@@ -70,8 +70,11 @@ General objects use the portable SSD-MobileNetV1-12 ONNX provider after explicit
 vision setup. The 29,461,455-byte checkpoint is pinned to a model-repository
 commit, byte count, and SHA-256 and stays outside release archives. The router
 prefers an explicitly capable Apple runner if one is configured, then ONNX.
-Pose support in 0.1 is intentionally macOS-native; other platforms receive a
-structured unavailable result instead of a platform-derived claim.
+Because ONNX Runtime 1.27 does not publish macOS Intel wheels, setup skips that
+model on Intel Macs and reports the provider as unsupported while preserving
+OpenCV and Apple Vision capabilities. Pose support in 0.1 is intentionally
+macOS-native; other platforms receive a structured unavailable result instead
+of a platform-derived claim.
 
 SAM 2.1 is an optional adapter, never part of the lightweight wheel. Explicit
 setup streams a pinned official source archive and Hiera Tiny checkpoint into

@@ -49,12 +49,13 @@ def install_setup_dependencies(*, browser: bool = False, effects: bool = False, 
             "numpy==2.4.6" if sys.version_info[:2] == (3, 11) else "numpy==2.5.1",
             "pillow==11.3.0",
         ])
-    if vision and any(importlib.util.find_spec(module) is None for module in ["numpy", "PIL", "cv2", "onnxruntime"]):
+    vision_modules = ["numpy", "PIL", "cv2", *(["onnxruntime"] if _onnx_runtime_supported() else [])]
+    if vision and any(importlib.util.find_spec(module) is None for module in vision_modules):
         packages.extend([
             "numpy==2.4.6" if sys.version_info[:2] == (3, 11) else "numpy==2.5.1",
             "pillow==11.3.0",
             "opencv-python-headless==4.13.0.92",
-            "onnxruntime==1.27.0",
+            *(["onnxruntime==1.27.0"] if _onnx_runtime_supported() else []),
         ])
     if sam and any(importlib.util.find_spec(module) is None for module in ["numpy", "PIL", "cv2", "torch", "torchvision", "hydra", "iopath", "tqdm"]):
         packages.extend([
@@ -162,6 +163,8 @@ def _setup_apple_vision(root: Path) -> JSONObject:
 
 
 def _setup_object_model(root: Path) -> JSONObject:
+    if not _onnx_runtime_supported():
+        return {"id": "vision.object_model", "available": False, "provider": None, "status": "unsupported-platform", "required": False, "reason": "ONNX Runtime 1.27 does not publish macOS Intel wheels; OpenCV face/body detection and the Apple Vision runner remain available."}
     runtime = root / "models" / OBJECT_MODEL["id"]
     model = runtime / "model.onnx"
     runtime.mkdir(parents=True, exist_ok=True)
@@ -180,6 +183,10 @@ def _setup_object_model(root: Path) -> JSONObject:
     path = runtime / "model.json"
     path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return {"id": "vision.object_model", "available": True, "provider": OBJECT_MODEL["id"], "version": OBJECT_MODEL["version"], "status": "installed", "required": True, "bytes": OBJECT_MODEL["bytes"], "license": manifest["license"], "manifest": str(path)}
+
+
+def _onnx_runtime_supported() -> bool:
+    return platform.system() != "Darwin" or platform.machine().lower() != "x86_64"
 
 
 def _setup_sam(root: Path) -> JSONObject:

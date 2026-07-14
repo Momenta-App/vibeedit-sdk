@@ -28,13 +28,14 @@ for (const directory of ["schema/fixtures", ...readdirSync(new URL("examples/", 
 }
 
 const siteData = read("site/catalog-data.js");
-assert.match(siteData, /^globalThis\.VIBEEDIT_CATALOG = /);
+const siteDataPrefix = "globalThis.VIBEEDIT_CATALOG = ";
+assert.ok(siteData.startsWith(siteDataPrefix));
 assert.match(read("site/index.html"), /copy-python/);
 assert.match(read("site/index.html"), /copy-javascript/);
 assert.match(read("site/app.js"), /item\.examples\.python/);
 assert.match(read("site/app.js"), /item\.examples\.javascript/);
 assert.deepEqual(
-  JSON.parse(siteData.slice("globalThis.VIBEEDIT_CATALOG = ".length, -2)),
+  JSON.parse(siteData.slice(siteDataPrefix.length).trimEnd().replace(/;$/, "")),
   catalog,
   "catalog site data is stale; run npm run catalog:build",
 );

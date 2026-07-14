@@ -39,10 +39,19 @@ def test_sam_setup_extracts_only_checksum_verified_payloads(tmp_path: Path, monk
 def test_object_setup_installs_only_checksum_verified_model(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     model = tmp_path / "controlled.onnx"
     model.write_bytes(b"controlled-object-model")
+    monkeypatch.setattr(vibeedit_setup, "_onnx_runtime_supported", lambda: True)
     monkeypatch.setattr(vibeedit_setup, "OBJECT_MODEL", {"id": "ssd-mobilenet-v1-12", "version": "test", "url": model.as_uri(), "sha256": hashlib.sha256(model.read_bytes()).hexdigest(), "bytes": model.stat().st_size})
     result = vibeedit_setup._setup_object_model(tmp_path / "cache")
     assert result["available"] is True
     assert Path(result["manifest"]).is_file()
+
+
+def test_object_setup_degrades_without_a_supported_onnx_runtime(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.setattr(vibeedit_setup, "_onnx_runtime_supported", lambda: False)
+    result = vibeedit_setup._setup_object_model(tmp_path / "cache")
+    assert result["available"] is False
+    assert result["status"] == "unsupported-platform"
+    assert not (tmp_path / "cache" / "models").exists()
 
 
 def test_sam_runner_box_and_rle_contract():

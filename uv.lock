@@ -1306,7 +1306,7 @@ all = [
     { name = "iopath" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "onnxruntime" },
+    { name = "onnxruntime", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
     { name = "opencv-python-headless" },
     { name = "pillow" },
     { name = "playwright" },
@@ -1340,7 +1340,7 @@ test = [
 vision = [
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "onnxruntime" },
+    { name = "onnxruntime", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
     { name = "opencv-python-headless" },
     { name = "pillow" },
 ]
@@ -1361,8 +1361,8 @@ requires-dist = [
     { name = "numpy", marker = "python_full_version >= '3.12' and extra == 'effects'", specifier = "==2.5.1" },
     { name = "numpy", marker = "python_full_version >= '3.12' and extra == 'sam'", specifier = "==2.5.1" },
     { name = "numpy", marker = "python_full_version >= '3.12' and extra == 'vision'", specifier = "==2.5.1" },
-    { name = "onnxruntime", marker = "extra == 'all'", specifier = "==1.27.0" },
-    { name = "onnxruntime", marker = "extra == 'vision'", specifier = "==1.27.0" },
+    { name = "onnxruntime", marker = "(platform_machine != 'x86_64' and extra == 'all') or (sys_platform != 'darwin' and extra == 'all')", specifier = "==1.27.0" },
+    { name = "onnxruntime", marker = "(platform_machine != 'x86_64' and extra == 'vision') or (sys_platform != 'darwin' and extra == 'vision')", specifier = "==1.27.0" },
     { name = "opencv-python-headless", marker = "extra == 'all'", specifier = "==4.13.0.92" },
     { name = "opencv-python-headless", marker = "extra == 'sam'", specifier = "==4.13.0.92" },
     { name = "opencv-python-headless", marker = "extra == 'vision'", specifier = "==4.13.0.92" },

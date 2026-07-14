@@ -59,9 +59,11 @@ a normalized JSON artifact and returns a public `TrackingArtifact` with source,
 runtime, and cache-key provenance. On macOS, `vibeedit setup --vision` builds the
 packaged VibeEdit-owned Swift runner and enables its explicitly declared face,
 body, and pose requests. The same explicit setup downloads a checksum-pinned
-29.5 MB SSD-MobileNetV1 ONNX model for portable general-object detection.
-Unsupported providers remain explicit in `doctor`; they are never inferred
-merely from the operating system.
+29.5 MB SSD-MobileNetV1 ONNX model for portable general-object detection where
+ONNX Runtime publishes a wheel. ONNX Runtime 1.27 has no macOS Intel wheel, so
+that platform retains OpenCV face/body tracking and Apple Vision while reporting
+the portable object provider as unsupported. Unsupported providers remain
+explicit in `doctor`; they are never inferred merely from the operating system.
 
 `vibeedit setup --sam` is an explicit 211.7 MB optional download. It installs a
 checksum-pinned official SAM 2.1 source revision and tiny checkpoint in the
