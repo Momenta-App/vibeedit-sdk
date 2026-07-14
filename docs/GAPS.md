@@ -11,13 +11,13 @@ This register distinguishes implemented claims from discovered source material.
 | Effects/transitions | 333 reviewed canonical presets are cloned byte-for-byte behind VibeEdit-owned adapters | Stable IDs, separate manifests, matching source/package hashes, exhaustive frame execution, and effect/transition/mask examples pass |
 | Skills | 67 tracked canonical skill directories were audited | 44 byte-identical release-safe clones install into four harness layouts; 23 rejected packages remain recorded/quarantined |
 | SFX | Many local recordings with incomplete rights evidence | Exclude/quarantine until license, rights, decode, loudness, and checksum pass |
-| Vision | OpenCV providers, a packaged VibeEdit-owned Apple Vision runner, and a pinned portable ONNX object detector exist | Face/body/pose pass on macOS Apple Silicon; portable OpenCV/ONNX dependencies and degradation behavior pass on Linux ARM64; 0.1 documents pose as macOS-native; Linux x86_64/Windows/macOS Intel matrix execution remains the proof gap |
+| Vision | OpenCV providers, a packaged VibeEdit-owned Apple Vision runner, and a pinned portable ONNX object detector exist | Face/body/pose pass on macOS Apple Silicon; portable OpenCV/ONNX dependencies and degradation behavior pass on Linux ARM64 and hosted Linux x86_64/Windows; 0.1 documents pose as macOS-native; macOS Intel returns a tested structured unsupported result for the unavailable ONNX Runtime wheel while its remaining portable checks pass |
 | SAM 2.1 | Official source and tiny weights are approved as an optional setup download | Exact URL/size/SHA, clean standalone `sam` extra, safe extraction, provider routing, controlled/natural 30-frame Torch/MPS visual proofs, and the verified 60-frame packaged example pass; evidence is retained in `docs/evidence/sam21-public-proof.json` |
 | SAM 3.1 | Local research workflows/models exist | Remains quarantined until source, weights, redistribution, setup, and independent inference proof pass |
 | MCP | Existing product MCP infrastructure is unrelated | Adapter over the library passes typed tool smoke tests |
 | Catalog site | Desktop catalog UI/data exists | Static generation, search/filter/copy, local open, and missing-preview states pass |
 | Licensing | npm says `UNLICENSED`; Python source says MIT | Custom package terms and third-party inventory receive qualified legal review |
-| Platform proof | macOS Apple Silicon and Dockerized Linux ARM64 have clean exact-artifact proofs; emulated Linux x86_64 exact-artifact smoke also passes | Execute and retain native Linux x86_64, Windows, and macOS Intel jobs before broadening verified support claims |
+| Platform proof | macOS Apple Silicon and Dockerized Linux ARM64 have clean exact-artifact proofs; native GitHub-hosted Linux x86_64 on Python 3.11/3.12/3.13, Windows, macOS Intel, and macOS Apple Silicon portable suites and package smoke installs pass | Retain the hosted run, archive checksums, and exact clone/preset audit with the release handoff |
 | Publication | Explicitly forbidden without approval | Build locally only; no registry publish, release, or production deployment |
 
 ## Immediate quarantine list

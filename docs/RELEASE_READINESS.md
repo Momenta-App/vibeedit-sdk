@@ -5,10 +5,10 @@ Candidate: VibeEdit 0.1.0
 Decision: **NOT READY FOR PUBLICATION**
 
 The candidate is a functional local package, not a scaffold. It now includes
-the expanded reusable VibeEdit inventory and locally verified production
-workflows. Publication remains withheld because Windows, Linux x86_64, and
-macOS Intel jobs have not actually run and the custom license/model notices
-have not been reviewed by qualified counsel. Pose support in 0.1 is explicitly macOS-native;
+the expanded reusable VibeEdit inventory and locally and GitHub-hosted verified
+production workflows. Publication remains withheld because the custom
+license/model notices have not been reviewed by qualified counsel. Pose support
+in 0.1 is explicitly macOS-native;
 SAM 3.1 remains quarantined rather than claimed. No npm/PyPI publication,
 website deployment, GitHub release, or production rollout occurred.
 
@@ -129,20 +129,23 @@ Python wheels. The sanitized ledger is
 
 | Platform | Status | Evidence |
 | --- | --- | --- |
-| macOS Apple Silicon | Locally verified | Source tests, exact wheel/npm clean installs, FFmpeg 8.1.1, Chromium/Playwright 1.61.0, OpenCV providers, native Apple Vision build/setup/requests, portable ONNX object inference, clean SAM 2.1 setup/inference/visual review, examples, and artifact audits passed. |
+| macOS Apple Silicon | Locally and GitHub-hosted verified | Source tests, exact wheel/npm clean installs, FFmpeg 8.1.1, Chromium/Playwright 1.61.0, OpenCV providers, native Apple Vision build/setup/requests, portable ONNX object inference, clean SAM 2.1 setup/inference/visual review, examples, and artifact audits passed. The hosted Python 3.12 portable checks and package smoke installs also pass. |
 | Linux ARM64 | Locally verified in Docker | Debian 12/aarch64, Python 3.11.2, Node 22.23.1, FFmpeg 5.1.9, pinned portable vision wheels, Playwright 1.61.0/Chromium 1228, 17 Node tests, 60 Python tests, exact wheel/npm installs, and core/mixed renders passed. The sole Python skip was the intentionally macOS-only Apple Vision build. |
-| macOS Intel | Workflow declared, not executed | Portable matrix job exists but has no recorded run. |
-| Linux x86_64 | Emulated artifact smoke passed; native workflow not executed | Under Docker `--platform linux/amd64`, the exact wheel/npm installed, doctor reported `linux/x86_64`, and a 60-frame audio/video render passed with zero drift. Native matrix jobs for Python 3.11/3.12/3.13 still have no recorded run. |
-| Windows | Workflow declared, not executed | Portable matrix job exists but has no recorded run. |
+| macOS Intel | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 17 Node tests, type declarations, catalog validation, and wheel/npm build-and-install smoke pass. ONNX Runtime 1.27 has no macOS x86_64 wheel, so object-model setup returns a tested structured unsupported-platform result while the rest of the portable package remains available. |
+| Linux x86_64 | Native GitHub-hosted verified | Python 3.11/3.12/3.13 jobs each pass 62 Python tests, 17 Node tests, type declarations, catalog validation, Chromium rendering, and wheel/npm build-and-install smoke. The earlier emulated exact-artifact render also passed with zero drift. |
+| Windows | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 17 Node tests, canonical skill checksum validation, catalog validation, and wheel/npm build-and-install smoke pass. |
 
 The Linux ARM64 proof is retained in
 `docs/evidence/linux-arm64-proof.json`; the explicitly limited x86_64 emulation
-proof is in `docs/evidence/linux-amd64-emulated-proof.json`. The workflow was
-corrected to reference real test files, install its test and browser extras,
-install pinned Chromium on every matrix OS, and use GitHub's current
-`macos-15-intel` label alongside the Apple-Silicon `macos-latest` job. Emulation
-and unexecuted workflows are still not native proof for the remaining matrix
-targets.
+proof is in `docs/evidence/linux-amd64-emulated-proof.json`. GitHub-hosted run
+[`29296607618`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29296607618)
+retains the successful six-job portable matrix for commit `fd4fa13`: native
+Linux x86_64 on three Python versions, Windows, macOS Intel, and macOS Apple
+Silicon. The workflow installs FFmpeg and pinned Chromium, runs both language
+suites, and smoke-installs newly built wheel and npm archives on every target.
+GitHub-hosted artifact attestation is unavailable for this private repository
+on the current organization plan, so the workflow retains SHA-256 sums and the
+private workflow artifact without claiming a hosted attestation.
 
 ## Local publishable artifacts
 
@@ -163,7 +166,7 @@ Run from the repository root unless a path is absolute:
 
 ```bash
 .venv/bin/pytest -q
-# 61 passed
+# 62 passed
 
 npm test
 # 17 passed
@@ -214,7 +217,7 @@ composition editing over the underlying library.
 | 12 | Pass | Ten MCP tools list and execute through the underlying library. |
 | 13 | Pass on verified platform | Face/body/tracking, macOS-native pose, portable ONNX objects, SAM 2.1 setup/inference, and structured degradation all operate; 0.1 documents pose as macOS-native. |
 | 14 | Pass for included assets | Included audio is VibeEdit-generated and hash/provenance/loudness/decode audited. |
-| 15 | Partial | Local macOS ARM64 and Linux ARM64 builds, installs, renders, catalog, skills, assets, and license scans pass; Linux x86_64/Windows/macOS Intel execution and legal review remain. |
+| 15 | Partial | Local macOS ARM64/Linux ARM64 and hosted Linux x86_64/Windows/macOS builds, installs, renders, catalog, skills, assets, and license scans pass; qualified legal review remains. |
 | 16 | Pass | npm/Python 0.1.0 share CompositionSpec 1.0.0 and catalog/skill compatibility policy. |
 | 17 | Pass for audited artifacts | No secrets, absolute developer paths, bundled weights, unapproved media, or undocumented downloads were found. |
 | 18 | Pass | This report records inventory, platforms, sizes, downloads, commands, gaps, and licensing concerns. |
@@ -222,9 +225,7 @@ composition editing over the underlying library.
 
 ## Remaining release blockers
 
-1. Execute and retain the Linux x86_64, Windows, and macOS Intel workflow
-   results, plus hosted macOS Apple Silicon artifact builds and clean installs.
-2. Obtain qualified legal review of `LICENSE.md`, commercial-license wording,
+1. Obtain qualified legal review of `LICENSE.md`, commercial-license wording,
    SAM/SSD-MobileNet/COCO terms, Chromium notices, imported skill content, and
    third-party dependency notices. The current license remains an engineering
    draft.
