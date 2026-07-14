@@ -18,7 +18,8 @@ This register distinguishes implemented claims from discovered source material.
 | Catalog site | Desktop catalog UI/data exists | Static generation, search/filter/copy, local open, and missing-preview states pass |
 | Licensing | npm says `UNLICENSED`; Python source says MIT | Custom package terms and third-party inventory receive qualified legal review |
 | Platform proof | macOS Apple Silicon and Dockerized Linux ARM64 have clean exact-artifact proofs; native GitHub-hosted Linux x86_64 on Python 3.11/3.12/3.13, Windows, macOS Intel, and macOS Apple Silicon portable suites and package smoke installs pass | Retain the hosted run, archive checksums, and exact clone/preset audit with the release handoff |
-| Publication | Explicitly forbidden without approval | Build locally only; no registry publish, release, or production deployment |
+| Public access | GitHub repository is private; unauthenticated access returns 404 | Obtain explicit approval for a public distribution channel, then make the repository or approved artifacts downloadable without authentication and rerun `scripts/check_public_access.py` |
+| Registry publication | Explicitly forbidden without approval | Build locally only; no npm/PyPI publish, GitHub release, or production deployment |
 
 ## Immediate quarantine list
 

@@ -12,6 +12,24 @@ in 0.1 is explicitly macOS-native;
 SAM 3.1 remains quarantined rather than claimed. No npm/PyPI publication,
 website deployment, GitHub release, or production rollout occurred.
 
+## Public access gate
+
+The package is not publicly downloadable today. GitHub reports
+`Momenta-App/vibeedit-sdk` as private to authenticated organization members,
+and an unauthenticated request returns HTTP 404. This is distinct from npm or
+PyPI publication: even though publishable archives exist, no public channel
+currently exposes them.
+
+Recheck the goal-wide access requirement without credentials:
+
+```bash
+python3 scripts/check_public_access.py --repo Momenta-App/vibeedit-sdk
+# exit 1; publiclyDownloadable=false; status=not-public; httpStatus=404
+```
+
+Changing repository visibility, creating a GitHub release, publishing to a
+registry, or deploying the catalog requires explicit user approval.
+
 ## Candidate inventory
 
 | Surface | Included and verified |
@@ -223,9 +241,15 @@ composition editing over the underlying library.
 | 18 | Pass | This report records inventory, platforms, sizes, downloads, commands, gaps, and licensing concerns. |
 | 19 | Pass | Nothing was published, deployed, or released. |
 
+The numbered safeguards above do not replace the objective's public-access
+requirement. That goal-wide gate is currently **Fail** because no artifact is
+downloadable without authentication.
+
 ## Remaining release blockers
 
-1. Obtain qualified legal review of `LICENSE.md`, commercial-license wording,
+1. Obtain explicit approval for a public distribution channel and make the
+   repository or approved artifacts downloadable without authentication.
+2. Obtain qualified legal review of `LICENSE.md`, commercial-license wording,
    SAM/SSD-MobileNet/COCO terms, Chromium notices, imported skill content, and
    third-party dependency notices. The current license remains an engineering
    draft.

@@ -138,7 +138,7 @@ function python(name, values) {
 }
 
 function commandVersion(name) {
-  const result = spawnSync(name, ["-version"], { encoding: "utf8" });
+  const result = spawnSync(name, name.startsWith("python") ? ["--version"] : ["-version"], { encoding: "utf8" });
   if (result.error?.code === "ENOENT") return { available: false, version: null };
   return { available: result.status === 0, version: (result.stdout || result.stderr).split("\n")[0] };
 }

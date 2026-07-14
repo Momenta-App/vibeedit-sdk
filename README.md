@@ -6,9 +6,14 @@ motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
 This repository contains an alpha package built and validated locally. It has
-not been published to npm or PyPI.
+not been published to npm or PyPI. The GitHub repository is currently private,
+so the package is not yet publicly downloadable. Public access and registry
+publication are separate release gates and require explicit approval.
 
 ## Install
+
+The registry commands below are the intended post-publication experience; they
+will not resolve until an approved release is published:
 
 Lightweight Python CLI and media orchestration:
 
@@ -79,6 +84,15 @@ Node SDK, HTML motion runtime, and Node-facing CLI:
 ```bash
 npm install vibeedit
 npx vibeedit doctor --json
+```
+
+For the current private candidate, build and install the exact local artifacts:
+
+```bash
+uv build --out-dir dist/python
+uv tool install dist/python/vibeedit-0.1.0-py3-none-any.whl
+npm pack --pack-destination dist/npm
+npm install ./dist/npm/vibeedit-0.1.0.tgz
 ```
 
 `setup` performs only explicitly requested work. It installs pinned browser and
@@ -235,7 +249,8 @@ See `docs/SECURITY.md`, `docs/ARCHITECTURE.md`, `SBOM.spdx.json`, and
 
 ## License
 
-The package is publicly inspectable/downloadable under `LICENSE.md`. Commercial
-use requires a separate license from Attention Engine Inc. Third-party
-components remain under their own licenses. The custom license text requires
-review by qualified legal counsel before publication.
+`LICENSE.md` defines the intended terms for a publicly inspectable/downloadable
+package. The current private candidate is not public. Commercial use requires a
+separate license from Attention Engine Inc. Third-party components remain under
+their own licenses. The custom license text requires review by qualified legal
+counsel before publication.

@@ -12,6 +12,13 @@ test("Node CLI reports the package version", () => {
   assert.equal(result.stdout.trim(), "vibeedit 0.1.0");
 });
 
+test("Node CLI doctor probes Python with its supported version flag", () => {
+  const result = spawnSync(process.execPath, ["bin/vibeedit.js", "doctor", "--json"], { encoding: "utf8" });
+  assert.equal(result.status, 0, result.stderr);
+  const commands = JSON.parse(result.stdout).capabilities.commands;
+  assert.ok([commands.python3, commands.python].some((command) => command.available && command.version.startsWith("Python ")));
+});
+
 test("Node CLI validates the canonical fixture", () => {
   const result = spawnSync(process.execPath, ["bin/vibeedit.js", "validate", "schema/fixtures/minimal.json", "--json"], { encoding: "utf8" });
   assert.equal(result.status, 0, result.stderr);
