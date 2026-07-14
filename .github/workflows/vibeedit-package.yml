@@ -42,7 +42,18 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Install FFmpeg on Windows
         if: runner.os == 'Windows'
-        run: choco install ffmpeg --no-progress -y
+        run: |
+          for ($attempt = 1; $attempt -le 3; $attempt++) {
+            choco install ffmpeg --no-progress -y
+            if (Get-Command ffmpeg -ErrorAction SilentlyContinue) {
+              ffmpeg -version
+              exit 0
+            }
+            if ($attempt -lt 3) {
+              Start-Sleep -Seconds (5 * $attempt)
+            }
+          }
+          throw "FFmpeg was not installed after three Chocolatey attempts"
       - name: Install FFmpeg on macOS
         if: runner.os == 'macOS'
         run: brew install ffmpeg
