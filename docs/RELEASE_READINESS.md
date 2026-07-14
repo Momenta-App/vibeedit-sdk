@@ -1,34 +1,34 @@
 # Release readiness report
 
-Date: 2026-07-13  
-Candidate: VibeEdit 0.1.0  
-Decision: **NOT READY FOR PUBLICATION**
+Date: 2026-07-14
+Candidate: VibeEdit 0.1.0
+Decision: **PUBLIC SOURCE CANDIDATE; NOT READY FOR REGISTRY OR COMMERCIAL RELEASE**
 
 The candidate is a functional local package, not a scaffold. It now includes
 the expanded reusable VibeEdit inventory and locally and GitHub-hosted verified
-production workflows. Publication remains withheld because the custom
-license/model notices have not been reviewed by qualified counsel. Pose support
-in 0.1 is explicitly macOS-native;
-SAM 3.1 remains quarantined rather than claimed. No npm/PyPI publication,
-website deployment, GitHub release, or production rollout occurred.
+production workflows. The GitHub source repository is publicly downloadable;
+npm/PyPI publication, a GitHub release, website deployment, and commercial
+release remain withheld because the custom license/model notices have not been
+reviewed by qualified counsel. Pose support in 0.1 is explicitly macOS-native;
+SAM 3.1 remains quarantined rather than claimed.
 
 ## Public access gate
 
-The package is not publicly downloadable today. GitHub reports
-`Momenta-App/vibeedit-sdk` as private to authenticated organization members,
-and an unauthenticated request returns HTTP 404. This is distinct from npm or
-PyPI publication: even though publishable archives exist, no public channel
-currently exposes them.
+The package source is publicly downloadable from
+`https://github.com/Momenta-App/vibeedit-sdk`. An unauthenticated GitHub API
+request returns HTTP 200 with `visibility=public`; a credential-disabled Git
+clone and the unauthenticated `main` branch archive download both pass. This is
+distinct from npm or PyPI publication, which has not occurred.
 
 Recheck the goal-wide access requirement without credentials:
 
 ```bash
 python3 scripts/check_public_access.py --repo Momenta-App/vibeedit-sdk
-# exit 1; publiclyDownloadable=false; status=not-public; httpStatus=404
+# exit 0; publiclyDownloadable=true; status=public; httpStatus=200
 ```
 
-Changing repository visibility, creating a GitHub release, publishing to a
-registry, or deploying the catalog requires explicit user approval.
+Creating a GitHub release, publishing to a registry, or deploying the catalog
+still requires explicit user approval.
 
 ## Candidate inventory
 
@@ -165,9 +165,9 @@ The build job also audits the final wheel, source distribution, and npm tarball
 against the pinned canonical skill-tree and preset-file digests before upload;
 an optional `--source-root` comparison retains the stronger byte-level check
 against a canonical VibeEdit Git checkout when one is available.
-GitHub-hosted artifact attestation is unavailable for this private repository
-on the current organization plan, so the workflow retains SHA-256 sums and the
-private workflow artifact without claiming a hosted attestation.
+Public workflow dispatches are configured to generate GitHub build-provenance
+attestations. Every build also retains artifact-relative SHA-256 sums and the
+uploaded workflow artifact.
 
 ## Local publishable artifacts
 
@@ -243,20 +243,17 @@ composition editing over the underlying library.
 | 16 | Pass | npm/Python 0.1.0 share CompositionSpec 1.0.0 and catalog/skill compatibility policy. |
 | 17 | Pass for audited artifacts | No secrets, absolute developer paths, bundled weights, unapproved media, or undocumented downloads were found. |
 | 18 | Pass | This report records inventory, platforms, sizes, downloads, commands, gaps, and licensing concerns. |
-| 19 | Pass | Nothing was published, deployed, or released. |
+| 19 | Pass | The source repository is public. No npm/PyPI publication, GitHub Release, website deployment, or production rollout occurred. |
 
-The numbered safeguards above do not replace the objective's public-access
-requirement. That goal-wide gate is currently **Fail** because no artifact is
-downloadable without authentication.
+The objective's public-access requirement now passes through the public GitHub
+source repository. Registry publication remains a separate withheld action.
 
 ## Remaining release blockers
 
-1. Obtain explicit approval for a public distribution channel and make the
-   repository or approved artifacts downloadable without authentication.
-2. Obtain qualified legal review of `LICENSE.md`, commercial-license wording,
+1. Obtain qualified legal review of `LICENSE.md`, commercial-license wording,
    SAM/SSD-MobileNet/COCO terms, Chromium notices, imported skill content, and
    third-party dependency notices. The current license remains an engineering
    draft.
 
-Publication approval must remain withheld until these gates are resolved or
-the initial support scope is explicitly reduced and approved.
+Registry and commercial-release approval must remain withheld until this gate
+is resolved or the initial support scope is explicitly reduced and approved.

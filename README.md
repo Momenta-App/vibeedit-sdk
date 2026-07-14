@@ -5,10 +5,10 @@ It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
 motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
-This repository contains an alpha package built and validated locally. It has
-not been published to npm or PyPI. The GitHub repository is currently private,
-so the package is not yet publicly downloadable. Public access and registry
-publication are separate release gates and require explicit approval.
+This public repository contains an alpha package built and validated locally
+and on GitHub-hosted Linux, Windows, and macOS runners. It has not been
+published to npm or PyPI. Public source access and registry publication are
+separate release states.
 
 ## Install
 
@@ -86,7 +86,21 @@ npm install vibeedit
 npx vibeedit doctor --json
 ```
 
-For the current private candidate, build and install the exact local artifacts:
+For the current public source candidate, clone and install locally:
+
+```bash
+git clone https://github.com/Momenta-App/vibeedit-sdk.git
+cd vibeedit-sdk
+uv tool install .
+```
+
+From a Node project:
+
+```bash
+npm install github:Momenta-App/vibeedit-sdk
+```
+
+Or build and install the exact local artifacts:
 
 ```bash
 uv build --out-dir dist/python
@@ -249,8 +263,9 @@ See `docs/SECURITY.md`, `docs/ARCHITECTURE.md`, `SBOM.spdx.json`, and
 
 ## License
 
-`LICENSE.md` defines the intended terms for a publicly inspectable/downloadable
-package. The current private candidate is not public. Commercial use requires a
-separate license from Attention Engine Inc. Third-party components remain under
-their own licenses. The custom license text requires review by qualified legal
-counsel before publication.
+`LICENSE.md` defines the intended terms for this publicly
+inspectable/downloadable source package. Commercial use requires a separate
+license from Attention Engine Inc. Third-party components remain under their
+own licenses. The custom license text remains an engineering draft requiring
+review by qualified legal counsel; registry and commercial release remain
+withheld.
