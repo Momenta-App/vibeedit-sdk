@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-07-13",
+  "decision": "accepted",
+  "scope": "Clean Linux ARM64 source-test and exact-artifact proof for the portable Python, Node, FFmpeg, and Chromium surfaces.",
+  "environment": {
+    "virtualization": "Docker Desktop Linux VM on a macOS Apple Silicon host",
+    "kernel": "Linux 5.15.49-linuxkit aarch64",
+    "distribution": "Debian GNU/Linux 12 (bookworm)",
+    "image": "node:22-bookworm-slim",
+    "imageDigest": "node@sha256:53ada149d435c38b14476cb57e4a7da73c15595aba79bd6971b547ceb6d018bf",
+    "imageId": "sha256:44b5401ff81007bebc40bdbc27a8e1c8d8e6060bff10abef92a8df113a26077a",
+    "architecture": "arm64",
+    "cpus": 4,
+    "memoryGiB": 7
+  },
+  "runtimes": {
+    "node": "22.23.1",
+    "npm": "10.9.8",
+    "python": "3.11.2",
+    "ffmpeg": "5.1.9-0+deb12u1",
+    "playwright": "1.61.0",
+    "chromium": "149.0.7827.55 (Playwright build 1228)"
+  },
+  "sourceStaging": {
+    "packageJsonSha256": "c12e15e01ae2c472b46c05f7bd8296a59a307eae0dbc6747147f1b144b5b17ac",
+    "pyprojectSha256": "9d052f6fc1798dab03593dd3c59f4c073175f70568c5317d08db89245ef14862",
+    "skillIndexSha256": "68fe408fdfc64e10855a2a6ad591e0bf44ea640292096de56310f51617ff503c",
+    "catalogSha256": "cfa5367dd19f90ac4fde043b31bec7480a3ebbb543b846ecd9c59a0ad0ab61b5"
+  },
+  "sourceValidation": {
+    "nodeTests": {
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typescript": "passed",
+    "packageValidation": {
+      "passed": true,
+      "catalogItems": 467,
+      "skills": 44,
+      "assets": 13
+    },
+    "pythonPortablePass": {
+      "passed": 55,
+      "failed": 0,
+      "skipped": 6,
+      "note": "This first pass intentionally omitted the browser extra; five browser-dependent cases and the macOS-only Apple Vision build were skipped."
+    },
+    "pythonBrowserPass": {
+      "passed": 60,
+      "failed": 0,
+      "skipped": 1,
+      "skip": "Apple Vision setup requires macOS and Swift"
+    }
+  },
+  "exactWheel": {
+    "name": "vibeedit-0.1.0-py3-none-any.whl",
+    "bytes": 1807366,
+    "sha256": "07c3e08e3e85b8880c2a681b1d40c44dabac2f043617782f25abfeafc0eb554e",
+    "coreInstall": {
+      "passed": true,
+      "catalogItems": 467,
+      "skills": 44,
+      "presets": 333
+    },
+    "coreRender": {
+      "example": "basic-generated",
+      "passed": true,
+      "width": 640,
+      "height": 360,
+      "durationFrames": 60,
+      "durationDriftFrames": 0,
+      "hasVideo": true,
+      "hasAudio": true
+    },
+    "browserSetup": {
+      "command": "vibeedit setup --browser --json",
+      "complete": true,
+      "dependenciesChangedDuringSetup": false,
+      "provider": "playwright-chromium",
+      "version": "1.61.0",
+      "executableSha256": "c1aa0fb5b6c60eb093df69d9e40dd50ab2039d3ccba8836ef21880340a77af64"
+    },
+    "browserRender": {
+      "example": "mixed-python-html",
+      "passed": true,
+      "width": 640,
+      "height": 360,
+      "durationFrames": 90,
+      "durationDriftFrames": 0,
+      "hasVideo": true,
+      "hasAudio": true,
+      "outputSha256": "7726e30ccbf4c511a1dd80ffc1c8d10818c8e0c12216abc6633c1df628c9cf4c"
+    }
+  },
+  "exactNpmRuntime": {
+    "cleanInstall": true,
+    "catalogItems": 467,
+    "skills": 44,
+    "motionComponents": 74,
+    "productionAuditVulnerabilities": 0,
+    "note": "The final tarball hash is intentionally retained in the external artifact audit so embedding it cannot mutate its own archive."
+  },
+  "rawLogs": {
+    "portableSha256": "a078233aceb32bc3b18386646f73d64291521eec3bce2c47284ae668729f61a9",
+    "browserSha256": "af418bd476db37bb6619b11831f754df881832ad2f64aa20d14d81717227f126"
+  },
+  "limitations": [
+    "This is a real Linux ARM64 userspace/kernel proof inside Docker Desktop, not an independent physical Linux host.",
+    "Linux x86_64, Windows, and macOS Intel remain unexecuted matrix targets.",
+    "Apple Vision is intentionally macOS-only and degraded with an explicit unavailable result on Linux."
+  ]
+}

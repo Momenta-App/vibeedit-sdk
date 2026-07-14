@@ -1,0 +1,16 @@
+{
+  "id": "vibeedit://template/multiple-transitions",
+  "name": "Multiple Transitions",
+  "description": "Executable three-card sequence with independently rendered push and film-burn catalog transitions.",
+  "families": [
+    "transitions",
+    "effects"
+  ],
+  "requirements": {
+    "extras": [
+      "effects"
+    ],
+    "models": []
+  },
+  "conditional": false
+}

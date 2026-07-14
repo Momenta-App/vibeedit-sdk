@@ -1,0 +1,1370 @@
+{
+  "schemaVersion": "1.0.0",
+  "bundleVersion": "0.1.0",
+  "skills": [
+    {
+      "id": "vibeedit://skill/clean-text-animation",
+      "name": "clean-text-animation",
+      "version": "0.1.0",
+      "path": "clean-text-animation",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "dd52caecaed8f96996d03ae2a8f8e2e1f9d3763a8a8a33b0ed8bd676788281f4",
+      "source": {
+        "path": ".codex/skills/clean-text-animation",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "dd52caecaed8f96996d03ae2a8f8e2e1f9d3763a8a8a33b0ed8bd676788281f4"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 3,
+        "pythonFiles": 1,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/fanedit-body",
+      "name": "fanedit-body",
+      "version": "0.1.0",
+      "path": "fanedit-body",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "ab6005c2d572fd4bdb0eb2e478935cc79928a97f99375c7671dbc3908d49dbee",
+      "source": {
+        "path": ".codex/skills/fanedit-body",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "ab6005c2d572fd4bdb0eb2e478935cc79928a97f99375c7671dbc3908d49dbee"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/fanedit-hook",
+      "name": "fanedit-hook",
+      "version": "0.1.0",
+      "path": "fanedit-hook",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "0af0333ec5fe13c8eccaa1099920853e324ee85329429acf8fd32630a50f42d4",
+      "source": {
+        "path": ".codex/skills/fanedit-hook",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "0af0333ec5fe13c8eccaa1099920853e324ee85329429acf8fd32630a50f42d4"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/fanedit-reference-learning",
+      "name": "fanedit-reference-learning",
+      "version": "0.1.0",
+      "path": "fanedit-reference-learning",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "c3472be005f1aff21880927c566e5f27427eeeae9b9207132aa04a296f2a0afe",
+      "source": {
+        "path": ".codex/skills/fanedit-reference-learning",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "c3472be005f1aff21880927c566e5f27427eeeae9b9207132aa04a296f2a0afe"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/fanedit-text",
+      "name": "fanedit-text",
+      "version": "0.1.0",
+      "path": "fanedit-text",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "5131ac08ec9f08c62a6fecd22777f46374f73575a0ca1557b015449a448a8a48",
+      "source": {
+        "path": ".codex/skills/fanedit-text",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "5131ac08ec9f08c62a6fecd22777f46374f73575a0ca1557b015449a448a8a48"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/micro-sfx-choice",
+      "name": "micro-sfx-choice",
+      "version": "0.1.0",
+      "path": "micro-sfx-choice",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "09c04ca9411920a76d0ffccada0a7fd270216cb59444ad06b58a9fe8c6c8f2f6",
+      "source": {
+        "path": ".codex/skills/micro-sfx-choice",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "09c04ca9411920a76d0ffccada0a7fd270216cb59444ad06b58a9fe8c6c8f2f6"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 4,
+        "pythonFiles": 1,
+        "jsonFiles": 1,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/micro-sfx-complexity-modes",
+      "name": "micro-sfx-complexity-modes",
+      "version": "0.1.0",
+      "path": "micro-sfx-complexity-modes",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "7350714ed749aa01612fe8f9216534a399db1d0a5ba7e0e9b6887fb9982b7c24",
+      "source": {
+        "path": ".codex/skills/micro-sfx-complexity-modes",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "7350714ed749aa01612fe8f9216534a399db1d0a5ba7e0e9b6887fb9982b7c24"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 3,
+        "pythonFiles": 1,
+        "jsonFiles": 1,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/micro-sfx-motion-attachment",
+      "name": "micro-sfx-motion-attachment",
+      "version": "0.1.0",
+      "path": "micro-sfx-motion-attachment",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "a1ea7047e6f39655223c73e0e0a42e3fa277f159146f4f852530fa0fdc8ec705",
+      "source": {
+        "path": ".codex/skills/micro-sfx-motion-attachment",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "a1ea7047e6f39655223c73e0e0a42e3fa277f159146f4f852530fa0fdc8ec705"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 4,
+        "pythonFiles": 1,
+        "jsonFiles": 1,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/micro-sfx-object-adaptation",
+      "name": "micro-sfx-object-adaptation",
+      "version": "0.1.0",
+      "path": "micro-sfx-object-adaptation",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "a423cbf0cc7b90548b91da5dde51ef7018e366e424c54ee341b71ee98972f596",
+      "source": {
+        "path": ".codex/skills/micro-sfx-object-adaptation",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "a423cbf0cc7b90548b91da5dde51ef7018e366e424c54ee341b71ee98972f596"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 3,
+        "pythonFiles": 1,
+        "jsonFiles": 1,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/micro-sfx-timing-craft",
+      "name": "micro-sfx-timing-craft",
+      "version": "0.1.0",
+      "path": "micro-sfx-timing-craft",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "6eecd63f60287ebfc86b70f80ef54150e01f720b1deb583b1208ccd14b79955c",
+      "source": {
+        "path": ".codex/skills/micro-sfx-timing-craft",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "6eecd63f60287ebfc86b70f80ef54150e01f720b1deb583b1208ccd14b79955c"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 6,
+        "pythonFiles": 1,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/negative",
+      "name": "negative",
+      "version": "0.1.0",
+      "path": "negative",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "ce545ed35f151b970e29dde62a0eff07524cc24c197818ab57f4842537ffe350",
+      "source": {
+        "path": ".codex/skills/negative",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "ce545ed35f151b970e29dde62a0eff07524cc24c197818ab57f4842537ffe350"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 3,
+        "pythonFiles": 2,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-beat-first-editing",
+      "name": "vibeedit-beat-first-editing",
+      "version": "0.1.0",
+      "path": "vibeedit-beat-first-editing",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "40d90a301b143a4b9eb63352acde9fe4be9bd8e95bb06fcd9f6b3ca6f62e16c2",
+      "source": {
+        "path": ".codex/skills/vibeedit-beat-first-editing",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "40d90a301b143a4b9eb63352acde9fe4be9bd8e95bb06fcd9f6b3ca6f62e16c2"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-bs-roformer-voice-isolation",
+      "name": "vibeedit-bs-roformer-voice-isolation",
+      "version": "0.1.0",
+      "path": "vibeedit-bs-roformer-voice-isolation",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "29b94947854cb43029a0b405160b79e7c53c8978260f49688a058f6317ddca37",
+      "source": {
+        "path": ".codex/skills/vibeedit-bs-roformer-voice-isolation",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "29b94947854cb43029a0b405160b79e7c53c8978260f49688a058f6317ddca37"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 3,
+        "pythonFiles": 1,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-color-style-recipes",
+      "name": "vibeedit-color-style-recipes",
+      "version": "0.1.0",
+      "path": "vibeedit-color-style-recipes",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "2bebc91f5c22f2bef9ae02120002713e2b1aa855f3a7ec50ee644b74aff25d63",
+      "source": {
+        "path": ".codex/skills/vibeedit-color-style-recipes",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "2bebc91f5c22f2bef9ae02120002713e2b1aa855f3a7ec50ee644b74aff25d63"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-compact-3d-typography",
+      "name": "vibeedit-compact-3d-typography",
+      "version": "0.1.0",
+      "path": "vibeedit-compact-3d-typography",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "fdad0e79fe99c41711e8d2cb75a85600388dc83fe2b8b45191c180561a4f997a",
+      "source": {
+        "path": ".codex/skills/vibeedit-compact-3d-typography",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "fdad0e79fe99c41711e8d2cb75a85600388dc83fe2b8b45191c180561a4f997a"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-continuity-supervisor",
+      "name": "vibeedit-continuity-supervisor",
+      "version": "0.1.0",
+      "path": "vibeedit-continuity-supervisor",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "b65735f80cf94c4119cfbc7a830b455618da9f7e78b9e52475185e81c00a12d5",
+      "source": {
+        "path": ".codex/skills/vibeedit-continuity-supervisor",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "b65735f80cf94c4119cfbc7a830b455618da9f7e78b9e52475185e81c00a12d5"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-creative-director",
+      "name": "vibeedit-creative-director",
+      "version": "0.1.0",
+      "path": "vibeedit-creative-director",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "b2fdab34a06f414133986187c54e3e194137e9d83b8473f1ac7b855038be1cdc",
+      "source": {
+        "path": ".codex/skills/vibeedit-creative-director",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "b2fdab34a06f414133986187c54e3e194137e9d83b8473f1ac7b855038be1cdc"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-creed-corpus-cross-reference",
+      "name": "vibeedit-creed-corpus-cross-reference",
+      "version": "0.1.0",
+      "path": "vibeedit-creed-corpus-cross-reference",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "e637afd908928e5d8c96d4ace273b92bc2964af28da1f22d14debceac9f24941",
+      "source": {
+        "path": ".codex/skills/vibeedit-creed-corpus-cross-reference",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "e637afd908928e5d8c96d4ace273b92bc2964af28da1f22d14debceac9f24941"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-creed-edit",
+      "name": "vibeedit-creed-edit",
+      "version": "0.1.0",
+      "path": "vibeedit-creed-edit",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "8d9faadd23607b0fbc405ed8e2092a935672d198d191855459d237fd2a64c6c5",
+      "source": {
+        "path": ".codex/skills/vibeedit-creed-edit",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "8d9faadd23607b0fbc405ed8e2092a935672d198d191855459d237fd2a64c6c5"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-creed-viral-edit-analysis",
+      "name": "vibeedit-creed-viral-edit-analysis",
+      "version": "0.1.0",
+      "path": "vibeedit-creed-viral-edit-analysis",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "cc4851f6cb51e720dfd93071f9f4ce02898238e1fc9c402b61428223a3c31eb3",
+      "source": {
+        "path": ".codex/skills/vibeedit-creed-viral-edit-analysis",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "cc4851f6cb51e720dfd93071f9f4ce02898238e1fc9c402b61428223a3c31eb3"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-effects",
+      "name": "vibeedit-effects",
+      "version": "0.1.0",
+      "path": "vibeedit-effects",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "b3c91d31ab71f0b6b0ad0fd256ef77d5b31fd5569be302a889266ff73e406389",
+      "source": {
+        "path": ".codex/skills/vibeedit-effects",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "b3c91d31ab71f0b6b0ad0fd256ef77d5b31fd5569be302a889266ff73e406389"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 2,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-effects-punctuation",
+      "name": "vibeedit-effects-punctuation",
+      "version": "0.1.0",
+      "path": "vibeedit-effects-punctuation",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "e2e33e69f894d0eb844491252f6cd8fef54d40167ed4595a242c0180d153398c",
+      "source": {
+        "path": ".codex/skills/vibeedit-effects-punctuation",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "e2e33e69f894d0eb844491252f6cd8fef54d40167ed4595a242c0180d153398c"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-face-tracking-framing",
+      "name": "vibeedit-face-tracking-framing",
+      "version": "0.1.0",
+      "path": "vibeedit-face-tracking-framing",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "b5b0e8b34db68fb4f11d01ac5741e763f2b53c77f294d4e63d785763d9dd7a70",
+      "source": {
+        "path": ".codex/skills/vibeedit-face-tracking-framing",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "b5b0e8b34db68fb4f11d01ac5741e763f2b53c77f294d4e63d785763d9dd7a70"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-fan-edit",
+      "name": "vibeedit-fan-edit",
+      "version": "0.1.0",
+      "path": "vibeedit-fan-edit",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "6aa73221537744329599eb5ac8f745dabf0f403556f41224053d3e895306eef0",
+      "source": {
+        "path": ".codex/skills/vibeedit-fan-edit",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "6aa73221537744329599eb5ac8f745dabf0f403556f41224053d3e895306eef0"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-finishing-producer",
+      "name": "vibeedit-finishing-producer",
+      "version": "0.1.0",
+      "path": "vibeedit-finishing-producer",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "340ac68192cf03dab4484cea4875e6a4c861806749a749012a59e7c7976d6425",
+      "source": {
+        "path": ".codex/skills/vibeedit-finishing-producer",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "340ac68192cf03dab4484cea4875e6a4c861806749a749012a59e7c7976d6425"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-lead-editor",
+      "name": "vibeedit-lead-editor",
+      "version": "0.1.0",
+      "path": "vibeedit-lead-editor",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "22954197dc9251de8ab6fdf2ec1a39d4de7ee3cf92d81e1219968180e52bf808",
+      "source": {
+        "path": ".codex/skills/vibeedit-lead-editor",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "22954197dc9251de8ab6fdf2ec1a39d4de7ee3cf92d81e1219968180e52bf808"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-look-director",
+      "name": "vibeedit-look-director",
+      "version": "0.1.0",
+      "path": "vibeedit-look-director",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "9ecd221aab621dda2c44ea7b81346dec8417d7091dc26bd9226cfb76574b241e",
+      "source": {
+        "path": ".codex/skills/vibeedit-look-director",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "9ecd221aab621dda2c44ea7b81346dec8417d7091dc26bd9226cfb76574b241e"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-pacing-contrast",
+      "name": "vibeedit-pacing-contrast",
+      "version": "0.1.0",
+      "path": "vibeedit-pacing-contrast",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "f9d81da182d4a0bc49b563fcfe4c0c5042baddeda106405912347ac82d2ff34d",
+      "source": {
+        "path": ".codex/skills/vibeedit-pacing-contrast",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "f9d81da182d4a0bc49b563fcfe4c0c5042baddeda106405912347ac82d2ff34d"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-producer",
+      "name": "vibeedit-producer",
+      "version": "0.1.0",
+      "path": "vibeedit-producer",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "13afcf36104fd22faf7da5536d08f21e0b989d1ab1b081f2025fe8b9bb9179df",
+      "source": {
+        "path": ".codex/skills/vibeedit-producer",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "13afcf36104fd22faf7da5536d08f21e0b989d1ab1b081f2025fe8b9bb9179df"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-project-json-editor",
+      "name": "vibeedit-project-json-editor",
+      "version": "0.1.0",
+      "path": "vibeedit-project-json-editor",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "edc7004eeea17fa224445efd297d4faff028552251f74de87ccc693e6e65bbbf",
+      "source": {
+        "path": ".codex/skills/vibeedit-project-json-editor",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "edc7004eeea17fa224445efd297d4faff028552251f74de87ccc693e6e65bbbf"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-python-analysis-rendering",
+      "name": "vibeedit-python-analysis-rendering",
+      "version": "0.1.0",
+      "path": "vibeedit-python-analysis-rendering",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "2bb955f4ebc6079bae0b63963a085ad52a7aa2f13f314fab0c5dd254373b8fdc",
+      "source": {
+        "path": ".codex/skills/vibeedit-python-analysis-rendering",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "2bb955f4ebc6079bae0b63963a085ad52a7aa2f13f314fab0c5dd254373b8fdc"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-qa-gap-discipline",
+      "name": "vibeedit-qa-gap-discipline",
+      "version": "0.1.0",
+      "path": "vibeedit-qa-gap-discipline",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "73482ac760491691d4406bc6ec6a9c1966fa2746e3a9ada0e120f91e6889f83a",
+      "source": {
+        "path": ".codex/skills/vibeedit-qa-gap-discipline",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "73482ac760491691d4406bc6ec6a9c1966fa2746e3a9ada0e120f91e6889f83a"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-quote-audio-structure",
+      "name": "vibeedit-quote-audio-structure",
+      "version": "0.1.0",
+      "path": "vibeedit-quote-audio-structure",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "f8e5eb3a356779fd252bf370e6fae83bd29658c90e74263e7ff3e6d4c7dbab29",
+      "source": {
+        "path": ".codex/skills/vibeedit-quote-audio-structure",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "f8e5eb3a356779fd252bf370e6fae83bd29658c90e74263e7ff3e6d4c7dbab29"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-reverse-curtain-reveal",
+      "name": "vibeedit-reverse-curtain-reveal",
+      "version": "0.1.0",
+      "path": "vibeedit-reverse-curtain-reveal",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "42e9601c72a3a69a386f74a26efce21c7101bfa2f23ffbddacddaad97ce75d9a",
+      "source": {
+        "path": ".codex/skills/vibeedit-reverse-curtain-reveal",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "42e9601c72a3a69a386f74a26efce21c7101bfa2f23ffbddacddaad97ce75d9a"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 5,
+        "pythonFiles": 2,
+        "jsonFiles": 1,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-reverse-curtain-subject-reveal",
+      "name": "vibeedit-reverse-curtain-subject-reveal",
+      "version": "0.1.0",
+      "path": "vibeedit-reverse-curtain-subject-reveal",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "626d777e0af82cb1a14d77d2316ee434baea03d27ed955cb999971ff393d3b67",
+      "source": {
+        "path": ".codex/skills/vibeedit-reverse-curtain-subject-reveal",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "626d777e0af82cb1a14d77d2316ee434baea03d27ed955cb999971ff393d3b67"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 5,
+        "pythonFiles": 2,
+        "jsonFiles": 1,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-segmentation-cutouts",
+      "name": "vibeedit-segmentation-cutouts",
+      "version": "0.1.0",
+      "path": "vibeedit-segmentation-cutouts",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "cd4773ce0bed8883d98bcc1eab1fefc3f5f6d177e794a46aa329478084261a07",
+      "source": {
+        "path": ".codex/skills/vibeedit-segmentation-cutouts",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "cd4773ce0bed8883d98bcc1eab1fefc3f5f6d177e794a46aa329478084261a07"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-sound-design",
+      "name": "vibeedit-sound-design",
+      "version": "0.1.0",
+      "path": "vibeedit-sound-design",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "64456bd51aa108c45129fed9b5bdfd524218f512595551054d32273e703729ac",
+      "source": {
+        "path": ".codex/skills/vibeedit-sound-design",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "64456bd51aa108c45129fed9b5bdfd524218f512595551054d32273e703729ac"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 2,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-story-shot-selection",
+      "name": "vibeedit-story-shot-selection",
+      "version": "0.1.0",
+      "path": "vibeedit-story-shot-selection",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "8075058ba4db2d4e416283d6357db73ae15e2fd09d6915129ff2e211c6789bb9",
+      "source": {
+        "path": ".codex/skills/vibeedit-story-shot-selection",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "8075058ba4db2d4e416283d6357db73ae15e2fd09d6915129ff2e211c6789bb9"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-text-layering",
+      "name": "vibeedit-text-layering",
+      "version": "0.1.0",
+      "path": "vibeedit-text-layering",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "566e0fc2c1aba173decd03ef29599fd97f04858293bb4f55b3b3f93df7b28402",
+      "source": {
+        "path": ".codex/skills/vibeedit-text-layering",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "566e0fc2c1aba173decd03ef29599fd97f04858293bb4f55b3b3f93df7b28402"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-transition-editor",
+      "name": "vibeedit-transition-editor",
+      "version": "0.1.0",
+      "path": "vibeedit-transition-editor",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "ea88d596fbd13a244c03cd718865711876cf6c090a4519f7601fceefba81bef9",
+      "source": {
+        "path": ".codex/skills/vibeedit-transition-editor",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "ea88d596fbd13a244c03cd718865711876cf6c090a4519f7601fceefba81bef9"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-viral-effects-reviewer",
+      "name": "vibeedit-viral-effects-reviewer",
+      "version": "0.1.0",
+      "path": "vibeedit-viral-effects-reviewer",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "23c80d27a9b47bb5286361b5ed78c6f821f67db38e2c535c3c614e6a18df0398",
+      "source": {
+        "path": ".codex/skills/vibeedit-viral-effects-reviewer",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "23c80d27a9b47bb5286361b5ed78c6f821f67db38e2c535c3c614e6a18df0398"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-viral-source-edit-router",
+      "name": "vibeedit-viral-source-edit-router",
+      "version": "0.1.0",
+      "path": "vibeedit-viral-source-edit-router",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "a44c5d9821ab76de8818849e5a0913b13b16dd461f2bb164e6bee54442924405",
+      "source": {
+        "path": ".codex/skills/vibeedit-viral-source-edit-router",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "a44c5d9821ab76de8818849e5a0913b13b16dd461f2bb164e6bee54442924405"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 11,
+        "pythonFiles": 2,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-viral-transition-reviewer",
+      "name": "vibeedit-viral-transition-reviewer",
+      "version": "0.1.0",
+      "path": "vibeedit-viral-transition-reviewer",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "bc406b149cc283affd269e24b16dfdf91e295e731c31a6f3454d2d50197847e9",
+      "source": {
+        "path": ".codex/skills/vibeedit-viral-transition-reviewer",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "bc406b149cc283affd269e24b16dfdf91e295e731c31a6f3454d2d50197847e9"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-workspace",
+      "name": "vibeedit-workspace",
+      "version": "0.1.0",
+      "path": "vibeedit-workspace",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "2a34f16e0f08bb882fe8e3ce42c209f25c7e55dcba69b0a3e8987fa429f15dd0",
+      "source": {
+        "path": ".codex/skills/vibeedit-workspace",
+        "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+        "sha256": "2a34f16e0f08bb882fe8e3ce42c209f25c7e55dcba69b0a3e8987fa429f15dd0"
+      },
+      "validation": {
+        "status": "passed",
+        "files": 1,
+        "pythonFiles": 0,
+        "jsonFiles": 0,
+        "checks": [
+          "entrypoint",
+          "forbidden-path scan",
+          "Python syntax",
+          "JSON decode",
+          "relative Markdown links"
+        ]
+      }
+    }
+  ]
+}

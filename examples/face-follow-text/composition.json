@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "face-follow-text",
+  "canvas": {
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "backgroundColor": "#101217",
+    "audioSampleRate": 48000
+  },
+  "durationFrames": 60,
+  "sources": [
+    {
+      "id": "subject",
+      "kind": "video",
+      "uri": "sources/subject.mp4",
+      "identity": {
+        "algorithm": "generated",
+        "value": "vibeedit-subject-v1"
+      },
+      "durationFrames": 60,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "V1",
+        "kind": "video",
+        "order": 0,
+        "items": [
+          {
+            "id": "subject",
+            "kind": "video",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 60
+            },
+            "source": {
+              "sourceId": "subject",
+              "inFrame": 0,
+              "durationFrames": 60
+            },
+            "effects": []
+          }
+        ]
+      },
+      {
+        "id": "M1",
+        "kind": "motion",
+        "order": 10,
+        "items": [
+          {
+            "id": "tracked-title",
+            "kind": "motion",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 60
+            },
+            "componentId": "vibeedit://text/negative-face-follow",
+            "props": {
+              "text": "LOCKED ON",
+              "trackingFrames": [
+                {
+                  "frame": 0,
+                  "x": 0.25,
+                  "y": 0.48
+                },
+                {
+                  "frame": 15,
+                  "x": 0.42,
+                  "y": 0.42
+                },
+                {
+                  "frame": 30,
+                  "x": 0.62,
+                  "y": 0.54
+                },
+                {
+                  "frame": 45,
+                  "x": 0.75,
+                  "y": 0.44
+                },
+                {
+                  "frame": 59,
+                  "x": 0.55,
+                  "y": 0.5
+                }
+              ],
+              "background": "transparent"
+            },
+            "renderer": "html",
+            "transparent": true
+          }
+        ]
+      },
+      {
+        "id": "A1",
+        "kind": "audio",
+        "order": 0,
+        "items": [
+          {
+            "id": "lock",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 30,
+              "durationFrames": 12
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 96
+            },
+            "gainDb": -13,
+            "variationSeed": 41,
+            "avoidImmediateRepeat": true
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "masks": [],
+    "tracking": [
+      {
+        "id": "face-track",
+        "kind": "face",
+        "artifactUri": "artifacts/face-tracks.json",
+        "startFrame": 0,
+        "durationFrames": 60,
+        "coordinateSpace": "normalized",
+        "format": "vibeedit.face-tracks+json",
+        "provenance": {
+          "generator": "vibeedit.examples.controlled_face_track",
+          "implementationVersion": "0.1.0",
+          "parameters": {},
+          "sourceIdentities": [
+            "vibeedit-generated-example"
+          ],
+          "cacheKey": "vibeedit-generated-example-v1"
+        }
+      }
+    ],
+    "analysis": []
+  },
+  "render": {
+    "backend": "mixed",
+    "output": {
+      "uri": "face-follow-text.mp4",
+      "container": "mp4",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "pixelFormat": "yuv420p"
+    },
+    "deterministic": true
+  },
+  "verification": {
+    "durationFrames": 60,
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "hasVideo": true,
+    "hasAudio": true,
+    "maxDurationDriftFrames": 1
+  },
+  "provenance": {
+    "generator": "vibeedit-example",
+    "generatorVersion": "0.1.0",
+    "createdAt": "2026-07-13T00:00:00Z",
+    "schemaSource": "schema/composition.schema.json",
+    "catalogVersion": "0.1.0"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "minimal",
+  "canvas": {
+    "width": 320,
+    "height": 180,
+    "frameRate": { "numerator": 30, "denominator": 1 },
+    "audioSampleRate": 48000
+  },
+  "durationFrames": 30,
+  "sources": [],
+  "timeline": {
+    "tracks": []
+  },
+  "artifacts": {
+    "masks": [],
+    "tracking": [],
+    "analysis": []
+  },
+  "render": {
+    "backend": "ffmpeg",
+    "output": {
+      "uri": "minimal.mp4",
+      "container": "mp4",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "pixelFormat": "yuv420p"
+    },
+    "deterministic": true
+  },
+  "verification": {
+    "durationFrames": 30,
+    "width": 320,
+    "height": 180,
+    "frameRate": { "numerator": 30, "denominator": 1 },
+    "hasVideo": true,
+    "hasAudio": false,
+    "maxDurationDriftFrames": 1
+  },
+  "provenance": {
+    "generator": "vibeedit-example",
+    "generatorVersion": "0.1.0",
+    "createdAt": "2026-07-13T00:00:00Z",
+    "schemaSource": "schema/composition.schema.json"
+  }
+}

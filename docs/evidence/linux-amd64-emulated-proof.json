@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-07-13",
+  "decision": "accepted_with_emulation_limit",
+  "scope": "Exact-artifact Linux x86_64 compatibility smoke under Docker Desktop CPU emulation.",
+  "environment": {
+    "host": "macOS Apple Silicon",
+    "virtualization": "Docker Desktop Linux VM with --platform linux/amd64",
+    "kernel": "Linux 5.15.49-linuxkit x86_64",
+    "distribution": "Debian GNU/Linux 12 (bookworm)",
+    "architecture": "amd64",
+    "node": "22.23.1",
+    "python": "3.11.2",
+    "ffmpeg": "5.1.9-0+deb12u1"
+  },
+  "exactWheel": {
+    "name": "vibeedit-0.1.0-py3-none-any.whl",
+    "bytes": 1807366,
+    "sha256": "07c3e08e3e85b8880c2a681b1d40c44dabac2f043617782f25abfeafc0eb554e",
+    "cleanInstall": true,
+    "catalogItems": 467,
+    "skills": 44,
+    "presets": 333,
+    "doctor": {
+      "ready": true,
+      "system": "linux",
+      "machine": "x86_64",
+      "optionalCapabilitiesDegradeWithActions": true
+    },
+    "render": {
+      "example": "basic-generated",
+      "passed": true,
+      "width": 640,
+      "height": 360,
+      "durationFrames": 60,
+      "durationDriftFrames": 0,
+      "hasVideo": true,
+      "hasAudio": true
+    }
+  },
+  "exactNpmRuntime": {
+    "cleanInstall": true,
+    "catalogItems": 467,
+    "skills": 44,
+    "motionComponents": 74,
+    "productionAuditVulnerabilities": 0,
+    "note": "The handoff tarball hash remains in the external artifact audit to avoid a self-mutating packaged hash."
+  },
+  "rawLogSha256": "0b1d0c1fdad85380e68456b0add10facc01a11f904401d81d7e738973c7be01b",
+  "limitations": [
+    "CPU and userspace execution were emulated on an Apple Silicon host, so this does not replace native Linux x86_64 CI.",
+    "Portable vision and Chromium source suites were not repeated in the emulated pass; they passed on Linux ARM64 and remain declared in native x86_64 CI."
+  ]
+}

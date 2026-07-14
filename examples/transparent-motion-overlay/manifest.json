@@ -1,0 +1,17 @@
+{
+  "id": "vibeedit://template/transparent-motion-overlay",
+  "name": "Transparent Motion Overlay",
+  "description": "Executable deterministic HTML title rendered as a VP9 alpha overlay for downstream compositing.",
+  "families": [
+    "html",
+    "motion",
+    "transparent-overlay"
+  ],
+  "requirements": {
+    "extras": [
+      "browser"
+    ],
+    "models": []
+  },
+  "conditional": false
+}

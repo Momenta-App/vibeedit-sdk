@@ -1,0 +1,17 @@
+{
+  "id": "vibeedit://template/mask-subject-effect",
+  "name": "Mask-Driven Subject Effect",
+  "description": "Executable moving subject matte that confines a catalog color treatment to the subject on every frame.",
+  "families": [
+    "masks",
+    "subject-effects",
+    "effects"
+  ],
+  "requirements": {
+    "extras": [
+      "effects"
+    ],
+    "models": []
+  },
+  "conditional": false
+}

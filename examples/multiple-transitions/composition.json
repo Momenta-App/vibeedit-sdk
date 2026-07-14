@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "multiple-transitions",
+  "canvas": {
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "backgroundColor": "#101217",
+    "audioSampleRate": 48000
+  },
+  "durationFrames": 120,
+  "sources": [],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "A1",
+        "kind": "audio",
+        "order": 0,
+        "items": [
+          {
+            "id": "push-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 37,
+              "durationFrames": 12
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 82
+            },
+            "gainDb": -13,
+            "variationSeed": 61,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "burn-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 82,
+              "durationFrames": 12
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 58
+            },
+            "gainDb": -11,
+            "variationSeed": 62,
+            "avoidImmediateRepeat": true
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "masks": [],
+    "tracking": [],
+    "analysis": []
+  },
+  "render": {
+    "backend": "python",
+    "output": {
+      "uri": "multiple-transitions.mp4",
+      "container": "mp4",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "pixelFormat": "yuv420p"
+    },
+    "deterministic": true
+  },
+  "verification": {
+    "durationFrames": 120,
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "hasVideo": true,
+    "hasAudio": true,
+    "maxDurationDriftFrames": 1
+  },
+  "provenance": {
+    "generator": "vibeedit-example",
+    "generatorVersion": "0.1.0",
+    "createdAt": "2026-07-13T00:00:00Z",
+    "schemaSource": "schema/composition.schema.json",
+    "catalogVersion": "0.1.0"
+  }
+}

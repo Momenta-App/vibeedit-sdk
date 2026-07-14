@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "object_classes": {
+    "ui": {
+      "small_fast": {
+        "sfx": ["click", "tick"],
+        "hit_count_multiplier": 1.0,
+        "layer_depth": 1,
+        "offset_ms": [-5, 0],
+        "gain_db": [-18, -11],
+        "tail_ms": [30, 90]
+      },
+      "small_slow": {
+        "sfx": ["tap", "pop"],
+        "hit_count_multiplier": 0.65,
+        "layer_depth": 1,
+        "offset_ms": [0, 25],
+        "gain_db": [-17, -10],
+        "tail_ms": [80, 160]
+      },
+      "large_fast": {
+        "sfx": ["hit", "tap"],
+        "hit_count_multiplier": 0.8,
+        "layer_depth": 2,
+        "offset_ms": [-20, 0],
+        "gain_db": [-12, -7],
+        "tail_ms": [100, 230]
+      },
+      "large_slow": {
+        "sfx": ["whoosh", "hit"],
+        "hit_count_multiplier": 0.45,
+        "layer_depth": 2,
+        "offset_ms": [-110, 0],
+        "gain_db": [-16, -7],
+        "tail_ms": [180, 360]
+      }
+    },
+    "text": {
+      "small_fast": {
+        "sfx": ["pop", "tick"],
+        "hit_count_multiplier": 1.0,
+        "layer_depth": 1,
+        "offset_ms": [0, 15],
+        "gain_db": [-18, -10],
+        "tail_ms": [40, 120]
+      },
+      "small_slow": {
+        "sfx": ["pop", "tap"],
+        "hit_count_multiplier": 0.7,
+        "layer_depth": 1,
+        "offset_ms": [0, 30],
+        "gain_db": [-17, -10],
+        "tail_ms": [90, 180]
+      },
+      "large_fast": {
+        "sfx": ["pop", "hit"],
+        "hit_count_multiplier": 0.75,
+        "layer_depth": 2,
+        "offset_ms": [-10, 0],
+        "gain_db": [-13, -8],
+        "tail_ms": [100, 220]
+      },
+      "large_slow": {
+        "sfx": ["whoosh", "pop"],
+        "hit_count_multiplier": 0.5,
+        "layer_depth": 2,
+        "offset_ms": [-90, 0],
+        "gain_db": [-16, -8],
+        "tail_ms": [160, 320]
+      }
+    },
+    "physical": {
+      "small_fast": {
+        "sfx": ["tap", "click"],
+        "hit_count_multiplier": 0.9,
+        "layer_depth": 1,
+        "offset_ms": [0],
+        "gain_db": [-16, -9],
+        "tail_ms": [60, 140]
+      },
+      "small_slow": {
+        "sfx": ["tap", "whoosh"],
+        "hit_count_multiplier": 0.55,
+        "layer_depth": 2,
+        "offset_ms": [-70, 0],
+        "gain_db": [-16, -8],
+        "tail_ms": [130, 280]
+      },
+      "large_fast": {
+        "sfx": ["hit", "whoosh"],
+        "hit_count_multiplier": 0.7,
+        "layer_depth": 2,
+        "offset_ms": [-55, 0],
+        "gain_db": [-10, -5],
+        "tail_ms": [160, 360]
+      },
+      "large_slow": {
+        "sfx": ["whoosh", "hit"],
+        "hit_count_multiplier": 0.4,
+        "layer_depth": 3,
+        "offset_ms": [-140, 0, 80],
+        "gain_db": [-15, -6],
+        "tail_ms": [240, 520]
+      }
+    },
+    "graphic": {
+      "small_fast": {
+        "sfx": ["tick", "pop"],
+        "hit_count_multiplier": 1.0,
+        "layer_depth": 1,
+        "offset_ms": [0],
+        "gain_db": [-18, -10],
+        "tail_ms": [35, 110]
+      },
+      "small_slow": {
+        "sfx": ["pop", "whoosh"],
+        "hit_count_multiplier": 0.65,
+        "layer_depth": 1,
+        "offset_ms": [-45, 0],
+        "gain_db": [-17, -10],
+        "tail_ms": [90, 210]
+      },
+      "large_fast": {
+        "sfx": ["whoosh", "hit"],
+        "hit_count_multiplier": 0.75,
+        "layer_depth": 2,
+        "offset_ms": [-70, 0],
+        "gain_db": [-13, -7],
+        "tail_ms": [140, 300]
+      },
+      "large_slow": {
+        "sfx": ["whoosh", "pop", "hit"],
+        "hit_count_multiplier": 0.45,
+        "layer_depth": 3,
+        "offset_ms": [-130, 0, 65],
+        "gain_db": [-16, -7],
+        "tail_ms": [220, 460]
+      }
+    }
+  },
+  "size_thresholds": {
+    "small": "less_than_12_percent_frame_area_or_single_text_token",
+    "large": "at_least_12_percent_frame_area_or_panel_title_object"
+  },
+  "speed_thresholds": {
+    "fast": "primary_motion_under_180_ms",
+    "slow": "primary_motion_at_least_180_ms"
+  }
+}

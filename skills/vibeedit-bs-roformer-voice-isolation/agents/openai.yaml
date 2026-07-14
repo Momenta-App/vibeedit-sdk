@@ -1,0 +1,6 @@
+interface:
+  display_name: "BS-Roformer Voice Separation"
+  short_description: "Create vocal and instrumental stems from audio or video"
+  default_prompt: "Use $vibeedit-bs-roformer-voice-isolation to create vocal and instrumental stems for this song, video, or timestamped section."
+policy:
+  allow_implicit_invocation: true

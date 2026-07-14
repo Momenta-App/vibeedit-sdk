@@ -1,0 +1,4 @@
+interface:
+  display_name: "Micro SFX Timing Craft"
+  short_description: "Plan precise layered micro-SFX timings"
+  default_prompt: "Use $micro-sfx-timing-craft to plan precise micro-SFX event timing and mix automation for this edit."

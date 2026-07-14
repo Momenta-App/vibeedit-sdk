@@ -1,0 +1,17 @@
+{
+  "group": "reveal",
+  "id": "effect-reverse-curtain-reveal",
+  "title": "Reverse Curtain Reveal",
+  "defaultFile": "007__effect-reverse-curtain-reveal-horizontal.mp4",
+  "recipeFile": "effect-reverse-curtain-reveal.recipe.json",
+  "skillName": "vibeedit-reverse-curtain-reveal",
+  "summary": "Screen starts black, then two black bars open outward from the center to reveal the source video.",
+  "controls": {
+    "orientation": ["horizontal", "vertical"],
+    "speed": "Reveal speed multiplier. Higher is faster.",
+    "openStartSeconds": "Delay before opening begins.",
+    "openDurationSeconds": "Base opening duration before speed is applied.",
+    "easing": ["smoothstep", "linear", "ease-out-cubic"],
+    "featherPixels": "Optional softened edge width."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "vibeedit://template/beat-synchronized",
+  "name": "Beat-Synchronized Edit",
+  "description": "Executable 120 BPM edit that analyzes generated audio and verifies cuts against the recovered integer-frame beat grid.",
+  "families": [
+    "beat-analysis",
+    "audio",
+    "transitions"
+  ],
+  "requirements": {
+    "extras": [
+      "vision"
+    ],
+    "models": []
+  },
+  "conditional": false
+}

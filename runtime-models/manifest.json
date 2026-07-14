@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "models": [
+    {
+      "id": "ssd-mobilenet-v1-12",
+      "capability": "vision.object",
+      "status": "optional-download",
+      "source": "https://huggingface.co/onnxmodelzoo/ssd_mobilenet_v1_12",
+      "version": "019281f3fcb151a90e491f3b2f0273f9f31bd6be",
+      "files": [
+        {"role": "weights", "url": "https://huggingface.co/onnxmodelzoo/ssd_mobilenet_v1_12/resolve/019281f3fcb151a90e491f3b2f0273f9f31bd6be/ssd_mobilenet_v1_12.onnx?download=true", "bytes": 29461455, "sha256": "b8fba5e404077d4048d27fcd1667e85e27e192eb9bf51e696c46a3acd7d21058"}
+      ],
+      "license": "SSD-MobileNetV1 model card states MIT; ONNX Model Zoo repository metadata states Apache-2.0; COCO dataset terms apply; legal review remains required.",
+      "reason": "`vibeedit setup --vision` downloads and verifies the 29.5 MB portable ONNX detector; it is never included in release archives."
+    },
+    {
+      "id": "sam-2.1",
+      "capability": "sam.2.1",
+      "status": "optional-download",
+      "source": "https://github.com/facebookresearch/sam2",
+      "version": "source revision 2b90b9f5ceec907a1c18123530e92e794ad901a4; tiny checkpoint 2024-09-29",
+      "files": [
+        {"role": "source", "url": "https://github.com/facebookresearch/sam2/archive/2b90b9f5ceec907a1c18123530e92e794ad901a4.tar.gz", "bytes": 55645345, "sha256": "1f2fbfad3ffa38110368abac76c6ef9df9c282a66d5c2807bc94abf4d2fb30f8"},
+        {"role": "weights", "url": "https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_tiny.pt", "bytes": 156008466, "sha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69"}
+      ],
+      "license": "Apache-2.0 for official Meta SAM 2 source and model checkpoints; downloaded only by explicit setup.",
+      "reason": "The lightweight package excludes the 211.7 MB runtime payload; `vibeedit setup --sam` downloads and verifies it."
+    },
+    {
+      "id": "sam-3.1",
+      "capability": "sam.3.1",
+      "status": "quarantined",
+      "source": "local research workflow only",
+      "version": null,
+      "files": [],
+      "license": "Unverified for public package redistribution.",
+      "reason": "Local workflow evidence is not a distributable model contract."
+    }
+  ]
+}

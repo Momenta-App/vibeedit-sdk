@@ -1,0 +1,16 @@
+{
+  "id": "vibeedit://template/fan-edit",
+  "name": "Fan Edit",
+  "description": "Executable setup-to-drop fan edit with beat punctuation, seeded stutter, and a frame-accurate transition.",
+  "families": [
+    "fan-edit",
+    "effects",
+    "transitions",
+    "sound-design"
+  ],
+  "requirements": {
+    "extras": [],
+    "models": []
+  },
+  "conditional": false
+}

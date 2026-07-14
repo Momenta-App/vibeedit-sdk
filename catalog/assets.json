@@ -1,0 +1,267 @@
+{
+  "schemaVersion": "1.0.0",
+  "assets": [
+    {
+      "path": "catalog/previews/effect-transition.mp4",
+      "sha256": "c6ebd977cfb3edc270502fca68d5663de9e26d5a8653c1253477fd87770f6d95",
+      "bytes": 56485,
+      "durationSeconds": 3.6,
+      "category": "preview-video",
+      "tags": [
+        "effect",
+        "transition"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/negative.mp4",
+      "sha256": "9bd1ef22b82578d8abd22ec3747cd678b15292c178adf9db66f8faaf76d3ecea",
+      "bytes": 34935,
+      "durationSeconds": 3.0,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "mixed"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/caption-rail.mp4",
+      "sha256": "5ed266f7b2c5b0713dd3355f126309765d9c77d75f37e23000ebce6b0b89537d",
+      "bytes": 232383,
+      "durationSeconds": 3.0,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "captions",
+        "html",
+        "mixed"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/mixed-source-html.mp4",
+      "sha256": "69f4f0413a0920c4186f10e33f6d83270700e4cbb31ddc4433919e697ef96a3e",
+      "bytes": 335610,
+      "durationSeconds": 3.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "source-video",
+        "html",
+        "mixed"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/portable-motion-showcase.mp4",
+      "sha256": "27c4385c0c9f44f5c8e3a6d826ba74634c3b286ba93b438f4545e16ff841382a",
+      "bytes": 297668,
+      "durationSeconds": 3.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "text",
+        "caption",
+        "html"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/impact.wav",
+      "sha256": "c85a603816b962715a41c3a9d43cdd1b649de9a8964e8cc1f63f353e9e110202",
+      "bytes": 38478,
+      "durationSeconds": 0.4,
+      "category": "procedural-sfx",
+      "tags": [
+        "impact",
+        "low-frequency"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": -10,
+      "loudnessLufs": -37.25,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/fan-edit.mp4",
+      "sha256": "bf2a8c08342bee5149e6273c1c30e1a0411f4e4e631e77340625f09ad35a98da",
+      "bytes": 67178,
+      "durationSeconds": 3.6,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "fan-edit",
+        "effects"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/beat-synchronized.mp4",
+      "sha256": "71d0de82c0bbd60dee55ea05faff59f91b18d7a42c008bc5f4304c20c7e4f84b",
+      "bytes": 83217,
+      "durationSeconds": 3.6,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "beats",
+        "analysis"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/sound-design-layering.mp4",
+      "sha256": "5b4b4cc009d7be72d63b46a3ad3447af37d432e154c97a03d36bdc9c6d7d70a8",
+      "bytes": 107275,
+      "durationSeconds": 3.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "audio",
+        "sfx"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/face-follow-text.mp4",
+      "sha256": "df0832361c8549b19381ebfda4a62e22cd21e652767f51c6266580322d3c0b74",
+      "bytes": 22601,
+      "durationSeconds": 2.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "face",
+        "tracking",
+        "text"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/mask-subject-effect.mp4",
+      "sha256": "ef792c73050ab2f18bc322560cb4bd9920b236c2b4568f2278f93e68c98a33bc",
+      "bytes": 15964,
+      "durationSeconds": 2.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "mask",
+        "subject-effect"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/multiple-transitions.mp4",
+      "sha256": "0f4623b9bd3c893982d929b2e8be827cd2e661edd12f9c898eac9e6faad968f8",
+      "bytes": 19354,
+      "durationSeconds": 4.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "transitions"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/transparent-motion-overlay.webm",
+      "sha256": "7dbae05c9b7caac4303d1422deb74027ef58952e805741550ee08d8755785b70",
+      "bytes": 7640,
+      "durationSeconds": 2.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "html",
+        "alpha",
+        "overlay"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    }
+  ]
+}

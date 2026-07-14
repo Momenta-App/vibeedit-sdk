@@ -1,0 +1,11 @@
+{
+  "group": "reveal",
+  "id": "effect-reverse-curtain-subject-reveal",
+  "title": "Reverse Curtain Subject Reveal",
+  "defaultFile": "008__effect-reverse-curtain-subject-reveal-over.mp4",
+  "recipeFile": "effect-reverse-curtain-subject-reveal.recipe.json",
+  "skillName": "vibeedit-reverse-curtain-subject-reveal",
+  "summary": "A slowed moving Apple Vision person cutout from a full-body character video moment combined with center-opening reverse curtain bars.",
+  "layerModes": ["subject_over_curtain", "subject_under_curtain"],
+  "backgroundModes": ["source", "stutter"]
+}

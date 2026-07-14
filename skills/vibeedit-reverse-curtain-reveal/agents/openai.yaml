@@ -1,0 +1,4 @@
+interface:
+  display_name: "VibeEdit Reverse Curtain Reveal"
+  short_description: "Render center-opening black-bar curtain reveals."
+  default_prompt: "Create a reverse curtain reveal effect where the screen starts black and opens from the center, with horizontal or vertical orientation and adjustable speed."

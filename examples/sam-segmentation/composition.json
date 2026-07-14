@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "sam-segmentation",
+  "canvas": {
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "backgroundColor": "#101217",
+    "audioSampleRate": 48000
+  },
+  "durationFrames": 60,
+  "sources": [
+    {
+      "id": "subject",
+      "kind": "video",
+      "uri": "sources/subject.mp4",
+      "identity": {
+        "algorithm": "generated",
+        "value": "vibeedit-subject-v1"
+      },
+      "durationFrames": 60,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "V1",
+        "kind": "video",
+        "order": 0,
+        "items": [
+          {
+            "id": "subject",
+            "kind": "video",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 60
+            },
+            "source": {
+              "sourceId": "subject",
+              "inFrame": 0,
+              "durationFrames": 60
+            },
+            "effects": []
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "masks": [
+      {
+        "id": "sam-mask",
+        "kind": "rle",
+        "startFrame": 0,
+        "durationFrames": 60,
+        "artifactUri": "artifacts/sam-mask.json",
+        "format": "vibeedit.sam-mask+json",
+        "inverted": false,
+        "provenance": {
+          "generator": "vibeedit.vision.segment",
+          "implementationVersion": "0.1.0",
+          "parameters": {},
+          "sourceIdentities": [
+            "vibeedit-generated-example"
+          ],
+          "cacheKey": "vibeedit-generated-example-v1",
+          "model": "configured-at-runtime",
+          "modelVersion": "configured-at-runtime"
+        }
+      }
+    ],
+    "tracking": [],
+    "analysis": []
+  },
+  "render": {
+    "backend": "ffmpeg",
+    "output": {
+      "uri": "sam-segmentation.mp4",
+      "container": "mp4",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "pixelFormat": "yuv420p"
+    },
+    "deterministic": true
+  },
+  "verification": {
+    "durationFrames": 60,
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "hasVideo": true,
+    "hasAudio": false,
+    "maxDurationDriftFrames": 1
+  },
+  "provenance": {
+    "generator": "vibeedit-example",
+    "generatorVersion": "0.1.0",
+    "createdAt": "2026-07-13T00:00:00Z",
+    "schemaSource": "schema/composition.schema.json",
+    "catalogVersion": "0.1.0"
+  }
+}

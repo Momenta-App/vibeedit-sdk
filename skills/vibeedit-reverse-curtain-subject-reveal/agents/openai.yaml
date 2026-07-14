@@ -1,0 +1,4 @@
+interface:
+  display_name: "VibeEdit Reverse Curtain Subject Reveal"
+  short_description: "Render curtain reveals with slowed masked character cutouts."
+  default_prompt: "Create a reverse curtain reveal with a masked character cutout, choosing whether the subject is above or below the curtain and whether the background is normal video or rapid frame stutter."

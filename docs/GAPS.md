@@ -1,0 +1,30 @@
+# Release Gap Register
+
+This register distinguishes implemented claims from discovered source material.
+
+| Area | Current state | Release gate |
+| --- | --- | --- |
+| CompositionSpec | Legacy projects use seconds and multiple shapes | Schema, compatibility tests, and cross-language fixtures pass |
+| Python distribution | Reusable `vibeedit_media` exists under another public name | VibeEdit-owned API, CLI, wheel/sdist, clean install, and real render pass |
+| npm runtime | Placeholder metadata package | Runtime exports, CLI, declarations, tests, and `npm pack --dry-run` pass |
+| HTML rendering | 74 tracked components are adapted into the portable runtime | Cross-runtime seek hashes, tracking interpolation, injection checks, pinned-Chromium video, and VP9-alpha example pass |
+| Effects/transitions | 333 reviewed canonical presets are cloned byte-for-byte behind VibeEdit-owned adapters | Stable IDs, separate manifests, matching source/package hashes, exhaustive frame execution, and effect/transition/mask examples pass |
+| Skills | 67 tracked canonical skill directories were audited | 44 byte-identical release-safe clones install into four harness layouts; 23 rejected packages remain recorded/quarantined |
+| SFX | Many local recordings with incomplete rights evidence | Exclude/quarantine until license, rights, decode, loudness, and checksum pass |
+| Vision | OpenCV providers, a packaged VibeEdit-owned Apple Vision runner, and a pinned portable ONNX object detector exist | Face/body/pose pass on macOS Apple Silicon; portable OpenCV/ONNX dependencies and degradation behavior pass on Linux ARM64; 0.1 documents pose as macOS-native; Linux x86_64/Windows/macOS Intel matrix execution remains the proof gap |
+| SAM 2.1 | Official source and tiny weights are approved as an optional setup download | Exact URL/size/SHA, clean standalone `sam` extra, safe extraction, provider routing, controlled/natural 30-frame Torch/MPS visual proofs, and the verified 60-frame packaged example pass; evidence is retained in `docs/evidence/sam21-public-proof.json` |
+| SAM 3.1 | Local research workflows/models exist | Remains quarantined until source, weights, redistribution, setup, and independent inference proof pass |
+| MCP | Existing product MCP infrastructure is unrelated | Adapter over the library passes typed tool smoke tests |
+| Catalog site | Desktop catalog UI/data exists | Static generation, search/filter/copy, local open, and missing-preview states pass |
+| Licensing | npm says `UNLICENSED`; Python source says MIT | Custom package terms and third-party inventory receive qualified legal review |
+| Platform proof | macOS Apple Silicon and Dockerized Linux ARM64 have clean exact-artifact proofs; emulated Linux x86_64 exact-artifact smoke also passes | Execute and retain native Linux x86_64, Windows, and macOS Intel jobs before broadening verified support claims |
+| Publication | Explicitly forbidden without approval | Build locally only; no registry publish, release, or production deployment |
+
+## Immediate quarantine list
+
+- Recorded music, dialogue, movie clips, reference-corpus extracts, downloaded
+  SFX, and model weights in release archives. The approved SAM 2.1 tiny weight
+  is downloaded only by explicit setup into the user cache.
+- Source with unclear ownership or a third-party noncommercial license.
+- Modified source-tree HTML components until their intended revision is known.
+- Absolute developer-machine paths and private service URLs.

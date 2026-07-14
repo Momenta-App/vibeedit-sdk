@@ -1,0 +1,18 @@
+{
+  "id": "vibeedit://template/face-follow-text",
+  "name": "Face-Following Text",
+  "description": "Executable tracked-text overlay using deterministic interpolation from a frame-addressed face TrackingArtifact.",
+  "families": [
+    "tracking",
+    "face",
+    "text",
+    "html"
+  ],
+  "requirements": {
+    "extras": [
+      "browser"
+    ],
+    "models": []
+  },
+  "conditional": false
+}

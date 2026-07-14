@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clean Text Animation"
+  short_description: "Clean word reveal with optional shimmer."
+  default_prompt: "Use $clean-text-animation to create a clean word-by-word text reveal for my phrase."

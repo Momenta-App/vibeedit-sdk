@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "modes": {
+    "low": {
+      "hit_count_per_second": [1, 3],
+      "layering_depth": 1,
+      "event_density": "major_events_only",
+      "timing_jitter_ms": [0, 6],
+      "volume_envelope": {
+        "gain_db": [-18, -10],
+        "attack_ms": [0, 3],
+        "release_ms": [45, 140],
+        "ducking": "none"
+      },
+      "motion_coupling": "anchor only to panel locks, hero text, major button confirmations, or object landings",
+      "verification_strictness": {
+        "timeline_required": true,
+        "frame_tolerance_ms": 50,
+        "must_list_unattached_sounds": true,
+        "listen_required": "spot_check"
+      }
+    },
+    "medium": {
+      "hit_count_per_second": [3, 6],
+      "layering_depth": 1,
+      "event_density": "readable_interactions_and_text_groups",
+      "timing_jitter_ms": [0, 12],
+      "volume_envelope": {
+        "gain_db": [-17, -8],
+        "attack_ms": [0, 4],
+        "release_ms": [60, 180],
+        "ducking": "light_group_ducking_when_music_competes"
+      },
+      "motion_coupling": "one sound per button, module, text group, grid group, connector endpoint, or panel lock",
+      "verification_strictness": {
+        "timeline_required": true,
+        "frame_tolerance_ms": 35,
+        "must_list_unattached_sounds": true,
+        "listen_required": "full_pass"
+      }
+    },
+    "medium-high": {
+      "hit_count_per_second": [6, 10],
+      "layering_depth": 2,
+      "event_density": "primary_events_plus_selective_secondary_ticks",
+      "timing_jitter_ms": [0, 18],
+      "volume_envelope": {
+        "gain_db": [-18, -7],
+        "attack_ms": [0, 5],
+        "release_ms": [70, 220],
+        "ducking": "group_bus_minus_2db_on_dense_runs"
+      },
+      "motion_coupling": "attach primary hits to visible anchors and secondary ticks to scale peaks, counter changes, grid pulses, or cursor contacts",
+      "verification_strictness": {
+        "timeline_required": true,
+        "frame_tolerance_ms": 25,
+        "must_list_unattached_sounds": true,
+        "listen_required": "full_pass_plus_dense_section_replay"
+      }
+    },
+    "high": {
+      "hit_count_per_second": [10, 16],
+      "layering_depth": 3,
+      "event_density": "dense_visible_micro_events",
+      "timing_jitter_ms": [0, 24],
+      "volume_envelope": {
+        "gain_db": [-20, -6],
+        "attack_ms": [0, 5],
+        "release_ms": [80, 300],
+        "ducking": "bus_limiter_and_minus_3db_between_overlapping_groups"
+      },
+      "motion_coupling": "every layer maps to anticipation, contact, bounce, route draw, grid pulse, text pop, or landing phase",
+      "verification_strictness": {
+        "timeline_required": true,
+        "frame_tolerance_ms": 17,
+        "must_list_unattached_sounds": true,
+        "listen_required": "full_pass_plus_isolated_sfx_bus",
+        "peak_check_required": true
+      }
+    },
+    "ultra": {
+      "hit_count_per_second": [16, 24],
+      "layering_depth": 4,
+      "event_density": "all_visible_micro_events_with_grouped_subhits",
+      "timing_jitter_ms": [0, 30],
+      "volume_envelope": {
+        "gain_db": [-22, -5],
+        "attack_ms": [0, 6],
+        "release_ms": [90, 420],
+        "ducking": "bus_limiter_minus_4db_dense_groups_and_manual_gain_rides"
+      },
+      "motion_coupling": "no free rhythm hits; each transient, body, tail, and subhit must name a visible target and phase",
+      "verification_strictness": {
+        "timeline_required": true,
+        "frame_tolerance_ms": 12,
+        "must_list_unattached_sounds": true,
+        "listen_required": "full_pass_isolated_bus_and_video_context",
+        "peak_check_required": true,
+        "overlap_audit_required": true
+      }
+    }
+  },
+  "mode_escalation": {
+    "increase_hit_count": "raise only when there are more visible anchors",
+    "increase_layering_depth": "add anticipation/body/tail layers before raising gain",
+    "increase_event_density": "group subhits if individual events are too fast to read",
+    "increase_timing_jitter": "use jitter for humanized dense runs, never to hide poor sync",
+    "increase_verification": "stricter modes require timeline, listening, peak, and overlap evidence"
+  }
+}

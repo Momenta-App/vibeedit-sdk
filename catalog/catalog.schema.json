@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibeedit.com/schema/catalog-1.0.0.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "catalogVersion", "items"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "catalogVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/item" }
+    }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "description", "category", "tags", "version", "inputs", "parameters", "platforms", "backends", "preview", "examples", "prompts", "requirements", "license", "provenance", "validation"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^vibeedit://[a-z][a-z0-9-]*/[a-z0-9][a-z0-9._-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "category": { "enum": ["effect", "transition", "text", "motion", "template", "sfx", "skill"] },
+        "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "version": { "type": "string" },
+        "inputs": { "type": "object" },
+        "parameters": { "type": "object" },
+        "platforms": { "type": "array", "items": { "enum": ["macos", "windows", "linux"] }, "uniqueItems": true },
+        "backends": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "preview": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status"],
+          "properties": {
+            "status": { "enum": ["verified", "missing", "unsupported"] },
+            "uri": { "type": "string" },
+            "mediaType": { "type": "string" },
+            "note": { "type": "string" }
+          }
+        },
+        "examples": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["python", "javascript"],
+          "properties": {
+            "python": { "type": "string", "minLength": 1 },
+            "javascript": { "type": "string", "minLength": 1 }
+          }
+        },
+        "prompts": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "requirements": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["assets", "models"],
+          "properties": {
+            "assets": { "type": "array", "items": { "type": "string" } },
+            "models": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "license": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["owner", "terms", "redistribution"],
+          "properties": {
+            "owner": { "type": "string" },
+            "terms": { "type": "string" },
+            "redistribution": { "enum": ["verified", "not-applicable", "quarantined"] },
+            "notes": { "type": "string" }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "source", "implementation"],
+          "properties": {
+            "kind": { "enum": ["vibeedit-owned", "adapted", "procedural", "third-party"] },
+            "source": { "type": "string" },
+            "implementation": { "type": "string" },
+            "thirdParty": { "type": "array", "items": { "type": "string" } },
+            "fidelity": { "type": "string" },
+            "canonicalId": { "type": "string" }
+          }
+        },
+        "validation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "status", "command"],
+            "properties": {
+              "id": { "type": "string" },
+              "status": { "enum": ["passed", "pending", "unsupported"] },
+              "command": { "type": "string" },
+              "evidence": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

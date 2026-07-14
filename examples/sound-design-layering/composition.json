@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "sound-design-layering",
+  "canvas": {
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "backgroundColor": "#101217",
+    "audioSampleRate": 48000
+  },
+  "durationFrames": 90,
+  "sources": [
+    {
+      "id": "source",
+      "kind": "video",
+      "uri": "sources/source.mp4",
+      "identity": {
+        "algorithm": "generated",
+        "value": "vibeedit-source-v1"
+      },
+      "durationFrames": 90,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    },
+    {
+      "id": "ambience",
+      "kind": "audio",
+      "uri": "sources/ambience.wav",
+      "identity": {
+        "algorithm": "generated",
+        "value": "vibeedit-ambience-v1"
+      },
+      "durationFrames": 90,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "V1",
+        "kind": "video",
+        "order": 0,
+        "items": [
+          {
+            "id": "source",
+            "kind": "video",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 90
+            },
+            "source": {
+              "sourceId": "source",
+              "inFrame": 0,
+              "durationFrames": 90
+            },
+            "effects": []
+          }
+        ]
+      },
+      {
+        "id": "A1",
+        "kind": "audio",
+        "order": 0,
+        "role": "ambience",
+        "items": [
+          {
+            "id": "ambience",
+            "kind": "audio",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 90
+            },
+            "source": {
+              "sourceId": "ambience",
+              "inFrame": 0,
+              "durationFrames": 90
+            },
+            "role": "ambience",
+            "gainDb": -22,
+            "pan": 0,
+            "fadeInFrames": 6,
+            "fadeOutFrames": 8,
+            "effects": []
+          }
+        ]
+      },
+      {
+        "id": "A2",
+        "kind": "audio",
+        "order": 1,
+        "role": "sfx",
+        "items": [
+          {
+            "id": "low-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 15,
+              "durationFrames": 12
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 55
+            },
+            "gainDb": -14,
+            "variationSeed": 31,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "mid-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 45,
+              "durationFrames": 12
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 88
+            },
+            "gainDb": -12,
+            "variationSeed": 32,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "high-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 75,
+              "durationFrames": 12
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 144
+            },
+            "gainDb": -16,
+            "variationSeed": 33,
+            "avoidImmediateRepeat": true
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "masks": [],
+    "tracking": [],
+    "analysis": []
+  },
+  "render": {
+    "backend": "ffmpeg",
+    "output": {
+      "uri": "sound-design-layering.mp4",
+      "container": "mp4",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "pixelFormat": "yuv420p"
+    },
+    "deterministic": true
+  },
+  "verification": {
+    "durationFrames": 90,
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "hasVideo": true,
+    "hasAudio": true,
+    "maxDurationDriftFrames": 1
+  },
+  "provenance": {
+    "generator": "vibeedit-example",
+    "generatorVersion": "0.1.0",
+    "createdAt": "2026-07-13T00:00:00Z",
+    "schemaSource": "schema/composition.schema.json",
+    "catalogVersion": "0.1.0"
+  },
+  "audio": {
+    "targetLufs": -16,
+    "truePeakDb": -1,
+    "preventImmediateSfxRepeat": true,
+    "ducking": {
+      "musicUnderSfxDb": -3
+    }
+  }
+}

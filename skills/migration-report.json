@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "1.0.0",
+  "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+  "source": "main-repository:.codex/skills",
+  "selected": [
+    {
+      "name": "clean-text-animation",
+      "sourceSha256": "dd52caecaed8f96996d03ae2a8f8e2e1f9d3763a8a8a33b0ed8bd676788281f4",
+      "packageSha256": "dd52caecaed8f96996d03ae2a8f8e2e1f9d3763a8a8a33b0ed8bd676788281f4",
+      "files": 3
+    },
+    {
+      "name": "fanedit-body",
+      "sourceSha256": "ab6005c2d572fd4bdb0eb2e478935cc79928a97f99375c7671dbc3908d49dbee",
+      "packageSha256": "ab6005c2d572fd4bdb0eb2e478935cc79928a97f99375c7671dbc3908d49dbee",
+      "files": 1
+    },
+    {
+      "name": "fanedit-hook",
+      "sourceSha256": "0af0333ec5fe13c8eccaa1099920853e324ee85329429acf8fd32630a50f42d4",
+      "packageSha256": "0af0333ec5fe13c8eccaa1099920853e324ee85329429acf8fd32630a50f42d4",
+      "files": 1
+    },
+    {
+      "name": "fanedit-reference-learning",
+      "sourceSha256": "c3472be005f1aff21880927c566e5f27427eeeae9b9207132aa04a296f2a0afe",
+      "packageSha256": "c3472be005f1aff21880927c566e5f27427eeeae9b9207132aa04a296f2a0afe",
+      "files": 1
+    },
+    {
+      "name": "fanedit-text",
+      "sourceSha256": "5131ac08ec9f08c62a6fecd22777f46374f73575a0ca1557b015449a448a8a48",
+      "packageSha256": "5131ac08ec9f08c62a6fecd22777f46374f73575a0ca1557b015449a448a8a48",
+      "files": 1
+    },
+    {
+      "name": "micro-sfx-choice",
+      "sourceSha256": "09c04ca9411920a76d0ffccada0a7fd270216cb59444ad06b58a9fe8c6c8f2f6",
+      "packageSha256": "09c04ca9411920a76d0ffccada0a7fd270216cb59444ad06b58a9fe8c6c8f2f6",
+      "files": 4
+    },
+    {
+      "name": "micro-sfx-complexity-modes",
+      "sourceSha256": "7350714ed749aa01612fe8f9216534a399db1d0a5ba7e0e9b6887fb9982b7c24",
+      "packageSha256": "7350714ed749aa01612fe8f9216534a399db1d0a5ba7e0e9b6887fb9982b7c24",
+      "files": 3
+    },
+    {
+      "name": "micro-sfx-motion-attachment",
+      "sourceSha256": "a1ea7047e6f39655223c73e0e0a42e3fa277f159146f4f852530fa0fdc8ec705",
+      "packageSha256": "a1ea7047e6f39655223c73e0e0a42e3fa277f159146f4f852530fa0fdc8ec705",
+      "files": 4
+    },
+    {
+      "name": "micro-sfx-object-adaptation",
+      "sourceSha256": "a423cbf0cc7b90548b91da5dde51ef7018e366e424c54ee341b71ee98972f596",
+      "packageSha256": "a423cbf0cc7b90548b91da5dde51ef7018e366e424c54ee341b71ee98972f596",
+      "files": 3
+    },
+    {
+      "name": "micro-sfx-timing-craft",
+      "sourceSha256": "6eecd63f60287ebfc86b70f80ef54150e01f720b1deb583b1208ccd14b79955c",
+      "packageSha256": "6eecd63f60287ebfc86b70f80ef54150e01f720b1deb583b1208ccd14b79955c",
+      "files": 6
+    },
+    {
+      "name": "negative",
+      "sourceSha256": "ce545ed35f151b970e29dde62a0eff07524cc24c197818ab57f4842537ffe350",
+      "packageSha256": "ce545ed35f151b970e29dde62a0eff07524cc24c197818ab57f4842537ffe350",
+      "files": 3
+    },
+    {
+      "name": "vibeedit-beat-first-editing",
+      "sourceSha256": "40d90a301b143a4b9eb63352acde9fe4be9bd8e95bb06fcd9f6b3ca6f62e16c2",
+      "packageSha256": "40d90a301b143a4b9eb63352acde9fe4be9bd8e95bb06fcd9f6b3ca6f62e16c2",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-bs-roformer-voice-isolation",
+      "sourceSha256": "29b94947854cb43029a0b405160b79e7c53c8978260f49688a058f6317ddca37",
+      "packageSha256": "29b94947854cb43029a0b405160b79e7c53c8978260f49688a058f6317ddca37",
+      "files": 3
+    },
+    {
+      "name": "vibeedit-color-style-recipes",
+      "sourceSha256": "2bebc91f5c22f2bef9ae02120002713e2b1aa855f3a7ec50ee644b74aff25d63",
+      "packageSha256": "2bebc91f5c22f2bef9ae02120002713e2b1aa855f3a7ec50ee644b74aff25d63",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-compact-3d-typography",
+      "sourceSha256": "fdad0e79fe99c41711e8d2cb75a85600388dc83fe2b8b45191c180561a4f997a",
+      "packageSha256": "fdad0e79fe99c41711e8d2cb75a85600388dc83fe2b8b45191c180561a4f997a",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-continuity-supervisor",
+      "sourceSha256": "b65735f80cf94c4119cfbc7a830b455618da9f7e78b9e52475185e81c00a12d5",
+      "packageSha256": "b65735f80cf94c4119cfbc7a830b455618da9f7e78b9e52475185e81c00a12d5",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-creative-director",
+      "sourceSha256": "b2fdab34a06f414133986187c54e3e194137e9d83b8473f1ac7b855038be1cdc",
+      "packageSha256": "b2fdab34a06f414133986187c54e3e194137e9d83b8473f1ac7b855038be1cdc",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-creed-corpus-cross-reference",
+      "sourceSha256": "e637afd908928e5d8c96d4ace273b92bc2964af28da1f22d14debceac9f24941",
+      "packageSha256": "e637afd908928e5d8c96d4ace273b92bc2964af28da1f22d14debceac9f24941",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-creed-edit",
+      "sourceSha256": "8d9faadd23607b0fbc405ed8e2092a935672d198d191855459d237fd2a64c6c5",
+      "packageSha256": "8d9faadd23607b0fbc405ed8e2092a935672d198d191855459d237fd2a64c6c5",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-creed-viral-edit-analysis",
+      "sourceSha256": "cc4851f6cb51e720dfd93071f9f4ce02898238e1fc9c402b61428223a3c31eb3",
+      "packageSha256": "cc4851f6cb51e720dfd93071f9f4ce02898238e1fc9c402b61428223a3c31eb3",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-effects",
+      "sourceSha256": "b3c91d31ab71f0b6b0ad0fd256ef77d5b31fd5569be302a889266ff73e406389",
+      "packageSha256": "b3c91d31ab71f0b6b0ad0fd256ef77d5b31fd5569be302a889266ff73e406389",
+      "files": 2
+    },
+    {
+      "name": "vibeedit-effects-punctuation",
+      "sourceSha256": "e2e33e69f894d0eb844491252f6cd8fef54d40167ed4595a242c0180d153398c",
+      "packageSha256": "e2e33e69f894d0eb844491252f6cd8fef54d40167ed4595a242c0180d153398c",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-face-tracking-framing",
+      "sourceSha256": "b5b0e8b34db68fb4f11d01ac5741e763f2b53c77f294d4e63d785763d9dd7a70",
+      "packageSha256": "b5b0e8b34db68fb4f11d01ac5741e763f2b53c77f294d4e63d785763d9dd7a70",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-fan-edit",
+      "sourceSha256": "6aa73221537744329599eb5ac8f745dabf0f403556f41224053d3e895306eef0",
+      "packageSha256": "6aa73221537744329599eb5ac8f745dabf0f403556f41224053d3e895306eef0",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-finishing-producer",
+      "sourceSha256": "340ac68192cf03dab4484cea4875e6a4c861806749a749012a59e7c7976d6425",
+      "packageSha256": "340ac68192cf03dab4484cea4875e6a4c861806749a749012a59e7c7976d6425",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-lead-editor",
+      "sourceSha256": "22954197dc9251de8ab6fdf2ec1a39d4de7ee3cf92d81e1219968180e52bf808",
+      "packageSha256": "22954197dc9251de8ab6fdf2ec1a39d4de7ee3cf92d81e1219968180e52bf808",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-look-director",
+      "sourceSha256": "9ecd221aab621dda2c44ea7b81346dec8417d7091dc26bd9226cfb76574b241e",
+      "packageSha256": "9ecd221aab621dda2c44ea7b81346dec8417d7091dc26bd9226cfb76574b241e",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-pacing-contrast",
+      "sourceSha256": "f9d81da182d4a0bc49b563fcfe4c0c5042baddeda106405912347ac82d2ff34d",
+      "packageSha256": "f9d81da182d4a0bc49b563fcfe4c0c5042baddeda106405912347ac82d2ff34d",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-producer",
+      "sourceSha256": "13afcf36104fd22faf7da5536d08f21e0b989d1ab1b081f2025fe8b9bb9179df",
+      "packageSha256": "13afcf36104fd22faf7da5536d08f21e0b989d1ab1b081f2025fe8b9bb9179df",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-project-json-editor",
+      "sourceSha256": "edc7004eeea17fa224445efd297d4faff028552251f74de87ccc693e6e65bbbf",
+      "packageSha256": "edc7004eeea17fa224445efd297d4faff028552251f74de87ccc693e6e65bbbf",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-python-analysis-rendering",
+      "sourceSha256": "2bb955f4ebc6079bae0b63963a085ad52a7aa2f13f314fab0c5dd254373b8fdc",
+      "packageSha256": "2bb955f4ebc6079bae0b63963a085ad52a7aa2f13f314fab0c5dd254373b8fdc",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-qa-gap-discipline",
+      "sourceSha256": "73482ac760491691d4406bc6ec6a9c1966fa2746e3a9ada0e120f91e6889f83a",
+      "packageSha256": "73482ac760491691d4406bc6ec6a9c1966fa2746e3a9ada0e120f91e6889f83a",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-quote-audio-structure",
+      "sourceSha256": "f8e5eb3a356779fd252bf370e6fae83bd29658c90e74263e7ff3e6d4c7dbab29",
+      "packageSha256": "f8e5eb3a356779fd252bf370e6fae83bd29658c90e74263e7ff3e6d4c7dbab29",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-reverse-curtain-reveal",
+      "sourceSha256": "42e9601c72a3a69a386f74a26efce21c7101bfa2f23ffbddacddaad97ce75d9a",
+      "packageSha256": "42e9601c72a3a69a386f74a26efce21c7101bfa2f23ffbddacddaad97ce75d9a",
+      "files": 5
+    },
+    {
+      "name": "vibeedit-reverse-curtain-subject-reveal",
+      "sourceSha256": "626d777e0af82cb1a14d77d2316ee434baea03d27ed955cb999971ff393d3b67",
+      "packageSha256": "626d777e0af82cb1a14d77d2316ee434baea03d27ed955cb999971ff393d3b67",
+      "files": 5
+    },
+    {
+      "name": "vibeedit-segmentation-cutouts",
+      "sourceSha256": "cd4773ce0bed8883d98bcc1eab1fefc3f5f6d177e794a46aa329478084261a07",
+      "packageSha256": "cd4773ce0bed8883d98bcc1eab1fefc3f5f6d177e794a46aa329478084261a07",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-sound-design",
+      "sourceSha256": "64456bd51aa108c45129fed9b5bdfd524218f512595551054d32273e703729ac",
+      "packageSha256": "64456bd51aa108c45129fed9b5bdfd524218f512595551054d32273e703729ac",
+      "files": 2
+    },
+    {
+      "name": "vibeedit-story-shot-selection",
+      "sourceSha256": "8075058ba4db2d4e416283d6357db73ae15e2fd09d6915129ff2e211c6789bb9",
+      "packageSha256": "8075058ba4db2d4e416283d6357db73ae15e2fd09d6915129ff2e211c6789bb9",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-text-layering",
+      "sourceSha256": "566e0fc2c1aba173decd03ef29599fd97f04858293bb4f55b3b3f93df7b28402",
+      "packageSha256": "566e0fc2c1aba173decd03ef29599fd97f04858293bb4f55b3b3f93df7b28402",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-transition-editor",
+      "sourceSha256": "ea88d596fbd13a244c03cd718865711876cf6c090a4519f7601fceefba81bef9",
+      "packageSha256": "ea88d596fbd13a244c03cd718865711876cf6c090a4519f7601fceefba81bef9",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-viral-effects-reviewer",
+      "sourceSha256": "23c80d27a9b47bb5286361b5ed78c6f821f67db38e2c535c3c614e6a18df0398",
+      "packageSha256": "23c80d27a9b47bb5286361b5ed78c6f821f67db38e2c535c3c614e6a18df0398",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-viral-source-edit-router",
+      "sourceSha256": "a44c5d9821ab76de8818849e5a0913b13b16dd461f2bb164e6bee54442924405",
+      "packageSha256": "a44c5d9821ab76de8818849e5a0913b13b16dd461f2bb164e6bee54442924405",
+      "files": 11
+    },
+    {
+      "name": "vibeedit-viral-transition-reviewer",
+      "sourceSha256": "bc406b149cc283affd269e24b16dfdf91e295e731c31a6f3454d2d50197847e9",
+      "packageSha256": "bc406b149cc283affd269e24b16dfdf91e295e731c31a6f3454d2d50197847e9",
+      "files": 1
+    },
+    {
+      "name": "vibeedit-workspace",
+      "sourceSha256": "2a34f16e0f08bb882fe8e3ce42c209f25c7e55dcba69b0a3e8987fa429f15dd0",
+      "packageSha256": "2a34f16e0f08bb882fe8e3ce42c209f25c7e55dcba69b0a3e8987fa429f15dd0",
+      "files": 1
+    }
+  ],
+  "rejected": [
+    {
+      "name": "fanedit-polish-router",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "graphify",
+      "reason": "repository-maintenance tool, not a video-production skill"
+    },
+    {
+      "name": "micro-botanica-sfx-router",
+      "reason": "contains recorded audio and developer-machine source paths"
+    },
+    {
+      "name": "micro-sfx-composer",
+      "reason": "contains recorded audio without package-level redistribution evidence"
+    },
+    {
+      "name": "negative-face-follow",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "supabase",
+      "reason": "unrelated third-party product skill"
+    },
+    {
+      "name": "supabase-postgres-best-practices",
+      "reason": "unrelated third-party product skill"
+    },
+    {
+      "name": "typeflow-text-motion",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-creed-kinetic-text",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-flash-subject-transition",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-longform-object-layers",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-masking-router",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-punch-sfx-library",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-random-frame-stutter",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-sam21-video-segmentation",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-sam31-mlx-flash-subject-transition",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-sam31-mlx-subject-effects",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-subject-effects",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-subject-effects-agents-copy",
+      "reason": "test alias, not a canonical skill"
+    },
+    {
+      "name": "vibeedit-subject-effects-codex-copy",
+      "reason": "test alias, not a canonical skill"
+    },
+    {
+      "name": "vibeedit-subject-effects-vibeedit-active",
+      "reason": "test alias, not a canonical skill"
+    },
+    {
+      "name": "vibeedit-tai-lung-dark-destiny-song",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    },
+    {
+      "name": "vibeedit-tile-object-reveal",
+      "reason": "contains absolute developer-machine paths that require a public-runtime rewrite"
+    }
+  ],
+  "policy": "Included skills are byte-identical clones of their pinned canonical Git sources. Packaging metadata is stored outside the skill directories; unsafe or unrelated skills are excluded instead of rewritten."
+}

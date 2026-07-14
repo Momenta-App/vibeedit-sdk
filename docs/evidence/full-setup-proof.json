@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-07-13",
+  "decision": "accepted",
+  "platform": "macOS 26.4 arm64",
+  "wheel": {
+    "name": "vibeedit-0.1.0-py3-none-any.whl",
+    "bytes": 1807366,
+    "sha256": "07c3e08e3e85b8880c2a681b1d40c44dabac2f043617782f25abfeafc0eb554e",
+    "installation": "Fresh Python 3.12 virtual environment using the all extra",
+    "installElapsedSeconds": 43.86,
+    "installMaximumResidentBytes": 236535808,
+    "installReportedSwaps": 0
+  },
+  "pinnedDependencies": {
+    "playwright": "1.61.0",
+    "numpy": "2.5.1",
+    "pillow": "11.3.0",
+    "opencv-python-headless": "4.13.0.92",
+    "onnxruntime": "1.27.0",
+    "torch": "2.12.0",
+    "torchvision": "0.27.0",
+    "hydra-core": "1.3.2",
+    "iopath": "0.1.10",
+    "tqdm": "4.67.1"
+  },
+  "command": "vibeedit setup --all --json",
+  "cleanVibeEditCache": true,
+  "hostPlaywrightBrowserCachePreexisted": true,
+  "complete": true,
+  "dependenciesChangedDuringSetup": false,
+  "setupElapsedSeconds": 65.53,
+  "setupMaximumResidentBytes": 444727296,
+  "setupReportedSwaps": 0,
+  "providers": [
+    {
+      "capability": "motion.html",
+      "provider": "playwright-chromium",
+      "version": "1.61.0",
+      "executableSha256": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+      "note": "The fresh Python environment and empty VibeEdit cache reused the host-global verified Playwright browser payload; missing-browser installation remains covered by setup tests but was not a clean-host download in this run."
+    },
+    {
+      "capability": "media.presets",
+      "provider": "numpy+pillow",
+      "presetCount": 333
+    },
+    {
+      "capability": "vision.face,vision.body,vision.pose",
+      "provider": "apple-vision",
+      "declaredCapabilities": ["face", "body", "pose"],
+      "compiledLocally": true,
+      "executableSha256": "94504d441a3cd98d1d229c21537c5a5539ab9416104ddf742e76cf23eff38637"
+    },
+    {
+      "capability": "vision.object",
+      "provider": "ssd-mobilenet-v1-12",
+      "version": "019281f3fcb151a90e491f3b2f0273f9f31bd6be",
+      "bytes": 29461455,
+      "sha256": "b8fba5e404077d4048d27fcd1667e85e27e192eb9bf51e696c46a3acd7d21058"
+    },
+    {
+      "capability": "vision.segmentation,sam.2.1",
+      "provider": "sam2.1-hiera-tiny",
+      "version": "2024-09-29",
+      "downloadBytes": 211653811,
+      "sourceSha256": "1f2fbfad3ffa38110368abac76c6ef9df9c282a66d5c2807bc94abf4d2fb30f8",
+      "weightsSha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69",
+      "launcher": "manifest-declared Python command; no POSIX shell dependency"
+    }
+  ],
+  "doctor": {
+    "ready": true,
+    "python": "3.12.13",
+    "available": [
+      "media.render",
+      "media.presets",
+      "motion.html",
+      "vision.face",
+      "vision.face_tracking",
+      "vision.body",
+      "vision.pose",
+      "vision.object",
+      "vision.segmentation",
+      "sam.2.1"
+    ],
+    "quarantined": ["sam.3.1"]
+  },
+  "safety": {
+    "diskGiBBefore": 26.5,
+    "diskGiBAfter": 26,
+    "memoryFreePercentBefore": 47,
+    "memoryFreePercentAfter": 48,
+    "loadOneMinuteBefore": 7.41,
+    "loadFiveMinuteBefore": 6.48,
+    "loadOneMinuteAfter": 5.93,
+    "loadFiveMinuteAfter": 6.16,
+    "activeModelWorkersBefore": 0,
+    "activeModelWorkersAfter": 0
+  },
+  "isolatedCacheKiB": 381808,
+  "networkPayloadBytesExcludingChromiumAndPythonWheels": 241115266,
+  "releaseArchiveContainsModelWeights": false
+}

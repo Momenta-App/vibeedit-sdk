@@ -1,0 +1,19 @@
+{
+  "id": "vibeedit://template/sam-segmentation",
+  "name": "Conditional SAM Segmentation",
+  "description": "Executable capability-gated SAM recipe that produces a mask with a checksum-declared external provider and writes actionable degradation evidence otherwise.",
+  "families": [
+    "segmentation",
+    "sam",
+    "masks"
+  ],
+  "requirements": {
+    "extras": [
+      "sam"
+    ],
+    "models": [
+      "checksum-declared SAM 2.1 or 3.1 provider"
+    ]
+  },
+  "conditional": true
+}

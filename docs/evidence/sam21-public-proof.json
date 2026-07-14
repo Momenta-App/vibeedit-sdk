@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-07-13",
+  "decision": "accepted",
+  "scope": "Fresh exact-wheel proof of the public VibeEdit SAM 2.1 setup, segmentation, cache, packaged example, and graceful adapter boundary; no model payload is redistributed.",
+  "host": {
+    "platform": "macOS 26.4 arm64",
+    "accelerator": "Apple MPS"
+  },
+  "wheel": {
+    "name": "vibeedit-0.1.0-py3-none-any.whl",
+    "bytes": 1807366,
+    "sha256": "07c3e08e3e85b8880c2a681b1d40c44dabac2f043617782f25abfeafc0eb554e",
+    "installation": "Fresh Python 3.12 virtual environment using the sam extra"
+  },
+  "setup": {
+    "command": "vibeedit setup --sam --json",
+    "complete": true,
+    "dependencyMutationDuringSetup": false,
+    "downloadBytes": 211653811,
+    "model": "sam2.1-hiera-tiny",
+    "modelVersion": "2024-09-29",
+    "license": "Apache-2.0 (Meta SAM 2 source and model checkpoint)",
+    "sourceRevision": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "sourceSha256": "1f2fbfad3ffa38110368abac76c6ef9df9c282a66d5c2807bc94abf4d2fb30f8",
+    "weightsSha256": "7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69"
+  },
+  "runtime": {
+    "device": "mps",
+    "torch": "2.12.0",
+    "opencv": "4.13.0",
+    "numpy": "2.5.1"
+  },
+  "safety": {
+    "minimumDiskGiB": 25,
+    "minimumMemoryFreePercent": 15,
+    "maximumOneAndFiveMinuteLoad": 10,
+    "diskGiBBeforeEveryModelJob": ">=27",
+    "memoryFreePercentObservedRange": [42, 49],
+    "oneAndFiveMinuteLoadsBeforeEveryModelJob": "<=10",
+    "activeModelWorkersBeforeEveryModelJob": 0,
+    "activeModelWorkersAfter": 0,
+    "processReportedSwaps": 0,
+    "serialized": true,
+    "firstAcceptedRung": {
+      "frames": 30,
+      "height": 180,
+      "objects": 1
+    },
+    "note": "Each heavy job passed the skill's disk, memory, load, and worker gate. The optional 60-frame packaged example ran only after the controlled and natural 30-frame previews passed visual review."
+  },
+  "attempts": [
+    {
+      "id": "controlled-fixture-v1",
+      "decision": "rejected",
+      "reason": "The source-generation expression produced a visually blank fixture, so the resulting prompt-region mask was not accepted or used as proof."
+    },
+    {
+      "id": "cache-check-simplified-prompt",
+      "decision": "not_evidence",
+      "reason": "A simplified prompt object correctly produced a different cache key and cache miss. Repeating with the exact original prompt parameters produced the accepted cache hit below."
+    }
+  ],
+  "runs": [
+    {
+      "id": "controlled-static-yellow-rectangle",
+      "source": "VibeEdit-generated controlled clip; not packaged",
+      "frames": 30,
+      "width": 180,
+      "height": 180,
+      "fps": 10,
+      "objects": 1,
+      "prompt": {
+        "label": "yellow rectangle",
+        "boxNormalized": [0.12, 0.1, 0.66, 0.9]
+      },
+      "elapsedSeconds": 10.04,
+      "processRealSeconds": 10.18,
+      "maximumResidentBytes": 789643264,
+      "emptyFrames": 0,
+      "coverageMin": 0.2962962962962963,
+      "coverageMax": 0.2962962962962963,
+      "iouMin": 1.0,
+      "iouMax": 1.0,
+      "precisionMin": 1.0,
+      "recallMin": 1.0,
+      "sourceSha256": "071b9691788ffb7f8160f27158fba65168d8785960338d12c14fe9c1c2ac794f",
+      "maskSha256": "237606bbaec959b2b484c8f138f96712985a36e4166b6aa706d754c2bd25cc6e",
+      "inspectionSheetSha256": "77011b22c95e4258f13d41e488c405485c290943ddb20a8e42be82282381fb9f",
+      "cacheKey": "e2063a3ac413faed0e2ee57a3057530876f5592de9e86f8284634cf8cbca20e3",
+      "visualReview": "Accepted: sampled frames 0, 15, and 29 exactly cover the known rectangle with no background spill."
+    },
+    {
+      "id": "natural-astronaut-person",
+      "source": "scikit-image 0.25.2 astronaut sample used only for local validation; not packaged",
+      "frames": 30,
+      "width": 180,
+      "height": 180,
+      "fps": 10,
+      "objects": 1,
+      "prompt": {
+        "label": "astronaut",
+        "boxNormalized": [0.02, 0.02, 0.7, 0.99]
+      },
+      "elapsedSeconds": 9.71,
+      "processRealSeconds": 9.85,
+      "maximumResidentBytes": 836321280,
+      "emptyFrames": 0,
+      "coverageMin": 0.4087345679012346,
+      "coverageMax": 0.4088888888888889,
+      "sourceSha256": "595b0b6a37cca7668625fd6581108feb6dcc89d9f57642a25f378af9acc4b3dc",
+      "maskSha256": "93228ceff1b13e8b03088533c74c56f03734eb8f1389641ae8fa14c8d183a31b",
+      "inspectionSheetSha256": "cbd131969fc7361c2d4ff6828fc2aed7d3cebe5e609f132c04b5d04966b25f0c",
+      "cacheKey": "b6c84809640f39d514e37f731c7518b1f3261b30f1228889afdb5a3ec7f1ad51",
+      "visualReview": "Accepted: sampled frames 0, 15, and 29 cover the astronaut/person while excluding the flag, spacecraft, and foreground helmet."
+    }
+  ],
+  "cacheProof": {
+    "cacheHit": true,
+    "cacheKey": "b6c84809640f39d514e37f731c7518b1f3261b30f1228889afdb5a3ec7f1ad51",
+    "identical": true,
+    "originalSha256": "93228ceff1b13e8b03088533c74c56f03734eb8f1389641ae8fa14c8d183a31b",
+    "cachedSha256": "93228ceff1b13e8b03088533c74c56f03734eb8f1389641ae8fa14c8d183a31b"
+  },
+  "packagedExample": {
+    "id": "sam-segmentation",
+    "source": "Generated FFmpeg testsrc2 clip",
+    "maskFrames": 60,
+    "emptyMaskFrames": 0,
+    "elapsedSeconds": 15.53,
+    "maximumResidentBytes": 842301440,
+    "processReportedSwaps": 0,
+    "outputBytes": 58269,
+    "sourceSha256": "b396d6165697333653e53c1072cf2a89eccde6101211b7cb635ac6957b79f9a3",
+    "outputSha256": "83c924250baa1bf7f6ad6c6c70d4a11b1440cb597a5f8220f5f2229c234d1a47",
+    "maskSha256": "37f5d45d06e8ba06d414253b131535628e510bf7fc1d6336dacd47bd774010a5",
+    "inspectionSheetSha256": "cfc858208576e20924b29090e6a249eb4d5684a580e65254f621fdd031708f62",
+    "verified": true,
+    "verification": {
+      "width": 320,
+      "height": 180,
+      "frameRate": "30/1",
+      "durationFrames": 60,
+      "durationDriftFrames": 0,
+      "hasVideo": true,
+      "hasAudio": false
+    },
+    "visualReview": "Accepted as a capability and serialization proof: sampled masks are non-empty and remain in the default central prompt region as the deliberately multi-object synthetic test pattern moves. The controlled clips, not this test pattern, are the semantic-quality benchmark."
+  }
+}

@@ -1,0 +1,486 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibeedit.com/schema/composition-1.0.0.json",
+  "title": "VibeEdit CompositionSpec",
+  "description": "Canonical cross-language VibeEdit composition contract. All timeline values are integer frames.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "kind", "id", "canvas", "durationFrames", "sources", "timeline", "artifacts", "render", "provenance"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "kind": { "const": "vibeedit.composition" },
+    "id": { "$ref": "#/$defs/id" },
+    "title": { "type": "string", "maxLength": 512 },
+    "canvas": { "$ref": "#/$defs/canvas" },
+    "durationFrames": { "$ref": "#/$defs/nonNegativeFrame" },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "timeline": { "$ref": "#/$defs/timeline" },
+    "artifacts": { "$ref": "#/$defs/artifacts" },
+    "audio": { "$ref": "#/$defs/audioMix" },
+    "cache": { "$ref": "#/$defs/cachePolicy" },
+    "render": { "$ref": "#/$defs/renderSettings" },
+    "verification": { "$ref": "#/$defs/verificationExpectations" },
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "metadata": { "$ref": "#/$defs/jsonObject" }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "vibeeditUri": {
+      "type": "string",
+      "pattern": "^vibeedit://[a-z][a-z0-9-]*/[a-z0-9][a-z0-9._-]*$"
+    },
+    "frame": { "type": "integer" },
+    "nonNegativeFrame": { "type": "integer", "minimum": 0 },
+    "positiveFrames": { "type": "integer", "minimum": 1 },
+    "rational": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numerator", "denominator"],
+      "properties": {
+        "numerator": { "type": "integer", "minimum": 1 },
+        "denominator": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height", "frameRate"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1, "maximum": 32768 },
+        "height": { "type": "integer", "minimum": 1, "maximum": 32768 },
+        "frameRate": { "$ref": "#/$defs/rational" },
+        "pixelAspectRatio": { "$ref": "#/$defs/rational" },
+        "pixelFormat": { "type": "string", "default": "yuv420p" },
+        "colorSpace": { "type": "string", "default": "bt709" },
+        "backgroundColor": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$" },
+        "audioSampleRate": { "type": "integer", "minimum": 8000, "maximum": 384000, "default": 48000 }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "uri", "identity"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["video", "audio", "image", "font", "data"] },
+        "uri": { "type": "string", "minLength": 1 },
+        "identity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "value"],
+          "properties": {
+            "algorithm": { "enum": ["sha256", "etag", "content-address", "generated"] },
+            "value": { "type": "string", "minLength": 1 }
+          }
+        },
+        "mediaType": { "type": "string" },
+        "durationFrames": { "$ref": "#/$defs/nonNegativeFrame" },
+        "license": { "$ref": "#/$defs/license" },
+        "metadata": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tracks"],
+      "properties": {
+        "tracks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/track" }
+        },
+        "markers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/marker" }
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "order", "items"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["video", "audio", "image", "motion", "data"] },
+        "order": { "type": "integer" },
+        "role": { "type": "string" },
+        "enabled": { "type": "boolean", "default": true },
+        "muted": { "type": "boolean", "default": false },
+        "items": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/$defs/videoClip" },
+              { "$ref": "#/$defs/audioClip" },
+              { "$ref": "#/$defs/imageClip" },
+              { "$ref": "#/$defs/motionComponent" },
+              { "$ref": "#/$defs/soundEffect" },
+              { "$ref": "#/$defs/transition" }
+            ]
+          }
+        }
+      }
+    },
+    "placement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["startFrame", "durationFrames"],
+      "properties": {
+        "startFrame": { "$ref": "#/$defs/nonNegativeFrame" },
+        "durationFrames": { "$ref": "#/$defs/positiveFrames" },
+        "enabled": { "type": "boolean", "default": true }
+      }
+    },
+    "sourceRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "inFrame", "durationFrames"],
+      "properties": {
+        "sourceId": { "$ref": "#/$defs/id" },
+        "inFrame": { "$ref": "#/$defs/nonNegativeFrame" },
+        "durationFrames": { "$ref": "#/$defs/positiveFrames" }
+      }
+    },
+    "transform": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "number", "default": 0 },
+        "y": { "type": "number", "default": 0 },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "scaleX": { "type": "number", "default": 1 },
+        "scaleY": { "type": "number", "default": 1 },
+        "rotationDegrees": { "type": "number", "default": 0 },
+        "anchorX": { "type": "number", "minimum": 0, "maximum": 1, "default": 0.5 },
+        "anchorY": { "type": "number", "minimum": 0, "maximum": 1, "default": 0.5 },
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1, "default": 1 },
+        "fit": { "enum": ["contain", "cover", "fill", "none"], "default": "cover" }
+      }
+    },
+    "videoClip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "placement", "source"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "const": "video" },
+        "placement": { "$ref": "#/$defs/placement" },
+        "source": { "$ref": "#/$defs/sourceRange" },
+        "speed": { "$ref": "#/$defs/rational" },
+        "transform": { "$ref": "#/$defs/transform" },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "maskIds": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "trackingArtifactIds": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "cacheKey": { "type": "string" },
+        "metadata": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "audioClip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "placement", "source"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "const": "audio" },
+        "placement": { "$ref": "#/$defs/placement" },
+        "source": { "$ref": "#/$defs/sourceRange" },
+        "role": { "enum": ["dialogue", "music", "sfx", "ambience", "other"] },
+        "gainDb": { "type": "number", "minimum": -120, "maximum": 48, "default": 0 },
+        "pan": { "type": "number", "minimum": -1, "maximum": 1, "default": 0 },
+        "fadeInFrames": { "$ref": "#/$defs/nonNegativeFrame" },
+        "fadeOutFrames": { "$ref": "#/$defs/nonNegativeFrame" },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "metadata": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "imageClip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "placement", "sourceId"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "const": "image" },
+        "placement": { "$ref": "#/$defs/placement" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "transform": { "$ref": "#/$defs/transform" },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "maskIds": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "metadata": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "motionComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "placement", "componentId", "props"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "const": "motion" },
+        "placement": { "$ref": "#/$defs/placement" },
+        "componentId": { "$ref": "#/$defs/vibeeditUri" },
+        "props": { "$ref": "#/$defs/jsonObject" },
+        "transform": { "$ref": "#/$defs/transform" },
+        "transparent": { "type": "boolean", "default": true },
+        "renderer": { "enum": ["html", "svg", "canvas", "webgl"] },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "metadata": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "effectId", "params"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "effectId": { "$ref": "#/$defs/vibeeditUri" },
+        "enabled": { "type": "boolean", "default": true },
+        "params": { "$ref": "#/$defs/jsonObject" },
+        "maskId": { "$ref": "#/$defs/id" },
+        "trackingArtifactId": { "$ref": "#/$defs/id" },
+        "implementationVersion": { "type": "string" }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "placement", "transitionId", "fromItemId", "toItemId", "params"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "const": "transition" },
+        "placement": { "$ref": "#/$defs/placement" },
+        "transitionId": { "$ref": "#/$defs/vibeeditUri" },
+        "fromItemId": { "$ref": "#/$defs/id" },
+        "toItemId": { "$ref": "#/$defs/id" },
+        "params": { "$ref": "#/$defs/jsonObject" },
+        "audioTransitionId": { "$ref": "#/$defs/vibeeditUri" },
+        "implementationVersion": { "type": "string" }
+      }
+    },
+    "soundEffect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "placement", "soundEffectId", "params"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "const": "sound_effect" },
+        "placement": { "$ref": "#/$defs/placement" },
+        "soundEffectId": { "$ref": "#/$defs/vibeeditUri" },
+        "params": { "$ref": "#/$defs/jsonObject" },
+        "gainDb": { "type": "number", "minimum": -120, "maximum": 48, "default": 0 },
+        "variationSeed": { "type": "integer" },
+        "avoidImmediateRepeat": { "type": "boolean", "default": true }
+      }
+    },
+    "mask": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "startFrame", "durationFrames", "artifactUri", "format", "provenance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["alpha_video", "image_sequence", "vector", "rle", "matte"] },
+        "startFrame": { "$ref": "#/$defs/nonNegativeFrame" },
+        "durationFrames": { "$ref": "#/$defs/positiveFrames" },
+        "artifactUri": { "type": "string" },
+        "format": { "type": "string" },
+        "inverted": { "type": "boolean", "default": false },
+        "trackingArtifactId": { "$ref": "#/$defs/id" },
+        "provenance": { "$ref": "#/$defs/artifactProvenance" }
+      }
+    },
+    "trackingArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "artifactUri", "startFrame", "durationFrames", "coordinateSpace", "provenance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["face", "body", "pose", "object", "point", "optical_flow"] },
+        "artifactUri": { "type": "string" },
+        "startFrame": { "$ref": "#/$defs/nonNegativeFrame" },
+        "durationFrames": { "$ref": "#/$defs/positiveFrames" },
+        "coordinateSpace": { "enum": ["pixels", "normalized"] },
+        "format": { "type": "string" },
+        "provenance": { "$ref": "#/$defs/artifactProvenance" }
+      }
+    },
+    "analysisArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "artifactUri", "provenance"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["transcript", "shots", "beats", "faces", "objects", "poses", "segmentation", "custom"] },
+        "artifactUri": { "type": "string" },
+        "format": { "type": "string" },
+        "sourceIds": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "provenance": { "$ref": "#/$defs/artifactProvenance" },
+        "metadata": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "artifactProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generator", "implementationVersion", "parameters", "cacheKey"],
+      "properties": {
+        "generator": { "type": "string" },
+        "implementationVersion": { "type": "string" },
+        "model": { "type": "string" },
+        "modelVersion": { "type": "string" },
+        "runtime": { "type": "string" },
+        "runtimeVersion": { "type": "string" },
+        "parameters": { "$ref": "#/$defs/jsonObject" },
+        "sourceIdentities": { "type": "array", "items": { "type": "string" } },
+        "cacheKey": { "type": "string", "minLength": 1 }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["masks", "tracking", "analysis"],
+      "properties": {
+        "masks": { "type": "array", "items": { "$ref": "#/$defs/mask" } },
+        "tracking": { "type": "array", "items": { "$ref": "#/$defs/trackingArtifact" } },
+        "analysis": { "type": "array", "items": { "$ref": "#/$defs/analysisArtifact" } }
+      }
+    },
+    "audioMix": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "targetLufs": { "type": "number", "minimum": -70, "maximum": 0 },
+        "truePeakDb": { "type": "number", "minimum": -20, "maximum": 0 },
+        "preventImmediateSfxRepeat": { "type": "boolean", "default": true },
+        "ducking": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "cachePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "namespace": { "type": "string" },
+        "directory": { "type": "string" },
+        "implementationVersion": { "type": "string" },
+        "runtimeVersions": { "$ref": "#/$defs/stringMap" }
+      }
+    },
+    "renderSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backend", "output"],
+      "properties": {
+        "backend": { "enum": ["auto", "ffmpeg", "python", "html", "mixed"] },
+        "htmlBackend": { "enum": ["auto", "chromium", "webkit", "firefox"] },
+        "output": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["uri", "container", "videoCodec"],
+          "properties": {
+            "uri": { "type": "string", "minLength": 1 },
+            "container": { "type": "string", "minLength": 1 },
+            "videoCodec": { "type": "string", "minLength": 1 },
+            "audioCodec": { "type": "string" },
+            "pixelFormat": { "type": "string" },
+            "transparent": { "type": "boolean", "default": false },
+            "quality": { "$ref": "#/$defs/jsonObject" }
+          }
+        },
+        "threads": { "type": "integer", "minimum": 0 },
+        "deterministic": { "type": "boolean", "default": true }
+      }
+    },
+    "verificationExpectations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "durationFrames": { "$ref": "#/$defs/nonNegativeFrame" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "frameRate": { "$ref": "#/$defs/rational" },
+        "hasVideo": { "type": "boolean" },
+        "hasAudio": { "type": "boolean" },
+        "maxDurationDriftFrames": { "$ref": "#/$defs/nonNegativeFrame" },
+        "maxBlackFrameRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "maxSilenceRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "goldenFrames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["frame", "sha256"],
+            "properties": {
+              "frame": { "$ref": "#/$defs/nonNegativeFrame" },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "perceptualThreshold": { "type": "number", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generator", "generatorVersion", "createdAt"],
+      "properties": {
+        "generator": { "type": "string", "minLength": 1 },
+        "generatorVersion": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "prompt": { "type": "string" },
+        "agent": { "type": "string" },
+        "schemaSource": { "type": "string" },
+        "catalogVersion": { "type": "string" },
+        "skillPackages": { "type": "array", "items": { "$ref": "#/$defs/vibeeditUri" } },
+        "inputs": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["verified", "quarantined", "user-supplied", "generated"] },
+        "spdx": { "type": "string" },
+        "source": { "type": "string" },
+        "commercialOutputAllowed": { "type": "boolean" },
+        "redistributionAllowed": { "type": "boolean" },
+        "notes": { "type": "string" }
+      }
+    },
+    "marker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "frame", "label"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "frame": { "$ref": "#/$defs/nonNegativeFrame" },
+        "label": { "type": "string" },
+        "kind": { "type": "string" },
+        "metadata": { "$ref": "#/$defs/jsonObject" }
+      }
+    },
+    "stringMap": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "jsonObject": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/jsonValue" }
+    },
+    "jsonValue": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "boolean" },
+        { "type": "number" },
+        { "type": "string" },
+        { "type": "array", "items": { "$ref": "#/$defs/jsonValue" } },
+        { "type": "object", "additionalProperties": { "$ref": "#/$defs/jsonValue" } }
+      ]
+    }
+  }
+}

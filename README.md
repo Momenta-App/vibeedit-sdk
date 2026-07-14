@@ -1,0 +1,239 @@
+# VibeEdit
+
+VibeEdit is a frame-accurate video-production library for AI coding harnesses.
+It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
+motion runtime, one shared CompositionSpec, a searchable local catalog, safe
+skill installation, rendering, and output verification.
+
+This repository contains an alpha package built and validated locally. It has
+not been published to npm or PyPI.
+
+## Install
+
+Lightweight Python CLI and media orchestration:
+
+```bash
+uv tool install vibeedit
+vibeedit doctor
+```
+
+Optional local runtimes:
+
+```bash
+pip install "vibeedit[effects]"
+pip install "vibeedit[browser]"
+pip install "vibeedit[vision]"
+pip install "vibeedit[sam]"
+pip install "vibeedit[all]"
+vibeedit setup --effects
+vibeedit setup --browser
+vibeedit setup --sam
+vibeedit doctor --json
+```
+
+The effects extra activates 333 reviewed deterministic frame presets: 200
+filters, 112 effects, and 21 transitions. Every preset has a stable catalog ID,
+bounded parameters, source hashes, and an exhaustive execution result in
+`catalog/preset-validation.json`.
+
+```python
+from vibeedit import apply_media_preset, render_transition_preset
+
+graded = apply_media_preset(
+    rgba_frame,
+    "vibeedit://effect/filters-cinematic-teal-orange",
+    parameter_overrides={"intensity": 0.42},
+    progress=0.4,
+)
+transition = render_transition_preset(
+    graded,
+    next_rgba_frame,
+    "vibeedit://transition/transitions-core-film-burn",
+    progress=0.5,
+)
+```
+
+The vision extra exposes real OpenCV face detection, person/body detection, and
+deterministic temporal face tracking through `CapabilityRouter`. Tracking writes
+a normalized JSON artifact and returns a public `TrackingArtifact` with source,
+runtime, and cache-key provenance. On macOS, `vibeedit setup --vision` builds the
+packaged VibeEdit-owned Swift runner and enables its explicitly declared face,
+body, and pose requests. The same explicit setup downloads a checksum-pinned
+29.5 MB SSD-MobileNetV1 ONNX model for portable general-object detection.
+Unsupported providers remain explicit in `doctor`; they are never inferred
+merely from the operating system.
+
+`vibeedit setup --sam` is an explicit 211.7 MB optional download. It installs a
+checksum-pinned official SAM 2.1 source revision and tiny checkpoint in the
+VibeEdit cache; the source and weights are Apache-2.0. The runner uses
+Torch/CUDA, Torch/MPS, or CPU in that order and records the model version,
+checkpoint digest, prompt, source identity, actual device/runtime versions, and
+cache key. A clean-wheel Torch/MPS proof with controlled and natural masks is
+recorded in `docs/evidence/sam21-public-proof.json`. SAM 3.1 remains quarantined.
+No model weight is part of the base wheel or npm archive.
+
+Node SDK, HTML motion runtime, and Node-facing CLI:
+
+```bash
+npm install vibeedit
+npx vibeedit doctor --json
+```
+
+`setup` performs only explicitly requested work. It installs pinned browser and
+vision wheels into the current VibeEdit tool environment when missing. Browser
+setup then installs Playwright's pinned Chromium revision, records the resolved
+executable and SHA-256, and writes its manifest to the VibeEdit cache. On macOS,
+vision setup compiles the bundled Swift source with Apple Vision, records the
+binary SHA-256 and declared capability list, then downloads the exact portable
+object model declared in `runtime-models/manifest.json`. SAM setup downloads
+only its separately declared exact URLs, sizes, and SHA-256 values. No runtime
+model is included in the base wheel or npm archive.
+
+## One composition contract
+
+All public APIs use `schema/composition.schema.json`. Timeline values are integer
+frames and frame rates are rational numbers.
+
+```python
+from vibeedit import Canvas, Composition, FrameRate, MotionComponent, Placement, Track
+
+composition = Composition(
+    "title-card",
+    Canvas(1920, 1080, FrameRate(30000, 1001)),
+    90,
+)
+motion = composition.timeline.add_track(Track("M1", "motion", 10))
+motion.add(
+    MotionComponent(
+        "title",
+        Placement(0, 90),
+        "vibeedit://text/negative",
+        {"text": "NO EXCUSES"},
+    )
+)
+composition.write("composition.json")
+```
+
+```js
+import { Canvas, Composition, FrameRate, MotionComponent, Placement, Timeline, Track } from "vibeedit";
+
+const timeline = new Timeline();
+const motion = timeline.addTrack(new Track({ id: "M1", kind: "motion", order: 10 }));
+motion.add(new MotionComponent({
+  id: "title",
+  placement: new Placement(0, 90),
+  componentId: "vibeedit://text/negative",
+  props: { text: "NO EXCUSES" },
+}));
+const composition = new Composition({
+  id: "title-card",
+  canvas: new Canvas({ width: 1920, height: 1080, frameRate: new FrameRate(30000, 1001) }),
+  durationFrames: 90,
+  timeline,
+});
+composition.validate();
+```
+
+MoviePy, FFmpeg, Playwright, OpenCV, ONNX, Torch, MLX, and platform APIs are
+backend details. Their native objects never enter the public CompositionSpec.
+
+## CLI
+
+```text
+vibeedit init
+vibeedit setup
+vibeedit doctor
+vibeedit inspect
+vibeedit catalog list|search|open
+vibeedit examples list|create
+vibeedit skills list|install|check|update|remove
+vibeedit validate
+vibeedit preview
+vibeedit render
+vibeedit verify
+vibeedit clean
+vibeedit mcp
+```
+
+Commands return actionable errors and support `--json` where automation
+benefits. Run a verified example with:
+
+```bash
+vibeedit examples create effect-transition
+python effect-transition/render.py
+
+vibeedit examples create mixed-python-html
+python mixed-python-html/render.py
+
+vibeedit examples create fan-edit
+python fan-edit/render.py
+
+vibeedit examples create face-follow-text
+python face-follow-text/render.py
+```
+
+The same example inventory is available without shell orchestration:
+
+```python
+from vibeedit import create_example, render_example
+
+directory = create_example("fan-edit")
+render_example(directory)
+```
+
+```javascript
+import { createExample } from "vibeedit";
+
+createExample("portable-motion-showcase");
+```
+
+Thirteen packaged examples cover generated assembly, effects/transitions,
+talking-head captions, portable kinetic typography, mixed media/HTML, a fan
+edit, beat analysis, layered sound design, a mask-confined subject effect,
+tracking-driven face-follow text, multiple transitions, a VP9 alpha overlay,
+and capability-gated SAM segmentation. Every non-SAM recipe renders from a
+clean copy in the test suite; the SAM recipe writes actionable evidence when no
+approved runtime is installed.
+
+## Catalog and skills
+
+All 467 shipped capabilities have a stable `vibeedit://` identifier, parameter
+schema, platforms/backends, provenance, validation evidence, example code,
+agent prompts, and an explicit preview state.
+
+```bash
+vibeedit catalog search stutter --json
+vibeedit catalog open
+vibeedit skills install vibeedit-workspace --harness codex
+```
+
+Skill install/update/remove operations track versions and checksums. They refuse
+to overwrite or remove user-modified skill files. The bundle contains 44 public
+skills copied byte-for-byte from pinned canonical Git sources and records 23
+rejected source skill packages with quarantine reasons in
+`skills/migration-report.json`. Packaging metadata remains outside the cloned
+skill directories.
+
+## Local tool server
+
+`vibeedit mcp` starts a local stdio JSON-RPC/MCP-compatible adapter exposing
+catalog search, media inspection, composition creation, effects, transitions,
+motion, SFX placement, render, and verification. It calls the same library used
+by the CLI; it is not a separate implementation.
+
+## Reproducibility and security
+
+Rendering uses integer-frame plans, normalized constant-frame-rate inputs,
+deterministic seeded effects, explicit runtime capability checks, safe subprocess
+argument arrays, content-based cache keys, and output probes. HTML components
+run locally with no network requirement. Catalog data is never executed as code.
+
+See `docs/SECURITY.md`, `docs/ARCHITECTURE.md`, `SBOM.spdx.json`, and
+`THIRD_PARTY_NOTICES.md` for boundaries and inventories.
+
+## License
+
+The package is publicly inspectable/downloadable under `LICENSE.md`. Commercial
+use requires a separate license from Attention Engine Inc. Third-party
+components remain under their own licenses. The custom license text requires
+review by qualified legal counsel before publication.

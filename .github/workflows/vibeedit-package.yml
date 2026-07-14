@@ -1,0 +1,122 @@
+name: VibeEdit package artifacts
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  portable-smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: "3.11"
+          - os: ubuntu-latest
+            python: "3.12"
+          - os: ubuntu-latest
+            python: "3.13"
+          - os: windows-latest
+            python: "3.12"
+          - os: macos-15-intel
+            python: "3.12"
+          - os: macos-latest
+            python: "3.12"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
+      - name: Install FFmpeg on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install FFmpeg on Windows
+        if: runner.os == 'Windows'
+        run: choco install ffmpeg --no-progress -y
+      - name: Install FFmpeg on macOS
+        if: runner.os == 'macOS'
+        run: brew install ffmpeg
+      - name: Install portable dependencies
+        run: |
+          npm ci
+          uv sync --extra test --extra effects --extra vision --extra browser
+      - name: Install Chromium on Linux
+        if: runner.os == 'Linux'
+        run: uv run playwright install --with-deps chromium
+      - name: Install Chromium on Windows and macOS
+        if: runner.os != 'Linux'
+        run: uv run playwright install chromium
+      - name: Run portable JavaScript checks
+        run: |
+          npm test
+          npm run types:check
+          npm run validate
+      - name: Run portable Python checks
+        run: uv run pytest python/tests -q
+      - name: Smoke install built packages
+        run: |
+          node -e "require('fs').mkdirSync('dist/smoke', { recursive: true })"
+          uv build --wheel --out-dir dist/smoke
+          uv tool run --from dist/smoke/vibeedit-0.1.0-py3-none-any.whl vibeedit --version
+          npm pack --pack-destination dist/smoke
+          npx --yes --package ./dist/smoke/vibeedit-0.1.0.tgz vibeedit --version
+
+  build-and-attest:
+    needs: portable-smoke
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
+      - name: Install JavaScript dependencies
+        run: npm ci
+      - name: Install Python test environment and Chromium
+        run: |
+          uv sync --extra test --extra browser --extra vision
+          uv run playwright install --with-deps chromium
+      - name: Validate JavaScript package
+        run: |
+          npm test
+          npm run types:check
+          npm run validate
+      - name: Validate Python package
+        run: uv run pytest python/tests -q
+      - name: Build publishable artifacts
+        run: |
+          mkdir -p dist/npm dist/python
+          npm pack --pack-destination dist/npm
+          uv build --out-dir dist/python
+      - name: Generate artifact checksums
+        run: sha256sum dist/npm/* dist/python/* > dist/SHA256SUMS
+      - name: Attest package provenance
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/attest-build-provenance@96278af6caaf10aea03fd8d33a09a777ca52d62f # v3.2.0
+        with:
+          subject-path: dist/**/*
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: vibeedit-0.1.0-packages
+          path: dist
+          if-no-files-found: error

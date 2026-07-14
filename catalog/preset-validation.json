@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "runtime": {
+    "python": "3.12.13",
+    "numpy": "2.5.1"
+  },
+  "source": {
+    "root": "main-repository",
+    "path": "packages/sdk/python/vibeedit_media/src/vibeedit_media",
+    "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+    "files": [
+      {
+        "path": "__init__.py",
+        "sha256": "9e4a070580affbf9349396fde3c242167f82d7ab6eb9bba3f17d91a1063f2894",
+        "packageSha256": "9e4a070580affbf9349396fde3c242167f82d7ab6eb9bba3f17d91a1063f2894",
+        "identical": true
+      },
+      {
+        "path": "backend.py",
+        "sha256": "73e95e3efb2c147184fd08184306a6f3e69f43793e67098d9a285ccaff2aebff",
+        "packageSha256": "73e95e3efb2c147184fd08184306a6f3e69f43793e67098d9a285ccaff2aebff",
+        "identical": true
+      },
+      {
+        "path": "backends.py",
+        "sha256": "ca687edb2203a1977da5b3d452808328706ec45e6a754c91521c7d140cc1cd64",
+        "packageSha256": "ca687edb2203a1977da5b3d452808328706ec45e6a754c91521c7d140cc1cd64",
+        "identical": true
+      },
+      {
+        "path": "blender.py",
+        "sha256": "e30d63d14ba9d899263b891b6b4e09ddac139d69e3588d140e19dd24f319acca",
+        "packageSha256": "e30d63d14ba9d899263b891b6b4e09ddac139d69e3588d140e19dd24f319acca",
+        "identical": true
+      },
+      {
+        "path": "core.py",
+        "sha256": "531f236753015d7629080abeb4da2cc77f7dee84635acdeac4b6c9591b069a83",
+        "packageSha256": "531f236753015d7629080abeb4da2cc77f7dee84635acdeac4b6c9591b069a83",
+        "identical": true
+      },
+      {
+        "path": "effects.py",
+        "sha256": "1a307dc8eb1f328b1837d8db2af6963b73ebda02509c7e351e80a5ac875ac7af",
+        "packageSha256": "1a307dc8eb1f328b1837d8db2af6963b73ebda02509c7e351e80a5ac875ac7af",
+        "identical": true
+      },
+      {
+        "path": "ffmpeg.py",
+        "sha256": "1f7e446f1c2842d3ec77b586b9885ce7b85a890ed3c9e3a7ad17727b36e36383",
+        "packageSha256": "1f7e446f1c2842d3ec77b586b9885ce7b85a890ed3c9e3a7ad17727b36e36383",
+        "identical": true
+      },
+      {
+        "path": "frames.py",
+        "sha256": "b5199b9f7b9f2d65ce540a6cf50f7731ba4c476089fb5684cf9bc34f64b0b9a4",
+        "packageSha256": "b5199b9f7b9f2d65ce540a6cf50f7731ba4c476089fb5684cf9bc34f64b0b9a4",
+        "identical": true
+      },
+      {
+        "path": "freecut_effects.py",
+        "sha256": "be10c332469302d6409a7aa738f82a83c3d4b9b46cba29029e891dcc05df6c4b",
+        "packageSha256": "be10c332469302d6409a7aa738f82a83c3d4b9b46cba29029e891dcc05df6c4b",
+        "identical": true
+      },
+      {
+        "path": "images.py",
+        "sha256": "f27bca516d9bb3b4ec8151dd8f5e05e52fb553ef78d4923b149a7597bdc24da0",
+        "packageSha256": "f27bca516d9bb3b4ec8151dd8f5e05e52fb553ef78d4923b149a7597bdc24da0",
+        "identical": true
+      },
+      {
+        "path": "manim.py",
+        "sha256": "90ef99c318ab8c56ac28262de6bad569c10383dccc38e9ccb9c8ad688613fc5f",
+        "packageSha256": "90ef99c318ab8c56ac28262de6bad569c10383dccc38e9ccb9c8ad688613fc5f",
+        "identical": true
+      },
+      {
+        "path": "movie.py",
+        "sha256": "3eaeaa302d6d57ac6cb54727dec85f83fd537d09d1605035093680f52ab9a331",
+        "packageSha256": "3eaeaa302d6d57ac6cb54727dec85f83fd537d09d1605035093680f52ab9a331",
+        "identical": true
+      },
+      {
+        "path": "optional.py",
+        "sha256": "53e4f2f1bb62461c4947e3984a1f03f530d898d560af6edf81d17bea04848ca9",
+        "packageSha256": "53e4f2f1bb62461c4947e3984a1f03f530d898d560af6edf81d17bea04848ca9",
+        "identical": true
+      },
+      {
+        "path": "preset_catalog.json",
+        "sha256": "fea6a53b0b30345df503660a80c557d88e9a625cad38176bf913fbde4a087b46",
+        "packageSha256": "fea6a53b0b30345df503660a80c557d88e9a625cad38176bf913fbde4a087b46",
+        "identical": true
+      },
+      {
+        "path": "preset_catalog.py",
+        "sha256": "c78c8975181eb09209fbfa71e5f59967cf2527d9b8cf7b9cff9fd9472d0cc8ad",
+        "packageSha256": "c78c8975181eb09209fbfa71e5f59967cf2527d9b8cf7b9cff9fd9472d0cc8ad",
+        "identical": true
+      },
+      {
+        "path": "project.py",
+        "sha256": "ae5325f67e09d5a1b9e4e0ce5b6172da2badc3ec35961cc9c59088d8a484d9a8",
+        "packageSha256": "ae5325f67e09d5a1b9e4e0ce5b6172da2badc3ec35961cc9c59088d8a484d9a8",
+        "identical": true
+      }
+    ]
+  },
+  "fidelity": {
+    "status": "passed",
+    "contract": "Every tracked canonical source file is packaged byte-for-byte under its original vibeedit_media namespace.",
+    "files": 16
+  },
+  "counts": {
+    "effects": 112,
+    "filters": 200,
+    "transitions": 21
+  },
+  "cases": 333,
+  "contract": "Every canonical preset returned a deterministic uint8 RGBA frame with the input dimensions.",
+  "aggregateSha256": "0950fc8ce189dd897b35bb4f5f9da5f8d9466c315c5a273cb91622a5e8e7bad7"
+}

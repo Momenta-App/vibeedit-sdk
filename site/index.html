@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Search the local VibeEdit production catalog.">
+    <title>VibeEdit / Production Index</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <header>
+      <div class="wordmark">VIBE<span>EDIT</span></div>
+      <div class="release">PRODUCTION INDEX<br>CATALOG 0.1.0</div>
+    </header>
+    <main>
+      <section class="hero">
+        <p class="kicker">TOOLS / MOTION / SOUND / AGENT CRAFT</p>
+        <h1>THE WORKBENCH,<br><em>INDEXED.</em></h1>
+        <p class="intro">Every shippable capability gets one permanent address, one parameter contract, and visible proof.</p>
+      </section>
+      <section class="controls" aria-label="Catalog filters">
+        <label><span>SEARCH</span><input id="search" type="search" placeholder="stutter, impact, typography…" autocomplete="off"></label>
+        <div id="filters" class="filters"></div>
+        <output id="count" aria-live="polite"></output>
+      </section>
+      <section id="catalog" class="catalog" aria-label="Catalog items"></section>
+      <section id="empty" class="empty" hidden>NO MATCH. ADJUST THE SIGNAL.</section>
+    </main>
+    <template id="card-template">
+      <article class="card">
+        <div class="card-top"><span class="category"></span><span class="version"></span></div>
+        <div class="preview"></div>
+        <h2></h2>
+        <button class="identifier" type="button" title="Copy stable identifier"></button>
+        <p class="description"></p>
+        <div class="tags"></div>
+        <details>
+          <summary>CONTRACT + USE</summary>
+          <div class="detail-grid">
+            <section class="contract-panel">
+              <h3>PLATFORMS / BACKENDS</h3><p class="compatibility"></p>
+              <h3>REQUIREMENTS</h3><p class="requirements"></p>
+              <h3>PARAMETERS</h3><pre class="parameters"></pre>
+            </section>
+            <section class="prompt-panel"><h3>AGENT PROMPT</h3><p class="prompt"></p><button class="copy-action copy-prompt" type="button">COPY PROMPT</button></section>
+            <section class="code-panel"><div class="code-heading"><h3>PYTHON</h3><button class="copy-action copy-python" type="button">COPY CODE</button></div><pre class="python-code"></pre></section>
+            <section class="code-panel"><div class="code-heading"><h3>JAVASCRIPT</h3><button class="copy-action copy-javascript" type="button">COPY CODE</button></div><pre class="javascript-code"></pre></section>
+          </div>
+        </details>
+      </article>
+    </template>
+    <footer><span>LOCAL-FIRST / FRAME-ACCURATE / PROVENANCE-BOUND</span><span>VIBEEDIT.COM</span></footer>
+    <script src="catalog-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

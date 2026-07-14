@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-07-13",
+  "decision": "accepted",
+  "capability": "vision.object",
+  "setup": {
+    "command": "vibeedit setup --vision --json",
+    "complete": true,
+    "provider": "ssd-mobilenet-v1-12",
+    "version": "019281f3fcb151a90e491f3b2f0273f9f31bd6be",
+    "downloadBytes": 29461455,
+    "weightsSha256": "b8fba5e404077d4048d27fcd1667e85e27e192eb9bf51e696c46a3acd7d21058",
+    "licenseReview": "Model card states MIT; ONNX Model Zoo repository metadata states Apache-2.0; COCO dataset terms apply. Qualified legal review remains required.",
+    "packaged": false
+  },
+  "runtime": {
+    "onnxruntime": "1.27.0",
+    "provider": "CPUExecutionProvider",
+    "numpy": "2.5.1",
+    "pillow": "11.3.0"
+  },
+  "input": {
+    "source": "scikit-image astronaut sample used only for local validation; not packaged",
+    "sha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5"
+  },
+  "detections": [
+    {
+      "label": "person",
+      "confidence": 0.8793759346008301,
+      "x": 0.040894150733947754,
+      "y": 0.007470905780792236,
+      "width": 0.6753442287445068,
+      "height": 0.9892386198043823
+    },
+    {
+      "label": "chair",
+      "confidence": 0.4591130018234253,
+      "x": 0.5396741032600403,
+      "y": 0.6639079451560974,
+      "width": 0.4384129047393799,
+      "height": 0.3250349760055542
+    }
+  ],
+  "validation": {
+    "personConfidenceMinimum": 0.8,
+    "allBoxesNormalized": true,
+    "doctorAvailable": true,
+    "setupComplete": true
+  }
+}

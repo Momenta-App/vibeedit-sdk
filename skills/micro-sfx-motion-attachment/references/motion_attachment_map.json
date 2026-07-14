@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "attachment_targets": {
+    "text_characters": {
+      "sfx": ["pop", "tick"],
+      "anchor": "first_readable_frame",
+      "offset_ms": [0, 15],
+      "motion_coupling": ["opacity_crosses_50_percent", "scale_peak", "bounce_up"],
+      "avoid": ["space_characters", "invisible_preload"]
+    },
+    "modules": {
+      "sfx": ["tap", "hit"],
+      "anchor": "route_switch_or_snap_frame",
+      "offset_ms": [0],
+      "motion_coupling": ["x_y_impulse", "rotation_kick", "background_flash"],
+      "avoid": ["idle_hover", "slow_settle_tail"]
+    },
+    "boxes": {
+      "sfx": ["tick", "pop", "hit"],
+      "anchor": "scale_peak_or_snap_contact",
+      "offset_ms": [0],
+      "motion_coupling": ["scale_overshoot", "border_color_flash", "grid_cell_activation"],
+      "avoid": ["unlit_background_cells"]
+    },
+    "buttons": {
+      "sfx": ["click", "tap"],
+      "anchor": "pointer_down_or_confirm_frame",
+      "offset_ms": [-5, 0],
+      "motion_coupling": ["press_depth", "color_confirm", "elastic_return"],
+      "avoid": ["hover_only"]
+    },
+    "cursors": {
+      "sfx": ["click", "whoosh"],
+      "anchor": "contact_frame_or_fastest_travel_midpoint",
+      "offset_ms": [-50, 0],
+      "motion_coupling": ["travel_speed_peak", "target_contact", "cursor_scale_pulse"],
+      "avoid": ["slow_tracking_without_contact"]
+    },
+    "grids": {
+      "sfx": ["tick", "tap"],
+      "anchor": "cell_illumination_frame",
+      "offset_ms": [0],
+      "motion_coupling": ["cell_scale_peak", "meter_bar_peak", "counter_step"],
+      "avoid": ["every_cell_when_density_exceeds_readability"]
+    },
+    "panels": {
+      "sfx": ["whoosh", "hit", "tap"],
+      "anchor": "entrance_start_and_lock_frame",
+      "offset_ms": [-90, 0],
+      "motion_coupling": ["slide_start", "lock_to_grid", "shadow_or_border_settle"],
+      "avoid": ["background_parallax_only"]
+    },
+    "connectors": {
+      "sfx": ["whoosh", "tick", "click"],
+      "anchor": "line_draw_start_endpoint_latch",
+      "offset_ms": [-60, 0],
+      "motion_coupling": ["scale_x_draw", "endpoint_flash", "route_completion"],
+      "avoid": ["static_lines"]
+    },
+    "object_reveals": {
+      "sfx": ["whoosh", "pop", "hit", "layered"],
+      "anchor": "first_full_silhouette_or_landing_frame",
+      "offset_ms": [-120, 0],
+      "motion_coupling": ["mask_open", "scale_land", "opacity_100_percent", "contact_shadow"],
+      "avoid": ["pre_reveal_alpha_noise"]
+    }
+  },
+  "attachment_patterns": {
+    "one_event_many_visuals": {
+      "allowed_when": ["same_frame_anchor", "same_beat", "same_user_action"],
+      "max_primary_sounds": 1,
+      "secondary_visuals": ["character", "grid_cell", "meter", "module", "connector", "cursor", "counter"]
+    },
+    "travel_then_land": {
+      "sounds": ["whoosh", "tap"],
+      "offset_ms": [-90, 0],
+      "required_visual_phases": ["travel", "land"]
+    },
+    "spawn_then_bounce": {
+      "sounds": ["pop", "tick"],
+      "offset_ms": [0, 35],
+      "required_visual_phases": ["first_visible", "overshoot_or_bounce"]
+    },
+    "character_type_on_speed_ladder": {
+      "sounds": ["iphone-typing-character"],
+      "source_family": "micro_23-25",
+      "target_text": "visible_non_space_characters",
+      "speed_options_ms": [120, 85, 60, 40, 25],
+      "required_visual_phases": ["opacity_reveal_per_character", "small_y_or_scale_pop_per_character"],
+      "avoid": ["whole_word_reveal_per_event", "animating_all_characters_from_each_event", "space_character_sounds"]
+    }
+  }
+}

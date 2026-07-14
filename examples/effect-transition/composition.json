@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "effect-transition",
+  "canvas": { "width": 320, "height": 180, "frameRate": { "numerator": 30, "denominator": 1 }, "backgroundColor": "#101217", "audioSampleRate": 48000 },
+  "durationFrames": 108,
+  "sources": [
+    { "id": "source-a", "kind": "video", "uri": "sources/a.mp4", "identity": { "algorithm": "generated", "value": "vibeedit-testsrc2-v1" }, "durationFrames": 60, "license": { "status": "generated", "commercialOutputAllowed": true, "redistributionAllowed": true } },
+    { "id": "source-b", "kind": "video", "uri": "sources/b.mp4", "identity": { "algorithm": "generated", "value": "vibeedit-smptebars-v1" }, "durationFrames": 60, "license": { "status": "generated", "commercialOutputAllowed": true, "redistributionAllowed": true } }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "V1",
+        "kind": "video",
+        "order": 0,
+        "items": [
+          { "id": "clip-a", "kind": "video", "placement": { "startFrame": 0, "durationFrames": 60 }, "source": { "sourceId": "source-a", "inFrame": 0, "durationFrames": 60 }, "effects": [{ "id": "stutter", "effectId": "vibeedit://effect/random-frame-stutter", "enabled": true, "params": { "seed": 7, "windowFrames": 4, "intensity": 0.75 }, "implementationVersion": "0.1.0" }] },
+          { "id": "clip-b", "kind": "video", "placement": { "startFrame": 48, "durationFrames": 60 }, "source": { "sourceId": "source-b", "inFrame": 0, "durationFrames": 60 }, "effects": [] },
+          { "id": "crossfade", "kind": "transition", "placement": { "startFrame": 48, "durationFrames": 12 }, "transitionId": "vibeedit://transition/crossfade", "fromItemId": "clip-a", "toItemId": "clip-b", "params": { "curve": "linear" }, "implementationVersion": "0.1.0" }
+        ]
+      },
+      {
+        "id": "A1",
+        "kind": "audio",
+        "order": 0,
+        "items": [{ "id": "impact", "kind": "sound_effect", "placement": { "startFrame": 48, "durationFrames": 12 }, "soundEffectId": "vibeedit://sfx/impact-procedural", "params": { "frequency": 72, "decay": 0.18 }, "gainDb": -10, "variationSeed": 7, "avoidImmediateRepeat": true }]
+      }
+    ]
+  },
+  "artifacts": { "masks": [], "tracking": [], "analysis": [] },
+  "render": { "backend": "ffmpeg", "output": { "uri": "effect-transition.mp4", "container": "mp4", "videoCodec": "h264", "audioCodec": "aac", "pixelFormat": "yuv420p" }, "deterministic": true },
+  "verification": { "durationFrames": 108, "width": 320, "height": 180, "frameRate": { "numerator": 30, "denominator": 1 }, "hasVideo": true, "hasAudio": true, "maxDurationDriftFrames": 1 },
+  "provenance": { "generator": "vibeedit-example", "generatorVersion": "0.1.0", "createdAt": "2026-07-13T00:00:00Z", "schemaSource": "schema/composition.schema.json", "catalogVersion": "0.1.0" }
+}

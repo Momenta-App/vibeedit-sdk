@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "source_evidence": {
+    "catalog_assets": 50,
+    "catalog_tags": {
+      "tap": 46,
+      "ui": 46,
+      "text-pop": 43,
+      "click": 34,
+      "tick": 22,
+      "motion": 9,
+      "pop": 5,
+      "whoosh": 4
+    },
+    "demo_events": 72,
+    "demo_duration_seconds": 6.0,
+    "demo_style": "button taps text pops motion ticks"
+  },
+  "sfx_types": {
+    "click": {
+      "primary_use": ["cursor_press", "tab_select", "checkbox_toggle", "tiny_latch"],
+      "tags": ["click", "button", "ui", "short"],
+      "attack_ms": 0,
+      "tail_ms": [35, 90],
+      "gain_db": [-15, -9],
+      "layer_recipe": ["dry_click"]
+    },
+    "tap": {
+      "primary_use": ["button_press", "card_touch", "key_press", "icon_nudge"],
+      "tags": ["tap", "button", "ui"],
+      "attack_ms": 0,
+      "tail_ms": [55, 130],
+      "gain_db": [-14, -8],
+      "layer_recipe": ["tap_body"]
+    },
+    "tick": {
+      "primary_use": ["counter_step", "grid_cell_pulse", "meter_increment", "timeline_marker"],
+      "tags": ["tick", "short", "ui"],
+      "attack_ms": 0,
+      "tail_ms": [30, 85],
+      "gain_db": [-18, -11],
+      "layer_recipe": ["thin_tick"]
+    },
+    "pop": {
+      "primary_use": ["text_character", "badge_appear", "tooltip_appear", "chip_spawn"],
+      "tags": ["text-pop", "pop", "tap", "short"],
+      "attack_ms": 0,
+      "tail_ms": [60, 150],
+      "gain_db": [-16, -9],
+      "layer_recipe": ["pop_transient", "optional_short_tail"]
+    },
+    "hit": {
+      "primary_use": ["large_card_snap", "panel_lock", "logo_land", "strong_beat_confirm"],
+      "tags": ["tap", "button", "medium"],
+      "attack_ms": 0,
+      "tail_ms": [90, 220],
+      "gain_db": [-11, -6],
+      "layer_recipe": ["tap_body", "low_weight_tail"]
+    },
+    "whoosh": {
+      "primary_use": ["slide", "sweep", "panel_enter", "connector_draw", "object_reveal"],
+      "tags": ["whoosh", "motion", "tail", "long"],
+      "attack_ms": [-120, -45],
+      "tail_ms": [140, 320],
+      "gain_db": [-17, -9],
+      "layer_recipe": ["motion_tail", "arrival_tap"]
+    },
+    "layered": {
+      "primary_use": ["hero_reveal", "travel_then_land", "multi_phase_object", "dense_transition"],
+      "tags": ["whoosh", "tap", "pop", "tick"],
+      "attack_ms": [-120, 0],
+      "tail_ms": [180, 420],
+      "gain_db": [-18, -6],
+      "layer_recipe": ["anticipation_whoosh", "contact_transient", "settle_tick_or_tail"]
+    }
+  },
+  "event_map": {
+    "cursor_down": "click",
+    "cursor_travel": "whoosh",
+    "button_press": "tap",
+    "toggle_on": "click",
+    "counter_increment": "tick",
+    "grid_pulse": "tick",
+    "character_reveal": "pop",
+    "word_reveal": "pop",
+    "badge_spawn": "pop",
+    "module_switch": "tap",
+    "box_snap": "hit",
+    "panel_enter": "whoosh",
+    "connector_draw": "whoosh",
+    "object_reveal": "layered",
+    "hero_logo_land": "hit"
+  }
+}

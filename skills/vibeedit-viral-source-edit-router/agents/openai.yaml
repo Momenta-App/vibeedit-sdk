@@ -1,0 +1,4 @@
+interface:
+  display_name: "VibeEdit Viral Source Edit Router"
+  short_description: "Route viral source-native edits through specialist roles."
+  default_prompt: "Use this skill to plan or produce a viral source-native edit from provided media, research artifacts, music, and evidence."

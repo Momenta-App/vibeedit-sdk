@@ -1,0 +1,15 @@
+{
+  "id": "vibeedit://template/sound-design-layering",
+  "name": "Sound-Design Layering",
+  "description": "Executable ambience bed plus three seeded procedural transient layers with gain, fades, and anti-repetition metadata.",
+  "families": [
+    "audio",
+    "sound-design",
+    "sfx"
+  ],
+  "requirements": {
+    "extras": [],
+    "models": []
+  },
+  "conditional": false
+}
