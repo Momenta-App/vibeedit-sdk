@@ -253,7 +253,9 @@ source repository. Registry publication remains a separate withheld action.
 1. Obtain qualified legal review of `LICENSE.md`, commercial-license wording,
    SAM/SSD-MobileNet/COCO terms, Chromium notices, imported skill content, and
    third-party dependency notices. The current license remains an engineering
-   draft.
+   draft. `docs/LEGAL_REVIEW_HANDOFF.md` provides the bounded decision list,
+   evidence index, and requested approval record without changing the draft
+   terms.
 
 Registry and commercial-release approval must remain withheld until this gate
 is resolved or the initial support scope is explicitly reduced and approved.

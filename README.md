@@ -268,4 +268,5 @@ inspectable/downloadable source package. Commercial use requires a separate
 license from Attention Engine Inc. Third-party components remain under their
 own licenses. The custom license text remains an engineering draft requiring
 review by qualified legal counsel; registry and commercial release remain
-withheld.
+withheld. The evidence and decisions requested from counsel are organized in
+`docs/LEGAL_REVIEW_HANDOFF.md`.
