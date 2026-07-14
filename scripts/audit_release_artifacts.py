@@ -19,6 +19,7 @@ FORBIDDEN_TEXT = (
     re.compile(rb"service[_-]?role[_-]?(key|secret)", re.IGNORECASE),
     re.compile(rb"BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY"),
 )
+CANONICAL_REVISION = "57b5f4cb3381f72b5ba153bb90d171ba42945e3a"
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -26,7 +27,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--wheel", type=Path, required=True)
     parser.add_argument("--sdist", type=Path, required=True)
     parser.add_argument("--npm", type=Path, required=True)
-    parser.add_argument("--source-root", type=Path, required=True)
+    parser.add_argument(
+        "--source-root",
+        type=Path,
+        help="optional canonical VibeEdit Git checkout for byte-level source comparison",
+    )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     for path in (args.wheel, args.sdist, args.npm):
@@ -47,29 +52,33 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("release-safe canonical skill count changed")
     if len(preset_report["source"]["files"]) != 16:
         raise RuntimeError("canonical preset source-file count changed")
+    if migration["revision"] != CANONICAL_REVISION or preset_report["source"]["revision"] != CANONICAL_REVISION:
+        raise RuntimeError("canonical source revision changed without updating the release audit")
 
-    source_root = args.source_root.resolve()
+    migration_records = {item["name"]: item for item in migration["selected"]}
     for skill in skill_index["skills"]:
         if skill.get("source", {}).get("sha256") != skill.get("checksum"):
             raise RuntimeError(f"skill source/package checksum differs: {skill['name']}")
-        prefix = skill["source"]["path"]
-        paths = _git(source_root, "ls-tree", "-r", "--name-only", skill["source"]["revision"], prefix).decode().splitlines()
-        for path in paths:
-            relative = Path(path).relative_to(prefix).as_posix()
-            canonical = _git(source_root, "show", f"{skill['source']['revision']}:{path}")
-            _equal(wheel, f"vibeedit/data/skills/{skill['name']}/{relative}", canonical)
-            _equal(npm, f"package/skills/{skill['name']}/{relative}", canonical)
-            _equal(sdist, _sdist_name(sdist, f"skills/{skill['name']}/{relative}"), canonical)
+        record = migration_records.get(skill["name"])
+        if not record or record["sourceSha256"] != skill["checksum"] or record["packageSha256"] != skill["checksum"]:
+            raise RuntimeError(f"skill migration record differs: {skill['name']}")
+        prefixes = {
+            "wheel": (wheel, f"vibeedit/data/skills/{skill['name']}"),
+            "sdist": (sdist, _sdist_directory(sdist, f"skills/{skill['name']}")),
+            "npm": (npm, f"package/skills/{skill['name']}"),
+        }
+        for label, (files, prefix) in prefixes.items():
+            if _tree_checksum(files, prefix) != skill["checksum"]:
+                raise RuntimeError(f"{label} skill tree differs from pinned source digest: {skill['name']}")
 
-    preset_root = preset_report["source"]["path"]
-    preset_revision = preset_report["source"]["revision"]
     for file in preset_report["source"]["files"]:
-        canonical = _git(source_root, "show", f"{preset_revision}:{preset_root}/{file['path']}")
-        digest = hashlib.sha256(canonical).hexdigest()
-        if digest != file["sha256"] or file["sha256"] != file["packageSha256"] or file["identical"] is not True:
+        if file["sha256"] != file["packageSha256"] or file["identical"] is not True:
             raise RuntimeError(f"preset fidelity record differs: {file['path']}")
-        _equal(wheel, f"vibeedit_media/{file['path']}", canonical)
-        _equal(sdist, _sdist_name(sdist, f"python/src/vibeedit_media/{file['path']}"), canonical)
+        _digest(wheel, f"vibeedit_media/{file['path']}", file["sha256"])
+        _digest(sdist, _sdist_name(sdist, f"python/src/vibeedit_media/{file['path']}"), file["sha256"])
+
+    if args.source_root:
+        _compare_canonical_sources(args.source_root.resolve(), skill_index, preset_report, wheel, sdist, npm)
 
     for label, files in (("wheel", wheel), ("sdist", sdist), ("npm", npm)):
         _scan(label, files)
@@ -78,6 +87,10 @@ def main(argv: list[str] | None = None) -> int:
         "schemaVersion": "1.0.0",
         "status": "passed",
         "sourceRevision": migration["revision"],
+        "provenanceVerification": {
+            "pinnedDigests": True,
+            "canonicalGitSourceCompared": args.source_root is not None,
+        },
         "skillClonesVerified": 44,
         "presetSourceFilesVerified": 16,
         "forbiddenEntries": 0,
@@ -111,6 +124,61 @@ def _sdist_name(files: dict[str, bytes], relative: str) -> str:
     if len(matches) != 1:
         raise RuntimeError(f"sdist entry is missing or ambiguous: {relative}")
     return matches[0]
+
+
+def _sdist_directory(files: dict[str, bytes], relative: str) -> str:
+    suffix = f"/{relative}/"
+    matches = {name[: name.index(suffix) + len(suffix) - 1] for name in files if suffix in name}
+    if len(matches) != 1:
+        raise RuntimeError(f"sdist directory is missing or ambiguous: {relative}")
+    return matches.pop()
+
+
+def _tree_checksum(files: dict[str, bytes], prefix: str) -> str:
+    entries = [(name[len(prefix) + 1 :], value) for name, value in files.items() if name.startswith(f"{prefix}/")]
+    if not entries:
+        raise RuntimeError(f"archive tree is missing: {prefix}")
+    digest = hashlib.sha256()
+    for relative, value in sorted(entries):
+        digest.update(relative.encode())
+        digest.update(b"\0")
+        digest.update(value)
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def _digest(files: dict[str, bytes], name: str, expected: str) -> None:
+    value = files.get(name)
+    if value is None or hashlib.sha256(value).hexdigest() != expected:
+        raise RuntimeError(f"archive entry is missing or differs from pinned source digest: {name}")
+
+
+def _compare_canonical_sources(
+    source_root: Path,
+    skill_index: dict,
+    preset_report: dict,
+    wheel: dict[str, bytes],
+    sdist: dict[str, bytes],
+    npm: dict[str, bytes],
+) -> None:
+    for skill in skill_index["skills"]:
+        prefix = skill["source"]["path"]
+        paths = _git(source_root, "ls-tree", "-r", "--name-only", skill["source"]["revision"], prefix).decode().splitlines()
+        for path in paths:
+            relative = Path(path).relative_to(prefix).as_posix()
+            canonical = _git(source_root, "show", f"{skill['source']['revision']}:{path}")
+            _equal(wheel, f"vibeedit/data/skills/{skill['name']}/{relative}", canonical)
+            _equal(npm, f"package/skills/{skill['name']}/{relative}", canonical)
+            _equal(sdist, _sdist_name(sdist, f"skills/{skill['name']}/{relative}"), canonical)
+
+    preset_root = preset_report["source"]["path"]
+    preset_revision = preset_report["source"]["revision"]
+    for file in preset_report["source"]["files"]:
+        canonical = _git(source_root, "show", f"{preset_revision}:{preset_root}/{file['path']}")
+        if hashlib.sha256(canonical).hexdigest() != file["sha256"]:
+            raise RuntimeError(f"canonical preset source differs: {file['path']}")
+        _equal(wheel, f"vibeedit_media/{file['path']}", canonical)
+        _equal(sdist, _sdist_name(sdist, f"python/src/vibeedit_media/{file['path']}"), canonical)
 
 
 def _equal(files: dict[str, bytes], name: str, expected: bytes) -> None:

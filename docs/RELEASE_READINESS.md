@@ -149,18 +149,22 @@ Python wheels. The sanitized ledger is
 | --- | --- | --- |
 | macOS Apple Silicon | Locally and GitHub-hosted verified | Source tests, exact wheel/npm clean installs, FFmpeg 8.1.1, Chromium/Playwright 1.61.0, OpenCV providers, native Apple Vision build/setup/requests, portable ONNX object inference, clean SAM 2.1 setup/inference/visual review, examples, and artifact audits passed. The hosted Python 3.12 portable checks and package smoke installs also pass. |
 | Linux ARM64 | Locally verified in Docker | Debian 12/aarch64, Python 3.11.2, Node 22.23.1, FFmpeg 5.1.9, pinned portable vision wheels, Playwright 1.61.0/Chromium 1228, 17 Node tests, 60 Python tests, exact wheel/npm installs, and core/mixed renders passed. The sole Python skip was the intentionally macOS-only Apple Vision build. |
-| macOS Intel | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 17 Node tests, type declarations, catalog validation, and wheel/npm build-and-install smoke pass. ONNX Runtime 1.27 has no macOS x86_64 wheel, so object-model setup returns a tested structured unsupported-platform result while the rest of the portable package remains available. |
-| Linux x86_64 | Native GitHub-hosted verified | Python 3.11/3.12/3.13 jobs each pass 62 Python tests, 17 Node tests, type declarations, catalog validation, Chromium rendering, and wheel/npm build-and-install smoke. The earlier emulated exact-artifact render also passed with zero drift. |
-| Windows | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 17 Node tests, canonical skill checksum validation, catalog validation, and wheel/npm build-and-install smoke pass. |
+| macOS Intel | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 18 Node tests, type declarations, catalog validation, and wheel/npm build-and-install smoke pass. ONNX Runtime 1.27 has no macOS x86_64 wheel, so object-model setup returns a tested structured unsupported-platform result while the rest of the portable package remains available. |
+| Linux x86_64 | Native GitHub-hosted verified | Python 3.11/3.12/3.13 jobs each pass 62 Python tests, 18 Node tests, type declarations, catalog validation, Chromium rendering, and wheel/npm build-and-install smoke. The earlier emulated exact-artifact render also passed with zero drift. |
+| Windows | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 18 Node tests, canonical skill checksum validation, catalog validation, and wheel/npm build-and-install smoke pass. |
 
 The Linux ARM64 proof is retained in
 `docs/evidence/linux-arm64-proof.json`; the explicitly limited x86_64 emulation
 proof is in `docs/evidence/linux-amd64-emulated-proof.json`. GitHub-hosted run
-[`29296607618`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29296607618)
-retains the successful six-job portable matrix for commit `fd4fa13`: native
+[`29305221241`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29305221241)
+retains the successful six-job portable matrix for commit `6d7bcc0`: native
 Linux x86_64 on three Python versions, Windows, macOS Intel, and macOS Apple
 Silicon. The workflow installs FFmpeg and pinned Chromium, runs both language
 suites, and smoke-installs newly built wheel and npm archives on every target.
+The build job also audits the final wheel, source distribution, and npm tarball
+against the pinned canonical skill-tree and preset-file digests before upload;
+an optional `--source-root` comparison retains the stronger byte-level check
+against a canonical VibeEdit Git checkout when one is available.
 GitHub-hosted artifact attestation is unavailable for this private repository
 on the current organization plan, so the workflow retains SHA-256 sums and the
 private workflow artifact without claiming a hosted attestation.
@@ -187,7 +191,7 @@ Run from the repository root unless a path is absolute:
 # 62 passed
 
 npm test
-# 17 passed
+# 18 passed
 
 npm run types:check
 # passed
