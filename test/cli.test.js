@@ -9,7 +9,7 @@ import { createExample } from "../src/index.js";
 test("Node CLI reports the package version", () => {
   const result = spawnSync(process.execPath, ["bin/vibeedit.js", "--version"], { encoding: "utf8" });
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.stdout.trim(), "vibeedit 0.1.0");
+  assert.equal(result.stdout.trim(), "vibeedit 0.1.0-beta.1");
 });
 
 test("Node CLI doctor probes Python with its supported version flag", () => {

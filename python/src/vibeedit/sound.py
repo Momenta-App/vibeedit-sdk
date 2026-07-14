@@ -7,6 +7,7 @@ from pathlib import Path
 
 from vibeedit.cache import write_artifact_provenance
 from vibeedit.spec import JSONObject
+from vibeedit.version import VERSION
 
 
 def synthesize_impact(
@@ -38,7 +39,7 @@ def synthesize_impact(
         audio.setframerate(sample_rate)
         audio.writeframes(samples)
     parameters: JSONObject = {"durationSeconds": duration_seconds, "frequency": frequency, "gainDb": gain_db, "sampleRate": sample_rate, "seed": seed}
-    write_artifact_provenance(destination.with_suffix(destination.suffix + ".vibeedit.json"), {"schemaVersion": "1.0.0", "generator": "vibeedit.sound.synthesize_impact", "implementationVersion": "0.1.0", "parameters": parameters, "output": {"path": destination.name, "bytes": destination.stat().st_size, "sha256": hashlib.sha256(destination.read_bytes()).hexdigest()}, "license": "VibeEdit procedural generation; SEE LICENSE IN LICENSE.md"})
+    write_artifact_provenance(destination.with_suffix(destination.suffix + ".vibeedit.json"), {"schemaVersion": "1.0.0", "generator": "vibeedit.sound.synthesize_impact", "implementationVersion": VERSION, "parameters": parameters, "output": {"path": destination.name, "bytes": destination.stat().st_size, "sha256": hashlib.sha256(destination.read_bytes()).hexdigest()}, "license": "VibeEdit procedural generation; SEE LICENSE IN LICENSE.md"})
     return destination
 
 

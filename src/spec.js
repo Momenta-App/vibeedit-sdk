@@ -1,4 +1,5 @@
 import { validateComposition } from "./validation.js";
+import { VERSION } from "./version.js";
 
 export class FrameRate {
   constructor(numerator, denominator = 1) {
@@ -35,7 +36,7 @@ export class SourceMedia {
 }
 
 export class Effect {
-  constructor({ id, effectId, params = {}, enabled = true, maskId, trackingArtifactId, implementationVersion = "0.1.0" }) { Object.assign(this, { id, effectId, params, enabled, maskId, trackingArtifactId, implementationVersion }); }
+  constructor({ id, effectId, params = {}, enabled = true, maskId, trackingArtifactId, implementationVersion = VERSION }) { Object.assign(this, { id, effectId, params, enabled, maskId, trackingArtifactId, implementationVersion }); }
   toJSON() { return compact({ id: this.id, effectId: this.effectId, params: this.params, enabled: this.enabled, maskId: this.maskId, trackingArtifactId: this.trackingArtifactId, implementationVersion: this.implementationVersion }); }
 }
 
@@ -49,7 +50,7 @@ export class AudioClip extends TimelineItem { constructor(values) { super({ kind
 export class ImageClip extends TimelineItem { constructor(values) { super({ kind: "image", effects: [], ...values }); } }
 export class MotionComponent extends TimelineItem { constructor(values) { super({ kind: "motion", renderer: "html", transparent: true, effects: [], props: {}, ...values }); } }
 export const Text = MotionComponent;
-export class Transition extends TimelineItem { constructor(values) { super({ kind: "transition", params: {}, implementationVersion: "0.1.0", ...values }); } }
+export class Transition extends TimelineItem { constructor(values) { super({ kind: "transition", params: {}, implementationVersion: VERSION, ...values }); } }
 export class SoundEffect extends TimelineItem { constructor(values) { super({ kind: "sound_effect", params: {}, gainDb: 0, variationSeed: 0, avoidImmediateRepeat: true, ...values }); } }
 
 export class Mask { constructor(values) { Object.assign(this, values); } toJSON() { return compact({ ...this, startFrame: this.startFrame, durationFrames: this.durationFrames, artifactUri: this.artifactUri, trackingArtifactId: this.trackingArtifactId }); } }
@@ -94,7 +95,7 @@ export class Composition {
         deterministic: this.render.deterministic ?? true,
       },
       verification: this.verification,
-      provenance: { generator: this.provenance.generator ?? "vibeedit-node", generatorVersion: this.provenance.generatorVersion ?? "0.1.0", createdAt: this.provenance.createdAt ?? new Date().toISOString(), schemaSource: "schema/composition.schema.json" },
+      provenance: { generator: this.provenance.generator ?? "vibeedit-node", generatorVersion: this.provenance.generatorVersion ?? VERSION, createdAt: this.provenance.createdAt ?? new Date().toISOString(), schemaSource: "schema/composition.schema.json" },
       metadata: this.metadata,
     });
   }

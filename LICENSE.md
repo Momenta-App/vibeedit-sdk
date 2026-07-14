@@ -16,7 +16,5 @@ to their respective licenses, notices, usage restrictions, and attribution
 requirements. See `THIRD_PARTY_NOTICES.md` and the generated dependency and
 asset inventories included with a release artifact.
 
-This license text is a product requirement draft and must be reviewed by
-qualified legal counsel before publication or release. Do not rely on it as
-legal advice.
-
+These terms apply to public beta releases made available for evaluation and
+community testing. A beta label does not expand the permissions granted above.

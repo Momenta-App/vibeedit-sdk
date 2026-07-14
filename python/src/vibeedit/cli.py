@@ -18,6 +18,7 @@ from vibeedit.validation import validate_composition
 from vibeedit.verify import verify_output
 from vibeedit.catalog import list_catalog, search_catalog
 from vibeedit.skills import check_skill, install_skill, list_skills, remove_skill, update_skill
+from vibeedit.version import VERSION
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -35,7 +36,7 @@ def main(argv: list[str] | None = None) -> int:
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="vibeedit", description="VibeEdit video production CLI")
-    parser.add_argument("--version", action="version", version="vibeedit 0.1.0")
+    parser.add_argument("--version", action="version", version=f"vibeedit {VERSION}")
     sub = parser.add_subparsers(dest="command", required=True)
 
     init = sub.add_parser("init", help="create a validated CompositionSpec")

@@ -58,9 +58,10 @@ from vibeedit.sound import sound_design_plan
 from vibeedit.sound import synthesize_impact
 from vibeedit.examples import render_example
 from vibeedit.examples import create_example
+from vibeedit.version import VERSION
 
 
-__version__ = "0.1.0"
+__version__ = VERSION
 
 __all__ = [
     "AnalysisArtifact",

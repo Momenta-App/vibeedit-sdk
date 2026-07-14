@@ -2,19 +2,19 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "vibeedit-0.1.0",
-  "documentNamespace": "https://vibeedit.com/sbom/vibeedit-0.1.0",
+  "name": "vibeedit-0.1.0-beta.1",
+  "documentNamespace": "https://vibeedit.com/sbom/vibeedit-0.1.0-beta.1",
   "creationInfo": {
-    "created": "2026-07-13T00:00:00Z",
+    "created": "2026-07-14T00:00:00Z",
     "creators": [
-      "Tool: VibeEdit SBOM generator 0.1.0"
+      "Tool: VibeEdit SBOM generator 0.1.0-beta.1"
     ]
   },
   "packages": [
     {
       "name": "vibeedit",
       "SPDXID": "SPDXRef-Package-VibeEdit",
-      "versionInfo": "0.1.0",
+      "versionInfo": "0.1.0-beta.1",
       "downloadLocation": "NOASSERTION",
       "licenseConcluded": "LicenseRef-VibeEdit",
       "licenseDeclared": "LicenseRef-VibeEdit",
@@ -311,7 +311,7 @@
   "hasExtractedLicensingInfos": [
     {
       "licenseId": "LicenseRef-VibeEdit",
-      "extractedText": "# VibeEdit License Terms\n\nCopyright (c) Attention Engine Inc. All rights reserved.\n\nVibeEdit is publicly inspectable and downloadable. Personal evaluation and any\nother uses specifically granted in writing by Attention Engine Inc. are\npermitted only under these terms. Commercial use requires a separate commercial\nlicense from Attention Engine Inc. Contact Attention Engine through its official\nchannels for commercial licensing.\n\nExcept for permissions expressly granted in writing, no license to VibeEdit\nowned code, assets, trademarks, or other intellectual property is granted.\n\nThird-party components are not relicensed by these terms. They remain subject\nto their respective licenses, notices, usage restrictions, and attribution\nrequirements. See `THIRD_PARTY_NOTICES.md` and the generated dependency and\nasset inventories included with a release artifact.\n\nThis license text is a product requirement draft and must be reviewed by\nqualified legal counsel before publication or release. Do not rely on it as\nlegal advice.\n\n"
+      "extractedText": "# VibeEdit License Terms\n\nCopyright (c) Attention Engine Inc. All rights reserved.\n\nVibeEdit is publicly inspectable and downloadable. Personal evaluation and any\nother uses specifically granted in writing by Attention Engine Inc. are\npermitted only under these terms. Commercial use requires a separate commercial\nlicense from Attention Engine Inc. Contact Attention Engine through its official\nchannels for commercial licensing.\n\nExcept for permissions expressly granted in writing, no license to VibeEdit\nowned code, assets, trademarks, or other intellectual property is granted.\n\nThird-party components are not relicensed by these terms. They remain subject\nto their respective licenses, notices, usage restrictions, and attribution\nrequirements. See `THIRD_PARTY_NOTICES.md` and the generated dependency and\nasset inventories included with a release artifact.\n\nThese terms apply to public beta releases made available for evaluation and\ncommunity testing. A beta label does not expand the permissions granted above.\n"
     }
   ]
 }

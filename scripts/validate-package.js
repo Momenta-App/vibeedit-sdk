@@ -1,17 +1,21 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
-import { treeChecksum, validateComposition } from "../src/index.js";
+import { treeChecksum, validateComposition, VERSION } from "../src/index.js";
 
 const root = new URL("..", import.meta.url);
 const read = (path) => readFileSync(new URL(path, root), "utf8");
 const packageJson = JSON.parse(read("package.json"));
 assert.equal(packageJson.license, "SEE LICENSE IN LICENSE.md");
-assert.equal(packageJson.version, "0.1.0");
-assert.match(read("pyproject.toml"), /version = "0\.1\.0"/);
+assert.equal(packageJson.version, VERSION);
+assert.match(read("pyproject.toml"), /version = "0\.1\.0b1"/);
 assert.match(read("LICENSE.md"), /Commercial use requires a separate\s+commercial\s+license/);
+const sbom = JSON.parse(read("SBOM.spdx.json"));
+assert.equal(sbom.name, `vibeedit-${VERSION}`);
+assert.equal(sbom.packages.find((item) => item.SPDXID === "SPDXRef-Package-VibeEdit")?.versionInfo, VERSION);
 
 const catalog = JSON.parse(read("catalog/catalog.json"));
 const catalogSchema = JSON.parse(read("catalog/catalog.schema.json"));
@@ -50,6 +54,7 @@ const assets = JSON.parse(read("catalog/assets.json"));
 for (const asset of assets.assets) {
   const path = new URL(asset.path, root);
   assert.ok(statSync(path).size === asset.bytes && asset.decodable && asset.redistribution === "verified");
+  assert.equal(createHash("sha256").update(readFileSync(path)).digest("hex"), asset.sha256, `stale checksum for ${asset.id}`);
   if (asset.category === "procedural-sfx") assert.equal(typeof asset.loudnessLufs, "number");
 }
 

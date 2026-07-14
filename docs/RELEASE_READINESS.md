@@ -1,16 +1,16 @@
 # Release readiness report
 
 Date: 2026-07-14
-Candidate: VibeEdit 0.1.0
-Decision: **PUBLIC SOURCE CANDIDATE; NOT READY FOR REGISTRY OR COMMERCIAL RELEASE**
+Candidate: VibeEdit 0.1.0 beta 1
+Decision: **PUBLIC BETA APPROVED FOR TESTING AND COMMUNITY REVIEW**
 
-The candidate is a functional local package, not a scaffold. It now includes
+The candidate is a functional package, not a scaffold. It includes
 the expanded reusable VibeEdit inventory and locally and GitHub-hosted verified
-production workflows. The GitHub source repository is publicly downloadable;
-npm/PyPI publication, a GitHub release, website deployment, and commercial
-release remain withheld because the custom license/model notices have not been
-reviewed by qualified counsel. Pose support in 0.1 is explicitly macOS-native;
-SAM 3.1 remains quarantined rather than claimed.
+production workflows. The release owner approved public beta publication and
+confirmed that the generated previews contain no third-party material, the
+included canonical VibeEdit material is authorized, and optional open-source
+integrations retain their own ownership and terms. Pose support in 0.1 is
+explicitly macOS-native; SAM 3.1 remains quarantined rather than claimed.
 
 ## Public access gate
 
@@ -27,8 +27,9 @@ python3 scripts/check_public_access.py --repo Momenta-App/vibeedit-sdk
 # exit 0; publiclyDownloadable=true; status=public; httpStatus=200
 ```
 
-Creating a GitHub release, publishing to a registry, or deploying the catalog
-still requires explicit user approval.
+The `0.1.0-beta.1` GitHub prerelease is explicitly approved. npm/PyPI registry
+publication is also authorized as a beta when package-owner credentials are
+available; catalog deployment and production rollout are separate actions.
 
 ## Candidate inventory
 
@@ -197,7 +198,7 @@ npm run types:check
 # passed
 
 npm run validate
-# {"ok":true,"version":"0.1.0","catalogItems":467,"skills":44,"assets":13}
+# {"ok":true,"version":"0.1.0-beta.1","catalogItems":467,"skills":44,"assets":13}
 
 .venv/bin/python -m build --outdir /tmp/vibeedit-python-release
 # wheel and sdist built through isolated PEP 517 environments
@@ -239,23 +240,19 @@ composition editing over the underlying library.
 | 12 | Pass | Ten MCP tools list and execute through the underlying library. |
 | 13 | Pass on verified platform | Face/body/tracking, macOS-native pose, portable ONNX objects, SAM 2.1 setup/inference, and structured degradation all operate; 0.1 documents pose as macOS-native. |
 | 14 | Pass for included assets | Included audio is VibeEdit-generated and hash/provenance/loudness/decode audited. |
-| 15 | Partial | Local macOS ARM64/Linux ARM64 and hosted Linux x86_64/Windows/macOS builds, installs, renders, catalog, skills, assets, and license scans pass; qualified legal review remains. |
-| 16 | Pass | npm/Python 0.1.0 share CompositionSpec 1.0.0 and catalog/skill compatibility policy. |
+| 15 | Pass | Local macOS ARM64/Linux ARM64 and hosted Linux x86_64/Windows/macOS builds, installs, renders, catalog, skills, assets, license scans, and release-owner rights review pass. |
+| 16 | Pass | npm `0.1.0-beta.1` and Python `0.1.0b1` identify the same beta and share CompositionSpec 1.0.0 plus the catalog/skill compatibility policy. |
 | 17 | Pass for audited artifacts | No secrets, absolute developer paths, bundled weights, unapproved media, or undocumented downloads were found. |
 | 18 | Pass | This report records inventory, platforms, sizes, downloads, commands, gaps, and licensing concerns. |
-| 19 | Pass | The source repository is public. No npm/PyPI publication, GitHub Release, website deployment, or production rollout occurred. |
+| 19 | Pass | The source repository is public and public beta publication is explicitly approved; website deployment and production rollout remain separate actions. |
 
 The objective's public-access requirement now passes through the public GitHub
 source repository. Registry publication remains a separate withheld action.
 
-## Remaining release blockers
+## Beta release gates
 
-1. Obtain qualified legal review of `LICENSE.md`, commercial-license wording,
-   SAM/SSD-MobileNet/COCO terms, Chromium notices, imported skill content, and
-   third-party dependency notices. The current license remains an engineering
-   draft. `docs/LEGAL_REVIEW_HANDOFF.md` provides the bounded decision list,
-   evidence index, and requested approval record without changing the draft
-   terms.
-
-Registry and commercial-release approval must remain withheld until this gate
-is resolved or the initial support scope is explicitly reduced and approved.
+No content-rights or engineering blocker remains for the approved public beta.
+The GitHub prerelease must use exact artifacts from a successful public
+workflow run and retain its checksums, archive audit, and attestations. npm and
+PyPI publication require package-owner credentials; final production or
+commercial release remains a separate decision under `LICENSE.md`.

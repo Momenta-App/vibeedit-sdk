@@ -1,0 +1,65 @@
+name: Beta feedback
+description: Report a VibeEdit public-beta problem or compatibility result.
+title: "[Beta] "
+labels:
+  - beta-feedback
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for testing VibeEdit. Please include reproducible, non-sensitive evidence.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Installation or setup
+        - Python API or CLI
+        - Node API or CLI
+        - Rendering or verification
+        - HTML motion or catalog
+        - Skills or AI harnesses
+        - Vision or SAM
+        - Documentation
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      description: Operating system, architecture, Python version, and Node version.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Version and doctor output
+      description: Paste `vibeedit --version` and `vibeedit doctor --json`.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide the smallest command or CompositionSpec that reproduces the result.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: sharing
+    attributes:
+      label: Sharing confirmation
+      options:
+        - label: I have not included secrets, private data, or media I lack permission to share.
+          required: true

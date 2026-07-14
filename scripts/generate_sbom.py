@@ -3,15 +3,16 @@ from pathlib import Path
 
 
 root = Path(__file__).resolve().parent.parent
+version = json.loads((root / "package.json").read_text(encoding="utf-8"))["version"]
 document = {
     "spdxVersion": "SPDX-2.3",
     "dataLicense": "CC0-1.0",
     "SPDXID": "SPDXRef-DOCUMENT",
-    "name": "vibeedit-0.1.0",
-    "documentNamespace": "https://vibeedit.com/sbom/vibeedit-0.1.0",
-    "creationInfo": {"created": "2026-07-13T00:00:00Z", "creators": ["Tool: VibeEdit SBOM generator 0.1.0"]},
+    "name": f"vibeedit-{version}",
+    "documentNamespace": f"https://vibeedit.com/sbom/vibeedit-{version}",
+    "creationInfo": {"created": "2026-07-14T00:00:00Z", "creators": [f"Tool: VibeEdit SBOM generator {version}"]},
     "packages": [
-        {"name": "vibeedit", "SPDXID": "SPDXRef-Package-VibeEdit", "versionInfo": "0.1.0", "downloadLocation": "NOASSERTION", "licenseConcluded": "LicenseRef-VibeEdit", "licenseDeclared": "LicenseRef-VibeEdit", "copyrightText": "Copyright Attention Engine Inc."},
+        {"name": "vibeedit", "SPDXID": "SPDXRef-Package-VibeEdit", "versionInfo": version, "downloadLocation": "NOASSERTION", "licenseConcluded": "LicenseRef-VibeEdit", "licenseDeclared": "LicenseRef-VibeEdit", "copyrightText": "Copyright Attention Engine Inc."},
         {"name": "ajv", "SPDXID": "SPDXRef-Package-Ajv", "versionInfo": "8.20.0", "downloadLocation": "https://www.npmjs.com/package/ajv", "licenseConcluded": "MIT", "licenseDeclared": "MIT", "copyrightText": "NOASSERTION"},
         {"name": "ajv-formats", "SPDXID": "SPDXRef-Package-AjvFormats", "versionInfo": "3.0.1", "downloadLocation": "https://www.npmjs.com/package/ajv-formats", "licenseConcluded": "MIT", "licenseDeclared": "MIT", "copyrightText": "NOASSERTION"},
         {"name": "jsonschema", "SPDXID": "SPDXRef-Package-Jsonschema", "versionInfo": "4.23-or-later-less-than-5", "downloadLocation": "https://pypi.org/project/jsonschema/", "licenseConcluded": "MIT", "licenseDeclared": "MIT", "copyrightText": "NOASSERTION"},

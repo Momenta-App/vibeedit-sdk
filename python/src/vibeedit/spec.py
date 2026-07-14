@@ -7,6 +7,8 @@ from fractions import Fraction
 from pathlib import Path
 from typing import TypeAlias
 
+from vibeedit.version import VERSION
+
 
 JSONValue: TypeAlias = None | bool | int | float | str | list["JSONValue"] | dict[str, "JSONValue"]
 JSONObject: TypeAlias = dict[str, JSONValue]
@@ -141,7 +143,7 @@ class Effect:
     enabled: bool = True
     mask_id: str | None = None
     tracking_artifact_id: str | None = None
-    implementation_version: str = "0.1.0"
+    implementation_version: str = VERSION
 
     def to_spec(self) -> JSONObject:
         return _without_none(
@@ -271,7 +273,7 @@ class Transition:
     to_item_id: str
     params: JSONObject = field(default_factory=dict)
     audio_transition_id: str | None = None
-    implementation_version: str = "0.1.0"
+    implementation_version: str = VERSION
 
     def to_spec(self) -> JSONObject:
         return _without_none(
@@ -502,7 +504,7 @@ class Composition:
     verification: JSONObject = field(default_factory=dict)
     metadata: JSONObject = field(default_factory=dict)
     generator: str = "vibeedit-python"
-    generator_version: str = "0.1.0"
+    generator_version: str = VERSION
     created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"))
 
     def to_spec(self) -> JSONObject:
@@ -567,4 +569,3 @@ class Composition:
 
 ProjectSpec = Composition
 CompositionSpec = Composition
-

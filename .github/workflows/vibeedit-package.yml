@@ -7,6 +7,10 @@ on:
 permissions:
   contents: read
 
+env:
+  NPM_PACKAGE_VERSION: 0.1.0-beta.1
+  PYTHON_PACKAGE_VERSION: 0.1.0b1
+
 jobs:
   portable-smoke:
     strategy:
@@ -33,7 +37,7 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: package-lock.json
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: ${{ matrix.python }}
       - uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
@@ -78,9 +82,9 @@ jobs:
         run: |
           node -e "require('fs').mkdirSync('dist/smoke', { recursive: true })"
           uv build --wheel --out-dir dist/smoke
-          uv tool run --from dist/smoke/vibeedit-0.1.0-py3-none-any.whl vibeedit --version
+          uv tool run --from dist/smoke/vibeedit-${{ env.PYTHON_PACKAGE_VERSION }}-py3-none-any.whl vibeedit --version
           npm pack --pack-destination dist/smoke
-          npx --yes --package ./dist/smoke/vibeedit-0.1.0.tgz vibeedit --version
+          npx --yes --package ./dist/smoke/vibeedit-${{ env.NPM_PACKAGE_VERSION }}.tgz vibeedit --version
 
   build-and-attest:
     needs: portable-smoke
@@ -96,7 +100,7 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: package-lock.json
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: "3.12"
       - uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
@@ -123,9 +127,9 @@ jobs:
       - name: Audit release archives against pinned provenance
         run: |
           python scripts/audit_release_artifacts.py \
-            --wheel dist/python/vibeedit-0.1.0-py3-none-any.whl \
-            --sdist dist/python/vibeedit-0.1.0.tar.gz \
-            --npm dist/npm/vibeedit-0.1.0.tgz \
+            --wheel dist/python/vibeedit-${{ env.PYTHON_PACKAGE_VERSION }}-py3-none-any.whl \
+            --sdist dist/python/vibeedit-${{ env.PYTHON_PACKAGE_VERSION }}.tar.gz \
+            --npm dist/npm/vibeedit-${{ env.NPM_PACKAGE_VERSION }}.tgz \
             --output dist/archive-audit.json
       - name: Generate artifact checksums
         working-directory: dist
@@ -138,6 +142,6 @@ jobs:
       - name: Upload package artifacts
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
-          name: vibeedit-0.1.0-packages
+          name: vibeedit-${{ env.NPM_PACKAGE_VERSION }}-packages
           path: dist
           if-no-files-found: error

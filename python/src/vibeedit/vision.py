@@ -17,6 +17,7 @@ from vibeedit.cache import cache_key
 from vibeedit.cache import cache_root
 from vibeedit.cache import restore_cached_artifact
 from vibeedit.cache import store_cached_artifact
+from vibeedit.version import VERSION
 
 
 @dataclass(frozen=True)
@@ -91,7 +92,7 @@ class CapabilityRouter:
             raise FileNotFoundError(source)
         source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
         runtime_versions = {"opencv": cv2.__version__}
-        key = cache_key("vision.face_tracking", {"sourceSha256": source_hash, "sampleEveryFrames": sample_every_frames}, implementation_version="0.1.0", runtime_versions=runtime_versions)
+        key = cache_key("vision.face_tracking", {"sourceSha256": source_hash, "sampleEveryFrames": sample_every_frames}, implementation_version=VERSION, runtime_versions=runtime_versions)
         destination = Path(output)
         cache_hit = restore_cached_artifact("vision.face_tracking", key, destination)
         if cache_hit:
@@ -104,7 +105,7 @@ class CapabilityRouter:
                 duration_frames=int(payload["frameCount"]),
                 coordinate_space="normalized",
                 format="vibeedit.face-tracks+json",
-                provenance={"generator": "vibeedit.vision.track_faces", "implementationVersion": "0.1.0", "runtime": "opencv", "runtimeVersion": cv2.__version__, "parameters": {"sampleEveryFrames": sample_every_frames}, "sourceIdentities": [source_hash], "cacheKey": key, "cacheHit": True},
+                provenance={"generator": "vibeedit.vision.track_faces", "implementationVersion": VERSION, "runtime": "opencv", "runtimeVersion": cv2.__version__, "parameters": {"sampleEveryFrames": sample_every_frames}, "sourceIdentities": [source_hash], "cacheKey": key, "cacheHit": True},
             )
         capture = cv2.VideoCapture(str(source))
         if not capture.isOpened():
@@ -141,7 +142,7 @@ class CapabilityRouter:
             duration_frames=frame_index,
             coordinate_space="normalized",
             format="vibeedit.face-tracks+json",
-            provenance={"generator": "vibeedit.vision.track_faces", "implementationVersion": "0.1.0", "runtime": "opencv", "runtimeVersion": cv2.__version__, "parameters": {"sampleEveryFrames": sample_every_frames}, "sourceIdentities": [source_hash], "cacheKey": key, "cacheHit": False},
+            provenance={"generator": "vibeedit.vision.track_faces", "implementationVersion": VERSION, "runtime": "opencv", "runtimeVersion": cv2.__version__, "parameters": {"sampleEveryFrames": sample_every_frames}, "sourceIdentities": [source_hash], "cacheKey": key, "cacheHit": False},
         )
 
     def segment(self, path: str | Path, output: str | Path, *, duration_frames: int, prompt: JSONObject | None = None) -> Mask:
@@ -162,7 +163,7 @@ class CapabilityRouter:
         if manifest.get("sourceRevision"):
             model["sourceRevision"] = manifest["sourceRevision"]
         declared_runtime = manifest.get("runtimeVersions") if isinstance(manifest.get("runtimeVersions"), dict) else {}
-        key = cache_key("vision.segmentation", {"sourceSha256": source_hash, "model": model, "parameters": parameters, "durationFrames": duration_frames}, implementation_version="0.1.0", runtime_versions={"provider": manifest["id"], "model": manifest["version"], **declared_runtime})
+        key = cache_key("vision.segmentation", {"sourceSha256": source_hash, "model": model, "parameters": parameters, "durationFrames": duration_frames}, implementation_version=VERSION, runtime_versions={"provider": manifest["id"], "model": manifest["version"], **declared_runtime})
         cache_hit = bool(declared_runtime) and destination.suffix == ".json" and restore_cached_artifact("vision.segmentation", key, destination)
         if not cache_hit:
             result = subprocess.run([*command, "segment", str(source), str(destination), json.dumps(parameters, sort_keys=True, separators=(",", ":"))], capture_output=True, text=True, check=False)
@@ -182,7 +183,7 @@ class CapabilityRouter:
                 (cache_root() / "artifacts" / "vision" / "segmentation" / f"{key}{destination.suffix}").unlink(missing_ok=True)
                 destination.unlink()
                 return self.segment(source, output, duration_frames=duration_frames, prompt=prompt)
-        key = cache_key("vision.segmentation", {"sourceSha256": source_hash, "model": model, "parameters": parameters, "durationFrames": duration_frames}, implementation_version="0.1.0", runtime_versions={"provider": manifest["id"], "model": manifest["version"], **runtime})
+        key = cache_key("vision.segmentation", {"sourceSha256": source_hash, "model": model, "parameters": parameters, "durationFrames": duration_frames}, implementation_version=VERSION, runtime_versions={"provider": manifest["id"], "model": manifest["version"], **runtime})
         if not cache_hit and destination.is_file():
             store_cached_artifact("vision.segmentation", key, destination)
         return Mask(
@@ -192,7 +193,7 @@ class CapabilityRouter:
             duration_frames=duration_frames,
             artifact_uri=str(destination),
             format="vibeedit.sam-mask+json" if destination.suffix == ".json" else "image/png",
-            provenance={"generator": "vibeedit.vision.segment", "implementationVersion": "0.1.0", "model": manifest["id"], "modelVersion": manifest["version"], "runtime": "external-runner", "runtimeVersions": runtime, "parameters": parameters, "sourceIdentities": [source_hash], "cacheKey": key, "cacheHit": cache_hit},
+            provenance={"generator": "vibeedit.vision.segment", "implementationVersion": VERSION, "model": manifest["id"], "modelVersion": manifest["version"], "runtime": "external-runner", "runtimeVersions": runtime, "parameters": parameters, "sourceIdentities": [source_hash], "cacheKey": key, "cacheHit": cache_hit},
         )
 
 

@@ -5,15 +5,17 @@ It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
 motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
-This public repository contains an alpha package built and validated locally
-and on GitHub-hosted Linux, Windows, and macOS runners. It has not been
-published to npm or PyPI. Public source access and registry publication are
-separate release states.
+This public repository contains VibeEdit 0.1.0 beta 1, built and validated
+locally and on GitHub-hosted Linux, Windows, and macOS runners. The beta is for
+evaluation, testing, and community review; it is not a production-stability or
+commercial-use claim. Public GitHub release assets and registry publication are
+separate release channels.
 
 ## Install
 
-The registry commands below are the intended post-publication experience; they
-will not resolve until an approved release is published:
+The registry commands below are the intended registry experience. Until a
+registry beta is published, install the attested GitHub prerelease artifacts or
+the public source checkout instead.
 
 Lightweight Python CLI and media orchestration:
 
@@ -86,7 +88,19 @@ npm install vibeedit
 npx vibeedit doctor --json
 ```
 
-For the current public source candidate, clone and install locally:
+Install the Python beta directly from its GitHub release asset:
+
+```bash
+uv tool install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.1/vibeedit-0.1.0b1-py3-none-any.whl
+```
+
+Install the Node beta tarball in a project:
+
+```bash
+npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.1/vibeedit-0.1.0-beta.1.tgz
+```
+
+Or clone and install the public source:
 
 ```bash
 git clone https://github.com/Momenta-App/vibeedit-sdk.git
@@ -104,9 +118,9 @@ Or build and install the exact local artifacts:
 
 ```bash
 uv build --out-dir dist/python
-uv tool install dist/python/vibeedit-0.1.0-py3-none-any.whl
+uv tool install dist/python/vibeedit-0.1.0b1-py3-none-any.whl
 npm pack --pack-destination dist/npm
-npm install ./dist/npm/vibeedit-0.1.0.tgz
+npm install ./dist/npm/vibeedit-0.1.0-beta.1.tgz
 ```
 
 `setup` performs only explicitly requested work. It installs pinned browser and
@@ -263,10 +277,8 @@ See `docs/SECURITY.md`, `docs/ARCHITECTURE.md`, `SBOM.spdx.json`, and
 
 ## License
 
-`LICENSE.md` defines the intended terms for this publicly
-inspectable/downloadable source package. Commercial use requires a separate
-license from Attention Engine Inc. Third-party components remain under their
-own licenses. The custom license text remains an engineering draft requiring
-review by qualified legal counsel; registry and commercial release remain
-withheld. The evidence and decisions requested from counsel are organized in
-`docs/LEGAL_REVIEW_HANDOFF.md`.
+`LICENSE.md` defines the terms for this publicly inspectable and downloadable
+beta. Commercial use requires a separate license from Attention Engine Inc.
+Third-party components remain under their own licenses and are not claimed as
+VibeEdit property. The release-owner provenance determination and evidence are
+recorded in `docs/LEGAL_REVIEW_HANDOFF.md`.

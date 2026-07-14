@@ -10,6 +10,7 @@ from vibeedit.render import render
 from vibeedit.spec import JSONObject
 from vibeedit.validation import validate_composition
 from vibeedit.verify import verify_output
+from vibeedit.version import VERSION
 
 
 TOOLS = [
@@ -30,7 +31,7 @@ def handle_request(request: JSONObject) -> JSONObject | None:
     identifier = request.get("id")
     try:
         if request.get("method") == "initialize":
-            return {"jsonrpc": "2.0", "id": identifier, "result": {"protocolVersion": "2025-06-18", "capabilities": {"tools": {"listChanged": False}}, "serverInfo": {"name": "vibeedit", "version": "0.1.0"}}}
+            return {"jsonrpc": "2.0", "id": identifier, "result": {"protocolVersion": "2025-06-18", "capabilities": {"tools": {"listChanged": False}}, "serverInfo": {"name": "vibeedit", "version": VERSION}}}
         if request.get("method") == "notifications/initialized":
             return None
         if request.get("method") == "ping":

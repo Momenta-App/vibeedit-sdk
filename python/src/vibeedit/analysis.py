@@ -15,6 +15,7 @@ from vibeedit.cache import restore_cached_artifact
 from vibeedit.cache import store_cached_artifact
 from vibeedit.spec import AnalysisArtifact
 from vibeedit.spec import JSONObject
+from vibeedit.version import VERSION
 
 
 def regular_beat_frames(
@@ -70,7 +71,7 @@ def analyze_beats(
     }
     version_result = subprocess.run([ffmpeg, "-version"], capture_output=True, text=True, check=False)
     runtime_versions = {"ffmpeg": (version_result.stdout or version_result.stderr).splitlines()[0] if version_result.returncode == 0 else "unavailable"}
-    key = cache_key("analysis.beats", {"sourceSha256": source_hash, **parameters}, implementation_version="0.1.0", runtime_versions=runtime_versions)
+    key = cache_key("analysis.beats", {"sourceSha256": source_hash, **parameters}, implementation_version=VERSION, runtime_versions=runtime_versions)
     destination = Path(output)
     cache_hit = restore_cached_artifact("analysis.beats", key, destination)
     if not cache_hit:
@@ -103,7 +104,7 @@ def analyze_beats(
         kind="beats",
         artifact_uri=str(destination),
         format="vibeedit.beats+json",
-        provenance={"generator": "vibeedit.analysis.analyze_beats", "implementationVersion": "0.1.0", "parameters": parameters, "sourceIdentities": [source_hash], "runtimeVersions": runtime_versions, "cacheKey": key, "cacheHit": cache_hit},
+        provenance={"generator": "vibeedit.analysis.analyze_beats", "implementationVersion": VERSION, "parameters": parameters, "sourceIdentities": [source_hash], "runtimeVersions": runtime_versions, "cacheKey": key, "cacheHit": cache_hit},
     )
 
 

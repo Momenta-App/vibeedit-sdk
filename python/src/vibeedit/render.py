@@ -11,6 +11,7 @@ from vibeedit.cache import cache_key, cache_root, write_artifact_provenance
 from vibeedit.ffmpeg import render_generated, render_media
 from vibeedit.spec import JSONObject
 from vibeedit.validation import canonical_json, validate_composition
+from vibeedit.version import VERSION
 
 
 def render(spec: JSONObject | str | Path, output: str | Path | None = None) -> Path:
@@ -22,7 +23,7 @@ def render(spec: JSONObject | str | Path, output: str | Path | None = None) -> P
     normalized = json.loads(json.dumps(composition))
     normalized["render"]["output"]["uri"] = "<output>"
     versions = _runtime_versions(backend)
-    key = cache_key("render", normalized, implementation_version="0.1.0", runtime_versions=versions)
+    key = cache_key("render", normalized, implementation_version=VERSION, runtime_versions=versions)
     cached = cache_root() / "renders" / f"{key}{destination.suffix}"
     if composition.get("cache", {}).get("enabled", False) and cached.is_file():
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -68,7 +69,7 @@ def _write_render_provenance(output: Path, spec: JSONObject, key: str, versions:
             "compositionId": spec["id"],
             "compositionSha256": hashlib.sha256(canonical_json(spec).encode()).hexdigest(),
             "sourceIdentities": [source["identity"] for source in spec["sources"]],
-            "implementationVersion": "0.1.0",
+            "implementationVersion": VERSION,
             "runtimeVersions": versions,
             "cacheKey": key,
             "cacheHit": cache_hit,

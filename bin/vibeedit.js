@@ -7,11 +7,12 @@ import { join, resolve } from "node:path";
 import process from "node:process";
 import { catalog, checkSkill, createExample, installSkill, listSkills, removeSkill, searchCatalog, updateSkill, validateComposition } from "../src/index.js";
 import { dataPath } from "../src/data.js";
+import { VERSION } from "../src/version.js";
 
 const [command, ...args] = process.argv.slice(2);
 
 if (!command || ["help", "--help", "-h"].includes(command)) {
-  console.log(`VibeEdit 0.1.0
+  console.log(`VibeEdit ${VERSION}
 
 Usage: vibeedit <command> [options]
 
@@ -24,7 +25,7 @@ Commands:
 }
 
 if (["version", "--version", "-V"].includes(command)) {
-  console.log("vibeedit 0.1.0");
+  console.log(`vibeedit ${VERSION}`);
   process.exit(0);
 }
 
@@ -60,7 +61,7 @@ function init(values) {
     canvas: { width, height, frameRate: { numerator: fps[0], denominator: fps[1] ?? 1 }, audioSampleRate: 48000 },
     durationFrames, sources: [], timeline: { tracks: [] }, artifacts: { masks: [], tracking: [], analysis: [] },
     render: { backend: "ffmpeg", output: { uri: "output.mp4", container: "mp4", videoCodec: "h264", audioCodec: "aac", pixelFormat: "yuv420p" }, deterministic: true },
-    provenance: { generator: "vibeedit-node", generatorVersion: "0.1.0", createdAt: new Date().toISOString(), schemaSource: "schema/composition.schema.json" },
+    provenance: { generator: "vibeedit-node", generatorVersion: VERSION, createdAt: new Date().toISOString(), schemaSource: "schema/composition.schema.json" },
   };
   validateComposition(spec);
   writeFileSync(output, `${JSON.stringify(spec, null, 2)}\n`);
