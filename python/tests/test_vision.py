@@ -31,7 +31,7 @@ def test_router_does_not_infer_capabilities_from_platform(tmp_path: Path, monkey
 
 
 def test_apple_runner_uses_only_explicit_capabilities(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
-    runner = tmp_path / "apple-vision"
+    runner = tmp_path / "apple-vision.py"
     runner.write_text("""#!/usr/bin/env python3
 import json, sys
 if sys.argv[1] == "capabilities": print(json.dumps({"capabilities":["face","body","pose"]}))
@@ -112,7 +112,7 @@ def test_opencv_face_tracker_writes_artifact_and_reuses_cache(tmp_path: Path, mo
 def test_checksum_declared_external_sam_provider_executes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     import json
 
-    runner = tmp_path / "sam-runner"
+    runner = tmp_path / "sam-runner.py"
     runner.write_text("#!/usr/bin/env python3\nimport json, pathlib, sys\npathlib.Path(sys.argv[3]).write_text(json.dumps({'format':'rle','counts':[1,2,3]}))\n")
     runner.chmod(0o755)
     manifest = tmp_path / "model.json"
@@ -130,7 +130,7 @@ def test_checksum_declared_external_sam_provider_executes(tmp_path: Path, monkey
 
 
 def test_external_sam_runtime_versions_enter_provenance_and_cache_key(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
-    runner = tmp_path / "sam-runner"
+    runner = tmp_path / "sam-runner.py"
     runner.write_text("#!/usr/bin/env python3\nimport json, pathlib, sys\npathlib.Path(sys.argv[3]).write_text(json.dumps({'runtime':{'device':'mps','torch':'test'},'frames':[{'frame':0,'rle':[1]}]}))\n")
     runner.chmod(0o755)
     manifest = tmp_path / "model.json"

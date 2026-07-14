@@ -1,4 +1,3 @@
-import hashlib
 import json
 from pathlib import Path
 
@@ -6,6 +5,7 @@ import pytest
 
 from vibeedit import check_skill, install_skill, list_skills, remove_skill, update_skill
 from vibeedit.data import data_path
+from vibeedit.skills import _checksum
 
 
 def test_skill_lifecycle_preserves_user_changes(tmp_path: Path):
@@ -37,12 +37,6 @@ def test_all_bundled_skills_are_byte_identical_canonical_clones():
     assert "byte-identical clones" in report["policy"]
     for skill in list_skills():
         record = records[skill["name"]]
-        digest = hashlib.sha256()
         root = data_path("skills", skill["path"])
-        for path in sorted(path for path in root.rglob("*") if path.is_file()):
-            digest.update(path.relative_to(root).as_posix().encode())
-            digest.update(b"\0")
-            digest.update(path.read_bytes())
-            digest.update(b"\0")
-        assert record["sourceSha256"] == record["packageSha256"] == skill["checksum"] == digest.hexdigest()
+        assert record["sourceSha256"] == record["packageSha256"] == skill["checksum"] == _checksum(root)
         assert skill["source"]["sha256"] == skill["checksum"]

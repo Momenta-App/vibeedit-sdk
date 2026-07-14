@@ -84,7 +84,10 @@ def _destination(skill: JSONObject, harness: str, scope: str, root: str | Path |
 
 def _checksum(root: Path, excluded: set[str] | None = None) -> str:
     digest = hashlib.sha256()
-    for path in sorted(path for path in root.rglob("*") if path.is_file() and path.name not in (excluded or set())):
+    for path in sorted(
+        (path for path in root.rglob("*") if path.is_file() and path.name not in (excluded or set())),
+        key=lambda path: path.relative_to(root).as_posix(),
+    ):
         digest.update(path.relative_to(root).as_posix().encode())
         digest.update(b"\0")
         digest.update(path.read_bytes())
@@ -94,4 +97,3 @@ def _checksum(root: Path, excluded: set[str] | None = None) -> str:
 
 def _write_tracker(destination: Path, skill: JSONObject, harness: str, checksum: str) -> None:
     (destination / ".vibeedit-install.json").write_text(json.dumps({"schemaVersion": 1, "id": skill["id"], "version": skill["version"], "harness": harness, "checksum": checksum}, indent=2) + "\n", encoding="utf-8")
-

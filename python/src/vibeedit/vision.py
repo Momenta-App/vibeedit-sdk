@@ -6,6 +6,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -255,7 +256,7 @@ def _coco_label(identifier: int) -> str:
 
 
 def _apple_request(runner: Path, operation: str, path: str | Path) -> JSONObject:
-    result = subprocess.run([str(runner), operation, str(path)], capture_output=True, text=True, check=False)
+    result = subprocess.run([*_runner_command(runner), operation, str(path)], capture_output=True, text=True, check=False)
     if result.returncode:
         raise RuntimeError(result.stderr.strip() or f"Apple Vision {operation} request failed")
     try:
@@ -270,9 +271,9 @@ def _apple_request(runner: Path, operation: str, path: str | Path) -> JSONObject
 def _apple_provider() -> tuple[Path, set[str]] | None:
     configured = os.environ.get("VIBEEDIT_APPLE_VISION_RUNNER")
     runner = Path(configured) if configured else cache_root() / "runtimes" / "apple-vision" / "vibeedit-apple-vision"
-    if not runner.is_file() or not os.access(runner, os.X_OK):
+    if not runner.is_file() or (os.name != "nt" and not os.access(runner, os.X_OK)):
         return None
-    result = subprocess.run([str(runner), "capabilities"], capture_output=True, text=True, check=False)
+    result = subprocess.run([*_runner_command(runner), "capabilities"], capture_output=True, text=True, check=False)
     if result.returncode:
         return None
     try:
@@ -284,6 +285,10 @@ def _apple_provider() -> tuple[Path, set[str]] | None:
         return None
     declared = set(capabilities) & {"face", "body", "pose", "object"}
     return (runner, declared) if declared else None
+
+
+def _runner_command(runner: Path) -> tuple[str, ...]:
+    return (sys.executable, str(runner)) if os.name == "nt" and runner.suffix.casefold() == ".py" else (str(runner),)
 
 
 def _assign_track_ids(detections: list[Detection], previous: dict[int, tuple[float, float]], next_id: int) -> tuple[list[JSONObject], dict[int, tuple[float, float]], int]:
@@ -320,7 +325,7 @@ def _sam_provider() -> tuple[tuple[str, ...], JSONObject] | None:
         return None
     runner = Path(runner_value)
     manifest_path = Path(manifest_value)
-    if not runner.is_file() or not manifest_path.is_file() or (not packaged and not os.access(runner, os.X_OK)):
+    if not runner.is_file() or not manifest_path.is_file() or (not packaged and os.name != "nt" and not os.access(runner, os.X_OK)):
         return None
     try:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -341,7 +346,7 @@ def _sam_provider() -> tuple[tuple[str, ...], JSONObject] | None:
         if not isinstance(command, list) or len(command) != 2 or any(not isinstance(value, str) or not value for value in command) or not Path(command[0]).is_file() or Path(command[1]) != runner:
             return None
         return tuple(command), manifest
-    return (str(runner),), manifest
+    return _runner_command(runner), manifest
 
 
 def _object_provider() -> tuple[Path, JSONObject] | None:
