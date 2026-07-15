@@ -22,7 +22,15 @@ npx vibeedit doctor --json
 ```
 
 The release also includes a Python source distribution, SHA-256 sums, and an
-archive audit. Verify GitHub build provenance with:
+archive audit. Download the three archives beside the beta-1 flat checksum
+manifest, then verify archive integrity with:
+
+```bash
+shasum -a 256 -c SHA256SUMS.release
+```
+
+The corrected build workflow emits future flat release manifests under the
+primary `SHA256SUMS` name. Verify GitHub build provenance separately with:
 
 ```bash
 gh attestation verify vibeedit-0.1.0b1-py3-none-any.whl --repo Momenta-App/vibeedit-sdk
