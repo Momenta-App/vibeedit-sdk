@@ -100,6 +100,15 @@ Install the Node beta tarball in a project:
 npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.1/vibeedit-0.1.0-beta.1.tgz
 ```
 
+When downloading all three beta-1 release archives manually, place them beside
+`SHA256SUMS.release` and verify before installing:
+
+```bash
+shasum -a 256 -c SHA256SUMS.release
+```
+
+The build workflow emits future flat release manifests as `SHA256SUMS`.
+
 Or clone and install the public source:
 
 ```bash

@@ -31,6 +31,15 @@ The `0.1.0-beta.1` GitHub prerelease is explicitly approved. npm/PyPI registry
 publication is also authorized as a beta when package-owner credentials are
 available; catalog deployment and production rollout are separate actions.
 
+On 2026-07-15, the exact GitHub release wheel, source distribution, and npm
+tarball were downloaded without repository credentials and installed in clean
+Python and Node environments. Python doctor reported core rendering ready and
+the packaged generated example produced a verified 640×360, 30 fps, 60-frame
+H.264/AAC MP4. Node doctor passed, catalog search and CompositionSpec validation
+passed, and the production dependency audit reported zero vulnerabilities. The
+flat and workflow-relative checksum layouts both verified. The hash-bound
+record is [public-beta-install-proof.json](evidence/public-beta-install-proof.json).
+
 ## Candidate inventory
 
 | Surface | Included and verified |
@@ -167,8 +176,8 @@ against the pinned canonical skill-tree and preset-file digests before upload;
 an optional `--source-root` comparison retains the stronger byte-level check
 against a canonical VibeEdit Git checkout when one is available.
 Public workflow dispatches are configured to generate GitHub build-provenance
-attestations. Every build also retains artifact-relative SHA-256 sums and the
-uploaded workflow artifact.
+attestations. Every build also retains flat GitHub-release SHA-256 sums,
+artifact-relative SHA-256 sums, and the uploaded workflow artifact.
 
 ## Local publishable artifacts
 

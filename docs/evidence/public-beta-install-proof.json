@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-07-15",
+  "decision": "accepted",
+  "scope": "Unauthenticated download and clean-install proof for the exact public GitHub prerelease artifacts.",
+  "repository": {
+    "url": "https://github.com/Momenta-App/vibeedit-sdk",
+    "visibility": "public",
+    "defaultBranch": "main"
+  },
+  "release": {
+    "url": "https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.1.0-beta.1",
+    "tag": "v0.1.0-beta.1",
+    "targetCommit": "4bca57886390dcff4397e37b5b21931679dbef8b",
+    "draft": false,
+    "prerelease": true,
+    "publishedAt": "2026-07-14T23:25:48Z"
+  },
+  "artifacts": [
+    {
+      "name": "vibeedit-0.1.0-beta.1.tgz",
+      "bytes": 1626853,
+      "sha256": "8a22507b478517ea02c77aca02a3cda3b7c7b6a403ed8fdd4d9bbba2b5f77e72"
+    },
+    {
+      "name": "vibeedit-0.1.0b1-py3-none-any.whl",
+      "bytes": 1808479,
+      "sha256": "3fb6f6fc396631a72319d9b0bf3d2f6f652073dbae90bcf5194c62189ed94113"
+    },
+    {
+      "name": "vibeedit-0.1.0b1.tar.gz",
+      "bytes": 1767734,
+      "sha256": "45c132af7ef3c8f30a9c8fd70c7fe9a2a4a331cec234dc47be7b52fa13c638b5"
+    },
+    {
+      "name": "SHA256SUMS.release",
+      "bytes": 282,
+      "sha256": "be5402d85d470803f5bb0f9502105b1b0facfd0775e732f2de6700d9000e320e"
+    }
+  ],
+  "integrity": {
+    "unauthenticatedDownloads": true,
+    "flatChecksumManifestVerified": true,
+    "nestedWorkflowChecksumManifestVerified": true,
+    "note": "The original beta-1 SHA256SUMS asset retained workflow-relative paths. SHA256SUMS.release is the added flat manifest for archives downloaded into one directory. The workflow fix makes future primary SHA256SUMS assets flat."
+  },
+  "pythonCleanInstall": {
+    "python": "3.12.13",
+    "version": "0.1.0b1",
+    "doctorReady": true,
+    "mediaRenderProvider": "ffmpeg 8.1.1",
+    "example": "basic-generated",
+    "renderVerified": true,
+    "output": {
+      "sha256": "e95b3799fc89ec8e748be5c03a30891291128191551bb10e5611613d2050867e",
+      "bytes": 9259,
+      "durationSeconds": 2.0,
+      "width": 640,
+      "height": 360,
+      "fps": 30,
+      "videoFrames": 60,
+      "videoCodec": "h264",
+      "audioCodec": "aac"
+    }
+  },
+  "nodeCleanInstall": {
+    "node": "26.0.0",
+    "version": "0.1.0-beta.1",
+    "doctorReady": true,
+    "ffmpeg": "8.1.1",
+    "catalogSearch": "passed",
+    "compositionValidation": "passed",
+    "productionAuditVulnerabilities": 0
+  },
+  "limitations": [
+    "This proof validates public GitHub release installation on macOS Apple Silicon; the release-readiness report contains the separate cross-platform matrix.",
+    "The Node proof intentionally used the core tarball without optional Playwright, so doctor reported HTML motion setup as available but not installed.",
+    "npm and PyPI registry publication were not tested because package-owner credentials were unavailable."
+  ]
+}
