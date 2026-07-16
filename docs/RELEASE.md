@@ -20,3 +20,40 @@ publish the tree manifest as the release's primary `SHA256SUMS` file.
 
 The checked-in action references are immutable commit SHAs. The workflow is
 triggered for package pull requests or by an explicit manual dispatch.
+
+## Registry beta handoff
+
+`.github/workflows/vibeedit-registry-beta.yml` is the only registry publication
+path. It is manual, publishes exactly one registry per reviewed dispatch, uses
+the protected `registry-beta` GitHub environment, and requires the literal
+confirmation `publish:<registry>:<release_tag>`.
+
+The job does not rebuild packages. It downloads the existing GitHub prerelease
+wheel, source distribution, and npm tarball; binds their versions to the tag;
+checks `SHA256SUMS.release`; checks the archive-audit hashes, byte counts, and
+forbidden-entry result; and verifies GitHub build attestations. Only then does
+it request a short-lived OIDC publishing identity. No long-lived npm or PyPI
+token is accepted by the workflow.
+
+Owner setup is still required before its first use:
+
+1. Create a protected GitHub environment named `registry-beta` with required
+   reviewers.
+2. On PyPI, create a pending trusted publisher for project `vibeedit`, owner
+   `Momenta-App`, repository `vibeedit-sdk`, workflow
+   `vibeedit-registry-beta.yml`, environment `registry-beta`.
+3. In the existing npm `vibeedit` package settings, configure the same GitHub
+   organization, repository, workflow filename, and environment, allowing
+   `npm publish`.
+4. Dispatch the workflow once with registry `pypi` and confirmation
+   `publish:pypi:v0.1.0-beta.1`.
+5. Dispatch it separately with registry `npm` and confirmation
+   `publish:npm:v0.1.0-beta.1`.
+6. Verify `uv tool install vibeedit` and `npm install vibeedit@beta` from clean
+   environments before changing any documentation to claim registry
+   availability. Keep npm's stable `latest` tag unchanged during beta review.
+
+PyPI supports a pending trusted publisher for a first release. npm already has
+the legacy `vibeedit` package and requires an authenticated owner to establish
+its trusted-publisher relationship. Those two registry-side settings cannot be
+created from this unauthenticated checkout.

@@ -258,6 +258,17 @@ composition editing over the underlying library.
 The objective's public-access requirement now passes through the public GitHub
 source repository. Registry publication remains a separate withheld action.
 
+The registry engineering path is now checked in as the manual, protected
+`.github/workflows/vibeedit-registry-beta.yml` workflow. It republishes only the
+already-attested GitHub prerelease archives after verifying their tag-bound
+package identities, flat checksums, archive audit, and GitHub attestations. It
+uses OIDC trusted publishing and accepts no long-lived registry token. As of
+2026-07-15, PyPI still returns 404 for `vibeedit`, npm `latest` is the legacy
+`0.0.1`, and this machine has neither registry credential. Registry install
+commands therefore remain unproven until an owner configures the two trusted
+publishers, approves the protected environment, runs the two separate
+dispatches, and performs clean post-publication installs.
+
 ## Beta release gates
 
 No content-rights or engineering blocker remains for the approved public beta.
