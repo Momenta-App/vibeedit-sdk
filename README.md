@@ -5,11 +5,12 @@ It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
 motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
-This public repository contains VibeEdit 0.1.0 beta 1, built and validated
-locally and on GitHub-hosted Linux, Windows, and macOS runners. The beta is for
-evaluation, testing, and community review; it is not a production-stability or
-commercial-use claim. Public GitHub release assets and registry publication are
-separate release channels.
+This public repository contains the unreleased VibeEdit 0.1.0 beta 2 source
+candidate. The latest downloadable GitHub prerelease is the immutable beta 1.
+Both have been validated locally and on GitHub-hosted Linux, Windows, and macOS
+runners. These betas are for evaluation, testing, and community review; they are
+not production-stability or commercial-use claims. Source, GitHub release assets,
+and registry publication are separate channels with separate version identities.
 
 ## Install
 
@@ -87,6 +88,28 @@ Node SDK, HTML motion runtime, and Node-facing CLI:
 npm install vibeedit
 npx vibeedit doctor --json
 ```
+
+The Node package owns CompositionSpec, catalog, skills, and HTML motion APIs.
+Media rendering commands bridge to an installed Python VibeEdit package. Run
+`npx vibeedit doctor --json` to see both capabilities and exact next actions.
+
+## Agent quick start
+
+Use this sequence when an agent has no prior VibeEdit context:
+
+```bash
+vibeedit doctor --json
+vibeedit examples list --details --json
+vibeedit catalog search kinetic --compact --limit 5 --json
+vibeedit examples create basic-generated ./vibeedit-work --json
+vibeedit render ./vibeedit-work/basic-generated/composition.json --json
+```
+
+`ready: true` means the core FFmpeg renderer is ready. It does not claim every
+optional model or browser capability is installed; inspect the `readiness` and
+`capabilities` fields for those distinctions. Compact catalog search is intended
+for low-token agent discovery. Omit `--compact` when the full parameter,
+provenance, prompt, and validation contract is needed.
 
 Install the Python beta directly from its GitHub release asset:
 
@@ -237,6 +260,13 @@ python fan-edit/render.py
 
 vibeedit examples create face-follow-text
 python face-follow-text/render.py
+```
+
+The local catalog stays in the background by default:
+
+```bash
+vibeedit catalog open --json           # resolve its packaged path; no tab
+vibeedit catalog open --browser        # explicitly open a visible browser tab
 ```
 
 The same example inventory is available without shell orchestration:

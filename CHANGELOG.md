@@ -2,6 +2,12 @@
 
 ## 0.1.0 beta 2 - Unreleased
 
+- Clarify beta.1 release versus beta.2 source-candidate messaging.
+- Add token-efficient bounded catalog search and detailed example discovery.
+- Add explicit core-versus-optional readiness summaries and setup guidance.
+- Add actionable missing-file errors and richer Node/Python command help.
+- Keep catalog browsing background-only unless `--browser` is explicit in both CLIs.
+
 - Give the materially changed post-beta.1 candidate a distinct npm/Python
   package identity so it cannot be confused with or overwrite the existing
   public beta.1 artifacts.
