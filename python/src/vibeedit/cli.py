@@ -76,8 +76,9 @@ def _parser() -> argparse.ArgumentParser:
     catalog_search.add_argument("query")
     catalog_search.add_argument("--json", action="store_true")
     catalog_search.set_defaults(handler=_catalog_search)
-    catalog_open = catalog_sub.add_parser("open", help="open the generated local catalog")
-    catalog_open.add_argument("--no-browser", action="store_true")
+    catalog_open = catalog_sub.add_parser("open", help="resolve the generated local catalog without opening a browser")
+    catalog_open.add_argument("--browser", action="store_true", help="open the catalog in the default browser")
+    catalog_open.add_argument("--no-browser", action="store_true", help=argparse.SUPPRESS)
     catalog_open.add_argument("--json", action="store_true")
     catalog_open.set_defaults(handler=_catalog_open)
 
@@ -216,7 +217,7 @@ def _catalog_open(args) -> int:
     path = data_path("site", "index.html")
     if not path.is_file():
         raise RuntimeError("catalog site has not been generated")
-    opened = False if args.no_browser else webbrowser.open(path.resolve().as_uri())
+    opened = webbrowser.open(path.resolve().as_uri()) if args.browser and not args.no_browser else False
     _emit({"ok": True, "path": str(path), "opened": opened}, as_json=args.json)
     return 0
 

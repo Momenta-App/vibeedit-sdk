@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from unittest.mock import patch
 
 from vibeedit.cli import main
 
@@ -19,3 +20,19 @@ def test_doctor_json(capsys):
     assert payload["version"] == 1
     assert any(item["id"] == "media.render" for item in payload["capabilities"])
 
+
+def test_catalog_open_stays_in_background_by_default(capsys):
+    with patch("vibeedit.cli.webbrowser.open") as browser:
+        assert main(["catalog", "open", "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    browser.assert_not_called()
+    assert payload["opened"] is False
+    assert Path(payload["path"]).is_file()
+
+
+def test_catalog_open_requires_explicit_browser_flag(capsys):
+    with patch("vibeedit.cli.webbrowser.open", return_value=True) as browser:
+        assert main(["catalog", "open", "--browser", "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    browser.assert_called_once()
+    assert payload["opened"] is True

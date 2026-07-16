@@ -270,7 +270,8 @@ agent prompts, and an explicit preview state.
 
 ```bash
 vibeedit catalog search stutter --json
-vibeedit catalog open
+vibeedit catalog open                 # print the local catalog path; no browser tab
+vibeedit catalog open --browser       # explicitly open the catalog in a browser
 vibeedit skills install vibeedit-workspace --harness codex
 ```
 
