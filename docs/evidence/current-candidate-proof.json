@@ -2,7 +2,11 @@
   "schemaVersion": "1.0.0",
   "date": "2026-07-16",
   "status": "passed",
-  "testedCommit": "4f1c9c31911dacf837667cafc4f8b443515838ec",
+  "testedCommit": "1244d0ac02272204d84247cd3a8a371ae5db7612",
+  "candidateVersions": {
+    "npm": "0.1.0-beta.2",
+    "python": "0.1.0b2"
+  },
   "published": false,
   "automatedSmoke": {
     "script": "scripts/smoke_release_artifacts.py",
@@ -10,9 +14,9 @@
     "localReplayPassed": true
   },
   "hostedWorkflow": {
-    "runId": 29534114373,
-    "url": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29534114373",
-    "testedCommit": "0ad0b240c87584f53fed478d020e9d3ed4347593",
+    "runId": 29535644613,
+    "url": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29535644613",
+    "testedCommit": "1244d0ac02272204d84247cd3a8a371ae5db7612",
     "status": "passed",
     "jobsPassed": 7,
     "platforms": [
@@ -27,22 +31,22 @@
     "downloadedArtifactReplayPassed": true,
     "downloadedArtifacts": {
       "wheel": {
-        "name": "vibeedit-0.1.0b1-py3-none-any.whl",
-        "bytes": 15139335,
+        "name": "vibeedit-0.1.0b2-py3-none-any.whl",
+        "bytes": 15139347,
         "entries": 406,
-        "sha256": "ad9cb4248ec8868bd98b6092fc2eeccf873edc42736f441d8eeebe30b3d6bb6a"
+        "sha256": "32b5c93d73bddc3e1cd1e6c820502f0a22baf2d3542d9d84cea93611c626c0ea"
       },
       "sourceDistribution": {
-        "name": "vibeedit-0.1.0b1.tar.gz",
-        "bytes": 18979365,
+        "name": "vibeedit-0.1.0b2.tar.gz",
+        "bytes": 18979841,
         "entries": 473,
-        "sha256": "27060f3521e8b82fc2dea3b93a02df6e512613c6d537e9fa4e6ec4d252230547"
+        "sha256": "4ba356cb9611afd39134839a0ac142329e0d84fa7178d5c7e42d0f867eb8297e"
       },
       "npm": {
-        "name": "vibeedit-0.1.0-beta.1.tgz",
-        "bytes": 19752847,
+        "name": "vibeedit-0.1.0-beta.2.tgz",
+        "bytes": 19753192,
         "entries": 439,
-        "sha256": "a700165d86da0e91a43dbf7964c8c49c2d11a3f466fb0a326bbc631f3f307ead"
+        "sha256": "c2fd7086f94bf1dd7717dfdcd23c5110b45ebfbe33aa2a37c3b4747ba2e933bd"
       }
     },
     "canonicalGitSourceCompared": true,
@@ -61,22 +65,22 @@
   },
   "artifacts": {
     "wheel": {
-      "name": "vibeedit-0.1.0b1-py3-none-any.whl",
-      "bytes": 15139335,
+      "name": "vibeedit-0.1.0b2-py3-none-any.whl",
+      "bytes": 15139347,
       "entries": 406,
-      "sha256": "ad9cb4248ec8868bd98b6092fc2eeccf873edc42736f441d8eeebe30b3d6bb6a"
+      "sha256": "32b5c93d73bddc3e1cd1e6c820502f0a22baf2d3542d9d84cea93611c626c0ea"
     },
     "sourceDistribution": {
-      "name": "vibeedit-0.1.0b1.tar.gz",
-      "bytes": 18975690,
-      "entries": 471,
-      "sha256": "315c1cfd0e6dde79c7a12eafb6046e82e2484d25bcc46e761bf13c200ca2e5af"
+      "name": "vibeedit-0.1.0b2.tar.gz",
+      "bytes": 18979841,
+      "entries": 473,
+      "sha256": "4ba356cb9611afd39134839a0ac142329e0d84fa7178d5c7e42d0f867eb8297e"
     },
     "npm": {
-      "name": "vibeedit-0.1.0-beta.1.tgz",
-      "bytes": 19720152,
-      "entries": 438,
-      "sha256": "63f72635b64085c5fc7fbf5476dc56d6d0aee0bd76dc7c3384ec0c7818cab2cf"
+      "name": "vibeedit-0.1.0-beta.2.tgz",
+      "bytes": 19753192,
+      "entries": 439,
+      "sha256": "c2fd7086f94bf1dd7717dfdcd23c5110b45ebfbe33aa2a37c3b4747ba2e933bd"
     }
   },
   "archiveAudit": {
@@ -140,7 +144,7 @@
   ],
   "nodeCleanInstall": {
     "artifact": "npm",
-    "version": "0.1.0-beta.1",
+    "version": "0.1.0-beta.2",
     "apiImported": true,
     "compositionConstructed": true,
     "schemaValidated": true,

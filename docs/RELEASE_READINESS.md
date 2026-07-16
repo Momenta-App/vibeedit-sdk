@@ -14,10 +14,11 @@ explicitly macOS-native; SAM 3.1 remains quarantined rather than claimed.
 
 ## Current branch candidate verification
 
-Commit `4f1c9c31911dacf837667cafc4f8b443515838ec` was rebuilt locally as a
-wheel, source distribution, and npm tarball after the Chromium/CEF renderer
-hardening. This is candidate verification only; no new registry or GitHub
-release was published.
+Commit `1244d0ac02272204d84247cd3a8a371ae5db7612` was rebuilt as the distinct
+Python `0.1.0b2` and npm `0.1.0-beta.2` candidate after the Chromium/CEF
+renderer hardening and text-catalog refinements. This is candidate verification
+only; no new registry or GitHub release was published. The already-public
+beta.1 remains immutable and retains its original artifacts.
 
 The exact archives pass byte-level comparison against the pinned canonical
 VibeEdit Git source: 44 skills and 16 preset source files match, and the archive
@@ -36,9 +37,9 @@ so future Linux, Windows, Intel Mac, and Apple Silicon candidates must exercise
 the exact wheel and npm archive rather than only report their version strings.
 
 Hosted workflow run
-[`29534114373`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29534114373)
-then passed this exact-artifact gate for commit
-`0ad0b240c87584f53fed478d020e9d3ed4347593` on Windows, Intel macOS, Apple
+[`29535644613`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29535644613)
+passed this exact-artifact gate for commit
+`1244d0ac02272204d84247cd3a8a371ae5db7612` on Windows, Intel macOS, Apple
 Silicon macOS, and Linux with Python 3.11, 3.12, and 3.13. The downstream
 build-and-attest job also passed. Its uploaded wheel, source distribution, and
 npm archive were downloaded again, re-audited against the canonical VibeEdit
@@ -226,7 +227,7 @@ against the pinned canonical skill-tree and preset-file digests before upload;
 an optional `--source-root` comparison retains the stronger byte-level check
 against a canonical VibeEdit Git checkout when one is available.
 The current exact-artifact matrix and build-and-attest proof is hosted in run
-[`29534114373`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29534114373).
+[`29535644613`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29535644613).
 Public workflow dispatches are configured to generate GitHub build-provenance
 attestations. Every build also retains flat GitHub-release SHA-256 sums,
 artifact-relative SHA-256 sums, and the uploaded workflow artifact.
