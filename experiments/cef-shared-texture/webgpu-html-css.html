@@ -31,6 +31,9 @@
     </section>
   </main>
   <script type="module">
+    const failure = new URLSearchParams(location.search).get("failure");
+    if (failure === "webgpu-error") throw new Error("VIBEEDIT_TEST_WEBGPU_ERROR");
+    if (failure === "hang") await new Promise(() => {});
     const canvas = document.querySelector("#gpu");
     const status = document.querySelector("#status");
     let state;
@@ -97,13 +100,22 @@
       await state.device.queue.onSubmittedWorkDone();
     }
 
-    globalThis.vibeedit = { seek: (time) => renderAt(time) };
+    async function seek(time) {
+      for (const animation of document.getAnimations({ subtree: true })) {
+        animation.pause();
+        animation.currentTime = time * 1000;
+      }
+      await renderAt(time);
+      document.documentElement.dataset.vibeeditTime = String(time);
+    }
+
+    globalThis.vibeedit = { seek };
     if (new URLSearchParams(location.search).has("live")) {
       const start = performance.now();
       const loop = async (now) => { await renderAt((now - start) / 1000); requestAnimationFrame(loop); };
       requestAnimationFrame(loop);
     } else {
-      await renderAt(0);
+      await seek(0);
     }
   </script>
 </body>

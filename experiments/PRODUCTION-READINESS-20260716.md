@@ -2,133 +2,112 @@
 
 ## Decision
 
-Keep HTML, CSS, JavaScript, and optional WebGPU/WGSL as the primary agent
+Keep the SDK's persistent Playwright/Chromium renderer as the production-safe
+HTML fallback. Keep HTML, CSS, JavaScript, and optional WebGPU/WGSL as the agent
 authoring surface. Chromium remains responsible for standards-compatible DOM,
-layout, font shaping, CSS painting, filters, and web-library execution. Rust is
-the scheduler and native compositor; it must consume Chromium's finished GPU
-surface rather than attempting to reproduce Blink/Skia's pixels.
+layout, font shaping, CSS painting, filters, and web-library execution.
 
-Python remains a trusted extension and orchestration surface for effects,
-transitions, analysis, and filter construction. In the current SDK those
-builders return FFmpeg filter graphs; FFmpeg's native C/C++ implementation does
-the pixel processing. Python is not looping over video pixels.
+The CEF/Rust/Metal path is now a deterministic, background, zero-CPU-readback
+prototype. It is not yet safe to replace the fallback because high-resolution
+jobs can stop producing frames after multi-process GPU stress. Production must
+fall back to the current persistent Chromium path on readiness or frame timeout.
 
-## What this round proved
+Python remains the trusted orchestration and extension surface for effects,
+transitions, analysis, and FFmpeg graph construction. Native FFmpeg code, not a
+Python pixel loop, performs those media operations.
 
-| Test | Result | Interpretation |
+## Results from this round
+
+| Test | Result | Meaning |
 |---|---:|---|
-| CEF only, 1080p | 60.33 callback fps | Chromium can paint the test document at the 60 fps cap. |
-| CEF → Rust → Metal, 1080p | 52.02 callback fps; 1.551 ms average submit | Direct GPU import and GPU-private blit work without CPU readback. |
-| CEF → Rust → Metal, 4K | 35.03 callback fps; 2.657 ms average submit | The direct path remains faster than real time at 30 fps. |
-| CEF synchronous 4K CPU copy | 12.45 callback fps | CPU readback and file I/O are unacceptable as the production boundary. |
-| CEF Rust queued 4K CPU copy | 14.44 callback fps | Moving the copy helps callbacks slightly but wall time and memory remain poor. |
-| Two concurrent CEF/Metal processes | all passed | Isolated consumers are safe, but separate-process startup and GPU contention are expensive. |
-| Four concurrent CEF/Metal processes | all passed, worse end-to-end throughput | Four heavy Chromium processes oversubscribe this 10-core machine. |
-| Python/FFmpeg, one worker/one thread | 6.99 aggregate fps | This was the effective old behavior because the SDK ignored `render.threads`. |
-| Python/FFmpeg, one auto-threaded worker | 23.08 aggregate fps | Respecting native encoder/filter concurrency gives 3.30× throughput. |
-| Python/FFmpeg, two workers/five threads | 44.29 aggregate fps | Best tested throughput: 6.34× the old behavior. |
-| Python/FFmpeg, four workers/two threads | 43.29 aggregate fps | More jobs do not improve this machine. |
-| Three web bands, sequential vs concurrent | 10.175 s vs 3.231 s | Parallel web-band production was 3.15× faster. |
+| Three fresh 1080p Chromium runs, 30 frames | exact hashes for every frame | Host-controlled seeking is reproducible for the tested document. |
+| Three fresh 720p CEF/Rust/Metal composite runs | identical final hash; exact sequences | The deterministic compositor output repeats across processes. |
+| 720p native composite | 23.0–23.5 callback fps; 2.11–2.33 ms synchronous GPU work | Metal is not the primary callback bottleneck. |
+| One isolated 4K composite before stress | exact 30-frame sequence; 21.61 steady callback fps; 4.944 ms GPU work | A clean single process can render 4K without CPU readback. |
+| Five sequential 720p × 60-frame runs | 5/5 passed; exact sequences | Short sequential soak passed; maximum child RSS was about 203 MB. |
+| One vs two isolated 720p processes | 3.42 vs 7.22 aggregate end-to-end fps | Two processes improve aggregate throughput by about 2.11×. |
+| Four isolated 720p processes | 2/4 timed out | Four processes are unsafe and dramatically slower. |
+| Post-stress 900p/1080p retry | stalled after zero or one paint | CEF/Chromium GPU lifecycle recovery is still a production blocker. |
+| Script failure and never-ready page | bounded incomplete result and cache cleanup | Failure is reported instead of being mistaken for success. |
+| Background-host check | `visible=false`, `frontmost=false`, zero windows | Rendering no longer opens a tab/window or steals focus. |
 
-The 4K direct-GPU path is 2.81× faster at the callback boundary than the
-synchronous CPU-copy path and avoids writing roughly 995 MB for only 30 raw 4K
-frames. The interleaved review validates this order:
-
-1. native/Python media base;
-2. transparent Chromium text;
-3. native screen-blend video;
-4. transparent Chromium text;
-5. circularly masked, partially transparent native video;
-6. transparent Chromium text.
-
-The review still uses the current PNG capture fallback for its web bands. The
-new CEF/Rust/Metal route proves how to remove that boundary, but it is not yet
-wired into the final multi-layer compositor.
+The accepted compositor fixture performs real Metal work: a procedural native
+base, transformed and opacity-adjusted Chromium layer, circular mask, and native
+screen-blend overlay. It does not yet contain decoded video textures or the
+final encoder.
 
 ## Defects found and fixed
 
-- `render.threads` was present in the public schema but ignored by every Python
-  FFmpeg path. The implementation now passes it to the encoder and complex
-  filter scheduler while preserving one thread as the default.
-- A frame-count-only Rust queue could hide hundreds of megabytes or gigabytes
-  of pending 4K buffers. The probe now derives effective depth from a memory
-  budget and reports capacity, copy time, queue wait, and buffer allocation.
-- Concurrent CEF clients originally collided because they shared a runtime
-  cache. Every probe now receives an isolated temporary CEF cache.
-- CPU copying was incorrectly treated as the likely Rust boundary. A real
-  Rust-to-Metal surface submission path now imports and blits the IOSurface on
-  the GPU with a three-frame in-flight limit.
+- CSS/WAAPI/WebGPU state now seeks to exact rational frame time. CEF external
+  begin-frame requests are numbered and validated as an exact sequence.
+- The browser frame request now allows a full frame budget before requesting a
+  paint. This avoids asking CEF to paint before asynchronous WebGPU work has had
+  an opportunity to finish.
+- The Metal adapter now waits for GPU completion before returning the IOSurface
+  to CEF's reuse pool. Returning earlier was an invalid ownership assumption.
+- Native compositor QA now captures the final GPU result and verifies its hash.
+- The probe terminates the complete process group with escalation, records the
+  lifecycle outcome, and always removes its temporary browser cache.
+- Renderer errors and never-ready pages now fail explicitly.
+- The sample host's redundant OpenGL preview draw is disabled in capture mode.
+- The macOS host is an accessory process with an initially hidden window, so
+  all rendering happens in the background.
+- Concurrency tests retain partial failures instead of aborting and losing the
+  evidence.
 
-## Determinism finding
+## Production policy now
 
-H.264 outputs produced with different encoder thread counts did not have equal
-decoded-frame hashes. Therefore production deterministic mode should parallelize
-lossless intermediate layer/segment generation, then perform one controlled
-final encode. Fast preview mode may use multi-threaded or hardware encoding and
-must not promise byte- or pixel-identical output across concurrency settings.
+1. Default to the existing persistent Chromium renderer.
+2. Keep CEF/Rust/Metal behind an experimental capability flag.
+3. Admit at most two isolated CEF jobs on the tested 10-core/32 GB Apple Silicon
+   machine; use one under memory or GPU pressure.
+4. Apply a readiness deadline and a per-frame deadline. On failure, terminate
+   the process group, discard its runtime cache, and retry through the persistent
+   Chromium fallback without lowering resolution or changing pixels silently.
+5. Use one controlled final encode for deterministic delivery. Preview mode may
+   use more aggressive FFmpeg threads or hardware encoding.
 
-CEF benchmarking currently uses live wall-clock animation. Production rendering
-still needs a host-controlled protocol:
-
-1. wait for document, fonts, and web libraries to report ready;
-2. seek all CSS, WAAPI, JavaScript, and WebGPU state to an exact rational frame;
-3. call CEF external begin-frame;
-4. accept exactly one matching accelerated-paint surface;
-5. submit it to the Rust compositor and apply bounded backpressure;
-6. advance only after the compositor accepts the frame.
-
-Until that handshake exists, the shared-texture path is a validated transport
-prototype, not a deterministic production renderer.
-
-## Production architecture
+## Architecture
 
 ```text
-Agent code (HTML/CSS/JS, optional WGSL)
-                    │
-                    ▼
-         Chromium / Blink / Skia
-       exact web layout and painting
-                    │ IOSurface / shared handle / dma-buf
-                    ▼
-          Rust scheduler + compositor
-     transforms, masks, blend, color, cache
-           │                    │
-           │                    └── native video textures
-           ▼
-      hardware encoder
+Agent HTML/CSS/JS (optional WGSL)
+              │
+              ▼
+     Chromium / Blink / Skia
+ exact web layout, text, and paint
+              │ IOSurface
+              ▼
+     Rust scheduler + Metal
+ transforms, masks, blend, color
+              │
+              ├── native video textures (next gate)
+              ▼
+       hardware encoder (next gate)
 
-Python/Rust/other-language extension
-        └── validates and emits composition nodes,
-            FFmpeg graphs, native kernels, or WGSL
+Python extension
+  └── validates composition nodes and emits FFmpeg/native work
 ```
 
-Alternate text/video/text/video ordering should create one transparent Chromium
-surface per contiguous web z-band. Native media stays as native textures between
-those bands. This avoids one Chromium instance per text item and preserves exact
-track ordering.
+Agents should never author raw Metal or WGPU for ordinary typography. Reusable
+declarative atoms are the lowest-token path; arbitrary HTML/CSS/JS remains the
+compatibility escape hatch.
 
-Agents may author extensions in any language only through a stable process or
-WASM ABI with declared inputs, outputs, determinism, resource limits, and cache
-identity. Arbitrary code cannot safely become an unconstrained in-process plugin.
-The lowest-token path remains a declarative composition plus reusable atoms;
-raw HTML/CSS/JS is the escape hatch for designs that need it.
+## Remaining gates
 
-## Remaining gate before production
+1. Replace the modified `cefclient` sample with a small VibeEdit-owned CEF host
+   and one persistent browser process containing pooled off-screen views.
+2. Find and fix the high-resolution post-stress paint stall. Add GPU-process
+   crash/restart telemetry and a clean-process recovery test at 1080p and 4K.
+3. Feed decoded media textures into the compositor and validate multiple real
+   video layers, masks, transforms, opacity, blend modes, color, blur, and
+   distortion against canonical output.
+4. Connect the final texture to VideoToolbox. Add D3D11/Media Foundation for
+   Windows and dma-buf/Vulkan/VA-API for Linux.
+5. Expand soak from five short jobs to hours, including cancellation, cache
+   invalidation, font/library matrices, device loss, and memory-pressure tests.
+6. Add golden/perceptual thresholds for the complete browser → native media →
+   encoder pipeline.
 
-1. Build the deterministic CEF seek/begin-frame/paint handshake.
-2. Replace the discarded Metal blit destination with the real Rust compositor
-   texture graph and add transforms, masks, blend modes, and color tests.
-3. Connect the compositor texture directly to VideoToolbox on macOS; add D3D11/
-   Media Foundation on Windows and dma-buf/Vulkan/VA-API on Linux.
-4. Run one persistent CEF process with pooled browser views. Start with two
-   concurrent heavy web bands on a 10-core/32 GB machine and adapt from measured
-   CPU/GPU/memory pressure.
-5. Split deterministic final rendering from fast preview policy.
-6. Add crash isolation, watchdogs, cancellation, memory budgets, font/package
-   pinning, cache invalidation, golden-frame conformance, and soak tests.
-
-This round did not establish a 10× end-to-end win. It established the correct
-zero-readback boundary, a 6.34× media-stage throughput improvement, and a 3.15×
-web-band concurrency improvement. A 10× claim should wait until deterministic
-CEF scheduling, native compositing, and texture-native encoding are connected
-and measured as one pipeline.
+This round closes deterministic scheduling, compositor repeatability, bounded
+failure handling, and background operation for the tested fixture. It does not
+justify a production-ready or 10× end-to-end claim yet.

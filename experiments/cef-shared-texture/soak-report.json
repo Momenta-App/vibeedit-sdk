@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "vibeedit.cef-soak.v1",
+  "resolution": {
+    "width": 1280,
+    "height": 720
+  },
+  "runs": 5,
+  "framesPerRun": 60,
+  "allPassed": true,
+  "exactFrameSequences": true,
+  "steadyStateCallbackFps": [
+    22.49,
+    23.49,
+    24.18,
+    24.42,
+    23.64
+  ],
+  "averageGpuSubmitMilliseconds": [
+    1.249,
+    1.049,
+    0.903,
+    0.928,
+    1.348
+  ],
+  "maximumChildResidentBytes": 202850304,
+  "wallSeconds": 27.548
+}

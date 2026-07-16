@@ -1,48 +1,63 @@
 {
   "schemaVersion": "vibeedit.cef-gpu-concurrency.v1",
   "resolution": {
-    "width": 1920,
-    "height": 1080
+    "width": 1280,
+    "height": 720
   },
-  "framesPerConsumer": 30,
+  "framesPerConsumer": 20,
   "cases": [
     {
       "workers": 1,
-      "wallSeconds": 3.896,
-      "endToEndAggregateFramesPerSecond": 7.7,
-      "steadyStateAggregateCallbackFps": 62.33,
+      "wallSeconds": 5.852,
+      "endToEndAggregateFramesPerSecond": 3.42,
+      "steadyStateAggregateCallbackFps": 22.34,
       "perConsumerCallbackFps": [
-        62.33
+        22.34
       ],
-      "averageGpuSubmitMilliseconds": 0.838,
-      "allPassed": true
+      "averageGpuSubmitMilliseconds": 2.517,
+      "allPassed": true,
+      "failures": []
     },
     {
       "workers": 2,
-      "wallSeconds": 3.911,
-      "endToEndAggregateFramesPerSecond": 15.34,
-      "steadyStateAggregateCallbackFps": 100.42,
+      "wallSeconds": 5.539,
+      "endToEndAggregateFramesPerSecond": 7.22,
+      "steadyStateAggregateCallbackFps": 46.77,
       "perConsumerCallbackFps": [
-        58.32,
-        42.1
+        23.88,
+        22.89
       ],
-      "averageGpuSubmitMilliseconds": 1.079,
-      "allPassed": true
+      "averageGpuSubmitMilliseconds": 1.214,
+      "allPassed": true,
+      "failures": []
     },
     {
       "workers": 4,
-      "wallSeconds": 9.809,
-      "endToEndAggregateFramesPerSecond": 12.23,
-      "steadyStateAggregateCallbackFps": 87.4,
+      "wallSeconds": 66.491,
+      "endToEndAggregateFramesPerSecond": 0.63,
+      "steadyStateAggregateCallbackFps": 25.05,
       "perConsumerCallbackFps": [
-        11.27,
-        27.01,
-        29.29,
-        19.83
+        null,
+        11.22,
+        null,
+        13.83
       ],
-      "averageGpuSubmitMilliseconds": 0.607,
-      "allPassed": true
+      "averageGpuSubmitMilliseconds": 1.426,
+      "allPassed": false,
+      "failures": [
+        {
+          "consumer": 0,
+          "callbacks": 1,
+          "reason": "timeout"
+        },
+        {
+          "consumer": 2,
+          "callbacks": 1,
+          "reason": "timeout"
+        }
+      ]
     }
   ],
+  "recommendedMaxIsolatedWorkers": 2,
   "scope": "Each worker is an isolated CEF process and Rust/Metal consumer. This measures safe aggregate pressure; production should share one CEF process and compositor device."
 }

@@ -9,9 +9,9 @@
   "surfaceTransport": "CEF OnAcceleratedPaint IOSurface",
   "pngBoundaryUsed": false,
   "webgpuReady": true,
-  "acceleratedPaintCallbacks": 20,
-  "callbackFps": 20.86,
-  "steadyStateCallbackFps": 22.89,
+  "acceleratedPaintCallbacks": 30,
+  "callbackFps": 20.38,
+  "steadyStateCallbackFps": 21.61,
   "frameScheduling": {
     "mode": "external-begin-frame",
     "fps": 30,
@@ -35,26 +35,36 @@
       16,
       17,
       18,
-      19
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
     ],
     "exactSequence": true
   },
   "firstSurface": {
-    "width": 1280,
-    "height": 720,
+    "width": 3840,
+    "height": 2160,
     "kind": "IOSurface"
   },
   "logicalViewport": {
-    "width": 1280,
-    "height": 720
+    "width": 3840,
+    "height": 2160
   },
   "surfaceConsumer": "rust-metal-gpu-import",
   "channelDepth": null,
   "rustSurfaceStats": null,
   "rustGpuStats": {
-    "submittedFrames": 20,
-    "completedWhenReported": 20,
-    "averageSubmitMilliseconds": 1.181,
+    "submittedFrames": 30,
+    "completedWhenReported": 30,
+    "averageSubmitMilliseconds": 4.944,
     "cpuReadback": false
   },
   "rustGpuMode": "composite",
@@ -71,14 +81,6 @@
     "complete": false
   },
   "videoOutput": null,
-  "lifecycle": {
-    "pageMode": "normal",
-    "timedOut": false,
-    "processWasRunningAtCleanup": true,
-    "processExitCode": 0,
-    "runtimeCacheRemoved": true,
-    "failureReason": null
-  },
   "errors": [],
-  "claimBoundary": "Deterministic CEF external-begin-frame scheduling and macOS Rust/Metal IOSurface compositing primitives are proven for this fixture. A real multi-input media texture graph, hardware encoding, pooled browser views, crash isolation, and Windows/Linux adapters remain production gates."
+  "claimBoundary": "CEF-to-Rust-to-Metal IOSurface import and GPU-private blit are proven when rustGpuStats is present. Deterministic external frame scheduling, cross-platform platform adapters, native multi-layer compositing, and texture-native hardware encoding are not yet implemented."
 }

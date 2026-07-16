@@ -7,6 +7,7 @@ dist/
 .DS_Store
 console.log
 experiments/**/target/
+experiments/cef-shared-texture/*.bgra
 experiments/render-concurrency/output/**/*.mp4
 experiments/render-concurrency/output/source-*.mp4
 experiments/interleaved-layers/output/sequential/

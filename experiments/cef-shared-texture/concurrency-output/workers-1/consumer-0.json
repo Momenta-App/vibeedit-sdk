@@ -9,25 +9,60 @@
   "surfaceTransport": "CEF OnAcceleratedPaint IOSurface",
   "pngBoundaryUsed": false,
   "webgpuReady": true,
-  "acceleratedPaintCallbacks": 30,
-  "callbackFps": 62.33,
+  "acceleratedPaintCallbacks": 20,
+  "callbackFps": 20.64,
+  "steadyStateCallbackFps": 22.34,
+  "frameScheduling": {
+    "mode": "external-begin-frame",
+    "fps": 30,
+    "requestedFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "exactSequence": true
+  },
   "firstSurface": {
-    "width": 1920,
-    "height": 1080,
+    "width": 1280,
+    "height": 720,
     "kind": "IOSurface"
   },
   "logicalViewport": {
-    "width": 1920,
-    "height": 1080
+    "width": 1280,
+    "height": 720
   },
   "surfaceConsumer": "rust-metal-gpu-import",
   "channelDepth": null,
   "rustSurfaceStats": null,
   "rustGpuStats": {
-    "submittedFrames": 30,
-    "completedWhenReported": 29,
-    "averageSubmitMilliseconds": 0.838,
+    "submittedFrames": 20,
+    "completedWhenReported": 20,
+    "averageSubmitMilliseconds": 2.517,
     "cpuReadback": false
+  },
+  "rustGpuMode": "composite",
+  "gpuQaCapture": {
+    "enabled": false,
+    "bytes": 0,
+    "expectedBytes": 0,
+    "sha256": null
   },
   "rawCapture": {
     "enabled": false,
@@ -36,6 +71,14 @@
     "complete": false
   },
   "videoOutput": null,
+  "lifecycle": {
+    "pageMode": "normal",
+    "timedOut": false,
+    "processWasRunningAtCleanup": true,
+    "processExitCode": 0,
+    "runtimeCacheRemoved": true,
+    "failureReason": null
+  },
   "errors": [],
-  "claimBoundary": "CEF-to-Rust-to-Metal IOSurface import and GPU-private blit are proven when rustGpuStats is present. Deterministic external frame scheduling, cross-platform platform adapters, native multi-layer compositing, and texture-native hardware encoding are not yet implemented."
+  "claimBoundary": "Deterministic CEF external-begin-frame scheduling and macOS Rust/Metal IOSurface compositing primitives are proven for this fixture. A real multi-input media texture graph, hardware encoding, pooled browser views, crash isolation, and Windows/Linux adapters remain production gates."
 }

@@ -35,6 +35,8 @@
     "!experiments/**/target/",
     "!experiments/**/output/",
     "!experiments/**/concurrency-output/",
+    "!experiments/**/__pycache__/",
+    "!experiments/**/*.pyc",
     "index.d.ts",
     "LICENSE.md",
     "motion.d.ts",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.cef-shared-texture-mvp.v1",
-  "status": "passed",
+  "status": "incomplete",
   "platform": "macos-arm64",
   "cefVersion": "144.0.30+g9e70dde+chromium-144.0.7559.257",
   "chromiumVersion": "144.0.7559.257",
@@ -9,25 +9,36 @@
   "surfaceTransport": "CEF OnAcceleratedPaint IOSurface",
   "pngBoundaryUsed": false,
   "webgpuReady": true,
-  "acceleratedPaintCallbacks": 30,
-  "callbackFps": 11.27,
+  "acceleratedPaintCallbacks": 1,
+  "callbackFps": null,
+  "steadyStateCallbackFps": null,
+  "frameScheduling": {
+    "mode": "external-begin-frame",
+    "fps": 30,
+    "requestedFrames": [
+      0
+    ],
+    "exactSequence": false
+  },
   "firstSurface": {
-    "width": 1920,
-    "height": 1080,
+    "width": 1280,
+    "height": 720,
     "kind": "IOSurface"
   },
   "logicalViewport": {
-    "width": 1920,
-    "height": 1080
+    "width": 1280,
+    "height": 720
   },
   "surfaceConsumer": "rust-metal-gpu-import",
   "channelDepth": null,
   "rustSurfaceStats": null,
-  "rustGpuStats": {
-    "submittedFrames": 30,
-    "completedWhenReported": 29,
-    "averageSubmitMilliseconds": 0.492,
-    "cpuReadback": false
+  "rustGpuStats": null,
+  "rustGpuMode": "composite",
+  "gpuQaCapture": {
+    "enabled": false,
+    "bytes": 0,
+    "expectedBytes": 0,
+    "sha256": null
   },
   "rawCapture": {
     "enabled": false,
@@ -36,6 +47,14 @@
     "complete": false
   },
   "videoOutput": null,
+  "lifecycle": {
+    "pageMode": "normal",
+    "timedOut": true,
+    "processWasRunningAtCleanup": true,
+    "processExitCode": 0,
+    "runtimeCacheRemoved": true,
+    "failureReason": "timeout"
+  },
   "errors": [],
-  "claimBoundary": "CEF-to-Rust-to-Metal IOSurface import and GPU-private blit are proven when rustGpuStats is present. Deterministic external frame scheduling, cross-platform platform adapters, native multi-layer compositing, and texture-native hardware encoding are not yet implemented."
+  "claimBoundary": "Deterministic CEF external-begin-frame scheduling and macOS Rust/Metal IOSurface compositing primitives are proven for this fixture. A real multi-input media texture graph, hardware encoding, pooled browser views, crash isolation, and Windows/Linux adapters remain production gates."
 }

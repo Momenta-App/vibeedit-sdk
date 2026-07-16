@@ -7,8 +7,10 @@ The production-candidate path performs real GPU work:
 1. CEF passes its callback-scoped IOSurface to Rust.
 2. Rust calls a small platform adapter compiled into the library.
 3. The adapter imports the IOSurface as a Metal texture.
-4. A three-frame in-flight GPU queue blits it into private GPU memory without
-   CPU pixel readback.
+4. Metal either blits or composites it with native transforms, opacity, masks,
+   and blend modes without CPU pixel readback.
+5. The adapter waits for GPU completion before returning because CEF may reuse
+   the callback-scoped IOSurface as soon as `OnAcceleratedPaint` returns.
 
 The diagnostic CPU path makes the old bottleneck measurable:
 
@@ -23,8 +25,9 @@ the Objective-C++ Metal platform adapter using the macOS toolchain. It is loaded
 instrumented CEF probe with `dlopen`, so the downloaded CEF sample does not need
 to link against Rust at build time.
 
-The Metal path proves direct native GPU import and blit. It does not yet connect
-the private texture to the production layer compositor or hardware encoder.
+The Metal path proves direct native GPU import and compositor primitives for a
+fixture. It does not yet ingest decoded video textures or connect the final
+texture to a hardware encoder.
 Equivalent D3D and Vulkan/dma-buf adapters are still required for Windows and
 Linux. Stable high-level wgpu is not used for IOSurface import because that
 external-memory operation is platform-specific.

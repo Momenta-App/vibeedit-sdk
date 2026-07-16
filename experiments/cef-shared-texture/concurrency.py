@@ -24,6 +24,7 @@ def main() -> int:
         "resolution": {"width": args.width, "height": args.height},
         "framesPerConsumer": args.frames,
         "cases": cases,
+        "recommendedMaxIsolatedWorkers": max(value["workers"] for value in cases if value["allPassed"]),
         "scope": "Each worker is an isolated CEF process and Rust/Metal consumer. This measures safe aggregate pressure; production should share one CEF process and compositor device.",
     }
     destination = args.output / "report.json"
@@ -44,10 +45,19 @@ def run_case(args: argparse.Namespace, workers: int) -> dict:
         "workers": workers,
         "wallSeconds": round(elapsed, 3),
         "endToEndAggregateFramesPerSecond": round(frames / elapsed, 2),
-        "steadyStateAggregateCallbackFps": round(sum(report["callbackFps"] for report in reports), 2),
-        "perConsumerCallbackFps": [report["callbackFps"] for report in reports],
-        "averageGpuSubmitMilliseconds": round(sum(report["rustGpuStats"]["averageSubmitMilliseconds"] for report in reports) / workers, 3),
+        "steadyStateAggregateCallbackFps": round(sum(report["steadyStateCallbackFps"] or 0 for report in reports), 2),
+        "perConsumerCallbackFps": [report["steadyStateCallbackFps"] for report in reports],
+        "averageGpuSubmitMilliseconds": round(sum(report["rustGpuStats"]["averageSubmitMilliseconds"] for report in reports if report["rustGpuStats"]) / max(1, sum(1 for report in reports if report["rustGpuStats"])), 3),
         "allPassed": all(report["status"] == "passed" for report in reports),
+        "failures": [
+            {
+                "consumer": index,
+                "callbacks": report["acceleratedPaintCallbacks"],
+                "reason": report.get("lifecycle", {}).get("failureReason"),
+            }
+            for index, report in enumerate(reports)
+            if report["status"] != "passed"
+        ],
     }
 
 
@@ -58,6 +68,9 @@ def run_consumer(args: argparse.Namespace, destination: Path) -> dict:
             str(Path(__file__).with_name("probe.py")),
             "--skip-build",
             "--rust-gpu",
+            "--rust-gpu-mode",
+            "composite",
+            "--deterministic",
             "--frames",
             str(args.frames),
             "--width",
@@ -73,7 +86,7 @@ def run_consumer(args: argparse.Namespace, destination: Path) -> dict:
         text=True,
         check=False,
     )
-    if result.returncode:
+    if not destination.is_file():
         raise RuntimeError(result.stderr or result.stdout)
     return json.loads(destination.read_text(encoding="utf-8"))
 

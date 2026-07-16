@@ -25,11 +25,26 @@ struct Bridge {
 static BRIDGE: OnceLock<Option<Bridge>> = OnceLock::new();
 static GPU_SUBMITTED_FRAMES: AtomicU64 = AtomicU64::new(0);
 static GPU_SUBMIT_NANOS: AtomicU64 = AtomicU64::new(0);
+static GPU_PREPARED: OnceLock<bool> = OnceLock::new();
 
 #[cfg(target_os = "macos")]
 unsafe extern "C" {
+    fn vibeedit_metal_prepare() -> i32;
     fn vibeedit_metal_copy_surface(surface: *mut c_void, width: usize, height: usize) -> i32;
     fn vibeedit_metal_completed_frames() -> u64;
+}
+
+#[unsafe(no_mangle)]
+pub extern "C" fn vibeedit_rust_prepare_gpu() -> i32 {
+    #[cfg(target_os = "macos")]
+    {
+        return i32::from(*GPU_PREPARED.get_or_init(|| {
+            // SAFETY: Initializes process-global Metal objects once.
+            unsafe { vibeedit_metal_prepare() != 0 }
+        }));
+    }
+    #[cfg(not(target_os = "macos"))]
+    0
 }
 
 #[unsafe(no_mangle)]
@@ -43,6 +58,9 @@ pub unsafe extern "C" fn vibeedit_rust_submit_surface(
     }
     #[cfg(target_os = "macos")]
     {
+        if vibeedit_rust_prepare_gpu() == 0 {
+            return 0;
+        }
         let started = Instant::now();
         // SAFETY: The adapter imports the callback-scoped IOSurface into a
         // retained Metal texture before returning to CEF.
