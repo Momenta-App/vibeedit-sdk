@@ -19,7 +19,7 @@ This register distinguishes implemented claims from discovered source material.
 | Licensing | The legacy npm placeholder says `UNLICENSED`; earlier Python source said MIT | The standalone beta uses explicit custom terms; the release owner approved included VibeEdit material and confirmed open-source integrations retain their own terms and ownership |
 | Platform proof | macOS Apple Silicon and Dockerized Linux ARM64 have clean exact-artifact proofs; native GitHub-hosted Linux x86_64 on Python 3.11/3.12/3.13, Windows, macOS Intel, and macOS Apple Silicon portable suites and package smoke installs pass | Retain the hosted run, archive checksums, and exact clone/preset audit with the release handoff |
 | Public access | GitHub repository is public; unauthenticated API access, credential-disabled clone, and branch-archive download pass | Retain `scripts/check_public_access.py` and public clone/archive checks in release evidence |
-| Registry publication | Public beta publication is explicitly approved | GitHub prerelease is authorized; npm/PyPI publication requires package-owner credentials and must use prerelease versions/tags |
+| Registry publication | GitHub prerelease is public and validated; PyPI currently has no `vibeedit` project and npm `latest` remains the legacy `0.0.1` placeholder | The guarded OIDC workflow is ready, but an owner must configure PyPI/npm trusted publishers and the protected `registry-beta` environment; then publish and clean-install `vibeedit` from PyPI and `vibeedit@beta` from npm |
 
 ## Immediate quarantine list
 

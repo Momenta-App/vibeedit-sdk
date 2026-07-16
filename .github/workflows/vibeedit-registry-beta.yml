@@ -1,0 +1,99 @@
+name: Publish VibeEdit registry beta
+
+on:
+  workflow_dispatch:
+    inputs:
+      registry:
+        description: Publish one registry per reviewed dispatch
+        required: true
+        type: choice
+        options:
+          - pypi
+          - npm
+      release_tag:
+        description: Existing attested GitHub prerelease tag
+        required: true
+        default: v0.1.0-beta.1
+        type: string
+      confirmation:
+        description: Enter publish:<registry>:<release_tag>
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: registry-beta-${{ inputs.registry }}-${{ inputs.release_tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish ${{ inputs.registry }} beta
+    runs-on: ubuntu-latest
+    environment: registry-beta
+    permissions:
+      contents: read
+      id-token: write
+      attestations: read
+    steps:
+      - name: Require exact publication confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+          REGISTRY: ${{ inputs.registry }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          test "$CONFIRMATION" = "publish:$REGISTRY:$RELEASE_TAG"
+
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.12"
+
+      - name: Download exact GitHub prerelease assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          mkdir -p registry/python registry/npm
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.whl' --pattern '*.tar.gz' --dir registry/python
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.tgz' --dir registry/npm
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern 'SHA256SUMS.release' --pattern 'archive-audit.json' --dir registry
+
+      - name: Validate identities, versions, checksums, and archive audit
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: python scripts/validate_registry_release.py --directory registry --tag "$RELEASE_TAG"
+
+      - name: Verify GitHub build provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh attestation verify registry/python/*.whl --repo "$GITHUB_REPOSITORY"
+          gh attestation verify registry/python/*.tar.gz --repo "$GITHUB_REPOSITORY"
+          gh attestation verify registry/npm/*.tgz --repo "$GITHUB_REPOSITORY"
+
+      - name: Require npm trusted-publishing runtime
+        if: inputs.registry == 'npm'
+        run: |
+          npm install --global npm@11.18.0
+          test "$(npm --version)" = "11.18.0"
+
+      - name: Publish npm beta through OIDC
+        if: inputs.registry == 'npm'
+        run: npm publish registry/npm/*.tgz --tag beta --access public
+
+      - name: Publish Python beta through OIDC
+        if: inputs.registry == 'pypi'
+        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
+        with:
+          packages-dir: registry/python
+          print-hash: true
+          verbose: true
