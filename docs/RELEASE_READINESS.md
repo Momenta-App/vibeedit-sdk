@@ -35,6 +35,17 @@ The same clean-artifact sequence is now implemented by
 so future Linux, Windows, Intel Mac, and Apple Silicon candidates must exercise
 the exact wheel and npm archive rather than only report their version strings.
 
+Hosted workflow run
+[`29534114373`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29534114373)
+then passed this exact-artifact gate for commit
+`0ad0b240c87584f53fed478d020e9d3ed4347593` on Windows, Intel macOS, Apple
+Silicon macOS, and Linux with Python 3.11, 3.12, and 3.13. The downstream
+build-and-attest job also passed. Its uploaded wheel, source distribution, and
+npm archive were downloaded again, re-audited against the canonical VibeEdit
+Git source, and replayed through the clean-artifact smoke script locally. The
+archive hashes and hosted job matrix are retained in
+[current-candidate-proof.json](evidence/current-candidate-proof.json).
+
 The accelerated CEF/Rust/Metal path remains experimental and is not the package
 default. Its archive download is now pinned with SHA-256 and its background,
 deterministic three-frame probe passes. Persistent Playwright/Chromium remains
@@ -198,9 +209,9 @@ Python wheels. The sanitized ledger is
 | --- | --- | --- |
 | macOS Apple Silicon | Locally and GitHub-hosted verified | Source tests, exact wheel/npm clean installs, FFmpeg 8.1.1, Chromium/Playwright 1.61.0, OpenCV providers, native Apple Vision build/setup/requests, portable ONNX object inference, clean SAM 2.1 setup/inference/visual review, examples, and artifact audits passed. The hosted Python 3.12 portable checks and package smoke installs also pass. |
 | Linux ARM64 | Locally verified in Docker | Debian 12/aarch64, Python 3.11.2, Node 22.23.1, FFmpeg 5.1.9, pinned portable vision wheels, Playwright 1.61.0/Chromium 1228, 17 Node tests, 60 Python tests, exact wheel/npm installs, and core/mixed renders passed. The sole Python skip was the intentionally macOS-only Apple Vision build. |
-| macOS Intel | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 18 Node tests, type declarations, catalog validation, and wheel/npm build-and-install smoke pass. ONNX Runtime 1.27 has no macOS x86_64 wheel, so object-model setup returns a tested structured unsupported-platform result while the rest of the portable package remains available. |
-| Linux x86_64 | Native GitHub-hosted verified | Python 3.11/3.12/3.13 jobs each pass 62 Python tests, 18 Node tests, type declarations, catalog validation, Chromium rendering, and wheel/npm build-and-install smoke. The earlier emulated exact-artifact render also passed with zero drift. |
-| Windows | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 18 Node tests, canonical skill checksum validation, catalog validation, and wheel/npm build-and-install smoke pass. |
+| macOS Intel | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 78 Python tests with 1 intentional skip, 23 Node tests, type declarations, catalog validation, and exact wheel/npm workflow smoke pass. ONNX Runtime 1.27 has no macOS x86_64 wheel, so object-model setup returns a tested structured unsupported-platform result while the rest of the portable package remains available. |
+| Linux x86_64 | Native GitHub-hosted verified | Python 3.11/3.12/3.13 jobs each pass 78 Python tests with 1 intentional skip, 23 Node tests, type declarations, catalog validation, Chromium rendering, and exact wheel/npm workflow smoke. The earlier emulated exact-artifact render also passed with zero drift. |
+| Windows | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 77 Python tests with 2 intentional skips, 23 Node tests, canonical skill checksum validation, catalog validation, and exact wheel/npm workflow smoke pass. |
 
 The Linux ARM64 proof is retained in
 `docs/evidence/linux-arm64-proof.json`; the explicitly limited x86_64 emulation
@@ -214,6 +225,8 @@ The build job also audits the final wheel, source distribution, and npm tarball
 against the pinned canonical skill-tree and preset-file digests before upload;
 an optional `--source-root` comparison retains the stronger byte-level check
 against a canonical VibeEdit Git checkout when one is available.
+The current exact-artifact matrix and build-and-attest proof is hosted in run
+[`29534114373`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29534114373).
 Public workflow dispatches are configured to generate GitHub build-provenance
 attestations. Every build also retains flat GitHub-release SHA-256 sums,
 artifact-relative SHA-256 sums, and the uploaded workflow artifact.

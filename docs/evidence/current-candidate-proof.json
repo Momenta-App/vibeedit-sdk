@@ -9,6 +9,47 @@
     "workflow": ".github/workflows/vibeedit-package.yml",
     "localReplayPassed": true
   },
+  "hostedWorkflow": {
+    "runId": 29534114373,
+    "url": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29534114373",
+    "testedCommit": "0ad0b240c87584f53fed478d020e9d3ed4347593",
+    "status": "passed",
+    "jobsPassed": 7,
+    "platforms": [
+      "ubuntu-latest/python-3.11",
+      "ubuntu-latest/python-3.12",
+      "ubuntu-latest/python-3.13",
+      "windows-latest/python-3.12",
+      "macos-intel/python-3.12",
+      "macos-apple-silicon/python-3.12"
+    ],
+    "buildAndAttestPassed": true,
+    "downloadedArtifactReplayPassed": true,
+    "downloadedArtifacts": {
+      "wheel": {
+        "name": "vibeedit-0.1.0b1-py3-none-any.whl",
+        "bytes": 15139335,
+        "entries": 406,
+        "sha256": "ad9cb4248ec8868bd98b6092fc2eeccf873edc42736f441d8eeebe30b3d6bb6a"
+      },
+      "sourceDistribution": {
+        "name": "vibeedit-0.1.0b1.tar.gz",
+        "bytes": 18979365,
+        "entries": 473,
+        "sha256": "27060f3521e8b82fc2dea3b93a02df6e512613c6d537e9fa4e6ec4d252230547"
+      },
+      "npm": {
+        "name": "vibeedit-0.1.0-beta.1.tgz",
+        "bytes": 19752847,
+        "entries": 439,
+        "sha256": "a700165d86da0e91a43dbf7964c8c49c2d11a3f466fb0a326bbc631f3f307ead"
+      }
+    },
+    "canonicalGitSourceCompared": true,
+    "skillClonesVerified": 44,
+    "presetSourceFilesVerified": 16,
+    "forbiddenEntries": 0
+  },
   "platform": {
     "system": "macos",
     "version": "26.4",
