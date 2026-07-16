@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "vibeedit.cef-shared-texture-benchmark.v1",
+  "date": "2026-07-16",
+  "composition": {
+    "width": 640,
+    "height": 360,
+    "frames": 90,
+    "frameRate": 30,
+    "content": [
+      "HTML DOM text",
+      "CSS animation",
+      "CSS filters",
+      "CSS blend mode",
+      "CSS 3D transform",
+      "browser WebGPU canvas",
+      "WGSL shader"
+    ]
+  },
+  "productionCompatibleRender": {
+    "backend": "chromium-persistent PNG image2pipe plus H.264 encode",
+    "elapsedSeconds": 7.96,
+    "throughputFramesPerSecond": 11.31,
+    "outputFrames": 90,
+    "outputDurationSeconds": 3.0,
+    "outputBytes": 90047
+  },
+  "sharedSurfaceProbe": {
+    "backend": "CEF accelerated off-screen paint",
+    "browserWebgpuReady": true,
+    "surface": "IOSurface",
+    "surfaceWidth": 1280,
+    "surfaceHeight": 720,
+    "logicalWidth": 640,
+    "logicalHeight": 360,
+    "callbacks": 60,
+    "callbackFramesPerSecond": 35.78,
+    "pngBoundaryUsed": false
+  },
+  "comparisonBoundary": "The production result includes capture and software encode. The shared-surface result measures browser-to-native surface delivery only, so their throughput values are not an end-to-end speedup claim.",
+  "nextMilestone": "Import each callback-scoped IOSurface into the Rust/wgpu compositor, then feed the native hardware encoder and benchmark complete video output."
+}

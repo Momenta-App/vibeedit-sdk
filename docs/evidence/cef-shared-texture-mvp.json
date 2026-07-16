@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "vibeedit.cef-shared-texture-mvp.v1",
+  "status": "passed",
+  "platform": "macos-arm64",
+  "cefVersion": "144.0.30+g9e70dde+chromium-144.0.7559.257",
+  "chromiumVersion": "144.0.7559.257",
+  "htmlCssEngine": "Blink/Skia",
+  "browserGpu": "WebGPU",
+  "surfaceTransport": "CEF OnAcceleratedPaint IOSurface",
+  "pngBoundaryUsed": false,
+  "webgpuReady": true,
+  "acceleratedPaintCallbacks": 60,
+  "callbackFps": 35.78,
+  "firstSurface": {
+    "width": 1280,
+    "height": 720,
+    "kind": "IOSurface"
+  },
+  "errors": [],
+  "claimBoundary": "IOSurface delivery is proven; direct IOSurface-to-wgpu import and hardware encoding are not implemented in this MVP."
+}

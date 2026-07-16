@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add a pinned Chromium/CEF shared-texture MVP proving HTML/CSS plus browser
+  WebGPU composition can reach native code as a macOS IOSurface without PNG
+  capture.
 - Added `vibeedit://motion/html-css`, a deterministic raw HTML/CSS-only authoring
   contract with full pinned-Chromium CSS rendering, automatic animation seeking,
   local assets/fonts, and no authored JavaScript.

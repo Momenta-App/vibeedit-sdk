@@ -179,6 +179,12 @@ The persistent renderer removes per-frame page, framework, iframe, and font
 initialization. Chromium's `optimizeForSpeed` lossless PNG capture is used for
 the current master path. Browser-only compositions stream those PNG frames
 directly into FFmpeg with `image2pipe`, avoiding intermediate frame files. PNG
-extraction is still an encoded CPU readback; raw or shared-texture extraction
-requires a deeper Chromium/Skia integration and is the next acceleration
-boundary.
+extraction is still an encoded CPU readback.
+
+The experimental CEF shared-texture harness in
+`experiments/cef-shared-texture` proves the next boundary on macOS ARM64:
+Chromium can composite ordinary HTML/CSS with a browser WebGPU canvas and
+deliver the result through `OnAcceleratedPaint` as an IOSurface without PNG
+capture. The experiment does not yet replace the production renderer. Its
+remaining integration is copying that callback-scoped IOSurface into the
+Rust/wgpu compositor and native encoder.
