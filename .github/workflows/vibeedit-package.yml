@@ -85,6 +85,7 @@ jobs:
           uv tool run --from dist/smoke/vibeedit-${{ env.PYTHON_PACKAGE_VERSION }}-py3-none-any.whl vibeedit --version
           npm pack --pack-destination dist/smoke
           npx --yes --package ./dist/smoke/vibeedit-${{ env.NPM_PACKAGE_VERSION }}.tgz vibeedit --version
+          python scripts/smoke_release_artifacts.py --wheel dist/smoke/vibeedit-${{ env.PYTHON_PACKAGE_VERSION }}-py3-none-any.whl --npm dist/smoke/vibeedit-${{ env.NPM_PACKAGE_VERSION }}.tgz --output dist/smoke-proof.json
 
   build-and-attest:
     needs: portable-smoke

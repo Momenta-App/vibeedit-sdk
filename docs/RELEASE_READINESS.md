@@ -1,6 +1,6 @@
 # Release readiness report
 
-Date: 2026-07-14
+Date: 2026-07-16
 Candidate: VibeEdit 0.1.0 beta 1
 Decision: **PUBLIC BETA APPROVED FOR TESTING AND COMMUNITY REVIEW**
 
@@ -11,6 +11,35 @@ confirmed that the generated previews contain no third-party material, the
 included canonical VibeEdit material is authorized, and optional open-source
 integrations retain their own ownership and terms. Pose support in 0.1 is
 explicitly macOS-native; SAM 3.1 remains quarantined rather than claimed.
+
+## Current branch candidate verification
+
+Commit `4f1c9c31911dacf837667cafc4f8b443515838ec` was rebuilt locally as a
+wheel, source distribution, and npm tarball after the Chromium/CEF renderer
+hardening. This is candidate verification only; no new registry or GitHub
+release was published.
+
+The exact archives pass byte-level comparison against the pinned canonical
+VibeEdit Git source: 44 skills and 16 preset source files match, and the archive
+scanner found zero forbidden entries. A fresh Python 3.12 environment installed
+the exact wheel with its browser extra, completed browser setup, initialized the
+10-tool MCP server, resolved the packaged catalog site, and installed/checked a
+Codex skill without modification. It rendered the generated 60-frame example
+and the mixed source-video/Chromium/SFX 90-frame example with zero duration
+drift. A fresh Node project installed the exact npm tarball, imported the API,
+constructed and validated a CompositionSpec, searched the catalog, and reported
+zero production vulnerabilities. The hash-bound record is
+[current-candidate-proof.json](evidence/current-candidate-proof.json).
+The same clean-artifact sequence is now implemented by
+`scripts/smoke_release_artifacts.py` and runs in every portable workflow job,
+so future Linux, Windows, Intel Mac, and Apple Silicon candidates must exercise
+the exact wheel and npm archive rather than only report their version strings.
+
+The accelerated CEF/Rust/Metal path remains experimental and is not the package
+default. Its archive download is now pinned with SHA-256 and its background,
+deterministic three-frame probe passes. Persistent Playwright/Chromium remains
+the production fallback while high-resolution post-stress recovery is still
+being developed.
 
 ## Public access gate
 
@@ -208,10 +237,10 @@ Run from the repository root unless a path is absolute:
 
 ```bash
 .venv/bin/pytest -q
-# 59 passed, 8 skipped on the local macOS host
+# 76 passed, 3 skipped on the local macOS host
 
 npm test
-# 20 passed
+# 23 passed
 
 npm run types:check
 # passed
@@ -252,7 +281,7 @@ composition editing over the underlying library.
 | 5 | Pass on verified platform | JavaScript/Python motion seeks deterministically and Chromium produces real outputs. |
 | 6 | Pass on verified platform | One CompositionSpec combines source media, HTML overlay, source audio, and SFX with zero frame drift. |
 | 7 | Pass on verified platform | Verified examples exist for every locally enabled major family, including fresh accepted public-runner SAM output. |
-| 8 | Pass | Effects, transitions, text, SFX, skills, and templates share one 467-item catalog. |
+| 8 | Pass | Effects, transitions, text, SFX, skills, and templates share one 443-item catalog. |
 | 9 | Pass | Packaged `catalog open --no-browser` resolves the generated local site. |
 | 10 | Pass | Site copy controls use canonical IDs, prompts, Python, and JavaScript strings. |
 | 11 | Pass | Forty-four byte-identical canonical skills install/check/update/remove across agent, Codex, Claude, and OpenCode layouts without overwriting user edits. |
