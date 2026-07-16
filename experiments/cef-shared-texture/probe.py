@@ -23,7 +23,7 @@ from pathlib import Path
 CEF_VERSION = "144.0.30+g9e70dde+chromium-144.0.7559.257"
 CHROMIUM_VERSION = "144.0.7559.257"
 ARCHIVE = f"cef_binary_{CEF_VERSION}_macosarm64.tar.bz2"
-ARCHIVE_SHA1 = "52f7336a55a0bf54563675b81704e8d1d05bc14f"
+ARCHIVE_SHA256 = "74a0b4495ff0985105e64a584efbb1ac1375bb97a3c6e92050dd4ac7277c9960"
 MARKER = "VIBEEDIT_CEF_ACCELERATED_PAINT"
 
 
@@ -303,13 +303,13 @@ def prepare_cef(cache: Path, *, skip_build: bool) -> Path:
     cef = cache / ARCHIVE.removesuffix(".tar.bz2")
     if not archive.is_file():
         urllib.request.urlretrieve(f"https://cef-builds.spotifycdn.com/{ARCHIVE}", archive)
-    digest = hashlib.sha1()
+    digest = hashlib.sha256()
     with archive.open("rb") as source:
         while chunk := source.read(1024 * 1024):
             digest.update(chunk)
-    if digest.hexdigest() != ARCHIVE_SHA1:
+    if digest.hexdigest() != ARCHIVE_SHA256:
         archive.unlink(missing_ok=True)
-        raise SystemExit("downloaded CEF archive did not match the pinned SHA-1")
+        raise SystemExit("downloaded CEF archive did not match the pinned SHA-256")
     if not cef.is_dir():
         with tarfile.open(archive, "r:bz2") as bundle:
             for member in bundle.getmembers():

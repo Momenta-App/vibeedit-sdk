@@ -5,7 +5,7 @@ optional WebGPU scene inside the browser, and receives the composited result as
 a GPU-backed shared surface instead of a PNG screenshot.
 
 On macOS ARM64 the probe pins CEF `144.0.30` / Chromium `144.0.7559.257`,
-verifies the published archive SHA-1, builds the maintained `cefclient`
+verifies the archive against VibeEdit's pinned SHA-256, builds the maintained `cefclient`
 off-screen sample, instruments `OnAcceleratedPaint`, and confirms that CEF
 delivers an IOSurface while the page reports an active WebGPU adapter. The MVP
 probe accepts an explicit logical viewport and fixes the device scale at one.
