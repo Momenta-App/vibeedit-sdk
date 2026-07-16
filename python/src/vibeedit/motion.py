@@ -7,11 +7,13 @@ import http.server
 import json
 import math
 import mimetypes
+import re
 import tempfile
 import threading
 import urllib.parse
 from contextlib import contextmanager, nullcontext
 from functools import lru_cache
+from html.parser import HTMLParser
 from pathlib import Path
 
 from vibeedit.data import data_path
@@ -21,6 +23,9 @@ from vibeedit.spec import JSONObject
 
 class MotionRenderError(RuntimeError):
     pass
+
+
+HTML_CSS_MOTION_COMPONENT_ID = "vibeedit://motion/html-css"
 
 
 def motion_render_plan(spec: JSONObject) -> JSONObject:
@@ -50,17 +55,19 @@ def motion_render_plan(spec: JSONObject) -> JSONObject:
             ]
             custom = _is_web_component(item)
             advanced = bool(set(detected) & {"three.js", "pixijs", "webgpu", "canvas"})
-            native_candidate = not custom or (not props.get("javascript") and not props.get("entry") and not advanced)
+            html_css_only = item["componentId"] == HTML_CSS_MOTION_COMPONENT_ID
+            native_candidate = not custom or html_css_only or (not props.get("javascript") and not props.get("entry") and not advanced)
             layers.append(
                 {
                     "id": item["id"],
                     "componentId": item["componentId"],
                     "requestedRenderer": item.get("renderer", "html"),
                     "selectedBackend": "chromium-persistent",
-                    "reason": "source-preserved catalog component" if component and component.get("canonical") else "arbitrary local web project" if custom else "portable browser component",
+                    "reason": "source-preserved catalog component" if component and component.get("canonical") else "raw HTML/CSS reference document" if html_css_only else "arbitrary local web project" if custom else "portable browser component",
                     "libraries": sorted(set(declared_libraries + detected)),
                     "nativeEligibility": "candidate-unverified" if native_candidate else "browser-required",
-                    "seekContract": "explicit-vibeedit-seek" if advanced else "automatic-css-waapi-library-adapter",
+                    "seekContract": "automatic-css-animations" if html_css_only else "explicit-vibeedit-seek" if advanced else "automatic-css-waapi-library-adapter",
+                    "authoringContract": "html-css-only" if html_css_only else "local-web-runtime",
                 }
             )
     return {
@@ -125,7 +132,7 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
         return destination
 
 
-def _persistent_document(spec: JSONObject, catalog_url: str, project_url: str, *, inline_url: str | None = None, inline_documents: dict[str, bytes] | None = None, transparent: bool = False) -> str:
+def _persistent_document(spec: JSONObject, catalog_url: str, project_url: str, *, atoms_url: str | None = None, inline_url: str | None = None, inline_documents: dict[str, bytes] | None = None, transparent: bool = False) -> str:
     layers = []
     for order, item in sorted(
         (
@@ -146,7 +153,7 @@ def _persistent_document(spec: JSONObject, catalog_url: str, project_url: str, *
             content = _portable_component(component, item["props"], 0, item["placement"]["durationFrames"], catalog_url, frame_rate["numerator"] / frame_rate["denominator"])
         if _is_web_component(item):
             kind = "web"
-            content = _web_component(item, project_url, inline_url, inline_documents)
+            content = _web_component(item, project_url, atoms_url, inline_url, inline_documents)
         layers.append(
             f'<div data-vibeedit-item="{token}" data-vibeedit-kind="{kind}" data-vibeedit-order="{order}" style="position:absolute;inset:0;visibility:hidden;pointer-events:none">{content}</div>'
         )
@@ -166,6 +173,7 @@ def _load_persistent_page(page, spec: JSONObject, asset_urls: dict, *, transpare
         spec,
         asset_urls["catalog"],
         asset_urls["project"],
+        atoms_url=asset_urls["atoms"],
         inline_url=asset_urls["inline"],
         inline_documents=asset_urls["inlineDocuments"],
         transparent=transparent,
@@ -225,7 +233,7 @@ def _layer_for_item(item: JSONObject, local_frame: int, asset_base_url: str | No
 
 
 def _is_web_component(item: JSONObject) -> bool:
-    return item.get("componentId") in {"vibeedit://motion/html", "vibeedit://motion/web-project"}
+    return item.get("componentId") in {HTML_CSS_MOTION_COMPONENT_ID, "vibeedit://motion/html", "vibeedit://motion/web-project"}
 
 
 def _requires_webgpu(spec: JSONObject) -> bool:
@@ -242,8 +250,16 @@ def _item_token(item: JSONObject) -> str:
     return hashlib.sha256(str(item["id"]).encode()).hexdigest()[:20]
 
 
-def _web_component(item: JSONObject, project_url: str, inline_url: str | None, inline_documents: dict[str, bytes] | None) -> str:
+def _web_component(item: JSONObject, project_url: str, atoms_url: str | None, inline_url: str | None, inline_documents: dict[str, bytes] | None) -> str:
     props = item["props"]
+    if item["componentId"] == HTML_CSS_MOTION_COMPONENT_ID:
+        source = _html_css_document(props, project_url, atoms_url)
+        if inline_url and inline_documents is not None:
+            name = f"{_item_token(item)}.html"
+            inline_documents[name] = source.encode()
+            source_url = urllib.parse.urljoin(inline_url, name)
+            return f'<iframe data-vibeedit-web="true" data-vibeedit-html-css="true" src="{html.escape(source_url, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent"></iframe>'
+        return f'<iframe data-vibeedit-web="true" data-vibeedit-html-css="true" srcdoc="{html.escape(source, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent"></iframe>'
     if props.get("entry"):
         source = urllib.parse.urljoin(project_url, urllib.parse.quote(str(props["entry"])))
         return f'<iframe data-vibeedit-web="true" src="{html.escape(source, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent" allow="webgpu"></iframe>'
@@ -266,6 +282,65 @@ def _web_component(item: JSONObject, project_url: str, inline_url: str | None, i
         source_url = urllib.parse.urljoin(inline_url, name)
         return f'<iframe data-vibeedit-web="true" src="{html.escape(source_url, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent" allow="webgpu"></iframe>'
     return f'<iframe data-vibeedit-web="true" srcdoc="{html.escape(source, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent" allow="webgpu"></iframe>'
+
+
+def _html_css_document(props: JSONObject, project_url: str, atoms_url: str | None) -> str:
+    forbidden = [key for key in ("javascript", "libraries", "entry", "scriptType") if props.get(key)]
+    if forbidden:
+        raise MotionRenderError(f"{HTML_CSS_MOTION_COMPONENT_ID} does not allow {', '.join(forbidden)}; use raw HTML, CSS, and local stylesheets only")
+    markup = str(props.get("html", ""))
+    css = str(props.get("css", ""))
+    validator = _HTMLCSSValidator()
+    validator.feed(markup)
+    validator.close()
+    if validator.error:
+        raise MotionRenderError(f"{HTML_CSS_MOTION_COMPONENT_ID} rejected markup: {validator.error}")
+    stylesheets = "".join(
+        f'<link rel="stylesheet" href="{html.escape(str(source), quote=True)}">'
+        for source in props.get("stylesheets", [])
+        if isinstance(source, str)
+    )
+    atoms = f'<link rel="stylesheet" href="{html.escape(atoms_url, quote=True)}">' if atoms_url and props.get("atoms", True) is not False else ""
+    head = (
+        '<meta charset="utf-8">'
+        '<meta http-equiv="Content-Security-Policy" content="default-src \'self\' data: blob:; script-src \'none\'; connect-src \'none\'; frame-src \'none\'; object-src \'none\'; base-uri \'self\'; style-src \'self\' \'unsafe-inline\' data: blob:; font-src \'self\' data: blob:; img-src \'self\' data: blob:; media-src \'self\' data: blob:">'
+        f'<base href="{html.escape(project_url, quote=True)}">'
+        '<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}*{box-sizing:border-box}</style>'
+        f'{atoms}{stylesheets}<style>{css}</style>'
+    )
+    if re.search(r"<head\b", markup, flags=re.IGNORECASE):
+        return re.sub(r"(<head\b[^>]*>)", lambda match: match.group(1) + head, markup, count=1, flags=re.IGNORECASE)
+    if re.search(r"<html\b", markup, flags=re.IGNORECASE):
+        return re.sub(r"(<html\b[^>]*>)", lambda match: match.group(1) + f"<head>{head}</head>", markup, count=1, flags=re.IGNORECASE)
+    return f"<!doctype html><html><head>{head}</head><body>{markup}</body></html>"
+
+
+class _HTMLCSSValidator(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=False)
+        self.error: str | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self._validate(tag, attrs)
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self._validate(tag, attrs)
+
+    def _validate(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if self.error:
+            return
+        if tag.casefold() in {"script", "iframe", "object", "embed"}:
+            self.error = f"<{tag}> is outside the HTML/CSS-only contract"
+            return
+        normalized = {name.casefold(): (value or "") for name, value in attrs}
+        if any(name.startswith("on") or name == "srcdoc" for name in normalized):
+            self.error = f"event handlers and srcdoc are outside the HTML/CSS-only contract on <{tag}>"
+            return
+        if any(value.lstrip().casefold().startswith("javascript:") for value in normalized.values()):
+            self.error = f"javascript: URLs are outside the HTML/CSS-only contract on <{tag}>"
+            return
+        if tag.casefold() == "meta" and normalized.get("http-equiv", "").casefold() == "refresh":
+            self.error = "meta refresh is outside the HTML/CSS-only contract"
 
 
 def _settle_web_frames(page, spec: JSONObject, frame_number: int) -> None:
@@ -366,6 +441,11 @@ def _caption_rail(props: JSONObject, frame: int, duration_frames: int) -> str:
 @lru_cache(maxsize=1)
 def list_motion_components() -> list[JSONObject]:
     return json.loads(data_path("catalog", "motion-components.json").read_text(encoding="utf-8"))["components"]
+
+
+@lru_cache(maxsize=1)
+def list_motion_atoms() -> JSONObject:
+    return json.loads(data_path("catalog", "motion-atoms", "manifest.json").read_text(encoding="utf-8"))
 
 
 @lru_cache(maxsize=1)
@@ -470,7 +550,11 @@ def _settle_canonical_frames(page) -> None:
 
 @contextmanager
 def _motion_asset_server(project_root: str | Path = "."):
-    roots = {"catalog": data_path("catalog", "text-runtime").resolve(), "project": Path(project_root).resolve()}
+    roots = {
+        "catalog": data_path("catalog", "text-runtime").resolve(),
+        "atoms": data_path("catalog", "motion-atoms").resolve(),
+        "project": Path(project_root).resolve(),
+    }
     inline_documents: dict[str, bytes] = {}
 
     class Handler(http.server.BaseHTTPRequestHandler):
@@ -516,7 +600,7 @@ def _motion_asset_server(project_root: str | Path = "."):
     thread.start()
     try:
         origin = f"http://127.0.0.1:{server.server_port}/"
-        yield {"origin": origin, "catalog": f"{origin}catalog/", "project": f"{origin}project/", "inline": f"{origin}inline/", "inlineDocuments": inline_documents}
+        yield {"origin": origin, "catalog": f"{origin}catalog/", "atoms": f"{origin}atoms/v1.css", "project": f"{origin}project/", "inline": f"{origin}inline/", "inlineDocuments": inline_documents}
     finally:
         server.shutdown()
         server.server_close()

@@ -1,0 +1,102 @@
+/* VibeEdit Motion Atoms v1: composable browser-reference primitives. */
+@property --ve-active-blur {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+:root {
+  --ve-duration: 1s;
+  --ve-delay: 0s;
+  --ve-ease: cubic-bezier(.2, .8, .2, 1);
+  --ve-distance: 12vh;
+  --ve-blur: 18px;
+  --ve-foreground: #fff;
+  --ve-accent: #d7ff3f;
+  --ve-shadow: rgba(0, 0, 0, .42);
+  --ve-depth: .08em;
+  --ve-perspective: 900px;
+  --ve-rotate-x: 0deg;
+  --ve-rotate-y: 0deg;
+  --ve-rotate-z: 0deg;
+}
+
+.ve-stage { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.ve-layer { position: absolute; inset: 0; }
+.ve-safe { position: absolute; inset: 5%; }
+.ve-center { display: grid; place-items: center; }
+.ve-row { display: flex; align-items: center; justify-content: center; }
+.ve-stack { display: grid; }
+.ve-stack > * { grid-area: 1 / 1; }
+.ve-clip { overflow: hidden; }
+.ve-text {
+  color: var(--ve-foreground);
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(32px, 10vw, 180px);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: .94;
+  text-align: center;
+  text-wrap: balance;
+}
+.ve-uppercase { text-transform: uppercase; }
+.ve-nowrap { white-space: nowrap; }
+.ve-crisp { -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+.ve-outline { -webkit-text-stroke: var(--ve-stroke, 2px) var(--ve-stroke-color, currentColor); color: transparent; }
+.ve-gradient {
+  background: var(--ve-gradient, linear-gradient(90deg, var(--ve-foreground), var(--ve-accent)));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.ve-shadow { --ve-active-shadow: var(--ve-shadow); }
+.ve-shadow,
+.ve-blur-in { filter: blur(var(--ve-active-blur)) drop-shadow(var(--ve-shadow-x, 0) var(--ve-shadow-y, .08em) var(--ve-shadow-blur, .14em) var(--ve-active-shadow, transparent)); }
+.ve-depth { text-shadow: var(--ve-depth) var(--ve-depth) 0 var(--ve-depth-color, var(--ve-shadow)); }
+.ve-perspective { perspective: var(--ve-perspective); transform-style: preserve-3d; }
+.ve-tilt { transform: rotateX(var(--ve-rotate-x)) rotateY(var(--ve-rotate-y)) rotateZ(var(--ve-rotate-z)); transform-style: preserve-3d; }
+.ve-blend-screen { mix-blend-mode: screen; }
+.ve-blend-multiply { mix-blend-mode: multiply; }
+.ve-blend-overlay { mix-blend-mode: overlay; }
+.ve-blend-difference { mix-blend-mode: difference; }
+.ve-blend-soft-light { mix-blend-mode: soft-light; }
+
+.ve-enter,
+.ve-fade,
+.ve-blur-in,
+.ve-shimmer {
+  animation-name: var(--ve-motion-animation, ve-noop), var(--ve-material-animation, ve-noop);
+  animation-duration: var(--ve-duration), var(--ve-duration);
+  animation-delay: var(--ve-delay), var(--ve-delay);
+  animation-fill-mode: both, both;
+  animation-timing-function: var(--ve-ease), var(--ve-ease);
+}
+.ve-enter { --ve-motion-animation: ve-enter; }
+.ve-enter[data-ve-from="left"] { --ve-x: calc(-1 * var(--ve-distance)); --ve-y: 0px; }
+.ve-enter[data-ve-from="right"] { --ve-x: var(--ve-distance); --ve-y: 0px; }
+.ve-enter[data-ve-from="top"] { --ve-x: 0px; --ve-y: calc(-1 * var(--ve-distance)); }
+.ve-enter[data-ve-from="bottom"] { --ve-x: 0px; --ve-y: var(--ve-distance); }
+.ve-fade { --ve-motion-animation: ve-fade; }
+.ve-blur-in { --ve-motion-animation: ve-blur-in; }
+.ve-shimmer {
+  --ve-material-animation: ve-shimmer;
+  background-image: linear-gradient(105deg, var(--ve-foreground) 30%, var(--ve-accent) 48%, var(--ve-foreground) 66%);
+  background-position: 140% 0;
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@keyframes ve-enter {
+  from { opacity: 0; translate: var(--ve-x, 0) var(--ve-y, var(--ve-distance)); }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes ve-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ve-blur-in { from { --ve-active-blur: var(--ve-blur); opacity: 0; } to { --ve-active-blur: 0px; opacity: 1; } }
+@keyframes ve-shimmer { from { background-position: 140% 0; } to { background-position: -40% 0; } }
+@keyframes ve-noop { from { --ve-noop: 0; } to { --ve-noop: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ve-enter, .ve-fade, .ve-blur-in, .ve-shimmer { animation-timing-function: linear; }
+}

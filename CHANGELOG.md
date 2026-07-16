@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Added `vibeedit://motion/html-css`, a deterministic raw HTML/CSS-only authoring
+  contract with full pinned-Chromium CSS rendering, automatic animation seeking,
+  local assets/fonts, and no authored JavaScript.
+- Added VibeEdit Motion Atoms v1, a reusable CSS/manifest vocabulary designed for
+  concise agent composition and future conformance-gated Rust/WGPU lowering.
+
+## Unreleased
+
 - Replace per-frame Chromium document reloads with a persistent deterministic
   seek runtime and faster lossless compositor capture.
 - Stream browser-only frame sequences directly into FFmpeg instead of writing

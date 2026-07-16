@@ -1,5 +1,60 @@
 # HTML Motion Runtime
 
+## Preferred raw HTML/CSS contract
+
+For new agent-authored text and motion graphics, start with
+`vibeedit://motion/html-css`. It accepts either an HTML fragment or a complete
+HTML document and ordinary CSS. JavaScript, script libraries, event-handler
+attributes, embedded documents, and `javascript:` URLs are rejected. CSS
+animations are paused and sought by VibeEdit at each integer output frame.
+
+```json
+{
+  "id": "title",
+  "kind": "motion",
+  "placement": { "startFrame": 0, "durationFrames": 60 },
+  "componentId": "vibeedit://motion/html-css",
+  "renderer": "auto",
+  "transparent": true,
+  "props": {
+    "html": "<main class=\"ve-stage ve-center\"><h1 class=\"ve-text ve-enter ve-shimmer\" data-ve-from=\"bottom\">BUILT DIFFERENT</h1></main>",
+    "css": ":root { --ve-duration: .8s; --ve-accent: #d7ff3f }"
+  }
+}
+```
+
+This path uses the complete HTML and CSS feature set implemented by VibeEdit's
+pinned Chromium build, including semantic HTML, inline SVG, pseudo-elements,
+custom properties, Grid, Flexbox, container/media queries, variable fonts,
+masks, clip paths, gradients, filters, blend modes, 2D/3D transforms, and CSS
+keyframes. Local images, CSS, and licensed fonts resolve relative to the
+composition directory. Network URLs are blocked, so remote resources must be
+bundled locally.
+
+“Complete” here means browser-reference rendering, not that every CSS operation
+already has a native Rust implementation. Chromium remains the source of truth.
+VibeEdit may route a layer to Rust/WGPU only after its used operations pass
+decoded-pixel conformance tests.
+
+### Reusable Motion Atoms
+
+The HTML/CSS component automatically loads VibeEdit Motion Atoms v1 unless
+`props.atoms` is `false`. Atoms are small classes intended to be combined, not
+new locked presets. They preserve the existing approved text-effect catalog.
+
+- Layout: `ve-stage`, `ve-layer`, `ve-safe`, `ve-center`, `ve-row`, `ve-stack`,
+  `ve-clip`
+- Text/material: `ve-text`, `ve-crisp`, `ve-outline`, `ve-gradient`, `ve-shadow`,
+  `ve-depth`
+- Space/compositing: `ve-perspective`, `ve-tilt`, `ve-blend-screen`,
+  `ve-blend-multiply`, `ve-blend-overlay`, `ve-blend-difference`,
+  `ve-blend-soft-light`
+- Motion: `ve-enter` with `data-ve-from`, `ve-fade`, `ve-blur-in`, `ve-shimmer`
+
+Tune atoms through `--ve-*` CSS custom properties. Run
+`vibeedit motion atoms --json`, or read the exported `vibeedit/motion-atoms`
+manifest, for the stable machine-readable vocabulary and future native mapping.
+
 VibeEdit lets an agent use HTML, CSS, and JavaScript as the primary language for
 text, text effects, motion graphics, SVG, Canvas, WebGL, and WebGPU. The agent
 does not select a low-level renderer. VibeEdit keeps the browser compatibility
@@ -7,7 +62,7 @@ path available and may move a layer to a conformance-proven native path later.
 
 ## Custom project component
 
-Use `vibeedit://motion/html` for an inline fragment or
+Use `vibeedit://motion/html` for an inline fragment with JavaScript or
 `vibeedit://motion/web-project` for a bundled project entry point.
 
 ```json

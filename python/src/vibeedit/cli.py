@@ -81,6 +81,12 @@ def _parser() -> argparse.ArgumentParser:
     catalog_open.add_argument("--json", action="store_true")
     catalog_open.set_defaults(handler=_catalog_open)
 
+    motion = sub.add_parser("motion", help="inspect agent-authorable motion contracts")
+    motion_sub = motion.add_subparsers(dest="motion_command", required=True)
+    motion_atoms = motion_sub.add_parser("atoms", help="list reusable HTML/CSS motion atoms")
+    motion_atoms.add_argument("--json", action="store_true")
+    motion_atoms.set_defaults(handler=_motion_atoms)
+
     examples = sub.add_parser("examples", help="list or create executable examples")
     examples_sub = examples.add_subparsers(dest="examples_command", required=True)
     examples_list = examples_sub.add_parser("list")
@@ -212,6 +218,13 @@ def _catalog_open(args) -> int:
         raise RuntimeError("catalog site has not been generated")
     opened = False if args.no_browser else webbrowser.open(path.resolve().as_uri())
     _emit({"ok": True, "path": str(path), "opened": opened}, as_json=args.json)
+    return 0
+
+
+def _motion_atoms(args) -> int:
+    from vibeedit.motion import list_motion_atoms
+
+    _emit(list_motion_atoms(), as_json=args.json)
     return 0
 
 

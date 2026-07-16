@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "vibeedit.motion-atoms.v1",
+  "version": "1.0.0",
+  "stylesheet": "v1.css",
+  "componentId": "vibeedit://motion/html-css",
+  "authoring": "raw-html-css",
+  "javascript": "forbidden",
+  "browserReference": "pinned-chromium",
+  "nativeRouting": "conformance-gated",
+  "atoms": [
+    { "name": "stage", "selector": ".ve-stage", "role": "full-canvas root", "nativePrimitive": "layer" },
+    { "name": "layer", "selector": ".ve-layer", "role": "full-canvas layer", "nativePrimitive": "layer" },
+    { "name": "safe", "selector": ".ve-safe", "role": "five-percent safe area", "nativePrimitive": "inset" },
+    { "name": "center", "selector": ".ve-center", "role": "center alignment", "nativePrimitive": "layout" },
+    { "name": "row", "selector": ".ve-row", "role": "centered horizontal layout", "nativePrimitive": "layout" },
+    { "name": "stack", "selector": ".ve-stack", "role": "same-cell layer stack", "nativePrimitive": "stack" },
+    { "name": "clip", "selector": ".ve-clip", "role": "overflow clipping", "nativePrimitive": "clip" },
+    { "name": "text", "selector": ".ve-text", "role": "responsive text face", "nativePrimitive": "text" },
+    { "name": "outline", "selector": ".ve-outline", "role": "text stroke", "nativePrimitive": "text-stroke" },
+    { "name": "gradient", "selector": ".ve-gradient", "role": "gradient text fill", "nativePrimitive": "text-gradient" },
+    { "name": "shadow", "selector": ".ve-shadow", "role": "drop shadow", "nativePrimitive": "drop-shadow" },
+    { "name": "depth", "selector": ".ve-depth", "role": "compact text depth", "nativePrimitive": "text-shadow-depth" },
+    { "name": "perspective", "selector": ".ve-perspective", "role": "3D perspective parent", "nativePrimitive": "perspective" },
+    { "name": "tilt", "selector": ".ve-tilt", "role": "3D rotations from CSS variables", "nativePrimitive": "transform-3d" },
+    { "name": "enter", "selector": ".ve-enter", "role": "directional entrance", "nativePrimitive": "keyframed-transform" },
+    { "name": "fade", "selector": ".ve-fade", "role": "opacity entrance", "nativePrimitive": "keyframed-opacity" },
+    { "name": "blur-in", "selector": ".ve-blur-in", "role": "blur-to-crisp entrance", "nativePrimitive": "keyframed-blur" },
+    { "name": "shimmer", "selector": ".ve-shimmer", "role": "moving glyph highlight", "nativePrimitive": "text-gradient-animation" },
+    { "name": "blend", "selector": ".ve-blend-*", "role": "screen, multiply, overlay, difference, and soft-light", "nativePrimitive": "blend-mode" }
+  ],
+  "customProperties": [
+    "--ve-duration", "--ve-delay", "--ve-ease", "--ve-distance", "--ve-blur",
+    "--ve-foreground", "--ve-accent", "--ve-shadow", "--ve-depth", "--ve-perspective",
+    "--ve-rotate-x", "--ve-rotate-y", "--ve-rotate-z", "--ve-gradient", "--ve-stroke",
+    "--ve-stroke-color", "--ve-shadow-x", "--ve-shadow-y", "--ve-shadow-blur", "--ve-depth-color"
+  ]
+}

@@ -1,6 +1,8 @@
 export type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue };
 export type JSONObject = { [key: string]: JSONValue };
 export declare const portableMotionComponents: readonly JSONObject[];
+export declare const HTML_CSS_MOTION_COMPONENT_ID: "vibeedit://motion/html-css";
+export type HTMLCSSMotionProps = { html: string; css?: string; stylesheets?: string[]; atoms?: boolean };
 export type CatalogCategory = "effect" | "transition" | "text" | "motion" | "template" | "sfx" | "skill";
 
 export declare class FrameRate {

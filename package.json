@@ -18,6 +18,7 @@
       "types": "./motion.d.ts",
       "import": "./src/motion/index.js"
     },
+    "./motion-atoms": "./catalog/motion-atoms/manifest.json",
     "./schema": "./schema/composition.schema.json",
     "./catalog": "./catalog/catalog.json"
   },

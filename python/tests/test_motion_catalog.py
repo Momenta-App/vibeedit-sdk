@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from vibeedit import list_motion_components
+from vibeedit import list_motion_atoms, list_motion_components
 from vibeedit.data import data_path
-from vibeedit.motion import _apply_persistent_frame, _load_persistent_page, _motion_asset_server, _requires_webgpu, _settle_web_frames, document_for_frame, motion_render_plan
+from vibeedit.motion import MotionRenderError, _apply_persistent_frame, _html_css_document, _load_persistent_page, _motion_asset_server, _requires_webgpu, _settle_web_frames, document_for_frame, motion_render_plan
 
 
 def _spec(identifier):
@@ -133,6 +133,75 @@ def test_motion_plan_keeps_arbitrary_webgpu_in_browser_until_conformant():
     assert plan["layers"][0]["nativeEligibility"] == "browser-required"
     assert plan["layers"][0]["libraries"] == ["webgpu"]
     assert _requires_webgpu(spec) is True
+
+
+def test_raw_html_css_contract_is_discoverable_and_native_candidate():
+    atoms = list_motion_atoms()
+    assert atoms["componentId"] == "vibeedit://motion/html-css"
+    assert atoms["javascript"] == "forbidden"
+    assert {atom["name"] for atom in atoms["atoms"]} >= {"text", "enter", "shimmer", "blend", "tilt"}
+    spec = _spec("vibeedit://motion/html-css")
+    spec["timeline"]["tracks"][0]["items"][0]["props"] = {"html": '<h1 class="ve-text ve-enter">RAW CSS</h1>', "css": ".ve-text{color:papayawhip}"}
+    plan = motion_render_plan(spec)
+    assert plan["layers"][0]["authoringContract"] == "html-css-only"
+    assert plan["layers"][0]["seekContract"] == "automatic-css-animations"
+    assert plan["layers"][0]["nativeEligibility"] == "candidate-unverified"
+
+
+def test_raw_html_css_accepts_full_documents_and_rejects_script_surfaces():
+    document = _html_css_document(
+        {
+            "html": "<!doctype html><html lang=\"en\"><head><title>Raw</title></head><body><svg viewBox=\"0 0 10 10\"><circle cx=\"5\" cy=\"5\" r=\"4\"/></svg></body></html>",
+            "css": "svg{filter:drop-shadow(0 0 2px white)}",
+        },
+        "http://127.0.0.1:1234/project/",
+        "http://127.0.0.1:1234/atoms/v1.css",
+    )
+    assert document.count("<html") == 1
+    assert document.count("<head") == 1
+    assert 'href="http://127.0.0.1:1234/atoms/v1.css"' in document
+    assert "script-src 'none'" in document
+    assert "<svg" in document
+    with pytest.raises(MotionRenderError, match="does not allow javascript"):
+        _html_css_document({"html": "<h1>NO</h1>", "javascript": "alert(1)"}, "http://127.0.0.1/", None)
+    with pytest.raises(MotionRenderError, match="<script>"):
+        _html_css_document({"html": "<script>alert(1)</script>"}, "http://127.0.0.1/", None)
+    with pytest.raises(MotionRenderError, match="event handlers"):
+        _html_css_document({"html": '<div onclick="alert(1)">NO</div>'}, "http://127.0.0.1/", None)
+
+
+def test_raw_html_css_atoms_render_and_seek_without_authored_javascript():
+    playwright = pytest.importorskip("playwright.sync_api")
+    spec = _spec("vibeedit://motion/html-css")
+    spec["durationFrames"] = 30
+    spec["canvas"].update({"frameRate": {"numerator": 30, "denominator": 1}, "backgroundColor": "#111"})
+    spec["timeline"]["tracks"][0]["items"][0]["placement"]["durationFrames"] = 30
+    spec["timeline"]["tracks"][0]["items"][0]["props"] = {
+        "html": '<main class="ve-stage ve-center"><h1 id="title" class="ve-text ve-enter ve-gradient ve-shimmer ve-perspective ve-tilt" data-ve-from="bottom">ATOMS</h1><p id="blur" class="ve-text ve-blur-in ve-shadow">COMPOSED</p></main>',
+        "css": ":root{--ve-duration:1s;--ve-rotate-y:18deg;--ve-gradient:linear-gradient(90deg,#fff,#8cf)}#title::after{content:' CSS';color:white}",
+    }
+    with playwright.sync_playwright() as runtime, _motion_asset_server(Path.cwd()) as urls:
+        browser = runtime.chromium.launch(headless=True)
+        page = browser.new_page(viewport={"width": 640, "height": 360})
+        _load_persistent_page(page, spec, urls)
+        _apply_persistent_frame(page, spec, 0, urls["catalog"])
+        _settle_web_frames(page, spec, 0)
+        child = page.locator("iframe[data-vibeedit-html-css]").element_handle().content_frame()
+        early = child.locator("#title").evaluate("element => ({transform:getComputedStyle(element).transform, translate:getComputedStyle(element).translate, background:getComputedStyle(element).backgroundImage, position:getComputedStyle(element).backgroundPosition, after:getComputedStyle(element, '::after').content})")
+        early_blur = child.locator("#blur").evaluate("element => getComputedStyle(element).filter")
+        _apply_persistent_frame(page, spec, 20, urls["catalog"])
+        _settle_web_frames(page, spec, 20)
+        late = child.locator("#title").evaluate("element => ({transform:getComputedStyle(element).transform, translate:getComputedStyle(element).translate, background:getComputedStyle(element).backgroundImage, position:getComputedStyle(element).backgroundPosition, after:getComputedStyle(element, '::after').content})")
+        late_blur = child.locator("#blur").evaluate("element => getComputedStyle(element).filter")
+        assert early["translate"] != late["translate"]
+        assert early["position"] != late["position"]
+        assert early["transform"] == late["transform"]
+        assert early_blur != late_blur
+        assert "drop-shadow" in late_blur
+        assert "gradient" in late["background"]
+        assert late["after"] == '" CSS"'
+        assert child.locator("script").count() == 0
+        browser.close()
 
 
 def test_local_webgpu_project_can_compile_wgsl_when_adapter_is_available():

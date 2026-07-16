@@ -14,6 +14,10 @@ only when the user explicitly requests `setup --sam` or `setup --all`.
   only when a composition explicitly selects `vibeedit://motion/html` or
   `vibeedit://motion/web-project`; it is executable code and has the same trust
   level as a local script launched by the user.
+- `vibeedit://motion/html-css` is the narrower raw authoring contract. It rejects
+  authored scripts, event-handler attributes, `javascript:` URLs, embedded
+  documents, and meta refresh; a restrictive content-security policy also
+  disables scripts, connections, frames, and plugins inside the layer.
 - Browser rendering runs locally and does not fetch network assets.
 - Custom project assets are exposed through a traversal-safe loopback server
   rooted at the composition directory. The server has no directory listing and

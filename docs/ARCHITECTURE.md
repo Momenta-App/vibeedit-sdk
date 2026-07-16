@@ -56,6 +56,15 @@ compiler proves that every operation it uses is supported and visually
 conformant. WebGPU/WGSL is also available inside custom projects as an advanced
 escape hatch; agents are not required to author shaders for ordinary text.
 
+The preferred agent surface is narrower than the unrestricted project path:
+`vibeedit://motion/html-css` accepts raw Chromium HTML and CSS, automatically
+seeks CSS animations, and forbids authored JavaScript. Its optional VibeEdit
+Motion Atoms stylesheet is a composable vocabulary of layout, text, material,
+transform, animation, and blend primitives. The atoms are browser-reference
+CSS today and carry stable native-primitive names for future conformance-gated
+Rust/WGPU lowering; they do not replace or mutate the source-preserved preset
+catalog.
+
 ## Backends and capability routing
 
 The lightweight installation requires Python and system FFmpeg/FFprobe. Optional
