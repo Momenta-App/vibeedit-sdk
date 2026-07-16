@@ -2,19 +2,19 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "vibeedit-0.1.0-beta.1",
-  "documentNamespace": "https://vibeedit.com/sbom/vibeedit-0.1.0-beta.1",
+  "name": "vibeedit-0.1.0-beta.2",
+  "documentNamespace": "https://vibeedit.com/sbom/vibeedit-0.1.0-beta.2",
   "creationInfo": {
     "created": "2026-07-14T00:00:00Z",
     "creators": [
-      "Tool: VibeEdit SBOM generator 0.1.0-beta.1"
+      "Tool: VibeEdit SBOM generator 0.1.0-beta.2"
     ]
   },
   "packages": [
     {
       "name": "vibeedit",
       "SPDXID": "SPDXRef-Package-VibeEdit",
-      "versionInfo": "0.1.0-beta.1",
+      "versionInfo": "0.1.0-beta.2",
       "downloadLocation": "NOASSERTION",
       "licenseConcluded": "LicenseRef-VibeEdit",
       "licenseDeclared": "LicenseRef-VibeEdit",

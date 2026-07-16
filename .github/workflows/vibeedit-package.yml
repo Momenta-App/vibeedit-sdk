@@ -8,8 +8,8 @@ permissions:
   contents: read
 
 env:
-  NPM_PACKAGE_VERSION: 0.1.0-beta.1
-  PYTHON_PACKAGE_VERSION: 0.1.0b1
+  NPM_PACKAGE_VERSION: 0.1.0-beta.2
+  PYTHON_PACKAGE_VERSION: 0.1.0b2
 
 jobs:
   portable-smoke:

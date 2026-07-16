@@ -1,7 +1,7 @@
 # Release readiness report
 
 Date: 2026-07-16
-Candidate: VibeEdit 0.1.0 beta 1
+Candidate: VibeEdit 0.1.0 beta 2 (unreleased)
 Decision: **PUBLIC BETA APPROVED FOR TESTING AND COMMUNITY REVIEW**
 
 The candidate is a functional package, not a scaffold. It includes
@@ -259,7 +259,7 @@ npm run types:check
 # passed
 
 npm run validate
-# {"ok":true,"version":"0.1.0-beta.1","catalogItems":443,"skills":44,"assets":65}
+# {"ok":true,"version":"0.1.0-beta.2","catalogItems":443,"skills":44,"assets":65}
 
 .venv/bin/python -m build --outdir /tmp/vibeedit-python-release
 # wheel and sdist built through isolated PEP 517 environments
@@ -302,7 +302,7 @@ composition editing over the underlying library.
 | 13 | Pass on verified platform | Face/body/tracking, macOS-native pose, portable ONNX objects, SAM 2.1 setup/inference, and structured degradation all operate; 0.1 documents pose as macOS-native. |
 | 14 | Pass for included assets | Included audio is VibeEdit-generated and hash/provenance/loudness/decode audited. |
 | 15 | Pass | Local macOS ARM64/Linux ARM64 and hosted Linux x86_64/Windows/macOS builds, installs, renders, catalog, skills, assets, license scans, and release-owner rights review pass. |
-| 16 | Pass | npm `0.1.0-beta.1` and Python `0.1.0b1` identify the same beta and share CompositionSpec 1.0.0 plus the catalog/skill compatibility policy. |
+| 16 | Pass | The unreleased npm `0.1.0-beta.2` and Python `0.1.0b2` identify the same candidate and share CompositionSpec 1.0.0 plus the catalog/skill compatibility policy. The existing public beta.1 retains its original immutable versions and artifacts. |
 | 17 | Pass for audited artifacts | No secrets, absolute developer paths, bundled weights, unapproved media, or undocumented downloads were found. |
 | 18 | Pass | This report records inventory, platforms, sizes, downloads, commands, gaps, and licensing concerns. |
 | 19 | Pass | The source repository is public and public beta publication is explicitly approved; website deployment and production rollout remain separate actions. |

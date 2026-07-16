@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 beta 2 - Unreleased
+
+- Give the materially changed post-beta.1 candidate a distinct npm/Python
+  package identity so it cannot be confused with or overwrite the existing
+  public beta.1 artifacts.
 
 - Add a pinned Chromium/CEF shared-texture MVP proving HTML/CSS plus browser
   WebGPU composition can reach native code as a macOS IOSurface without PNG
@@ -13,8 +17,6 @@
   local assets/fonts, and no authored JavaScript.
 - Added VibeEdit Motion Atoms v1, a reusable CSS/manifest vocabulary designed for
   concise agent composition and future conformance-gated Rust/WGPU lowering.
-
-## Unreleased
 
 - Replace per-frame Chromium document reloads with a persistent deterministic
   seek runtime and faster lossless compositor capture.

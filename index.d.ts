@@ -143,6 +143,6 @@ export declare function documentForFrame(spec: JSONObject, frame: number, option
 export declare function trackingPointAt(points: JSONObject[], frame: number, fallback?: { x: number; y: number }): Readonly<{ x: number; y: number }>;
 export declare function renderMotionFrame(spec: JSONObject, frame: number, output: string, options?: { transparent?: boolean }): Promise<string>;
 
-export declare const VERSION: "0.1.0-beta.1";
-export declare const vibeedit: Readonly<{ name: "VibeEdit"; version: "0.1.0-beta.1"; website: "https://vibeedit.com"; npm: "https://www.npmjs.com/package/vibeedit"; schemaVersion: "1.0.0"; catalogVersion: "0.1.0" }>;
+export declare const VERSION: "0.1.0-beta.2";
+export declare const vibeedit: Readonly<{ name: "VibeEdit"; version: "0.1.0-beta.2"; website: "https://vibeedit.com"; npm: "https://www.npmjs.com/package/vibeedit"; schemaVersion: "1.0.0"; catalogVersion: "0.1.0" }>;
 export default vibeedit;

@@ -127,9 +127,9 @@ Or build and install the exact local artifacts:
 
 ```bash
 uv build --out-dir dist/python
-uv tool install dist/python/vibeedit-0.1.0b1-py3-none-any.whl
+uv tool install dist/python/vibeedit-0.1.0b2-py3-none-any.whl
 npm pack --pack-destination dist/npm
-npm install ./dist/npm/vibeedit-0.1.0-beta.1.tgz
+npm install ./dist/npm/vibeedit-0.1.0-beta.2.tgz
 ```
 
 `setup` performs only explicitly requested work. It installs pinned browser and
