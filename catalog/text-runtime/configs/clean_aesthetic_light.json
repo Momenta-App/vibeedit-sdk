@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "slug": "clean_aesthetic_light",
+  "name": "clean aesthetic light",
+  "family": "apple-clean",
+  "source": "V2 50 TITLES PACK PR/Manual files/clean aesthetic light.mogrt",
+  "controls": [
+    {
+      "name": "clean aesthetic light",
+      "type": 6,
+      "value": "clean aesthetic light"
+    },
+    {
+      "name": "Resplandor Intensidad de resplandor",
+      "type": 2,
+      "value": 0.5440000000000003
+    },
+    {
+      "name": "Resplandor Radio de resplandor",
+      "type": 2,
+      "value": 27
+    },
+    {
+      "name": "Relleno Color",
+      "type": 4,
+      "value": [
+        1,
+        0.970934271812439,
+        0.8823529481887817,
+        1
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "recipe": {
+    "type": "clean_aesthetic",
+    "motion": "left_reveal",
+    "introFrames": 16,
+    "text": "clean aesthetic light",
+    "font": "Poppins-Regular.ttf",
+    "bounds": [
+      152,
+      150,
+      336,
+      56
+    ],
+    "color": [
+      255,
+      248,
+      225,
+      1
+    ],
+    "sizeScale": 0.66,
+    "textPadY": 5,
+    "fontBoundsScale": 0.54,
+    "pill": {
+      "alpha": 0.74,
+      "borderAlpha": 0.78,
+      "radius": 7,
+      "insetX": 3,
+      "insetY": 4,
+      "shadowAlpha": 0.48
+    },
+    "textGlowAlpha": 0.72,
+    "textGlowRadius": 7,
+    "textWideGlowAlpha": 0.2,
+    "textWideGlowRadius": 13,
+    "textHaloOpacity": 0.48,
+    "textHaloBlur": 4.5,
+    "textSweepOpacity": 0.18,
+    "textShadowAlpha": 0.34
+  },
+  "editable": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph layers, duplicate text halos, masks, shadows, and light sweeps."
+}

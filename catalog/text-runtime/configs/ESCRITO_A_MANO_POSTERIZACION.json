@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "slug": "ESCRITO_A_MANO_POSTERIZACION",
+  "name": "ESCRITO A MANO POSTERIZACION",
+  "family": "elegant-misc",
+  "kind": "glyph_canvas_motion",
+  "duration": 7,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "source": "V2 50 TITLES PACK PR/ESCRITO A MANO POSTERIZACION.mogrt",
+  "controls": [
+    {
+      "id": "31381b8c-0a58-4229-8490-97ac44cf9493",
+      "type": 6,
+      "name": "Cambiar texto",
+      "value": "texto escrito a mano\rcon posterizacion",
+      "font": "Mytupi-Bold",
+      "fontSize": 36
+    },
+    {
+      "id": "80ed47fb-a561-42bc-b5b9-347a214c4df2",
+      "type": 4,
+      "name": "color 1",
+      "value": [
+        255,
+        244,
+        226,
+        1
+      ]
+    },
+    {
+      "id": "532dbc47-6feb-4d8a-90c6-e2318a88bd07",
+      "type": 5,
+      "name": "Gradient Ramp Start of Ramp",
+      "value": {
+        "x": 958,
+        "y": 698.2776794433594
+      }
+    },
+    {
+      "id": "7f141e84-a685-4026-b591-0ff1e6c0d2dc",
+      "type": 4,
+      "name": "color 2",
+      "value": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "ffbc0297-0380-4fef-ae27-c6bd3115ebf8",
+      "type": 5,
+      "name": "Gradient Ramp End of Ramp",
+      "value": {
+        "x": 958,
+        "y": 554
+      }
+    },
+    {
+      "id": "f3c7dd6c-20eb-41ac-bdab-eb93cb8745c9",
+      "type": 2,
+      "name": "Desplazamiento turbulento Nivel",
+      "value": 9.000000000000004,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "54cbcd1d-a152-43cf-b57f-cbc4c4cfe0c3",
+      "type": 2,
+      "name": "Desplazamiento turbulento Tamaño",
+      "value": 27.799999999999997,
+      "min": 5,
+      "max": 400
+    },
+    {
+      "id": "ea368aa4-feb3-4cc6-8847-e5127c2f3116",
+      "type": 3,
+      "name": "NO TOCAR",
+      "value": 0
+    },
+    {
+      "id": "77bd9a4a-ffaa-4486-b153-d911c399d0e1",
+      "type": 2,
+      "name": "FPS",
+      "value": 6,
+      "min": 1,
+      "max": 64
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "recipe": {
+    "type": "elegant-misc-canvas",
+    "style": "posterized",
+    "duration": 7,
+    "layers": [
+      {
+        "text": "texto escrito a mano\ncon posterizacion",
+        "font": "Mytupi-Bold",
+        "box": [
+          470,
+          116
+        ],
+        "center": [
+          320.5,
+          179.5
+        ],
+        "gradient": [
+          [
+            238,
+            228,
+            212
+          ],
+          [
+            228,
+            218,
+            202
+          ]
+        ],
+        "tracking": 0,
+        "line_gap": 8,
+        "alpha_gain": 1.7,
+        "alpha_threshold": 38,
+        "glow": [
+          255,
+          244,
+          226
+        ],
+        "glow_radius": 2,
+        "glow_opacity": 0.1,
+        "shadow": [
+          0,
+          0,
+          0
+        ],
+        "shadow_offset": [
+          3,
+          3
+        ],
+        "shadow_radius": 2,
+        "shadow_opacity": 0.36,
+        "stroke": null,
+        "stroke_width": 0,
+        "stroke_opacity": 0,
+        "radial": false,
+        "posterized": true,
+        "jitter": 0,
+        "posterize_fps": 6,
+        "turbulent": 0.5,
+        "turbulent_size": 27.8,
+        "turbulent_seed": 431
+      }
+    ],
+    "controls": {
+      "text": "texto escrito a mano\\ncon posterizacion",
+      "color_1": [
+        255,
+        244,
+        226,
+        1
+      ],
+      "color_2": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "turbulent_displace_amount": 3.9,
+      "turbulent_displace_size": 27.8,
+      "turbulent_displace_seed": 431,
+      "posterize_fps": 6,
+      "effects": [
+        "CC Light Sweep",
+        "Fill",
+        "Gaussian Blur",
+        "Glow",
+        "Gradient Ramp",
+        "Posterize Time",
+        "Transform",
+        "Turbulent Displace"
+      ]
+    },
+    "defects": [
+      "Turbulent Displace now uses a reduced deterministic seeded 6 fps displacement; the recovered AE amount 9.0 was too heavy in the browser mask renderer.",
+      "Per-layer alpha threshold/gain erodes the browser-softened glyph edge to better match the original posterized rasterization; final threshold is lowered slightly from the prior pass after residual metrics improved.",
+      "Line gap is widened from the editable renderer draft to better match the packaged AE preview's stacked handwritten placement while preserving editable canvas text."
+    ]
+  },
+  "sourceMapping": {
+    "sourceSpec": "../specs/ESCRITO_A_MANO_POSTERIZACION.json"
+  },
+  "outputs": {
+    "html": "families/elegant-misc/outputs/ESCRITO_A_MANO_POSTERIZACION.html",
+    "preview": "previews/ESCRITO_A_MANO_POSTERIZACION.mp4",
+    "alpha": "alpha/ESCRITO_A_MANO_POSTERIZACION.mov"
+  },
+  "renderer": {
+    "component": "families/elegant-misc/components/elegant-misc.js",
+    "style": "families/elegant-misc/components/elegant-misc.css",
+    "renderScript": "families/elegant-misc/scripts/render.mjs",
+    "output": "families/elegant-misc/outputs/ESCRITO_A_MANO_POSTERIZACION.html"
+  },
+  "fonts": [
+    "Mytupi-Bold"
+  ],
+  "noBoxGlowRuleAcknowledged": true
+}

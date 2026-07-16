@@ -18,8 +18,8 @@
     "python": "3.12.13",
     "node": "v26.0.0"
   },
-  "javascriptSha256": "65bf4ac9ddfe2ece131c580b6831a3b25cc94c25d77e88cb37f80e7582f747cc",
-  "pythonSha256": "b14362b87467c80ce31dfd7e849368b082de46faf33b36c936de49d66ee05144",
-  "aggregateSha256": "af7a80f4e3ca5a733493c45bc6511c077532e77676e9a3308d87c5f39cf41173",
-  "contract": "Every generated component rendered deterministically at two integer frames in both public runtimes without network or binary assets."
+  "javascriptSha256": "33dd15aacc472aa9e73e6394bf2f8d85544fa8e2b7cddb080706324447c4f6a5",
+  "pythonSha256": "b4369d4b7481eef2a0294af2925217476733e5f532aa57f51aa1a0b15c10ef6a",
+  "aggregateSha256": "243f02fd21ef1c5a141acb37869c4219aa8f1aef8bc069d842e43d9ef942ccc9",
+  "contract": "Every generated fallback component rendered deterministically at two integer frames in both public runtimes. Canonical browser fidelity is validated separately against the packaged tracked HTML/CSS/JS runtime."
 }

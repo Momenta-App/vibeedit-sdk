@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "slug": "WARP",
+  "name": "WARP",
+  "family": "water-warp",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {},
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable HTML motion rebuild using shared canvas text masks, row displacement, glyph-derived glow/shadow, gradients, light sweep, shimmer, and a procedural water plate.",
+  "recipe": {
+    "slug": "WARP",
+    "name": "WARP",
+    "text": "warp",
+    "duration": 7.6,
+    "font_family": "Poppins-Black",
+    "font_file": "Poppins-Black.ttf",
+    "font_size": 58,
+    "style": "warp_text",
+    "controls": {
+      "text": "warp",
+      "source_text_control_font": "Poppins-Black",
+      "aep_report_font": "AVANTE Regular",
+      "chosen_preview_font": "Poppins-Black",
+      "gradient_start": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "gradient_end": [
+        0,
+        210,
+        255,
+        1
+      ],
+      "turbulent_displace_size": 48,
+      "turbulent_displace_level": 52,
+      "effects": [
+        "venetian blinds",
+        "CC Burn Film",
+        "CC Light Sweep",
+        "wave warp",
+        "4-color gradient",
+        "fast box blur",
+        "turbulent displacement",
+        "gradient ramp",
+        "glow",
+        "noise"
+      ]
+    },
+    "defects": [
+      "AE Turbulent Displace is approximated with deterministic row displacement and shimmer noise.",
+      "CC Burn Film and Venetian Blinds are represented by brief luminance flicker, not the original AE procedural pattern."
+    ]
+  },
+  "componentRecipe": {
+    "slug": "WARP",
+    "family": "water-warp",
+    "editable": true,
+    "compositionId": "water-warp-WARP",
+    "text": "warp",
+    "duration": 7.6,
+    "fps": 30,
+    "style": "warp_text",
+    "font": {
+      "family": "Poppins Black",
+      "file": "Poppins-Black.ttf",
+      "sourceFamily": "Poppins-Black",
+      "italic": false
+    },
+    "fontSize": 58,
+    "primaryText": "Principal",
+    "secondaryText": "second",
+    "primaryFontSize": 58,
+    "secondaryFontSize": 32,
+    "browserTuning": {
+      "gradientTop": [
+        250,
+        255,
+        255
+      ],
+      "gradientBottom": [
+        0,
+        210,
+        255
+      ],
+      "strokeColor": [
+        1,
+        41,
+        49
+      ],
+      "glowColor": [
+        0,
+        210,
+        255
+      ],
+      "amp": 3.3,
+      "period": 11,
+      "phaseSpeed": 0.23,
+      "centerX": 316,
+      "centerY": 184,
+      "flickerBase": 0.88,
+      "flickerRange": 0.12,
+      "venetian": {
+        "enabled": false
+      }
+    }
+  }
+}

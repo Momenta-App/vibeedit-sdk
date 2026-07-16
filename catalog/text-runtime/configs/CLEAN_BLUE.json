@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "slug": "CLEAN_BLUE",
+  "name": "CLEAN BLUE",
+  "family": "apple-clean",
+  "source": "V2 50 TITLES PACK PR/CLEAN BLUE.mogrt",
+  "controls": [
+    {
+      "name": "Text 1",
+      "type": 10,
+      "value": [
+        "dde5ab8f-2f22-4caf-bca8-75811e702699",
+        "38ce3dec-3917-4190-865e-b09650ab117f",
+        "47d04e13-50d6-418f-9812-d22f00a5bccb",
+        "1c454f30-6a63-4b27-8da7-3e9eafdae1cf",
+        "27ad7f47-bec5-45be-8d4b-bd5768a20e59",
+        "414323f5-9e77-4874-8bcd-9277a5e36827"
+      ]
+    },
+    {
+      "name": "Clean 2",
+      "type": 6,
+      "value": "Clean"
+    },
+    {
+      "name": "Gradient Ramp Start of Ramp",
+      "type": 5,
+      "value": {
+        "x": 960,
+        "y": 494
+      }
+    },
+    {
+      "name": "Gradient Ramp Start Color",
+      "type": 4,
+      "value": [
+        1,
+        0.9180622696876526,
+        0.8117647171020508,
+        1
+      ]
+    },
+    {
+      "name": "Gradient Ramp End of Ramp",
+      "type": 5,
+      "value": {
+        "x": 960,
+        "y": 660
+      }
+    },
+    {
+      "name": "Gradient Ramp End Color",
+      "type": 4,
+      "value": [
+        0,
+        0.5882351994514465,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Animator 2 Position",
+      "type": 5,
+      "value": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "name": "Text 2",
+      "type": 10,
+      "value": [
+        "1d66b22e-5fb2-4e5f-b522-d8f9aa36ee40",
+        "1b87b11a-a4a0-48a0-a5e2-2f727052c18c",
+        "69514fb7-5066-438a-a89b-f9684a3b2afa",
+        "2bdcd209-097f-4d9c-a55d-1e7c9945b98e",
+        "c9d76f86-64b3-47eb-998f-b175a075307e",
+        "020c9e07-cd0e-408b-9632-88c91ea25775"
+      ]
+    },
+    {
+      "name": "blue",
+      "type": 6,
+      "value": "blue"
+    },
+    {
+      "name": "Gradient Ramp Start of Ramp",
+      "type": 5,
+      "value": {
+        "x": 960,
+        "y": 543
+      }
+    },
+    {
+      "name": "Gradient Ramp Start Color",
+      "type": 4,
+      "value": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Gradient Ramp End of Ramp",
+      "type": 5,
+      "value": {
+        "x": 960,
+        "y": 660
+      }
+    },
+    {
+      "name": "Gradient Ramp End Color",
+      "type": 4,
+      "value": [
+        0,
+        0.5882351994514465,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Animator 2 Position",
+      "type": 5,
+      "value": {
+        "x": 0,
+        "y": -6
+      }
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "recipe": {
+    "type": "clean_blue",
+    "motion": "zoom_settle",
+    "introFrames": 23,
+    "bounds": [
+      236,
+      140,
+      171,
+      114
+    ],
+    "topGlowAlpha": 0.48,
+    "bottomGlowAlpha": 0.74,
+    "tealShadowAlpha": 0.48,
+    "topBlueGlowAlpha": 0.18,
+    "bottomDepthAlpha": 0.28,
+    "topFontSize": 64,
+    "bottomFontSize": 64,
+    "topBounds": [
+      0,
+      -1,
+      171,
+      63
+    ],
+    "bottomBounds": [
+      0,
+      31,
+      171,
+      77
+    ],
+    "lines": [
+      {
+        "text": "Clean",
+        "font": "mytupiBOLD.ttf",
+        "color": [
+          255,
+          234,
+          207,
+          1
+        ],
+        "vars": {
+          "top-halo-opacity": 0.32,
+          "top-halo-blur": "4px",
+          "top-sweep-opacity": 0.2
+        }
+      },
+      {
+        "text": "blue",
+        "font": "mytupiBOLD.ttf",
+        "color": [
+          0,
+          150,
+          255,
+          1
+        ],
+        "vars": {
+          "bottom-halo-opacity": 0.44,
+          "bottom-halo-blur": "5px",
+          "bottom-sweep-opacity": 0.22
+        }
+      }
+    ]
+  },
+  "editable": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph layers, duplicate text halos, masks, shadows, and light sweeps."
+}

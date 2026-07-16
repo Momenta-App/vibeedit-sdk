@@ -49,6 +49,8 @@
     "catalog:build": "python3 scripts/normalize_catalog_examples.py && python3 scripts/generate_catalog_site.py",
     "previews:build": "uv run --extra browser python scripts/build_previews.py",
     "text:previews": "node scripts/build_text_effect_previews.mjs",
+    "text:runtime:import": "python3 scripts/import_canonical_text_runtime.py",
+    "text:fidelity": "node scripts/verify_canonical_text_fidelity.mjs",
     "sbom:build": "python3 scripts/generate_sbom.py",
     "pack:check": "npm pack --dry-run",
     "types:check": "tsc --noEmit -p tsconfig.types.json"

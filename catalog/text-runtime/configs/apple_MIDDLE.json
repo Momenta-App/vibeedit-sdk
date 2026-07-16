@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "slug": "apple_MIDDLE",
+  "name": "apple MIDDLE",
+  "family": "apple-clean",
+  "source": "V2 50 TITLES PACK PR/Manual files/apple MIDDLE.mogrt",
+  "controls": [
+    {
+      "name": "apple middle",
+      "type": 6,
+      "value": "apple middle"
+    },
+    {
+      "name": "Relleno Color",
+      "type": 4,
+      "value": [
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "recipe": {
+    "type": "plain",
+    "motion": "center_reveal",
+    "introFrames": 30,
+    "text": "apple middle",
+    "font": "mytupiBOLD.ttf",
+    "bounds": [
+      192,
+      154,
+      256,
+      52
+    ],
+    "fontSize": 44,
+    "color": [
+      255,
+      255,
+      255,
+      1
+    ],
+    "sweep": true,
+    "sweepStrength": 0.08,
+    "sweepWidth": "6%",
+    "glows": [
+      {
+        "color": [
+          255,
+          255,
+          255,
+          1
+        ],
+        "radius": 1.8,
+        "alpha": 0.2
+      }
+    ]
+  },
+  "editable": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph layers, duplicate text halos, masks, shadows, and light sweeps."
+}

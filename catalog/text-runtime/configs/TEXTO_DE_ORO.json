@@ -1,0 +1,46 @@
+{
+  "slug": "TEXTO_DE_ORO",
+  "family": "dimensional-metal",
+  "duration": 7,
+  "fps": 30,
+  "text": "Texto de Oro",
+  "font": "assets/fonts/mytupiBOLD.ttf",
+  "font_size": 148,
+  "top_color": [
+    255,
+    246,
+    169,
+    255
+  ],
+  "bottom_color": [
+    246,
+    217,
+    0,
+    255
+  ],
+  "shadow_color": [
+    32,
+    24,
+    0,
+    255
+  ],
+  "center": [
+    891,
+    566
+  ],
+  "tracking": 0,
+  "stroke_width": 8,
+  "bevel": 6,
+  "glow": 1,
+  "source_notes": {
+    "mogrt": "V2 50 TITLES AE/AE TEXT 2.1/ClashTextPresets_Package/presets/TEXTO DE ORO.mogrt",
+    "effects": [
+      "Advanced 3D",
+      "CC Light Sweep",
+      "Turbulent Displace",
+      "Glow",
+      "Gradient Ramp"
+    ]
+  },
+  "noBoxGlowRuleAcknowledged": true
+}

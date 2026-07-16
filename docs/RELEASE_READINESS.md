@@ -45,7 +45,7 @@ record is [public-beta-install-proof.json](evidence/public-beta-install-proof.js
 | Surface | Included and verified |
 | --- | --- |
 | Media presets | 333: 200 filters, 112 effects, 21 transitions |
-| Motion runtime | 74 tracked text/caption/MOGRT adaptations plus the two baseline components |
+| Motion runtime | 53 source-preserved VibeEdit HTML/CSS/JS effects, 21 portable-runtime text/caption effects, and two baseline components |
 | Skills | 44 byte-identical clones selected from the canonical tracked tree; 23 rejected/quarantined |
 | Examples | 13 executable examples; 12 render locally or are baseline recipes, 1 is capability-gated SAM |
 | Catalog | 467 searchable items with stable IDs, prompts, code, compatibility, provenance, and validation |
@@ -72,9 +72,13 @@ No MoviePy or HyperFrames object is public API.
 - Representative cinematic-filter, invert, cross-dissolve, film-burn, and
   push-transition frames match fixed pixel goldens and exceed perceptual-delta
   floors against their inputs.
-- All 74 portable motion adaptations seek at two frames in Python and
+- All 74 fallback motion implementations seek at two frames in Python and
   JavaScript with aggregate cross-runtime SHA-256
-  `af7a80f4e3ca5a733493c45bc6511c077532e77676e9a3308d87c5f39cf41173`.
+  `243f02fd21ef1c5a141acb37869c4219aa8f1aef8bc069d842e43d9ef942ccc9`.
+- All 53 packaged canonical HTML/CSS/JS effects were compared to the tracked
+  source at three timeline points: 50 are pixel-identical and three are
+  perceptually equivalent browser-font rasterizations above SSIM 0.95. The
+  measured minimum is 0.958599.
 - All 76 registered text effects (74 imported adaptations plus the two
   baseline components) have verified, hash-bound, decodable MP4 previews. The
   browser suite checks deterministic frames, visible pixels, expected DOM

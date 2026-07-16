@@ -1,0 +1,83 @@
+{
+  "slug": "ORANGE_TEXT",
+  "family": "aesthetic-glow",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph masks, duplicate text layers, SVG/CSS glow, blur, reflection, light-sweep, and color recipes. No rectangular haze, slabs, or panel shortcuts are used.",
+  "recipe": {
+    "duration": 7,
+    "motion": {
+      "from_dx": -22,
+      "from_dy": -16,
+      "from_scale": 0.98,
+      "intro": 0.7
+    },
+    "texts": [
+      {
+        "text": "Orange",
+        "font": "Mytupi-Bold",
+        "size": 54,
+        "x": 217,
+        "y": 138,
+        "top": [
+          255,
+          218,
+          160
+        ],
+        "bottom": [
+          255,
+          92,
+          0
+        ],
+        "shadow": {
+          "dx": 2,
+          "dy": 15,
+          "blur": 11,
+          "opacity": 0.72,
+          "color": [
+            110,
+            42,
+            0
+          ]
+        },
+        "glows": [
+          {
+            "color": [
+              255,
+              120,
+              0
+            ],
+            "radius": 21,
+            "opacity": 0.74
+          },
+          {
+            "color": [
+              255,
+              250,
+              240
+            ],
+            "radius": 4,
+            "opacity": 0.38
+          }
+        ],
+        "extrude": {
+          "dx": 1,
+          "dy": 2,
+          "steps": 4,
+          "color": [
+            90,
+            28,
+            0
+          ],
+          "opacity": 0.58
+        }
+      }
+    ]
+  }
+}

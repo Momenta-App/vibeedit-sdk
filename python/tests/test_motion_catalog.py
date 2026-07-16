@@ -35,6 +35,25 @@ def test_motion_validation_report_records_both_runtimes():
     assert len(report["pythonSha256"]) == 64
 
 
+def test_canonical_text_runtime_is_manifest_bound():
+    components = list_motion_components()
+    assert len([component for component in components if component.get("canonical")]) == 53
+    root = data_path("catalog", "text-runtime")
+    manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["schemaVersion"] == "vibeedit.canonical-text-runtime.v1"
+    assert len(manifest["files"]) == 151
+    for record in manifest["files"]:
+        payload = (root / record["path"]).read_bytes()
+        assert len(payload) == record["bytes"], record["path"]
+        assert hashlib.sha256(payload).hexdigest() == record["sha256"], record["path"]
+
+
+def test_canonical_seeking_uses_canvas_frame_rate():
+    spec = _spec("vibeedit://text/mogrt-bubble")
+    spec["canvas"]["frameRate"] = {"numerator": 24, "denominator": 1}
+    assert 'data-vibeedit-time="0.500000"' in document_for_frame(spec, 12, "http://127.0.0.1:1234/")
+
+
 def test_every_registered_text_effect_has_a_verified_hash_bound_preview():
     catalog = json.loads(data_path("catalog", "catalog.json").read_text(encoding="utf-8"))
     assets = json.loads(data_path("catalog", "assets.json").read_text(encoding="utf-8"))

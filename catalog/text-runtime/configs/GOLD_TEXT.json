@@ -1,0 +1,46 @@
+{
+  "slug": "GOLD_TEXT",
+  "family": "dimensional-metal",
+  "duration": 7,
+  "fps": 30,
+  "text": "Gold Text",
+  "font": "assets/fonts/mytupiBOLD.ttf",
+  "font_size": 140,
+  "top_color": [
+    255,
+    246,
+    169,
+    255
+  ],
+  "bottom_color": [
+    246,
+    217,
+    0,
+    255
+  ],
+  "shadow_color": [
+    32,
+    24,
+    0,
+    255
+  ],
+  "center": [
+    884,
+    560
+  ],
+  "tracking": 0,
+  "stroke_width": 8,
+  "bevel": 6,
+  "glow": 1,
+  "source_notes": {
+    "mogrt": "V2 50 TITLES PACK PR/GOLD TEXT.mogrt",
+    "effects": [
+      "Advanced 3D",
+      "CC Light Sweep",
+      "Turbulent Displace",
+      "Glow",
+      "Gradient Ramp"
+    ]
+  },
+  "noBoxGlowRuleAcknowledged": true
+}

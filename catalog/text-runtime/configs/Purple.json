@@ -1,0 +1,73 @@
+{
+  "slug": "Purple",
+  "family": "aesthetic-glow",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph masks, duplicate text layers, SVG/CSS glow, blur, reflection, light-sweep, and color recipes. No rectangular haze, slabs, or panel shortcuts are used.",
+  "recipe": {
+    "duration": 7.6,
+    "motion": {
+      "from_dx": -18,
+      "from_dy": -12,
+      "from_scale": 0.98,
+      "intro": 0.64
+    },
+    "texts": [
+      {
+        "text": "Purple",
+        "font": "Poppins-BlackItalic",
+        "size": 54,
+        "x": 214,
+        "y": 151,
+        "top": [
+          225,
+          0,
+          255
+        ],
+        "bottom": [
+          75,
+          0,
+          170
+        ],
+        "shadow": {
+          "dx": 2,
+          "dy": 4,
+          "blur": 2,
+          "opacity": 0.72
+        },
+        "glows": [
+          {
+            "color": [
+              188,
+              0,
+              255
+            ],
+            "radius": 9,
+            "opacity": 0.64
+          }
+        ],
+        "extrude": {
+          "dx": 1,
+          "dy": 2,
+          "steps": 3,
+          "color": [
+            40,
+            0,
+            70
+          ],
+          "opacity": 0.55
+        },
+        "wave": {
+          "amp": 1,
+          "period": 38
+        }
+      }
+    ]
+  }
+}

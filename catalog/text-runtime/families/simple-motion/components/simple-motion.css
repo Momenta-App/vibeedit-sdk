@@ -1,0 +1,34 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #000;
+}
+
+body.transparent {
+  background: transparent;
+}
+
+.simple-motion-root {
+  position: relative;
+  width: 640px;
+  height: 360px;
+  overflow: hidden;
+  transform: scale(var(--hm-preview-scale, 1));
+  transform-origin: center;
+}
+
+.simple-motion-canvas {
+  position: absolute;
+  inset: 0;
+  width: 640px;
+  height: 360px;
+  display: block;
+}

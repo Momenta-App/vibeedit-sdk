@@ -108,7 +108,8 @@ uses `supersedes` rather than reassigning an ID.
 The verified vertical slice was expanded mechanically from canonical sources:
 
 - 333 deterministic media presets behind the VibeEdit-owned frame API.
-- 74 dependency-free, seekable Python/JavaScript motion components.
+- 53 source-preserved HTML/CSS/JS effects plus 21 dependency-free fallback
+  Python/JavaScript motion components.
 - 44 byte-identical canonical skill packages with four-harness lifecycle support.
 - External audio-clip mixing, beat analysis, mask compositing, procedural SFX,
   OpenCV face/body providers, tracking artifacts, and optional SAM routing.

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "slug": "dark_water",
+  "name": "dark water",
+  "family": "water-warp",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {},
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable HTML motion rebuild using shared canvas text masks, row displacement, glyph-derived glow/shadow, gradients, light sweep, shimmer, and a procedural water plate.",
+  "recipe": {
+    "slug": "dark_water",
+    "name": "dark water",
+    "text": "Principal\nsecond",
+    "duration": 7.6,
+    "font_family": "Poppins-BlackItalic",
+    "font_file": "Poppins-BlackItalic.ttf",
+    "font_size": 54,
+    "style": "dark_water",
+    "controls": {
+      "primary_text": "Principal",
+      "secondary_text": "second",
+      "source_text_control_font": "Poppins-BlackItalic",
+      "aep_report_font": "Mytupi Bold",
+      "primary_renderer_font_size": 54,
+      "secondary_renderer_font_size": 38,
+      "primary_gradient_start": [
+        0,
+        255,
+        204,
+        1
+      ],
+      "primary_gradient_end": [
+        0,
+        31,
+        27,
+        1
+      ],
+      "secondary_gradient_start": [
+        0,
+        128,
+        102,
+        1
+      ],
+      "secondary_gradient_end": [
+        0,
+        31,
+        27,
+        1
+      ],
+      "effects": [
+        "CC Light Sweep",
+        "wave warp",
+        "gradient ramp",
+        "transform"
+      ]
+    },
+    "defects": [
+      "AE wave deformation is approximated with small row displacement.",
+      "The exact Adobe italic text metrics differ slightly from Pillow/Freetype."
+    ]
+  },
+  "componentRecipe": {
+    "slug": "dark_water",
+    "family": "water-warp",
+    "editable": true,
+    "compositionId": "water-warp-dark_water",
+    "text": "Principal\nsecond",
+    "duration": 7.6,
+    "fps": 30,
+    "style": "dark_water",
+    "font": {
+      "family": "Poppins Black Italic",
+      "file": "Poppins-BlackItalic.ttf",
+      "sourceFamily": "Poppins-BlackItalic",
+      "italic": true
+    },
+    "fontSize": 46,
+    "primaryText": "Principal",
+    "secondaryText": "second",
+    "primaryFontSize": 46,
+    "secondaryFontSize": 32
+  }
+}

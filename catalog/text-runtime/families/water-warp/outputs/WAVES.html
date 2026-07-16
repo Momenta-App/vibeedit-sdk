@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640, height=360">
+    <title>WAVES - Water Warp</title>
+    <link rel="stylesheet" href="../components/water-warp.css">
+    <style>
+      @font-face {
+        font-family: "Poppins Black";
+        src: url("../../../assets/fonts/Poppins-Black.ttf") format("truetype");
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Poppins Black Italic";
+        src: url("../../../assets/fonts/Poppins-BlackItalic.ttf") format("truetype");
+        font-display: block;
+      }
+
+    </style>
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div id="root" data-composition-id="water-warp-WAVES" data-start="0" data-width="640" data-height="360" data-duration="7.6">
+      <section id="water-warp-WAVES-clip" class="clip" data-start="0" data-duration="7.6" data-track-index="1">
+        <canvas id="water-warp-canvas" class="water-warp-canvas" width="640" height="360"></canvas>
+      </section>
+    </div>
+    <script src="../components/water-warp.js"></script>
+    <script>
+      WaterWarp.mount({
+      "slug": "WAVES",
+      "family": "water-warp",
+      "editable": true,
+      "compositionId": "water-warp-WAVES",
+      "text": "waves",
+      "duration": 7.6,
+      "fps": 30,
+      "style": "waves_text",
+      "font": {
+            "family": "Poppins Black",
+            "file": "Poppins-Black.ttf",
+            "sourceFamily": "Poppins-Black",
+            "italic": false
+      },
+      "fontSize": 62,
+      "primaryText": "Principal",
+      "secondaryText": "second",
+      "primaryFontSize": 62,
+      "secondaryFontSize": 32
+});
+    </script>
+  </body>
+</html>

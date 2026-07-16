@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analog Glitch Family</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #101114;
+        color: #f5f6f8;
+        font: 14px/1.4 system-ui, sans-serif;
+      }
+
+      main {
+        width: min(960px, calc(100vw - 40px));
+      }
+
+      iframe {
+        width: 640px;
+        height: 360px;
+        max-width: 100%;
+        border: 1px solid #2d3038;
+        background: #000;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-block: 16px;
+      }
+
+      a {
+        color: #dfe7ff;
+      }
+    </style>
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <main>
+      <h1>Analog Glitch</h1>
+      <nav>
+        <a href="renderer.html?slug=ERROR_TEXT" target="preview">ERROR_TEXT</a>
+        <a href="renderer.html?slug=OLD_TV" target="preview">OLD_TV</a>
+        <a href="renderer.html?slug=VHS" target="preview">VHS</a>
+        <a href="renderer.html?slug=Radial_BLUR" target="preview">Radial_BLUR</a>
+      </nav>
+      <iframe name="preview" title="Analog glitch preview" src="renderer.html?slug=ERROR_TEXT"></iframe>
+    </main>
+  </body>
+</html>

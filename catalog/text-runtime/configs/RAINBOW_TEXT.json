@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "slug": "RAINBOW_TEXT",
+  "name": "RAINBOW TEXT",
+  "family": "rainbow-trippy",
+  "source": "V2 50 TITLES PACK PR/Manual files/RAINBOW TEXT.mogrt",
+  "text": "Trippy Text",
+  "duration": 7,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "style": "trippy_plate",
+  "fontFace": "Mytupi",
+  "fontFile": "mytupiBOLD.ttf",
+  "fontSize": 46,
+  "dashes": [
+    [
+      242,
+      92,
+      82,
+      7,
+      0.48
+    ],
+    [
+      346,
+      93,
+      66,
+      7,
+      0.66
+    ],
+    [
+      180,
+      147,
+      8,
+      23,
+      0.44
+    ],
+    [
+      452,
+      146,
+      8,
+      24,
+      0.73
+    ],
+    [
+      243,
+      256,
+      84,
+      6,
+      0.5
+    ],
+    [
+      347,
+      252,
+      66,
+      6,
+      0.73
+    ]
+  ],
+  "noBoxGlowRuleAcknowledged": true,
+  "recipe": {
+    "type": "canvas-title",
+    "source": "families/rainbow-trippy/rainbow-trippy.js",
+    "renderer": "families/rainbow-trippy/renderer.html",
+    "effects": [
+      "4-color gradient",
+      "lobe-shaped rounded gradient plate",
+      "glyph-derived glow",
+      "gaussian blur",
+      "turbulent row displacement",
+      "subpixel plate-edge softening",
+      "chromatic optics offsets",
+      "posterized-time phase-table color cycling",
+      "light sweep"
+    ]
+  },
+  "knownDefects": [
+    "AE Optics Compensation and Turbulent Displace are approximated rather than reconstructed.",
+    "Source plate edges and dash silhouettes have more organic deformation and richer internal shadow/color interaction than the canvas rebuild."
+  ]
+}

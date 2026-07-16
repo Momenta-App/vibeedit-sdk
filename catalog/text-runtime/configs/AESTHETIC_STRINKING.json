@@ -1,0 +1,189 @@
+{
+  "slug": "AESTHETIC_STRINKING",
+  "family": "aesthetic-glow",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph masks, duplicate text layers, SVG/CSS glow, blur, reflection, light-sweep, and color recipes. No rectangular haze, slabs, or panel shortcuts are used.",
+  "recipe": {
+    "duration": 7,
+    "crossing_intro": 1.12,
+    "crossing_texts": [
+      {
+        "text": "aesthetic",
+        "font": "Poppins-Black",
+        "size": 50,
+        "start": [
+          208,
+          139
+        ],
+        "end": [
+          208,
+          139
+        ],
+        "top": [
+          250,
+          240,
+          222
+        ],
+        "bottom": [
+          140,
+          138,
+          130
+        ],
+        "start_blur": 10,
+        "end_blur": 0,
+        "shadow": {
+          "dx": 1,
+          "dy": 3,
+          "blur": 2,
+          "opacity": 0.2,
+          "color": [
+            0,
+            0,
+            0
+          ]
+        },
+        "extrude": {
+          "dx": 1,
+          "dy": 1,
+          "steps": 3,
+          "color": [
+            38,
+            36,
+            32
+          ],
+          "opacity": 0.24
+        },
+        "glow": {
+          "color": [
+            210,
+            206,
+            190
+          ],
+          "start_radius": 12,
+          "end_radius": 1.6,
+          "start_opacity": 0.58,
+          "end_opacity": 0.06
+        },
+        "halos": [
+          {
+            "color": [
+              32,
+              32,
+              34
+            ],
+            "dx": 0,
+            "dy": -3,
+            "scale_x": 1,
+            "scale_y": 1,
+            "start_blur": 5,
+            "end_blur": 5,
+            "start_opacity": 0.9,
+            "end_opacity": 0.9,
+            "stroke_width": 34,
+            "stroke_color": [
+              32,
+              32,
+              34
+            ],
+            "stroke_opacity": 0.9
+          }
+        ],
+        "z": 1
+      },
+      {
+        "text": "striking",
+        "font": "Poppins-Black",
+        "size": 49,
+        "start": [
+          228,
+          168
+        ],
+        "end": [
+          228,
+          168
+        ],
+        "top": [
+          210,
+          0,
+          0
+        ],
+        "bottom": [
+          58,
+          0,
+          0
+        ],
+        "start_blur": 10,
+        "end_blur": 0,
+        "shadow": {
+          "dx": 1,
+          "dy": 7,
+          "blur": 14,
+          "opacity": 0.36,
+          "color": [
+            70,
+            0,
+            0
+          ]
+        },
+        "extrude": {
+          "dx": 1,
+          "dy": 1,
+          "steps": 3,
+          "color": [
+            44,
+            0,
+            0
+          ],
+          "opacity": 0.28
+        },
+        "glow": {
+          "color": [
+            170,
+            0,
+            0
+          ],
+          "start_radius": 12,
+          "end_radius": 2.8,
+          "start_opacity": 0.62,
+          "end_opacity": 0.11
+        },
+        "halos": [
+          {
+            "color": [
+              42,
+              0,
+              0
+            ],
+            "dx": 0,
+            "dy": 2,
+            "scale_x": 1,
+            "scale_y": 1,
+            "start_blur": 6,
+            "end_blur": 6,
+            "start_opacity": 0.63,
+            "end_opacity": 0.63,
+            "stroke_width": 30,
+            "stroke_color": [
+              42,
+              0,
+              0
+            ],
+            "stroke_opacity": 0.63
+          }
+        ],
+        "z": 2
+      }
+    ],
+    "intro_opacity": {
+      "start": 0,
+      "end_time": 0.17
+    }
+  }
+}

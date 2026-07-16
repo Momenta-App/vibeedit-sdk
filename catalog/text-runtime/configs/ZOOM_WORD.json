@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "slug": "ZOOM_WORD",
+  "kind": "zoom_word",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "aesthetic\rpurple",
+  "font": "Poppins-Black",
+  "font_size": 38,
+  "center": [
+    320,
+    180
+  ],
+  "color": [
+    255,
+    255,
+    255,
+    1
+  ],
+  "final_scale": 1.12,
+  "start_scale": 0.94,
+  "fade_frames": 2,
+  "group_offset_x": -2,
+  "card_warp_amp": 1.15,
+  "card_warp_jitter": 0.52,
+  "card_warp_strip": 2,
+  "card_warp_period": 20,
+  "card_edge_alpha": 0.08,
+  "card_edge_streaks": 18,
+  "card_edge_cut_alpha": 0.22,
+  "card_edge_cut_count": 8,
+  "card_edge_cut_top": 1,
+  "card_edge_cut_side": 0.42,
+  "card_edge_cut_bottom": 0.28,
+  "layer_size": [
+    320,
+    184
+  ],
+  "back_shadow_size": [
+    232,
+    82
+  ],
+  "back_shadow_xy": [
+    32,
+    44
+  ],
+  "back_shadow_blur": 6.4,
+  "upper_size": [
+    190,
+    29
+  ],
+  "upper_xy": [
+    24,
+    22
+  ],
+  "upper_fill": [
+    62,
+    65,
+    62,
+    206
+  ],
+  "upper_highlight": [
+    218,
+    232,
+    255,
+    44
+  ],
+  "upper_noise_alpha": 7,
+  "left_size": [
+    216,
+    64
+  ],
+  "left_xy": [
+    22,
+    35
+  ],
+  "left_radius": 16,
+  "left_fill": [
+    37,
+    37,
+    32,
+    232
+  ],
+  "left_highlight": [
+    102,
+    104,
+    100,
+    78
+  ],
+  "left_noise_alpha": 7,
+  "left_sweep_alpha": 9,
+  "left_sweep_x": 118,
+  "left_sweep_width": 42,
+  "right_shadow_size": [
+    174,
+    84
+  ],
+  "right_shadow_xy": [
+    117,
+    64
+  ],
+  "right_shadow": [
+    62,
+    0,
+    58,
+    205
+  ],
+  "right_shadow_blur": 8.2,
+  "right_size": [
+    168,
+    68
+  ],
+  "right_xy": [
+    116,
+    57
+  ],
+  "right_radius": 17,
+  "right_fill": [
+    96,
+    0,
+    92,
+    236
+  ],
+  "right_highlight": [
+    238,
+    0,
+    202,
+    110
+  ],
+  "right_highlight_height": 25,
+  "right_noise_alpha": 8,
+  "right_sweep_alpha": 10,
+  "right_sweep_x": 66,
+  "right_sweep_width": 32,
+  "aesthetic_size": 40,
+  "aesthetic_center": [
+    118,
+    68
+  ],
+  "aesthetic_top": [
+    255,
+    255,
+    232,
+    255
+  ],
+  "aesthetic_bottom": [
+    200,
+    184,
+    126,
+    255
+  ],
+  "purple_size": 42,
+  "purple_center": [
+    196,
+    101
+  ],
+  "purple_top": [
+    248,
+    32,
+    226,
+    255
+  ],
+  "purple_bottom": [
+    124,
+    0,
+    150,
+    255
+  ],
+  "purple_glow": [
+    255,
+    0,
+    255,
+    116
+  ],
+  "purple_glow_blur": 3.4,
+  "source_note": "Reference preview renders aesthetic/purple even though extracted controls expose zoom/word.",
+  "name": "ZOOM WORD",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/ ZOOM WORD.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild. Reference preview renders aesthetic/purple even though extracted text controls expose zoom/word; config follows the visible preview.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/ZOOM_WORD.html"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "slug": "BLUR_IN",
+  "kind": "blob_motion",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "blur in",
+  "font": "Mytupi-Bold",
+  "font_size": 42,
+  "center": [
+    320,
+    178
+  ],
+  "color": [
+    255,
+    253,
+    245,
+    1
+  ],
+  "offset": [
+    0,
+    0
+  ],
+  "start_scale": 1.75,
+  "settle_frame": 40,
+  "blob_expand": 13,
+  "blob_blur": 7,
+  "crisp_start": 0.28,
+  "name": "BLUR IN",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/BLUR IN.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild using editable config text and glyph-derived blur/glow/mask effects; no arbitrary panels added beyond source-mapped rounded plates for SMOOTH_OPACITY and ZOOM_WORD.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/BLUR_IN.html"
+  }
+}

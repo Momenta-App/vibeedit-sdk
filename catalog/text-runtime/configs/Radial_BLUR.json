@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "slug": "Radial_BLUR",
+  "name": "Radial BLUR",
+  "family": "analog-glitch",
+  "compositionId": "analog-glitch-radial-blur",
+  "source": "V2 50 TITLES PACK PR/Manual files/Radial BLUR.mogrt",
+  "width": 640,
+  "height": 360,
+  "fps": 30,
+  "duration": 7.6,
+  "noBoxGlowRuleAcknowledged": true,
+  "text": "Radial blur",
+  "font": "Mytupi-Bold",
+  "fontSize": 48,
+  "center": [
+    320,
+    180
+  ],
+  "introDuration": 0,
+  "gradientTop": "#ffffff",
+  "gradientBottom": "#ffd3ff",
+  "shadowColor": "#ff00f6",
+  "blurColor": "#ff73ff",
+  "radialCopies": 6,
+  "radialStep": 0.023,
+  "radialOpacity": 0.13,
+  "radialBoost": 1.18,
+  "radialBlurStep": 0.48,
+  "radialOffsetX": 0.55,
+  "radialOffsetY": 0.38,
+  "textScaleY": 1.05,
+  "shadowAlpha": 0.96,
+  "magentaStreakAlpha": 0.045,
+  "highlightAlpha": 0.34,
+  "sweepAlpha": 0.04,
+  "sweepWidth": 22,
+  "sweepPeriod": 150,
+  "comparisonTimes": [
+    0,
+    1,
+    3.5,
+    5.5
+  ],
+  "recipe": {
+    "type": "canvas-analog-glitch",
+    "source": "families/analog-glitch/renderer.html",
+    "runtime": "families/analog-glitch/components/analog-runtime.js"
+  }
+}

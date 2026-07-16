@@ -19,32 +19,37 @@
     "background": "split-gradient-conformance-field",
     "network": "blocked-by-contract"
   },
-  "aggregatePreviewSha256": "4faeb8529ee1de5e9bc234be6fab9412e7f9a752f14238c47e564b4b7f82d92f",
+  "fidelityContract": {
+    "canonicalSourceClones": 53,
+    "portableRuntimeEffects": 23,
+    "meaning": "Render checks prove deterministic browser output. Canonical-source-clone identifies effects rendered by the packaged original VibeEdit HTML/CSS/JS implementation; portable-runtime does not claim source visual identity."
+  },
+  "aggregatePreviewSha256": "bf1ac3727d0021eea814e4038b037eb80f0636661646fd254513d77d76f4a458",
   "contactSheet": "docs/evidence/text-effects/contact-sheet.jpg",
   "contactSheets": [
     {
       "frame": 2,
       "path": "docs/evidence/text-effects/contact-sheet-early.jpg",
-      "sha256": "b77786fbfb12624d96760da7e8cf3b3aa47076be5ac7dad7116fa3a7e5f74c00",
-      "bytes": 1159674
+      "sha256": "a2ea807c540e3ffc74c28426e3df1a09c130049b030a96ebe5863b5d66a1b52a",
+      "bytes": 1164430
     },
     {
       "frame": 24,
       "path": "docs/evidence/text-effects/contact-sheet-mid.jpg",
-      "sha256": "bf7bb912f3b4f727b2fb56a621411967963207e63047c218fb5c65aaa60cd269",
-      "bytes": 1289730
+      "sha256": "25d79e7530448c54b30385781939c149608424217ee73f274c624c3b7f16b147",
+      "bytes": 1246881
     },
     {
       "frame": 32,
       "path": "docs/evidence/text-effects/contact-sheet.jpg",
-      "sha256": "aa49c8e4fd9256f7499bd857642aabcd5d0d7294b91e23e66bce090dd8db4f1f",
-      "bytes": 1305725
+      "sha256": "3a666b47efd1b2d9e742be0c88d9d4b00a5e9b2afde4f80cef8a25b2658b9eba",
+      "bytes": 1248434
     },
     {
       "frame": 43,
       "path": "docs/evidence/text-effects/contact-sheet-late.jpg",
-      "sha256": "58e0b9efafd83c1aa6afbcb0300aa870ad82cdd73a54e91b02c0f0974f9a1b63",
-      "bytes": 1311369
+      "sha256": "4c36098bc39b9b06811830f38a7f2580ac0abaf395205c539f1f499d9ad1ffd7",
+      "bytes": 1250041
     }
   ],
   "reviewReel": "docs/evidence/text-effects/review-reel.mp4",
@@ -54,6 +59,11 @@
       "name": "Blend Difference",
       "family": "portable-catalog",
       "motion": "difference",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-blend-difference.mp4",
       "sha256": "701855cca23460603ede28f799c237a4a996e127f6ba90060bcf48145fec634c",
       "bytes": 12805,
@@ -100,6 +110,11 @@
       "name": "Clip Wipe",
       "family": "portable-catalog",
       "motion": "wipe",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-clip-wipe.mp4",
       "sha256": "a297d0950faefad5ccc44046ba4f620f9231834d94a2bbcb03cef6a2568de447",
       "bytes": 14450,
@@ -146,6 +161,11 @@
       "name": "Editorial Emphasis",
       "family": "portable-catalog",
       "motion": "editorial",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-editorial-emphasis.mp4",
       "sha256": "eb8a0b1fa31b0db56563caf2d292e175be7ae1b1e38a180670142012b8ee511a",
       "bytes": 31342,
@@ -192,6 +212,11 @@
       "name": "Emoji Pop",
       "family": "portable-catalog",
       "motion": "pop",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-emoji-pop.mp4",
       "sha256": "7662b990cdecf74006144c0b6d4b7ed21542cc27e08c8024bd3addfb9508f22c",
       "bytes": 19940,
@@ -238,6 +263,11 @@
       "name": "Glitch RGB",
       "family": "portable-catalog",
       "motion": "glitch",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-glitch-rgb.mp4",
       "sha256": "56646173811e6dada27f1d7b05f7af408c994852775e0d7bd0c2be4a881ba5eb",
       "bytes": 51997,
@@ -284,6 +314,11 @@
       "name": "Gradient Fill",
       "family": "portable-catalog",
       "motion": "gradient",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-gradient-fill.mp4",
       "sha256": "8c7f1be1983250f4679e6c2c18651ea3cb9fc34d0bb4f35421bc2935f0d54879",
       "bytes": 36026,
@@ -330,6 +365,11 @@
       "name": "Highlight",
       "family": "portable-catalog",
       "motion": "highlight",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-highlight.mp4",
       "sha256": "b5d6ab985c6dd4a52316cbddb0035df16ab1f6380148430a8f4e5b9ecde668ad",
       "bytes": 21430,
@@ -376,6 +416,11 @@
       "name": "Kinetic Slam",
       "family": "portable-catalog",
       "motion": "slam",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-kinetic-slam.mp4",
       "sha256": "2991afe7d499d2600dcaf648a76d2c97a3b1dfea67b73bd2eaac8bb302fa66a0",
       "bytes": 20415,
@@ -422,6 +467,11 @@
       "name": "Matrix Decode",
       "family": "portable-catalog",
       "motion": "scramble",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-matrix-decode.mp4",
       "sha256": "ad495ad1003fa6b6dfb20c01aa4cb2cb1c26eb3450313f0a668d7162074f8f17",
       "bytes": 62693,
@@ -468,6 +518,11 @@
       "name": "Neon Accent",
       "family": "portable-catalog",
       "motion": "glow",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-neon-accent.mp4",
       "sha256": "e1e8bf3ebf23c03ea9ef1446b8f8a726d9030a9fa73da293a256d77861ae5fa3",
       "bytes": 16903,
@@ -514,6 +569,11 @@
       "name": "Neon Glow",
       "family": "portable-catalog",
       "motion": "glow",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-neon-glow.mp4",
       "sha256": "f47fb2d6caa1841d4ecbaae0894221928120fe9beeb6a83f761752405539c442",
       "bytes": 23462,
@@ -560,6 +620,11 @@
       "name": "Parallax Layers",
       "family": "portable-catalog",
       "motion": "parallax",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-parallax-layers.mp4",
       "sha256": "49083623d6a697d7e5fc12c59fe149154bd82ee684ed3a0ca9cf7cca068666b4",
       "bytes": 23585,
@@ -606,6 +671,11 @@
       "name": "Particle Burst",
       "family": "portable-catalog",
       "motion": "burst",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-particle-burst.mp4",
       "sha256": "fec826e4c7f4fb4c60dcc820fc74c0813f8d681a913faead0759ea68ae0aacf8",
       "bytes": 28008,
@@ -652,6 +722,11 @@
       "name": "Pill Karaoke",
       "family": "portable-catalog",
       "motion": "pill",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-pill-karaoke.mp4",
       "sha256": "d18922c1706540420b1da0a22312952d734350360aa98967e3bb5557b39b733e",
       "bytes": 33338,
@@ -698,6 +773,11 @@
       "name": "Caption Rail",
       "family": "baseline",
       "motion": "active-word",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-rail.mp4",
       "sha256": "65f55ab2889cce185d5a1645a78533782900e3e3c42792b847b8344afca9a8aa",
       "bytes": 16428,
@@ -744,6 +824,11 @@
       "name": "Texture",
       "family": "portable-catalog",
       "motion": "texture",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-texture.mp4",
       "sha256": "0d4a04c3d7b213ec2db0c3710a72b58e265a6c6810deab5df66cedd6b393d92e",
       "bytes": 70132,
@@ -790,6 +875,11 @@
       "name": "Weight Shift",
       "family": "portable-catalog",
       "motion": "weight",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/caption-weight-shift.mp4",
       "sha256": "470019456151cbb6996d0467fc7297ad367a1874664f14cfb30776e01cfb8f00",
       "bytes": 22128,
@@ -836,6 +926,11 @@
       "name": "Creed Kinetic Text",
       "family": "portable-catalog",
       "motion": "creed",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/creed-kinetic-text.mp4",
       "sha256": "bfd8917d4553a4b1632571ca20901effda2e9c400e3527eafe3ca292afb3873d",
       "bytes": 30342,
@@ -882,31 +977,36 @@
       "name": "3D Text",
       "family": "dimensional-metal",
       "motion": "creed",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/dimensional-metal/renderer.html?slug=3D_TEXT&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-3d-text.mp4",
-      "sha256": "d31a107ffa44164a20b59b79686b359a2f029562886e4bc16743f179096d3b9d",
-      "bytes": 20032,
+      "sha256": "5331d76627473379ac48abc60be4c1baaede99611a09d0426eb0af4d56a4a743",
+      "bytes": 22818,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.948611,
+      "visualSsimAgainstBackground": 0.969767,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "gf 7"
+        "text": "y-)"
       },
       "dom": {
         "component": "mogrt-3d-text",
         "text": "3D TEXT",
         "rect": {
-          "left": 177.37680053710938,
-          "top": 149.921875,
-          "right": 462.6231994628906,
-          "bottom": 210.078125,
-          "width": 285.24639892578125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -928,31 +1028,36 @@
       "name": "ABOVE IN",
       "family": "simple-motion",
       "motion": "wipe",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/ABOVE_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-above-in.mp4",
-      "sha256": "9ef884c654d11df13945e65c9419057e840bc4eaa9ae6b132351da4faec97417",
-      "bytes": 13776,
+      "sha256": "7cec8d671ac3a97050a35f0c2a80381edcf06ac3b25b1b664af0bfa832cdc418",
+      "bytes": 16621,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.9524,
+      "visualSsimAgainstBackground": 0.980547,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "fen"
+        "text": "££"
       },
       "dom": {
         "component": "mogrt-above-in",
         "text": "above in",
         "rect": {
-          "left": 158.671875,
-          "top": 149.921875,
-          "right": 481.328125,
-          "bottom": 210.078125,
-          "width": 322.65625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -974,31 +1079,36 @@
       "name": "Aesthetic Purple",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/AESTHETIC_PURPLE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-aesthetic-purple.mp4",
-      "sha256": "a9f0916648aa3d5cf8d650641b38f7736a82fdadaaa9e85d45802ccdc1e22edf",
-      "bytes": 23771,
+      "sha256": "280c6016f5c6c675f8ed9abf7abcb949f89407db2fe7ee218142f37704a9dd3c",
+      "bytes": 17224,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.900017,
+      "visualSsimAgainstBackground": 0.961765,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "pr"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-aesthetic-purple",
         "text": "aesthetic purple",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1020,31 +1130,36 @@
       "name": "Aesthetic Strinking",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/AESTHETIC_STRINKING.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-aesthetic-strinking.mp4",
-      "sha256": "99c918398151065d282734dbaadb690dd108fd8c607eb219ed857f2a9d758247",
-      "bytes": 23445,
+      "sha256": "89367f6ec831db036da11c28a77f041c536c81732b32913f4f3c73cbe63bbc0b",
+      "bytes": 18744,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.912356,
+      "visualSsimAgainstBackground": 0.95555,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "=f"
+        "text": "y"
       },
       "dom": {
         "component": "mogrt-aesthetic-strinking",
         "text": "aesthetic striking",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1066,31 +1181,36 @@
       "name": "apple LADDER",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/apple_LADDER.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-apple-ladder.mp4",
-      "sha256": "5e43e03983cfac7e1bff528e481d54bc4200a567e110bb9c3b50610b61e9eda4",
-      "bytes": 32015,
+      "sha256": "4108eb7fdbb72f7ac52b2b620dbdc2556d0fa29e4dd0dcaebafc9ac634127319",
+      "bytes": 13486,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.926366,
+      "visualSsimAgainstBackground": 0.979518,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "~ feo"
+        "text": "ya"
       },
       "dom": {
         "component": "mogrt-apple-ladder",
         "text": "apple ladder",
         "rect": {
-          "left": 111.078125,
-          "top": 149.921875,
-          "right": 528.90625,
-          "bottom": 210.078125,
-          "width": 417.828125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1112,31 +1232,36 @@
       "name": "apple MIDDLE",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/apple_MIDDLE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-apple-middle.mp4",
-      "sha256": "22ca2ccf4f521876b17ce7c0f602b39392378b914be6b1bd3e3650b3e628d1bf",
-      "bytes": 30351,
+      "sha256": "5c2ae2bb2cf8c3caa4a32e8b7c57784701b03d782136ee9c87126e94fabd8726",
+      "bytes": 11887,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.927911,
+      "visualSsimAgainstBackground": 0.978371,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "7 am"
+        "text": "-"
       },
       "dom": {
         "component": "mogrt-apple-middle",
         "text": "apple middle",
         "rect": {
-          "left": 117.828125,
-          "top": 149.921875,
-          "right": 522.15625,
-          "bottom": 210.078125,
-          "width": 404.328125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1158,31 +1283,36 @@
       "name": "apple smooth",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/apple_smooth.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-apple-smooth.mp4",
-      "sha256": "aac4c100acb6183a3c717cbb8297c836142f62c17b7f3faef1af46515d020671",
-      "bytes": 32532,
+      "sha256": "cf5f4c09fde51a94ce84d8640c67849b5d7a37e7100ac55dcf4d083008051def",
+      "bytes": 14457,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.919588,
+      "visualSsimAgainstBackground": 0.977193,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "ae"
+        "text": "7a"
       },
       "dom": {
         "component": "mogrt-apple-smooth",
         "text": "apple smooth",
         "rect": {
-          "left": 97.078125,
-          "top": 149.921875,
-          "right": 542.921875,
-          "bottom": 210.078125,
-          "width": 445.84375,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1204,31 +1334,36 @@
       "name": "APPLE STYLE ANIMATION",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/APPLE_STYLE_ANIMATION.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-apple-style-animation.mp4",
-      "sha256": "c350492e86aa957ee4a9922ffb9db0ab5c2a224ae65a125ebb905b0cf49833f0",
-      "bytes": 50859,
+      "sha256": "4b41115062f3697682b9ae8a6ae3d6543488140b79e35137459ab0c3f0c18b66",
+      "bytes": 20033,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.854606,
+      "visualSsimAgainstBackground": 0.942278,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "—_"
+        "text": "- tex"
       },
       "dom": {
         "component": "mogrt-apple-style-animation",
         "text": "apple style text animation",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1250,31 +1385,36 @@
       "name": "apple WORD",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/apple_WORD.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-apple-word.mp4",
-      "sha256": "29c2f4dbdf8b4e628842cfbb808b9279014e5e664dd81bfe2a66486478f13441",
-      "bytes": 29691,
+      "sha256": "67d80a8b698ebde4039e2295cb9a6948df93b3aa2606e5348042ffcf18f564ea",
+      "bytes": 12702,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.933984,
+      "visualSsimAgainstBackground": 0.982168,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "fom"
+        "text": "yi"
       },
       "dom": {
         "component": "mogrt-apple-word",
         "text": "apple word",
         "rect": {
-          "left": 134.15625,
-          "top": 149.921875,
-          "right": 505.84375,
-          "bottom": 210.078125,
-          "width": 371.6875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1296,31 +1436,36 @@
       "name": "Blue And Orange",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/BLUE_AND_ORANGE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-blue-and-orange.mp4",
-      "sha256": "1014521631494b0f0fc4b9c37b83e75458251b7bf4f3d88c556f8a049bd9d6f3",
-      "bytes": 26827,
+      "sha256": "46b7709395dcd84dc2906aef5ab8ccb7e3ecd93343d633cbf9a26d9815e0e550",
+      "bytes": 19851,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.850724,
+      "visualSsimAgainstBackground": 0.956056,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "an"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-blue-and-orange",
         "text": "blue and orange",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1342,31 +1487,36 @@
       "name": "BLUR IN",
       "family": "simple-motion",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/BLUR_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-blur-in.mp4",
-      "sha256": "c2dcb5babe2bbc3e952274eb1c923e02220f5faa3fc4b4821359f3cd075f3450",
-      "bytes": 21073,
+      "sha256": "4017f87de2ba3c1900043d1fe77b962834eed776bfb8c695e5ee9ab712727a24",
+      "bytes": 17506,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.963722,
+      "visualSsimAgainstBackground": 0.987527,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "ya"
+        "text": "yi"
       },
       "dom": {
         "component": "mogrt-blur-in",
         "text": "blur in",
         "rect": {
-          "left": 183.34375,
-          "top": 149.921875,
-          "right": 456.65625,
-          "bottom": 210.078125,
-          "width": 273.3125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1388,31 +1538,36 @@
       "name": "BOTTOM IN",
       "family": "simple-motion",
       "motion": "wipe",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/BOTTOM_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-bottom-in.mp4",
-      "sha256": "f6a890b00fc5d70c9831ef45a161b4ae7ba7afc24ce501cf1204bfcbd4ccdbcc",
-      "bytes": 14043,
+      "sha256": "bbb088419da21886ee492e04b1506f3e43fa57cbff7baf7eb497e3e766d7c289",
+      "bytes": 19843,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.942618,
+      "visualSsimAgainstBackground": 0.979153,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "7 a"
+        "text": "yi"
       },
       "dom": {
         "component": "mogrt-bottom-in",
         "text": "bottom in",
         "rect": {
-          "left": 130.46875,
-          "top": 149.921875,
-          "right": 509.53125,
-          "bottom": 210.078125,
-          "width": 379.0625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1434,31 +1589,36 @@
       "name": "Bubble",
       "family": "elegant-misc",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/Bubble.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-bubble.mp4",
-      "sha256": "c98edd9700079d4d76056f7a3d3ad8291a2ccbd074b1c7fd1a76442d5134f941",
-      "bytes": 28217,
+      "sha256": "80d59627ef6af3c709cc1ed7d10cd9d6994b3c125d178acc3428559ce3cf3d49",
+      "bytes": 20559,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.944955,
+      "visualSsimAgainstBackground": 0.966948,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "ys"
+        "text": ","
       },
       "dom": {
         "component": "mogrt-bubble",
         "text": "Bubble",
         "rect": {
-          "left": 173.6875,
-          "top": 149.921875,
-          "right": 466.3125,
-          "bottom": 210.078125,
-          "width": 292.625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1480,31 +1640,36 @@
       "name": "clean aesthetic light",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/clean_aesthetic_light.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-clean-aesthetic-light.mp4",
-      "sha256": "5de51167bafa8d6c24d45fd84b51a9de5ed95e2865f31a374529c2d8f499bc79",
-      "bytes": 44778,
+      "sha256": "540a5f62466e888203530d589199c37d146bf5a8ee82e8d6deed422dfed7a116",
+      "bytes": 11702,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.886817,
+      "visualSsimAgainstBackground": 0.961648,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "_"
+        "text": "££"
       },
       "dom": {
         "component": "mogrt-clean-aesthetic-light",
         "text": "clean aesthetic light",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1526,31 +1691,36 @@
       "name": "CLEAN BLUE",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/CLEAN_BLUE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-clean-blue.mp4",
-      "sha256": "09e52872022df7420896369b138ca1cf0b921c10806571550c623e0b3017904f",
-      "bytes": 25256,
+      "sha256": "6c7335748d83ee9a7662caac98fb0eb9a2a322f158d26da0a95497ce8285f937",
+      "bytes": 15514,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.965909,
+      "visualSsimAgainstBackground": 0.951155,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "y-"
+        "text": "rs"
       },
       "dom": {
         "component": "mogrt-clean-blue",
-        "text": "Clean",
+        "text": "Clean blue",
         "rect": {
-          "left": 224.015625,
-          "top": 149.921875,
-          "right": 415.984375,
-          "bottom": 210.078125,
-          "width": 191.96875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1572,31 +1742,36 @@
       "name": "Clean gradient",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/Clean_gradient.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-clean-gradient.mp4",
-      "sha256": "90098e4cca20251272a3e41e71fb680696c5c5651ecfbe71d775a6732b880811",
-      "bytes": 37454,
+      "sha256": "74d698b93899d72a1e7cc72176ffbac1de264cb4bee52ca0113d6cdfe9f1dbb0",
+      "bytes": 19422,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.908244,
+      "visualSsimAgainstBackground": 0.975048,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "ton"
+        "text": ""
       },
       "dom": {
         "component": "mogrt-clean-gradient",
         "text": "Clean gradient",
         "rect": {
-          "left": 74.09375,
-          "top": 149.921875,
-          "right": 565.890625,
-          "bottom": 210.078125,
-          "width": 491.796875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1618,31 +1793,36 @@
       "name": "CLEAN STYLE",
       "family": "apple-clean",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/CLEAN_STYLE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-clean-style.mp4",
-      "sha256": "63118e599a707d3052e05759092bcae2e873ed71f72394365f2f8a25b160d57d",
-      "bytes": 18926,
+      "sha256": "322cf82f4fe1ed90842173f67f9a8f87faf2a76d042d8bc176053682a14df9e3",
+      "bytes": 18890,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.967623,
+      "visualSsimAgainstBackground": 0.961404,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "£"
+        "text": "y."
       },
       "dom": {
         "component": "mogrt-clean-style",
-        "text": "Clean",
+        "text": "Clean style",
         "rect": {
-          "left": 224.015625,
-          "top": 149.921875,
-          "right": 415.984375,
-          "bottom": 210.078125,
-          "width": 191.96875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1664,16 +1844,21 @@
       "name": "dark water",
       "family": "water-warp",
       "motion": "morph",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/water-warp/outputs/dark_water.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-dark-water.mp4",
-      "sha256": "c1a616b11111b600bf351fe6535f78ff2b8ab670fd17cb24d957ac2c5468a2c8",
-      "bytes": 42985,
+      "sha256": "b158b848dd26a2b63aed5e24043b83b445730cd1d6e87afcf929476e327ef17e",
+      "bytes": 34643,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.92114,
+      "visualSsimAgainstBackground": 0.934169,
       "ocr": {
         "advisory": true,
         "available": true,
@@ -1683,12 +1868,12 @@
         "component": "mogrt-dark-water",
         "text": "Principal second",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1710,31 +1895,36 @@
       "name": "ELEGANT",
       "family": "elegant-misc",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/ELEGANT.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-elegant.mp4",
-      "sha256": "2c8281f34ce7152818ff28a862c76a9786f8db1ad5e5a09d0af3ee017e561a64",
-      "bytes": 26383,
+      "sha256": "30e2cfe703487d2b62602c3836b3085a78ea78bb7dd8ff70970459a73f19f067",
+      "bytes": 15438,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.944423,
+      "visualSsimAgainstBackground": 0.964029,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": ","
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-elegant",
         "text": "ELEGANT",
         "rect": {
-          "left": 150.8125,
-          "top": 149.921875,
-          "right": 489.171875,
-          "bottom": 210.078125,
-          "width": 338.359375,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1756,31 +1946,36 @@
       "name": "ERROR TEXT",
       "family": "analog-glitch",
       "motion": "glitch",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/analog-glitch/renderer.html?slug=ERROR_TEXT&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-error-text.mp4",
-      "sha256": "90394b40a3e18ce0f0fb6d89a5379c87535fc4b93a153df6455b2695eb41748f",
-      "bytes": 39065,
+      "sha256": "1a2ec83a4e151206d9c8b756de4959b4bdcf9c98de080893db05767961bffebe",
+      "bytes": 23048,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.960489,
+      "visualSsimAgainstBackground": 0.969932,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "-"
+        "text": "a"
       },
       "dom": {
         "component": "mogrt-error-text",
         "text": "error",
         "rect": {
-          "left": 204.796875,
-          "top": 148.421875,
-          "right": 438.1875,
-          "bottom": 208.578125,
-          "width": 233.390625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1802,31 +1997,36 @@
       "name": "ESCRITO A MANO POSTERIZACION",
       "family": "elegant-misc",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/ESCRITO_A_MANO_POSTERIZACION.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-escrito-a-mano-posterizacion.mp4",
-      "sha256": "fd3b91e4442179e2a82adf7886664be9ef4b0f231dbac0143765390148400519",
-      "bytes": 72586,
+      "sha256": "53faa2f8846c67502e97f517d62ad3ea0366b2993dbc0b435116a4467f5bc7ee",
+      "bytes": 16210,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.753593,
+      "visualSsimAgainstBackground": 0.852962,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "az."
+        "text": "texto es ) con p 1"
       },
       "dom": {
         "component": "mogrt-escrito-a-mano-posterizacion",
         "text": "texto escrito a mano con posterizacion",
         "rect": {
-          "left": 61.3125,
-          "top": 59.6875,
-          "right": 578.6875,
-          "bottom": 300.3125,
-          "width": 517.375,
-          "height": 240.625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1848,31 +2048,36 @@
       "name": "Esmerald",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/ESMERALD.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-esmerald.mp4",
-      "sha256": "72d2f7e4875a3b39b44328a60cb6edce43c0b5c772c1e55e46fb0b372d043eb5",
-      "bytes": 20173,
+      "sha256": "91f89ea304cac262dcaafa31a211a0fb44f927c01cc091712cb196594a222985",
+      "bytes": 15705,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.927482,
+      "visualSsimAgainstBackground": 0.974937,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "yf"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-esmerald",
         "text": "Emerald",
         "rect": {
-          "left": 157.640625,
-          "top": 149.921875,
-          "right": 482.359375,
-          "bottom": 210.078125,
-          "width": 324.71875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1894,16 +2099,21 @@
       "name": "FAST",
       "family": "simple-motion",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/FAST.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-fast.mp4",
-      "sha256": "471bf461749376f0f1ab2212cf363ea37b52e3621644c27d8ee4ae13c177c2f5",
-      "bytes": 24792,
+      "sha256": "36402a8eddcd63bc095458534b1c6bec130693a727af6b160d01a9e3efd7ef5f",
+      "bytes": 17922,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.970881,
+      "visualSsimAgainstBackground": 0.976184,
       "ocr": {
         "advisory": true,
         "available": true,
@@ -1913,12 +2123,12 @@
         "component": "mogrt-fast",
         "text": "FAST",
         "rect": {
-          "left": 236.3125,
-          "top": 149.921875,
-          "right": 403.671875,
-          "bottom": 210.078125,
-          "width": 167.359375,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1940,31 +2150,36 @@
       "name": "Fire",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/FIRE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-fire.mp4",
-      "sha256": "0df11d18f6ed09145482325172fba226b331a1bc4c6732068d7bef1015ca0e20",
-      "bytes": 17562,
+      "sha256": "6bb4bec19d31512ced4e6e6b4b79a872eb1f0cd27f34e9acf03925d9a49472a5",
+      "bytes": 15102,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.959733,
+      "visualSsimAgainstBackground": 0.982116,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "y-"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-fire",
         "text": "FIRE",
         "rect": {
-          "left": 243.953125,
-          "top": 149.921875,
-          "right": 396.03125,
-          "bottom": 210.078125,
-          "width": 152.078125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -1986,31 +2201,36 @@
       "name": "Fluorscent",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/fluorscent.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-fluorscent.mp4",
-      "sha256": "df4f62dfe9b9d64cfb127495760a85e265738f40404954373441d8a14c0ba48d",
-      "bytes": 24629,
+      "sha256": "5a896677eda2a32280df760cf481f7074abb47ceeb142e1a5dcbb63533400763",
+      "bytes": 19663,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.8883,
+      "visualSsimAgainstBackground": 0.946955,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "4"
+        "text": "; i"
       },
       "dom": {
         "component": "mogrt-fluorscent",
         "text": "fluorescent",
         "rect": {
-          "left": 71.78125,
-          "top": 149.921875,
-          "right": 568.203125,
-          "bottom": 210.078125,
-          "width": 496.421875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2032,31 +2252,36 @@
       "name": "FUTURIST",
       "family": "rainbow-trippy",
       "motion": "gradient",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/rainbow-trippy/renderer.html?slug=FUTURIST&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-futurist.mp4",
-      "sha256": "53eb9cc7c8433cb63c7dd2dec15eda23fd6d710bbf74c991df0317265b513c3a",
-      "bytes": 30701,
+      "sha256": "be083ec28114cc972f6a752f54a86b2c82c370dbc7a183e19022a89e149d26e7",
+      "bytes": 18553,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.950677,
+      "visualSsimAgainstBackground": 0.971836,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "_"
+        "text": ", -"
       },
       "dom": {
         "component": "mogrt-futurist",
         "text": "Futurist",
         "rect": {
-          "left": 150.1875,
-          "top": 149.921875,
-          "right": 489.8125,
-          "bottom": 210.078125,
-          "width": 339.625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2078,31 +2303,36 @@
       "name": "Gold Text",
       "family": "dimensional-metal",
       "motion": "creed",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/dimensional-metal/renderer.html?slug=GOLD_TEXT&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-gold-text.mp4",
-      "sha256": "7b0070afe55ac61ebbdaf48534df11cddb65ef7a85d475043caa5304e398a001",
-      "bytes": 23312,
+      "sha256": "1dac3127325729d745983d9ffb49e2d1b2abeab3e6ac056d6a6e391942d67337",
+      "bytes": 20097,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.934371,
+      "visualSsimAgainstBackground": 0.957254,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "_"
+        "text": "f"
       },
       "dom": {
         "component": "mogrt-gold-text",
         "text": "Gold Text",
         "rect": {
-          "left": 126.93930053710938,
-          "top": 149.921875,
-          "right": 513.0607299804688,
-          "bottom": 210.078125,
-          "width": 386.1214294433594,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2124,31 +2354,36 @@
       "name": "Green",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/Green.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-green.mp4",
-      "sha256": "f0a2d0d91c0ae0e05d39cba2a6023a9f8fe4ac461815530aa6932fc6fa91f432",
-      "bytes": 17603,
+      "sha256": "5f8ba9aec041e562637fb50d2ca34ac1c8c526d6a62531b02e4823ba73b3ac7f",
+      "bytes": 14640,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.936345,
+      "visualSsimAgainstBackground": 0.980535,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "a"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-green",
         "text": "Green",
         "rect": {
-          "left": 202.765625,
-          "top": 149.921875,
-          "right": 437.21875,
-          "bottom": 210.078125,
-          "width": 234.453125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2170,31 +2405,36 @@
       "name": "Green And Grey",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/GREEN_AND_GREY.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-green-and-grey.mp4",
-      "sha256": "2923d9b153ea32a901de1aa9f472e55953aa01880845a649f7a06b0c04ef2203",
-      "bytes": 25011,
+      "sha256": "747ccb644b0698533008341f49b908cbde28c02c2a5bf73ffc73294e73004d0f",
+      "bytes": 19936,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.861787,
+      "visualSsimAgainstBackground": 0.95283,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "aa"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-green-and-grey",
         "text": "green and grey",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2216,31 +2456,36 @@
       "name": "LEFT IN",
       "family": "simple-motion",
       "motion": "wipe",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/LEFT_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-left-in.mp4",
-      "sha256": "d385124d87af96e2aa4d69e44a4f7db7dd4684b2ed0dda6bfa275a166fb14589",
-      "bytes": 12356,
+      "sha256": "73148d7bca25a9de5c202e4ca8aa28cdb7edd349a847c868fe3b2ce0d3cf5bbf",
+      "bytes": 16968,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.966318,
+      "visualSsimAgainstBackground": 0.989481,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "ys"
+        "text": "yi"
       },
       "dom": {
         "component": "mogrt-left-in",
         "text": "left in",
         "rect": {
-          "left": 191.390625,
-          "top": 149.921875,
-          "right": 448.609375,
-          "bottom": 210.078125,
-          "width": 257.21875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2262,31 +2507,36 @@
       "name": "Old Money",
       "family": "dimensional-metal",
       "motion": "creed",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/dimensional-metal/renderer.html?slug=OLD_MONEY&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-old-money.mp4",
-      "sha256": "33d642d6a1b4f099a3bb83bc5abba9f28a905286ab28e0e19587cc9ced56455d",
-      "bytes": 24887,
+      "sha256": "33db935b0c68bed2d2d3d24f0ed45191c086646d6a804b0d4d1d02a608b2c2d3",
+      "bytes": 26328,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.917452,
+      "visualSsimAgainstBackground": 0.958799,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "="
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-old-money",
-        "text": "OLD MONEY",
+        "text": "OLD Money",
         "rect": {
-          "left": 116.29867553710938,
-          "top": 149.921875,
-          "right": 523.7013549804688,
-          "bottom": 210.078125,
-          "width": 407.4026794433594,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2308,31 +2558,36 @@
       "name": "OLD TV",
       "family": "analog-glitch",
       "motion": "glitch",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/analog-glitch/renderer.html?slug=OLD_TV&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-old-tv.mp4",
-      "sha256": "869dd6be301be7d5df9fde4fee83380d44b9a1333d32cdf1226d6b93417d2ad7",
-      "bytes": 35067,
+      "sha256": "566695466536e73e5b86b1b7a8dd6da900c9e4d71f524be9bbda3944fd99425e",
+      "bytes": 71392,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.965634,
+      "visualSsimAgainstBackground": 0.932243,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "fe"
+        "text": ""
       },
       "dom": {
         "component": "mogrt-old-tv",
         "text": "OLD TV",
         "rect": {
-          "left": 198.5625,
-          "top": 148.421875,
-          "right": 444.421875,
-          "bottom": 208.578125,
-          "width": 245.859375,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2354,31 +2609,36 @@
       "name": "OPACITY IN",
       "family": "simple-motion",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/OPACITY_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-opacity-in.mp4",
-      "sha256": "80cfa682964d23e234363fe629f35575ccb6ed474d00258df9926ec14e906390",
-      "bytes": 25731,
+      "sha256": "7af08d376da4c10ce917abc92b26b4ec5ea5cde58f6bea52ad5bb85c28e4f218",
+      "bytes": 11575,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.946908,
+      "visualSsimAgainstBackground": 0.971922,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "7 a"
+        "text": "-"
       },
       "dom": {
         "component": "mogrt-opacity-in",
         "text": "opacity in",
         "rect": {
-          "left": 127.90625,
-          "top": 149.921875,
-          "right": 512.078125,
-          "bottom": 210.078125,
-          "width": 384.171875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2400,31 +2660,36 @@
       "name": "Orange Text",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/ORANGE_TEXT.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-orange-text.mp4",
-      "sha256": "1b4e2d73ed5962c434a340f33f6b4cd23a0755b86baa2eb224a08ca805289d6c",
-      "bytes": 19545,
+      "sha256": "51292a31f2d1ffe00438d4285e60c1ffa16d5c1ffba59e899a8ce04781595984",
+      "bytes": 16764,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.933581,
+      "visualSsimAgainstBackground": 0.968544,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "yf"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-orange-text",
         "text": "Orange",
         "rect": {
-          "left": 175.765625,
-          "top": 149.921875,
-          "right": 464.21875,
-          "bottom": 210.078125,
-          "width": 288.453125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2446,31 +2711,36 @@
       "name": "Purple",
       "family": "aesthetic-glow",
       "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/Purple.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-purple.mp4",
-      "sha256": "41863f11962fbec281ad196c2eeb43305f086c6d1a4f1e54e9173061974a30d8",
-      "bytes": 18169,
+      "sha256": "1ecc11e17b0c33e1de385af881b2ee3e5c8f13dbc87abe6dd01ca0c370f301b8",
+      "bytes": 15137,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.941569,
+      "visualSsimAgainstBackground": 0.975732,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": ","
+        "text": "y-"
       },
       "dom": {
         "component": "mogrt-purple",
         "text": "Purple",
         "rect": {
-          "left": 186.40625,
-          "top": 149.921875,
-          "right": 453.578125,
-          "bottom": 210.078125,
-          "width": 267.171875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2492,31 +2762,36 @@
       "name": "Radial BLUR",
       "family": "analog-glitch",
       "motion": "glitch",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/analog-glitch/renderer.html?slug=Radial_BLUR&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-radial-blur.mp4",
-      "sha256": "d1c4378f3a1168203fb67ba30de6e533073cc316db163c8e9e5436c5aec981a7",
-      "bytes": 57129,
+      "sha256": "1698f77e625ccae057f3f17b2269525de99912b821072aac558efce8c3f1be7c",
+      "bytes": 19838,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.927297,
+      "visualSsimAgainstBackground": 0.968161,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "often"
+        "text": "-"
       },
       "dom": {
         "component": "mogrt-radial-blur",
         "text": "Radial blur",
         "rect": {
-          "left": 96.34375,
-          "top": 148.421875,
-          "right": 546.640625,
-          "bottom": 208.578125,
-          "width": 450.296875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2538,31 +2813,36 @@
       "name": "RAINBOW CLEAN TEXT",
       "family": "rainbow-trippy",
       "motion": "gradient",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/rainbow-trippy/renderer.html?slug=RAINBOW_CLEAN_TEXT&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-rainbow-clean-text.mp4",
-      "sha256": "0b9b1ca4a787b3b91816868206abb15c24aa6b4ce9b433d23fc3d011a30f5c38",
-      "bytes": 60836,
+      "sha256": "c8896e3c99000a0ac95a4969db2a1b15682656e9b0ec2020a24ab40563f2f106",
+      "bytes": 31822,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.893256,
+      "visualSsimAgainstBackground": 0.936208,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "p<"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-rainbow-clean-text",
         "text": "rainbow clean text",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2584,31 +2864,36 @@
       "name": "RAINBOW TEXT",
       "family": "rainbow-trippy",
       "motion": "gradient",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/rainbow-trippy/renderer.html?slug=RAINBOW_TEXT&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-rainbow-text.mp4",
-      "sha256": "5e26b4649033db1a38ee9ff58aa563f0c656a9ac1f730962f23401aa8a4a248f",
-      "bytes": 37669,
+      "sha256": "06ea972a0b971d0531ccfb1c7d461d3d0abbc03763054cac211fd882cd6f03ea",
+      "bytes": 37709,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.938296,
+      "visualSsimAgainstBackground": 0.922758,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "-"
+        "text": "a"
       },
       "dom": {
         "component": "mogrt-rainbow-text",
         "text": "Trippy Text",
         "rect": {
-          "left": 99.375,
-          "top": 149.921875,
-          "right": 540.609375,
-          "bottom": 210.078125,
-          "width": 441.234375,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2630,31 +2915,36 @@
       "name": "Reboot",
       "family": "elegant-misc",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/Rebote.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-rebote.mp4",
-      "sha256": "cc4769a2a60e2fd9151a2efbaf831d9e2ca128b5529aeaaec9bca7b59210e184",
-      "bytes": 28010,
+      "sha256": "da6b39dbfa71167a0c29b2274683dacbf567f057503848f4772c1ef2e6c76468",
+      "bytes": 18882,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.945712,
+      "visualSsimAgainstBackground": 0.950424,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": ";"
+        "text": "7"
       },
       "dom": {
         "component": "mogrt-rebote",
         "text": "Reboot",
         "rect": {
-          "left": 170.890625,
-          "top": 149.921875,
-          "right": 469.109375,
-          "bottom": 210.078125,
-          "width": 298.21875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2676,31 +2966,36 @@
       "name": "REBOUND",
       "family": "elegant-misc",
       "motion": "pop",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/REBOUND.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-rebound.mp4",
-      "sha256": "4c4c03c099e239e888ae822cc420ee5220b928000b6d30aba8b1769092dc5225",
-      "bytes": 28122,
+      "sha256": "9c43002834e444f1d80aea93f0583d0303cc494895f9389694a35b51eaad8604",
+      "bytes": 18514,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.946007,
+      "visualSsimAgainstBackground": 0.959158,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "yi"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-rebound",
         "text": "Rebote",
         "rect": {
-          "left": 174.046875,
-          "top": 149.921875,
-          "right": 465.953125,
-          "bottom": 210.078125,
-          "width": 291.90625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2722,31 +3017,36 @@
       "name": "RIGHT IN",
       "family": "simple-motion",
       "motion": "wipe",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/RIGHT_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-right-in.mp4",
-      "sha256": "451962d400c156fb2b334d7e5e2221fbb001d037c61430dd88d4940929828c50",
-      "bytes": 13107,
+      "sha256": "c8484483fdc98715bc66b3b1b97cadfdb3bbf9b827c3242c8929e7732b725908",
+      "bytes": 18662,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.957377,
+      "visualSsimAgainstBackground": 0.980535,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "fe"
+        "text": "£"
       },
       "dom": {
         "component": "mogrt-right-in",
         "text": "right in",
         "rect": {
-          "left": 167.96875,
-          "top": 149.921875,
-          "right": 472.03125,
-          "bottom": 210.078125,
-          "width": 304.0625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2768,31 +3068,36 @@
       "name": "SMOOTH BOUNCE",
       "family": "simple-motion",
       "motion": "pop",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/SMOOTH_BOUNCE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-smooth-bounce.mp4",
-      "sha256": "d5d560913238e3ce42bd8f0e543efb00390220d17ff9f9f6a29399194e67ecf1",
-      "bytes": 35598,
+      "sha256": "58933027ebf7773d2ba5c0f1ba859e11f34b65c28ee1c10c3e5a49a75b654444",
+      "bytes": 23392,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.9168,
+      "visualSsimAgainstBackground": 0.954337,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": ","
+        "text": "££"
       },
       "dom": {
         "component": "mogrt-smooth-bounce",
         "text": "smooth bounce",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2814,31 +3119,36 @@
       "name": "SMOOTH OPACITY",
       "family": "simple-motion",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/SMOOTH_OPACITY.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-smooth-opacity.mp4",
-      "sha256": "9c0e646c7a12a9a53ebd5af7d2ccc15e67b45c5f17563405cfcfb9e4bbf3ce9a",
-      "bytes": 39033,
+      "sha256": "00fb2dcda370a13615f27f93143b82adcc50101f833bd0abe2422199e68caddd",
+      "bytes": 22240,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.923485,
+      "visualSsimAgainstBackground": 0.890935,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": ", s"
+        "text": "7 a"
       },
       "dom": {
         "component": "mogrt-smooth-opacity",
         "text": "SMOOTH OPACITY",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2860,31 +3170,36 @@
       "name": "SMOOTH UP",
       "family": "simple-motion",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/SMOOTH_UP.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-smooth-up.mp4",
-      "sha256": "82d56d70d5f52b85dbe2af0edb8a72bbd2adc6df16582e88da0a1ed3b20d6cfc",
-      "bytes": 28226,
+      "sha256": "dcc79606b26901c84cd47239bfa3b627fc4f77f0f7b6cadb0b9797d06b53fdb3",
+      "bytes": 19785,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.945404,
+      "visualSsimAgainstBackground": 0.950644,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "7 ae"
+        "text": "| a"
       },
       "dom": {
         "component": "mogrt-smooth-up",
         "text": "Smooth up",
         "rect": {
-          "left": 116.953125,
-          "top": 149.921875,
-          "right": 523.046875,
-          "bottom": 210.078125,
-          "width": 406.09375,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2906,31 +3221,36 @@
       "name": "Texto De Oro",
       "family": "dimensional-metal",
       "motion": "creed",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/dimensional-metal/renderer.html?slug=TEXTO_DE_ORO&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-texto-de-oro.mp4",
-      "sha256": "9c6c856a85a0c954dc78cf607ee204f9bb577307d552c9f16c2239b45f0eabb3",
-      "bytes": 28489,
+      "sha256": "c0c9d27fb56690673f1218cf60c03d16c5fe5c6dbcd1dbb1c58f693995b5509c",
+      "bytes": 23605,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.909746,
+      "visualSsimAgainstBackground": 0.944213,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": ""
+        "text": "y="
       },
       "dom": {
         "component": "mogrt-texto-de-oro",
         "text": "Texto de Oro",
         "rect": {
-          "left": 68.90805053710938,
-          "top": 149.921875,
-          "right": 571.0763549804688,
-          "bottom": 210.078125,
-          "width": 502.1683044433594,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2952,31 +3272,36 @@
       "name": "TRIPLE ELEGANT TEXT",
       "family": "elegant-misc",
       "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/TRIPLE_ELEGANT_TEXT.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-triple-elegant-text.mp4",
-      "sha256": "6e39293fb522ab236d56edabc37dd3cf651d18b513fb4515a7b0c7fafa5e9c33",
-      "bytes": 21017,
+      "sha256": "74e95120c3088218d6cd6d04e16593e5293679e64e76fe8644b4a1db6712792f",
+      "bytes": 15567,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.955904,
+      "visualSsimAgainstBackground": 0.959492,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "spe"
+        "text": "Fi"
       },
       "dom": {
         "component": "mogrt-triple-elegant-text",
         "text": "arriba",
         "rect": {
-          "left": 180.015625,
-          "top": 149.921875,
-          "right": 459.984375,
-          "bottom": 210.078125,
-          "width": 279.96875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -2998,31 +3323,36 @@
       "name": "VHS",
       "family": "analog-glitch",
       "motion": "glitch",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/analog-glitch/renderer.html?slug=VHS&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-vhs.mp4",
-      "sha256": "1867f6a4dc2c96e0c472a1671849600d8abb90631583c456333ad1861e1f02a0",
-      "bytes": 30413,
+      "sha256": "91826f46e446a936875fe704a042ae1daece8f69d6563653899d6a155aabdd86",
+      "bytes": 25684,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.97859,
+      "visualSsimAgainstBackground": 0.967796,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "££"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-vhs",
         "text": "VHS",
         "rect": {
-          "left": 251.15625,
-          "top": 148.421875,
-          "right": 391.84375,
-          "bottom": 208.578125,
-          "width": 140.6875,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -3044,31 +3374,36 @@
       "name": "WARP",
       "family": "water-warp",
       "motion": "morph",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/water-warp/outputs/WARP.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-warp.mp4",
-      "sha256": "f61d990e79132a875568e4847c77416b8409430a4a8c1782a61fe30e14d2d04e",
-      "bytes": 18770,
+      "sha256": "117bd1b514aed2c533f74714429d7682985a554d203fe5d4bb9a70bb46d7ed80",
+      "bytes": 30137,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.979722,
+      "visualSsimAgainstBackground": 0.972285,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "-"
+        "text": "ys"
       },
       "dom": {
         "component": "mogrt-warp",
         "text": "warp",
         "rect": {
-          "left": 220.859375,
-          "top": 149.921875,
-          "right": 419.125,
-          "bottom": 210.078125,
-          "width": 198.265625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -3090,31 +3425,36 @@
       "name": "WATER TEXT",
       "family": "water-warp",
       "motion": "morph",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/water-warp/outputs/WATER_TEXT.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-water-text.mp4",
-      "sha256": "76d151f225160cdb22a8f339b8ad5269be0edbbf06c2f4ed6427592ee76cb8a7",
-      "bytes": 26694,
+      "sha256": "d3a91106401aa8e560bcdecbb5d8419cffa0e016260f3e2720255a95a5b30e21",
+      "bytes": 24326,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.966185,
+      "visualSsimAgainstBackground": 0.89793,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "££"
+        "text": ""
       },
       "dom": {
         "component": "mogrt-water-text",
         "text": "Water",
         "rect": {
-          "left": 201.390625,
-          "top": 149.921875,
-          "right": 438.59375,
-          "bottom": 210.078125,
-          "width": 237.203125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -3136,31 +3476,36 @@
       "name": "WAVES",
       "family": "water-warp",
       "motion": "morph",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/water-warp/outputs/WAVES.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-waves.mp4",
-      "sha256": "5084920734f7e47f78b1b081e08246af1bb33703bfc384e3f17f0dfde439c115",
-      "bytes": 23777,
+      "sha256": "e4c60a39a7fc78061e9ea7ed509e0ccfeb156e5671428732235da71f135f3f81",
+      "bytes": 19400,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.972648,
+      "visualSsimAgainstBackground": 0.962748,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "an"
+        "text": "ee"
       },
       "dom": {
         "component": "mogrt-waves",
         "text": "waves",
         "rect": {
-          "left": 200.953125,
-          "top": 149.921875,
-          "right": 439.03125,
-          "bottom": 210.078125,
-          "width": 238.078125,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -3182,31 +3527,36 @@
       "name": "ZOOM IN",
       "family": "simple-motion",
       "motion": "pop",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/ZOOM_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-zoom-in.mp4",
-      "sha256": "f1f239b7b62bddb0f534f6f509b4fadc68b5d20cb3af716193740a262b456d7a",
-      "bytes": 22053,
+      "sha256": "048b230ad23595839f6b00ce75e7565fad15e45aac9aabeaad82bfc9f94cc1e5",
+      "bytes": 20380,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.956554,
+      "visualSsimAgainstBackground": 0.979657,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "-_"
+        "text": "£"
       },
       "dom": {
         "component": "mogrt-zoom-in",
         "text": "zoom in",
         "rect": {
-          "left": 173.671875,
-          "top": 149.921875,
-          "right": 466.328125,
-          "bottom": 210.078125,
-          "width": 292.65625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -3228,31 +3578,36 @@
       "name": "ZOOM OUT",
       "family": "simple-motion",
       "motion": "pop",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/ZOOM_OUT.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-zoom-out.mp4",
-      "sha256": "c8c16398dfdc35a0dc21796a4c8ac8865d7f848ebb13b804d564a4cdfafac3ed",
-      "bytes": 25652,
+      "sha256": "89fb5e058ef6a465cea294f5eeca3c56777e81109ce6357086dd1f76f80634cf",
+      "bytes": 23659,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.947482,
+      "visualSsimAgainstBackground": 0.971345,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "7 a"
+        "text": "-"
       },
       "dom": {
         "component": "mogrt-zoom-out",
         "text": "zoom out",
         "rect": {
-          "left": 137.796875,
-          "top": 149.921875,
-          "right": 502.203125,
-          "bottom": 210.078125,
-          "width": 364.40625,
-          "height": 60.15625
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -3274,31 +3629,36 @@
       "name": "ZOOM WORD",
       "family": "simple-motion",
       "motion": "pop",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/ZOOM_WORD.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
       "preview": "catalog/previews/text-effects/mogrt-zoom-word.mp4",
-      "sha256": "68cfa482206591ec3e20fc1dc9581b9f13acf569bd44dfca7699cbd536c153cc",
-      "bytes": 37922,
+      "sha256": "9ea878cf6b43683bb1fd80c903d266c6b39b367d6c760007871c084a1a631805",
+      "bytes": 22711,
       "durationSeconds": 2,
       "frames": 48,
       "width": 640,
       "height": 360,
       "frameRate": "24/1",
       "representativeFrame": 32,
-      "visualSsimAgainstBackground": 0.905875,
+      "visualSsimAgainstBackground": 0.863473,
       "ocr": {
         "advisory": true,
         "available": true,
-        "text": "AES _"
+        "text": "r>"
       },
       "dom": {
         "component": "mogrt-zoom-word",
         "text": "aesthetic purple",
         "rect": {
-          "left": 61.3125,
-          "top": 119.84375,
-          "right": 578.6875,
-          "bottom": 240.15625,
-          "width": 517.375,
-          "height": 120.3125
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
         }
       },
       "checks": {
@@ -3320,6 +3680,11 @@
       "name": "Morph Text",
       "family": "portable-catalog",
       "motion": "morph",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/morph-text.mp4",
       "sha256": "7371faaab0934401f236fc65cc3300d82270f85d61ca15c3100cf75f9a1a2173",
       "bytes": 54065,
@@ -3366,6 +3731,11 @@
       "name": "Negative",
       "family": "baseline",
       "motion": "word-reveal",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/negative.mp4",
       "sha256": "b086437075835bde44f03bd1cce0534c0db2d35bca9d9200e50c981134a03b39",
       "bytes": 20949,
@@ -3412,6 +3782,11 @@
       "name": "Negative Face Follow",
       "family": "portable-catalog",
       "motion": "face-follow",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/negative-face-follow.mp4",
       "sha256": "a0c9e19ecbe7343b9533ae85b30ff0cfbd662ae37999e5c324ec1c59aa9c2c6c",
       "bytes": 58528,
@@ -3458,6 +3833,11 @@
       "name": "Shimmer Sweep",
       "family": "portable-catalog",
       "motion": "shimmer",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/shimmer-sweep.mp4",
       "sha256": "14383d75c46a478b5aa59e1616ba0f373a46b2705477a9ae4b4566b2e5faeac3",
       "bytes": 22137,
@@ -3504,6 +3884,11 @@
       "name": "Texture Mask Text",
       "family": "portable-catalog",
       "motion": "texture-mask",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
       "preview": "catalog/previews/text-effects/texture-mask-text.mp4",
       "sha256": "e54932a56331eb525a9dea69ead5cf52b2e0d4336361b09c57c4e66ae3878cfc",
       "bytes": 85542,

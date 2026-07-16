@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "slug": "OPACITY_IN",
+  "kind": "opacity",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "opacity in",
+  "font": "Mytupi-Bold",
+  "font_size": 50,
+  "center": [
+    320,
+    182
+  ],
+  "color": [
+    255,
+    253,
+    245,
+    1
+  ],
+  "fade_frames": 3,
+  "name": "OPACITY IN",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/Manual files/OPACITY IN.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild using editable config text and glyph-derived blur/glow/mask effects; no arbitrary panels added beyond source-mapped rounded plates for SMOOTH_OPACITY and ZOOM_WORD.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/OPACITY_IN.html"
+  }
+}

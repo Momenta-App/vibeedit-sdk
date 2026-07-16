@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ESMERALD - Aesthetic Glow</title>
+    <link rel="stylesheet" href="../components/glow-composition.css">
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div
+      id="composition-root"
+      class="ag-composition"
+      data-composition-id="aesthetic-glow-ESMERALD"
+      data-start="0"
+      data-width="640"
+      data-height="360"
+      data-duration="7.6"
+    >
+      <div class="ag-stage"></div>
+    </div>
+    <script type="application/json" id="template-config">
+{
+  "slug": "ESMERALD",
+  "family": "aesthetic-glow",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "notes": "Browser-playable HTML motion rebuild using editable glyph masks, duplicate text layers, SVG/CSS glow, blur, reflection, light-sweep, and color recipes. No rectangular haze, slabs, or panel shortcuts are used.",
+  "recipe": {
+    "duration": 7.6,
+    "motion": {
+      "from_dx": -20,
+      "from_dy": -14,
+      "from_scale": 0.98,
+      "intro": 0.65
+    },
+    "texts": [
+      {
+        "text": "Emerald",
+        "font": "BirdsofParadise-PersonaluseOnly",
+        "size": 46,
+        "x": 242,
+        "y": 148,
+        "top": [
+          140,
+          255,
+          252
+        ],
+        "bottom": [
+          0,
+          248,
+          116
+        ],
+        "shadow": {
+          "dx": 1,
+          "dy": 10,
+          "blur": 10,
+          "opacity": 0.5,
+          "color": [
+            0,
+            58,
+            38
+          ]
+        },
+        "glows": [
+          {
+            "color": [
+              0,
+              255,
+              135
+            ],
+            "radius": 18,
+            "opacity": 0.58
+          },
+          {
+            "color": [
+              105,
+              255,
+              252
+            ],
+            "radius": 6,
+            "opacity": 0.44
+          }
+        ],
+        "extrude": {
+          "dx": 1,
+          "dy": 2,
+          "steps": 2,
+          "color": [
+            0,
+            42,
+            30
+          ],
+          "opacity": 0.36
+        }
+      }
+    ],
+    "background": {
+      "hazes": [],
+      "panels": []
+    },
+    "panels": []
+  }
+}
+    </script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["aesthetic-glow-ESMERALD"] = {
+        duration: () => 7.6,
+        time: function () { return this; },
+        seek: function () { return this; },
+        progress: function () { return this; },
+        pause: function () { return this; }
+      };
+    </script>
+    <script src="../components/glow-composition.js"></script>
+  </body>
+</html>

@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import html
+import http.server
 import json
 import math
 import tempfile
-from functools import lru_cache
+import threading
+import urllib.parse
+from contextlib import contextmanager
+from functools import lru_cache, partial
 from pathlib import Path
 
 from vibeedit.data import data_path
@@ -38,12 +42,13 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
     destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="vibeedit-motion-") as temporary:
         frames = Path(temporary)
-        with sync_playwright() as playwright:
+        with sync_playwright() as playwright, _motion_asset_server() as asset_base_url:
             browser = playwright.chromium.launch(headless=True)
             page = browser.new_page(viewport={"width": spec["canvas"]["width"], "height": spec["canvas"]["height"]}, device_scale_factor=1)
             page.emulate_media(reduced_motion="reduce")
             for frame in range(spec["durationFrames"]):
-                page.set_content(document_for_frame(spec, frame), wait_until="load")
+                page.set_content(document_for_frame(spec, frame, asset_base_url), wait_until="load")
+                _settle_canonical_frames(page)
                 page.screenshot(path=str(frames / f"frame-{frame:06d}.png"), omit_background=bool(video), animations="disabled")
             browser.close()
         if video:
@@ -51,7 +56,7 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
         return render_frame_sequence(spec, frames / "frame-%06d.png", destination)
 
 
-def document_for_frame(spec: JSONObject, frame: int) -> str:
+def document_for_frame(spec: JSONObject, frame: int, asset_base_url: str | None = None) -> str:
     layers = []
     items = sorted(
         (
@@ -74,7 +79,8 @@ def document_for_frame(spec: JSONObject, frame: int) -> str:
             continue
         component = _portable_by_id().get(item["componentId"])
         if component:
-            layers.append(_portable_component(component, item["props"], local_frame, item["placement"]["durationFrames"]))
+            frame_rate = spec["canvas"].get("frameRate", {"numerator": 30, "denominator": 1})
+            layers.append(_portable_component(component, item["props"], local_frame, item["placement"]["durationFrames"], asset_base_url, frame_rate["numerator"] / frame_rate["denominator"]))
             continue
         raise MotionRenderError(f"unknown motion component: {item['componentId']}")
     return '<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}*{box-sizing:border-box}</style></head><body>' + "\n".join(layers) + "</body></html>"
@@ -133,7 +139,9 @@ def tracking_point_at(points, frame: int, fallback: tuple[float, float] = (0.5, 
     )
 
 
-def _portable_component(component: JSONObject, props: JSONObject, frame: int, duration_frames: int) -> str:
+def _portable_component(component: JSONObject, props: JSONObject, frame: int, duration_frames: int, asset_base_url: str | None = None, fps: float = 30) -> str:
+    if component.get("canonical") and asset_base_url:
+        return _canonical_component(component, props, frame, asset_base_url, fps)
     progress = max(0.0, min(1.0, (frame + 1) / max(1, duration_frames)))
     eased = 1 - (1 - progress) ** 3
     foreground = _css_color(props.get("foreground"), component["palette"]["foreground"])
@@ -163,6 +171,66 @@ def _portable_component(component: JSONObject, props: JSONObject, frame: int, du
     transform = "none" if component["kind"] == "caption" else "uppercase"
     styles = _family_style(component["family"], foreground, accent, progress, frame % 4) + _motion_style(component["motion"], progress, eased, frame % 4, accent, props, frame)
     return f'<section data-vibeedit-component="{slug}" data-family="{family}" data-frame="{frame}" style="position:absolute;inset:0;display:flex;align-items:{align};justify-content:center;padding:{padding};overflow:hidden;pointer-events:none;background:{background}"><div style="position:relative;max-width:94%;color:{foreground};font-family:\'Arial Black\',\'Avenir Next\',Arial,sans-serif;font-weight:900;font-size:clamp(32px,{size},180px);line-height:.94;letter-spacing:-.045em;text-align:center;text-transform:{transform};{styles}">{content}{particles}</div></section>'
+
+
+def _canonical_component(component: JSONObject, props: JSONObject, frame: int, asset_base_url: str, fps: float) -> str:
+    source = urllib.parse.urljoin(asset_base_url, component["canonical"]["entry"])
+    parsed = urllib.parse.urlparse(source)
+    query = dict(urllib.parse.parse_qsl(parsed.query))
+    query.update({"alpha": "1", "render": "1", "transparent": "1"})
+    text = str(props.get("text", component["defaultText"])).strip()
+    if text and _normalize_text(text) != _normalize_text(component["defaultText"]):
+        query["text"] = text
+    source = urllib.parse.urlunparse(parsed._replace(query=urllib.parse.urlencode(query)))
+    background = _css_color(props.get("background"), "transparent")
+    slug = html.escape(component["id"].rsplit("/", 1)[-1], quote=True).replace(";", "")
+    family = html.escape(component["family"], quote=True).replace(";", "")
+    name = html.escape(component["name"], quote=True).replace(";", "")
+    return f'<section data-vibeedit-component="{slug}" data-family="{family}" data-frame="{frame}" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;background:{background}"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">{html.escape(text)}</span><iframe data-vibeedit-canonical="true" data-vibeedit-time="{frame / max(1, fps):.6f}" title="{name}" src="{html.escape(source, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;pointer-events:none" tabindex="-1"></iframe></section>'
+
+
+def _settle_canonical_frames(page) -> None:
+    frames = page.locator("iframe[data-vibeedit-canonical]")
+    for index in range(frames.count()):
+        element = frames.nth(index)
+        handle = element.element_handle()
+        frame = handle.content_frame() if handle else None
+        if frame is None:
+            raise MotionRenderError(f"canonical text frame {index} did not attach")
+        frame.wait_for_function("Object.keys(globalThis.__timelines || {}).length > 0 || Boolean(document.body.dataset.error)", timeout=15_000)
+        error = frame.locator("body").get_attribute("data-error")
+        if error:
+            raise MotionRenderError(f"canonical text frame {index}: {error}")
+        frame.evaluate("""async (time) => {
+          if (document.fonts && document.fonts.ready) await document.fonts.ready;
+          const timeline = Object.values(globalThis.__timelines || {})[0];
+          timeline.time(time);
+          if (typeof timeline.pause === "function") timeline.pause();
+          await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        }""", float(element.get_attribute("data-vibeedit-time")))
+
+
+@contextmanager
+def _motion_asset_server():
+    root = data_path("catalog", "text-runtime")
+
+    class Handler(http.server.SimpleHTTPRequestHandler):
+        def log_message(self, format, *args):
+            return
+
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), partial(Handler, directory=str(root)))
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        yield f"http://127.0.0.1:{server.server_port}/"
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)
+
+
+def _normalize_text(value: str) -> str:
+    return " ".join(value.casefold().split())
 
 
 def _family_style(family: str, foreground: str, accent: str, progress: float, phase: int) -> str:

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640, height=360">
+    <title>SMOOTH_OPACITY - Simple Motion</title>
+    <link rel="stylesheet" href="../components/simple-motion.css">
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div id="root" class="simple-motion-root" data-composition-id="simple-motion-SMOOTH_OPACITY" data-start="0" data-width="640" data-height="360" data-duration="7">
+      <section id="simple-motion-SMOOTH_OPACITY-clip" class="clip" data-start="0" data-duration="7" data-track-index="1">
+        <canvas id="simple-motion-canvas" class="simple-motion-canvas" width="640" height="360"></canvas>
+      </section>
+    </div>
+    <script>
+      window.SIMPLE_MOTION_SLUG = "SMOOTH_OPACITY";
+      window.SIMPLE_MOTION_CONFIG_PATH = "../../../configs/SMOOTH_OPACITY.json";
+      window.SIMPLE_MOTION_FONT_ROOT = "../../../assets/fonts/";
+      window.__timelines = window.__timelines || {};
+      window.__timelines["simple-motion-SMOOTH_OPACITY"] = window.__timelines["simple-motion-SMOOTH_OPACITY"] || {
+        paused: true,
+        duration: () => 7,
+        time: function () { return this; },
+        seek: function () { return this; },
+        pause: function () { return this; },
+        progress: function () { return 0; }
+      };
+    </script>
+    <script type="module" src="../components/simple-motion.js"></script>
+  </body>
+</html>

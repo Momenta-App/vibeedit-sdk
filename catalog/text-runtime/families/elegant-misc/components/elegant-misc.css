@@ -1,0 +1,95 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #050505;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.elegant-misc-root,
+.clip,
+.elegant-misc-canvas {
+  position: absolute;
+  width: 640px;
+  height: 360px;
+}
+
+.elegant-misc-root {
+  position: relative;
+  overflow: hidden;
+  background: #050505;
+  transform: scale(var(--hm-preview-scale, 1));
+  transform-origin: center;
+}
+
+.clip,
+.elegant-misc-canvas {
+  inset: 0;
+}
+
+.clip {
+  overflow: visible;
+}
+
+.elegant-misc-canvas {
+  display: block;
+}
+
+.elegant-html-stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+.elegant-html-text {
+  display: inline-block;
+  padding: 42px 52px;
+  line-height: 1.12;
+  white-space: nowrap;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  will-change: opacity, transform, background-position;
+}
+
+.elegant-html-elegant .elegant-html-text {
+  font-family: "AVANTERegular", serif;
+  font-size: 76px;
+  letter-spacing: -.045em;
+  background-image: linear-gradient(105deg, #d6ae5f 0%, #fff5c7 38%, #fff 48%, #f2d98c 58%, #b98b3f 100%);
+  text-shadow: 0 2px 5px rgba(36, 22, 4, .28);
+}
+
+.elegant-html-rebote .elegant-html-text {
+  font-family: "Mytupi-Bold", sans-serif;
+  font-size: 86px;
+  letter-spacing: -.04em;
+  position: relative;
+  background-image: linear-gradient(180deg, #f5f8f8 0%, #aeb5b5 52%, #5f6667 100%);
+  -webkit-text-stroke: .45px rgba(255, 255, 255, .24);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, .22);
+}
+
+.elegant-html-rebote .elegant-html-text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 42px 52px;
+  color: transparent;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .98) 48%, rgba(220, 255, 250, .7) 52%, transparent 62%);
+  background-position: var(--shimmer-position, -140%) 50%;
+  background-size: 280% 100%;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  pointer-events: none;
+}

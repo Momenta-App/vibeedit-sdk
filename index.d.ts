@@ -136,7 +136,7 @@ export declare function treeChecksum(root: string, excluded?: Set<string>): stri
 
 export declare function registerComponent(id: string, component: (props: JSONObject, frame: number, context: JSONObject) => string): void;
 export declare function renderComponent(id: string, props: JSONObject, frame: number, context: JSONObject): string;
-export declare function documentForFrame(spec: JSONObject, frame: number): string;
+export declare function documentForFrame(spec: JSONObject, frame: number, options?: { assetBaseUrl?: string }): string;
 export declare function trackingPointAt(points: JSONObject[], frame: number, fallback?: { x: number; y: number }): Readonly<{ x: number; y: number }>;
 export declare function renderMotionFrame(spec: JSONObject, frame: number, output: string, options?: { transparent?: boolean }): Promise<string>;
 

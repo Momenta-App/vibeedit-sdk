@@ -625,8 +625,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-3d-text.mp4",
-      "sha256": "d31a107ffa44164a20b59b79686b359a2f029562886e4bc16743f179096d3b9d",
-      "bytes": 20032,
+      "sha256": "5331d76627473379ac48abc60be4c1baaede99611a09d0426eb0af4d56a4a743",
+      "bytes": 22818,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -645,8 +645,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-above-in.mp4",
-      "sha256": "9ef884c654d11df13945e65c9419057e840bc4eaa9ae6b132351da4faec97417",
-      "bytes": 13776,
+      "sha256": "7cec8d671ac3a97050a35f0c2a80381edcf06ac3b25b1b664af0bfa832cdc418",
+      "bytes": 16621,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -665,8 +665,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-aesthetic-purple.mp4",
-      "sha256": "a9f0916648aa3d5cf8d650641b38f7736a82fdadaaa9e85d45802ccdc1e22edf",
-      "bytes": 23771,
+      "sha256": "280c6016f5c6c675f8ed9abf7abcb949f89407db2fe7ee218142f37704a9dd3c",
+      "bytes": 17224,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -685,8 +685,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-aesthetic-strinking.mp4",
-      "sha256": "99c918398151065d282734dbaadb690dd108fd8c607eb219ed857f2a9d758247",
-      "bytes": 23445,
+      "sha256": "89367f6ec831db036da11c28a77f041c536c81732b32913f4f3c73cbe63bbc0b",
+      "bytes": 18744,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -705,8 +705,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-apple-ladder.mp4",
-      "sha256": "5e43e03983cfac7e1bff528e481d54bc4200a567e110bb9c3b50610b61e9eda4",
-      "bytes": 32015,
+      "sha256": "4108eb7fdbb72f7ac52b2b620dbdc2556d0fa29e4dd0dcaebafc9ac634127319",
+      "bytes": 13486,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -725,8 +725,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-apple-middle.mp4",
-      "sha256": "22ca2ccf4f521876b17ce7c0f602b39392378b914be6b1bd3e3650b3e628d1bf",
-      "bytes": 30351,
+      "sha256": "5c2ae2bb2cf8c3caa4a32e8b7c57784701b03d782136ee9c87126e94fabd8726",
+      "bytes": 11887,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -745,8 +745,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-apple-smooth.mp4",
-      "sha256": "aac4c100acb6183a3c717cbb8297c836142f62c17b7f3faef1af46515d020671",
-      "bytes": 32532,
+      "sha256": "cf5f4c09fde51a94ce84d8640c67849b5d7a37e7100ac55dcf4d083008051def",
+      "bytes": 14457,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -765,8 +765,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-apple-style-animation.mp4",
-      "sha256": "c350492e86aa957ee4a9922ffb9db0ab5c2a224ae65a125ebb905b0cf49833f0",
-      "bytes": 50859,
+      "sha256": "4b41115062f3697682b9ae8a6ae3d6543488140b79e35137459ab0c3f0c18b66",
+      "bytes": 20033,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -785,8 +785,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-apple-word.mp4",
-      "sha256": "29c2f4dbdf8b4e628842cfbb808b9279014e5e664dd81bfe2a66486478f13441",
-      "bytes": 29691,
+      "sha256": "67d80a8b698ebde4039e2295cb9a6948df93b3aa2606e5348042ffcf18f564ea",
+      "bytes": 12702,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -805,8 +805,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-blue-and-orange.mp4",
-      "sha256": "1014521631494b0f0fc4b9c37b83e75458251b7bf4f3d88c556f8a049bd9d6f3",
-      "bytes": 26827,
+      "sha256": "46b7709395dcd84dc2906aef5ab8ccb7e3ecd93343d633cbf9a26d9815e0e550",
+      "bytes": 19851,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -825,8 +825,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-blur-in.mp4",
-      "sha256": "c2dcb5babe2bbc3e952274eb1c923e02220f5faa3fc4b4821359f3cd075f3450",
-      "bytes": 21073,
+      "sha256": "4017f87de2ba3c1900043d1fe77b962834eed776bfb8c695e5ee9ab712727a24",
+      "bytes": 17506,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -845,8 +845,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-bottom-in.mp4",
-      "sha256": "f6a890b00fc5d70c9831ef45a161b4ae7ba7afc24ce501cf1204bfcbd4ccdbcc",
-      "bytes": 14043,
+      "sha256": "bbb088419da21886ee492e04b1506f3e43fa57cbff7baf7eb497e3e766d7c289",
+      "bytes": 19843,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -865,8 +865,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-bubble.mp4",
-      "sha256": "c98edd9700079d4d76056f7a3d3ad8291a2ccbd074b1c7fd1a76442d5134f941",
-      "bytes": 28217,
+      "sha256": "80d59627ef6af3c709cc1ed7d10cd9d6994b3c125d178acc3428559ce3cf3d49",
+      "bytes": 20559,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -885,8 +885,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-clean-aesthetic-light.mp4",
-      "sha256": "5de51167bafa8d6c24d45fd84b51a9de5ed95e2865f31a374529c2d8f499bc79",
-      "bytes": 44778,
+      "sha256": "540a5f62466e888203530d589199c37d146bf5a8ee82e8d6deed422dfed7a116",
+      "bytes": 11702,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -905,8 +905,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-clean-blue.mp4",
-      "sha256": "09e52872022df7420896369b138ca1cf0b921c10806571550c623e0b3017904f",
-      "bytes": 25256,
+      "sha256": "6c7335748d83ee9a7662caac98fb0eb9a2a322f158d26da0a95497ce8285f937",
+      "bytes": 15514,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -925,8 +925,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-clean-gradient.mp4",
-      "sha256": "90098e4cca20251272a3e41e71fb680696c5c5651ecfbe71d775a6732b880811",
-      "bytes": 37454,
+      "sha256": "74d698b93899d72a1e7cc72176ffbac1de264cb4bee52ca0113d6cdfe9f1dbb0",
+      "bytes": 19422,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -945,8 +945,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-clean-style.mp4",
-      "sha256": "63118e599a707d3052e05759092bcae2e873ed71f72394365f2f8a25b160d57d",
-      "bytes": 18926,
+      "sha256": "322cf82f4fe1ed90842173f67f9a8f87faf2a76d042d8bc176053682a14df9e3",
+      "bytes": 18890,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -965,8 +965,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-dark-water.mp4",
-      "sha256": "c1a616b11111b600bf351fe6535f78ff2b8ab670fd17cb24d957ac2c5468a2c8",
-      "bytes": 42985,
+      "sha256": "b158b848dd26a2b63aed5e24043b83b445730cd1d6e87afcf929476e327ef17e",
+      "bytes": 34643,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -985,8 +985,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-elegant.mp4",
-      "sha256": "2c8281f34ce7152818ff28a862c76a9786f8db1ad5e5a09d0af3ee017e561a64",
-      "bytes": 26383,
+      "sha256": "30e2cfe703487d2b62602c3836b3085a78ea78bb7dd8ff70970459a73f19f067",
+      "bytes": 15438,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1005,8 +1005,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-error-text.mp4",
-      "sha256": "90394b40a3e18ce0f0fb6d89a5379c87535fc4b93a153df6455b2695eb41748f",
-      "bytes": 39065,
+      "sha256": "1a2ec83a4e151206d9c8b756de4959b4bdcf9c98de080893db05767961bffebe",
+      "bytes": 23048,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1025,8 +1025,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-escrito-a-mano-posterizacion.mp4",
-      "sha256": "fd3b91e4442179e2a82adf7886664be9ef4b0f231dbac0143765390148400519",
-      "bytes": 72586,
+      "sha256": "53faa2f8846c67502e97f517d62ad3ea0366b2993dbc0b435116a4467f5bc7ee",
+      "bytes": 16210,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1045,8 +1045,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-esmerald.mp4",
-      "sha256": "72d2f7e4875a3b39b44328a60cb6edce43c0b5c772c1e55e46fb0b372d043eb5",
-      "bytes": 20173,
+      "sha256": "91f89ea304cac262dcaafa31a211a0fb44f927c01cc091712cb196594a222985",
+      "bytes": 15705,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1065,8 +1065,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-fast.mp4",
-      "sha256": "471bf461749376f0f1ab2212cf363ea37b52e3621644c27d8ee4ae13c177c2f5",
-      "bytes": 24792,
+      "sha256": "36402a8eddcd63bc095458534b1c6bec130693a727af6b160d01a9e3efd7ef5f",
+      "bytes": 17922,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1085,8 +1085,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-fire.mp4",
-      "sha256": "0df11d18f6ed09145482325172fba226b331a1bc4c6732068d7bef1015ca0e20",
-      "bytes": 17562,
+      "sha256": "6bb4bec19d31512ced4e6e6b4b79a872eb1f0cd27f34e9acf03925d9a49472a5",
+      "bytes": 15102,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1105,8 +1105,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-fluorscent.mp4",
-      "sha256": "df4f62dfe9b9d64cfb127495760a85e265738f40404954373441d8a14c0ba48d",
-      "bytes": 24629,
+      "sha256": "5a896677eda2a32280df760cf481f7074abb47ceeb142e1a5dcbb63533400763",
+      "bytes": 19663,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1125,8 +1125,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-futurist.mp4",
-      "sha256": "53eb9cc7c8433cb63c7dd2dec15eda23fd6d710bbf74c991df0317265b513c3a",
-      "bytes": 30701,
+      "sha256": "be083ec28114cc972f6a752f54a86b2c82c370dbc7a183e19022a89e149d26e7",
+      "bytes": 18553,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1145,8 +1145,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-gold-text.mp4",
-      "sha256": "7b0070afe55ac61ebbdaf48534df11cddb65ef7a85d475043caa5304e398a001",
-      "bytes": 23312,
+      "sha256": "1dac3127325729d745983d9ffb49e2d1b2abeab3e6ac056d6a6e391942d67337",
+      "bytes": 20097,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1165,8 +1165,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-green.mp4",
-      "sha256": "f0a2d0d91c0ae0e05d39cba2a6023a9f8fe4ac461815530aa6932fc6fa91f432",
-      "bytes": 17603,
+      "sha256": "5f8ba9aec041e562637fb50d2ca34ac1c8c526d6a62531b02e4823ba73b3ac7f",
+      "bytes": 14640,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1185,8 +1185,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-green-and-grey.mp4",
-      "sha256": "2923d9b153ea32a901de1aa9f472e55953aa01880845a649f7a06b0c04ef2203",
-      "bytes": 25011,
+      "sha256": "747ccb644b0698533008341f49b908cbde28c02c2a5bf73ffc73294e73004d0f",
+      "bytes": 19936,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1205,8 +1205,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-left-in.mp4",
-      "sha256": "d385124d87af96e2aa4d69e44a4f7db7dd4684b2ed0dda6bfa275a166fb14589",
-      "bytes": 12356,
+      "sha256": "73148d7bca25a9de5c202e4ca8aa28cdb7edd349a847c868fe3b2ce0d3cf5bbf",
+      "bytes": 16968,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1225,8 +1225,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-old-money.mp4",
-      "sha256": "33d642d6a1b4f099a3bb83bc5abba9f28a905286ab28e0e19587cc9ced56455d",
-      "bytes": 24887,
+      "sha256": "33db935b0c68bed2d2d3d24f0ed45191c086646d6a804b0d4d1d02a608b2c2d3",
+      "bytes": 26328,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1245,8 +1245,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-old-tv.mp4",
-      "sha256": "869dd6be301be7d5df9fde4fee83380d44b9a1333d32cdf1226d6b93417d2ad7",
-      "bytes": 35067,
+      "sha256": "566695466536e73e5b86b1b7a8dd6da900c9e4d71f524be9bbda3944fd99425e",
+      "bytes": 71392,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1265,8 +1265,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-opacity-in.mp4",
-      "sha256": "80cfa682964d23e234363fe629f35575ccb6ed474d00258df9926ec14e906390",
-      "bytes": 25731,
+      "sha256": "7af08d376da4c10ce917abc92b26b4ec5ea5cde58f6bea52ad5bb85c28e4f218",
+      "bytes": 11575,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1285,8 +1285,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-orange-text.mp4",
-      "sha256": "1b4e2d73ed5962c434a340f33f6b4cd23a0755b86baa2eb224a08ca805289d6c",
-      "bytes": 19545,
+      "sha256": "51292a31f2d1ffe00438d4285e60c1ffa16d5c1ffba59e899a8ce04781595984",
+      "bytes": 16764,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1305,8 +1305,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-purple.mp4",
-      "sha256": "41863f11962fbec281ad196c2eeb43305f086c6d1a4f1e54e9173061974a30d8",
-      "bytes": 18169,
+      "sha256": "1ecc11e17b0c33e1de385af881b2ee3e5c8f13dbc87abe6dd01ca0c370f301b8",
+      "bytes": 15137,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1325,8 +1325,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-radial-blur.mp4",
-      "sha256": "d1c4378f3a1168203fb67ba30de6e533073cc316db163c8e9e5436c5aec981a7",
-      "bytes": 57129,
+      "sha256": "1698f77e625ccae057f3f17b2269525de99912b821072aac558efce8c3f1be7c",
+      "bytes": 19838,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1345,8 +1345,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-rainbow-clean-text.mp4",
-      "sha256": "0b9b1ca4a787b3b91816868206abb15c24aa6b4ce9b433d23fc3d011a30f5c38",
-      "bytes": 60836,
+      "sha256": "c8896e3c99000a0ac95a4969db2a1b15682656e9b0ec2020a24ab40563f2f106",
+      "bytes": 31822,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1365,8 +1365,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-rainbow-text.mp4",
-      "sha256": "5e26b4649033db1a38ee9ff58aa563f0c656a9ac1f730962f23401aa8a4a248f",
-      "bytes": 37669,
+      "sha256": "06ea972a0b971d0531ccfb1c7d461d3d0abbc03763054cac211fd882cd6f03ea",
+      "bytes": 37709,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1385,8 +1385,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-rebote.mp4",
-      "sha256": "cc4769a2a60e2fd9151a2efbaf831d9e2ca128b5529aeaaec9bca7b59210e184",
-      "bytes": 28010,
+      "sha256": "da6b39dbfa71167a0c29b2274683dacbf567f057503848f4772c1ef2e6c76468",
+      "bytes": 18882,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1405,8 +1405,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-rebound.mp4",
-      "sha256": "4c4c03c099e239e888ae822cc420ee5220b928000b6d30aba8b1769092dc5225",
-      "bytes": 28122,
+      "sha256": "9c43002834e444f1d80aea93f0583d0303cc494895f9389694a35b51eaad8604",
+      "bytes": 18514,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1425,8 +1425,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-right-in.mp4",
-      "sha256": "451962d400c156fb2b334d7e5e2221fbb001d037c61430dd88d4940929828c50",
-      "bytes": 13107,
+      "sha256": "c8484483fdc98715bc66b3b1b97cadfdb3bbf9b827c3242c8929e7732b725908",
+      "bytes": 18662,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1445,8 +1445,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-smooth-bounce.mp4",
-      "sha256": "d5d560913238e3ce42bd8f0e543efb00390220d17ff9f9f6a29399194e67ecf1",
-      "bytes": 35598,
+      "sha256": "58933027ebf7773d2ba5c0f1ba859e11f34b65c28ee1c10c3e5a49a75b654444",
+      "bytes": 23392,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1465,8 +1465,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-smooth-opacity.mp4",
-      "sha256": "9c0e646c7a12a9a53ebd5af7d2ccc15e67b45c5f17563405cfcfb9e4bbf3ce9a",
-      "bytes": 39033,
+      "sha256": "00fb2dcda370a13615f27f93143b82adcc50101f833bd0abe2422199e68caddd",
+      "bytes": 22240,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1485,8 +1485,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-smooth-up.mp4",
-      "sha256": "82d56d70d5f52b85dbe2af0edb8a72bbd2adc6df16582e88da0a1ed3b20d6cfc",
-      "bytes": 28226,
+      "sha256": "dcc79606b26901c84cd47239bfa3b627fc4f77f0f7b6cadb0b9797d06b53fdb3",
+      "bytes": 19785,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1505,8 +1505,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-texto-de-oro.mp4",
-      "sha256": "9c6c856a85a0c954dc78cf607ee204f9bb577307d552c9f16c2239b45f0eabb3",
-      "bytes": 28489,
+      "sha256": "c0c9d27fb56690673f1218cf60c03d16c5fe5c6dbcd1dbb1c58f693995b5509c",
+      "bytes": 23605,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1525,8 +1525,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-triple-elegant-text.mp4",
-      "sha256": "6e39293fb522ab236d56edabc37dd3cf651d18b513fb4515a7b0c7fafa5e9c33",
-      "bytes": 21017,
+      "sha256": "74e95120c3088218d6cd6d04e16593e5293679e64e76fe8644b4a1db6712792f",
+      "bytes": 15567,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1545,8 +1545,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-vhs.mp4",
-      "sha256": "1867f6a4dc2c96e0c472a1671849600d8abb90631583c456333ad1861e1f02a0",
-      "bytes": 30413,
+      "sha256": "91826f46e446a936875fe704a042ae1daece8f69d6563653899d6a155aabdd86",
+      "bytes": 25684,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1565,8 +1565,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-warp.mp4",
-      "sha256": "f61d990e79132a875568e4847c77416b8409430a4a8c1782a61fe30e14d2d04e",
-      "bytes": 18770,
+      "sha256": "117bd1b514aed2c533f74714429d7682985a554d203fe5d4bb9a70bb46d7ed80",
+      "bytes": 30137,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1585,8 +1585,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-water-text.mp4",
-      "sha256": "76d151f225160cdb22a8f339b8ad5269be0edbbf06c2f4ed6427592ee76cb8a7",
-      "bytes": 26694,
+      "sha256": "d3a91106401aa8e560bcdecbb5d8419cffa0e016260f3e2720255a95a5b30e21",
+      "bytes": 24326,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1605,8 +1605,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-waves.mp4",
-      "sha256": "5084920734f7e47f78b1b081e08246af1bb33703bfc384e3f17f0dfde439c115",
-      "bytes": 23777,
+      "sha256": "e4c60a39a7fc78061e9ea7ed509e0ccfeb156e5671428732235da71f135f3f81",
+      "bytes": 19400,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1625,8 +1625,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-zoom-in.mp4",
-      "sha256": "f1f239b7b62bddb0f534f6f509b4fadc68b5d20cb3af716193740a262b456d7a",
-      "bytes": 22053,
+      "sha256": "048b230ad23595839f6b00ce75e7565fad15e45aac9aabeaad82bfc9f94cc1e5",
+      "bytes": 20380,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1645,8 +1645,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-zoom-out.mp4",
-      "sha256": "c8c16398dfdc35a0dc21796a4c8ac8865d7f848ebb13b804d564a4cdfafac3ed",
-      "bytes": 25652,
+      "sha256": "89fb5e058ef6a465cea294f5eeca3c56777e81109ce6357086dd1f76f80634cf",
+      "bytes": 23659,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -1665,8 +1665,8 @@
     },
     {
       "path": "catalog/previews/text-effects/mogrt-zoom-word.mp4",
-      "sha256": "68cfa482206591ec3e20fc1dc9581b9f13acf569bd44dfca7699cbd536c153cc",
-      "bytes": 37922,
+      "sha256": "9ea878cf6b43683bb1fd80c903d266c6b39b367d6c760007871c084a1a631805",
+      "bytes": 22711,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [

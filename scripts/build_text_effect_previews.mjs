@@ -5,6 +5,7 @@ import { join, relative } from "node:path";
 import { spawnSync } from "node:child_process";
 import { chromium } from "playwright";
 import { portableMotionComponents } from "../src/motion/components.generated.js";
+import { settleCanonicalFrames, startMotionAssetServer } from "../src/motion/assets.js";
 import { documentForFrame } from "../src/motion/runtime.js";
 
 const root = new URL("..", import.meta.url);
@@ -16,18 +17,22 @@ const durationFrames = 48;
 const representativeFrame = 32;
 const limitIndex = process.argv.indexOf("--limit");
 const limit = limitIndex === -1 ? undefined : Number(process.argv[limitIndex + 1]);
+const idsIndex = process.argv.indexOf("--ids");
+const requestedIds = idsIndex === -1 ? undefined : new Set(process.argv[idsIndex + 1].split(",").map((value) => value.startsWith("vibeedit://") ? value : `vibeedit://text/${value}`));
 const catalogPath = join(rootPath, "catalog/catalog.json");
 const assetsPath = join(rootPath, "catalog/assets.json");
 const previewRoot = join(rootPath, "catalog/previews/text-effects");
 const evidenceRoot = join(rootPath, "docs/evidence/text-effects");
 const catalog = JSON.parse(await readFile(catalogPath, "utf8"));
 const textItems = catalog.items.filter((item) => item.id.startsWith("vibeedit://text/")).sort((left, right) => left.id.localeCompare(right.id));
-const selected = Number.isFinite(limit) ? textItems.slice(0, Math.max(0, limit)) : textItems;
+const selected = requestedIds ? textItems.filter((item) => requestedIds.has(item.id)) : Number.isFinite(limit) ? textItems.slice(0, Math.max(0, limit)) : textItems;
+if (requestedIds && selected.length !== requestedIds.size) throw new Error(`unknown text effect IDs: ${[...requestedIds].filter((id) => !selected.some((item) => item.id === id)).join(", ")}`);
 const fullRun = selected.length === textItems.length;
 const work = await mkdtemp(join(tmpdir(), "vibeedit-text-effects-"));
 await mkdir(previewRoot, { recursive: true });
 await mkdir(evidenceRoot, { recursive: true });
 
+const assets = await startMotionAssetServer();
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
 await page.emulateMedia({ reducedMotion: "reduce" });
@@ -35,7 +40,7 @@ const requests = [];
 const consoleErrors = [];
 const pageErrors = [];
 page.on("request", (request) => {
-  if (!request.url().startsWith("about:") && !request.url().startsWith("data:")) requests.push(request.url());
+  if (!request.url().startsWith("about:") && !request.url().startsWith("data:") && !request.url().startsWith(assets.baseUrl)) requests.push(request.url());
 });
 page.on("console", (message) => {
   if (message.type() === "error") consoleErrors.push(message.text());
@@ -70,6 +75,7 @@ if (process.argv.includes("--contact-only")) {
   evidence.contactSheets = sheets;
   await writeFile(evidencePath, JSON.stringify(evidence, null, 2) + "\n");
   await browser.close();
+  await assets.close();
   await rm(work, { recursive: true, force: true });
   process.stdout.write(`${JSON.stringify({ ok: true, rebuilt: sheets.map((sheet) => sheet.path), cards: evidence.results.length })}\n`);
   process.exit(0);
@@ -96,16 +102,19 @@ try {
     const frameHashes = new Map();
     let representativePath;
     for (let frame = 0; frame < durationFrames; frame += 1) {
-      await page.setContent(withQaBackground(documentForFrame(spec, frame)), { waitUntil: "load" });
+      await page.setContent(withQaBackground(documentForFrame(spec, frame, { assetBaseUrl: assets.baseUrl })), { waitUntil: "load" });
+      await settleCanonicalFrames(page);
       const framePath = join(frameRoot, `frame-${String(frame).padStart(4, "0")}.png`);
       const bytes = await page.screenshot({ path: framePath, animations: "disabled" });
       if ([2, 24, 43].includes(frame)) frameHashes.set(frame, sha256(bytes));
       if (frame === representativeFrame) representativePath = framePath;
     }
 
-    await page.setContent(withQaBackground(documentForFrame(spec, 24)), { waitUntil: "load" });
+    await page.setContent(withQaBackground(documentForFrame(spec, 24, { assetBaseUrl: assets.baseUrl })), { waitUntil: "load" });
+    await settleCanonicalFrames(page);
     const repeatHash = sha256(await page.screenshot({ animations: "disabled" }));
-    await page.setContent(withQaBackground(documentForFrame(spec, durationFrames - 1)), { waitUntil: "load" });
+    await page.setContent(withQaBackground(documentForFrame(spec, durationFrames - 1, { assetBaseUrl: assets.baseUrl })), { waitUntil: "load" });
+    await settleCanonicalFrames(page);
     const dom = await page.evaluate(() => {
       const section = document.querySelector("[data-vibeedit-component]");
       const primary = section?.querySelector(":scope > div") ?? section;
@@ -144,11 +153,15 @@ try {
     const passed = Object.entries(checks).every(([key, value]) => key === "temporalChange" || key === "temporalChangeRequired" || value)
       && (!checks.temporalChangeRequired || checks.temporalChange);
     const bytes = await readFile(previewPath);
+    const metadata = motionMetadata(item.id);
     results.push({
       id: item.id,
       name: item.name,
-      family: motionMetadata(item.id).family,
-      motion: motionMetadata(item.id).motion,
+      family: metadata.family,
+      motion: metadata.motion,
+      fidelity: metadata.canonical
+        ? { mode: "canonical-source-clone", sourceEntry: metadata.canonical.entry, sourceRevision: JSON.parse(await readFile(join(rootPath, "catalog/motion-components.json"), "utf8")).revision }
+        : { mode: "portable-runtime", sourceEntry: null, sourceRevision: null },
       preview: relative(rootPath, previewPath),
       sha256: sha256(bytes),
       bytes: bytes.length,
@@ -196,6 +209,11 @@ try {
     failed: failures.length,
     failures,
     renderContract: { width, height, fps, durationFrames, background: "split-gradient-conformance-field", network: "blocked-by-contract" },
+    fidelityContract: {
+      canonicalSourceClones: results.filter((result) => result.fidelity.mode === "canonical-source-clone").length,
+      portableRuntimeEffects: results.filter((result) => result.fidelity.mode === "portable-runtime").length,
+      meaning: "Render checks prove deterministic browser output. Canonical-source-clone identifies effects rendered by the packaged original VibeEdit HTML/CSS/JS implementation; portable-runtime does not claim source visual identity.",
+    },
     aggregatePreviewSha256: sha256(results.map((result) => `${result.id}:${result.sha256}`).join("\n")),
     contactSheet: relative(rootPath, contactSheet),
     contactSheets: sheets,
@@ -213,7 +231,9 @@ try {
         status: "verified",
         uri: `previews/text-effects/${item.id.replace("vibeedit://text/", "")}.mp4`,
         mediaType: "video/mp4",
-        note: "Rendered by the complete browser text-effect conformance suite with deterministic frame, geometry, network, and decode checks.",
+        note: result.fidelity.mode === "canonical-source-clone"
+          ? "Rendered from the packaged original VibeEdit HTML/CSS/JS implementation and checked for deterministic frame, geometry, network, and decode behavior."
+          : "Rendered by the portable browser motion runtime and checked for deterministic frame, geometry, network, and decode behavior; no source-identity claim is made.",
       };
       item.validation = [
         ...item.validation.filter((entry) => entry.id !== "visual-render-conformance"),
@@ -251,12 +271,13 @@ try {
   process.stdout.write(`${JSON.stringify({ ok: true, tested: results.length, passed: results.length, contactSheet: relative(rootPath, contactSheet), reviewReel: relative(rootPath, reviewReel) })}\n`);
 } finally {
   await browser.close();
+  await assets.close();
   await rm(work, { recursive: true, force: true });
 }
 
 function testSpec(id, props) {
   return {
-    canvas: { width, height },
+    canvas: { width, height, frameRate: { numerator: fps, denominator: 1 } },
     timeline: {
       tracks: [{
         id: "M1",
@@ -293,10 +314,10 @@ async function writeContactSheet(browserInstance, cards, output) {
 }
 
 function motionMetadata(id) {
-  if (id === "vibeedit://text/negative") return { family: "baseline", motion: "word-reveal" };
-  if (id === "vibeedit://text/caption-rail") return { family: "baseline", motion: "active-word" };
+  if (id === "vibeedit://text/negative") return { family: "baseline", motion: "word-reveal", canonical: null };
+  if (id === "vibeedit://text/caption-rail") return { family: "baseline", motion: "active-word", canonical: null };
   const component = portableMotionComponents.find((entry) => entry.id === id);
-  return { family: component?.family ?? "unknown", motion: component?.motion ?? "unknown" };
+  return { family: component?.family ?? "unknown", motion: component?.motion ?? "unknown", canonical: component?.canonical ?? null };
 }
 
 function baselineText(id) {

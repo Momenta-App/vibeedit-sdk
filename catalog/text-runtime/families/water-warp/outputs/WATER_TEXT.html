@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640, height=360">
+    <title>WATER_TEXT - Water Warp</title>
+    <link rel="stylesheet" href="../components/water-warp.css">
+    <style>
+      @font-face {
+        font-family: "Poppins Black";
+        src: url("../../../assets/fonts/Poppins-Black.ttf") format("truetype");
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Poppins Black Italic";
+        src: url("../../../assets/fonts/Poppins-BlackItalic.ttf") format("truetype");
+        font-display: block;
+      }
+
+    </style>
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div id="root" data-composition-id="water-warp-WATER_TEXT" data-start="0" data-width="640" data-height="360" data-duration="7.0">
+      <section id="water-warp-WATER_TEXT-clip" class="clip" data-start="0" data-duration="7.0" data-track-index="1">
+        <canvas id="water-warp-canvas" class="water-warp-canvas" width="640" height="360"></canvas>
+      </section>
+    </div>
+    <script src="../components/water-warp.js"></script>
+    <script>
+      WaterWarp.mount({
+      "slug": "WATER_TEXT",
+      "family": "water-warp",
+      "editable": true,
+      "compositionId": "water-warp-WATER_TEXT",
+      "text": "Water",
+      "duration": 7.0,
+      "fps": 30,
+      "style": "water_plate",
+      "font": {
+            "family": "Poppins Black",
+            "file": "Poppins-Black.ttf",
+            "sourceFamily": "Poppins-Black",
+            "italic": false
+      },
+      "fontSize": 36,
+      "primaryText": "Principal",
+      "secondaryText": "second",
+      "primaryFontSize": 36,
+      "secondaryFontSize": 32,
+      "browserTuning": {
+            "textLayerWidth": 164,
+            "textLayerHeight": 76,
+            "textYOffset": 0,
+            "textTop": [
+                  118,
+                  255,
+                  255
+            ],
+            "textBottom": [
+                  0,
+                  176,
+                  255
+            ],
+            "textShadow": [
+                  0,
+                  20,
+                  58
+            ],
+            "sweepOpacity": 0.38,
+            "plate": {
+                  "width": 214,
+                  "height": 136,
+                  "outerRadius": 10,
+                  "outerTop": [
+                        0,
+                        174,
+                        145
+                  ],
+                  "outerBottom": [
+                        0,
+                        33,
+                        151
+                  ],
+                  "innerX": 9,
+                  "innerY": 14,
+                  "innerBottom": 27,
+                  "innerRadius": 56,
+                  "innerTop": [
+                        0,
+                        117,
+                        101
+                  ],
+                  "innerBottomColor": [
+                        0,
+                        40,
+                        70
+                  ],
+                  "displaceAmp": 1.1,
+                  "secondAmp": 0.35,
+                  "outerStrokeAlpha": 0.26,
+                  "innerStrokeAlpha": 0.28
+            }
+      },
+      "finalRender": {
+            "renderer": "editable_python",
+            "fontSize": 36,
+            "offset": [
+                  1,
+                  0
+            ],
+            "reason": "Restores the lower-MAE procedural editable path for final WATER_TEXT encodes."
+      }
+});
+    </script>
+  </body>
+</html>

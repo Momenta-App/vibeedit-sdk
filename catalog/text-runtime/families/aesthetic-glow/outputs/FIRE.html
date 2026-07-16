@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FIRE - Aesthetic Glow</title>
+    <link rel="stylesheet" href="../components/glow-composition.css">
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div
+      id="composition-root"
+      class="ag-composition"
+      data-composition-id="aesthetic-glow-FIRE"
+      data-start="0"
+      data-width="640"
+      data-height="360"
+      data-duration="7.6"
+    >
+      <div class="ag-stage"></div>
+    </div>
+    <script type="application/json" id="template-config">
+{
+  "slug": "FIRE",
+  "family": "aesthetic-glow",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "notes": "Browser-playable HTML motion rebuild using editable glyph masks, duplicate text layers, SVG/CSS glow, blur, reflection, light-sweep, and color recipes. No rectangular haze, slabs, or panel shortcuts are used.",
+  "recipe": {
+    "duration": 7.6,
+    "motion": {
+      "from_dx": -18,
+      "from_dy": -12,
+      "from_scale": 0.98,
+      "intro": 0.64
+    },
+    "texts": [
+      {
+        "text": "FIRE",
+        "font": "Poppins-BlackItalic",
+        "size": 43,
+        "x": 269,
+        "y": 156,
+        "top": [
+          255,
+          190,
+          20
+        ],
+        "bottom": [
+          255,
+          46,
+          0
+        ],
+        "shadow": {
+          "dx": 2,
+          "dy": 4,
+          "blur": 2,
+          "opacity": 0.75
+        },
+        "glows": [
+          {
+            "color": [
+              255,
+              79,
+              0
+            ],
+            "radius": 6,
+            "opacity": 0.5
+          }
+        ],
+        "extrude": {
+          "dx": 1,
+          "dy": 2,
+          "steps": 3,
+          "color": [
+            75,
+            18,
+            0
+          ],
+          "opacity": 0.55
+        },
+        "wave": {
+          "amp": 1.3,
+          "period": 32
+        }
+      }
+    ]
+  }
+}
+    </script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["aesthetic-glow-FIRE"] = {
+        duration: () => 7.6,
+        time: function () { return this; },
+        seek: function () { return this; },
+        progress: function () { return this; },
+        pause: function () { return this; }
+      };
+    </script>
+    <script src="../components/glow-composition.js"></script>
+  </body>
+</html>

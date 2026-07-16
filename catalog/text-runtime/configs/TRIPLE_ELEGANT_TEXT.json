@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 1,
+  "slug": "TRIPLE_ELEGANT_TEXT",
+  "name": "TRIPLE ELEGANT TEXT",
+  "family": "elegant-misc",
+  "kind": "glyph_canvas_motion",
+  "duration": 7,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "source": "V2 50 TITLES PACK PR/Manual files/TRIPLE ELEGANT TEXT.mogrt",
+  "controls": [
+    {
+      "id": "c21e45d0-e1d5-429a-a8a6-28c1d60e6117",
+      "type": 10,
+      "name": "text 1",
+      "value": [
+        null,
+        null,
+        null,
+        "1a458753-d06b-4465-9050-8b3df5e80963"
+      ]
+    },
+    {
+      "id": "e5a97cdf-e181-4d34-8b3b-ad5802c75454",
+      "type": 6,
+      "name": "Cambiar texto arriba",
+      "value": "arriba",
+      "font": "Bebas-Regular",
+      "fontSize": 124
+    },
+    {
+      "id": "4b70d924-571d-4165-90c6-a2329e0ce4da",
+      "type": 4,
+      "name": "Color arriba",
+      "value": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "id": "3eb68aee-cb63-4541-88bb-c36267ef272f",
+      "type": 5,
+      "name": "Gradient Ramp Start of Ramp",
+      "value": {
+        "x": 960,
+        "y": 512
+      }
+    },
+    {
+      "id": "f808dc37-5735-4851-856a-9847773ae093",
+      "type": 5,
+      "name": "Gradient Ramp End of Ramp",
+      "value": {
+        "x": 960,
+        "y": 476
+      }
+    },
+    {
+      "id": "6823a2bf-9a3a-419a-b7ed-2209f906a507",
+      "type": 5,
+      "name": "Animator 1 Position",
+      "value": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "1a458753-d06b-4465-9050-8b3df5e80963",
+      "type": 4,
+      "name": "Start Color",
+      "value": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "7987f990-3196-45ee-bb6f-2b38fbe31f82",
+      "type": 10,
+      "name": "Text 2",
+      "value": [
+        null,
+        null,
+        null,
+        "7f48e845-9d7c-4db3-b642-a9ac95a43a1f"
+      ]
+    },
+    {
+      "id": "07355e31-7b45-4a2f-8390-c3c09012c92b",
+      "type": 6,
+      "name": "Texto principal",
+      "value": "Principal",
+      "font": "AbrilFatface-Regular",
+      "fontSize": 124
+    },
+    {
+      "id": "c814cfc3-07a9-4535-a381-3d31a185c7f9",
+      "type": 4,
+      "name": "color text 2",
+      "value": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "id": "7f48e845-9d7c-4db3-b642-a9ac95a43a1f",
+      "type": 5,
+      "name": "Gradient Ramp Start of Ramp",
+      "value": {
+        "x": 960,
+        "y": 670
+      }
+    },
+    {
+      "id": "fab79eb1-5cc5-4781-93ef-76e037df90cd",
+      "type": 4,
+      "name": "Gradient Ramp Start Color",
+      "value": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "195b0968-96fb-4355-81a7-f8f0deebcdab",
+      "type": 5,
+      "name": "Gradient Ramp End of Ramp",
+      "value": {
+        "x": 960,
+        "y": 516
+      }
+    },
+    {
+      "id": "dc7f730a-f920-4470-ae51-fc2dc43a3c7c",
+      "type": 5,
+      "name": "Animator 1 Position",
+      "value": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "id": "2e940460-efb3-409f-93e5-55c6df41a714",
+      "type": 10,
+      "name": "Text 3",
+      "value": [
+        null,
+        null,
+        null,
+        "b33c7003-90ad-469b-8556-c59c73ba4fc9"
+      ]
+    },
+    {
+      "id": "24c05062-6de6-4a3d-ae08-e0e0d890cc84",
+      "type": 6,
+      "name": "Cambiar texto abajo",
+      "value": "abajo",
+      "font": "Bebas-Regular",
+      "fontSize": 124
+    },
+    {
+      "id": "c0563a05-92a5-470c-99df-a5347e0ceb78",
+      "type": 4,
+      "name": "Color abajo",
+      "value": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "id": "33d33804-174a-4789-aad5-dc433f2862d7",
+      "type": 5,
+      "name": "Gradient Ramp Start of Ramp",
+      "value": {
+        "x": 960,
+        "y": 646
+      }
+    },
+    {
+      "id": "b33c7003-90ad-469b-8556-c59c73ba4fc9",
+      "type": 4,
+      "name": "Gradient Ramp Start Color",
+      "value": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "47f020ff-e320-4ce0-8a5c-753f34b760ee",
+      "type": 5,
+      "name": "Gradient Ramp End of Ramp",
+      "value": {
+        "x": 960,
+        "y": 608
+      }
+    },
+    {
+      "id": "9e3579b9-65d1-4431-8cc3-600caa0a26fc",
+      "type": 5,
+      "name": "text 3 position",
+      "value": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "recipe": {
+    "type": "elegant-misc-canvas",
+    "style": "triple",
+    "duration": 7,
+    "layers": [
+      {
+        "text": "arriba",
+        "font": "Bebas-Regular",
+        "box": [
+          52,
+          20
+        ],
+        "center": [
+          396,
+          150
+        ],
+        "gradient": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "tracking": 0.65,
+        "line_gap": 0,
+        "glow": [
+          255,
+          255,
+          255
+        ],
+        "glow_radius": 0.8,
+        "glow_opacity": 0.16,
+        "shadow": [
+          0,
+          0,
+          0
+        ],
+        "shadow_offset": [
+          1,
+          2
+        ],
+        "shadow_radius": 0.8,
+        "shadow_opacity": 0.22,
+        "stroke": null,
+        "stroke_width": 0,
+        "stroke_opacity": 0,
+        "radial": false,
+        "posterized": true,
+        "posterize_fps": 6,
+        "jitter": 0,
+        "turbulent": 0.2,
+        "turbulent_size": 31,
+        "turbulent_seed": 211
+      },
+      {
+        "text": "Principal",
+        "font": "AbrilFatface-Regular",
+        "box": [
+          214,
+          49
+        ],
+        "center": [
+          320,
+          180
+        ],
+        "gradient": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            224,
+            224,
+            224
+          ]
+        ],
+        "tracking": 0,
+        "line_gap": 0,
+        "glow": [
+          255,
+          255,
+          255
+        ],
+        "glow_radius": 1.5,
+        "glow_opacity": 0.2,
+        "shadow": [
+          0,
+          0,
+          0
+        ],
+        "shadow_offset": [
+          2,
+          3
+        ],
+        "shadow_radius": 1,
+        "shadow_opacity": 0.28,
+        "stroke": null,
+        "stroke_width": 0,
+        "stroke_opacity": 0,
+        "radial": false,
+        "posterized": true,
+        "posterize_fps": 6,
+        "jitter": 0,
+        "turbulent": 0.24,
+        "turbulent_size": 36,
+        "turbulent_seed": 257
+      },
+      {
+        "text": "abajo",
+        "font": "Bebas-Regular",
+        "box": [
+          52,
+          20
+        ],
+        "center": [
+          238,
+          209
+        ],
+        "gradient": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            238,
+            238,
+            238
+          ]
+        ],
+        "tracking": 0.65,
+        "line_gap": 0,
+        "glow": [
+          255,
+          255,
+          255
+        ],
+        "glow_radius": 0.8,
+        "glow_opacity": 0.16,
+        "shadow": [
+          0,
+          0,
+          0
+        ],
+        "shadow_offset": [
+          1,
+          2
+        ],
+        "shadow_radius": 0.8,
+        "shadow_opacity": 0.22,
+        "stroke": null,
+        "stroke_width": 0,
+        "stroke_opacity": 0,
+        "radial": false,
+        "posterized": true,
+        "posterize_fps": 6,
+        "jitter": 0,
+        "turbulent": 0.2,
+        "turbulent_size": 31,
+        "turbulent_seed": 293
+      }
+    ],
+    "controls": {
+      "text_top": "arriba",
+      "text_main": "Principal",
+      "text_bottom": "abajo",
+      "top_font": "Bebas-Regular",
+      "main_font": "AbrilFatface-Regular",
+      "bottom_font": "Bebas-Regular",
+      "effects": [
+        "Fill",
+        "Gaussian Blur",
+        "Glow",
+        "Gradient Ramp",
+        "Posterize Time",
+        "Transform",
+        "Turbulent Displace"
+      ]
+    },
+    "defects": [
+      "Layer positions and sizes are visually fitted from the preview; exact text animator offsets are not available from the report.",
+      "Small labels were shifted 1 px left and tracked wider to reduce browser font compression, but Adobe text rasterization still differs slightly."
+    ]
+  },
+  "sourceMapping": {
+    "sourceSpec": "../specs/TRIPLE_ELEGANT_TEXT.json"
+  },
+  "outputs": {
+    "html": "families/elegant-misc/outputs/TRIPLE_ELEGANT_TEXT.html",
+    "preview": "previews/TRIPLE_ELEGANT_TEXT.mp4",
+    "alpha": "alpha/TRIPLE_ELEGANT_TEXT.mov"
+  },
+  "renderer": {
+    "component": "families/elegant-misc/components/elegant-misc.js",
+    "style": "families/elegant-misc/components/elegant-misc.css",
+    "renderScript": "families/elegant-misc/scripts/render.mjs",
+    "output": "families/elegant-misc/outputs/TRIPLE_ELEGANT_TEXT.html"
+  },
+  "fonts": [
+    "AbrilFatface-Regular",
+    "Bebas-Regular"
+  ],
+  "noBoxGlowRuleAcknowledged": true
+}

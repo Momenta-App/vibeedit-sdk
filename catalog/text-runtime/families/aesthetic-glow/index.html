@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aesthetic Glow HyperFrames</title>
+    <link rel="stylesheet" href="components/glow-composition.css">
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div
+      id="composition-root"
+      class="ag-composition"
+      data-composition-id="aesthetic-glow"
+      data-start="0"
+      data-width="640"
+      data-height="360"
+      data-duration="7.6"
+    >
+      <div class="ag-stage"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["aesthetic-glow"] = {
+        duration: () => 7.6,
+        time: function () { return this; },
+        seek: function () { return this; },
+        progress: function () { return this; },
+        pause: function () { return this; }
+      };
+    </script>
+    <script src="components/glow-composition.js"></script>
+  </body>
+</html>

@@ -41,6 +41,12 @@ FFmpeg, MoviePy, OpenCV, Pillow, and scikit-image documentation for vocabulary
 and production context; the shipped backend does not bundle those projects'
 source.
 
+The canonical text runtime packages the local HTML/CSS/JS renderer files and
+font files used by the approved VibeEdit designs. Font authors and licensors
+retain their respective rights; VibeEdit does not claim ownership of those
+fonts. The release owner confirmed that these included design assets are
+authorized for this public beta. Original MOGRT binaries are not included.
+
 No third-party recorded media is included in the beta. All 13 preview/audio
 assets are entirely VibeEdit-generated, identified, and hash-bound in
 `catalog/assets.json`. The release owner confirmed that the included canonical
