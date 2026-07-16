@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import shutil
 import subprocess
+from contextlib import contextmanager
 from fractions import Fraction
 from pathlib import Path
 
@@ -128,12 +129,52 @@ def render_generated(spec: JSONObject, output: str | Path | None = None) -> Path
 
 
 def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | Path) -> Path:
+    destination = Path(output)
+    command = _frame_encoder_command(spec, ["-framerate", _frame_rate(spec), "-i", str(sequence)], destination)
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    if result.returncode:
+        raise FFmpegRenderError(result.stderr.strip() or f"ffmpeg failed with exit code {result.returncode}")
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
+    return destination
+
+
+@contextmanager
+def frame_stream_encoder(spec: JSONObject, output: str | Path):
+    destination = Path(output)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    command = _frame_encoder_command(spec, ["-f", "image2pipe", "-framerate", _frame_rate(spec), "-vcodec", "png", "-i", "pipe:0"], destination)
+    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    if process.stdin is None or process.stderr is None:
+        process.terminate()
+        raise FFmpegRenderError("ffmpeg did not expose the frame-stream pipes")
+    try:
+        yield process.stdin
+    except BaseException:
+        process.stdin.close()
+        process.terminate()
+        process.wait(timeout=5)
+        raise
+    process.stdin.close()
+    error = process.stderr.read().decode(errors="replace").strip()
+    return_code = process.wait()
+    if return_code:
+        raise FFmpegRenderError(error or f"ffmpeg failed with exit code {return_code}")
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
+
+
+def _frame_rate(spec: JSONObject) -> str:
+    rate = spec["canvas"]["frameRate"]
+    return f'{rate["numerator"]}/{rate["denominator"]}'
+
+
+def _frame_encoder_command(spec: JSONObject, input_arguments: list[str], destination: Path) -> list[str]:
     canvas = spec["canvas"]
     rate = canvas["frameRate"]
     duration = Fraction(spec["durationFrames"] * rate["denominator"], rate["numerator"])
-    frame_rate = f'{rate["numerator"]}/{rate["denominator"]}'
-    destination = Path(output)
-    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-framerate", frame_rate, "-i", str(sequence)]
+    frame_rate = _frame_rate(spec)
+    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", *input_arguments]
     sound_effects = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "sound_effect"]
     for item in sound_effects:
         frequency = float(item["params"].get("frequency", 72))
@@ -162,12 +203,7 @@ def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | 
     if settings["container"] == "mp4":
         command.extend(["-movflags", "+faststart"])
     command.append(str(destination))
-    result = subprocess.run(command, capture_output=True, text=True, check=False)
-    if result.returncode:
-        raise FFmpegRenderError(result.stderr.strip() or f"ffmpeg failed with exit code {result.returncode}")
-    if not destination.is_file() or destination.stat().st_size == 0:
-        raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
-    return destination
+    return command
 
 
 def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str | Path, base: str | Path = ".") -> Path:

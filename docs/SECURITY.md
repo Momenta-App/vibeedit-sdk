@@ -10,9 +10,15 @@ only when the user explicitly requests `setup --sam` or `setup --all`.
   shell command.
 - Local paths are validated as files before media execution.
 - Catalog entries are JSON data and never executed.
-- Built-in HTML components escape text/attributes. Arbitrary third-party HTML
-  is not loaded by the release runtime.
+- Built-in HTML components escape text/attributes. Arbitrary local HTML runs
+  only when a composition explicitly selects `vibeedit://motion/html` or
+  `vibeedit://motion/web-project`; it is executable code and has the same trust
+  level as a local script launched by the user.
 - Browser rendering runs locally and does not fetch network assets.
+- Custom project assets are exposed through a traversal-safe loopback server
+  rooted at the composition directory. The server has no directory listing and
+  Chromium aborts non-loopback network requests. Bundle libraries and licensed
+  fonts locally instead of using a CDN.
 - Browser setup delegates archive verification to the pinned Playwright
   downloader, records the resolved executable SHA-256, and rejects a changed
   executable for the same Playwright version on subsequent setup runs.

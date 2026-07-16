@@ -228,7 +228,7 @@
         "props": { "$ref": "#/$defs/jsonObject" },
         "transform": { "$ref": "#/$defs/transform" },
         "transparent": { "type": "boolean", "default": true },
-        "renderer": { "enum": ["html", "svg", "canvas", "webgl"] },
+        "renderer": { "enum": ["auto", "html", "svg", "canvas", "webgl", "webgpu"] },
         "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
         "metadata": { "$ref": "#/$defs/jsonObject" }
       }

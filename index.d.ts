@@ -59,7 +59,8 @@ export interface TimelineItemOptions { id: string; placement: Placement | JSONOb
 export declare class VideoClip { constructor(options: TimelineItemOptions & { source: SourceRange | JSONObject }); id: string; kind: "video"; toJSON(): JSONObject }
 export declare class AudioClip { constructor(options: TimelineItemOptions & { source: SourceRange | JSONObject; role?: string; gainDb?: number; pan?: number }); id: string; kind: "audio"; toJSON(): JSONObject }
 export declare class ImageClip { constructor(options: TimelineItemOptions & { sourceId: string }); id: string; kind: "image"; toJSON(): JSONObject }
-export declare class MotionComponent { constructor(options: TimelineItemOptions & { componentId: string; props?: JSONObject; renderer?: string; transparent?: boolean }); id: string; kind: "motion"; toJSON(): JSONObject }
+export type MotionRenderer = "auto" | "html" | "svg" | "canvas" | "webgl" | "webgpu";
+export declare class MotionComponent { constructor(options: TimelineItemOptions & { componentId: string; props?: JSONObject; renderer?: MotionRenderer; transparent?: boolean }); id: string; kind: "motion"; toJSON(): JSONObject }
 export { MotionComponent as Text };
 export declare class Transition { constructor(options: TimelineItemOptions & { transitionId: string; fromItemId: string; toItemId: string; params?: JSONObject }); id: string; kind: "transition"; toJSON(): JSONObject }
 export declare class SoundEffect { constructor(options: TimelineItemOptions & { soundEffectId: string; params?: JSONObject; gainDb?: number; variationSeed?: number; avoidImmediateRepeat?: boolean }); id: string; kind: "sound_effect"; toJSON(): JSONObject }

@@ -1,23 +1,75 @@
 from __future__ import annotations
 
+import base64
+import hashlib
 import html
 import http.server
 import json
 import math
+import mimetypes
 import tempfile
 import threading
 import urllib.parse
-from contextlib import contextmanager
-from functools import lru_cache, partial
+from contextlib import contextmanager, nullcontext
+from functools import lru_cache
 from pathlib import Path
 
 from vibeedit.data import data_path
-from vibeedit.ffmpeg import render_frame_sequence, render_overlay_sequence
+from vibeedit.ffmpeg import frame_stream_encoder, render_overlay_sequence
 from vibeedit.spec import JSONObject
 
 
 class MotionRenderError(RuntimeError):
     pass
+
+
+def motion_render_plan(spec: JSONObject) -> JSONObject:
+    layers = []
+    for track in spec["timeline"]["tracks"]:
+        for item in track["items"]:
+            if item["kind"] != "motion":
+                continue
+            component = _portable_by_id().get(item["componentId"])
+            props = item.get("props", {})
+            source = " ".join(str(props.get(key, "")) for key in ("html", "css", "javascript", "entry")).casefold()
+            declared_libraries = [str(value) for value in props.get("libraries", []) if isinstance(value, str)]
+            detected = [
+                name
+                for name, tokens in {
+                    "gsap": ("gsap",),
+                    "anime.js": ("anime",),
+                    "react": ("react",),
+                    "vue": ("vue",),
+                    "svelte": ("svelte",),
+                    "three.js": ("three", "webglrenderer"),
+                    "pixijs": ("pixi",),
+                    "webgpu": ("navigator.gpu", "wgsl", "gpuadapter"),
+                    "canvas": ("<canvas", "getcontext("),
+                }.items()
+                if any(token in source or any(token in library.casefold() for library in declared_libraries) for token in tokens)
+            ]
+            custom = _is_web_component(item)
+            advanced = bool(set(detected) & {"three.js", "pixijs", "webgpu", "canvas"})
+            native_candidate = not custom or (not props.get("javascript") and not props.get("entry") and not advanced)
+            layers.append(
+                {
+                    "id": item["id"],
+                    "componentId": item["componentId"],
+                    "requestedRenderer": item.get("renderer", "html"),
+                    "selectedBackend": "chromium-persistent",
+                    "reason": "source-preserved catalog component" if component and component.get("canonical") else "arbitrary local web project" if custom else "portable browser component",
+                    "libraries": sorted(set(declared_libraries + detected)),
+                    "nativeEligibility": "candidate-unverified" if native_candidate else "browser-required",
+                    "seekContract": "explicit-vibeedit-seek" if advanced else "automatic-css-waapi-library-adapter",
+                }
+            )
+    return {
+        "strategy": "browser-reference-with-conformance-gated-native-routing",
+        "selectedBackend": "chromium-persistent" if layers else "none",
+        "nativeRoutingEnabled": False,
+        "nativeRoutingReason": "no layer is routed until its decoded-pixel conformance suite passes",
+        "layers": layers,
+    }
 
 
 def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str | Path = ".") -> Path:
@@ -42,18 +94,231 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
     destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="vibeedit-motion-") as temporary:
         frames = Path(temporary)
-        with sync_playwright() as playwright, _motion_asset_server() as asset_base_url:
-            browser = playwright.chromium.launch(headless=True)
-            page = browser.new_page(viewport={"width": spec["canvas"]["width"], "height": spec["canvas"]["height"]}, device_scale_factor=1)
-            page.emulate_media(reduced_motion="reduce")
+        with (nullcontext(None) if video else frame_stream_encoder(spec, destination)) as encoder, sync_playwright() as playwright, _motion_asset_server(base) as asset_urls:
+            browser = playwright.chromium.launch(headless=True, args=["--enable-unsafe-webgpu"] if _requires_webgpu(spec) else [])
+            context = browser.new_context(viewport={"width": spec["canvas"]["width"], "height": spec["canvas"]["height"]}, device_scale_factor=1)
+            context.route("**/*", lambda route: route.continue_() if _is_local_browser_url(route.request.url, asset_urls["origin"]) else route.abort("blockedbyclient"))
+            page = context.new_page()
+            errors: list[str] = []
+            page.on("pageerror", lambda error: errors.append(str(error)))
+            page.on("requestfailed", lambda request: errors.append(f"asset request failed: {request.url} ({request.failure or 'unknown error'})"))
+            page.on("response", lambda response: errors.append(f"asset request returned HTTP {response.status}: {response.url}") if response.status >= 400 else None)
+            _load_persistent_page(page, spec, asset_urls, transparent=bool(video))
+            session = context.new_cdp_session(page)
+            if video:
+                session.send("Emulation.setDefaultBackgroundColorOverride", {"color": {"r": 0, "g": 0, "b": 0, "a": 0}})
             for frame in range(spec["durationFrames"]):
-                page.set_content(document_for_frame(spec, frame, asset_base_url), wait_until="load")
+                _apply_persistent_frame(page, spec, frame, asset_urls["catalog"])
                 _settle_canonical_frames(page)
-                page.screenshot(path=str(frames / f"frame-{frame:06d}.png"), omit_background=bool(video), animations="disabled")
+                _settle_web_frames(page, spec, frame)
+                if errors:
+                    raise MotionRenderError(f"browser motion component failed: {errors[0]}")
+                payload = _capture_fast_png(session)
+                if encoder is not None:
+                    encoder.write(payload)
+                else:
+                    (frames / f"frame-{frame:06d}.png").write_bytes(payload)
+            context.close()
             browser.close()
         if video:
             return render_overlay_sequence(spec, frames / "frame-%06d.png", destination, base)
-        return render_frame_sequence(spec, frames / "frame-%06d.png", destination)
+        return destination
+
+
+def _persistent_document(spec: JSONObject, catalog_url: str, project_url: str, *, inline_url: str | None = None, inline_documents: dict[str, bytes] | None = None, transparent: bool = False) -> str:
+    layers = []
+    for order, item in sorted(
+        (
+            (track["order"], item)
+            for track in spec["timeline"]["tracks"]
+            for item in track["items"]
+            if item["kind"] == "motion"
+        ),
+        key=lambda value: value[0],
+    ):
+        token = _item_token(item)
+        kind = "dynamic"
+        content = ""
+        component = _portable_by_id().get(item["componentId"])
+        if component and component.get("canonical"):
+            kind = "canonical"
+            frame_rate = spec["canvas"].get("frameRate", {"numerator": 30, "denominator": 1})
+            content = _portable_component(component, item["props"], 0, item["placement"]["durationFrames"], catalog_url, frame_rate["numerator"] / frame_rate["denominator"])
+        if _is_web_component(item):
+            kind = "web"
+            content = _web_component(item, project_url, inline_url, inline_documents)
+        layers.append(
+            f'<div data-vibeedit-item="{token}" data-vibeedit-kind="{kind}" data-vibeedit-order="{order}" style="position:absolute;inset:0;visibility:hidden;pointer-events:none">{content}</div>'
+        )
+    background = "transparent" if transparent else _css_color(spec["canvas"].get("backgroundColor"), "transparent")
+    return (
+        '<!doctype html><html><head><meta charset="utf-8"><style>'
+        f'html,body,#vibeedit-root{{margin:0;width:100%;height:100%;overflow:hidden;background:{background}}}'
+        '*{box-sizing:border-box}</style></head><body><main id="vibeedit-root">'
+        + "\n".join(layers)
+        + "</main></body></html>"
+    )
+
+
+def _load_persistent_page(page, spec: JSONObject, asset_urls: dict, *, transparent: bool = False) -> None:
+    name = "vibeedit-render-shell.html"
+    asset_urls["inlineDocuments"][name] = _persistent_document(
+        spec,
+        asset_urls["catalog"],
+        asset_urls["project"],
+        inline_url=asset_urls["inline"],
+        inline_documents=asset_urls["inlineDocuments"],
+        transparent=transparent,
+    ).encode()
+    page.goto(urllib.parse.urljoin(asset_urls["inline"], name), wait_until="load")
+
+
+def _apply_persistent_frame(page, spec: JSONObject, frame: int, catalog_url: str) -> None:
+    payload = []
+    frame_rate = spec["canvas"].get("frameRate", {"numerator": 30, "denominator": 1})
+    fps = frame_rate["numerator"] / frame_rate["denominator"]
+    for track in spec["timeline"]["tracks"]:
+        for item in track["items"]:
+            if item["kind"] != "motion":
+                continue
+            start = item["placement"]["startFrame"]
+            duration = item["placement"]["durationFrames"]
+            active = start <= frame < start + duration
+            local_frame = frame - start
+            component = _portable_by_id().get(item["componentId"])
+            kind = "web" if _is_web_component(item) else "canonical" if component and component.get("canonical") else "dynamic"
+            layer = ""
+            if active and kind == "dynamic":
+                layer = _layer_for_item(item, local_frame, catalog_url, fps)
+            payload.append({"token": _item_token(item), "kind": kind, "active": active, "frame": local_frame, "durationFrames": duration, "time": local_frame / max(1, fps), "html": layer})
+    page.evaluate(
+        """(items) => {
+          for (const item of items) {
+            const layer = document.querySelector(`[data-vibeedit-item="${item.token}"]`);
+            if (!layer) throw new Error(`missing VibeEdit motion layer ${item.token}`);
+            layer.style.visibility = item.active ? "visible" : "hidden";
+            layer.dataset.vibeeditActive = item.active ? "true" : "false";
+            layer.dataset.vibeeditFrame = String(item.frame);
+            layer.dataset.vibeeditDurationFrames = String(item.durationFrames);
+            if (item.kind === "dynamic" && item.active) layer.innerHTML = item.html;
+            if (item.kind === "canonical") {
+              const frame = layer.querySelector("iframe[data-vibeedit-canonical]");
+              if (frame) frame.dataset.vibeeditTime = String(item.time);
+            }
+          }
+        }""",
+        payload,
+    )
+
+
+def _layer_for_item(item: JSONObject, local_frame: int, asset_base_url: str | None, fps: float) -> str:
+    if item["componentId"] == "vibeedit://text/negative":
+        return _negative(item["props"], local_frame, item["placement"]["durationFrames"])
+    if item["componentId"] == "vibeedit://text/caption-rail":
+        return _caption_rail(item["props"], local_frame, item["placement"]["durationFrames"])
+    component = _portable_by_id().get(item["componentId"])
+    if component:
+        return _portable_component(component, item["props"], local_frame, item["placement"]["durationFrames"], asset_base_url, fps)
+    if _is_web_component(item):
+        raise MotionRenderError("custom HTML motion components require the persistent browser renderer")
+    raise MotionRenderError(f"unknown motion component: {item['componentId']}")
+
+
+def _is_web_component(item: JSONObject) -> bool:
+    return item.get("componentId") in {"vibeedit://motion/html", "vibeedit://motion/web-project"}
+
+
+def _requires_webgpu(spec: JSONObject) -> bool:
+    return any(
+        item.get("renderer") == "webgpu"
+        or any(token in " ".join(str(item.get("props", {}).get(key, "")) for key in ("html", "css", "javascript", "entry")).casefold() for token in ("navigator.gpu", "gpuadapter", "@compute", "@vertex", "@fragment", "wgsl"))
+        for track in spec["timeline"]["tracks"]
+        for item in track["items"]
+        if item["kind"] == "motion"
+    )
+
+
+def _item_token(item: JSONObject) -> str:
+    return hashlib.sha256(str(item["id"]).encode()).hexdigest()[:20]
+
+
+def _web_component(item: JSONObject, project_url: str, inline_url: str | None, inline_documents: dict[str, bytes] | None) -> str:
+    props = item["props"]
+    if props.get("entry"):
+        source = urllib.parse.urljoin(project_url, urllib.parse.quote(str(props["entry"])))
+        return f'<iframe data-vibeedit-web="true" src="{html.escape(source, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent" allow="webgpu"></iframe>'
+    markup = str(props.get("html", ""))
+    css = str(props.get("css", ""))
+    javascript = str(props.get("javascript", ""))
+    stylesheets = "".join(f'<link rel="stylesheet" href="{html.escape(str(source), quote=True)}">' for source in props.get("stylesheets", []) if isinstance(source, str))
+    libraries = "".join(f'<script src="{html.escape(str(source), quote=True)}"></script>' for source in props.get("libraries", []) if isinstance(source, str))
+    script_type = "module" if props.get("scriptType") == "module" else "text/javascript"
+    javascript = javascript.replace("</script", "<\\/script")
+    source = (
+        '<!doctype html><html><head><meta charset="utf-8">'
+        f'<base href="{html.escape(project_url, quote=True)}">'
+        '<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}*{box-sizing:border-box}</style>'
+        f"{stylesheets}<style>{css}</style></head><body>{markup}{libraries}<script type=\"{script_type}\">{javascript}</script></body></html>"
+    )
+    if inline_url and inline_documents is not None:
+        name = f"{_item_token(item)}.html"
+        inline_documents[name] = source.encode()
+        source_url = urllib.parse.urljoin(inline_url, name)
+        return f'<iframe data-vibeedit-web="true" src="{html.escape(source_url, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent" allow="webgpu"></iframe>'
+    return f'<iframe data-vibeedit-web="true" srcdoc="{html.escape(source, quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent" allow="webgpu"></iframe>'
+
+
+def _settle_web_frames(page, spec: JSONObject, frame_number: int) -> None:
+    frame_rate = spec["canvas"].get("frameRate", {"numerator": 30, "denominator": 1})
+    fps = frame_rate["numerator"] / frame_rate["denominator"]
+    layers = page.locator('[data-vibeedit-kind="web"][data-vibeedit-active="true"]')
+    for index in range(layers.count()):
+        layer = layers.nth(index)
+        element = layer.locator("iframe[data-vibeedit-web]").element_handle()
+        child = element.content_frame() if element else None
+        if child is None:
+            raise MotionRenderError(f"custom HTML frame {index} did not attach")
+        local_frame = int(layer.get_attribute("data-vibeedit-frame") or frame_number)
+        duration = int(layer.get_attribute("data-vibeedit-duration-frames") or spec["durationFrames"])
+        child.evaluate(
+            """async (context) => {
+              if (document.fonts && document.fonts.ready) await document.fonts.ready;
+              const failedFonts = document.fonts ? [...document.fonts].filter((font) => font.status === "error").map((font) => font.family) : [];
+              if (failedFonts.length) throw new Error(`font loading failed: ${failedFonts.join(", ")}`);
+              const api = globalThis.vibeedit;
+              if (api && typeof api.seek === "function") await api.seek(context.time, context);
+              else if (typeof globalThis.__vibeeditSeek === "function") await globalThis.__vibeeditSeek(context.frame, context);
+              if (globalThis.gsap && globalThis.gsap.globalTimeline) {
+                globalThis.gsap.globalTimeline.time(context.time, false).pause();
+              }
+              if (globalThis.anime && Array.isArray(globalThis.anime.running)) {
+                for (const animation of globalThis.anime.running) {
+                  if (typeof animation.seek === "function") animation.seek(context.time * 1000);
+                  if (typeof animation.pause === "function") animation.pause();
+                }
+              }
+              for (const animation of document.getAnimations({subtree: true})) {
+                animation.pause();
+                const timing = animation.effect && animation.effect.getComputedTiming ? animation.effect.getComputedTiming() : null;
+                const end = timing && Number.isFinite(timing.endTime) ? timing.endTime : context.time * 1000;
+                animation.currentTime = Math.min(context.time * 1000, end);
+              }
+              globalThis.dispatchEvent(new CustomEvent("vibeedit:frame", {detail: context}));
+              await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+            }""",
+            {"frame": local_frame, "absoluteFrame": frame_number, "durationFrames": duration, "fps": fps, "time": local_frame / max(1, fps), "progress": max(0.0, min(1.0, local_frame / max(1, duration - 1)))},
+        )
+
+
+def _capture_fast_png(session) -> bytes:
+    result = session.send("Page.captureScreenshot", {"format": "png", "fromSurface": True, "captureBeyondViewport": False, "optimizeForSpeed": True})
+    return base64.b64decode(result["data"])
+
+
+def _is_local_browser_url(url: str, origin: str) -> bool:
+    if url.startswith((origin, "about:", "data:", "blob:")):
+        return True
+    return False
 
 
 def document_for_frame(spec: JSONObject, frame: int, asset_base_url: str | None = None) -> str:
@@ -71,18 +336,8 @@ def document_for_frame(spec: JSONObject, frame: int, asset_base_url: str | None 
     )
     for _, item in items:
         local_frame = frame - item["placement"]["startFrame"]
-        if item["componentId"] == "vibeedit://text/negative":
-            layers.append(_negative(item["props"], local_frame, item["placement"]["durationFrames"]))
-            continue
-        if item["componentId"] == "vibeedit://text/caption-rail":
-            layers.append(_caption_rail(item["props"], local_frame, item["placement"]["durationFrames"]))
-            continue
-        component = _portable_by_id().get(item["componentId"])
-        if component:
-            frame_rate = spec["canvas"].get("frameRate", {"numerator": 30, "denominator": 1})
-            layers.append(_portable_component(component, item["props"], local_frame, item["placement"]["durationFrames"], asset_base_url, frame_rate["numerator"] / frame_rate["denominator"]))
-            continue
-        raise MotionRenderError(f"unknown motion component: {item['componentId']}")
+        frame_rate = spec["canvas"].get("frameRate", {"numerator": 30, "denominator": 1})
+        layers.append(_layer_for_item(item, local_frame, asset_base_url, frame_rate["numerator"] / frame_rate["denominator"]))
     return '<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}*{box-sizing:border-box}</style></head><body>' + "\n".join(layers) + "</body></html>"
 
 
@@ -193,6 +448,8 @@ def _settle_canonical_frames(page) -> None:
     frames = page.locator("iframe[data-vibeedit-canonical]")
     for index in range(frames.count()):
         element = frames.nth(index)
+        if not element.is_visible():
+            continue
         handle = element.element_handle()
         frame = handle.content_frame() if handle else None
         if frame is None:
@@ -204,6 +461,7 @@ def _settle_canonical_frames(page) -> None:
         frame.evaluate("""async (time) => {
           if (document.fonts && document.fonts.ready) await document.fonts.ready;
           const timeline = Object.values(globalThis.__timelines || {})[0];
+          timeline.time(0);
           timeline.time(time);
           if (typeof timeline.pause === "function") timeline.pause();
           await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
@@ -211,18 +469,54 @@ def _settle_canonical_frames(page) -> None:
 
 
 @contextmanager
-def _motion_asset_server():
-    root = data_path("catalog", "text-runtime")
+def _motion_asset_server(project_root: str | Path = "."):
+    roots = {"catalog": data_path("catalog", "text-runtime").resolve(), "project": Path(project_root).resolve()}
+    inline_documents: dict[str, bytes] = {}
 
-    class Handler(http.server.SimpleHTTPRequestHandler):
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            parsed = urllib.parse.urlparse(self.path)
+            parts = [part for part in urllib.parse.unquote(parsed.path).split("/") if part]
+            if not parts:
+                self.send_error(404)
+                return
+            if parts[0] == "inline":
+                payload = inline_documents.get("/".join(parts[1:]))
+                if payload is None:
+                    self.send_error(404)
+                    return
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(payload)))
+                self.send_header("Cache-Control", "no-store")
+                self.end_headers()
+                self.wfile.write(payload)
+                return
+            namespace = parts[0] if parts[0] in roots else "catalog"
+            relative = parts[1:] if parts[0] in roots else parts
+            root = roots[namespace]
+            target = root.joinpath(*relative).resolve()
+            if not target.is_relative_to(root) or not target.is_file():
+                self.send_error(404)
+                return
+            payload = target.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", mimetypes.guess_type(target.name)[0] or "application/octet-stream")
+            self.send_header("Content-Length", str(len(payload)))
+            self.send_header("Cache-Control", "public, max-age=31536000, immutable")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(payload)
+
         def log_message(self, format, *args):
             return
 
-    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), partial(Handler, directory=str(root)))
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:
-        yield f"http://127.0.0.1:{server.server_port}/"
+        origin = f"http://127.0.0.1:{server.server_port}/"
+        yield {"origin": origin, "catalog": f"{origin}catalog/", "project": f"{origin}project/", "inline": f"{origin}inline/", "inlineDocuments": inline_documents}
     finally:
         server.shutdown()
         server.server_close()

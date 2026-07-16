@@ -1,9 +1,12 @@
 import hashlib
 import json
+from pathlib import Path
+
+import pytest
 
 from vibeedit import list_motion_components
 from vibeedit.data import data_path
-from vibeedit.motion import document_for_frame
+from vibeedit.motion import _apply_persistent_frame, _load_persistent_page, _motion_asset_server, _requires_webgpu, _settle_web_frames, document_for_frame, motion_render_plan
 
 
 def _spec(identifier):
@@ -73,3 +76,93 @@ def test_every_registered_text_effect_has_a_verified_hash_bound_preview():
         assert hashlib.sha256(payload).hexdigest() == asset["sha256"], item["id"]
         assert asset["redistribution"] == "verified", item["id"]
         assert asset["decodable"] is True, item["id"]
+
+
+def test_persistent_html_runtime_seeks_css_and_loads_project_fonts():
+    playwright = pytest.importorskip("playwright.sync_api")
+    spec = {
+        "canvas": {"width": 640, "height": 360, "frameRate": {"numerator": 30, "denominator": 1}, "backgroundColor": "#101217"},
+        "durationFrames": 30,
+        "timeline": {
+            "tracks": [
+                {
+                    "order": 10,
+                    "items": [
+                        {
+                            "id": "agent-html",
+                            "kind": "motion",
+                            "placement": {"startFrame": 0, "durationFrames": 30},
+                            "componentId": "vibeedit://motion/html",
+                            "props": {
+                                "html": '<div id="title">AGENT HTML</div>',
+                                "css": "@font-face{font-family:TestPoppins;src:url('catalog/text-runtime/assets/fonts/Poppins-Bold.ttf');font-weight:700}#title{font:700 72px TestPoppins;animation:enter 1s linear both}@keyframes enter{from{transform:translateX(-200px);opacity:0}to{transform:translateX(100px);opacity:1}}",
+                            },
+                        }
+                    ],
+                }
+            ]
+        },
+    }
+    with playwright.sync_playwright() as runtime, _motion_asset_server(Path.cwd()) as urls:
+        browser = runtime.chromium.launch(headless=True)
+        context = browser.new_context(viewport={"width": 640, "height": 360})
+        page = context.new_page()
+        _load_persistent_page(page, spec, urls)
+        _apply_persistent_frame(page, spec, 0, urls["catalog"])
+        _settle_web_frames(page, spec, 0)
+        child = page.locator("iframe[data-vibeedit-web]").element_handle().content_frame()
+        early = child.locator("#title").evaluate("element => ({transform:getComputedStyle(element).transform, font:getComputedStyle(element).fontFamily})")
+        _apply_persistent_frame(page, spec, 15, urls["catalog"])
+        _settle_web_frames(page, spec, 15)
+        late = child.locator("#title").evaluate("element => ({transform:getComputedStyle(element).transform, font:getComputedStyle(element).fontFamily})")
+        assert early["transform"] != late["transform"]
+        assert "TestPoppins" in late["font"]
+        assert child.evaluate("document.fonts.check('700 72px TestPoppins')") is True
+        assert child.evaluate("isSecureContext") is True
+        context.close()
+        browser.close()
+
+
+def test_motion_plan_keeps_arbitrary_webgpu_in_browser_until_conformant():
+    spec = _spec("vibeedit://motion/web-project")
+    spec["timeline"]["tracks"][0]["items"][0]["renderer"] = "auto"
+    spec["timeline"]["tracks"][0]["items"][0]["props"] = {"entry": "dist/index.html", "javascript": "const adapter = await navigator.gpu.requestAdapter()"}
+    plan = motion_render_plan(spec)
+    assert plan["nativeRoutingEnabled"] is False
+    assert plan["layers"][0]["selectedBackend"] == "chromium-persistent"
+    assert plan["layers"][0]["nativeEligibility"] == "browser-required"
+    assert plan["layers"][0]["libraries"] == ["webgpu"]
+    assert _requires_webgpu(spec) is True
+
+
+def test_local_webgpu_project_can_compile_wgsl_when_adapter_is_available():
+    playwright = pytest.importorskip("playwright.sync_api")
+    spec = _spec("vibeedit://motion/html")
+    item = spec["timeline"]["tracks"][0]["items"][0]
+    item["renderer"] = "webgpu"
+    item["props"] = {"html": "<canvas></canvas>", "javascript": "window.vibeedit={seek(){}} // WGSL"}
+    with playwright.sync_playwright() as runtime, _motion_asset_server(Path.cwd()) as urls:
+        browser = runtime.chromium.launch(headless=True, args=["--enable-unsafe-webgpu"])
+        page = browser.new_page(viewport={"width": 640, "height": 360})
+        _load_persistent_page(page, spec, urls)
+        child = page.locator("iframe[data-vibeedit-web]").element_handle().content_frame()
+        result = child.evaluate(
+            """async () => {
+              const adapter = await navigator.gpu?.requestAdapter();
+              if (!adapter) return {available: false};
+              const device = await adapter.requestDevice();
+              const module = device.createShaderModule({code: `
+                @vertex fn vertex_main(@builtin(vertex_index) index: u32) -> @builtin(position) vec4f {
+                  var points = array(vec2f(-1, -1), vec2f(3, -1), vec2f(-1, 3));
+                  return vec4f(points[index], 0, 1);
+                }
+                @fragment fn fragment_main() -> @location(0) vec4f { return vec4f(0.3, 0.8, 1.0, 1.0); }
+              `});
+              const errors = (await module.getCompilationInfo()).messages.filter((message) => message.type === "error");
+              return {available: true, errors: errors.map((error) => error.message)};
+            }"""
+        )
+        browser.close()
+    if not result["available"]:
+        pytest.skip("pinned Chromium exposed WebGPU but no adapter on this host")
+    assert result["errors"] == []

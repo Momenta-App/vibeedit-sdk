@@ -185,7 +185,9 @@ def _inspect(args) -> int:
     if path.suffix.lower() == ".json":
         value = json.loads(path.read_text(encoding="utf-8"))
         validate_composition(value)
-        result = {"kind": "composition", "valid": True, "id": value["id"], "durationFrames": value["durationFrames"]}
+        from vibeedit.motion import motion_render_plan
+
+        result = {"kind": "composition", "valid": True, "id": value["id"], "durationFrames": value["durationFrames"], "motionRenderPlan": motion_render_plan(value)}
     else:
         result = probe(path)
     _emit(result, as_json=args.json)

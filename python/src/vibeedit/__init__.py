@@ -50,6 +50,7 @@ from vibeedit.presets import get_media_preset
 from vibeedit.presets import list_media_presets
 from vibeedit.presets import render_transition_preset
 from vibeedit.motion import list_motion_components
+from vibeedit.motion import motion_render_plan
 from vibeedit.motion import tracking_point_at
 from vibeedit.analysis import analyze_beats
 from vibeedit.analysis import regular_beat_frames
@@ -110,6 +111,7 @@ __all__ = [
     "list_skills",
     "list_media_presets",
     "list_motion_components",
+    "motion_render_plan",
     "probe",
     "render",
     "render_example",

@@ -78,6 +78,41 @@ def test_mixed_python_html_fixture_renders(tmp_path: Path):
 
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
+def test_agent_authored_html_css_javascript_renders(tmp_path: Path):
+    pytest.importorskip("playwright")
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    spec["id"] = "agent-authored-web-motion"
+    spec["durationFrames"] = 24
+    spec["cache"]["enabled"] = False
+    spec["timeline"]["tracks"] = [
+        {
+            "id": "M1",
+            "kind": "motion",
+            "order": 10,
+            "items": [
+                {
+                    "id": "web-title",
+                    "kind": "motion",
+                    "placement": {"startFrame": 0, "durationFrames": 24},
+                    "componentId": "vibeedit://motion/html",
+                    "props": {
+                        "html": '<h1 id="title">WRITE FOR THE WEB</h1>',
+                        "css": "body{display:grid;place-items:center;background:#101217;color:white}h1{font:900 54px Arial;animation:enter .8s ease-out both}@keyframes enter{from{opacity:0;transform:translateY(80px);filter:blur(12px)}to{opacity:1;transform:none;filter:blur(0)}}",
+                        "javascript": "addEventListener('vibeedit:frame', ({detail}) => document.body.dataset.frame = detail.frame)",
+                    },
+                    "renderer": "auto",
+                    "transparent": False,
+                }
+            ],
+        }
+    ]
+    spec["verification"] = {"durationFrames": 24, "width": 640, "height": 360, "frameRate": {"numerator": 30, "denominator": 1}, "hasVideo": True, "hasAudio": False, "maxDurationDriftFrames": 1}
+    output = render(spec, tmp_path / "agent-html.mp4")
+    report = verify_output(output, spec["verification"])
+    assert report.passed, report.errors
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_mixed_source_video_and_html_overlay_renders(tmp_path: Path):
     pytest.importorskip("playwright")
     import subprocess

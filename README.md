@@ -190,6 +190,15 @@ composition.validate();
 MoviePy, FFmpeg, Playwright, OpenCV, ONNX, Torch, MLX, and platform APIs are
 backend details. Their native objects never enter the public CompositionSpec.
 
+Agents may also supply an inline HTML/CSS/JavaScript fragment or a complete
+locally bundled React, Vue, Svelte, Three.js, PixiJS, Canvas, WebGL, or WebGPU
+project through `vibeedit://motion/html` and
+`vibeedit://motion/web-project`. The persistent Chromium renderer loads the
+project once, waits for bundled fonts, and seeks it by integer frame. Run
+`vibeedit inspect composition.json --json` to see routing and library details.
+The complete authoring and deterministic-seek contract is documented in
+[`docs/HTML_MOTION_RUNTIME.md`](docs/HTML_MOTION_RUNTIME.md).
+
 ## CLI
 
 ```text

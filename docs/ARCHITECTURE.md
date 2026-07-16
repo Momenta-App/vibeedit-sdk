@@ -26,8 +26,9 @@ public constructor signatures.
    backends, examples, previews, and validation cases.
 3. **Python API** — composition builders, media inspection, analysis artifacts,
    cache/provenance, render dispatch, audio mixing, and verification.
-4. **HTML runtime** — a deterministic `frame -> visual state` contract for CSS,
-   SVG, Canvas, and isolated WebGL components.
+4. **HTML runtime** — a persistent deterministic `frame -> visual state`
+   contract for unrestricted local HTML/CSS/JavaScript projects, CSS, SVG,
+   Canvas, WebGL, and WebGPU components.
 5. **Render dispatcher** — plans media-domain work and HTML overlay work, renders
    intermediates, and assembles them with FFmpeg.
 6. **Adapters** — CLI, Node API, MCP, skills installer, and static catalog site.
@@ -41,9 +42,19 @@ seekable transparent overlays. A render plan is deterministic when its spec,
 source identities, implementation versions, model versions, and runtime
 versions are fixed.
 
-HTML components run in a restricted local document with explicit assets and no
-network access by default. Catalog HTML is data, not executable code. A future
-third-party component loader requires a separate trust boundary.
+Built-in components and explicitly selected local web projects run in a pinned,
+persistent Chromium document. The renderer loads each project once, waits for
+fonts and libraries, seeks CSS/WAAPI plus recognized animation runtimes to an
+integer frame, and captures the resulting compositor surface. Project assets
+are served from a traversal-safe loopback server. External network requests are
+blocked during rendering. Catalog HTML remains data; selecting a local web
+project is an explicit executable-code trust boundary.
+
+The browser path is the compatibility reference. Native Rust/WGPU routing is
+per-layer and conformance-gated: a layer remains in Chromium unless the native
+compiler proves that every operation it uses is supported and visually
+conformant. WebGPU/WGSL is also available inside custom projects as an advanced
+escape hatch; agents are not required to author shaders for ordinary text.
 
 ## Backends and capability routing
 
