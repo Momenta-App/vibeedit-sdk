@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "vibeedit.cef-gpu-concurrency.v1",
+  "resolution": {
+    "width": 1920,
+    "height": 1080
+  },
+  "framesPerConsumer": 30,
+  "cases": [
+    {
+      "workers": 1,
+      "wallSeconds": 3.896,
+      "endToEndAggregateFramesPerSecond": 7.7,
+      "steadyStateAggregateCallbackFps": 62.33,
+      "perConsumerCallbackFps": [
+        62.33
+      ],
+      "averageGpuSubmitMilliseconds": 0.838,
+      "allPassed": true
+    },
+    {
+      "workers": 2,
+      "wallSeconds": 3.911,
+      "endToEndAggregateFramesPerSecond": 15.34,
+      "steadyStateAggregateCallbackFps": 100.42,
+      "perConsumerCallbackFps": [
+        58.32,
+        42.1
+      ],
+      "averageGpuSubmitMilliseconds": 1.079,
+      "allPassed": true
+    },
+    {
+      "workers": 4,
+      "wallSeconds": 9.809,
+      "endToEndAggregateFramesPerSecond": 12.23,
+      "steadyStateAggregateCallbackFps": 87.4,
+      "perConsumerCallbackFps": [
+        11.27,
+        27.01,
+        29.29,
+        19.83
+      ],
+      "averageGpuSubmitMilliseconds": 0.607,
+      "allPassed": true
+    }
+  ],
+  "scope": "Each worker is an isolated CEF process and Rust/Metal consumer. This measures safe aggregate pressure; production should share one CEF process and compositor device."
+}

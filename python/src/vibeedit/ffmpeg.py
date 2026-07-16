@@ -109,8 +109,7 @@ def render_generated(spec: JSONObject, output: str | Path | None = None) -> Path
             frame_rate,
             "-frames:v",
             str(spec["durationFrames"]),
-            "-threads",
-            "1",
+            *_thread_arguments(spec, complex_filter=bool(sound_effects)),
             "-map_metadata",
             "-1",
         ]
@@ -169,6 +168,11 @@ def _frame_rate(spec: JSONObject) -> str:
     return f'{rate["numerator"]}/{rate["denominator"]}'
 
 
+def _thread_arguments(spec: JSONObject, *, complex_filter: bool = False) -> list[str]:
+    threads = str(spec["render"].get("threads", 1))
+    return (["-filter_complex_threads", threads] if complex_filter else []) + ["-threads", threads]
+
+
 def _frame_encoder_command(spec: JSONObject, input_arguments: list[str], destination: Path) -> list[str]:
     canvas = spec["canvas"]
     rate = canvas["frameRate"]
@@ -197,7 +201,7 @@ def _frame_encoder_command(spec: JSONObject, input_arguments: list[str], destina
         command.extend(["-map", "0:v:0", "-an"])
     settings = spec["render"]["output"]
     codecs = {"h264": "libx264", "hevc": "libx265", "vp9": "libvpx-vp9", "av1": "libaom-av1"}
-    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), "-threads", "1", "-map_metadata", "-1"])
+    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), *_thread_arguments(spec, complex_filter=bool(sound_effects)), "-map_metadata", "-1"])
     if sound_effects:
         command.extend(["-c:a", settings.get("audioCodec", "aac"), "-ar", str(canvas.get("audioSampleRate", 48000))])
     if settings["container"] == "mp4":
@@ -316,7 +320,7 @@ def _overlay_encoder_command(spec: JSONObject, overlay_input_arguments: list[str
     command.extend(["-map", f"[{audio_label}]"] if audio_label else ["-an"])
     settings = spec["render"]["output"]
     codecs = {"h264": "libx264", "hevc": "libx265", "vp9": "libvpx-vp9", "av1": "libaom-av1"}
-    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), "-threads", "1", "-map_metadata", "-1"])
+    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), *_thread_arguments(spec, complex_filter=True), "-map_metadata", "-1"])
     if audio_label:
         command.extend(["-c:a", settings.get("audioCodec", "aac"), "-ar", str(canvas.get("audioSampleRate", 48000))])
     if settings["container"] == "mp4":
@@ -438,7 +442,7 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
     command.extend(["-map", f"[{audio_label}]"] if audio_label else ["-an"])
     settings = spec["render"]["output"]
     codecs = {"h264": "libx264", "hevc": "libx265", "vp9": "libvpx-vp9", "av1": "libaom-av1"}
-    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), "-threads", "1", "-map_metadata", "-1"])
+    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), *_thread_arguments(spec, complex_filter=True), "-map_metadata", "-1"])
     if audio_label:
         command.extend(["-c:a", settings.get("audioCodec", "aac"), "-ar", str(canvas.get("audioSampleRate", 48000))])
     if settings["container"] == "mp4":

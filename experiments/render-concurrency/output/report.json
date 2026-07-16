@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "vibeedit.render-concurrency.v1",
+  "machineLogicalCpus": 10,
+  "resolution": {
+    "width": 1920,
+    "height": 1080
+  },
+  "framesPerRender": 150,
+  "rendersPerCase": 4,
+  "results": [
+    {
+      "workers": 1,
+      "threads": 1,
+      "wallSeconds": 85.853,
+      "aggregateFramesPerSecond": 6.99,
+      "megapixelsPerSecond": 14.49,
+      "outputBytes": 7837811
+    },
+    {
+      "workers": 1,
+      "threads": 0,
+      "wallSeconds": 25.993,
+      "aggregateFramesPerSecond": 23.08,
+      "megapixelsPerSecond": 47.86,
+      "outputBytes": 8196096
+    },
+    {
+      "workers": 2,
+      "threads": 1,
+      "wallSeconds": 27.218,
+      "aggregateFramesPerSecond": 22.04,
+      "megapixelsPerSecond": 45.71,
+      "outputBytes": 7837811
+    },
+    {
+      "workers": 2,
+      "threads": 5,
+      "wallSeconds": 13.548,
+      "aggregateFramesPerSecond": 44.29,
+      "megapixelsPerSecond": 91.84,
+      "outputBytes": 7847124
+    },
+    {
+      "workers": 4,
+      "threads": 1,
+      "wallSeconds": 16.849,
+      "aggregateFramesPerSecond": 35.61,
+      "megapixelsPerSecond": 73.84,
+      "outputBytes": 7837811
+    },
+    {
+      "workers": 4,
+      "threads": 2,
+      "wallSeconds": 13.859,
+      "aggregateFramesPerSecond": 43.29,
+      "megapixelsPerSecond": 89.77,
+      "outputBytes": 7842157
+    }
+  ],
+  "note": "Python selects trusted filters and launches FFmpeg; FFmpeg performs the pixel work in native code."
+}

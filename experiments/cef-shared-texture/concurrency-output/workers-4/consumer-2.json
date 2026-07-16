@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "vibeedit.cef-shared-texture-mvp.v1",
+  "status": "passed",
+  "platform": "macos-arm64",
+  "cefVersion": "144.0.30+g9e70dde+chromium-144.0.7559.257",
+  "chromiumVersion": "144.0.7559.257",
+  "htmlCssEngine": "Blink/Skia",
+  "browserGpu": "WebGPU",
+  "surfaceTransport": "CEF OnAcceleratedPaint IOSurface",
+  "pngBoundaryUsed": false,
+  "webgpuReady": true,
+  "acceleratedPaintCallbacks": 30,
+  "callbackFps": 29.29,
+  "firstSurface": {
+    "width": 1920,
+    "height": 1080,
+    "kind": "IOSurface"
+  },
+  "logicalViewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "surfaceConsumer": "rust-metal-gpu-import",
+  "channelDepth": null,
+  "rustSurfaceStats": null,
+  "rustGpuStats": {
+    "submittedFrames": 30,
+    "completedWhenReported": 29,
+    "averageSubmitMilliseconds": 0.476,
+    "cpuReadback": false
+  },
+  "rawCapture": {
+    "enabled": false,
+    "bytes": 0,
+    "expectedBytes": 0,
+    "complete": false
+  },
+  "videoOutput": null,
+  "errors": [],
+  "claimBoundary": "CEF-to-Rust-to-Metal IOSurface import and GPU-private blit are proven when rustGpuStats is present. Deterministic external frame scheduling, cross-platform platform adapters, native multi-layer compositing, and texture-native hardware encoding are not yet implemented."
+}

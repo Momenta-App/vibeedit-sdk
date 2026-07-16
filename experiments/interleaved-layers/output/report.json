@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "vibeedit.interleaved-layer-stress.v1",
+  "resolution": {
+    "width": 1280,
+    "height": 720
+  },
+  "frames": 60,
+  "stackBottomToTop": [
+    "Python/native base video",
+    "Chromium text A",
+    "Python/native screen-blend video",
+    "Chromium text B",
+    "Python/native circular alpha-mask video",
+    "Chromium text C"
+  ],
+  "sequentialWebSeconds": 10.175,
+  "concurrentWebSeconds": 3.231,
+  "webConcurrencySpeedup": 3.15,
+  "finalCompositeSeconds": 3.891,
+  "reviewVideo": "experiments/interleaved-layers/output/interleaved-review.mp4",
+  "boundary": "This validates ordering, blend, mask, opacity, and parallel web-band production through the current PNG fallback. The CEF Rust/Metal experiment removes that PNG boundary but is not yet connected to this final compositor."
+}

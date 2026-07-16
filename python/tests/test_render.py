@@ -6,6 +6,13 @@ import pytest
 
 from vibeedit import render, verify_output
 from vibeedit.data import data_path
+from vibeedit.ffmpeg import _thread_arguments
+
+
+def test_ffmpeg_thread_arguments_honor_render_contract():
+    assert _thread_arguments({"render": {}}) == ["-threads", "1"]
+    assert _thread_arguments({"render": {"threads": 0}}, complex_filter=True) == ["-filter_complex_threads", "0", "-threads", "0"]
+    assert _thread_arguments({"render": {"threads": 6}}, complex_filter=True) == ["-filter_complex_threads", "6", "-threads", "6"]
 
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
