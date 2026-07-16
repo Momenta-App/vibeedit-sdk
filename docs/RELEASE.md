@@ -33,7 +33,11 @@ wheel, source distribution, and npm tarball; binds their versions to the tag;
 checks `SHA256SUMS.release`; checks the archive-audit hashes, byte counts, and
 forbidden-entry result; and verifies GitHub build attestations. Only then does
 it request a short-lived OIDC publishing identity. No long-lived npm or PyPI
-token is accepted by the workflow.
+token is accepted by the workflow. After publication, it waits for the exact
+version to become publicly resolvable, installs it into a new temporary npm
+project or Python virtual environment, and requires the installed CLI to report
+the tag-bound version. A successful registry job therefore proves publication
+and a clean public install of the exact beta artifact.
 
 The protected `registry-beta` GitHub environment was created on 2026-07-15
 with a required reviewer and protected-branch deployment policy. Registry-owner
@@ -51,9 +55,10 @@ setup is still required before the workflow's first use:
    `publish:pypi:v0.1.0-beta.1`.
 5. Dispatch it separately with registry `npm` and confirmation
    `publish:npm:v0.1.0-beta.1`.
-6. Verify `uv tool install vibeedit` and `npm install vibeedit@beta` from clean
-   environments before changing any documentation to claim registry
-   availability. Keep npm's stable `latest` tag unchanged during beta review.
+6. Retain the workflow's clean public-install proof, then independently verify
+   `uv tool install vibeedit` and `npm install vibeedit@beta` before changing
+   any documentation to claim registry availability. Keep npm's stable
+   `latest` tag unchanged during beta review.
 
 PyPI supports a pending trusted publisher for a first release. npm already has
 the legacy `vibeedit` package and requires an authenticated owner to establish

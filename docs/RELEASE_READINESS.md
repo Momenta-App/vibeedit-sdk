@@ -268,8 +268,10 @@ uses OIDC trusted publishing and accepts no long-lived registry token. As of
 commands therefore remain unproven. The protected `registry-beta` GitHub
 environment now exists with a required reviewer and protected-branch policy;
 an owner must still configure the two registry-side trusted publishers, approve
-the environment, run the separate dispatches, and perform clean
-post-publication installs.
+the environment, and run the separate dispatches. Each dispatch now waits for
+the exact published version to become publicly resolvable and proves a clean
+temporary install plus CLI version check before it can pass; an independent
+`uv tool install`/`npm install` verification remains the final handoff check.
 
 ## Beta release gates
 
