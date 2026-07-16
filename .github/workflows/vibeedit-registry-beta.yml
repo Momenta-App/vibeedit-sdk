@@ -68,9 +68,14 @@ jobs:
           gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern 'SHA256SUMS.release' --pattern 'archive-audit.json' --dir registry
 
       - name: Validate identities, versions, checksums, and archive audit
+        id: release
         env:
           RELEASE_TAG: ${{ inputs.release_tag }}
-        run: python scripts/validate_registry_release.py --directory registry --tag "$RELEASE_TAG"
+        run: |
+          python scripts/validate_registry_release.py --directory registry --tag "$RELEASE_TAG" > registry/validated.json
+          cat registry/validated.json
+          echo "npm_version=$(jq -r .npmVersion registry/validated.json)" >> "$GITHUB_OUTPUT"
+          echo "python_version=$(jq -r .pythonVersion registry/validated.json)" >> "$GITHUB_OUTPUT"
 
       - name: Verify GitHub build provenance
         env:
@@ -97,3 +102,44 @@ jobs:
           packages-dir: registry/python
           print-hash: true
           verbose: true
+
+      - name: Verify exact npm beta through a clean public install
+        if: inputs.registry == 'npm'
+        env:
+          NPM_VERSION: ${{ steps.release.outputs.npm_version }}
+        run: |
+          for attempt in $(seq 1 18); do
+            RESOLVED_VERSION="$(npm view "vibeedit@$NPM_VERSION" version 2>/dev/null || true)"
+            if [ "$RESOLVED_VERSION" = "$NPM_VERSION" ]; then
+              break
+            fi
+            if [ "$attempt" = 18 ]; then
+              echo "npm did not expose vibeedit@$NPM_VERSION within three minutes" >&2
+              exit 1
+            fi
+            sleep 10
+          done
+          WORKSPACE="$(mktemp -d)"
+          cd "$WORKSPACE"
+          npm init --yes
+          npm install --ignore-scripts --no-audit --no-fund "vibeedit@$NPM_VERSION"
+          test "$(./node_modules/.bin/vibeedit --version)" = "vibeedit $NPM_VERSION"
+
+      - name: Verify exact Python beta through a clean public install
+        if: inputs.registry == 'pypi'
+        env:
+          PYTHON_VERSION: ${{ steps.release.outputs.python_version }}
+        run: |
+          for attempt in $(seq 1 18); do
+            if curl --fail --silent --show-error "https://pypi.org/pypi/vibeedit/$PYTHON_VERSION/json" > /dev/null; then
+              break
+            fi
+            if [ "$attempt" = 18 ]; then
+              echo "PyPI did not expose vibeedit==$PYTHON_VERSION within three minutes" >&2
+              exit 1
+            fi
+            sleep 10
+          done
+          python -m venv "${RUNNER_TEMP}/vibeedit-registry-proof"
+          "${RUNNER_TEMP}/vibeedit-registry-proof/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --index-url https://pypi.org/simple "vibeedit==$PYTHON_VERSION"
+          test "$("${RUNNER_TEMP}/vibeedit-registry-proof/bin/vibeedit" --version)" = "vibeedit $PYTHON_VERSION"
