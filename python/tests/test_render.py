@@ -6,6 +6,7 @@ import pytest
 
 from vibeedit import render, verify_output
 from vibeedit.data import data_path
+from vibeedit.ffmpeg import FFmpegRenderError
 
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
@@ -15,6 +16,38 @@ def test_minimal_fixture_renders_real_media(tmp_path: Path):
     report = verify_output(output, spec["verification"])
     assert output.stat().st_size > 0
     assert report.passed, report.errors
+
+
+def test_subsampled_output_rejects_odd_dimensions_before_ffmpeg(tmp_path: Path):
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec["canvas"]["width"] = 161
+    spec["canvas"]["height"] = 91
+    spec["render"]["output"]["pixelFormat"] = "yuv420p"
+
+    with pytest.raises(FFmpegRenderError, match="choose yuv444p to preserve exact odd dimensions"):
+        render(spec, tmp_path / "invalid-odd.mp4")
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
+def test_yuv444_output_preserves_exact_odd_dimensions(tmp_path: Path):
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec["canvas"]["width"] = 161
+    spec["canvas"]["height"] = 91
+    spec["durationFrames"] = 3
+    spec["render"]["output"]["pixelFormat"] = "yuv444p"
+    spec["verification"] = {
+        "durationFrames": 3,
+        "width": 161,
+        "height": 91,
+        "frameRate": spec["canvas"]["frameRate"],
+        "hasVideo": True,
+        "hasAudio": False,
+        "maxDurationDriftFrames": 0,
+    }
+
+    output = render(spec, tmp_path / "exact-odd.mp4")
+
+    assert verify_output(output, spec["verification"]).passed
 
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")

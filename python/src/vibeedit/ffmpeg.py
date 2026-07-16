@@ -19,6 +19,23 @@ class FFmpegRenderError(RuntimeError):
     pass
 
 
+def _validate_output_geometry(spec: JSONObject) -> None:
+    canvas = spec["canvas"]
+    pixel_format = spec["render"]["output"].get("pixelFormat", canvas.get("pixelFormat", "yuv420p"))
+    formats_420 = {"nv12", "nv21", "p010be", "p010le", "p016be", "p016le", "yuv420p", "yuvj420p", "yuva420p"}
+    formats_422 = {"p210be", "p210le", "p216be", "p216le", "uyvy422", "yuv422p", "yuvj422p", "yuva422p", "yuyv422"}
+    invalid = pixel_format in formats_420 and (canvas["width"] % 2 or canvas["height"] % 2)
+    invalid = invalid or pixel_format in formats_422 and canvas["width"] % 2
+    if not invalid:
+        return
+    requirement = "even width and height" if pixel_format in formats_420 else "an even width"
+    raise FFmpegRenderError(
+        f"pixel format {pixel_format} requires {requirement}; got {canvas['width']}x{canvas['height']}. "
+        "Use an even canvas or choose yuv444p to preserve exact odd dimensions. "
+        "VibeEdit will not silently pad or crop the composition."
+    )
+
+
 def ffmpeg_path() -> str:
     executable = shutil.which("ffmpeg")
     if not executable:
@@ -46,6 +63,7 @@ def probe(path: str | Path) -> JSONObject:
 
 
 def render_generated(spec: JSONObject, output: str | Path | None = None) -> Path:
+    _validate_output_geometry(spec)
     canvas = spec["canvas"]
     rate = canvas["frameRate"]
     duration = Fraction(spec["durationFrames"] * rate["denominator"], rate["numerator"])
@@ -128,6 +146,7 @@ def render_generated(spec: JSONObject, output: str | Path | None = None) -> Path
 
 
 def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | Path) -> Path:
+    _validate_output_geometry(spec)
     canvas = spec["canvas"]
     rate = canvas["frameRate"]
     duration = Fraction(spec["durationFrames"] * rate["denominator"], rate["numerator"])
@@ -171,6 +190,7 @@ def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | 
 
 
 def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str | Path, base: str | Path = ".") -> Path:
+    _validate_output_geometry(spec)
     canvas = spec["canvas"]
     rate = canvas["frameRate"]
     frame_rate = f'{rate["numerator"]}/{rate["denominator"]}'
@@ -201,7 +221,7 @@ def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str 
         f"scale={canvas['width']}:{canvas['height']}:force_original_aspect_ratio=decrease",
         f"pad={canvas['width']}:{canvas['height']}:(ow-iw)/2:(oh-ih)/2:color=black",
         "setsar=1",
-        "format=yuv420p",
+        "format=yuv444p",
         "settb=AVTB",
     ]
     video_filters.extend(
@@ -255,6 +275,7 @@ def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str 
 
 
 def render_media(spec: JSONObject, output: str | Path | None = None, base: str | Path = ".") -> Path:
+    _validate_output_geometry(spec)
     canvas = spec["canvas"]
     rate = canvas["frameRate"]
     frame_rate = f'{rate["numerator"]}/{rate["denominator"]}'
@@ -306,7 +327,7 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
             f"scale={canvas['width']}:{canvas['height']}:force_original_aspect_ratio=decrease",
             f"pad={canvas['width']}:{canvas['height']}:(ow-iw)/2:(oh-ih)/2:color=black",
             "setsar=1",
-            "format=yuv420p",
+            "format=yuv444p",
             "settb=AVTB",
         ]
         filters.extend(

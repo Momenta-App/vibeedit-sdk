@@ -45,6 +45,37 @@ HTML components run in a restricted local document with explicit assets and no
 network access by default. Catalog HTML is data, not executable code. A future
 third-party component loader requires a separate trust boundary.
 
+### Hybrid renderer boundary
+
+VibeEdit keeps browser-authored paint and native media work separate. HTML,
+CSS, Canvas, and WebGL remain responsible for the exact visual surface that an
+agent authored; the backend does not reinterpret DOM layout, glyph shaping,
+shadows, gradients, or blend behavior. Native code owns source decoding,
+surface transforms, alpha compositing, effects, transitions, audio, caching,
+and encoding. This preserves browser appearance while leaving a stable boundary
+for a future Rust/WGPU compositor.
+
+A 50-edit adversarial gauntlet exercised existing VibeEdit motion components,
+effects, transitions, transparent surfaces, blend modes, fractional affine
+transforms, one through eight layers, overlapping motion, and odd frame sizes.
+It did not introduce a replacement skill or a second public object model. The
+native compositor matched its canonical reference across all 35 routed cases;
+the remaining 15 cases stayed on the browser fallback because they depended on
+browser paint semantics that were not safely portable.
+
+The package does not currently ship the experimental Rust compositor. The test
+runtime proved that a native accelerator must probe for an adapter and fall back
+without crashing, use 256-byte GPU row alignment, accept straight RGBA textures,
+composite in premultiplied alpha, and convert readback to straight alpha before
+encoding. Those contracts are prerequisites for promotion into a cross-platform
+release artifact.
+
+Subsampled output formats also have geometric constraints. VibeEdit preserves
+exact odd dimensions through a 4:4:4 working surface and supports them with
+`yuv444p`. A requested 4:2:0 or 4:2:2 output whose dimensions violate chroma
+subsampling now fails before FFmpeg with an actionable message; VibeEdit never
+silently changes composition size.
+
 ## Backends and capability routing
 
 The lightweight installation requires Python and system FFmpeg/FFprobe. Optional
