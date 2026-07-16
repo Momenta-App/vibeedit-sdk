@@ -265,9 +265,11 @@ package identities, flat checksums, archive audit, and GitHub attestations. It
 uses OIDC trusted publishing and accepts no long-lived registry token. As of
 2026-07-15, PyPI still returns 404 for `vibeedit`, npm `latest` is the legacy
 `0.0.1`, and this machine has neither registry credential. Registry install
-commands therefore remain unproven until an owner configures the two trusted
-publishers, approves the protected environment, runs the two separate
-dispatches, and performs clean post-publication installs.
+commands therefore remain unproven. The protected `registry-beta` GitHub
+environment now exists with a required reviewer and protected-branch policy;
+an owner must still configure the two registry-side trusted publishers, approve
+the environment, run the separate dispatches, and perform clean
+post-publication installs.
 
 ## Beta release gates
 

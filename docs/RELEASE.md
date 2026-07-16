@@ -35,10 +35,12 @@ forbidden-entry result; and verifies GitHub build attestations. Only then does
 it request a short-lived OIDC publishing identity. No long-lived npm or PyPI
 token is accepted by the workflow.
 
-Owner setup is still required before its first use:
+The protected `registry-beta` GitHub environment was created on 2026-07-15
+with a required reviewer and protected-branch deployment policy. Registry-owner
+setup is still required before the workflow's first use:
 
-1. Create a protected GitHub environment named `registry-beta` with required
-   reviewers.
+1. Confirm the `registry-beta` environment and required-reviewer policy remain
+   enabled.
 2. On PyPI, create a pending trusted publisher for project `vibeedit`, owner
    `Momenta-App`, repository `vibeedit-sdk`, workflow
    `vibeedit-registry-beta.yml`, environment `registry-beta`.
@@ -55,5 +57,5 @@ Owner setup is still required before its first use:
 
 PyPI supports a pending trusted publisher for a first release. npm already has
 the legacy `vibeedit` package and requires an authenticated owner to establish
-its trusted-publisher relationship. Those two registry-side settings cannot be
-created from this unauthenticated checkout.
+its trusted-publisher relationship. Those two registry-account settings cannot
+be created from this unauthenticated checkout.
