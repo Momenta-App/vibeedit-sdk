@@ -34,7 +34,9 @@ from vibeedit.ffmpeg import probe
 from vibeedit.render import render
 from vibeedit.verify import verify_output
 from vibeedit.effects import random_frame_stutter_mapping
+from vibeedit.effects import register_video_effect_filter
 from vibeedit.transitions import crossfade_filter
+from vibeedit.transitions import register_transition_filter
 from vibeedit.catalog import inspect_catalog_item
 from vibeedit.catalog import list_catalog
 from vibeedit.catalog import search_catalog
@@ -49,7 +51,10 @@ from vibeedit.presets import build_media_preset_plan
 from vibeedit.presets import get_media_preset
 from vibeedit.presets import list_media_presets
 from vibeedit.presets import render_transition_preset
+from vibeedit.motion import HTML_CSS_MOTION_COMPONENT_ID
 from vibeedit.motion import list_motion_components
+from vibeedit.motion import list_motion_atoms
+from vibeedit.motion import motion_render_plan
 from vibeedit.motion import tracking_point_at
 from vibeedit.analysis import analyze_beats
 from vibeedit.analysis import regular_beat_frames
@@ -76,6 +81,7 @@ __all__ = [
     "FFmpegRenderError",
     "FFmpegUnavailableError",
     "FrameRate",
+    "HTML_CSS_MOTION_COMPONENT_ID",
     "ImageClip",
     "Mask",
     "MotionComponent",
@@ -109,11 +115,15 @@ __all__ = [
     "list_catalog",
     "list_skills",
     "list_media_presets",
+    "list_motion_atoms",
     "list_motion_components",
+    "motion_render_plan",
     "probe",
     "render",
     "render_example",
     "random_frame_stutter_mapping",
+    "register_transition_filter",
+    "register_video_effect_filter",
     "regular_beat_frames",
     "remove_skill",
     "render_transition_preset",

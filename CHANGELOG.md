@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.1.0 beta 2 - Unreleased
+
+- Give the materially changed post-beta.1 candidate a distinct npm/Python
+  package identity so it cannot be confused with or overwrite the existing
+  public beta.1 artifacts.
+
+- Add a pinned Chromium/CEF shared-texture MVP proving HTML/CSS plus browser
+  WebGPU composition can reach native code as a macOS IOSurface without PNG
+  capture.
+- Stream mixed Chromium overlay frames directly into FFmpeg, support two-clip
+  Python effect/transition bases, and expose trusted process-local Python filter
+  registration for agent-authored effects and transitions.
+- Added `vibeedit://motion/html-css`, a deterministic raw HTML/CSS-only authoring
+  contract with full pinned-Chromium CSS rendering, automatic animation seeking,
+  local assets/fonts, and no authored JavaScript.
+- Added VibeEdit Motion Atoms v1, a reusable CSS/manifest vocabulary designed for
+  concise agent composition and future conformance-gated Rust/WGPU lowering.
+
+- Replace per-frame Chromium document reloads with a persistent deterministic
+  seek runtime and faster lossless compositor capture.
+- Stream browser-only frame sequences directly into FFmpeg instead of writing
+  and rereading temporary PNG directories.
+- Add explicit local HTML/CSS/JavaScript project components, bundled font and
+  asset loading, CSS/WAAPI/GSAP/Anime.js seeking, framework guidance, and
+  actionable network/font failures.
+- Add secure-loopback WebGPU/WGSL execution, native-eligibility inspection, and
+  conformance-gated routing that keeps unverified layers on Chromium.
+
 ## 0.1.0 beta 1 - 2026-07-14
 
 - Publish the first public beta for evaluation, testing, and community review.

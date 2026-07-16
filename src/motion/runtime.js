@@ -14,12 +14,18 @@ export function renderComponent(id, props, frame, context) {
   return component(Object.freeze({ ...props }), frame, Object.freeze({ ...context }));
 }
 
-export function documentForFrame(spec, frame) {
+export function documentForFrame(spec, frame, options = {}) {
   const layers = spec.timeline.tracks
     .flatMap((track) => track.items.map((item) => ({ ...item, trackOrder: track.order })))
     .filter((item) => item.kind === "motion" && frame >= item.placement.startFrame && frame < item.placement.startFrame + item.placement.durationFrames)
     .sort((left, right) => left.trackOrder - right.trackOrder)
-    .map((item) => renderComponent(item.componentId, item.props, frame - item.placement.startFrame, { durationFrames: item.placement.durationFrames, width: spec.canvas.width, height: spec.canvas.height }))
+    .map((item) => renderComponent(item.componentId, item.props, frame - item.placement.startFrame, {
+      assetBaseUrl: options.assetBaseUrl,
+      durationFrames: item.placement.durationFrames,
+      fps: spec.canvas.frameRate ? spec.canvas.frameRate.numerator / spec.canvas.frameRate.denominator : 30,
+      width: spec.canvas.width,
+      height: spec.canvas.height,
+    }))
     .join("\n");
   return `<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent}*{box-sizing:border-box}</style></head><body>${layers}</body></html>`;
 }
@@ -58,6 +64,7 @@ for (const component of portableMotionComponents) {
 }
 
 function renderPortableComponent(component, props, frame, context) {
+  if (component.canonical && context.assetBaseUrl) return renderCanonicalComponent(component, props, frame, context);
   const progress = Math.max(0, Math.min(1, (frame + 1) / Math.max(1, context.durationFrames)));
   const eased = 1 - Math.pow(1 - progress, 3);
   const foreground = cssColor(props.foreground, component.palette.foreground);
@@ -76,6 +83,17 @@ function renderPortableComponent(component, props, frame, context) {
     ? Array.from({ length: 8 }, (_, index) => `<i style="position:absolute;left:50%;top:50%;width:.12em;height:.12em;border-radius:50%;background:${index % 2 ? accent : foreground};transform:rotate(${index * 45}deg) translate(${(eased * 4.2).toFixed(3)}em);opacity:${(1 - progress).toFixed(4)}"></i>`).join("")
     : "";
   return `<section data-vibeedit-component="${escapeAttribute(component.id.split("/").at(-1))}" data-family="${escapeAttribute(component.family)}" data-frame="${frame}" style="position:absolute;inset:0;display:flex;align-items:${component.kind === "caption" ? "flex-end" : "center"};justify-content:center;padding:${component.kind === "caption" ? "0 7% 8%" : "7%"};overflow:hidden;pointer-events:none;background:${background}"><div style="position:relative;max-width:94%;color:${foreground};font-family:'Arial Black','Avenir Next',Arial,sans-serif;font-weight:900;font-size:clamp(32px,${component.kind === "caption" ? "6vw" : "10vw"},180px);line-height:.94;letter-spacing:-.045em;text-align:center;text-transform:${component.kind === "caption" ? "none" : "uppercase"};${family}${motion}">${content}${particles}</div></section>`;
+}
+
+function renderCanonicalComponent(component, props, frame, context) {
+  const source = new URL(component.canonical.entry, context.assetBaseUrl);
+  source.searchParams.set("alpha", "1");
+  source.searchParams.set("render", "1");
+  source.searchParams.set("transparent", "1");
+  const text = String(props.text ?? component.defaultText).trim();
+  if (text && normalizeText(text) !== normalizeText(component.defaultText)) source.searchParams.set("text", text);
+  const time = frame / Math.max(1, context.fps ?? component.canonical.fps ?? 30);
+  return `<section data-vibeedit-component="${escapeAttribute(component.id.split("/").at(-1))}" data-family="${escapeAttribute(component.family)}" data-frame="${frame}" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;background:${cssColor(props.background, "transparent")}"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">${escapeHtml(text)}</span><iframe data-vibeedit-canonical="true" data-vibeedit-time="${time.toFixed(6)}" title="${escapeAttribute(component.name)}" src="${escapeHtml(source.href)}" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;pointer-events:none" tabindex="-1"></iframe></section>`;
 }
 
 function familyStyle(family, foreground, accent, progress, phase) {
@@ -99,7 +117,7 @@ function motionStyle(motion, progress, eased, phase, accent, props, frame) {
   if (motion === "glow") return `color:${accent};text-shadow:0 0 .08em ${accent},0 0 .32em ${accent};opacity:${eased.toFixed(5)};`;
   if (motion === "parallax") return `text-shadow:.035em .045em 0 ${accent},.07em .09em 0 rgba(0,0,0,.5);transform:perspective(700px) rotateY(${((1 - eased) * -18).toFixed(3)}deg);`;
   if (motion === "pill") return `background:${accent};padding:.24em .52em;border-radius:999px;color:#101217;transform:scaleX(${(0.72 + eased * 0.28).toFixed(5)});`;
-  if (motion === "texture" || motion === "texture-mask") return `background:repeating-linear-gradient(135deg,${accent} 0 .12em,#fff .12em .2em,${accent} .2em .34em);color:transparent;background-clip:text;-webkit-background-clip:text;filter:contrast(1.15);`;
+  if (motion === "texture" || motion === "texture-mask") return `background:repeating-linear-gradient(135deg,${accent} 0 .12em,#fff .12em .2em,${accent} .2em .34em);background-size:220% 220%;background-position:${(progress * 100).toFixed(3)}% ${(100 - progress * 100).toFixed(3)}%;color:transparent;background-clip:text;-webkit-background-clip:text;filter:contrast(1.15);`;
   if (motion === "weight") return `font-weight:${Math.round(300 + eased * 600)};letter-spacing:${((1 - eased) * 0.08 - 0.03).toFixed(4)}em;`;
   if (motion === "difference") return `mix-blend-mode:difference;color:#fff;`;
   if (motion === "face-follow") {
@@ -125,3 +143,4 @@ function cssColor(value, fallback) {
   return /^(#[0-9a-f]{3,8}|rgba?\([\d\s.,%+-]+\)|hsla?\([\d\s.,%+-]+\)|transparent|white|black)$/i.test(candidate) ? escapeAttribute(candidate) : fallback;
 }
 function clamp(value) { return Math.max(0, Math.min(1, value)); }
+function normalizeText(value) { return value.normalize("NFKC").replace(/\s+/g, " ").trim().toLocaleLowerCase(); }

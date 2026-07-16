@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640, height=360">
+    <title>Elegant Misc Renderer</title>
+    <link rel="stylesheet" href="components/elegant-misc.css">
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div id="root" class="elegant-misc-root" data-composition-id="elegant-misc-runtime" data-start="0" data-width="640" data-height="360" data-duration="7.6">
+      <section class="clip" data-start="0" data-duration="7.6" data-track-index="1">
+        <canvas id="elegant-misc-canvas" class="elegant-misc-canvas" width="640" height="360"></canvas>
+      </section>
+    </div>
+    <script>
+      const params = new URLSearchParams(location.search);
+      window.ELEGANT_MISC_SLUG = params.get("slug") || "Bubble";
+      window.ELEGANT_MISC_CONFIG_PATH = params.get("config") || `../../configs/${window.ELEGANT_MISC_SLUG}.json`;
+      window.ELEGANT_MISC_FONT_ROOT = params.get("fonts") || "../../assets/fonts/";
+    </script>
+    <script type="module" src="components/elegant-misc.js"></script>
+  </body>
+</html>

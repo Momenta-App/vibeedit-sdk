@@ -1,0 +1,2710 @@
+{
+  "schemaVersion": "vibeedit.text-effect-conformance.v1",
+  "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725",
+  "totalRegistered": 52,
+  "tested": 52,
+  "portableImported": 50,
+  "baselineComponents": [
+    "vibeedit://text/caption-rail",
+    "vibeedit://text/negative"
+  ],
+  "passed": 52,
+  "failed": 0,
+  "failures": [],
+  "renderContract": {
+    "width": 640,
+    "height": 360,
+    "fps": 24,
+    "durationFrames": 48,
+    "background": "split-gradient-conformance-field",
+    "network": "blocked-by-contract"
+  },
+  "fidelityContract": {
+    "canonicalSourceClones": 30,
+    "portableRuntimeEffects": 22,
+    "meaning": "Render checks prove deterministic browser output. Canonical-source-clone identifies effects rendered by the packaged original VibeEdit HTML/CSS/JS implementation; portable-runtime does not claim source visual identity."
+  },
+  "aggregatePreviewSha256": "5b64306cb447d69cb6a62671475afa670b3ffe9a4c8784f65229b9c54ae216f0",
+  "contactSheet": "docs/evidence/text-effects/contact-sheet.jpg",
+  "contactSheets": [
+    {
+      "frame": 2,
+      "path": "docs/evidence/text-effects/contact-sheet-early.jpg",
+      "sha256": "f031d59057ff62320ffd4b762b452526bd6ba674a57cdf51908543539682b2d5",
+      "bytes": 790539
+    },
+    {
+      "frame": 24,
+      "path": "docs/evidence/text-effects/contact-sheet-mid.jpg",
+      "sha256": "6e5d11e19c05ec181112388b6b71be2a863daa1070c3fda7c64eb73cbb424fed",
+      "bytes": 852098
+    },
+    {
+      "frame": 32,
+      "path": "docs/evidence/text-effects/contact-sheet.jpg",
+      "sha256": "b950e898d10867914dac57ddf90ec63aa2f8d6c82142f8280df398dece6673a3",
+      "bytes": 855925
+    },
+    {
+      "frame": 43,
+      "path": "docs/evidence/text-effects/contact-sheet-late.jpg",
+      "sha256": "59d1cefbd866718d9c51903135421d0c9e7375ef34e8540b1cc44db68f723239",
+      "bytes": 858811
+    }
+  ],
+  "reviewReel": "docs/evidence/text-effects/review-reel.mp4",
+  "results": [
+    {
+      "id": "vibeedit://text/caption-blend-difference",
+      "name": "Blend Difference",
+      "family": "portable-catalog",
+      "motion": "difference",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-blend-difference.mp4",
+      "sha256": "701855cca23460603ede28f799c237a4a996e127f6ba90060bcf48145fec634c",
+      "bytes": 12805,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.921969,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "w"
+      },
+      "dom": {
+        "component": "caption-blend-difference",
+        "text": "MAKE THE CONTRAST WORK",
+        "rect": {
+          "left": 61.3125,
+          "top": 236.625,
+          "right": 578.6875,
+          "bottom": 308.8125,
+          "width": 517.375,
+          "height": 72.1875
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": false,
+        "temporalChangeRequired": false,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-clip-wipe",
+      "name": "Clip Wipe",
+      "family": "portable-catalog",
+      "motion": "wipe",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-clip-wipe.mp4",
+      "sha256": "a297d0950faefad5ccc44046ba4f620f9231834d94a2bbcb03cef6a2568de447",
+      "bytes": 14450,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.944755,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "y i"
+      },
+      "dom": {
+        "component": "caption-clip-wipe",
+        "text": "REVEAL EVERY WORD",
+        "rect": {
+          "left": 100.09375,
+          "top": 272.71875,
+          "right": 539.90625,
+          "bottom": 308.8125,
+          "width": 439.8125,
+          "height": 36.09375
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-editorial-emphasis",
+      "name": "Editorial Emphasis",
+      "family": "portable-catalog",
+      "motion": "editorial",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-editorial-emphasis.mp4",
+      "sha256": "eb8a0b1fa31b0db56563caf2d292e175be7ae1b1e38a180670142012b8ee511a",
+      "bytes": 31342,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.954608,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "caption-editorial-emphasis",
+        "text": "Make the key phrase matter",
+        "rect": {
+          "left": 92.296875,
+          "top": 266.21875,
+          "right": 547.703125,
+          "bottom": 308.8125,
+          "width": 455.40625,
+          "height": 42.59375
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-emoji-pop",
+      "name": "Emoji Pop",
+      "family": "portable-catalog",
+      "motion": "pop",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-emoji-pop.mp4",
+      "sha256": "7662b990cdecf74006144c0b6d4b7ed21542cc27e08c8024bd3addfb9508f22c",
+      "bytes": 19940,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.965949,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "yi"
+      },
+      "dom": {
+        "component": "caption-emoji-pop",
+        "text": "BIG MOMENT ✦",
+        "rect": {
+          "left": 167.96875,
+          "top": 272.71875,
+          "right": 472.03125,
+          "bottom": 308.8125,
+          "width": 304.0625,
+          "height": 36.09375
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-glitch-rgb",
+      "name": "Glitch RGB",
+      "family": "portable-catalog",
+      "motion": "glitch",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-glitch-rgb.mp4",
+      "sha256": "56646173811e6dada27f1d7b05f7af408c994852775e0d7bd0c2be4a881ba5eb",
+      "bytes": 51997,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.944038,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "caption-glitch-rgb",
+        "text": "SIGNAL INTERRUPTED",
+        "rect": {
+          "left": 96.5,
+          "top": 271.21875,
+          "right": 546.484375,
+          "bottom": 307.3125,
+          "width": 449.984375,
+          "height": 36.09375
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-gradient-fill",
+      "name": "Gradient Fill",
+      "family": "portable-catalog",
+      "motion": "gradient",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-gradient-fill.mp4",
+      "sha256": "8c7f1be1983250f4679e6c2c18651ea3cb9fc34d0bb4f35421bc2935f0d54879",
+      "bytes": 36026,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.933003,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ";"
+      },
+      "dom": {
+        "component": "caption-gradient-fill",
+        "text": "COLOR MOVES WITH ENERGY",
+        "rect": {
+          "left": 61.3125,
+          "top": 236.625,
+          "right": 578.6875,
+          "bottom": 308.8125,
+          "width": 517.375,
+          "height": 72.1875
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-highlight",
+      "name": "Highlight",
+      "family": "portable-catalog",
+      "motion": "highlight",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-highlight.mp4",
+      "sha256": "b5d6ab985c6dd4a52316cbddb0035df16ab1f6380148430a8f4e5b9ecde668ad",
+      "bytes": 21430,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.862954,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "HIGHLIGHT THE ACTIVE IDEA"
+      },
+      "dom": {
+        "component": "caption-highlight",
+        "text": "HIGHLIGHT THE ACTIVE IDEA",
+        "rect": {
+          "left": 61.3125,
+          "top": 226.65625,
+          "right": 578.6875,
+          "bottom": 308.8125,
+          "width": 517.375,
+          "height": 82.15625
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-kinetic-slam",
+      "name": "Kinetic Slam",
+      "family": "portable-catalog",
+      "motion": "slam",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-kinetic-slam.mp4",
+      "sha256": "2991afe7d499d2600dcaf648a76d2c97a3b1dfea67b73bd2eaac8bb302fa66a0",
+      "bytes": 20415,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.9813,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "yi"
+      },
+      "dom": {
+        "component": "caption-kinetic-slam",
+        "text": "IMPACT",
+        "rect": {
+          "left": 243.953125,
+          "top": 272.71875,
+          "right": 396.03125,
+          "bottom": 308.8125,
+          "width": 152.078125,
+          "height": 36.09375
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-matrix-decode",
+      "name": "Matrix Decode",
+      "family": "portable-catalog",
+      "motion": "scramble",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-matrix-decode.mp4",
+      "sha256": "ad495ad1003fa6b6dfb20c01aa4cb2cb1c26eb3450313f0a668d7162074f8f17",
+      "bytes": 62693,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.941689,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "caption-matrix-decode",
+        "text": "DECODE THE MESSAGE",
+        "rect": {
+          "left": 86.3125,
+          "top": 272.71875,
+          "right": 553.671875,
+          "bottom": 308.8125,
+          "width": 467.359375,
+          "height": 36.09375
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-neon-accent",
+      "name": "Neon Accent",
+      "family": "portable-catalog",
+      "motion": "glow",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-neon-accent.mp4",
+      "sha256": "e1e8bf3ebf23c03ea9ef1446b8f8a726d9030a9fa73da293a256d77861ae5fa3",
+      "bytes": 16903,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.970075,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "yi"
+      },
+      "dom": {
+        "component": "caption-neon-accent",
+        "text": "NEON ACCENT",
+        "rect": {
+          "left": 173.0625,
+          "top": 272.71875,
+          "right": 466.921875,
+          "bottom": 308.8125,
+          "width": 293.859375,
+          "height": 36.09375
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-neon-glow",
+      "name": "Neon Glow",
+      "family": "portable-catalog",
+      "motion": "glow",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-neon-glow.mp4",
+      "sha256": "f47fb2d6caa1841d4ecbaae0894221928120fe9beeb6a83f761752405539c442",
+      "bytes": 23462,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.940528,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "THROUG®"
+      },
+      "dom": {
+        "component": "caption-neon-glow",
+        "text": "GLOW THROUGH THE NOISE",
+        "rect": {
+          "left": 61.3125,
+          "top": 236.625,
+          "right": 578.6875,
+          "bottom": 308.8125,
+          "width": 517.375,
+          "height": 72.1875
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-parallax-layers",
+      "name": "Parallax Layers",
+      "family": "portable-catalog",
+      "motion": "parallax",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-parallax-layers.mp4",
+      "sha256": "49083623d6a697d7e5fc12c59fe149154bd82ee684ed3a0ca9cf7cca068666b4",
+      "bytes": 23585,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.915701,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "7"
+      },
+      "dom": {
+        "component": "caption-parallax-layers",
+        "text": "DEPTH BEHIND THE SUBJECT",
+        "rect": {
+          "left": 61.3125,
+          "top": 236.625,
+          "right": 578.6875,
+          "bottom": 308.8125,
+          "width": 517.375,
+          "height": 72.1875
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-particle-burst",
+      "name": "Particle Burst",
+      "family": "portable-catalog",
+      "motion": "burst",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-particle-burst.mp4",
+      "sha256": "fec826e4c7f4fb4c60dcc820fc74c0813f8d681a913faead0759ea68ae0aacf8",
+      "bytes": 28008,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.947802,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "caption-particle-burst",
+        "text": "BURST ON THE BEAT",
+        "rect": {
+          "left": 110.390625,
+          "top": 272.71875,
+          "right": 529.609375,
+          "bottom": 308.8125,
+          "width": 419.21875,
+          "height": 36.09375
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-pill-karaoke",
+      "name": "Pill Karaoke",
+      "family": "portable-catalog",
+      "motion": "pill",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-pill-karaoke.mp4",
+      "sha256": "d18922c1706540420b1da0a22312952d734350360aa98967e3bb5557b39b733e",
+      "bytes": 33338,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.894115,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "caption-pill-karaoke",
+        "text": "FOLLOW EVERY WORD",
+        "rect": {
+          "left": 76.53125,
+          "top": 254.3125,
+          "right": 563.46875,
+          "bottom": 308.8125,
+          "width": 486.9375,
+          "height": 54.5
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-rail",
+      "name": "Caption Rail",
+      "family": "baseline",
+      "motion": "active-word",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-rail.mp4",
+      "sha256": "65f55ab2889cce185d5a1645a78533782900e3e3c42792b847b8344afca9a8aa",
+      "bytes": 16428,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.890813,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "MAKE EVERY FRAME COUNT"
+      },
+      "dom": {
+        "component": "caption-rail",
+        "text": "MAKE EVERY FRAME COUNT",
+        "rect": {
+          "left": 91.578125,
+          "top": 248.015625,
+          "right": 548.40625,
+          "bottom": 308.8125,
+          "width": 456.828125,
+          "height": 60.796875
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/caption-weight-shift",
+      "name": "Weight Shift",
+      "family": "portable-catalog",
+      "motion": "weight",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/caption-weight-shift.mp4",
+      "sha256": "470019456151cbb6996d0467fc7297ad367a1874664f14cfb30776e01cfb8f00",
+      "bytes": 22128,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.938837,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "caption-weight-shift",
+        "text": "Quiet words become strong",
+        "rect": {
+          "left": 61.3125,
+          "top": 236.625,
+          "right": 578.6875,
+          "bottom": 308.8125,
+          "width": 517.375,
+          "height": 72.1875
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/creed-kinetic-text",
+      "name": "Creed Kinetic Text",
+      "family": "portable-catalog",
+      "motion": "creed",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/creed-kinetic-text.mp4",
+      "sha256": "bfd8917d4553a4b1632571ca20901effda2e9c400e3527eafe3ca292afb3873d",
+      "bytes": 30342,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.888967,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "it Al A vie"
+      },
+      "dom": {
+        "component": "creed-kinetic-text",
+        "text": "ONE STEP AT A TIME",
+        "rect": {
+          "left": 58.15984344482422,
+          "top": 119.84375,
+          "right": 581.8401412963867,
+          "bottom": 240.15625,
+          "width": 523.6802978515625,
+          "height": 120.3125
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-3d-text",
+      "name": "3D Text",
+      "family": "dimensional-metal",
+      "motion": "creed",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/dimensional-metal/renderer.html?slug=3D_TEXT&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-3d-text.mp4",
+      "sha256": "afad763799e0fd1c89fdd2154824ddca875150191d471c7c2c8e96090dfa7976",
+      "bytes": 24761,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.989275,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "y-s"
+      },
+      "dom": {
+        "component": "mogrt-3d-text",
+        "text": "3D TEXT",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-above-in",
+      "name": "ABOVE IN",
+      "family": "simple-motion",
+      "motion": "wipe",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/ABOVE_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-above-in.mp4",
+      "sha256": "7cec8d671ac3a97050a35f0c2a80381edcf06ac3b25b1b664af0bfa832cdc418",
+      "bytes": 16621,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.980547,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "££"
+      },
+      "dom": {
+        "component": "mogrt-above-in",
+        "text": "above in",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-aesthetic-purple",
+      "name": "Aesthetic Purple",
+      "family": "aesthetic-glow",
+      "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/AESTHETIC_PURPLE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-aesthetic-purple.mp4",
+      "sha256": "cfcb42909a17bc84e4041eaecee2c957e7b9fbbb983717b70bf75573c7a5261c",
+      "bytes": 15424,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.965547,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ", i"
+      },
+      "dom": {
+        "component": "mogrt-aesthetic-purple",
+        "text": "aesthetic purple",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-aesthetic-strinking",
+      "name": "Aesthetic Strinking",
+      "family": "aesthetic-glow",
+      "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/AESTHETIC_STRINKING.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-aesthetic-strinking.mp4",
+      "sha256": "87e73aeb7b67983658fd34d4992e77360ad6f23e3509ea23f0db6805ecfa2bc1",
+      "bytes": 15466,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.965702,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ",--"
+      },
+      "dom": {
+        "component": "mogrt-aesthetic-strinking",
+        "text": "aesthetic striking",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-apple-ladder",
+      "name": "apple LADDER",
+      "family": "apple-clean",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/apple_LADDER.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-apple-ladder.mp4",
+      "sha256": "4108eb7fdbb72f7ac52b2b620dbdc2556d0fa29e4dd0dcaebafc9ac634127319",
+      "bytes": 13486,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.979518,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "ya"
+      },
+      "dom": {
+        "component": "mogrt-apple-ladder",
+        "text": "apple ladder",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-apple-smooth",
+      "name": "apple smooth",
+      "family": "apple-clean",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/apple_smooth.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-apple-smooth.mp4",
+      "sha256": "cf5f4c09fde51a94ce84d8640c67849b5d7a37e7100ac55dcf4d083008051def",
+      "bytes": 14457,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.977193,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "7a"
+      },
+      "dom": {
+        "component": "mogrt-apple-smooth",
+        "text": "apple smooth",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-blur-in",
+      "name": "BLUR IN",
+      "family": "simple-motion",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/BLUR_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-blur-in.mp4",
+      "sha256": "be00f049c231f69d6104f17153a6f41fac665b20747a0d37b11fd87765345691",
+      "bytes": 11872,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.987529,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "yi"
+      },
+      "dom": {
+        "component": "mogrt-blur-in",
+        "text": "blur in",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-bottom-in",
+      "name": "BOTTOM IN",
+      "family": "simple-motion",
+      "motion": "wipe",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/BOTTOM_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-bottom-in.mp4",
+      "sha256": "adb6df2560a89f09407add93ba665d4ac2b46a0bbcf21956b6bad11a0696a390",
+      "bytes": 14015,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.979152,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "yi"
+      },
+      "dom": {
+        "component": "mogrt-bottom-in",
+        "text": "bottom in",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-clean-blue",
+      "name": "CLEAN BLUE",
+      "family": "apple-clean",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/CLEAN_BLUE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-clean-blue.mp4",
+      "sha256": "38a131ac2b06c5d4f6658576dc4dc470ee4cbfdc78b68025427a12151aea2670",
+      "bytes": 17529,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.959321,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "rs"
+      },
+      "dom": {
+        "component": "mogrt-clean-blue",
+        "text": "Clean blue",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-clean-gradient",
+      "name": "Clean gradient",
+      "family": "apple-clean",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/Clean_gradient.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-clean-gradient.mp4",
+      "sha256": "74d698b93899d72a1e7cc72176ffbac1de264cb4bee52ca0113d6cdfe9f1dbb0",
+      "bytes": 19422,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.975048,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "mogrt-clean-gradient",
+        "text": "Clean gradient",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-clean-style",
+      "name": "CLEAN STYLE",
+      "family": "apple-clean",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/apple-clean/outputs/CLEAN_STYLE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-clean-style.mp4",
+      "sha256": "322cf82f4fe1ed90842173f67f9a8f87faf2a76d042d8bc176053682a14df9e3",
+      "bytes": 18890,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.961404,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "y."
+      },
+      "dom": {
+        "component": "mogrt-clean-style",
+        "text": "Clean style",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-dark-water",
+      "name": "dark water",
+      "family": "water-warp",
+      "motion": "morph",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/water-warp/outputs/dark_water.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-dark-water.mp4",
+      "sha256": "51c9e25c17149363a1843de1933d53e9aefe9b11c6607a06c8c53e45900afd7c",
+      "bytes": 30599,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.941019,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "mogrt-dark-water",
+        "text": "Principal second",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-elegant",
+      "name": "ELEGANT",
+      "family": "elegant-misc",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/ELEGANT.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-elegant.mp4",
+      "sha256": "a8ffc6e8f9816a55d888337e0fe75792f07157087ec2643735c892846fa1a591",
+      "bytes": 18922,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.964029,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "ys"
+      },
+      "dom": {
+        "component": "mogrt-elegant",
+        "text": "ELEGANT",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-error-text",
+      "name": "ERROR TEXT",
+      "family": "analog-glitch",
+      "motion": "glitch",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/analog-glitch/renderer.html?slug=ERROR_TEXT&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-error-text.mp4",
+      "sha256": "1a2ec83a4e151206d9c8b756de4959b4bdcf9c98de080893db05767961bffebe",
+      "bytes": 23048,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.969932,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "a"
+      },
+      "dom": {
+        "component": "mogrt-error-text",
+        "text": "error",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-esmerald",
+      "name": "Esmerald",
+      "family": "aesthetic-glow",
+      "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/ESMERALD.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-esmerald.mp4",
+      "sha256": "65220c37410a9f54c49996af293584f9f184ceffde6c5c8447f59c557a9ac668",
+      "bytes": 15190,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.980855,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "yi"
+      },
+      "dom": {
+        "component": "mogrt-esmerald",
+        "text": "Emerald",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-fast",
+      "name": "FAST",
+      "family": "simple-motion",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/FAST.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-fast.mp4",
+      "sha256": "36402a8eddcd63bc095458534b1c6bec130693a727af6b160d01a9e3efd7ef5f",
+      "bytes": 17922,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.976184,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "ys"
+      },
+      "dom": {
+        "component": "mogrt-fast",
+        "text": "FAST",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-fire",
+      "name": "Fire",
+      "family": "aesthetic-glow",
+      "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/FIRE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-fire.mp4",
+      "sha256": "6bb4bec19d31512ced4e6e6b4b79a872eb1f0cd27f34e9acf03925d9a49472a5",
+      "bytes": 15102,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.982116,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "ys"
+      },
+      "dom": {
+        "component": "mogrt-fire",
+        "text": "FIRE",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-fluorscent",
+      "name": "Fluorscent",
+      "family": "aesthetic-glow",
+      "motion": "glow",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/aesthetic-glow/outputs/fluorscent.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-fluorscent.mp4",
+      "sha256": "49df85dda4b60097ef013d9e4ee4a94716f06e63da609722b61f32c69763385c",
+      "bytes": 17251,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.970669,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "mogrt-fluorscent",
+        "text": "fluorescent",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-futurist",
+      "name": "FUTURIST",
+      "family": "rainbow-trippy",
+      "motion": "gradient",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/rainbow-trippy/renderer.html?slug=FUTURIST&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-futurist.mp4",
+      "sha256": "be083ec28114cc972f6a752f54a86b2c82c370dbc7a183e19022a89e149d26e7",
+      "bytes": 18553,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.971836,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ", -"
+      },
+      "dom": {
+        "component": "mogrt-futurist",
+        "text": "Futurist",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-gold-text",
+      "name": "Gold Text",
+      "family": "dimensional-metal",
+      "motion": "creed",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/dimensional-metal/renderer.html?slug=GOLD_TEXT&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-gold-text.mp4",
+      "sha256": "ed5ad36129044a6bbff04f08604afc6e8e31174b8ae3a0d1aabb142e06353ea9",
+      "bytes": 20362,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.957143,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "f"
+      },
+      "dom": {
+        "component": "mogrt-gold-text",
+        "text": "Gold Text",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-left-in",
+      "name": "LEFT IN",
+      "family": "simple-motion",
+      "motion": "wipe",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/LEFT_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-left-in.mp4",
+      "sha256": "9f122ce72e98dcd9cbc27587fd1a984ca6656fdf11d0ccb27251b48ac1d050fb",
+      "bytes": 14084,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.989486,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "yi"
+      },
+      "dom": {
+        "component": "mogrt-left-in",
+        "text": "left in",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-old-money",
+      "name": "Old Money",
+      "family": "dimensional-metal",
+      "motion": "creed",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/dimensional-metal/renderer.html?slug=OLD_MONEY&render=1",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-old-money.mp4",
+      "sha256": "33db935b0c68bed2d2d3d24f0ed45191c086646d6a804b0d4d1d02a608b2c2d3",
+      "bytes": 26328,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.958799,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "ys"
+      },
+      "dom": {
+        "component": "mogrt-old-money",
+        "text": "OLD Money",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-opacity-in",
+      "name": "OPACITY IN",
+      "family": "simple-motion",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/OPACITY_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-opacity-in.mp4",
+      "sha256": "b539cc1b86dc48ce90424f31849c65b49278970dc9f96834232d7e6b04824c8e",
+      "bytes": 13993,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.971862,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "2"
+      },
+      "dom": {
+        "component": "mogrt-opacity-in",
+        "text": "opacity in",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-rebote",
+      "name": "Reboot",
+      "family": "elegant-misc",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/Rebote.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-rebote.mp4",
+      "sha256": "da6b39dbfa71167a0c29b2274683dacbf567f057503848f4772c1ef2e6c76468",
+      "bytes": 18882,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.950424,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "7"
+      },
+      "dom": {
+        "component": "mogrt-rebote",
+        "text": "Reboot",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-right-in",
+      "name": "RIGHT IN",
+      "family": "simple-motion",
+      "motion": "wipe",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/RIGHT_IN.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-right-in.mp4",
+      "sha256": "1ae939d85219dd5c02c25a6edcd8e30cb4f92b719700c85f269363f4f4b5f7b5",
+      "bytes": 14007,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.980534,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "££"
+      },
+      "dom": {
+        "component": "mogrt-right-in",
+        "text": "right in",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-smooth-bounce",
+      "name": "SMOOTH BOUNCE",
+      "family": "simple-motion",
+      "motion": "pop",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/SMOOTH_BOUNCE.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-smooth-bounce.mp4",
+      "sha256": "58933027ebf7773d2ba5c0f1ba859e11f34b65c28ee1c10c3e5a49a75b654444",
+      "bytes": 23392,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.954337,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "££"
+      },
+      "dom": {
+        "component": "mogrt-smooth-bounce",
+        "text": "smooth bounce",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-smooth-opacity",
+      "name": "SMOOTH OPACITY",
+      "family": "simple-motion",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/SMOOTH_OPACITY.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-smooth-opacity.mp4",
+      "sha256": "0e680b590fe0ab0c500b8b23c0e8997c77734db41480b7422883670c4b3a42c7",
+      "bytes": 23490,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.927155,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "7”"
+      },
+      "dom": {
+        "component": "mogrt-smooth-opacity",
+        "text": "SMOOTH OPACITY",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-smooth-up",
+      "name": "SMOOTH UP",
+      "family": "simple-motion",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/simple-motion/outputs/SMOOTH_UP.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-smooth-up.mp4",
+      "sha256": "dcc79606b26901c84cd47239bfa3b627fc4f77f0f7b6cadb0b9797d06b53fdb3",
+      "bytes": 19785,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.950644,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "| a"
+      },
+      "dom": {
+        "component": "mogrt-smooth-up",
+        "text": "Smooth up",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-triple-elegant-text",
+      "name": "TRIPLE ELEGANT TEXT",
+      "family": "elegant-misc",
+      "motion": "rise",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/elegant-misc/outputs/TRIPLE_ELEGANT_TEXT.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-triple-elegant-text.mp4",
+      "sha256": "74e95120c3088218d6cd6d04e16593e5293679e64e76fe8644b4a1db6712792f",
+      "bytes": 15567,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.959492,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "Fi"
+      },
+      "dom": {
+        "component": "mogrt-triple-elegant-text",
+        "text": "arriba",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/mogrt-warp",
+      "name": "WARP",
+      "family": "water-warp",
+      "motion": "morph",
+      "fidelity": {
+        "mode": "canonical-source-clone",
+        "sourceEntry": "families/water-warp/outputs/WARP.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725"
+      },
+      "preview": "catalog/previews/text-effects/mogrt-warp.mp4",
+      "sha256": "117bd1b514aed2c533f74714429d7682985a554d203fe5d4bb9a70bb46d7ed80",
+      "bytes": 30137,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.972285,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "ys"
+      },
+      "dom": {
+        "component": "mogrt-warp",
+        "text": "warp",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/morph-text",
+      "name": "Morph Text",
+      "family": "portable-catalog",
+      "motion": "morph",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/morph-text.mp4",
+      "sha256": "7371faaab0934401f236fc65cc3300d82270f85d61ca15c3100cf75f9a1a2173",
+      "bytes": 54065,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.86674,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "EE"
+      },
+      "dom": {
+        "component": "morph-text",
+        "text": "BUILT FOR WHAT'S NEXT",
+        "rect": {
+          "left": 61.3125,
+          "top": 119.84375,
+          "right": 578.6875,
+          "bottom": 240.15625,
+          "width": 517.375,
+          "height": 120.3125
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/negative",
+      "name": "Negative",
+      "family": "baseline",
+      "motion": "word-reveal",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/negative.mp4",
+      "sha256": "b086437075835bde44f03bd1cce0534c0db2d35bca9d9200e50c981134a03b39",
+      "bytes": 20949,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.46539,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "NO EXCUSES"
+      },
+      "dom": {
+        "component": "negative",
+        "text": "NO EXCUSES",
+        "rect": {
+          "left": 47.8125,
+          "top": 147.546875,
+          "right": 592.1875,
+          "bottom": 212.4375,
+          "width": 544.375,
+          "height": 64.890625
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/negative-face-follow",
+      "name": "Negative Face Follow",
+      "family": "portable-catalog",
+      "motion": "face-follow",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/negative-face-follow.mp4",
+      "sha256": "a0c9e19ecbe7343b9533ae85b30ff0cfbd662ae37999e5c324ec1c59aa9c2c6c",
+      "bytes": 58528,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.910174,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ""
+      },
+      "dom": {
+        "component": "negative-face-follow",
+        "text": "RELENTLESS",
+        "rect": {
+          "left": 101.5078125,
+          "top": 149.921875,
+          "right": 538.4921875,
+          "bottom": 210.078125,
+          "width": 436.984375,
+          "height": 60.15625
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/shimmer-sweep",
+      "name": "Shimmer Sweep",
+      "family": "portable-catalog",
+      "motion": "shimmer",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/shimmer-sweep.mp4",
+      "sha256": "14383d75c46a478b5aa59e1616ba0f373a46b2705477a9ae4b4566b2e5faeac3",
+      "bytes": 22137,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.918208,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": ";"
+      },
+      "dom": {
+        "component": "shimmer-sweep",
+        "text": "PREMIUM REVEAL",
+        "rect": {
+          "left": 61.3125,
+          "top": 119.84375,
+          "right": 578.6875,
+          "bottom": 240.15625,
+          "width": 517.375,
+          "height": 120.3125
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    },
+    {
+      "id": "vibeedit://text/texture-mask-text",
+      "name": "Texture Mask Text",
+      "family": "portable-catalog",
+      "motion": "texture-mask",
+      "fidelity": {
+        "mode": "portable-runtime",
+        "sourceEntry": null,
+        "sourceRevision": null
+      },
+      "preview": "catalog/previews/text-effects/texture-mask-text.mp4",
+      "sha256": "e54932a56331eb525a9dea69ead5cf52b2e0d4336361b09c57c4e66ae3878cfc",
+      "bytes": 85542,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.914229,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "7"
+      },
+      "dom": {
+        "component": "texture-mask-text",
+        "text": "CUT THROUGH",
+        "rect": {
+          "left": 69.765625,
+          "top": 149.921875,
+          "right": 570.21875,
+          "bottom": 210.078125,
+          "width": 500.453125,
+          "height": 60.15625
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "passed": true
+    }
+  ]
+}

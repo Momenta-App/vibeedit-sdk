@@ -26,8 +26,9 @@ public constructor signatures.
    backends, examples, previews, and validation cases.
 3. **Python API** — composition builders, media inspection, analysis artifacts,
    cache/provenance, render dispatch, audio mixing, and verification.
-4. **HTML runtime** — a deterministic `frame -> visual state` contract for CSS,
-   SVG, Canvas, and isolated WebGL components.
+4. **HTML runtime** — a persistent deterministic `frame -> visual state`
+   contract for unrestricted local HTML/CSS/JavaScript projects, CSS, SVG,
+   Canvas, WebGL, and WebGPU components.
 5. **Render dispatcher** — plans media-domain work and HTML overlay work, renders
    intermediates, and assembles them with FFmpeg.
 6. **Adapters** — CLI, Node API, MCP, skills installer, and static catalog site.
@@ -41,9 +42,28 @@ seekable transparent overlays. A render plan is deterministic when its spec,
 source identities, implementation versions, model versions, and runtime
 versions are fixed.
 
-HTML components run in a restricted local document with explicit assets and no
-network access by default. Catalog HTML is data, not executable code. A future
-third-party component loader requires a separate trust boundary.
+Built-in components and explicitly selected local web projects run in a pinned,
+persistent Chromium document. The renderer loads each project once, waits for
+fonts and libraries, seeks CSS/WAAPI plus recognized animation runtimes to an
+integer frame, and captures the resulting compositor surface. Project assets
+are served from a traversal-safe loopback server. External network requests are
+blocked during rendering. Catalog HTML remains data; selecting a local web
+project is an explicit executable-code trust boundary.
+
+The browser path is the compatibility reference. Native Rust/WGPU routing is
+per-layer and conformance-gated: a layer remains in Chromium unless the native
+compiler proves that every operation it uses is supported and visually
+conformant. WebGPU/WGSL is also available inside custom projects as an advanced
+escape hatch; agents are not required to author shaders for ordinary text.
+
+The preferred agent surface is narrower than the unrestricted project path:
+`vibeedit://motion/html-css` accepts raw Chromium HTML and CSS, automatically
+seeks CSS animations, and forbids authored JavaScript. Its optional VibeEdit
+Motion Atoms stylesheet is a composable vocabulary of layout, text, material,
+transform, animation, and blend primitives. The atoms are browser-reference
+CSS today and carry stable native-primitive names for future conformance-gated
+Rust/WGPU lowering; they do not replace or mutate the source-preserved preset
+catalog.
 
 ## Backends and capability routing
 
@@ -108,11 +128,13 @@ uses `supersedes` rather than reassigning an ID.
 The verified vertical slice was expanded mechanically from canonical sources:
 
 - 333 deterministic media presets behind the VibeEdit-owned frame API.
-- 74 dependency-free, seekable Python/JavaScript motion components.
+- 30 selected HTML/CSS/JS effects plus 20 dependency-free fallback
+  Python/JavaScript motion components and two baseline effects.
 - 44 byte-identical canonical skill packages with four-harness lifecycle support.
 - External audio-clip mixing, beat analysis, mask compositing, procedural SFX,
   OpenCV face/body providers, tracking artifacts, and optional SAM routing.
-- 13 executable examples and 13 generated preview/audio assets.
+- 13 executable examples and 65 generated, hash-bound preview/audio assets,
+  including one verified browser render for every registered text effect.
 - One 467-item catalog and static site generated from the same manifests.
 
 Generated imports retain tracked source revision, per-file hashes, aggregate

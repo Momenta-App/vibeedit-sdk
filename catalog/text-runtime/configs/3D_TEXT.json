@@ -1,0 +1,40 @@
+{
+  "slug": "3D_TEXT",
+  "family": "dimensional-metal",
+  "duration": 7,
+  "fps": 30,
+  "text": "3D TEXT",
+  "font": "assets/fonts/mytupiBOLD.ttf",
+  "font_size": 126,
+  "front_color": [
+    255,
+    0,
+    0,
+    255
+  ],
+  "back_color": [
+    0,
+    82,
+    210,
+    255
+  ],
+  "center": [
+    960,
+    548
+  ],
+  "tracking": 0,
+  "extrusion": 90,
+  "stroke_width": 1,
+  "glow": 0.32,
+  "source_notes": {
+    "mogrt": "V2 50 TITLES PACK PR/3D TEXT.mogrt",
+    "effects": [
+      "Advanced 3D",
+      "CC Light Sweep",
+      "Turbulent Displace",
+      "Glow",
+      "Gradient Ramp"
+    ]
+  },
+  "noBoxGlowRuleAcknowledged": true
+}

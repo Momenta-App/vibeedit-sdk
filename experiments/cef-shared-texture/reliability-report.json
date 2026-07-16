@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "vibeedit.cef-reliability.v1",
+  "status": "passed",
+  "cases": [
+    {
+      "mode": "normal",
+      "probeStatus": "passed",
+      "returnCode": 0,
+      "callbacks": 10,
+      "webgpuReady": true,
+      "timedOut": false,
+      "failureReason": null,
+      "boundedFailure": true,
+      "wallSeconds": 3.378,
+      "runtimeCacheRemoved": true
+    },
+    {
+      "mode": "webgpu-error",
+      "probeStatus": "incomplete",
+      "returnCode": 1,
+      "callbacks": 10,
+      "webgpuReady": false,
+      "timedOut": true,
+      "failureReason": "timeout",
+      "boundedFailure": true,
+      "wallSeconds": 4.079,
+      "runtimeCacheRemoved": true
+    },
+    {
+      "mode": "hang",
+      "probeStatus": "incomplete",
+      "returnCode": 1,
+      "callbacks": 10,
+      "webgpuReady": false,
+      "timedOut": true,
+      "failureReason": "timeout",
+      "boundedFailure": true,
+      "wallSeconds": 3.553,
+      "runtimeCacheRemoved": true
+    }
+  ],
+  "wallSeconds": 11.011,
+  "scope": "Validates success, bounded renderer script failure, bounded page-not-ready failure, process-group shutdown, and runtime-cache cleanup."
+}

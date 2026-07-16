@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "vibeedit.cef-shared-texture-mvp.v1",
+  "status": "passed",
+  "platform": "macos-arm64",
+  "cefVersion": "144.0.30+g9e70dde+chromium-144.0.7559.257",
+  "chromiumVersion": "144.0.7559.257",
+  "htmlCssEngine": "Blink/Skia",
+  "browserGpu": "WebGPU",
+  "surfaceTransport": "CEF OnAcceleratedPaint IOSurface",
+  "pngBoundaryUsed": false,
+  "webgpuReady": true,
+  "acceleratedPaintCallbacks": 30,
+  "callbackFps": 23.34,
+  "frameScheduling": {
+    "mode": "external-begin-frame",
+    "fps": 30,
+    "requestedFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "exactSequence": true
+  },
+  "firstSurface": {
+    "width": 1280,
+    "height": 720,
+    "kind": "IOSurface"
+  },
+  "logicalViewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "surfaceConsumer": "rust-metal-gpu-import",
+  "channelDepth": null,
+  "rustSurfaceStats": null,
+  "rustGpuStats": {
+    "submittedFrames": 30,
+    "completedWhenReported": 30,
+    "averageSubmitMilliseconds": 1.057,
+    "cpuReadback": false
+  },
+  "rustGpuMode": "composite",
+  "gpuQaCapture": {
+    "enabled": true,
+    "bytes": 3686400,
+    "expectedBytes": 3686400,
+    "sha256": "81b897a8171340a5fd81e31240fe2d112d6d6739156cf2552c663cc6eaf0dd1c"
+  },
+  "rawCapture": {
+    "enabled": false,
+    "bytes": 0,
+    "expectedBytes": 0,
+    "complete": false
+  },
+  "videoOutput": null,
+  "errors": [],
+  "claimBoundary": "CEF-to-Rust-to-Metal IOSurface import and GPU-private blit are proven when rustGpuStats is present. Deterministic external frame scheduling, cross-platform platform adapters, native multi-layer compositing, and texture-native hardware encoding are not yet implemented."
+}

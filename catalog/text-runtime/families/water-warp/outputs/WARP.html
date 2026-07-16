@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640, height=360">
+    <title>WARP - Water Warp</title>
+    <link rel="stylesheet" href="../components/water-warp.css">
+    <style>
+      @font-face {
+        font-family: "Poppins Black";
+        src: url("../../../assets/fonts/Poppins-Black.ttf") format("truetype");
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Poppins Black Italic";
+        src: url("../../../assets/fonts/Poppins-BlackItalic.ttf") format("truetype");
+        font-display: block;
+      }
+
+    </style>
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div id="root" data-composition-id="water-warp-WARP" data-start="0" data-width="640" data-height="360" data-duration="7.6">
+      <section id="water-warp-WARP-clip" class="clip" data-start="0" data-duration="7.6" data-track-index="1">
+        <canvas id="water-warp-canvas" class="water-warp-canvas" width="640" height="360"></canvas>
+      </section>
+    </div>
+    <script src="../components/water-warp.js"></script>
+    <script>
+      WaterWarp.mount({
+      "slug": "WARP",
+      "family": "water-warp",
+      "editable": true,
+      "compositionId": "water-warp-WARP",
+      "text": "warp",
+      "duration": 7.6,
+      "fps": 30,
+      "style": "warp_text",
+      "font": {
+            "family": "Poppins Black",
+            "file": "Poppins-Black.ttf",
+            "sourceFamily": "Poppins-Black",
+            "italic": false
+      },
+      "fontSize": 58,
+      "primaryText": "Principal",
+      "secondaryText": "second",
+      "primaryFontSize": 58,
+      "secondaryFontSize": 32,
+      "browserTuning": {
+            "gradientTop": [
+                  250,
+                  255,
+                  255
+            ],
+            "gradientBottom": [
+                  0,
+                  210,
+                  255
+            ],
+            "strokeColor": [
+                  1,
+                  41,
+                  49
+            ],
+            "glowColor": [
+                  0,
+                  210,
+                  255
+            ],
+            "amp": 3.3,
+            "period": 11,
+            "phaseSpeed": 0.23,
+            "centerX": 316,
+            "centerY": 184,
+            "flickerBase": 0.88,
+            "flickerRange": 0.12,
+            "venetian": {
+                  "enabled": false
+            }
+      }
+});
+    </script>
+  </body>
+</html>

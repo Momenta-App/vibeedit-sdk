@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "slug": "ERROR_TEXT",
+  "name": "ERROR TEXT",
+  "family": "analog-glitch",
+  "compositionId": "analog-glitch-error-text",
+  "source": "V2 50 TITLES PACK PR/ERROR TEXT.mogrt",
+  "width": 640,
+  "height": 360,
+  "fps": 30,
+  "duration": 7,
+  "noBoxGlowRuleAcknowledged": true,
+  "text": "error",
+  "font": "Mytupi-Bold",
+  "fontSize": 58,
+  "center": [
+    319,
+    180
+  ],
+  "introDuration": 0.22,
+  "textColor": "#f05a66",
+  "chromaticCyan": "#24c7ff",
+  "chromaticMagenta": "#ff3a9d",
+  "textBlur": 0.9,
+  "glowBlur": 5.8,
+  "sweepAlpha": 0.18,
+  "sweepWidth": 26,
+  "sweepPeriod": 118,
+  "waveDisplace": 1,
+  "pillColor": "#ec1725",
+  "pillWidth": 196,
+  "pillHeight": 54,
+  "pillRadius": 12,
+  "pillAngle": -3,
+  "pillBlur": 1.2,
+  "slashColor": "#b80c16",
+  "slashWidth": 150,
+  "slashHeight": 8,
+  "slashRadius": 4,
+  "slashAngle": -9.5,
+  "jitter": {
+    "x": 3,
+    "y": 1
+  },
+  "comparisonTimes": [
+    0.5,
+    1,
+    3,
+    5.5
+  ],
+  "recipe": {
+    "type": "canvas-analog-glitch",
+    "source": "families/analog-glitch/renderer.html",
+    "runtime": "families/analog-glitch/components/analog-runtime.js"
+  }
+}

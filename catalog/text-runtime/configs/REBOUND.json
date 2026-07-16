@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "slug": "REBOUND",
+  "name": "REBOUND",
+  "family": "elegant-misc",
+  "kind": "glyph_canvas_motion",
+  "duration": 7,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "source": "V2 50 TITLES AE/AE TEXT 2.1/ClashTextPresets_Package/presets/REBOUND.mogrt",
+  "controls": [
+    {
+      "id": "05d079d1-a9ac-493f-8473-4ec24cb2257c",
+      "type": 6,
+      "name": "Rebote",
+      "value": "Rebote",
+      "font": "Mytupi-Bold",
+      "fontSize": 140
+    },
+    {
+      "id": "bac67a00-b8d1-4168-be0b-805ec67858cb",
+      "type": 4,
+      "name": "Cambiar degradado medio",
+      "value": [
+        241,
+        254,
+        253,
+        1
+      ]
+    },
+    {
+      "id": "4c08ed0f-aa6e-40ef-b0e6-b29ff9767be8",
+      "type": 4,
+      "name": "Cambiar degradado bordes",
+      "value": [
+        55,
+        55,
+        55,
+        1
+      ]
+    },
+    {
+      "id": "bbc2b724-997d-46d7-af20-c1b9f7c87915",
+      "type": 2,
+      "name": "brillo de borde",
+      "value": 2.6400000000000112,
+      "min": 0,
+      "max": 10
+    },
+    {
+      "id": "3e2d0442-89f6-49f1-8cd8-40ff362a8df9",
+      "type": 2,
+      "name": "Color texto sin degradado",
+      "value": 0,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "id": "5fd8cf01-f758-4ac4-8635-79e21603f3b7",
+      "type": 4,
+      "name": "COLOR TEXTO COMPLETO",
+      "value": [
+        255,
+        60,
+        60,
+        1
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "recipe": {
+    "type": "elegant-misc-canvas",
+    "style": "rebound",
+    "duration": 7,
+    "layers": [
+      {
+        "text": "Rebote",
+        "font": "Mytupi-Bold",
+        "box": [
+          206,
+          50
+        ],
+        "center": [
+          318.5,
+          179.5
+        ],
+        "gradient": [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            84,
+            94,
+            94
+          ]
+        ],
+        "tracking": 0,
+        "line_gap": 0,
+        "glow": [
+          241,
+          254,
+          253
+        ],
+        "glow_radius": 2.7,
+        "glow_opacity": 0.32,
+        "shadow": [
+          0,
+          0,
+          0
+        ],
+        "shadow_offset": [
+          2,
+          5
+        ],
+        "shadow_radius": 2.4,
+        "shadow_opacity": 0.6,
+        "stroke": [
+          44,
+          50,
+          50
+        ],
+        "stroke_width": 1.5,
+        "stroke_opacity": 0.35,
+        "alpha_gain": 2.1,
+        "alpha_threshold": 5,
+        "radial": true,
+        "posterized": true,
+        "jitter": 0.6,
+        "turbulent": 0.9
+      }
+    ],
+    "controls": {
+      "text": "Rebote",
+      "gradient_middle": [
+        241,
+        254,
+        253,
+        1
+      ],
+      "gradient_edges": [
+        55,
+        55,
+        55,
+        1
+      ],
+      "edge_glow": 2.64,
+      "solid_text_color": [
+        255,
+        60,
+        60,
+        1
+      ],
+      "effects": [
+        "CC Light Sweep",
+        "Gaussian Blur",
+        "Glow",
+        "Gradient Ramp",
+        "Posterize Time",
+        "Transform",
+        "Turbulent Displace"
+      ]
+    },
+    "defects": [
+      "Source label is REBOUND but the embedded editable text is Rebote; this renderer preserves the source text.",
+      "The preview's compression-soft grey gradient is close, but the Adobe glow edge is not exact."
+    ]
+  },
+  "sourceMapping": {
+    "sourceSpec": "../specs/REBOUND.json"
+  },
+  "outputs": {
+    "html": "families/elegant-misc/outputs/REBOUND.html",
+    "preview": "previews/REBOUND.mp4",
+    "alpha": "alpha/REBOUND.mov"
+  },
+  "renderer": {
+    "component": "families/elegant-misc/components/elegant-misc.js",
+    "style": "families/elegant-misc/components/elegant-misc.css",
+    "renderScript": "families/elegant-misc/scripts/render.mjs",
+    "output": "families/elegant-misc/outputs/REBOUND.html"
+  },
+  "fonts": [
+    "Mytupi-Bold"
+  ],
+  "noBoxGlowRuleAcknowledged": true
+}

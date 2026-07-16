@@ -1,0 +1,16 @@
+[package]
+name = "vibeedit-cef-surface-bridge"
+version = "0.1.0"
+edition = "2024"
+build = "build.rs"
+license = "SEE LICENSE IN ../../../LICENSE.md"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+strip = true

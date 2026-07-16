@@ -1,0 +1,14 @@
+**/__pycache__/**
+**/*.pyc
+experiments/**/target/**
+experiments/cef-shared-texture/rust-surface-bridge/target/
+experiments/cef-shared-texture/*.bgra
+experiments/**/__pycache__/
+experiments/**/*.pyc
+experiments/cef-shared-texture/concurrency-output/
+experiments/render-concurrency/output/
+experiments/interleaved-layers/output/
+experiments/render-concurrency/output/**/*.mp4
+experiments/render-concurrency/output/source-*.mp4
+experiments/interleaved-layers/output/sequential/**
+experiments/interleaved-layers/output/concurrent/**

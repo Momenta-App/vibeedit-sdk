@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "slug": "WAVES",
+  "name": "WAVES",
+  "family": "water-warp",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {},
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable HTML motion rebuild using shared canvas text masks, row displacement, glyph-derived glow/shadow, gradients, light sweep, shimmer, and a procedural water plate.",
+  "recipe": {
+    "slug": "WAVES",
+    "name": "WAVES",
+    "text": "waves",
+    "duration": 7.6,
+    "font_family": "Poppins-Black",
+    "font_file": "Poppins-Black.ttf",
+    "font_size": 62,
+    "style": "waves_text",
+    "controls": {
+      "text": "waves",
+      "source_text_control_font": "Mytupi-Bold",
+      "aep_report_font": "AVANTE Regular",
+      "chosen_preview_font": "Poppins-Black",
+      "gradient_start": [
+        161,
+        232,
+        255,
+        1
+      ],
+      "gradient_end": [
+        0,
+        204,
+        255,
+        1
+      ],
+      "wave_height": -4,
+      "wave_width": 263.5,
+      "effects": [
+        "venetian blinds",
+        "CC Burn Film",
+        "CC Light Sweep",
+        "wave warp",
+        "4-color gradient",
+        "fast box blur",
+        "turbulent displacement",
+        "gradient ramp",
+        "glow",
+        "noise"
+      ]
+    },
+    "defects": [
+      "Source wave warp is subtle; this renderer keeps the same small row motion but cannot match AE's exact phase.",
+      "Light sweep is a clipped diagonal highlight instead of CC Light Sweep."
+    ]
+  },
+  "componentRecipe": {
+    "slug": "WAVES",
+    "family": "water-warp",
+    "editable": true,
+    "compositionId": "water-warp-WAVES",
+    "text": "waves",
+    "duration": 7.6,
+    "fps": 30,
+    "style": "waves_text",
+    "font": {
+      "family": "Poppins Black",
+      "file": "Poppins-Black.ttf",
+      "sourceFamily": "Poppins-Black",
+      "italic": false
+    },
+    "fontSize": 62,
+    "primaryText": "Principal",
+    "secondaryText": "second",
+    "primaryFontSize": 62,
+    "secondaryFontSize": 32
+  }
+}

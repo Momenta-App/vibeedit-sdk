@@ -1,0 +1,140 @@
+@font-face {
+  font-family: "Poppins-Black";
+  src: url("assets/fonts/Poppins-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-BlackItalic";
+  src: url("assets/fonts/Poppins-BlackItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Mytupi-Bold";
+  src: url("assets/fonts/mytupiBOLD.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BirdsofParadise-PersonaluseOnly";
+  src: url("assets/fonts/Birds%20of%20Paradise.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bebas-Regular";
+  src: url("assets/fonts/Bebas-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "AVANTERegular";
+  src: url("assets/fonts/AVANTE.otf") format("opentype");
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: #111;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.ag-composition {
+  position: relative;
+  width: 640px;
+  height: 360px;
+  overflow: hidden;
+  background: transparent;
+  contain: layout paint size;
+  transform: scale(var(--hm-preview-scale, 1));
+  transform-origin: center;
+}
+
+.ag-stage {
+  position: absolute;
+  inset: 0;
+  width: 640px;
+  height: 360px;
+  overflow: visible;
+}
+
+.ag-stage svg {
+  display: block;
+  width: 640px;
+  height: 360px;
+  overflow: visible;
+}
+
+.ag-text {
+  paint-order: stroke fill;
+  dominant-baseline: hanging;
+  letter-spacing: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ag-label {
+  font-family: system-ui, sans-serif;
+  font-size: 12px;
+  fill: #bbb;
+  opacity: 0;
+}
+
+.ag-html-stage {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  box-sizing: border-box;
+  padding: 44px 48px;
+  overflow: visible;
+}
+
+.ag-html-word {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-block;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -.055em;
+  color: transparent;
+  background: linear-gradient(180deg, var(--word-top), var(--word-bottom));
+  background-clip: text;
+  -webkit-background-clip: text;
+  will-change: opacity, transform, filter;
+  box-sizing: content-box;
+  padding: .16em .12em;
+  overflow: visible;
+}
+
+.ag-aesthetic-purple .ag-html-word-1 {
+  z-index: 1;
+  transform: translate(-64%, -62%) translateY(var(--enter-y, 0));
+  text-shadow: 0 2px 3px rgba(0, 0, 0, .24);
+}
+
+.ag-aesthetic-purple .ag-html-word-2 {
+  z-index: 2;
+  transform: translate(-22%, -34%) translateY(var(--enter-y, 0));
+}
+
+.ag-aesthetic-strinking .ag-html-word-1 {
+  z-index: 1;
+  transform: translate(-50%, -62%) translateY(var(--enter-y, 0));
+  text-shadow: 0 2px 3px rgba(0, 0, 0, .24);
+}
+
+.ag-aesthetic-strinking .ag-html-word-2 {
+  z-index: 2;
+  transform: translate(-50%, -32%) translateY(var(--enter-y, 0));
+}
+
+.ag-aesthetic-purple .ag-html-word-2,
+.ag-aesthetic-strinking .ag-html-word-2 {
+  text-shadow:
+    0 2px 3px rgba(12, 16, 24, .22),
+    0 0 5px rgba(226, 232, 242, .12);
+}

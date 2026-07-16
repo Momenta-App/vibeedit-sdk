@@ -1,0 +1,323 @@
+{
+  "schemaVersion": "vibeedit.canonical-text-source-fidelity.v1",
+  "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725",
+  "sourceBaseUrl": "http://127.0.0.1:8765/text-effect-catalog/components/html-motion-mogrt/",
+  "compared": 15,
+  "excludedApprovedRefinements": [
+    "vibeedit://text/mogrt-3d-text",
+    "vibeedit://text/mogrt-aesthetic-purple",
+    "vibeedit://text/mogrt-aesthetic-strinking",
+    "vibeedit://text/mogrt-blur-in",
+    "vibeedit://text/mogrt-bottom-in",
+    "vibeedit://text/mogrt-clean-blue",
+    "vibeedit://text/mogrt-elegant",
+    "vibeedit://text/mogrt-esmerald",
+    "vibeedit://text/mogrt-gold-text",
+    "vibeedit://text/mogrt-left-in",
+    "vibeedit://text/mogrt-opacity-in",
+    "vibeedit://text/mogrt-right-in",
+    "vibeedit://text/mogrt-smooth-opacity",
+    "vibeedit://text/mogrt-dark-water",
+    "vibeedit://text/mogrt-fluorscent"
+  ],
+  "frames": [
+    2,
+    24,
+    43
+  ],
+  "minimumAcceptedSsim": 0.95,
+  "pixelIdentical": 13,
+  "perceptuallyEquivalent": 2,
+  "meaning": "SSIM is measured for unmodified clones after deterministic seeking and compositing both the tracked VibeEdit source and packaged clone over the same matte. Approved beta refinements intentionally diverge from their source and are covered by render conformance instead.",
+  "passed": 15,
+  "failed": 0,
+  "failures": [],
+  "aggregateSha256": "b311287aa6de0e0fbe4bddf35d3024c797f403c2560e903f77f64106108b027d",
+  "results": [
+    {
+      "id": "vibeedit://text/mogrt-above-in",
+      "sourceEntry": "families/simple-motion/outputs/ABOVE_IN.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-clean-style",
+      "sourceEntry": "families/apple-clean/outputs/CLEAN_STYLE.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 0.958599
+        },
+        {
+          "frame": 43,
+          "ssim": 0.958599
+        }
+      ],
+      "minimumSsim": 0.958599
+    },
+    {
+      "id": "vibeedit://text/mogrt-clean-gradient",
+      "sourceEntry": "families/apple-clean/outputs/Clean_gradient.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-error-text",
+      "sourceEntry": "families/analog-glitch/renderer.html?slug=ERROR_TEXT&render=1",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-fast",
+      "sourceEntry": "families/simple-motion/outputs/FAST.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-fire",
+      "sourceEntry": "families/aesthetic-glow/outputs/FIRE.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-futurist",
+      "sourceEntry": "families/rainbow-trippy/renderer.html?slug=FUTURIST&render=1",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-old-money",
+      "sourceEntry": "families/dimensional-metal/renderer.html?slug=OLD_MONEY&render=1",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-rebote",
+      "sourceEntry": "families/elegant-misc/outputs/Rebote.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-smooth-bounce",
+      "sourceEntry": "families/simple-motion/outputs/SMOOTH_BOUNCE.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-smooth-up",
+      "sourceEntry": "families/simple-motion/outputs/SMOOTH_UP.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-triple-elegant-text",
+      "sourceEntry": "families/elegant-misc/outputs/TRIPLE_ELEGANT_TEXT.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-warp",
+      "sourceEntry": "families/water-warp/outputs/WARP.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-apple-ladder",
+      "sourceEntry": "families/apple-clean/outputs/apple_LADDER.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 1
+        },
+        {
+          "frame": 24,
+          "ssim": 1
+        },
+        {
+          "frame": 43,
+          "ssim": 1
+        }
+      ],
+      "minimumSsim": 1
+    },
+    {
+      "id": "vibeedit://text/mogrt-apple-smooth",
+      "sourceEntry": "families/apple-clean/outputs/apple_smooth.html",
+      "comparisons": [
+        {
+          "frame": 2,
+          "ssim": 0.986335
+        },
+        {
+          "frame": 24,
+          "ssim": 0.986067
+        },
+        {
+          "frame": 43,
+          "ssim": 0.98607
+        }
+      ],
+      "minimumSsim": 0.986067
+    }
+  ]
+}

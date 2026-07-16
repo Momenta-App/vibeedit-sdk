@@ -127,9 +127,9 @@ Or build and install the exact local artifacts:
 
 ```bash
 uv build --out-dir dist/python
-uv tool install dist/python/vibeedit-0.1.0b1-py3-none-any.whl
+uv tool install dist/python/vibeedit-0.1.0b2-py3-none-any.whl
 npm pack --pack-destination dist/npm
-npm install ./dist/npm/vibeedit-0.1.0-beta.1.tgz
+npm install ./dist/npm/vibeedit-0.1.0-beta.2.tgz
 ```
 
 `setup` performs only explicitly requested work. It installs pinned browser and
@@ -190,6 +190,19 @@ composition.validate();
 MoviePy, FFmpeg, Playwright, OpenCV, ONNX, Torch, MLX, and platform APIs are
 backend details. Their native objects never enter the public CompositionSpec.
 
+Agents may supply raw HTML/CSS fragments or full documents through
+`vibeedit://motion/html-css`. This preferred contract loads local fonts/assets,
+automatically seeks CSS animations, rejects authored JavaScript, and includes a
+composable Motion Atoms vocabulary. The broader executable path accepts an
+inline HTML/CSS/JavaScript fragment or a complete locally bundled React, Vue,
+Svelte, Three.js, PixiJS, Canvas, WebGL, or WebGPU project through
+`vibeedit://motion/html` and
+`vibeedit://motion/web-project`. The persistent Chromium renderer loads the
+project once, waits for bundled fonts, and seeks it by integer frame. Run
+`vibeedit inspect composition.json --json` to see routing and library details.
+The complete authoring and deterministic-seek contract is documented in
+[`docs/HTML_MOTION_RUNTIME.md`](docs/HTML_MOTION_RUNTIME.md).
+
 ## CLI
 
 ```text
@@ -198,6 +211,7 @@ vibeedit setup
 vibeedit doctor
 vibeedit inspect
 vibeedit catalog list|search|open
+vibeedit motion atoms
 vibeedit examples list|create
 vibeedit skills list|install|check|update|remove
 vibeedit validate
@@ -256,7 +270,8 @@ agent prompts, and an explicit preview state.
 
 ```bash
 vibeedit catalog search stutter --json
-vibeedit catalog open
+vibeedit catalog open                 # print the local catalog path; no browser tab
+vibeedit catalog open --browser       # explicitly open the catalog in a browser
 vibeedit skills install vibeedit-workspace --harness codex
 ```
 

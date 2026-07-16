@@ -1,25 +1,25 @@
 {
   "schemaVersion": "1.0.0",
   "status": "passed",
-  "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
-  "cases": 74,
+  "revision": "2403e3f94cfabf7236d5401bd4beeadefde1d725",
+  "cases": 50,
   "families": {
-    "aesthetic-glow": 10,
-    "analog-glitch": 4,
-    "apple-clean": 9,
-    "dimensional-metal": 4,
-    "elegant-misc": 6,
-    "portable-catalog": 21,
-    "rainbow-trippy": 3,
-    "simple-motion": 13,
-    "water-warp": 4
+    "aesthetic-glow": 5,
+    "analog-glitch": 1,
+    "apple-clean": 5,
+    "dimensional-metal": 3,
+    "elegant-misc": 3,
+    "portable-catalog": 20,
+    "rainbow-trippy": 1,
+    "simple-motion": 10,
+    "water-warp": 2
   },
   "runtime": {
     "python": "3.12.13",
     "node": "v26.0.0"
   },
-  "javascriptSha256": "971a7046bdcf83623c49b55efb845a144c0023a837e896e58046ae0a65a47f52",
-  "pythonSha256": "9f24f2446fbb359bff38f5ba60721ee9334b4e446f827fbea459afff57e708e4",
-  "aggregateSha256": "1cf1537e50444f0499e07384eeaaaed27ba9bcd2a1947ef66870c22dc55bedb1",
-  "contract": "Every generated component rendered deterministically at two integer frames in both public runtimes without network or binary assets."
+  "javascriptSha256": "55807331f62c74bf39d11156189350f7f30d9444ef2dfeab3ea2fef4ad552a74",
+  "pythonSha256": "6ec1019b789a3327efce68e64a4432d90086ad87d0116926d5e15cf6e48cf63f",
+  "aggregateSha256": "c096094e8e9a2f75097dacc96d9d84a1099a57170de7408ea8d4169fe338cedf",
+  "contract": "Every generated fallback component rendered deterministically at two integer frames in both public runtimes. Canonical browser fidelity is validated separately against the packaged tracked HTML/CSS/JS runtime."
 }

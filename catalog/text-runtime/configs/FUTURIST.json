@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "slug": "FUTURIST",
+  "name": "FUTURIST",
+  "family": "rainbow-trippy",
+  "source": "V2 50 TITLES PACK PR/FUTURIST.mogrt",
+  "text": "Futurist",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "style": "futurist",
+  "fontFace": "Mytupi",
+  "fontFile": "mytupiBOLD.ttf",
+  "fontSize": 56,
+  "gradientStart": [
+    255,
+    0,
+    216
+  ],
+  "gradientEnd": [
+    0,
+    204,
+    255
+  ],
+  "dashes": [],
+  "noBoxGlowRuleAcknowledged": true,
+  "recipe": {
+    "type": "canvas-title",
+    "source": "families/rainbow-trippy/rainbow-trippy.js",
+    "renderer": "families/rainbow-trippy/renderer.html",
+    "effects": [
+      "gradient ramp",
+      "subtle row wave warp",
+      "glyph-derived glow",
+      "CC Light Sweep approximation",
+      "magenta/cyan chromatic separation"
+    ]
+  },
+  "knownDefects": [
+    "CC Light Sweep and Wave Warp are approximated with deterministic canvas formulas.",
+    "The source has slightly brighter AE glow and channel separation at sweep peaks."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "vibeedit.cef-compositor-conformance.v1",
+  "resolution": {
+    "width": 1280,
+    "height": 720
+  },
+  "fps": 30,
+  "frames": 30,
+  "runs": 3,
+  "allRunsPassed": true,
+  "exactFinalFrameReplay": true,
+  "finalFrameSha256": "81b897a8171340a5fd81e31240fe2d112d6d6739156cf2552c663cc6eaf0dd1c",
+  "exactFrameSequences": true,
+  "steadyStateCallbackFps": [
+    23.0,
+    23.14,
+    23.52
+  ],
+  "averageGpuSubmitMilliseconds": [
+    2.11,
+    2.155,
+    2.332
+  ],
+  "wallSeconds": 21.925
+}

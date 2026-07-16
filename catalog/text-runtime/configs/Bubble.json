@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "slug": "Bubble",
+  "name": "Bubble",
+  "family": "elegant-misc",
+  "kind": "glyph_canvas_motion",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "source": "V2 50 TITLES PACK PR/Bubble.mogrt",
+  "controls": [
+    {
+      "id": "a8d48f1b-2fdc-4d9f-bb1b-6b054a8b0aeb",
+      "type": 6,
+      "name": "Bubble",
+      "value": "Bubble",
+      "font": "Poppins-Black",
+      "fontSize": 158
+    },
+    {
+      "id": "fb65cb21-44cf-4212-88a6-f2343b9b617c",
+      "type": 4,
+      "name": "Gradación de degradado Color de inicio",
+      "value": [
+        0,
+        210,
+        255,
+        1
+      ]
+    },
+    {
+      "id": "d68d73d8-fb84-43a1-b72f-046d339ed51c",
+      "type": 4,
+      "name": "Gradación de degradado Color final",
+      "value": [
+        0,
+        12,
+        103,
+        1
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "recipe": {
+    "type": "elegant-misc-canvas",
+    "style": "bubble",
+    "duration": 7.6,
+    "layers": [
+      {
+        "text": "Bubble",
+        "font": "Poppins-Black",
+        "box": [
+          184,
+          45
+        ],
+        "center": [
+          318.5,
+          178
+        ],
+        "gradient": [
+          [
+            42,
+            224,
+            255
+          ],
+          [
+            0,
+            92,
+            190
+          ]
+        ],
+        "tracking": 0,
+        "line_gap": 0,
+        "glow": [
+          0,
+          210,
+          255
+        ],
+        "glow_radius": 3.6,
+        "glow_opacity": 0.5,
+        "shadow": [
+          0,
+          0,
+          18
+        ],
+        "shadow_offset": [
+          2,
+          3
+        ],
+        "shadow_radius": 1.2,
+        "shadow_opacity": 0.55,
+        "stroke": [
+          5,
+          42,
+          92
+        ],
+        "stroke_width": 1,
+        "stroke_opacity": 0.55,
+        "radial": false,
+        "posterized": false,
+        "jitter": 0,
+        "turbulent": 0.7
+      }
+    ],
+    "controls": {
+      "text": "Bubble",
+      "gradient_start": [
+        0,
+        210,
+        255,
+        1
+      ],
+      "gradient_end": [
+        0,
+        12,
+        103,
+        1
+      ],
+      "effects": [
+        "CC Light Sweep",
+        "Wave Warp",
+        "Gradient Ramp",
+        "Transform"
+      ]
+    },
+    "defects": [
+      "CC Light Sweep and Wave Warp are approximated with a diagonal sweep and low-amplitude mask displacement.",
+      "The source has subtle AE antialiasing and cyan edge bloom that is close but not pixel-exact."
+    ]
+  },
+  "sourceMapping": {
+    "sourceSpec": "../specs/Bubble.json"
+  },
+  "outputs": {
+    "html": "families/elegant-misc/outputs/Bubble.html",
+    "preview": "previews/Bubble.mp4",
+    "alpha": "alpha/Bubble.mov"
+  },
+  "renderer": {
+    "component": "families/elegant-misc/components/elegant-misc.js",
+    "style": "families/elegant-misc/components/elegant-misc.css",
+    "renderScript": "families/elegant-misc/scripts/render.mjs",
+    "output": "families/elegant-misc/outputs/Bubble.html"
+  },
+  "fonts": [
+    "Poppins-Black"
+  ],
+  "noBoxGlowRuleAcknowledged": true
+}

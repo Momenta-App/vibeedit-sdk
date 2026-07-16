@@ -1,0 +1,112 @@
+{
+  "slug": "fluorscent",
+  "family": "aesthetic-glow",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph masks, duplicate text layers, SVG/CSS glow, blur, reflection, light-sweep, and color recipes. No rectangular haze, slabs, or panel shortcuts are used.",
+  "recipe": {
+    "duration": 7.6,
+    "motion": {
+      "from_dx": -22,
+      "from_dy": -15,
+      "from_scale": 0.98,
+      "intro": 0.7
+    },
+    "texts": [
+      {
+        "text": "fluorescent",
+        "font": "Poppins-Black",
+        "size": 48,
+        "x": 168,
+        "y": 152,
+        "top": [
+          255,
+          255,
+          232
+        ],
+        "bottom": [
+          124,
+          232,
+          0
+        ],
+        "shadow": {
+          "dx": 2,
+          "dy": 2,
+          "blur": 1,
+          "opacity": 0,
+          "color": [
+            70,
+            95,
+            0
+          ]
+        },
+        "glows": [
+          {
+            "color": [
+              176,
+              255,
+              40
+            ],
+            "radius": 1.5,
+            "opacity": 0.1
+          }
+        ],
+        "extrude": {
+          "dx": 1,
+          "dy": 2,
+          "steps": 1,
+          "color": [
+            28,
+            42,
+            0
+          ],
+          "opacity": 0.08
+        },
+        "reflection": {
+          "dy": 31,
+          "blur": 5,
+          "scale_y": 0.5,
+          "opacity": 0,
+          "top": [
+            115,
+            170,
+            0
+          ],
+          "bottom": [
+            8,
+            12,
+            0
+          ]
+        },
+        "sweep": {
+          "center": 0.48,
+          "width": 20,
+          "angle": -18,
+          "opacity": 0.2
+        },
+        "turbulence": {
+          "frequency": "0.023 0.18",
+          "scale": 0,
+          "octaves": 2,
+          "seed": 61
+        },
+        "blinds": {
+          "step": 7,
+          "height": 1.4,
+          "opacity": 0,
+          "color": [
+            12,
+            28,
+            0
+          ]
+        }
+      }
+    ]
+  }
+}

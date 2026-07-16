@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "cef-shared-texture-webgpu-mvp",
+  "title": "Chromium HTML CSS plus browser WebGPU surface MVP",
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "frameRate": { "numerator": 30, "denominator": 1 },
+    "backgroundColor": "#070a12",
+    "audioSampleRate": 48000
+  },
+  "durationFrames": 90,
+  "sources": [],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "M1",
+        "kind": "motion",
+        "order": 10,
+        "items": [
+          {
+            "id": "browser-webgpu-surface",
+            "kind": "motion",
+            "placement": { "startFrame": 0, "durationFrames": 90 },
+            "componentId": "vibeedit://motion/web-project",
+            "props": { "entry": "webgpu-html-css.html", "libraries": ["WebGPU"] },
+            "transparent": false,
+            "renderer": "webgpu"
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": { "masks": [], "tracking": [], "analysis": [] },
+  "audio": { "targetLufs": -14, "truePeakDb": -1, "preventImmediateSfxRepeat": true },
+  "cache": { "enabled": false, "namespace": "cef-shared-texture-mvp", "implementationVersion": "0.1.0", "runtimeVersions": {} },
+  "render": {
+    "backend": "html",
+    "htmlBackend": "chromium",
+    "output": { "uri": "cef-shared-texture-webgpu-mvp.mp4", "container": "mp4", "videoCodec": "h264", "audioCodec": "aac", "pixelFormat": "yuv420p", "transparent": false, "quality": { "crf": 18 } },
+    "deterministic": true
+  },
+  "verification": { "durationFrames": 90, "width": 640, "height": 360, "frameRate": { "numerator": 30, "denominator": 1 }, "hasVideo": true, "hasAudio": false, "maxDurationDriftFrames": 1, "maxBlackFrameRatio": 0.2 },
+  "provenance": { "generator": "vibeedit-cef-shared-texture-mvp", "generatorVersion": "0.1.0", "createdAt": "2026-07-16T00:00:00Z", "schemaSource": "schema/composition.schema.json", "catalogVersion": "0.1.0", "skillPackages": [] }
+}

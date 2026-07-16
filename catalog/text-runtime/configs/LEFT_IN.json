@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "slug": "LEFT_IN",
+  "kind": "blob_motion",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "left in",
+  "font": "Mytupi-Bold",
+  "font_size": 43,
+  "center": [
+    320,
+    178
+  ],
+  "color": [
+    255,
+    253,
+    245,
+    1
+  ],
+  "offset": [
+    -390,
+    0
+  ],
+  "start_scale": 1,
+  "settle_frame": 24,
+  "blob_expand": 13,
+  "blob_blur": 7.5,
+  "name": "LEFT IN",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/LEFT IN.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild using editable config text and glyph-derived blur/glow/mask effects; no arbitrary panels added beyond source-mapped rounded plates for SMOOTH_OPACITY and ZOOM_WORD.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/LEFT_IN.html"
+  },
+  "blur_text_in": true,
+  "end_scale": 1,
+  "appear_frames": 4,
+  "start_text_blur": 14,
+  "end_text_blur": 0,
+  "start_glow_blur": 4,
+  "end_glow_blur": 0,
+  "blur_glow": [
+    255,
+    255,
+    255,
+    18
+  ]
+}

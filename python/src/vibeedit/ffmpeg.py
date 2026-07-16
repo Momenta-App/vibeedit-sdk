@@ -3,12 +3,13 @@ from __future__ import annotations
 import json
 import shutil
 import subprocess
+from contextlib import contextmanager
 from fractions import Fraction
 from pathlib import Path
 
 from vibeedit.spec import JSONObject
-from vibeedit.effects import random_frame_stutter_filter
-from vibeedit.transitions import crossfade_filter
+from vibeedit.effects import video_effect_filter
+from vibeedit.transitions import transition_filter
 
 
 class FFmpegUnavailableError(RuntimeError):
@@ -108,8 +109,7 @@ def render_generated(spec: JSONObject, output: str | Path | None = None) -> Path
             frame_rate,
             "-frames:v",
             str(spec["durationFrames"]),
-            "-threads",
-            "1",
+            *_thread_arguments(spec, complex_filter=bool(sound_effects)),
             "-map_metadata",
             "-1",
         ]
@@ -128,12 +128,57 @@ def render_generated(spec: JSONObject, output: str | Path | None = None) -> Path
 
 
 def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | Path) -> Path:
+    destination = Path(output)
+    command = _frame_encoder_command(spec, ["-framerate", _frame_rate(spec), "-i", str(sequence)], destination)
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    if result.returncode:
+        raise FFmpegRenderError(result.stderr.strip() or f"ffmpeg failed with exit code {result.returncode}")
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
+    return destination
+
+
+@contextmanager
+def frame_stream_encoder(spec: JSONObject, output: str | Path):
+    destination = Path(output)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    command = _frame_encoder_command(spec, ["-f", "image2pipe", "-framerate", _frame_rate(spec), "-vcodec", "png", "-i", "pipe:0"], destination)
+    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    if process.stdin is None or process.stderr is None:
+        process.terminate()
+        raise FFmpegRenderError("ffmpeg did not expose the frame-stream pipes")
+    try:
+        yield process.stdin
+    except BaseException:
+        process.stdin.close()
+        process.terminate()
+        process.wait(timeout=5)
+        raise
+    process.stdin.close()
+    error = process.stderr.read().decode(errors="replace").strip()
+    return_code = process.wait()
+    if return_code:
+        raise FFmpegRenderError(error or f"ffmpeg failed with exit code {return_code}")
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
+
+
+def _frame_rate(spec: JSONObject) -> str:
+    rate = spec["canvas"]["frameRate"]
+    return f'{rate["numerator"]}/{rate["denominator"]}'
+
+
+def _thread_arguments(spec: JSONObject, *, complex_filter: bool = False) -> list[str]:
+    threads = str(spec["render"].get("threads", 1))
+    return (["-filter_complex_threads", threads] if complex_filter else []) + ["-threads", threads]
+
+
+def _frame_encoder_command(spec: JSONObject, input_arguments: list[str], destination: Path) -> list[str]:
     canvas = spec["canvas"]
     rate = canvas["frameRate"]
     duration = Fraction(spec["durationFrames"] * rate["denominator"], rate["numerator"])
-    frame_rate = f'{rate["numerator"]}/{rate["denominator"]}'
-    destination = Path(output)
-    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-framerate", frame_rate, "-i", str(sequence)]
+    frame_rate = _frame_rate(spec)
+    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", *input_arguments]
     sound_effects = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "sound_effect"]
     for item in sound_effects:
         frequency = float(item["params"].get("frequency", 72))
@@ -156,12 +201,19 @@ def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | 
         command.extend(["-map", "0:v:0", "-an"])
     settings = spec["render"]["output"]
     codecs = {"h264": "libx264", "hevc": "libx265", "vp9": "libvpx-vp9", "av1": "libaom-av1"}
-    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), "-threads", "1", "-map_metadata", "-1"])
+    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), *_thread_arguments(spec, complex_filter=bool(sound_effects)), "-map_metadata", "-1"])
     if sound_effects:
         command.extend(["-c:a", settings.get("audioCodec", "aac"), "-ar", str(canvas.get("audioSampleRate", 48000))])
     if settings["container"] == "mp4":
         command.extend(["-movflags", "+faststart"])
     command.append(str(destination))
+    return command
+
+
+def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str | Path, base: str | Path = ".") -> Path:
+    destination = Path(output)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    command = _overlay_encoder_command(spec, ["-framerate", _frame_rate(spec), "-i", str(sequence)], destination, base)
     result = subprocess.run(command, capture_output=True, text=True, check=False)
     if result.returncode:
         raise FFmpegRenderError(result.stderr.strip() or f"ffmpeg failed with exit code {result.returncode}")
@@ -170,7 +222,37 @@ def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | 
     return destination
 
 
-def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str | Path, base: str | Path = ".") -> Path:
+@contextmanager
+def overlay_frame_stream_encoder(spec: JSONObject, output: str | Path, base: str | Path = "."):
+    destination = Path(output)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    command = _overlay_encoder_command(
+        spec,
+        ["-f", "image2pipe", "-framerate", _frame_rate(spec), "-vcodec", "png", "-i", "pipe:0"],
+        destination,
+        base,
+    )
+    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    if process.stdin is None or process.stderr is None:
+        process.terminate()
+        raise FFmpegRenderError("ffmpeg did not expose the overlay frame-stream pipes")
+    try:
+        yield process.stdin
+    except BaseException:
+        process.stdin.close()
+        process.terminate()
+        process.wait(timeout=5)
+        raise
+    process.stdin.close()
+    error = process.stderr.read().decode(errors="replace").strip()
+    return_code = process.wait()
+    if return_code:
+        raise FFmpegRenderError(error or f"ffmpeg failed with exit code {return_code}")
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
+
+
+def _overlay_encoder_command(spec: JSONObject, overlay_input_arguments: list[str], destination: Path, base: str | Path) -> list[str]:
     canvas = spec["canvas"]
     rate = canvas["frameRate"]
     frame_rate = f'{rate["numerator"]}/{rate["denominator"]}'
@@ -186,7 +268,7 @@ def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str 
     if not source_path.is_file():
         raise FFmpegRenderError(f"source file does not exist: {source_path}")
 
-    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-i", str(source_path), "-framerate", frame_rate, "-i", str(sequence)]
+    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-i", str(source_path), *overlay_input_arguments]
     sound_effects = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "sound_effect"]
     for item in sound_effects:
         duration = Fraction(item["placement"]["durationFrames"] * rate["denominator"], rate["numerator"])
@@ -205,9 +287,9 @@ def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str 
         "settb=AVTB",
     ]
     video_filters.extend(
-        random_frame_stutter_filter(effect.get("params", {}))
+        video_effect_filter(effect["effectId"], effect.get("params", {}))
         for effect in clip.get("effects", [])
-        if effect.get("enabled", True) and effect["effectId"] == "vibeedit://effect/random-frame-stutter"
+        if effect.get("enabled", True)
     )
     chains = [
         f"[0:v]{','.join(video_filters)}[base]",
@@ -238,20 +320,13 @@ def render_overlay_sequence(spec: JSONObject, sequence: str | Path, output: str 
     command.extend(["-map", f"[{audio_label}]"] if audio_label else ["-an"])
     settings = spec["render"]["output"]
     codecs = {"h264": "libx264", "hevc": "libx265", "vp9": "libvpx-vp9", "av1": "libaom-av1"}
-    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), "-threads", "1", "-map_metadata", "-1"])
+    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), *_thread_arguments(spec, complex_filter=True), "-map_metadata", "-1"])
     if audio_label:
         command.extend(["-c:a", settings.get("audioCodec", "aac"), "-ar", str(canvas.get("audioSampleRate", 48000))])
     if settings["container"] == "mp4":
         command.extend(["-movflags", "+faststart"])
-    destination = Path(output)
-    destination.parent.mkdir(parents=True, exist_ok=True)
     command.append(str(destination))
-    result = subprocess.run(command, capture_output=True, text=True, check=False)
-    if result.returncode:
-        raise FFmpegRenderError(result.stderr.strip() or f"ffmpeg failed with exit code {result.returncode}")
-    if not destination.is_file() or destination.stat().st_size == 0:
-        raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
-    return destination
+    return command
 
 
 def render_media(spec: JSONObject, output: str | Path | None = None, base: str | Path = ".") -> Path:
@@ -310,19 +385,19 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
             "settb=AVTB",
         ]
         filters.extend(
-            random_frame_stutter_filter(effect.get("params", {}))
+            video_effect_filter(effect["effectId"], effect.get("params", {}))
             for effect in clip.get("effects", [])
-            if effect.get("enabled", True) and effect["effectId"] == "vibeedit://effect/random-frame-stutter"
+            if effect.get("enabled", True)
         )
         chains.append(f"[{index}:v]{','.join(filters)}[clip{index}]")
 
     video_label = "clip0"
     if len(clips) == 2:
         transition = transitions[0]
-        if transition["transitionId"] != "vibeedit://transition/crossfade":
-            raise FFmpegRenderError(f"unsupported transition: {transition['transitionId']}")
         offset_frames = transition["placement"]["startFrame"] - clips[0]["placement"]["startFrame"]
-        chains.append(f"[clip0][clip1]{crossfade_filter(duration_frames=transition['placement']['durationFrames'], offset_frames=offset_frames, numerator=rate['numerator'], denominator=rate['denominator'])}[video]")
+        chains.append(
+            f"[clip0][clip1]{transition_filter(transition['transitionId'], transition.get('params', {}), duration_frames=transition['placement']['durationFrames'], offset_frames=offset_frames, numerator=rate['numerator'], denominator=rate['denominator'])}[video]"
+        )
         video_label = "video"
 
     audio_label = None
@@ -367,7 +442,7 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
     command.extend(["-map", f"[{audio_label}]"] if audio_label else ["-an"])
     settings = spec["render"]["output"]
     codecs = {"h264": "libx264", "hevc": "libx265", "vp9": "libvpx-vp9", "av1": "libaom-av1"}
-    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), "-threads", "1", "-map_metadata", "-1"])
+    command.extend(["-c:v", codecs.get(settings["videoCodec"], settings["videoCodec"]), "-pix_fmt", settings.get("pixelFormat", "yuv420p"), "-r", frame_rate, "-frames:v", str(spec["durationFrames"]), *_thread_arguments(spec, complex_filter=True), "-map_metadata", "-1"])
     if audio_label:
         command.extend(["-c:a", settings.get("audioCodec", "aac"), "-ar", str(canvas.get("audioSampleRate", 48000))])
     if settings["container"] == "mp4":

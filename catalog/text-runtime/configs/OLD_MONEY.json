@@ -1,0 +1,86 @@
+{
+  "slug": "OLD_MONEY",
+  "family": "dimensional-metal",
+  "duration": 7,
+  "fps": 30,
+  "text_lines": [
+    {
+      "text": "OLD",
+      "font": "assets/fonts/AVANTE.otf",
+      "font_size": 220,
+      "top_color": [
+        255,
+        244,
+        220,
+        255
+      ],
+      "bottom_color": [
+        8,
+        8,
+        7,
+        255
+      ],
+      "center": [
+        800,
+        462
+      ],
+      "stroke_width": 1
+    },
+    {
+      "text": "Money",
+      "font": "assets/fonts/Birds of Paradise.ttf",
+      "font_size": 205,
+      "top_color": [
+        238,
+        228,
+        185,
+        255
+      ],
+      "bottom_color": [
+        0,
+        74,
+        13,
+        255
+      ],
+      "center": [
+        960,
+        548
+      ],
+      "stroke_width": 1
+    }
+  ],
+  "plate": {
+    "center": [
+      900,
+      492
+    ],
+    "size": [
+      600,
+      332
+    ],
+    "corner_radius": 42,
+    "source": "assets/old-money-plate.png",
+    "backing": {
+      "center_offset": [
+        252,
+        58
+      ],
+      "size": [
+        240,
+        116
+      ],
+      "corner_radius": 34
+    }
+  },
+  "glow": 0.55,
+  "source_notes": {
+    "mogrt": "V2 50 TITLES PACK PR/Manual files/OLD MONEY.mogrt",
+    "effects": [
+      "Advanced 3D",
+      "CC Light Sweep",
+      "Glow",
+      "Gradient Ramp"
+    ]
+  },
+  "noBoxGlowRuleAcknowledged": true
+}

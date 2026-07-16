@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "slug": "SMOOTH_BOUNCE",
+  "kind": "smooth_bounce",
+  "duration": 7,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "smooth\rbounce",
+  "font": "Mytupi-Bold",
+  "font_size": 54,
+  "center": [
+    320,
+    179
+  ],
+  "color": [
+    255,
+    253,
+    245,
+    1
+  ],
+  "main_alpha": 1,
+  "line_spacing": 6,
+  "y_keyframes": [
+    [
+      0,
+      67
+    ],
+    [
+      2,
+      67
+    ],
+    [
+      4,
+      179
+    ],
+    [
+      7,
+      179
+    ],
+    [
+      10,
+      177
+    ],
+    [
+      14,
+      179
+    ],
+    [
+      210,
+      179
+    ]
+  ],
+  "white_start_frame": 0,
+  "white_end_frame": 12,
+  "red_glow": [
+    255,
+    0,
+    0,
+    125
+  ],
+  "red_glow_blur": 1.8,
+  "final_glow": [
+    255,
+    255,
+    255,
+    38
+  ],
+  "final_glow_blur": 2.2,
+  "name": "SMOOTH BOUNCE",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES AE/AE TEXT 2.1/ClashTextPresets_Package/presets/SMOOTH BOUNCE.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild using editable config text and glyph-derived blur/glow/mask effects; no arbitrary panels added beyond source-mapped rounded plates for SMOOTH_OPACITY and ZOOM_WORD.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/SMOOTH_BOUNCE.html"
+  }
+}

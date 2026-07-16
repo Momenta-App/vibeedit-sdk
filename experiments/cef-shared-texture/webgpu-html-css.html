@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VibeEdit Chromium + WebGPU surface MVP</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, "Helvetica Neue", Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #070a12; }
+    canvas, .grain, .content { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .grain { opacity: .14; mix-blend-mode: screen; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E"); }
+    .content { display: grid; place-items: center; perspective: 900px; padding: 8%; }
+    .card { position: relative; transform-style: preserve-3d; animation: card-in 1.1s cubic-bezier(.2,.8,.2,1) both; }
+    .eyebrow { margin: 0 0 .8rem; color: #9bb0d0; font-size: clamp(11px, 1.8vw, 22px); font-weight: 750; letter-spacing: .28em; text-align: center; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 11ch; color: transparent; font-size: clamp(54px, 11vw, 170px); font-weight: 950; letter-spacing: -.075em; line-height: .78; text-align: center; text-transform: uppercase; transform: rotateX(-8deg) rotateY(10deg); background: linear-gradient(105deg,#fff 18%,#a5c8ff 38%,#fff 52%,#7ef8d5 62%,#fff 78%); background-size: 260% 100%; background-clip: text; -webkit-background-clip: text; filter: drop-shadow(.04em .07em .06em rgba(0,0,0,.55)); animation: shimmer 1.8s linear infinite; }
+    .badge { width: max-content; margin: 1.4rem auto 0; padding: .45em .75em; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; background: rgba(5,8,16,.56); color: #dce7fa; font-size: clamp(11px,1.5vw,18px); font-weight: 700; letter-spacing: .08em; backdrop-filter: blur(12px); }
+    .badge strong { color: #7ef8d5; }
+    @keyframes card-in { from { opacity: 0; translate: 0 14vh; filter: blur(18px); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
+    @keyframes shimmer { from { background-position: 135% 0; } to { background-position: -55% 0; } }
+  </style>
+</head>
+<body>
+  <canvas id="gpu"></canvas>
+  <div class="grain"></div>
+  <main class="content">
+    <section class="card">
+      <p class="eyebrow">Chromium HTML/CSS + browser WebGPU</p>
+      <h1>One GPU Surface</h1>
+      <p class="badge"><strong id="status">STARTING</strong> · deterministic frame control</p>
+    </section>
+  </main>
+  <script type="module">
+    const failure = new URLSearchParams(location.search).get("failure");
+    if (failure === "webgpu-error") throw new Error("VIBEEDIT_TEST_WEBGPU_ERROR");
+    if (failure === "hang") await new Promise(() => {});
+    const canvas = document.querySelector("#gpu");
+    const status = document.querySelector("#status");
+    let state;
+
+    const ready = (async () => {
+      if (!navigator.gpu) throw new Error("WebGPU unavailable");
+      const adapter = await navigator.gpu.requestAdapter();
+      if (!adapter) throw new Error("WebGPU adapter unavailable");
+      const device = await adapter.requestDevice();
+      const context = canvas.getContext("webgpu");
+      const format = navigator.gpu.getPreferredCanvasFormat();
+      const module = device.createShaderModule({ code: `
+        struct Uniforms { time: f32, width: f32, height: f32, pad: f32 }
+        @group(0) @binding(0) var<uniform> uniforms: Uniforms;
+        @vertex fn vertex(@builtin(vertex_index) index: u32) -> @builtin(position) vec4f {
+          var points = array(vec2f(-1,-1), vec2f(3,-1), vec2f(-1,3));
+          return vec4f(points[index], 0, 1);
+        }
+        @fragment fn fragment(@builtin(position) position: vec4f) -> @location(0) vec4f {
+          let uv = position.xy / vec2f(uniforms.width, uniforms.height);
+          let center = uv - vec2f(.5);
+          let pulse = .5 + .5 * sin(uniforms.time * 1.8 + length(center) * 13.0);
+          let sweep = smoothstep(.0, .7, uv.x + .18 * sin(uniforms.time + uv.y * 8.0));
+          let base = mix(vec3f(.025,.04,.09), vec3f(.05,.24,.28), sweep);
+          let glow = vec3f(.12,.28,.55) * pulse * exp(-4.2 * length(center));
+          return vec4f(base + glow, 1.0);
+        }
+      `});
+      const uniform = device.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
+      const pipeline = device.createRenderPipeline({
+        layout: "auto",
+        vertex: { module, entryPoint: "vertex" },
+        fragment: { module, entryPoint: "fragment", targets: [{ format }] },
+        primitive: { topology: "triangle-list" }
+      });
+      const bindGroup = device.createBindGroup({ layout: pipeline.getBindGroupLayout(0), entries: [{ binding: 0, resource: { buffer: uniform } }] });
+      state = { device, context, format, uniform, pipeline, bindGroup };
+      status.textContent = "WEBGPU ACTIVE";
+      console.log("VIBEEDIT_WEBGPU_READY", adapter.info?.device || "adapter-ready");
+    })().catch((error) => {
+      status.textContent = "WEBGPU UNAVAILABLE";
+      console.error("VIBEEDIT_WEBGPU_ERROR", error.message);
+      throw error;
+    });
+
+    async function renderAt(time) {
+      await ready;
+      const scale = devicePixelRatio || 1;
+      const width = Math.max(1, Math.round(innerWidth * scale));
+      const height = Math.max(1, Math.round(innerHeight * scale));
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+        state.context.configure({ device: state.device, format: state.format, alphaMode: "premultiplied" });
+      }
+      state.device.queue.writeBuffer(state.uniform, 0, new Float32Array([time, width, height, 0]));
+      const encoder = state.device.createCommandEncoder();
+      const pass = encoder.beginRenderPass({ colorAttachments: [{ view: state.context.getCurrentTexture().createView(), clearValue: {r:0,g:0,b:0,a:1}, loadOp: "clear", storeOp: "store" }] });
+      pass.setPipeline(state.pipeline);
+      pass.setBindGroup(0, state.bindGroup);
+      pass.draw(3);
+      pass.end();
+      state.device.queue.submit([encoder.finish()]);
+      await state.device.queue.onSubmittedWorkDone();
+    }
+
+    async function seek(time) {
+      for (const animation of document.getAnimations({ subtree: true })) {
+        animation.pause();
+        animation.currentTime = time * 1000;
+      }
+      await renderAt(time);
+      document.documentElement.dataset.vibeeditTime = String(time);
+    }
+
+    globalThis.vibeedit = { seek };
+    if (new URLSearchParams(location.search).has("live")) {
+      const start = performance.now();
+      const loop = async (now) => { await renderAt((now - start) / 1000); requestAnimationFrame(loop); };
+      requestAnimationFrame(loop);
+    } else {
+      await seek(0);
+    }
+  </script>
+</body>
+</html>

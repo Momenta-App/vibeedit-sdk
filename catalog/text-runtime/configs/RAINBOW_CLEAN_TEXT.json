@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "slug": "RAINBOW_CLEAN_TEXT",
+  "name": "RAINBOW CLEAN TEXT",
+  "family": "rainbow-trippy",
+  "source": "V2 50 TITLES PACK PR/Manual files/RAINBOW CLEAN TEXT.mogrt",
+  "text": "rainbow\nclean\ntext",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "style": "clean_stack",
+  "fontFace": "Mytupi",
+  "fontFile": "mytupiBOLD.ttf",
+  "fontSize": 48,
+  "dashes": [
+    [
+      250,
+      96,
+      98,
+      5,
+      0.5
+    ],
+    [
+      357,
+      99,
+      35,
+      5,
+      0.68
+    ],
+    [
+      232,
+      139,
+      8,
+      26,
+      0.48
+    ],
+    [
+      398,
+      141,
+      9,
+      25,
+      0.74
+    ],
+    [
+      241,
+      198,
+      12,
+      27,
+      0.28
+    ],
+    [
+      381,
+      204,
+      11,
+      21,
+      0.88
+    ],
+    [
+      286,
+      254,
+      65,
+      6,
+      0.18
+    ],
+    [
+      355,
+      229,
+      10,
+      9,
+      0.8
+    ]
+  ],
+  "noBoxGlowRuleAcknowledged": true,
+  "recipe": {
+    "type": "canvas-title",
+    "source": "families/rainbow-trippy/rainbow-trippy.js",
+    "renderer": "families/rainbow-trippy/renderer.html",
+    "effects": [
+      "4-color gradient",
+      "gradient ramp",
+      "glyph-derived glow",
+      "turbulent row displacement",
+      "stack-aligned wave echo",
+      "slow shared hue phase",
+      "light sweep",
+      "venetian dash layers"
+    ]
+  },
+  "knownDefects": [
+    "The AEP report names AVANTE, but this pass uses Mytupi-Bold because it better matches the rounded lowercase preview at 640x360.",
+    "AE CC Burn Film, Venetian Blinds, Turbulent Displace, Wave Warp, and CC Light Sweep remain procedural approximations.",
+    "Text scale, wave echo anchors, and the shared hue phase are tuned to the original preview samples rather than the earlier second-wave offset stack.",
+    "Dash layers remain cleaner and more regular than the source's organic AE turbulence."
+  ]
+}

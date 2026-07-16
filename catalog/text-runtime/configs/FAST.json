@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "slug": "FAST",
+  "kind": "fast",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "FAST",
+  "font": "Poppins-BlackItalic",
+  "font_size": 54,
+  "center": [
+    320,
+    174
+  ],
+  "color": [
+    255,
+    0,
+    0,
+    1
+  ],
+  "offset": [
+    -112,
+    0
+  ],
+  "settle_frame": 44,
+  "name": "FAST",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/FAST.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild using editable config text and glyph-derived blur/glow/mask effects; no arbitrary panels added beyond source-mapped rounded plates for SMOOTH_OPACITY and ZOOM_WORD.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/FAST.html"
+  }
+}

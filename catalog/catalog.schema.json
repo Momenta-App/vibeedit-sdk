@@ -74,7 +74,7 @@
           "additionalProperties": false,
           "required": ["kind", "source", "implementation"],
           "properties": {
-            "kind": { "enum": ["vibeedit-owned", "adapted", "procedural", "third-party"] },
+            "kind": { "enum": ["vibeedit-owned", "cloned", "adapted", "procedural", "third-party"] },
             "source": { "type": "string" },
             "implementation": { "type": "string" },
             "thirdParty": { "type": "array", "items": { "type": "string" } },

@@ -1,7 +1,7 @@
 # Release readiness report
 
-Date: 2026-07-14
-Candidate: VibeEdit 0.1.0 beta 1
+Date: 2026-07-16
+Candidate: VibeEdit 0.1.0 beta 2 (unreleased)
 Decision: **PUBLIC BETA APPROVED FOR TESTING AND COMMUNITY REVIEW**
 
 The candidate is a functional package, not a scaffold. It includes
@@ -11,6 +11,47 @@ confirmed that the generated previews contain no third-party material, the
 included canonical VibeEdit material is authorized, and optional open-source
 integrations retain their own ownership and terms. Pose support in 0.1 is
 explicitly macOS-native; SAM 3.1 remains quarantined rather than claimed.
+
+## Current branch candidate verification
+
+Commit `1244d0ac02272204d84247cd3a8a371ae5db7612` was rebuilt as the distinct
+Python `0.1.0b2` and npm `0.1.0-beta.2` candidate after the Chromium/CEF
+renderer hardening and text-catalog refinements. This is candidate verification
+only; no new registry or GitHub release was published. The already-public
+beta.1 remains immutable and retains its original artifacts.
+
+The exact archives pass byte-level comparison against the pinned canonical
+VibeEdit Git source: 44 skills and 16 preset source files match, and the archive
+scanner found zero forbidden entries. A fresh Python 3.12 environment installed
+the exact wheel with its browser extra, completed browser setup, initialized the
+10-tool MCP server, resolved the packaged catalog site, and installed/checked a
+Codex skill without modification. It rendered the generated 60-frame example
+and the mixed source-video/Chromium/SFX 90-frame example with zero duration
+drift. A fresh Node project installed the exact npm tarball, imported the API,
+constructed and validated a CompositionSpec, searched the catalog, and reported
+zero production vulnerabilities. The hash-bound record is
+[current-candidate-proof.json](evidence/current-candidate-proof.json).
+The same clean-artifact sequence is now implemented by
+`scripts/smoke_release_artifacts.py` and runs in every portable workflow job,
+so future Linux, Windows, Intel Mac, and Apple Silicon candidates must exercise
+the exact wheel and npm archive rather than only report their version strings.
+
+Hosted workflow run
+[`29535644613`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29535644613)
+passed this exact-artifact gate for commit
+`1244d0ac02272204d84247cd3a8a371ae5db7612` on Windows, Intel macOS, Apple
+Silicon macOS, and Linux with Python 3.11, 3.12, and 3.13. The downstream
+build-and-attest job also passed. Its uploaded wheel, source distribution, and
+npm archive were downloaded again, re-audited against the canonical VibeEdit
+Git source, and replayed through the clean-artifact smoke script locally. The
+archive hashes and hosted job matrix are retained in
+[current-candidate-proof.json](evidence/current-candidate-proof.json).
+
+The accelerated CEF/Rust/Metal path remains experimental and is not the package
+default. Its archive download is now pinned with SHA-256 and its background,
+deterministic three-frame probe passes. Persistent Playwright/Chromium remains
+the production fallback while high-resolution post-stress recovery is still
+being developed.
 
 ## Public access gate
 
@@ -45,11 +86,11 @@ record is [public-beta-install-proof.json](evidence/public-beta-install-proof.js
 | Surface | Included and verified |
 | --- | --- |
 | Media presets | 333: 200 filters, 112 effects, 21 transitions |
-| Motion runtime | 74 tracked text/caption/MOGRT adaptations plus the two baseline components |
+| Motion runtime | 30 selected VibeEdit HTML/CSS/JS effects, 20 portable-runtime text/caption effects, and two baseline components |
 | Skills | 44 byte-identical clones selected from the canonical tracked tree; 23 rejected/quarantined |
 | Examples | 13 executable examples; 12 render locally or are baseline recipes, 1 is capability-gated SAM |
-| Catalog | 467 searchable items with stable IDs, prompts, code, compatibility, provenance, and validation |
-| Assets | 13 generated, hash-bound, decodable preview/audio assets |
+| Catalog | 443 searchable items with stable IDs, prompts, code, compatibility, provenance, and validation |
+| Assets | 65 generated, hash-bound, decodable preview/audio assets: the original 13 plus 52 text-effect previews |
 | Tooling | Python and Node CLIs, four-harness skill lifecycle, static site, and 10-tool local MCP adapter |
 
 The Python API owns composition, media rendering, external audio mixing, beat
@@ -72,9 +113,19 @@ No MoviePy or HyperFrames object is public API.
 - Representative cinematic-filter, invert, cross-dissolve, film-burn, and
   push-transition frames match fixed pixel goldens and exceed perceptual-delta
   floors against their inputs.
-- All 74 portable motion adaptations seek at two frames in Python and
+- All 50 imported motion implementations seek at two frames in Python and
   JavaScript with aggregate cross-runtime SHA-256
-  `1cf1537e50444f0499e07384eeaaaed27ba9bcd2a1947ef66870c22dc55bedb1`.
+  `c096094e8e9a2f75097dacc96d9d84a1099a57170de7408ea8d4169fe338cedf`.
+- All 15 unmodified packaged canonical HTML/CSS/JS effects were compared to the
+  tracked source at three timeline points: 13 are pixel-identical and two are
+  perceptually equivalent browser-font rasterizations above SSIM 0.95. Fifteen
+  approved refinements intentionally diverge and pass browser conformance.
+- All 52 registered text effects (50 imported components plus the two
+  baseline components) have verified, hash-bound, decodable MP4 previews. The
+  browser suite checks deterministic frames, visible pixels, expected DOM
+  text, in-frame geometry, temporal motion where required, blocked networking,
+  browser errors, and full 48-frame decode. The visual evidence is retained in
+  `docs/evidence/text-effects/`.
 - Clean-copy examples pass for fan editing, beat analysis/synchronization,
   layered sound design, mask-confined subject treatment, face-following text,
   multiple transitions, and transparent overlays. Talking-head captions,
@@ -159,9 +210,9 @@ Python wheels. The sanitized ledger is
 | --- | --- | --- |
 | macOS Apple Silicon | Locally and GitHub-hosted verified | Source tests, exact wheel/npm clean installs, FFmpeg 8.1.1, Chromium/Playwright 1.61.0, OpenCV providers, native Apple Vision build/setup/requests, portable ONNX object inference, clean SAM 2.1 setup/inference/visual review, examples, and artifact audits passed. The hosted Python 3.12 portable checks and package smoke installs also pass. |
 | Linux ARM64 | Locally verified in Docker | Debian 12/aarch64, Python 3.11.2, Node 22.23.1, FFmpeg 5.1.9, pinned portable vision wheels, Playwright 1.61.0/Chromium 1228, 17 Node tests, 60 Python tests, exact wheel/npm installs, and core/mixed renders passed. The sole Python skip was the intentionally macOS-only Apple Vision build. |
-| macOS Intel | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 18 Node tests, type declarations, catalog validation, and wheel/npm build-and-install smoke pass. ONNX Runtime 1.27 has no macOS x86_64 wheel, so object-model setup returns a tested structured unsupported-platform result while the rest of the portable package remains available. |
-| Linux x86_64 | Native GitHub-hosted verified | Python 3.11/3.12/3.13 jobs each pass 62 Python tests, 18 Node tests, type declarations, catalog validation, Chromium rendering, and wheel/npm build-and-install smoke. The earlier emulated exact-artifact render also passed with zero drift. |
-| Windows | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 62 Python tests, 18 Node tests, canonical skill checksum validation, catalog validation, and wheel/npm build-and-install smoke pass. |
+| macOS Intel | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 78 Python tests with 1 intentional skip, 23 Node tests, type declarations, catalog validation, and exact wheel/npm workflow smoke pass. ONNX Runtime 1.27 has no macOS x86_64 wheel, so object-model setup returns a tested structured unsupported-platform result while the rest of the portable package remains available. |
+| Linux x86_64 | Native GitHub-hosted verified | Python 3.11/3.12/3.13 jobs each pass 78 Python tests with 1 intentional skip, 23 Node tests, type declarations, catalog validation, Chromium rendering, and exact wheel/npm workflow smoke. The earlier emulated exact-artifact render also passed with zero drift. |
+| Windows | GitHub-hosted verified | Python 3.12, Node 22, FFmpeg, Chromium, 77 Python tests with 2 intentional skips, 23 Node tests, canonical skill checksum validation, catalog validation, and exact wheel/npm workflow smoke pass. |
 
 The Linux ARM64 proof is retained in
 `docs/evidence/linux-arm64-proof.json`; the explicitly limited x86_64 emulation
@@ -175,6 +226,8 @@ The build job also audits the final wheel, source distribution, and npm tarball
 against the pinned canonical skill-tree and preset-file digests before upload;
 an optional `--source-root` comparison retains the stronger byte-level check
 against a canonical VibeEdit Git checkout when one is available.
+The current exact-artifact matrix and build-and-attest proof is hosted in run
+[`29535644613`](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29535644613).
 Public workflow dispatches are configured to generate GitHub build-provenance
 attestations. Every build also retains flat GitHub-release SHA-256 sums,
 artifact-relative SHA-256 sums, and the uploaded workflow artifact.
@@ -198,16 +251,16 @@ Run from the repository root unless a path is absolute:
 
 ```bash
 .venv/bin/pytest -q
-# 62 passed
+# 76 passed, 3 skipped on the local macOS host
 
 npm test
-# 18 passed
+# 23 passed
 
 npm run types:check
 # passed
 
 npm run validate
-# {"ok":true,"version":"0.1.0-beta.1","catalogItems":467,"skills":44,"assets":13}
+# {"ok":true,"version":"0.1.0-beta.2","catalogItems":443,"skills":44,"assets":65}
 
 .venv/bin/python -m build --outdir /tmp/vibeedit-python-release
 # wheel and sdist built through isolated PEP 517 environments
@@ -217,7 +270,7 @@ npm pack --pack-destination /tmp/vibeedit-npm-release --json
 ```
 
 Clean core wheel validation installed only the exact wheel and its base dependencies,
-enumerated 467 catalog items, 44 skills, 74 motion components, 333 presets, and
+enumerated 443 catalog items, 44 skills, 50 imported motion components, 333 presets, and
 13 examples, then rendered and verified the packaged generated example with
 real audio/video and zero frame drift. The same clean wheel ran explicit vision
 setup, compiled the packaged Swift source, and returned the exact
@@ -242,7 +295,7 @@ composition editing over the underlying library.
 | 5 | Pass on verified platform | JavaScript/Python motion seeks deterministically and Chromium produces real outputs. |
 | 6 | Pass on verified platform | One CompositionSpec combines source media, HTML overlay, source audio, and SFX with zero frame drift. |
 | 7 | Pass on verified platform | Verified examples exist for every locally enabled major family, including fresh accepted public-runner SAM output. |
-| 8 | Pass | Effects, transitions, text, SFX, skills, and templates share one 467-item catalog. |
+| 8 | Pass | Effects, transitions, text, SFX, skills, and templates share one 443-item catalog. |
 | 9 | Pass | Packaged `catalog open --no-browser` resolves the generated local site. |
 | 10 | Pass | Site copy controls use canonical IDs, prompts, Python, and JavaScript strings. |
 | 11 | Pass | Forty-four byte-identical canonical skills install/check/update/remove across agent, Codex, Claude, and OpenCode layouts without overwriting user edits. |
@@ -250,7 +303,7 @@ composition editing over the underlying library.
 | 13 | Pass on verified platform | Face/body/tracking, macOS-native pose, portable ONNX objects, SAM 2.1 setup/inference, and structured degradation all operate; 0.1 documents pose as macOS-native. |
 | 14 | Pass for included assets | Included audio is VibeEdit-generated and hash/provenance/loudness/decode audited. |
 | 15 | Pass | Local macOS ARM64/Linux ARM64 and hosted Linux x86_64/Windows/macOS builds, installs, renders, catalog, skills, assets, license scans, and release-owner rights review pass. |
-| 16 | Pass | npm `0.1.0-beta.1` and Python `0.1.0b1` identify the same beta and share CompositionSpec 1.0.0 plus the catalog/skill compatibility policy. |
+| 16 | Pass | The unreleased npm `0.1.0-beta.2` and Python `0.1.0b2` identify the same candidate and share CompositionSpec 1.0.0 plus the catalog/skill compatibility policy. The existing public beta.1 retains its original immutable versions and artifacts. |
 | 17 | Pass for audited artifacts | No secrets, absolute developer paths, bundled weights, unapproved media, or undocumented downloads were found. |
 | 18 | Pass | This report records inventory, platforms, sizes, downloads, commands, gaps, and licensing concerns. |
 | 19 | Pass | The source repository is public and public beta publication is explicitly approved; website deployment and production rollout remain separate actions. |

@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "slug": "SMOOTH_OPACITY",
+  "kind": "smooth_opacity",
+  "duration": 7,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "SMOOTH OPACITY",
+  "font": "Bebas-Regular",
+  "font_size": 50,
+  "center": [
+    319,
+    160
+  ],
+  "color": [
+    43,
+    229,
+    240,
+    1
+  ],
+  "start_y": 100,
+  "settle_frame": 28,
+  "fade_frames": 10,
+  "box_width": 406,
+  "top_width": 402,
+  "top_height": 74,
+  "top_radius": 10,
+  "top_highlight_height": 31,
+  "top_fill": [
+    5,
+    40,
+    42,
+    235
+  ],
+  "top_shadow_alpha": 0.32,
+  "top_skew_x": -0.035,
+  "top_skew_y": 0.002,
+  "top_highlight": [
+    0,
+    54,
+    70,
+    38
+  ],
+  "ramp_glow_alpha": 20,
+  "ramp_glow_x": 0.68,
+  "ramp_glow_y": 0.34,
+  "ramp_glow_radius": 0.52,
+  "ramp_shadow_alpha": 46,
+  "top_bevel_hi": [
+    210,
+    245,
+    255,
+    18
+  ],
+  "top_bevel_low": [
+    0,
+    10,
+    12,
+    28
+  ],
+  "top_bottom_bevel_height": 16,
+  "top_bottom_bevel_width": 2.4,
+  "top_sweep_alpha": 10,
+  "top_sweep_x": 314,
+  "top_sweep_width": 92,
+  "top_sweep_skew": -0.22,
+  "edge_damage_alpha": 0.76,
+  "edge_damage_blur": 0.36,
+  "edge_rim_alpha": 0.44,
+  "edge_rim_blur": 0.55,
+  "edge_rim_width": 1.6,
+  "edge_top_scuff_alpha": 0.26,
+  "edge_top_scuff_blur": 0.55,
+  "edge_damage_left": [
+    [
+      25,
+      255,
+      78,
+      160
+    ],
+    [
+      238,
+      36,
+      70,
+      126
+    ],
+    [
+      28,
+      98,
+      255,
+      82
+    ]
+  ],
+  "edge_damage_right": [
+    [
+      22,
+      55,
+      255,
+      138
+    ],
+    [
+      18,
+      195,
+      84,
+      82
+    ],
+    [
+      224,
+      22,
+      86,
+      72
+    ]
+  ],
+  "lower_width": 186,
+  "lower_height": 46,
+  "lower_radius": 22,
+  "lower_offset_y": 51,
+  "lower_follow_top": 0,
+  "lower_center_y": 211,
+  "lower_fill": [
+    45,
+    45,
+    45,
+    240
+  ],
+  "lower_highlight": [
+    250,
+    250,
+    250,
+    48
+  ],
+  "lower_highlight_height": 23,
+  "lower_center_gloss_alpha": 80,
+  "lower_center_gloss_width": 158,
+  "lower_center_gloss_height": 24,
+  "lower_center_gloss_y": -3,
+  "lower_center_gloss_blur": 6,
+  "lower_gloss_damage_alpha": 0.46,
+  "lower_gloss_scratch_alpha": 54,
+  "lower_gloss_scratch_blur": 0.45,
+  "lower_noise_alpha": 9,
+  "main_text_size": 70,
+  "main_text_erode": 0,
+  "main_text_alpha": 0.98,
+  "main_top": [
+    0,
+    178,
+    202,
+    255
+  ],
+  "main_bottom": [
+    160,
+    232,
+    255,
+    255
+  ],
+  "main_glow": [
+    0,
+    205,
+    230,
+    28
+  ],
+  "main_glow_blur": 1.2,
+  "main_sweep_alpha": 0.018,
+  "main_sweep_progress": 0.61,
+  "main_sweep_width": 0.14,
+  "main_inner_highlight_alpha": 0.16,
+  "main_inner_highlight_start": 0.16,
+  "main_inner_highlight_end": 0.54,
+  "main_material_noise_alpha": 0,
+  "main_material_noise_cell": 2,
+  "main_material_noise_seed": 1207,
+  "main_text_offset_x": -1,
+  "main_text_offset_y": 9,
+  "small_text_size": 26,
+  "small_text_alpha": 0.9,
+  "small_text_follow_lower": true,
+  "small_text_lower_offset_y": -4,
+  "small_top": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "small_bottom": [
+    86,
+    86,
+    86,
+    255
+  ],
+  "small_text_offset_y": 47,
+  "small_highlight_alpha": 0.12,
+  "small_highlight_blur": 0.35,
+  "small_inner_highlight_alpha": 0.14,
+  "tracking": 0,
+  "small_tracking": 1,
+  "name": "SMOOTH OPACITY",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/Manual files/SMOOTH OPACITY.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "SMOOTH_OPACITY uses glyph-derived duplicated text alpha for support glow/rim; rectangular top slab and lower pill fills are disabled by config to satisfy the no rectangular/slab/panel haze rule.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/SMOOTH_OPACITY.html"
+  },
+  "glyph_derived_supports": true,
+  "main_back_fill": [
+    0,
+    58,
+    62,
+    245
+  ],
+  "main_back_alpha": 0.1,
+  "main_back_blur": 2.2,
+  "main_back_scale_x": 1.03,
+  "main_back_scale_y": 1.05,
+  "main_chroma_alpha": 0.04,
+  "main_chroma_blur": 0.5,
+  "small_back_fill": [
+    52,
+    52,
+    52,
+    210
+  ],
+  "small_back_alpha": 0.06,
+  "small_back_blur": 1.4,
+  "small_back_scale_x": 1.02,
+  "small_back_scale_y": 1.05
+}

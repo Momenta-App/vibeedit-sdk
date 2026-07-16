@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-07-16",
+  "status": "passed",
+  "testedCommit": "1244d0ac02272204d84247cd3a8a371ae5db7612",
+  "candidateVersions": {
+    "npm": "0.1.0-beta.2",
+    "python": "0.1.0b2"
+  },
+  "published": false,
+  "automatedSmoke": {
+    "script": "scripts/smoke_release_artifacts.py",
+    "workflow": ".github/workflows/vibeedit-package.yml",
+    "localReplayPassed": true
+  },
+  "hostedWorkflow": {
+    "runId": 29535644613,
+    "url": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/29535644613",
+    "testedCommit": "1244d0ac02272204d84247cd3a8a371ae5db7612",
+    "status": "passed",
+    "jobsPassed": 7,
+    "platforms": [
+      "ubuntu-latest/python-3.11",
+      "ubuntu-latest/python-3.12",
+      "ubuntu-latest/python-3.13",
+      "windows-latest/python-3.12",
+      "macos-intel/python-3.12",
+      "macos-apple-silicon/python-3.12"
+    ],
+    "buildAndAttestPassed": true,
+    "downloadedArtifactReplayPassed": true,
+    "downloadedArtifacts": {
+      "wheel": {
+        "name": "vibeedit-0.1.0b2-py3-none-any.whl",
+        "bytes": 15139347,
+        "entries": 406,
+        "sha256": "32b5c93d73bddc3e1cd1e6c820502f0a22baf2d3542d9d84cea93611c626c0ea"
+      },
+      "sourceDistribution": {
+        "name": "vibeedit-0.1.0b2.tar.gz",
+        "bytes": 18979841,
+        "entries": 473,
+        "sha256": "4ba356cb9611afd39134839a0ac142329e0d84fa7178d5c7e42d0f867eb8297e"
+      },
+      "npm": {
+        "name": "vibeedit-0.1.0-beta.2.tgz",
+        "bytes": 19753192,
+        "entries": 439,
+        "sha256": "c2fd7086f94bf1dd7717dfdcd23c5110b45ebfbe33aa2a37c3b4747ba2e933bd"
+      }
+    },
+    "canonicalGitSourceCompared": true,
+    "skillClonesVerified": 44,
+    "presetSourceFilesVerified": 16,
+    "forbiddenEntries": 0
+  },
+  "platform": {
+    "system": "macos",
+    "version": "26.4",
+    "architecture": "arm64",
+    "python": "3.12.13",
+    "node": "26.0.0",
+    "ffmpeg": "8.1.1",
+    "playwright": "1.61.0"
+  },
+  "artifacts": {
+    "wheel": {
+      "name": "vibeedit-0.1.0b2-py3-none-any.whl",
+      "bytes": 15139347,
+      "entries": 406,
+      "sha256": "32b5c93d73bddc3e1cd1e6c820502f0a22baf2d3542d9d84cea93611c626c0ea"
+    },
+    "sourceDistribution": {
+      "name": "vibeedit-0.1.0b2.tar.gz",
+      "bytes": 18979841,
+      "entries": 473,
+      "sha256": "4ba356cb9611afd39134839a0ac142329e0d84fa7178d5c7e42d0f867eb8297e"
+    },
+    "npm": {
+      "name": "vibeedit-0.1.0-beta.2.tgz",
+      "bytes": 19753192,
+      "entries": 439,
+      "sha256": "c2fd7086f94bf1dd7717dfdcd23c5110b45ebfbe33aa2a37c3b4747ba2e933bd"
+    }
+  },
+  "archiveAudit": {
+    "status": "passed",
+    "canonicalGitSourceCompared": true,
+    "canonicalSourceRevision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+    "skillClonesVerified": 44,
+    "presetSourceFilesVerified": 16,
+    "forbiddenEntries": 0
+  },
+  "pythonCleanInstall": {
+    "artifact": "wheel",
+    "baseAndBrowserExtrasInstalled": true,
+    "doctorReady": true,
+    "browserSetupComplete": true,
+    "browserDownloadReusedFromPinnedHostCache": true,
+    "catalogSiteResolvedFromInstalledWheel": true,
+    "skillLifecycle": {
+      "harness": "codex",
+      "installed": true,
+      "modified": false,
+      "version": "0.1.0"
+    },
+    "mcp": {
+      "initialized": true,
+      "protocolVersion": "2025-06-18",
+      "toolsListed": 10,
+      "catalogToolExecuted": true
+    }
+  },
+  "renderVerification": [
+    {
+      "example": "basic-generated",
+      "passed": true,
+      "width": 640,
+      "height": 360,
+      "fps": 30,
+      "durationFrames": 60,
+      "durationDriftFrames": 0,
+      "hasVideo": true,
+      "hasAudio": true
+    },
+    {
+      "example": "mixed-python-html",
+      "passed": true,
+      "width": 640,
+      "height": 360,
+      "fps": 30,
+      "durationFrames": 90,
+      "durationDriftFrames": 0,
+      "hasVideo": true,
+      "hasAudio": true,
+      "domains": [
+        "generated-source-video",
+        "source-audio",
+        "chromium-html-motion",
+        "procedural-sfx",
+        "ffmpeg-final-assembly"
+      ]
+    }
+  ],
+  "nodeCleanInstall": {
+    "artifact": "npm",
+    "version": "0.1.0-beta.2",
+    "apiImported": true,
+    "compositionConstructed": true,
+    "schemaValidated": true,
+    "catalogSearchExecuted": true,
+    "productionVulnerabilities": 0
+  },
+  "rendererSecurity": {
+    "cefVersion": "144.0.30",
+    "chromiumVersion": "144.0.7559.257",
+    "archiveSha256": "74a0b4495ff0985105e64a584efbb1ac1375bb97a3c6e92050dd4ac7277c9960",
+    "archiveChecksumVerified": true,
+    "backgroundProbePassed": true,
+    "exactThreeFrameSequencePassed": true,
+    "productionDefault": false,
+    "fallback": "persistent-playwright-chromium"
+  },
+  "commands": [
+    "uv build --out-dir <candidate>/python",
+    "npm pack --pack-destination <candidate>/npm",
+    "python scripts/audit_release_artifacts.py --wheel <wheel> --sdist <sdist> --npm <npm> --source-root <canonical-vibeedit>",
+    "uv pip install --python <clean-python> <wheel>[browser]",
+    "vibeedit setup --browser --json",
+    "vibeedit doctor --json",
+    "python <mixed-example>/render.py",
+    "vibeedit verify <output> --spec <composition> --json",
+    "npm install <npm-tarball> --ignore-scripts",
+    "npm audit --omit=dev --audit-level=high"
+  ]
+}

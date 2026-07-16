@@ -1,0 +1,94 @@
+{
+  "slug": "ESMERALD",
+  "family": "aesthetic-glow",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph masks, duplicate text layers, SVG/CSS glow, blur, reflection, light-sweep, and color recipes. No rectangular haze, slabs, or panel shortcuts are used.",
+  "recipe": {
+    "duration": 7.6,
+    "motion": {
+      "from_dx": -20,
+      "from_dy": -14,
+      "from_scale": 0.98,
+      "intro": 0.65
+    },
+    "texts": [
+      {
+        "text": "Emerald",
+        "font": "BirdsofParadise-PersonaluseOnly",
+        "size": 55,
+        "x": 224,
+        "y": 148,
+        "top": [
+          140,
+          255,
+          252
+        ],
+        "bottom": [
+          0,
+          248,
+          116
+        ],
+        "shadow": {
+          "dx": 1,
+          "dy": 3,
+          "blur": 2,
+          "opacity": 0.12,
+          "color": [
+            0,
+            58,
+            38
+          ]
+        },
+        "glows": [
+          {
+            "color": [
+              0,
+              255,
+              135
+            ],
+            "radius": 3,
+            "opacity": 0.14
+          },
+          {
+            "color": [
+              180,
+              255,
+              252
+            ],
+            "radius": 1,
+            "opacity": 0.08
+          }
+        ],
+        "extrude": {
+          "dx": 1,
+          "dy": 2,
+          "steps": 1,
+          "color": [
+            0,
+            42,
+            30
+          ],
+          "opacity": 0.14
+        },
+        "sweep": {
+          "center": 0.52,
+          "width": 12,
+          "angle": -16,
+          "opacity": 0.2
+        }
+      }
+    ],
+    "background": {
+      "hazes": [],
+      "panels": []
+    },
+    "panels": []
+  }
+}

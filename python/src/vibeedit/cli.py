@@ -76,10 +76,17 @@ def _parser() -> argparse.ArgumentParser:
     catalog_search.add_argument("query")
     catalog_search.add_argument("--json", action="store_true")
     catalog_search.set_defaults(handler=_catalog_search)
-    catalog_open = catalog_sub.add_parser("open", help="open the generated local catalog")
-    catalog_open.add_argument("--no-browser", action="store_true")
+    catalog_open = catalog_sub.add_parser("open", help="resolve the generated local catalog without opening a browser")
+    catalog_open.add_argument("--browser", action="store_true", help="open the catalog in the default browser")
+    catalog_open.add_argument("--no-browser", action="store_true", help=argparse.SUPPRESS)
     catalog_open.add_argument("--json", action="store_true")
     catalog_open.set_defaults(handler=_catalog_open)
+
+    motion = sub.add_parser("motion", help="inspect agent-authorable motion contracts")
+    motion_sub = motion.add_subparsers(dest="motion_command", required=True)
+    motion_atoms = motion_sub.add_parser("atoms", help="list reusable HTML/CSS motion atoms")
+    motion_atoms.add_argument("--json", action="store_true")
+    motion_atoms.set_defaults(handler=_motion_atoms)
 
     examples = sub.add_parser("examples", help="list or create executable examples")
     examples_sub = examples.add_subparsers(dest="examples_command", required=True)
@@ -185,7 +192,9 @@ def _inspect(args) -> int:
     if path.suffix.lower() == ".json":
         value = json.loads(path.read_text(encoding="utf-8"))
         validate_composition(value)
-        result = {"kind": "composition", "valid": True, "id": value["id"], "durationFrames": value["durationFrames"]}
+        from vibeedit.motion import motion_render_plan
+
+        result = {"kind": "composition", "valid": True, "id": value["id"], "durationFrames": value["durationFrames"], "motionRenderPlan": motion_render_plan(value)}
     else:
         result = probe(path)
     _emit(result, as_json=args.json)
@@ -208,8 +217,15 @@ def _catalog_open(args) -> int:
     path = data_path("site", "index.html")
     if not path.is_file():
         raise RuntimeError("catalog site has not been generated")
-    opened = False if args.no_browser else webbrowser.open(path.resolve().as_uri())
+    opened = webbrowser.open(path.resolve().as_uri()) if args.browser and not args.no_browser else False
     _emit({"ok": True, "path": str(path), "opened": opened}, as_json=args.json)
+    return 0
+
+
+def _motion_atoms(args) -> int:
+    from vibeedit.motion import list_motion_atoms
+
+    _emit(list_motion_atoms(), as_json=args.json)
     return 0
 
 

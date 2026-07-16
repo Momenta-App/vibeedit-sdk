@@ -7,6 +7,14 @@ SHA-256 checksums, creates
 GitHub build-provenance attestations for public workflow dispatches, and
 uploads workflow artifacts for review.
 
+Each portable matrix job also runs `scripts/smoke_release_artifacts.py` against
+the wheel and npm tarball it just built. The script creates new Python and Node
+environments, installs the exact archives, performs browser setup, renders and
+verifies both generated and mixed HTML/media examples, exercises the packaged
+catalog and skill lifecycle, initializes and calls the 10-tool MCP adapter,
+imports the Node API, validates CompositionSpec, and requires a zero-vulnerability
+production dependency audit. Source-tree tests cannot substitute for this gate.
+
 The workflow has no npm, PyPI, GitHub Release, website deployment, or other
 release step. The release owner explicitly approved the `0.1.0-beta.1` public
 GitHub prerelease. It is published manually only after the exact workflow run

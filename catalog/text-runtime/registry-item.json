@@ -1,0 +1,25 @@
+{
+  "$schema": "https://vibeedit.heygen.com/schema/registry-item.json",
+  "name": "html-motion-mogrt",
+  "type": "vibeedit:component",
+  "title": "HTML Motion MOGRT Rebuild",
+  "description": "Verified HTML/CSS/JS text motion rebuilds for all 53 imported MOGRT title templates. Each entry uses a lightweight browser renderer with editable JSON config and hover playback in the VibeEdit text catalogue.",
+  "tags": ["text", "text-effect", "html-css-js", "mogrt", "motion-title", "fan-edit"],
+  "files": [
+    {
+      "path": "families",
+      "target": "compositions/components/html-motion-mogrt/families",
+      "type": "vibeedit:asset"
+    },
+    {
+      "path": "configs",
+      "target": "compositions/components/html-motion-mogrt/configs",
+      "type": "vibeedit:asset"
+    },
+    {
+      "path": "assets/fonts",
+      "target": "compositions/components/html-motion-mogrt/assets/fonts",
+      "type": "vibeedit:asset"
+    }
+  ]
+}

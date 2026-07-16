@@ -1,0 +1,358 @@
+@font-face {
+  font-family: "MytupiLocal";
+  src: url("../../../assets/fonts/mytupiBOLD.ttf") format("truetype");
+  font-display: block;
+}
+
+@font-face {
+  font-family: "BucklaneLocal";
+  src: url("../../../assets/fonts/BucklaneScript.otf") format("opentype");
+  font-display: block;
+}
+
+@font-face {
+  font-family: "PoppinsLocal";
+  src: url("../../../assets/fonts/Poppins-Bold.ttf") format("truetype");
+  font-display: block;
+}
+
+@font-face {
+  font-family: "PoppinsRegularLocal";
+  src: url("../../../assets/fonts/Poppins-Bold.ttf") format("truetype");
+  font-display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  color: #fff;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+.ac-root {
+  position: relative;
+  width: 640px;
+  height: 360px;
+  overflow: hidden;
+  background: transparent;
+  transform: scale(var(--hm-preview-scale, 1));
+  transform-origin: center;
+}
+
+.ac-root:not(.is-alpha)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000;
+}
+
+.ac-stage,
+.ac-item,
+.ac-text,
+.ac-sweep,
+.ac-pill {
+  position: absolute;
+}
+
+.ac-stage {
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+
+.ac-text {
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  white-space: pre;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: var(--line-height, .82);
+  font-family: var(--font-family), system-ui, sans-serif;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight, 700);
+  color: var(--text-color, #fff);
+  text-shadow: var(--text-shadow, none);
+  transform-origin: 50% 50%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  box-sizing: border-box;
+}
+
+.clean-style,
+.clean-style .ac-item,
+.clean-style .ac-text {
+  overflow: visible;
+}
+
+.clean-style .ac-text {
+  padding: .14em .18em;
+}
+
+.clean-style-dom {
+  overflow: visible;
+}
+
+.clean-style-dom .clean-word,
+.clean-style-dom .style-word {
+  position: absolute;
+  display: inline-block;
+  box-sizing: content-box;
+  padding: .2em .24em;
+  white-space: nowrap;
+  line-height: 1.12;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  will-change: opacity, transform, filter;
+}
+
+.clean-style-dom .clean-word {
+  font-family: "MytupiLocal", sans-serif;
+  font-weight: 400;
+  color: transparent;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--clean-color, #fff) 88%, white) 0%,
+    var(--clean-color, #fff) 56%,
+    color-mix(in srgb, var(--clean-color, #fff) 72%, transparent) 82%,
+    transparent 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  mask-image: linear-gradient(180deg, #000 0%, #000 72%, rgba(0, 0, 0, .7) 87%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 72%, rgba(0, 0, 0, .7) 87%, transparent 100%);
+  transform: translateX(var(--enter-x, 0));
+  filter:
+    blur(var(--entrance-blur, 0))
+    drop-shadow(0 0 5px color-mix(in srgb, var(--clean-color, #fff) 34%, transparent))
+    drop-shadow(0 2px 2px rgba(48, 20, 0, .28));
+}
+
+.clean-style-dom .style-word {
+  font-family: "BucklaneLocal", cursive;
+  font-weight: 400;
+  color: var(--style-color, #4169e1);
+  transform: translateX(var(--enter-x, 0));
+  filter:
+    blur(var(--entrance-blur, 0))
+    drop-shadow(0 0 4px color-mix(in srgb, var(--style-color, #4169e1) 28%, transparent))
+    drop-shadow(0 2px 2px rgba(0, 0, 0, .24));
+}
+
+.ac-text::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre;
+  text-align: center;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: var(--glyph-glow-color, currentColor);
+  opacity: var(--glyph-glow-opacity, 0);
+  filter: blur(var(--glyph-glow-blur, 0));
+  transform: translate(var(--glyph-glow-x, 0), var(--glyph-glow-y, 0));
+  pointer-events: none;
+}
+
+.ac-text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre;
+  text-align: center;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: transparent;
+  opacity: var(--glyph-sweep-opacity, 0);
+  background-image: linear-gradient(
+    var(--glyph-sweep-angle, 104deg),
+    transparent calc(50% - var(--glyph-sweep-width, 11%)),
+    rgba(255, 255, 255, var(--glyph-sweep-alpha, .8)) 50%,
+    transparent calc(50% + var(--glyph-sweep-width, 11%))
+  );
+  background-size: 220% 100%;
+  background-position: calc(114% - var(--sweep-progress, 0) * 220%) 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: blur(var(--glyph-sweep-blur, .15px));
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.reveal-center {
+  clip-path: inset(0 calc((1 - var(--reveal, 1)) * 50%) 0 calc((1 - var(--reveal, 1)) * 50%));
+}
+
+.reveal-left {
+  clip-path: inset(0 calc((1 - var(--reveal, 1)) * 100%) 0 0);
+}
+
+.distorted-reveal .ac-text {
+  transform: translateX(calc(var(--reveal-distort, 0) * var(--reveal-pull, -8px)))
+    skewX(calc(var(--reveal-distort, 0) * var(--reveal-skew, -9deg)));
+}
+
+.ac-sweep {
+  inset: -10% -28%;
+  opacity: var(--sweep-alpha, 0);
+  background: linear-gradient(
+    var(--sweep-angle, 105deg),
+    transparent calc(50% - var(--sweep-width, 12%)),
+    rgba(255, 255, 255, .95) 50%,
+    transparent calc(50% + var(--sweep-width, 12%))
+  );
+  mix-blend-mode: screen;
+  transform: translateX(calc(-52% + var(--sweep-progress, 0) * 112%));
+  pointer-events: none;
+}
+
+.plain-mask,
+.apple-style-mask,
+.gradient-text {
+  overflow: hidden;
+}
+
+.gradient-text .ac-text {
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--gradient));
+  background-size: var(--gradient-size, 118%) 100%;
+  background-position: calc(var(--gradient-offset, 0%) + var(--sweep-progress, 0) * var(--gradient-travel, 10%)) 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.apple-style-mask .ac-text {
+  filter:
+    saturate(0)
+    brightness(var(--apple-brightness, 1.16))
+    drop-shadow(0 0 var(--apple-drop-radius, 4px) rgba(255, 255, 255, var(--apple-drop-alpha, .16)))
+    drop-shadow(0 3px 4px rgba(0, 0, 0, var(--apple-depth-alpha, .08)));
+  -webkit-text-stroke: var(--apple-stroke-width, 0) rgba(255, 255, 255, var(--apple-stroke-alpha, 0));
+  --glyph-glow-color: rgba(255, 255, 255, 1);
+  --glyph-glow-opacity: var(--apple-halo-opacity, .18);
+  --glyph-glow-blur: var(--apple-halo-blur, 2.5px);
+  --glyph-sweep-opacity: var(--apple-sweep-opacity, .18);
+  --glyph-sweep-width: var(--apple-sweep-width, 8%);
+}
+
+.clean-aesthetic .ac-text {
+  inset: var(--text-pad-y, 8px) 5px var(--text-pad-y, 8px) 5px;
+  justify-content: center;
+  line-height: 1;
+  --glyph-glow-color: rgba(255, 248, 225, 1);
+  --glyph-glow-opacity: var(--text-halo-opacity, .42);
+  --glyph-glow-blur: var(--text-halo-blur, 4px);
+  --glyph-sweep-opacity: var(--text-sweep-opacity, .13);
+  --glyph-sweep-width: var(--text-sweep-width, 7%);
+  filter:
+    drop-shadow(0 0 var(--text-glow-radius, 6px) rgba(255, 248, 225, var(--text-glow-alpha, .46)))
+    drop-shadow(0 0 var(--text-wide-glow-radius, 11px) rgba(255, 248, 225, var(--text-wide-glow-alpha, .13)))
+    drop-shadow(0 2px 4px rgba(35, 35, 34, var(--text-shadow-alpha, .28)));
+  text-shadow: 0 0 var(--text-glow-radius, 6px) rgba(255, 248, 225, var(--text-glow-alpha, .46));
+}
+
+.ac-pill {
+  left: var(--pill-inset-x, 4px);
+  right: var(--pill-inset-x, 4px);
+  top: var(--pill-inset-y, 6px);
+  bottom: var(--pill-inset-y, 6px);
+  border-radius: var(--pill-radius, 7px);
+  background: rgba(34, 36, 38, var(--pill-alpha, .64));
+  border: 1px solid rgba(238, 238, 224, var(--pill-border-alpha, .58));
+  box-shadow:
+    0 0 4px rgba(255, 248, 225, .18),
+    0 4px 8px rgba(0, 0, 0, var(--pill-shadow-alpha, .38));
+}
+
+.clean-blue .top-word .ac-text {
+  color: transparent;
+  background-image: linear-gradient(180deg, #fff6e8 0%, #ffffff 48%, #48c7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  --glyph-glow-color: rgba(255, 234, 207, 1);
+  --glyph-glow-opacity: var(--top-halo-opacity, .28);
+  --glyph-glow-blur: var(--top-halo-blur, 4px);
+  --glyph-sweep-opacity: var(--top-sweep-opacity, .18);
+  --glyph-sweep-width: var(--top-sweep-width, 8%);
+  filter:
+    drop-shadow(0 0 7px rgba(255, 234, 207, var(--top-glow-alpha, .34)))
+    drop-shadow(0 0 10px rgba(0, 150, 255, var(--top-blue-glow-alpha, .13)))
+    drop-shadow(0 3px 4px rgba(0, 0, 0, .58));
+  text-shadow: 0 0 5px rgba(255, 234, 207, var(--top-glow-alpha, .34));
+}
+
+.clean-blue .bottom-word .ac-text {
+  color: transparent;
+  background-image: linear-gradient(180deg, #f5fbff 0%, #00a5ff 34%, #007fe0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  --glyph-glow-color: rgba(0, 150, 255, 1);
+  --glyph-glow-opacity: var(--bottom-halo-opacity, .38);
+  --glyph-glow-blur: var(--bottom-halo-blur, 5px);
+  --glyph-glow-y: var(--bottom-halo-y, 2px);
+  --glyph-sweep-opacity: var(--bottom-sweep-opacity, .2);
+  --glyph-sweep-width: var(--bottom-sweep-width, 9%);
+  filter:
+    drop-shadow(-3px 3px 11px rgba(0, 88, 110, var(--teal-shadow-alpha, .42)))
+    drop-shadow(0 0 13px rgba(0, 150, 255, var(--bottom-glow-alpha, .52)))
+    drop-shadow(0 8px 10px rgba(0, 42, 55, var(--bottom-depth-alpha, .22)));
+  text-shadow:
+    0 0 8px rgba(0, 150, 255, var(--bottom-glow-alpha, .52)),
+    0 -2px 3px rgba(255, 255, 255, .35);
+}
+
+.clean-style .clean-word .ac-text {
+  font-weight: 400;
+  color: transparent;
+  background-image: linear-gradient(180deg, #ff8a00, #3a1b00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  --glyph-glow-color: rgba(255, 128, 0, 1);
+  --glyph-glow-opacity: var(--clean-halo-opacity, .42);
+  --glyph-glow-blur: var(--clean-halo-blur, 5px);
+  --glyph-glow-x: var(--clean-halo-x, -1px);
+  --glyph-sweep-opacity: var(--clean-sweep-opacity, .18);
+  --glyph-sweep-width: var(--clean-sweep-width, 8%);
+  filter:
+    drop-shadow(0 1px 2px rgba(255, 180, 18, var(--clean-glow-alpha, .18)))
+    drop-shadow(0 3px 3px rgba(45, 18, 0, .34));
+  text-shadow: none;
+}
+
+.clean-style .style-word .ac-text {
+  font-family: "BucklaneLocal", cursive;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1;
+  --glyph-glow-color: rgba(255, 255, 255, 1);
+  --glyph-glow-opacity: var(--style-halo-opacity, .42);
+  --glyph-glow-blur: var(--style-halo-blur, 4px);
+  --glyph-glow-y: 1px;
+  --glyph-sweep-opacity: var(--style-sweep-opacity, .16);
+  --glyph-sweep-width: var(--style-sweep-width, 8%);
+  filter:
+    drop-shadow(0 1px 2px rgba(255, 255, 255, var(--style-glow-alpha, .16)))
+    drop-shadow(0 3px 3px rgba(0, 0, 0, var(--style-shadow-alpha, .24)));
+  text-shadow: none;
+}

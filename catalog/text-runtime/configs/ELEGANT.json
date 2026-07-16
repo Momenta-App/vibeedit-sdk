@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "slug": "ELEGANT",
+  "name": "ELEGANT",
+  "family": "elegant-misc",
+  "kind": "glyph_canvas_motion",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "source": "V2 50 TITLES PACK PR/ELEGANT.mogrt",
+  "controls": [
+    {
+      "id": "8ac2ab95-fe6c-4e28-88e8-d5dfc84a61f0",
+      "type": 6,
+      "name": "ELEGANT",
+      "value": "ELEGANT",
+      "font": "AVANTERegular",
+      "fontSize": 124
+    },
+    {
+      "id": "17e60de6-7350-4a15-96c2-10dcc8eb2856",
+      "type": 4,
+      "name": "Gradación de degradado Color de inicio",
+      "value": [
+        255,
+        215,
+        120,
+        1
+      ]
+    },
+    {
+      "id": "d8671218-8f88-4b8a-b497-511e3128d551",
+      "type": 4,
+      "name": "Gradación de degradado Color final",
+      "value": [
+        255,
+        255,
+        255,
+        1
+      ]
+    },
+    {
+      "id": "b3579972-f1ca-48d1-b917-758417b69272",
+      "type": 2,
+      "name": "CC Light Sweep Edge Thickness",
+      "value": 1.8000000000000005,
+      "min": 0,
+      "max": 10
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "recipe": {
+    "type": "elegant-misc-canvas",
+    "style": "elegant",
+    "duration": 7.6,
+    "layers": [
+      {
+        "text": "ELEGANT",
+        "font": "AVANTERegular",
+        "box": [
+          178,
+          40
+        ],
+        "center": [
+          319.5,
+          180
+        ],
+        "gradient": [
+          [
+            255,
+            255,
+            246
+          ],
+          [
+            255,
+            220,
+            142
+          ]
+        ],
+        "tracking": -1,
+        "line_gap": 0,
+        "glow": [
+          255,
+          230,
+          168
+        ],
+        "glow_radius": 3.4,
+        "glow_opacity": 0.22,
+        "shadow": [
+          0,
+          0,
+          0
+        ],
+        "shadow_offset": [
+          1,
+          2
+        ],
+        "shadow_radius": 1.2,
+        "shadow_opacity": 0.34,
+        "stroke": null,
+        "stroke_width": 0,
+        "stroke_opacity": 0,
+        "radial": false,
+        "posterized": false,
+        "jitter": 0,
+        "turbulent": 0.45
+      }
+    ],
+    "controls": {
+      "text": "ELEGANT",
+      "gradient_start": [
+        255,
+        215,
+        120,
+        1
+      ],
+      "gradient_end": [
+        255,
+        255,
+        255,
+        1
+      ],
+      "light_sweep_edge_thickness": 1.8,
+      "effects": [
+        "CC Burn Film",
+        "CC Light Sweep",
+        "Wave Warp",
+        "4-Color Gradient",
+        "Fast Box Blur",
+        "Gradient Ramp",
+        "Fill",
+        "Hue/Saturation",
+        "Transform"
+      ]
+    },
+    "defects": [
+      "CC Burn Film is represented by a short gold smear during the intro; the exact burn matte is not recovered from the AEP.",
+      "AVANTE glyph rasterization differs slightly from the Adobe text engine at preview scale."
+    ]
+  },
+  "sourceMapping": {
+    "sourceSpec": "../specs/ELEGANT.json"
+  },
+  "outputs": {
+    "html": "families/elegant-misc/outputs/ELEGANT.html",
+    "preview": "previews/ELEGANT.mp4",
+    "alpha": "alpha/ELEGANT.mov"
+  },
+  "renderer": {
+    "component": "families/elegant-misc/components/elegant-misc.js",
+    "style": "families/elegant-misc/components/elegant-misc.css",
+    "renderScript": "families/elegant-misc/scripts/render.mjs",
+    "output": "families/elegant-misc/outputs/ELEGANT.html"
+  },
+  "fonts": [
+    "AVANTERegular"
+  ],
+  "noBoxGlowRuleAcknowledged": true
+}

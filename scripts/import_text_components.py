@@ -39,6 +39,50 @@ STYLE = {
     "texture-mask-text": ("texture-mask", "text", "CUT THROUGH", "#ffffff", "#8d8d8d"),
 }
 
+REMOVED_REGISTRY_NAMES = {"caption-texture"}
+REMOVED_MOGRT_SLUGS = {
+    "APPLE_STYLE_ANIMATION",
+    "BLUE_AND_ORANGE",
+    "Bubble",
+    "ESCRITO_A_MANO_POSTERIZACION",
+    "GREEN_AND_GREY",
+    "Green",
+    "OLD_TV",
+    "ORANGE_TEXT",
+    "Purple",
+    "RAINBOW_CLEAN_TEXT",
+    "RAINBOW_TEXT",
+    "REBOUND",
+    "Radial_BLUR",
+    "TEXTO_DE_ORO",
+    "VHS",
+    "WATER_TEXT",
+    "WAVES",
+    "ZOOM_IN",
+    "ZOOM_OUT",
+    "ZOOM_WORD",
+    "apple_MIDDLE",
+    "apple_WORD",
+    "clean_aesthetic_light",
+}
+REFINED_MOGRT_SLUGS = {
+    "3D_TEXT",
+    "AESTHETIC_PURPLE",
+    "AESTHETIC_STRINKING",
+    "BLUR_IN",
+    "BOTTOM_IN",
+    "CLEAN_BLUE",
+    "ELEGANT",
+    "ESMERALD",
+    "GOLD_TEXT",
+    "LEFT_IN",
+    "OPACITY_IN",
+    "RIGHT_IN",
+    "SMOOTH_OPACITY",
+    "dark_water",
+    "fluorscent",
+}
+
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Import tracked VibeEdit text designs into the portable motion runtime")
@@ -48,8 +92,8 @@ def main(argv: list[str] | None = None) -> int:
     root = args.source_root.resolve()
     revision = _git(root, "rev-parse", args.revision).decode().strip()
     components = _registry_components(root, revision) + _mogrt_components(root, revision)
-    if len(components) != 74:
-        raise RuntimeError(f"reviewed portable text inventory changed: expected 74, found {len(components)}")
+    if len(components) != 50:
+        raise RuntimeError(f"reviewed portable text inventory changed: expected 50, found {len(components)}")
     if len({component["id"] for component in components}) != len(components):
         raise RuntimeError("portable text identifiers must be unique")
 
@@ -82,6 +126,8 @@ def _registry_components(root: Path, revision: str) -> list[dict]:
         metadata = json.loads(metadata_bytes)
         name = metadata["name"]
         if name in {"html-motion-mogrt", "learned-text-styles"}:
+            continue
+        if name in REMOVED_REGISTRY_NAMES:
             continue
         if name not in STYLE:
             raise RuntimeError(f"portable style mapping missing for {name}")
@@ -116,6 +162,8 @@ def _mogrt_components(root: Path, revision: str) -> list[dict]:
         source = _show(root, revision, path)
         config = json.loads(source)
         slug = config["slug"]
+        if slug in REMOVED_MOGRT_SLUGS:
+            continue
         family = config["family"]
         default_text = _default_text(config) or slug.replace("_", " ")
         foreground, accent = _palette(config, family)
@@ -123,13 +171,19 @@ def _mogrt_components(root: Path, revision: str) -> list[dict]:
             {
                 "id": f"vibeedit://text/mogrt-{_slug(slug)}",
                 "name": config.get("name", slug.replace("_", " ").title()),
-                "description": f"Portable deterministic {family.replace('-', ' ')} adaptation of the tracked VibeEdit {slug} motion-title configuration.",
+                "description": f"Source-preserved {family.replace('-', ' ')} text effect rendered by the tracked VibeEdit {slug} HTML/CSS/JS implementation.",
                 "kind": "text",
                 "family": family,
                 "motion": _family_motion(family, slug),
                 "defaultText": default_text,
                 "palette": {"foreground": foreground, "accent": accent},
-                "tags": ["text", "motion-title", "mogrt-adaptation", family, "portable", "deterministic"],
+                "canonical": {
+                    "entry": _canonical_entry(config),
+                    "fps": config.get("fps", config.get("canvas", {}).get("fps", 30)),
+                    "durationSeconds": config.get("duration", config.get("canvas", {}).get("duration", 7.6)),
+                    "approvedRefinement": slug in REFINED_MOGRT_SLUGS,
+                },
+                "tags": ["text", "motion-title", "canonical-source-clone", family, "portable", "deterministic"],
                 "source": {"path": path, "revision": revision, "sha256": hashlib.sha256(source).hexdigest()},
             }
         )
@@ -187,7 +241,7 @@ console.log(JSON.stringify({ count: portableMotionComponents.length, sha256: dig
         "javascriptSha256": node_result["sha256"],
         "pythonSha256": digest.hexdigest(),
         "aggregateSha256": hashlib.sha256(f"{node_result['sha256']}:{digest.hexdigest()}".encode()).hexdigest(),
-        "contract": "Every generated component rendered deterministically at two integer frames in both public runtimes without network or binary assets.",
+        "contract": "Every generated fallback component rendered deterministically at two integer frames in both public runtimes. Canonical browser fidelity is validated separately against the packaged tracked HTML/CSS/JS runtime.",
     }
 
 
@@ -202,6 +256,7 @@ def _write_catalog(components: list[dict]) -> None:
 def _catalog_item(component: dict) -> dict:
     identifier = component["id"]
     mogrt = "/html-motion-mogrt/" in component["source"]["path"]
+    canonical = component.get("canonical")
     return {
         "id": identifier,
         "name": component["name"],
@@ -228,17 +283,17 @@ def _catalog_item(component: dict) -> dict:
             "javascript": f"renderComponent({identifier!r}, {{ text: {component['defaultText']!r} }}, 12, {{ durationFrames: 60, width: 640, height: 360 }})",
         },
         "prompts": [f"Use {component['name']} for this text and keep the motion frame-seekable and transparent.", f"Adapt the wording and palette while preserving the {component['motion']} motion grammar."],
-        "requirements": {"assets": [], "models": []},
+        "requirements": {"assets": ["packaged canonical text runtime"] if canonical else [], "models": []},
         "license": {
             "owner": "Attention Engine Inc.",
             "terms": "SEE LICENSE IN LICENSE.md",
             "redistribution": "verified",
-            "notes": "Portable VibeEdit-owned adaptation only; source fonts, textures, CDNs, MOGRT binaries, and remote previews are not bundled.",
+            "notes": "The tracked VibeEdit HTML/CSS/JS runtime and its approved local design assets are packaged; the original MOGRT binary and remote media are not bundled." if canonical else "Portable VibeEdit-owned adaptation only; source fonts, textures, CDNs, MOGRT binaries, and remote previews are not bundled.",
         },
         "provenance": {
-            "kind": "adapted",
+            "kind": "cloned" if canonical else "adapted",
             "source": f"main-repository:{component['source']['path']}#revision={component['source']['revision']}&sha256={component['source']['sha256']}",
-            "implementation": "src/motion/runtime.js",
+            "implementation": f"catalog/text-runtime/{canonical['entry'].split('?')[0]}" if canonical else "src/motion/runtime.js",
             "thirdParty": ["Original MOGRT design reference (not bundled)"] if mogrt else [],
         },
         "validation": [
@@ -247,7 +302,13 @@ def _catalog_item(component: dict) -> dict:
                 "status": "passed",
                 "command": "node --test test/motion-catalog.test.js && pytest python/tests/test_motion_catalog.py",
                 "evidence": "Deterministic early/late integer-frame rendering passed in JavaScript and Python with no network dependency.",
-            }
+            },
+            *([{
+                "id": "canonical-source-fidelity",
+                "status": "passed",
+                "command": "npm run text:fidelity -- --source-base-url <tracked-source-url>",
+                "evidence": "docs/evidence/text-effects/source-fidelity.json",
+            }] if canonical else []),
         ],
     }
 
@@ -256,7 +317,7 @@ def _showcase_item() -> dict:
     return {
         "id": "vibeedit://template/portable-motion-showcase",
         "name": "Portable Motion Showcase",
-        "description": "Executable source-video template proving a tracked MOGRT adaptation and a portable caption style through deterministic Chromium rendering.",
+        "description": "Executable source-video template proving a source-preserved VibeEdit HTML motion title and a portable caption style through deterministic Chromium rendering.",
         "category": "template",
         "tags": ["motion", "text", "caption", "chromium", "executable"],
         "version": "0.1.0",
@@ -264,7 +325,7 @@ def _showcase_item() -> dict:
         "parameters": {"type": "object", "properties": {"title": {"type": "string", "default": "PORTABLE MOTION"}, "caption": {"type": "string", "default": "SEEK EVERY FRAME"}}, "additionalProperties": False},
         "platforms": ["macos", "windows", "linux"],
         "backends": ["python", "html", "chromium", "ffmpeg"],
-        "preview": {"status": "missing", "note": "Run the preview builder to create the verified local render."},
+        "preview": {"status": "verified", "uri": "previews/portable-motion-showcase.mp4", "mediaType": "video/mp4", "note": "Rendered from the packaged portable-motion-showcase example through pinned Chromium and FFmpeg."},
         "examples": {"python": "create_example('portable-motion-showcase')", "javascript": "createExample('portable-motion-showcase')"},
         "prompts": ["Start from the portable motion showcase, replace the source, and preserve integer-frame text timing."],
         "requirements": {"assets": [], "models": []},
@@ -284,9 +345,11 @@ def _test_spec(identifier: str) -> dict:
 def _default_text(config: dict) -> str:
     candidates = [config.get("text"), config.get("recipe", {}).get("text") if isinstance(config.get("recipe"), dict) else None]
     recipe = config.get("recipe") if isinstance(config.get("recipe"), dict) else {}
-    for key in ("texts", "crossing_texts"):
+    for key in ("texts", "crossing_texts", "lines"):
         if isinstance(recipe.get(key), list):
             candidates.append(" ".join(str(item.get("text", "")) for item in recipe[key] if isinstance(item, dict)))
+    if isinstance(config.get("text_lines"), list):
+        candidates.append(" ".join(str(item.get("text", "")) for item in config["text_lines"] if isinstance(item, dict)))
     if isinstance(config.get("controls"), list):
         candidates.extend(item.get("value") for item in config["controls"] if item.get("type") == 6)
     return next((str(value).replace("\r", " ").replace("\n", " ").strip() for value in candidates if isinstance(value, str) and value.strip()), "")
@@ -337,6 +400,19 @@ def _family_motion(family: str, slug: str) -> str:
     if any(token in slug for token in ("LEFT", "RIGHT", "ABOVE", "BOTTOM")):
         return "wipe"
     return "rise"
+
+
+def _canonical_entry(config: dict) -> str:
+    slug = config["slug"]
+    family = config["family"]
+    output = config.get("renderer", {}).get("output") or config.get("outputs", {}).get("html")
+    if output:
+        return output
+    if family in {"simple-motion", "apple-clean", "aesthetic-glow", "elegant-misc", "water-warp"}:
+        return f"families/{family}/outputs/{slug}.html"
+    if family in {"dimensional-metal", "analog-glitch", "rainbow-trippy"}:
+        return f"families/{family}/renderer.html?slug={slug}&render=1"
+    raise RuntimeError(f"canonical renderer mapping missing for {family}/{slug}")
 
 
 def _slug(value: str) -> str:

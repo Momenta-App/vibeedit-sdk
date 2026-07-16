@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "slug": "Clean_gradient",
+  "name": "Clean gradient",
+  "family": "apple-clean",
+  "source": "V2 50 TITLES PACK PR/Clean gradient.mogrt",
+  "controls": [
+    {
+      "name": "Radial blur",
+      "type": 6,
+      "value": "Clean gradient"
+    },
+    {
+      "name": "Degradado de 4 colores Color 1",
+      "type": 4,
+      "value": [
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "Degradado de 4 colores Color 2",
+      "type": 4,
+      "value": [
+        1,
+        0,
+        0.8235295414924622,
+        1
+      ]
+    },
+    {
+      "name": "Degradado de 4 colores Color 3",
+      "type": 4,
+      "value": [
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Degradado de 4 colores Color 4",
+      "type": 4,
+      "value": [
+        0,
+        0,
+        1,
+        1
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "recipe": {
+    "type": "gradient_text",
+    "motion": "right_slide",
+    "introFrames": 28,
+    "startOffset": [
+      50,
+      0
+    ],
+    "text": "Clean gradient",
+    "font": "mytupiBOLD.ttf",
+    "bounds": [
+      172,
+      154,
+      296,
+      54
+    ],
+    "fontSize": 47,
+    "gradient": [
+      [
+        255,
+        255,
+        0,
+        1
+      ],
+      [
+        255,
+        138,
+        0,
+        1
+      ],
+      [
+        255,
+        0,
+        190,
+        1
+      ],
+      [
+        0,
+        0,
+        255,
+        1
+      ]
+    ],
+    "gradientSize": "112%",
+    "gradientTravel": "8%",
+    "gradientOffset": "-2%",
+    "sweepStrength": 0.14,
+    "sweepWidth": "8%",
+    "sweepRate": 0.95
+  },
+  "editable": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph layers, duplicate text halos, masks, shadows, and light sweeps."
+}

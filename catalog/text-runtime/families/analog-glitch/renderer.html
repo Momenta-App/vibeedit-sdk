@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640, initial-scale=1">
+    <title>Analog Glitch Renderer</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: transparent;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      [data-composition-id] {
+        position: relative;
+        width: 640px;
+        height: 360px;
+        overflow: hidden;
+        background: transparent;
+        transform: scale(var(--hm-preview-scale, 1));
+        transform-origin: center;
+      }
+
+      .clip,
+      canvas {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 640px;
+        height: 360px;
+      }
+    </style>
+  <script src="/vibeedit-adapter.js"></script><style>html,body,.elegant-misc-root{background:transparent!important}</style></head>
+  <body>
+    <div data-composition-id="analog-glitch" data-duration="7.6" data-width="640" data-height="360">
+      <canvas id="analog-canvas" class="clip" data-start="0" data-duration="7.6" data-track-index="0" width="640" height="360"></canvas>
+    </div>
+    <script id="analog-config" type="application/json">{}</script>
+    <script src="components/analog-runtime.js"></script>
+    <script>
+      (async function bootAnalogRenderer() {
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("slug") || "ERROR_TEXT";
+        const response = await fetch(`../../configs/${slug}.json`, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Unable to load analog config ${slug}`);
+        const config = await response.json();
+        document.getElementById("analog-config").textContent = JSON.stringify(config);
+        const root = document.querySelector("[data-composition-id]");
+        const resize = () => {
+          root.style.setProperty("--hm-preview-scale", String(Math.min(window.innerWidth / 640, window.innerHeight / 360)));
+        };
+        resize();
+        window.addEventListener("resize", resize, { passive: true });
+        root.dataset.compositionId = config.compositionId || `analog-glitch-${slug}`;
+        document.title = `Analog Glitch - ${slug}`;
+        window.AnalogGlitch.boot();
+      })().catch((error) => {
+        document.body.textContent = error.message;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "slug": "ABOVE_IN",
+  "kind": "blob_motion",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "above in",
+  "font": "Poppins-Black",
+  "font_size": 46,
+  "center": [
+    320,
+    184
+  ],
+  "color": [
+    255,
+    253,
+    245,
+    1
+  ],
+  "offset": [
+    0,
+    -54
+  ],
+  "start_scale": 1.72,
+  "settle_frame": 48,
+  "blur_text_in": true,
+  "blur_color": [
+    176,
+    176,
+    170,
+    1
+  ],
+  "blur_glow": [
+    255,
+    255,
+    245,
+    72
+  ],
+  "start_text_blur": 10.5,
+  "end_text_blur": 0,
+  "start_glow_blur": 14,
+  "end_glow_blur": 0.25,
+  "blob_start_width": 233,
+  "blob_start_height": 117,
+  "blob_end_width": 154,
+  "blob_end_height": 40,
+  "blob_blur": 0.9,
+  "blob_fade_start": 0.68,
+  "crisp_start": 0.48,
+  "crisp_end": 0.92,
+  "text_glow": [
+    255,
+    255,
+    255,
+    16
+  ],
+  "text_glow_blur": 0.35,
+  "name": "ABOVE IN",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/ABOVE IN.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild using editable config text and glyph-derived blur/glow/mask effects; no arbitrary panels added beyond source-mapped rounded plates for SMOOTH_OPACITY and ZOOM_WORD.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/ABOVE_IN.html"
+  }
+}

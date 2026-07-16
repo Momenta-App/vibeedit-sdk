@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "slug": "APPLE_STYLE_ANIMATION",
+  "name": "APPLE STYLE ANIMATION",
+  "family": "apple-clean",
+  "source": "V2 50 TITLES PACK PR/APPLE STYLE ANIMATION.mogrt",
+  "controls": [
+    {
+      "name": "Cambiar texto 1",
+      "type": 6,
+      "value": "apple style \rtext animation"
+    },
+    {
+      "name": "Cambiar color arriba texto",
+      "type": 4,
+      "value": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "Cambiar color abajo texto",
+      "type": 4,
+      "value": [
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "noBoxGlowRuleAcknowledged": true,
+  "recipe": {
+    "type": "apple_style",
+    "motion": "zoom_settle",
+    "introFrames": 24,
+    "text": "apple style\ntext animation",
+    "font": "mytupiBOLD.ttf",
+    "bounds": [
+      181,
+      141,
+      279,
+      75
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1
+    ],
+    "fontSize": 42,
+    "lineHeight": 0.94,
+    "lineFactor": 1.12,
+    "fitText": false,
+    "textOpacity": 1,
+    "strokeAlpha": 0.08,
+    "glowAlpha": 0.12,
+    "glowRadius": 2.2,
+    "haloOpacity": 0.16,
+    "haloBlur": 1.4,
+    "dropAlpha": 0.15,
+    "dropRadius": 2.6,
+    "depthAlpha": 0.06,
+    "sweepStrength": 0.02,
+    "sweepWidth": "4%",
+    "sweepRate": 1.18,
+    "sweepOffset": 0.12,
+    "shadowAlpha": 0.05
+  },
+  "editable": true,
+  "notes": "Browser-playable HTML motion rebuild using editable glyph layers, duplicate text halos, masks, shadows, and light sweeps."
+}

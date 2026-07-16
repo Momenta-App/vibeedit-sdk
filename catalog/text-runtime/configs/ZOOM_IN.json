@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "slug": "ZOOM_IN",
+  "kind": "blob_motion",
+  "duration": 7.6,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "zoom in",
+  "font": "Mytupi-Bold",
+  "font_size": 48,
+  "center": [
+    320,
+    180
+  ],
+  "color": [
+    255,
+    253,
+    245,
+    1
+  ],
+  "offset": [
+    0,
+    0
+  ],
+  "start_scale": 0.46,
+  "settle_frame": 40,
+  "blob_expand": 16,
+  "blob_blur": 5.5,
+  "crisp_start": 0.28,
+  "crisp_end": 0.68,
+  "name": "ZOOM IN",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7.6
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/Manual files/ZOOM IN.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild using editable config text and glyph-derived blur/glow/mask effects; no arbitrary panels added beyond source-mapped rounded plates for SMOOTH_OPACITY and ZOOM_WORD.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/ZOOM_IN.html"
+  }
+}

@@ -53,10 +53,15 @@ canonical preset files.
 
 The desktop app has 24 top-level text-effect component families under its
 public text-effect catalog. The importer reads tracked revision
-`57b5f4cb3381f72b5ba153bb90d171ba42945e3a`, not dirty working files. It adapts
-21 caption/text vocabularies and all 53 tracked MOGRT configs into 74
-dependency-free seekable components. Live CDN pages, fonts, textures, previews,
-and MOGRT binaries are not copied.
+`2403e3f94cfabf7236d5401bd4beeadefde1d725`, not dirty working files. It adapts
+20 caption/text vocabularies into dependency-free seekable components and
+packages 30 selected VibeEdit HTML/CSS/JS motion-title renderers. Fifteen remain
+source-identical apart from the text-override/transparent-compositing adapter;
+fifteen contain approved beta refinements recorded in the runtime manifest.
+Required local fonts and design assets are included; live CDNs, previews,
+external media, and MOGRT binaries are not copied. A three-frame source
+comparison passes all 15 unmodified canonical entries (13 pixel-identical, two
+perceptually equivalent).
 
 ### Skills
 

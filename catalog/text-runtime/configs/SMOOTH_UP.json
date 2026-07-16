@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "slug": "SMOOTH_UP",
+  "kind": "smooth_up",
+  "duration": 7,
+  "fps": 30,
+  "width": 640,
+  "height": 360,
+  "text": "Smooth up",
+  "font": "BirdsofParadise-PersonaluseOnly",
+  "font_size": 84,
+  "center": [
+    320,
+    179
+  ],
+  "color": [
+    255,
+    247,
+    225,
+    1
+  ],
+  "main_alpha": 0.96,
+  "text_erode": 0,
+  "glow_color": [
+    255,
+    255,
+    255,
+    0.46
+  ],
+  "glow_blur_start": 10,
+  "glow_blur_end": 0.8,
+  "start_offset_x": 0,
+  "start_offset_y": 0,
+  "reveal_start_frame": 1,
+  "reveal_end_frame": 10,
+  "main_start_frame": 3,
+  "main_full_frame": 13,
+  "main_sweep_alpha": 0.04,
+  "main_sweep_width": 0.14,
+  "trail_alpha": 0.42,
+  "trail_color": [
+    255,
+    255,
+    255,
+    112
+  ],
+  "trail_blur": 6.8,
+  "trail_scale_x": 1.12,
+  "trail_offset_x": 10,
+  "trail_offset_y": 1,
+  "trail_start_frame": 1,
+  "trail_full_frame": 8,
+  "trail_decay": 0.78,
+  "trail_decay_start": 15,
+  "trail_decay_end": 34,
+  "frontier_glow_alpha": 0.08,
+  "frontier_blur": 8.5,
+  "frontier_width": 0.12,
+  "frontier_ahead": 0.08,
+  "frontier_offset_x": 22,
+  "frontier_scale_x": 1.14,
+  "name": "SMOOTH UP",
+  "family": "simple-motion",
+  "editable": true,
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "fps": 30,
+    "duration": 7
+  },
+  "source": {
+    "mogrt": "V2 50 TITLES PACK PR/Manual files/SMOOTH UP.mogrt"
+  },
+  "outputs": {},
+  "noBoxGlowRuleAcknowledged": true,
+  "notes": "Browser-playable simple-motion HTML canvas rebuild using editable config text and glyph-derived blur/glow/mask effects; no arbitrary panels added beyond source-mapped rounded plates for SMOOTH_OPACITY and ZOOM_WORD.",
+  "renderer": {
+    "component": "families/simple-motion/components/simple-motion.js",
+    "style": "families/simple-motion/components/simple-motion.css",
+    "output": "families/simple-motion/outputs/SMOOTH_UP.html"
+  }
+}

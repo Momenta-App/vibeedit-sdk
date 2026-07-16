@@ -1,6 +1,8 @@
 export type JSONValue = null | boolean | number | string | JSONValue[] | { [key: string]: JSONValue };
 export type JSONObject = { [key: string]: JSONValue };
 export declare const portableMotionComponents: readonly JSONObject[];
+export declare const HTML_CSS_MOTION_COMPONENT_ID: "vibeedit://motion/html-css";
+export type HTMLCSSMotionProps = { html: string; css?: string; stylesheets?: string[]; atoms?: boolean };
 export type CatalogCategory = "effect" | "transition" | "text" | "motion" | "template" | "sfx" | "skill";
 
 export declare class FrameRate {
@@ -59,7 +61,8 @@ export interface TimelineItemOptions { id: string; placement: Placement | JSONOb
 export declare class VideoClip { constructor(options: TimelineItemOptions & { source: SourceRange | JSONObject }); id: string; kind: "video"; toJSON(): JSONObject }
 export declare class AudioClip { constructor(options: TimelineItemOptions & { source: SourceRange | JSONObject; role?: string; gainDb?: number; pan?: number }); id: string; kind: "audio"; toJSON(): JSONObject }
 export declare class ImageClip { constructor(options: TimelineItemOptions & { sourceId: string }); id: string; kind: "image"; toJSON(): JSONObject }
-export declare class MotionComponent { constructor(options: TimelineItemOptions & { componentId: string; props?: JSONObject; renderer?: string; transparent?: boolean }); id: string; kind: "motion"; toJSON(): JSONObject }
+export type MotionRenderer = "auto" | "html" | "svg" | "canvas" | "webgl" | "webgpu";
+export declare class MotionComponent { constructor(options: TimelineItemOptions & { componentId: string; props?: JSONObject; renderer?: MotionRenderer; transparent?: boolean }); id: string; kind: "motion"; toJSON(): JSONObject }
 export { MotionComponent as Text };
 export declare class Transition { constructor(options: TimelineItemOptions & { transitionId: string; fromItemId: string; toItemId: string; params?: JSONObject }); id: string; kind: "transition"; toJSON(): JSONObject }
 export declare class SoundEffect { constructor(options: TimelineItemOptions & { soundEffectId: string; params?: JSONObject; gainDb?: number; variationSeed?: number; avoidImmediateRepeat?: boolean }); id: string; kind: "sound_effect"; toJSON(): JSONObject }
@@ -136,10 +139,10 @@ export declare function treeChecksum(root: string, excluded?: Set<string>): stri
 
 export declare function registerComponent(id: string, component: (props: JSONObject, frame: number, context: JSONObject) => string): void;
 export declare function renderComponent(id: string, props: JSONObject, frame: number, context: JSONObject): string;
-export declare function documentForFrame(spec: JSONObject, frame: number): string;
+export declare function documentForFrame(spec: JSONObject, frame: number, options?: { assetBaseUrl?: string }): string;
 export declare function trackingPointAt(points: JSONObject[], frame: number, fallback?: { x: number; y: number }): Readonly<{ x: number; y: number }>;
 export declare function renderMotionFrame(spec: JSONObject, frame: number, output: string, options?: { transparent?: boolean }): Promise<string>;
 
-export declare const VERSION: "0.1.0-beta.1";
-export declare const vibeedit: Readonly<{ name: "VibeEdit"; version: "0.1.0-beta.1"; website: "https://vibeedit.com"; npm: "https://www.npmjs.com/package/vibeedit"; schemaVersion: "1.0.0"; catalogVersion: "0.1.0" }>;
+export declare const VERSION: "0.1.0-beta.2";
+export declare const vibeedit: Readonly<{ name: "VibeEdit"; version: "0.1.0-beta.2"; website: "https://vibeedit.com"; npm: "https://www.npmjs.com/package/vibeedit"; schemaVersion: "1.0.0"; catalogVersion: "0.1.0" }>;
 export default vibeedit;
