@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
 import { portableMotionComponents, renderComponent, trackingPointAt } from "../src/index.js";
 
@@ -36,4 +40,28 @@ test("face-follow motion interpolates tracked positions", () => {
   assert.deepEqual(trackingPointAt(points, 5), { x: 0.5, y: 0.5 });
   const html = renderComponent("vibeedit://text/negative-face-follow", { text: "TRACKED", trackingFrames: points }, 5, { durationFrames: 30, width: 640, height: 360 });
   assert.match(html, /left:50\.0000%;top:50\.0000%/);
+});
+
+
+test("every registered text effect has a verified hash-bound preview", () => {
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const catalog = JSON.parse(fs.readFileSync(path.join(root, "catalog", "catalog.json"), "utf8"));
+  const assets = JSON.parse(fs.readFileSync(path.join(root, "catalog", "assets.json"), "utf8"));
+  const text = catalog.items.filter((item) => item.id.startsWith("vibeedit://text/"));
+  const byPath = new Map(assets.assets.map((asset) => [asset.path, asset]));
+
+  assert.equal(text.length, 76);
+  assert.equal(new Set(text.map((item) => item.id)).size, 76);
+  for (const item of text) {
+    assert.equal(item.preview.status, "verified", item.id);
+    assert.equal(item.preview.mediaType, "video/mp4", item.id);
+    const assetPath = path.posix.join("catalog", item.preview.uri);
+    const asset = byPath.get(assetPath);
+    assert.ok(asset, `${item.id} is missing its asset ledger entry`);
+    const bytes = fs.readFileSync(path.join(root, assetPath));
+    assert.equal(bytes.length, asset.bytes, item.id);
+    assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), asset.sha256, item.id);
+    assert.equal(asset.redistribution, "verified", item.id);
+    assert.equal(asset.decodable, true, item.id);
+  }
 });

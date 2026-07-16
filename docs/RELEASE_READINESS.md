@@ -49,7 +49,7 @@ record is [public-beta-install-proof.json](evidence/public-beta-install-proof.js
 | Skills | 44 byte-identical clones selected from the canonical tracked tree; 23 rejected/quarantined |
 | Examples | 13 executable examples; 12 render locally or are baseline recipes, 1 is capability-gated SAM |
 | Catalog | 467 searchable items with stable IDs, prompts, code, compatibility, provenance, and validation |
-| Assets | 13 generated, hash-bound, decodable preview/audio assets |
+| Assets | 89 generated, hash-bound, decodable preview/audio assets: the original 13 plus 76 text-effect previews |
 | Tooling | Python and Node CLIs, four-harness skill lifecycle, static site, and 10-tool local MCP adapter |
 
 The Python API owns composition, media rendering, external audio mixing, beat
@@ -74,7 +74,13 @@ No MoviePy or HyperFrames object is public API.
   floors against their inputs.
 - All 74 portable motion adaptations seek at two frames in Python and
   JavaScript with aggregate cross-runtime SHA-256
-  `1cf1537e50444f0499e07384eeaaaed27ba9bcd2a1947ef66870c22dc55bedb1`.
+  `af7a80f4e3ca5a733493c45bc6511c077532e77676e9a3308d87c5f39cf41173`.
+- All 76 registered text effects (74 imported adaptations plus the two
+  baseline components) have verified, hash-bound, decodable MP4 previews. The
+  browser suite checks deterministic frames, visible pixels, expected DOM
+  text, in-frame geometry, temporal motion where required, blocked networking,
+  browser errors, and full 48-frame decode. The visual evidence is retained in
+  `docs/evidence/text-effects/`.
 - Clean-copy examples pass for fan editing, beat analysis/synchronization,
   layered sound design, mask-confined subject treatment, face-following text,
   multiple transitions, and transparent overlays. Talking-head captions,
@@ -198,16 +204,16 @@ Run from the repository root unless a path is absolute:
 
 ```bash
 .venv/bin/pytest -q
-# 62 passed
+# 59 passed, 8 skipped on the local macOS host
 
 npm test
-# 18 passed
+# 20 passed
 
 npm run types:check
 # passed
 
 npm run validate
-# {"ok":true,"version":"0.1.0-beta.1","catalogItems":467,"skills":44,"assets":13}
+# {"ok":true,"version":"0.1.0-beta.1","catalogItems":467,"skills":44,"assets":89}
 
 .venv/bin/python -m build --outdir /tmp/vibeedit-python-release
 # wheel and sdist built through isolated PEP 517 environments

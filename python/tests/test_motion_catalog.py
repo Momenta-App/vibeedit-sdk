@@ -1,3 +1,4 @@
+import hashlib
 import json
 
 from vibeedit import list_motion_components
@@ -32,3 +33,24 @@ def test_motion_validation_report_records_both_runtimes():
     assert report["cases"] == 74
     assert len(report["javascriptSha256"]) == 64
     assert len(report["pythonSha256"]) == 64
+
+
+def test_every_registered_text_effect_has_a_verified_hash_bound_preview():
+    catalog = json.loads(data_path("catalog", "catalog.json").read_text(encoding="utf-8"))
+    assets = json.loads(data_path("catalog", "assets.json").read_text(encoding="utf-8"))
+    text = [item for item in catalog["items"] if item["id"].startswith("vibeedit://text/")]
+    by_path = {asset["path"]: asset for asset in assets["assets"]}
+
+    assert len(text) == 76
+    assert len({item["id"] for item in text}) == 76
+    for item in text:
+        assert item["preview"]["status"] == "verified", item["id"]
+        assert item["preview"]["mediaType"] == "video/mp4", item["id"]
+        asset_path = f"catalog/{item['preview']['uri']}"
+        assert asset_path in by_path, item["id"]
+        asset = by_path[asset_path]
+        payload = data_path(asset_path).read_bytes()
+        assert len(payload) == asset["bytes"], item["id"]
+        assert hashlib.sha256(payload).hexdigest() == asset["sha256"], item["id"]
+        assert asset["redistribution"] == "verified", item["id"]
+        assert asset["decodable"] is True, item["id"]

@@ -203,7 +203,7 @@ def _motion_style(motion: str, progress: float, eased: float, phase: int, accent
     if motion == "pill":
         return f"background:{accent};padding:.24em .52em;border-radius:999px;color:#101217;transform:scaleX({0.72 + eased * 0.28:.5f});"
     if motion in {"texture", "texture-mask"}:
-        return f"background:repeating-linear-gradient(135deg,{accent} 0 .12em,#fff .12em .2em,{accent} .2em .34em);color:transparent;background-clip:text;-webkit-background-clip:text;filter:contrast(1.15);"
+        return f"background:repeating-linear-gradient(135deg,{accent} 0 .12em,#fff .12em .2em,{accent} .2em .34em);background-size:220% 220%;background-position:{progress * 100:.3f}% {100 - progress * 100:.3f}%;color:transparent;background-clip:text;-webkit-background-clip:text;filter:contrast(1.15);"
     if motion == "weight":
         return f"font-weight:{round(300 + eased * 600)};letter-spacing:{(1 - eased) * 0.08 - 0.03:.4f}em;"
     if motion == "difference":

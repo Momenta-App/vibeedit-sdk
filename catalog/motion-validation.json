@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "status": "passed",
-  "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
+  "revision": "2403e3f94cfabf7236d5401bd4beeadefde1d725",
   "cases": 74,
   "families": {
     "aesthetic-glow": 10,
@@ -18,8 +18,8 @@
     "python": "3.12.13",
     "node": "v26.0.0"
   },
-  "javascriptSha256": "971a7046bdcf83623c49b55efb845a144c0023a837e896e58046ae0a65a47f52",
-  "pythonSha256": "9f24f2446fbb359bff38f5ba60721ee9334b4e446f827fbea459afff57e708e4",
-  "aggregateSha256": "1cf1537e50444f0499e07384eeaaaed27ba9bcd2a1947ef66870c22dc55bedb1",
+  "javascriptSha256": "65bf4ac9ddfe2ece131c580b6831a3b25cc94c25d77e88cb37f80e7582f747cc",
+  "pythonSha256": "b14362b87467c80ce31dfd7e849368b082de46faf33b36c936de49d66ee05144",
+  "aggregateSha256": "af7a80f4e3ca5a733493c45bc6511c077532e77676e9a3308d87c5f39cf41173",
   "contract": "Every generated component rendered deterministically at two integer frames in both public runtimes without network or binary assets."
 }

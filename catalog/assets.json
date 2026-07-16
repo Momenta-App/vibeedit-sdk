@@ -24,7 +24,7 @@
       "path": "catalog/previews/negative.mp4",
       "sha256": "9bd1ef22b82578d8abd22ec3747cd678b15292c178adf9db66f8faaf76d3ecea",
       "bytes": 34935,
-      "durationSeconds": 3.0,
+      "durationSeconds": 3,
       "category": "preview-video",
       "tags": [
         "text",
@@ -44,7 +44,7 @@
       "path": "catalog/previews/caption-rail.mp4",
       "sha256": "5ed266f7b2c5b0713dd3355f126309765d9c77d75f37e23000ebce6b0b89537d",
       "bytes": 232383,
-      "durationSeconds": 3.0,
+      "durationSeconds": 3,
       "category": "preview-video",
       "tags": [
         "text",
@@ -65,7 +65,7 @@
       "path": "catalog/previews/mixed-source-html.mp4",
       "sha256": "69f4f0413a0920c4186f10e33f6d83270700e4cbb31ddc4433919e697ef96a3e",
       "bytes": 335610,
-      "durationSeconds": 3.0,
+      "durationSeconds": 3,
       "category": "preview-video",
       "tags": [
         "template",
@@ -86,7 +86,7 @@
       "path": "catalog/previews/portable-motion-showcase.mp4",
       "sha256": "27c4385c0c9f44f5c8e3a6d826ba74634c3b286ba93b438f4545e16ff841382a",
       "bytes": 297668,
-      "durationSeconds": 3.0,
+      "durationSeconds": 3,
       "category": "preview-video",
       "tags": [
         "template",
@@ -166,7 +166,7 @@
       "path": "catalog/previews/sound-design-layering.mp4",
       "sha256": "5b4b4cc009d7be72d63b46a3ad3447af37d432e154c97a03d36bdc9c6d7d70a8",
       "bytes": 107275,
-      "durationSeconds": 3.0,
+      "durationSeconds": 3,
       "category": "preview-video",
       "tags": [
         "template",
@@ -186,7 +186,7 @@
       "path": "catalog/previews/face-follow-text.mp4",
       "sha256": "df0832361c8549b19381ebfda4a62e22cd21e652767f51c6266580322d3c0b74",
       "bytes": 22601,
-      "durationSeconds": 2.0,
+      "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
         "template",
@@ -207,7 +207,7 @@
       "path": "catalog/previews/mask-subject-effect.mp4",
       "sha256": "ef792c73050ab2f18bc322560cb4bd9920b236c2b4568f2278f93e68c98a33bc",
       "bytes": 15964,
-      "durationSeconds": 2.0,
+      "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
         "template",
@@ -227,7 +227,7 @@
       "path": "catalog/previews/multiple-transitions.mp4",
       "sha256": "0f4623b9bd3c893982d929b2e8be827cd2e661edd12f9c898eac9e6faad968f8",
       "bytes": 19354,
-      "durationSeconds": 4.0,
+      "durationSeconds": 4,
       "category": "preview-video",
       "tags": [
         "template",
@@ -246,7 +246,7 @@
       "path": "catalog/previews/transparent-motion-overlay.webm",
       "sha256": "7dbae05c9b7caac4303d1422deb74027ef58952e805741550ee08d8755785b70",
       "bytes": 7640,
-      "durationSeconds": 2.0,
+      "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
         "template",
@@ -258,6 +258,1526 @@
       "recommendedGainDb": null,
       "loudnessLufs": null,
       "source": "VibeEdit procedural generation",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-blend-difference.mp4",
+      "sha256": "701855cca23460603ede28f799c237a4a996e127f6ba90060bcf48145fec634c",
+      "bytes": 12805,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-blend-difference",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-clip-wipe.mp4",
+      "sha256": "a297d0950faefad5ccc44046ba4f620f9231834d94a2bbcb03cef6a2568de447",
+      "bytes": 14450,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-clip-wipe",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-editorial-emphasis.mp4",
+      "sha256": "eb8a0b1fa31b0db56563caf2d292e175be7ae1b1e38a180670142012b8ee511a",
+      "bytes": 31342,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-editorial-emphasis",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-emoji-pop.mp4",
+      "sha256": "7662b990cdecf74006144c0b6d4b7ed21542cc27e08c8024bd3addfb9508f22c",
+      "bytes": 19940,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-emoji-pop",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-glitch-rgb.mp4",
+      "sha256": "56646173811e6dada27f1d7b05f7af408c994852775e0d7bd0c2be4a881ba5eb",
+      "bytes": 51997,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-glitch-rgb",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-gradient-fill.mp4",
+      "sha256": "8c7f1be1983250f4679e6c2c18651ea3cb9fc34d0bb4f35421bc2935f0d54879",
+      "bytes": 36026,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-gradient-fill",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-highlight.mp4",
+      "sha256": "b5d6ab985c6dd4a52316cbddb0035df16ab1f6380148430a8f4e5b9ecde668ad",
+      "bytes": 21430,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-highlight",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-kinetic-slam.mp4",
+      "sha256": "2991afe7d499d2600dcaf648a76d2c97a3b1dfea67b73bd2eaac8bb302fa66a0",
+      "bytes": 20415,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-kinetic-slam",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-matrix-decode.mp4",
+      "sha256": "ad495ad1003fa6b6dfb20c01aa4cb2cb1c26eb3450313f0a668d7162074f8f17",
+      "bytes": 62693,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-matrix-decode",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-neon-accent.mp4",
+      "sha256": "e1e8bf3ebf23c03ea9ef1446b8f8a726d9030a9fa73da293a256d77861ae5fa3",
+      "bytes": 16903,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-neon-accent",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-neon-glow.mp4",
+      "sha256": "f47fb2d6caa1841d4ecbaae0894221928120fe9beeb6a83f761752405539c442",
+      "bytes": 23462,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-neon-glow",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-parallax-layers.mp4",
+      "sha256": "49083623d6a697d7e5fc12c59fe149154bd82ee684ed3a0ca9cf7cca068666b4",
+      "bytes": 23585,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-parallax-layers",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-particle-burst.mp4",
+      "sha256": "fec826e4c7f4fb4c60dcc820fc74c0813f8d681a913faead0759ea68ae0aacf8",
+      "bytes": 28008,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-particle-burst",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-pill-karaoke.mp4",
+      "sha256": "d18922c1706540420b1da0a22312952d734350360aa98967e3bb5557b39b733e",
+      "bytes": 33338,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-pill-karaoke",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-rail.mp4",
+      "sha256": "65f55ab2889cce185d5a1645a78533782900e3e3c42792b847b8344afca9a8aa",
+      "bytes": 16428,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-rail",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-texture.mp4",
+      "sha256": "0d4a04c3d7b213ec2db0c3710a72b58e265a6c6810deab5df66cedd6b393d92e",
+      "bytes": 70132,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-texture",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/caption-weight-shift.mp4",
+      "sha256": "470019456151cbb6996d0467fc7297ad367a1874664f14cfb30776e01cfb8f00",
+      "bytes": 22128,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/caption-weight-shift",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/creed-kinetic-text.mp4",
+      "sha256": "bfd8917d4553a4b1632571ca20901effda2e9c400e3527eafe3ca292afb3873d",
+      "bytes": 30342,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/creed-kinetic-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-3d-text.mp4",
+      "sha256": "d31a107ffa44164a20b59b79686b359a2f029562886e4bc16743f179096d3b9d",
+      "bytes": 20032,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-3d-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-above-in.mp4",
+      "sha256": "9ef884c654d11df13945e65c9419057e840bc4eaa9ae6b132351da4faec97417",
+      "bytes": 13776,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-above-in",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-aesthetic-purple.mp4",
+      "sha256": "a9f0916648aa3d5cf8d650641b38f7736a82fdadaaa9e85d45802ccdc1e22edf",
+      "bytes": 23771,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-aesthetic-purple",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-aesthetic-strinking.mp4",
+      "sha256": "99c918398151065d282734dbaadb690dd108fd8c607eb219ed857f2a9d758247",
+      "bytes": 23445,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-aesthetic-strinking",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-apple-ladder.mp4",
+      "sha256": "5e43e03983cfac7e1bff528e481d54bc4200a567e110bb9c3b50610b61e9eda4",
+      "bytes": 32015,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-apple-ladder",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-apple-middle.mp4",
+      "sha256": "22ca2ccf4f521876b17ce7c0f602b39392378b914be6b1bd3e3650b3e628d1bf",
+      "bytes": 30351,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-apple-middle",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-apple-smooth.mp4",
+      "sha256": "aac4c100acb6183a3c717cbb8297c836142f62c17b7f3faef1af46515d020671",
+      "bytes": 32532,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-apple-smooth",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-apple-style-animation.mp4",
+      "sha256": "c350492e86aa957ee4a9922ffb9db0ab5c2a224ae65a125ebb905b0cf49833f0",
+      "bytes": 50859,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-apple-style-animation",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-apple-word.mp4",
+      "sha256": "29c2f4dbdf8b4e628842cfbb808b9279014e5e664dd81bfe2a66486478f13441",
+      "bytes": 29691,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-apple-word",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-blue-and-orange.mp4",
+      "sha256": "1014521631494b0f0fc4b9c37b83e75458251b7bf4f3d88c556f8a049bd9d6f3",
+      "bytes": 26827,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-blue-and-orange",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-blur-in.mp4",
+      "sha256": "c2dcb5babe2bbc3e952274eb1c923e02220f5faa3fc4b4821359f3cd075f3450",
+      "bytes": 21073,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-blur-in",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-bottom-in.mp4",
+      "sha256": "f6a890b00fc5d70c9831ef45a161b4ae7ba7afc24ce501cf1204bfcbd4ccdbcc",
+      "bytes": 14043,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-bottom-in",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-bubble.mp4",
+      "sha256": "c98edd9700079d4d76056f7a3d3ad8291a2ccbd074b1c7fd1a76442d5134f941",
+      "bytes": 28217,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-bubble",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-clean-aesthetic-light.mp4",
+      "sha256": "5de51167bafa8d6c24d45fd84b51a9de5ed95e2865f31a374529c2d8f499bc79",
+      "bytes": 44778,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-clean-aesthetic-light",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-clean-blue.mp4",
+      "sha256": "09e52872022df7420896369b138ca1cf0b921c10806571550c623e0b3017904f",
+      "bytes": 25256,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-clean-blue",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-clean-gradient.mp4",
+      "sha256": "90098e4cca20251272a3e41e71fb680696c5c5651ecfbe71d775a6732b880811",
+      "bytes": 37454,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-clean-gradient",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-clean-style.mp4",
+      "sha256": "63118e599a707d3052e05759092bcae2e873ed71f72394365f2f8a25b160d57d",
+      "bytes": 18926,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-clean-style",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-dark-water.mp4",
+      "sha256": "c1a616b11111b600bf351fe6535f78ff2b8ab670fd17cb24d957ac2c5468a2c8",
+      "bytes": 42985,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-dark-water",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-elegant.mp4",
+      "sha256": "2c8281f34ce7152818ff28a862c76a9786f8db1ad5e5a09d0af3ee017e561a64",
+      "bytes": 26383,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-elegant",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-error-text.mp4",
+      "sha256": "90394b40a3e18ce0f0fb6d89a5379c87535fc4b93a153df6455b2695eb41748f",
+      "bytes": 39065,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-error-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-escrito-a-mano-posterizacion.mp4",
+      "sha256": "fd3b91e4442179e2a82adf7886664be9ef4b0f231dbac0143765390148400519",
+      "bytes": 72586,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-escrito-a-mano-posterizacion",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-esmerald.mp4",
+      "sha256": "72d2f7e4875a3b39b44328a60cb6edce43c0b5c772c1e55e46fb0b372d043eb5",
+      "bytes": 20173,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-esmerald",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-fast.mp4",
+      "sha256": "471bf461749376f0f1ab2212cf363ea37b52e3621644c27d8ee4ae13c177c2f5",
+      "bytes": 24792,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-fast",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-fire.mp4",
+      "sha256": "0df11d18f6ed09145482325172fba226b331a1bc4c6732068d7bef1015ca0e20",
+      "bytes": 17562,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-fire",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-fluorscent.mp4",
+      "sha256": "df4f62dfe9b9d64cfb127495760a85e265738f40404954373441d8a14c0ba48d",
+      "bytes": 24629,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-fluorscent",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-futurist.mp4",
+      "sha256": "53eb9cc7c8433cb63c7dd2dec15eda23fd6d710bbf74c991df0317265b513c3a",
+      "bytes": 30701,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-futurist",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-gold-text.mp4",
+      "sha256": "7b0070afe55ac61ebbdaf48534df11cddb65ef7a85d475043caa5304e398a001",
+      "bytes": 23312,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-gold-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-green.mp4",
+      "sha256": "f0a2d0d91c0ae0e05d39cba2a6023a9f8fe4ac461815530aa6932fc6fa91f432",
+      "bytes": 17603,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-green",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-green-and-grey.mp4",
+      "sha256": "2923d9b153ea32a901de1aa9f472e55953aa01880845a649f7a06b0c04ef2203",
+      "bytes": 25011,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-green-and-grey",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-left-in.mp4",
+      "sha256": "d385124d87af96e2aa4d69e44a4f7db7dd4684b2ed0dda6bfa275a166fb14589",
+      "bytes": 12356,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-left-in",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-old-money.mp4",
+      "sha256": "33d642d6a1b4f099a3bb83bc5abba9f28a905286ab28e0e19587cc9ced56455d",
+      "bytes": 24887,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-old-money",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-old-tv.mp4",
+      "sha256": "869dd6be301be7d5df9fde4fee83380d44b9a1333d32cdf1226d6b93417d2ad7",
+      "bytes": 35067,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-old-tv",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-opacity-in.mp4",
+      "sha256": "80cfa682964d23e234363fe629f35575ccb6ed474d00258df9926ec14e906390",
+      "bytes": 25731,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-opacity-in",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-orange-text.mp4",
+      "sha256": "1b4e2d73ed5962c434a340f33f6b4cd23a0755b86baa2eb224a08ca805289d6c",
+      "bytes": 19545,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-orange-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-purple.mp4",
+      "sha256": "41863f11962fbec281ad196c2eeb43305f086c6d1a4f1e54e9173061974a30d8",
+      "bytes": 18169,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-purple",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-radial-blur.mp4",
+      "sha256": "d1c4378f3a1168203fb67ba30de6e533073cc316db163c8e9e5436c5aec981a7",
+      "bytes": 57129,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-radial-blur",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-rainbow-clean-text.mp4",
+      "sha256": "0b9b1ca4a787b3b91816868206abb15c24aa6b4ce9b433d23fc3d011a30f5c38",
+      "bytes": 60836,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-rainbow-clean-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-rainbow-text.mp4",
+      "sha256": "5e26b4649033db1a38ee9ff58aa563f0c656a9ac1f730962f23401aa8a4a248f",
+      "bytes": 37669,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-rainbow-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-rebote.mp4",
+      "sha256": "cc4769a2a60e2fd9151a2efbaf831d9e2ca128b5529aeaaec9bca7b59210e184",
+      "bytes": 28010,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-rebote",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-rebound.mp4",
+      "sha256": "4c4c03c099e239e888ae822cc420ee5220b928000b6d30aba8b1769092dc5225",
+      "bytes": 28122,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-rebound",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-right-in.mp4",
+      "sha256": "451962d400c156fb2b334d7e5e2221fbb001d037c61430dd88d4940929828c50",
+      "bytes": 13107,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-right-in",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-smooth-bounce.mp4",
+      "sha256": "d5d560913238e3ce42bd8f0e543efb00390220d17ff9f9f6a29399194e67ecf1",
+      "bytes": 35598,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-smooth-bounce",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-smooth-opacity.mp4",
+      "sha256": "9c0e646c7a12a9a53ebd5af7d2ccc15e67b45c5f17563405cfcfb9e4bbf3ce9a",
+      "bytes": 39033,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-smooth-opacity",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-smooth-up.mp4",
+      "sha256": "82d56d70d5f52b85dbe2af0edb8a72bbd2adc6df16582e88da0a1ed3b20d6cfc",
+      "bytes": 28226,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-smooth-up",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-texto-de-oro.mp4",
+      "sha256": "9c6c856a85a0c954dc78cf607ee204f9bb577307d552c9f16c2239b45f0eabb3",
+      "bytes": 28489,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-texto-de-oro",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-triple-elegant-text.mp4",
+      "sha256": "6e39293fb522ab236d56edabc37dd3cf651d18b513fb4515a7b0c7fafa5e9c33",
+      "bytes": 21017,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-triple-elegant-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-vhs.mp4",
+      "sha256": "1867f6a4dc2c96e0c472a1671849600d8abb90631583c456333ad1861e1f02a0",
+      "bytes": 30413,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-vhs",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-warp.mp4",
+      "sha256": "f61d990e79132a875568e4847c77416b8409430a4a8c1782a61fe30e14d2d04e",
+      "bytes": 18770,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-warp",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-water-text.mp4",
+      "sha256": "76d151f225160cdb22a8f339b8ad5269be0edbbf06c2f4ed6427592ee76cb8a7",
+      "bytes": 26694,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-water-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-waves.mp4",
+      "sha256": "5084920734f7e47f78b1b081e08246af1bb33703bfc384e3f17f0dfde439c115",
+      "bytes": 23777,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-waves",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-zoom-in.mp4",
+      "sha256": "f1f239b7b62bddb0f534f6f509b4fadc68b5d20cb3af716193740a262b456d7a",
+      "bytes": 22053,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-zoom-in",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-zoom-out.mp4",
+      "sha256": "c8c16398dfdc35a0dc21796a4c8ac8865d7f848ebb13b804d564a4cdfafac3ed",
+      "bytes": 25652,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-zoom-out",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/mogrt-zoom-word.mp4",
+      "sha256": "68cfa482206591ec3e20fc1dc9581b9f13acf569bd44dfca7699cbd536c153cc",
+      "bytes": 37922,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/mogrt-zoom-word",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/morph-text.mp4",
+      "sha256": "7371faaab0934401f236fc65cc3300d82270f85d61ca15c3100cf75f9a1a2173",
+      "bytes": 54065,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/morph-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/negative.mp4",
+      "sha256": "b086437075835bde44f03bd1cce0534c0db2d35bca9d9200e50c981134a03b39",
+      "bytes": 20949,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/negative",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/negative-face-follow.mp4",
+      "sha256": "a0c9e19ecbe7343b9533ae85b30ff0cfbd662ae37999e5c324ec1c59aa9c2c6c",
+      "bytes": 58528,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/negative-face-follow",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/shimmer-sweep.mp4",
+      "sha256": "14383d75c46a478b5aa59e1616ba0f373a46b2705477a9ae4b4566b2e5faeac3",
+      "bytes": 22137,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/shimmer-sweep",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/text-effects/texture-mask-text.mp4",
+      "sha256": "e54932a56331eb525a9dea69ead5cf52b2e0d4336361b09c57c4e66ae3878cfc",
+      "bytes": 85542,
+      "durationSeconds": 2,
+      "category": "preview-video",
+      "tags": [
+        "text",
+        "html",
+        "text-effect-conformance"
+      ],
+      "intendedUse": "catalog preview for vibeedit://text/texture-mask-text",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit deterministic browser motion runtime",
       "license": "SEE LICENSE IN LICENSE.md",
       "redistribution": "verified",
       "commercialOutputAllowed": true,

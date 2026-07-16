@@ -99,7 +99,7 @@ function motionStyle(motion, progress, eased, phase, accent, props, frame) {
   if (motion === "glow") return `color:${accent};text-shadow:0 0 .08em ${accent},0 0 .32em ${accent};opacity:${eased.toFixed(5)};`;
   if (motion === "parallax") return `text-shadow:.035em .045em 0 ${accent},.07em .09em 0 rgba(0,0,0,.5);transform:perspective(700px) rotateY(${((1 - eased) * -18).toFixed(3)}deg);`;
   if (motion === "pill") return `background:${accent};padding:.24em .52em;border-radius:999px;color:#101217;transform:scaleX(${(0.72 + eased * 0.28).toFixed(5)});`;
-  if (motion === "texture" || motion === "texture-mask") return `background:repeating-linear-gradient(135deg,${accent} 0 .12em,#fff .12em .2em,${accent} .2em .34em);color:transparent;background-clip:text;-webkit-background-clip:text;filter:contrast(1.15);`;
+  if (motion === "texture" || motion === "texture-mask") return `background:repeating-linear-gradient(135deg,${accent} 0 .12em,#fff .12em .2em,${accent} .2em .34em);background-size:220% 220%;background-position:${(progress * 100).toFixed(3)}% ${(100 - progress * 100).toFixed(3)}%;color:transparent;background-clip:text;-webkit-background-clip:text;filter:contrast(1.15);`;
   if (motion === "weight") return `font-weight:${Math.round(300 + eased * 600)};letter-spacing:${((1 - eased) * 0.08 - 0.03).toFixed(4)}em;`;
   if (motion === "difference") return `mix-blend-mode:difference;color:#fff;`;
   if (motion === "face-follow") {

@@ -48,6 +48,7 @@
     "validate": "node scripts/validate-package.js",
     "catalog:build": "python3 scripts/normalize_catalog_examples.py && python3 scripts/generate_catalog_site.py",
     "previews:build": "uv run --extra browser python scripts/build_previews.py",
+    "text:previews": "node scripts/build_text_effect_previews.mjs",
     "sbom:build": "python3 scripts/generate_sbom.py",
     "pack:check": "npm pack --dry-run",
     "types:check": "tsc --noEmit -p tsconfig.types.json"
