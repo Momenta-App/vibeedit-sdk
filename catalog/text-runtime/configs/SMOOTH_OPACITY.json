@@ -21,7 +21,7 @@
   ],
   "start_y": 100,
   "settle_frame": 28,
-  "fade_frames": 1,
+  "fade_frames": 10,
   "box_width": 406,
   "top_width": 402,
   "top_height": 74,
@@ -159,16 +159,16 @@
     0,
     205,
     230,
-    64
+    28
   ],
-  "main_glow_blur": 3.4,
+  "main_glow_blur": 1.2,
   "main_sweep_alpha": 0.018,
   "main_sweep_progress": 0.61,
   "main_sweep_width": 0.14,
   "main_inner_highlight_alpha": 0.16,
   "main_inner_highlight_start": 0.16,
   "main_inner_highlight_end": 0.54,
-  "main_material_noise_alpha": 0.1,
+  "main_material_noise_alpha": 0,
   "main_material_noise_cell": 2,
   "main_material_noise_seed": 1207,
   "main_text_offset_x": -1,
@@ -190,8 +190,8 @@
     255
   ],
   "small_text_offset_y": 47,
-  "small_highlight_alpha": 0.4,
-  "small_highlight_blur": 0.8,
+  "small_highlight_alpha": 0.12,
+  "small_highlight_blur": 0.35,
   "small_inner_highlight_alpha": 0.14,
   "tracking": 0,
   "small_tracking": 1,
@@ -222,11 +222,11 @@
     62,
     245
   ],
-  "main_back_alpha": 1,
-  "main_back_blur": 8,
-  "main_back_scale_x": 1.28,
-  "main_back_scale_y": 1.35,
-  "main_chroma_alpha": 0.35,
+  "main_back_alpha": 0.1,
+  "main_back_blur": 2.2,
+  "main_back_scale_x": 1.03,
+  "main_back_scale_y": 1.05,
+  "main_chroma_alpha": 0.04,
   "main_chroma_blur": 0.5,
   "small_back_fill": [
     52,
@@ -234,8 +234,8 @@
     52,
     210
   ],
-  "small_back_alpha": 1,
-  "small_back_blur": 6,
-  "small_back_scale_x": 1.34,
-  "small_back_scale_y": 1.9
+  "small_back_alpha": 0.06,
+  "small_back_blur": 1.4,
+  "small_back_scale_x": 1.02,
+  "small_back_scale_y": 1.05
 }

@@ -21,10 +21,10 @@
   ],
   "offset": [
     0,
-    0
+    18
   ],
-  "start_scale": 1.75,
-  "settle_frame": 40,
+  "start_scale": 1.02,
+  "settle_frame": 24,
   "blob_expand": 13,
   "blob_blur": 7,
   "crisp_start": 0.28,
@@ -47,5 +47,18 @@
     "component": "families/simple-motion/components/simple-motion.js",
     "style": "families/simple-motion/components/simple-motion.css",
     "output": "families/simple-motion/outputs/BLUR_IN.html"
-  }
+  },
+  "blur_text_in": true,
+  "end_scale": 1,
+  "appear_frames": 4,
+  "start_text_blur": 18,
+  "end_text_blur": 0,
+  "start_glow_blur": 4,
+  "end_glow_blur": 0,
+  "blur_glow": [
+    255,
+    255,
+    255,
+    18
+  ]
 }

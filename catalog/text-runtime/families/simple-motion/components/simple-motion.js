@@ -690,8 +690,8 @@ function drawOpacity(ctx, frame, cfg) {
   drawText(ctx, cfg.text, cfg.font, cfg.font_size, cfg.center, {
     fill: cfg.color,
     alpha: smoothstep(0, cfg.fade_frames || 3, frame),
-    glow: [255, 255, 255, 55],
-    glowBlur: 0.9
+    glow: cfg.glow || [255, 255, 255, 0],
+    glowBlur: cfg.glow_blur ?? 0
   });
 }
 

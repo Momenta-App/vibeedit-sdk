@@ -34,7 +34,7 @@ test("mixed fixture produces one deterministic document", async () => {
 });
 
 test("canonical seeking uses the CompositionSpec canvas frame rate", () => {
-  const component = portableMotionComponents.find((entry) => entry.id === "vibeedit://text/mogrt-bubble");
+  const component = portableMotionComponents.find((entry) => entry.id === "vibeedit://text/mogrt-elegant");
   const spec = {
     canvas: { width: 640, height: 360, frameRate: { numerator: 24, denominator: 1 } },
     timeline: { tracks: [{ order: 0, items: [{ kind: "motion", placement: { startFrame: 0, durationFrames: 48 }, componentId: component.id, props: {} }] }] },
@@ -44,9 +44,9 @@ test("canonical seeking uses the CompositionSpec canvas frame rate", () => {
 
 test("canonical text components retain their source renderer entries", () => {
   const canonical = portableMotionComponents.filter((component) => component.canonical);
-  assert.equal(canonical.length, 53);
+  assert.equal(canonical.length, 30);
   assert.ok(canonical.every((component) => component.canonical.entry.endsWith(".html") || component.canonical.entry.includes(".html?")));
-  const component = canonical.find((entry) => entry.id === "vibeedit://text/mogrt-bubble");
+  const component = canonical.find((entry) => entry.id === "vibeedit://text/mogrt-elegant");
   const html = renderComponent(component.id, { text: component.defaultText }, 12, {
     assetBaseUrl: "http://127.0.0.1:1234/",
     durationFrames: 48,
@@ -55,7 +55,7 @@ test("canonical text components retain their source renderer entries", () => {
     height: 360,
   });
   assert.match(html, /data-vibeedit-canonical="true"/);
-  assert.match(html, /families\/elegant-misc\/outputs\/Bubble\.html/);
+  assert.match(html, /families\/elegant-misc\/outputs\/ELEGANT\.html/);
   assert.match(html, /data-vibeedit-time="0\.500000"/);
 });
 

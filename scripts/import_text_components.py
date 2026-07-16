@@ -39,6 +39,50 @@ STYLE = {
     "texture-mask-text": ("texture-mask", "text", "CUT THROUGH", "#ffffff", "#8d8d8d"),
 }
 
+REMOVED_REGISTRY_NAMES = {"caption-texture"}
+REMOVED_MOGRT_SLUGS = {
+    "APPLE_STYLE_ANIMATION",
+    "BLUE_AND_ORANGE",
+    "Bubble",
+    "ESCRITO_A_MANO_POSTERIZACION",
+    "GREEN_AND_GREY",
+    "Green",
+    "OLD_TV",
+    "ORANGE_TEXT",
+    "Purple",
+    "RAINBOW_CLEAN_TEXT",
+    "RAINBOW_TEXT",
+    "REBOUND",
+    "Radial_BLUR",
+    "TEXTO_DE_ORO",
+    "VHS",
+    "WATER_TEXT",
+    "WAVES",
+    "ZOOM_IN",
+    "ZOOM_OUT",
+    "ZOOM_WORD",
+    "apple_MIDDLE",
+    "apple_WORD",
+    "clean_aesthetic_light",
+}
+REFINED_MOGRT_SLUGS = {
+    "3D_TEXT",
+    "AESTHETIC_PURPLE",
+    "AESTHETIC_STRINKING",
+    "BLUR_IN",
+    "BOTTOM_IN",
+    "CLEAN_BLUE",
+    "ELEGANT",
+    "ESMERALD",
+    "GOLD_TEXT",
+    "LEFT_IN",
+    "OPACITY_IN",
+    "RIGHT_IN",
+    "SMOOTH_OPACITY",
+    "dark_water",
+    "fluorscent",
+}
+
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Import tracked VibeEdit text designs into the portable motion runtime")
@@ -48,8 +92,8 @@ def main(argv: list[str] | None = None) -> int:
     root = args.source_root.resolve()
     revision = _git(root, "rev-parse", args.revision).decode().strip()
     components = _registry_components(root, revision) + _mogrt_components(root, revision)
-    if len(components) != 74:
-        raise RuntimeError(f"reviewed portable text inventory changed: expected 74, found {len(components)}")
+    if len(components) != 50:
+        raise RuntimeError(f"reviewed portable text inventory changed: expected 50, found {len(components)}")
     if len({component["id"] for component in components}) != len(components):
         raise RuntimeError("portable text identifiers must be unique")
 
@@ -82,6 +126,8 @@ def _registry_components(root: Path, revision: str) -> list[dict]:
         metadata = json.loads(metadata_bytes)
         name = metadata["name"]
         if name in {"html-motion-mogrt", "learned-text-styles"}:
+            continue
+        if name in REMOVED_REGISTRY_NAMES:
             continue
         if name not in STYLE:
             raise RuntimeError(f"portable style mapping missing for {name}")
@@ -116,6 +162,8 @@ def _mogrt_components(root: Path, revision: str) -> list[dict]:
         source = _show(root, revision, path)
         config = json.loads(source)
         slug = config["slug"]
+        if slug in REMOVED_MOGRT_SLUGS:
+            continue
         family = config["family"]
         default_text = _default_text(config) or slug.replace("_", " ")
         foreground, accent = _palette(config, family)
@@ -133,6 +181,7 @@ def _mogrt_components(root: Path, revision: str) -> list[dict]:
                     "entry": _canonical_entry(config),
                     "fps": config.get("fps", config.get("canvas", {}).get("fps", 30)),
                     "durationSeconds": config.get("duration", config.get("canvas", {}).get("duration", 7.6)),
+                    "approvedRefinement": slug in REFINED_MOGRT_SLUGS,
                 },
                 "tags": ["text", "motion-title", "canonical-source-clone", family, "portable", "deterministic"],
                 "source": {"path": path, "revision": revision, "sha256": hashlib.sha256(source).hexdigest()},

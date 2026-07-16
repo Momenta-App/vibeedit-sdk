@@ -20,7 +20,8 @@ const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 640, height: 360 }, deviceScaleFactor: 1 });
 const frames = [2, 24, 43];
 const results = [];
-const components = portableMotionComponents.filter((entry) => entry.canonical && (!requestedIds || requestedIds.has(entry.id)));
+const refined = portableMotionComponents.filter((entry) => entry.canonical?.approvedRefinement);
+const components = portableMotionComponents.filter((entry) => entry.canonical && !entry.canonical.approvedRefinement && (!requestedIds || requestedIds.has(entry.id)));
 if (requestedIds && components.length !== requestedIds.size) throw new Error("one or more --only canonical text effect IDs were not found");
 
 await page.addInitScript(() => {
@@ -61,11 +62,12 @@ const evidence = {
   sourceRevision: manifest.revision,
   sourceBaseUrl: sourceBaseUrl.href,
   compared: results.length,
+  excludedApprovedRefinements: refined.map((entry) => entry.id),
   frames,
   minimumAcceptedSsim: 0.95,
   pixelIdentical: results.filter((result) => result.minimumSsim === 1).length,
   perceptuallyEquivalent: results.filter((result) => result.minimumSsim >= 0.95 && result.minimumSsim < 1).length,
-  meaning: "SSIM is measured after deterministic seeking and compositing both the tracked VibeEdit source and packaged clone over the same matte. A score of 1 is pixel-identical; 0.95 or higher is accepted as perceptually equivalent and preserves small browser font-antialiasing differences.",
+  meaning: "SSIM is measured for unmodified clones after deterministic seeking and compositing both the tracked VibeEdit source and packaged clone over the same matte. Approved beta refinements intentionally diverge from their source and are covered by render conformance instead.",
   passed: results.length - failures.length,
   failed: failures.length,
   failures: failures.map((result) => result.id),

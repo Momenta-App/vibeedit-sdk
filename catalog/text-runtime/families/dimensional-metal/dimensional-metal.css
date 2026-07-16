@@ -153,7 +153,7 @@ body {
 .money-word {
   background:
     linear-gradient(105deg, transparent 0%, transparent 18%, rgba(255, 255, 255, .92) 32%, rgba(255, 246, 146, .38) 42%, transparent 54%, transparent 100%),
-    linear-gradient(180deg, var(--top), #fff9a8 33%, #ffe85a 54%, var(--bottom) 78%, #8a6500 100%);
+    linear-gradient(180deg, var(--top), #ffe078 30%, #ffc21c 52%, var(--bottom) 78%, #6f3500 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -180,7 +180,7 @@ body {
 
 .gold-fill {
   z-index: 24;
-  filter: brightness(1.52) saturate(1.38) contrast(1.04);
+  filter: brightness(1.18) saturate(1.52) contrast(1.08);
   text-shadow:
     0 0 2px rgba(255, 255, 222, .88),
     0 0 4px rgba(255, 225, 68, .88),

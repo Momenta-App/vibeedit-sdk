@@ -45,11 +45,11 @@ record is [public-beta-install-proof.json](evidence/public-beta-install-proof.js
 | Surface | Included and verified |
 | --- | --- |
 | Media presets | 333: 200 filters, 112 effects, 21 transitions |
-| Motion runtime | 53 source-preserved VibeEdit HTML/CSS/JS effects, 21 portable-runtime text/caption effects, and two baseline components |
+| Motion runtime | 30 selected VibeEdit HTML/CSS/JS effects, 20 portable-runtime text/caption effects, and two baseline components |
 | Skills | 44 byte-identical clones selected from the canonical tracked tree; 23 rejected/quarantined |
 | Examples | 13 executable examples; 12 render locally or are baseline recipes, 1 is capability-gated SAM |
-| Catalog | 467 searchable items with stable IDs, prompts, code, compatibility, provenance, and validation |
-| Assets | 89 generated, hash-bound, decodable preview/audio assets: the original 13 plus 76 text-effect previews |
+| Catalog | 443 searchable items with stable IDs, prompts, code, compatibility, provenance, and validation |
+| Assets | 65 generated, hash-bound, decodable preview/audio assets: the original 13 plus 52 text-effect previews |
 | Tooling | Python and Node CLIs, four-harness skill lifecycle, static site, and 10-tool local MCP adapter |
 
 The Python API owns composition, media rendering, external audio mixing, beat
@@ -72,14 +72,14 @@ No MoviePy or HyperFrames object is public API.
 - Representative cinematic-filter, invert, cross-dissolve, film-burn, and
   push-transition frames match fixed pixel goldens and exceed perceptual-delta
   floors against their inputs.
-- All 74 fallback motion implementations seek at two frames in Python and
+- All 50 imported motion implementations seek at two frames in Python and
   JavaScript with aggregate cross-runtime SHA-256
-  `243f02fd21ef1c5a141acb37869c4219aa8f1aef8bc069d842e43d9ef942ccc9`.
-- All 53 packaged canonical HTML/CSS/JS effects were compared to the tracked
-  source at three timeline points: 50 are pixel-identical and three are
-  perceptually equivalent browser-font rasterizations above SSIM 0.95. The
-  measured minimum is 0.958599.
-- All 76 registered text effects (74 imported adaptations plus the two
+  `c096094e8e9a2f75097dacc96d9d84a1099a57170de7408ea8d4169fe338cedf`.
+- All 15 unmodified packaged canonical HTML/CSS/JS effects were compared to the
+  tracked source at three timeline points: 13 are pixel-identical and two are
+  perceptually equivalent browser-font rasterizations above SSIM 0.95. Fifteen
+  approved refinements intentionally diverge and pass browser conformance.
+- All 52 registered text effects (50 imported components plus the two
   baseline components) have verified, hash-bound, decodable MP4 previews. The
   browser suite checks deterministic frames, visible pixels, expected DOM
   text, in-frame geometry, temporal motion where required, blocked networking,
@@ -217,7 +217,7 @@ npm run types:check
 # passed
 
 npm run validate
-# {"ok":true,"version":"0.1.0-beta.1","catalogItems":467,"skills":44,"assets":89}
+# {"ok":true,"version":"0.1.0-beta.1","catalogItems":443,"skills":44,"assets":65}
 
 .venv/bin/python -m build --outdir /tmp/vibeedit-python-release
 # wheel and sdist built through isolated PEP 517 environments
@@ -227,7 +227,7 @@ npm pack --pack-destination /tmp/vibeedit-npm-release --json
 ```
 
 Clean core wheel validation installed only the exact wheel and its base dependencies,
-enumerated 467 catalog items, 44 skills, 74 motion components, 333 presets, and
+enumerated 443 catalog items, 44 skills, 50 imported motion components, 333 presets, and
 13 examples, then rendered and verified the packaged generated example with
 real audio/video and zero frame drift. The same clean wheel ran explicit vision
 setup, compiled the packaged Swift source, and returned the exact

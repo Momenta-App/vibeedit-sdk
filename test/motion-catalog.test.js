@@ -9,8 +9,8 @@ import { portableMotionComponents, renderComponent, trackingPointAt } from "../s
 
 
 test("all portable motion components seek deterministically without network content", () => {
-  assert.equal(portableMotionComponents.length, 74);
-  assert.equal(new Set(portableMotionComponents.map((component) => component.id)).size, 74);
+  assert.equal(portableMotionComponents.length, 50);
+  assert.equal(new Set(portableMotionComponents.map((component) => component.id)).size, 50);
   for (const component of portableMotionComponents) {
     const context = { durationFrames: 60, width: 640, height: 360 };
     const early = renderComponent(component.id, {}, 2, context);
@@ -50,8 +50,8 @@ test("every registered text effect has a verified hash-bound preview", () => {
   const text = catalog.items.filter((item) => item.id.startsWith("vibeedit://text/"));
   const byPath = new Map(assets.assets.map((asset) => [asset.path, asset]));
 
-  assert.equal(text.length, 76);
-  assert.equal(new Set(text.map((item) => item.id)).size, 76);
+  assert.equal(text.length, 52);
+  assert.equal(new Set(text.map((item) => item.id)).size, 52);
   for (const item of text) {
     assert.equal(item.preview.status, "verified", item.id);
     assert.equal(item.preview.mediaType, "video/mp4", item.id);

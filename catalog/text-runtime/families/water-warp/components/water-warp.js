@@ -365,11 +365,11 @@
     const strokeMask = textMask(text, recipe.font, fontSize, 1, 20);
     const layer = createCanvas(strokeMask.width + 20, strokeMask.height + 20);
     const ctx = layer.getContext("2d", { willReadFrequently: true });
-    pasteCenter(ctx, solid(strokeMask, [0, 20, 18], 0.95, 0.45), layer.width / 2 + 5, layer.height / 2 + 7);
-    pasteCenter(ctx, solid(strokeMask, [0, 255, 204], 0.12, 1.6), layer.width / 2, layer.height / 2);
+    pasteCenter(ctx, solid(strokeMask, [0, 20, 18], 0.72, 0.25), layer.width / 2 + 2, layer.height / 2 + 3);
+    pasteCenter(ctx, solid(strokeMask, [0, 255, 204], 0.08, 0.7), layer.width / 2, layer.height / 2);
     pasteCenter(ctx, gradient(mask, top, bottom), layer.width / 2, layer.height / 2);
-    pasteCenter(ctx, lightSweep(mask, frameIndex + 8, 110, 0.38, 0.16), layer.width / 2, layer.height / 2);
-    return rowDisplace(layer, 0.8, 34, frameIndex * 0.09, 0.25);
+    pasteCenter(ctx, lightSweep(mask, frameIndex + 8, 110, 0.52, 0.11), layer.width / 2, layer.height / 2);
+    return layer;
   }
 
   function renderDarkWater(ctx, recipe, frameIndex) {

@@ -108,12 +108,12 @@ uses `supersedes` rather than reassigning an ID.
 The verified vertical slice was expanded mechanically from canonical sources:
 
 - 333 deterministic media presets behind the VibeEdit-owned frame API.
-- 53 source-preserved HTML/CSS/JS effects plus 21 dependency-free fallback
-  Python/JavaScript motion components.
+- 30 selected HTML/CSS/JS effects plus 20 dependency-free fallback
+  Python/JavaScript motion components and two baseline effects.
 - 44 byte-identical canonical skill packages with four-harness lifecycle support.
 - External audio-clip mixing, beat analysis, mask compositing, procedural SFX,
   OpenCV face/body providers, tracking artifacts, and optional SAM routing.
-- 13 executable examples and 89 generated, hash-bound preview/audio assets,
+- 13 executable examples and 65 generated, hash-bound preview/audio assets,
   including one verified browser render for every registered text effect.
 - One 467-item catalog and static site generated from the same manifests.
 

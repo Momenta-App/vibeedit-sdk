@@ -27,26 +27,26 @@
           136
         ],
         "top": [
-          218,
-          216,
-          202
+          255,
+          255,
+          255
         ],
         "bottom": [
-          86,
-          86,
-          82
+          190,
+          196,
+          206
         ],
-        "start_blur": 9,
+        "start_blur": 4.5,
         "end_blur": 0,
         "shadow": {
           "dx": 1,
-          "dy": 8,
-          "blur": 5,
-          "opacity": 0.36,
+          "dy": 2,
+          "blur": 2,
+          "opacity": 0.18,
           "color": [
-            0,
-            0,
-            0
+            10,
+            14,
+            22
           ]
         },
         "extrude": {
@@ -71,54 +71,21 @@
         },
         "glow": {
           "color": [
-            222,
-            220,
-            204
+            224,
+            230,
+            240
           ],
-          "start_radius": 12.5,
-          "end_radius": 5.6,
-          "start_opacity": 0.9425,
-          "end_opacity": 0.3575
+          "start_radius": 4,
+          "end_radius": 0.4,
+          "start_opacity": 0.18,
+          "end_opacity": 0.03
         },
-        "halos": [
-          {
-            "color": [
-              210,
-              208,
-              194
-            ],
-            "dx": -6,
-            "dy": 6,
-            "scale_x": 1.12,
-            "scale_y": 1.18,
-            "start_blur": 16,
-            "end_blur": 11.5,
-            "start_opacity": 0.504,
-            "end_opacity": 0.336,
-            "pad": true
-          },
-          {
-            "color": [
-              68,
-              68,
-              64
-            ],
-            "dx": -5,
-            "dy": 21,
-            "scale_x": 1.16,
-            "scale_y": 0.72,
-            "start_blur": 12,
-            "end_blur": 8,
-            "start_opacity": 0.408,
-            "end_opacity": 0.24,
-            "pad": true
-          }
-        ],
+        "halos": [],
         "reflection": {
           "dy": 47,
           "blur": 12,
           "scale_y": 0.7,
-          "opacity": 0.36,
+          "opacity": 0.08,
           "top": [
             144,
             144,
@@ -145,26 +112,26 @@
           154
         ],
         "top": [
-          255,
-          34,
+          246,
+          248,
           252
         ],
         "bottom": [
-          96,
-          0,
-          138
+          145,
+          153,
+          166
         ],
-        "start_blur": 9,
+        "start_blur": 4.5,
         "end_blur": 0,
         "shadow": {
           "dx": 1,
-          "dy": 8,
-          "blur": 5,
-          "opacity": 0.34,
+          "dy": 2,
+          "blur": 2,
+          "opacity": 0.18,
           "color": [
-            24,
-            0,
-            24
+            10,
+            14,
+            22
           ]
         },
         "extrude": {
@@ -180,54 +147,21 @@
         },
         "glow": {
           "color": [
-            255,
-            0,
-            246
+            224,
+            230,
+            240
           ],
-          "start_radius": 13,
-          "end_radius": 5.8,
-          "start_opacity": 1.08,
-          "end_opacity": 0.57
+          "start_radius": 4,
+          "end_radius": 0.4,
+          "start_opacity": 0.18,
+          "end_opacity": 0.03
         },
-        "halos": [
-          {
-            "color": [
-              255,
-              0,
-              236
-            ],
-            "dx": -8,
-            "dy": 10,
-            "scale_x": 1.12,
-            "scale_y": 1.18,
-            "start_blur": 16,
-            "end_blur": 9,
-            "start_opacity": 0.621,
-            "end_opacity": 0.414,
-            "pad": true
-          },
-          {
-            "color": [
-              92,
-              0,
-              106
-            ],
-            "dx": -8,
-            "dy": 25,
-            "scale_x": 1.16,
-            "scale_y": 0.72,
-            "start_blur": 13,
-            "end_blur": 8,
-            "start_opacity": 0.483,
-            "end_opacity": 0.2875,
-            "pad": true
-          }
-        ],
+        "halos": [],
         "reflection": {
           "dy": 46,
           "blur": 12,
           "scale_y": 0.72,
-          "opacity": 0.65,
+          "opacity": 0.08,
           "top": [
             172,
             0,

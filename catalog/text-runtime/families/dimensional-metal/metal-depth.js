@@ -52,7 +52,7 @@
     stack.className = "text-stack";
     group.appendChild(stack);
 
-    const depth = Math.max(12, Math.round(config.extrusion / 4));
+    const depth = Math.max(20, Math.round(config.extrusion / 2.5));
     for (let i = depth; i >= 1; i -= 1) {
       const layer = makeTextSpan(config.text, "depth-layer");
       const t = i / depth;
@@ -64,7 +64,7 @@
         255,
       ]);
       layer.style.opacity = String(0.54 + (1 - t) * 0.28);
-      layer.style.transform = `translate(${-i * 0.34}px, ${i * 0.18}px)`;
+      layer.style.transform = `translate3d(${-i * 0.48}px, ${i * 0.24}px, ${-i * 1.8}px)`;
       layer.style.zIndex = String(depth - i);
       stack.appendChild(layer);
     }
@@ -72,14 +72,17 @@
     const front = makeTextSpan(config.text, "front-layer metal-front red-front");
     front.style.color = rgba(config.front_color);
     front.style.webkitTextStroke = `${Math.max(0.35, stage(config.stroke_width))}px rgba(255,255,255,.78)`;
+    front.style.transform = "translateZ(3px)";
     stack.appendChild(front);
 
     const rim = makeTextSpan(config.text, "front-layer red-rim");
     rim.style.webkitTextStroke = `${Math.max(0.5, stage(config.stroke_width) * 1.2)}px rgba(255,255,255,.55)`;
+    rim.style.transform = "translateZ(4px)";
     stack.appendChild(rim);
 
     const shine = makeTextSpan(config.text, "front-layer shine-layer");
     shine.style.webkitTextStroke = front.style.webkitTextStroke;
+    shine.style.transform = "translateZ(5px)";
     stack.appendChild(shine);
     return { group, shine };
   }
@@ -179,11 +182,11 @@
     if (config.slug === "3D_TEXT") {
       tl.fromTo(
         handles.group,
-        { opacity: 0, scale: 0.92, x: -2, y: -1, rotationY: 87, rotation: -92 },
-        { opacity: 1, scale: 1, x: 0, y: 0, rotationY: 10, rotation: -4, duration: 1.55, ease: "back.out(1.08)" },
+        { opacity: 0, scale: 0.92, x: -2, y: -1, rotationX: -16, rotationY: -72, rotationZ: -8 },
+        { opacity: 1, scale: 1, x: 0, y: 0, rotationX: 8, rotationY: 288, rotationZ: 2, duration: 1.55, ease: "power2.inOut" },
         0
       );
-      tl.to(handles.group, { rotationY: 0, rotation: 0, duration: 0.35, ease: "power2.out" }, 1.1);
+      tl.to(handles.group, { rotationX: 0, rotationY: 360, rotationZ: 0, duration: 0.35, ease: "power2.out" }, 1.55);
       tl.fromTo(handles.shine, { opacity: 0, x: -40 }, { opacity: 0.72, x: 44, duration: 0.72, ease: "power1.inOut" }, 0.22);
       tl.to(handles.shine, { opacity: 0, duration: 0.28, ease: "power1.out" }, 0.92);
       return tl;

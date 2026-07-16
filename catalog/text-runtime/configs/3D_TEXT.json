@@ -14,8 +14,8 @@
   ],
   "back_color": [
     0,
-    126,
-    255,
+    82,
+    210,
     255
   ],
   "center": [
@@ -23,9 +23,9 @@
     548
   ],
   "tracking": 0,
-  "extrusion": 60,
+  "extrusion": 90,
   "stroke_width": 1,
-  "glow": 0.55,
+  "glow": 0.32,
   "source_notes": {
     "mogrt": "V2 50 TITLES PACK PR/3D TEXT.mogrt",
     "effects": [

@@ -132,12 +132,9 @@ body {
   transform: translate(-50%, -32%) translateY(var(--enter-y, 0));
 }
 
-.ag-aesthetic-purple .ag-html-word-2 {
-  text-shadow:
-    0 0 5px rgba(215, 30, 255, .72),
-    0 0 14px rgba(160, 0, 224, .42);
-}
-
+.ag-aesthetic-purple .ag-html-word-2,
 .ag-aesthetic-strinking .ag-html-word-2 {
-  text-shadow: 0 3px 6px rgba(72, 0, 0, .48);
+  text-shadow:
+    0 2px 3px rgba(12, 16, 24, .22),
+    0 0 5px rgba(226, 232, 242, .12);
 }

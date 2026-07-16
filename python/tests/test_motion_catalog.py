@@ -15,8 +15,8 @@ def _spec(identifier):
 
 def test_all_portable_motion_components_seek_deterministically():
     components = list_motion_components()
-    assert len(components) == 74
-    assert len({component["id"] for component in components}) == 74
+    assert len(components) == 50
+    assert len({component["id"] for component in components}) == 50
     for component in components:
         early = document_for_frame(_spec(component["id"]), 2)
         late = document_for_frame(_spec(component["id"]), 42)
@@ -30,14 +30,14 @@ def test_all_portable_motion_components_seek_deterministically():
 def test_motion_validation_report_records_both_runtimes():
     report = json.loads(data_path("catalog", "motion-validation.json").read_text(encoding="utf-8"))
     assert report["status"] == "passed"
-    assert report["cases"] == 74
+    assert report["cases"] == 50
     assert len(report["javascriptSha256"]) == 64
     assert len(report["pythonSha256"]) == 64
 
 
 def test_canonical_text_runtime_is_manifest_bound():
     components = list_motion_components()
-    assert len([component for component in components if component.get("canonical")]) == 53
+    assert len([component for component in components if component.get("canonical")]) == 30
     root = data_path("catalog", "text-runtime")
     manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["schemaVersion"] == "vibeedit.canonical-text-runtime.v1"
@@ -49,7 +49,7 @@ def test_canonical_text_runtime_is_manifest_bound():
 
 
 def test_canonical_seeking_uses_canvas_frame_rate():
-    spec = _spec("vibeedit://text/mogrt-bubble")
+    spec = _spec("vibeedit://text/mogrt-elegant")
     spec["canvas"]["frameRate"] = {"numerator": 24, "denominator": 1}
     assert 'data-vibeedit-time="0.500000"' in document_for_frame(spec, 12, "http://127.0.0.1:1234/")
 
@@ -60,8 +60,8 @@ def test_every_registered_text_effect_has_a_verified_hash_bound_preview():
     text = [item for item in catalog["items"] if item["id"].startswith("vibeedit://text/")]
     by_path = {asset["path"]: asset for asset in assets["assets"]}
 
-    assert len(text) == 76
-    assert len({item["id"] for item in text}) == 76
+    assert len(text) == 52
+    assert len({item["id"] for item in text}) == 52
     for item in text:
         assert item["preview"]["status"] == "verified", item["id"]
         assert item["preview"]["mediaType"] == "video/mp4", item["id"]

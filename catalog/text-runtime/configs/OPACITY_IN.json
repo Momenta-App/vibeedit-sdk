@@ -19,7 +19,7 @@
     245,
     1
   ],
-  "fade_frames": 3,
+  "fade_frames": 20,
   "name": "OPACITY IN",
   "family": "simple-motion",
   "editable": true,
@@ -39,5 +39,12 @@
     "component": "families/simple-motion/components/simple-motion.js",
     "style": "families/simple-motion/components/simple-motion.css",
     "output": "families/simple-motion/outputs/OPACITY_IN.html"
-  }
+  },
+  "glow": [
+    255,
+    255,
+    255,
+    0
+  ],
+  "glow_blur": 0
 }

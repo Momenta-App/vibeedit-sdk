@@ -7,7 +7,7 @@ This register distinguishes implemented claims from discovered source material.
 | CompositionSpec | Legacy projects use seconds and multiple shapes | Schema, compatibility tests, and cross-language fixtures pass |
 | Python distribution | Reusable `vibeedit_media` exists under another public name | VibeEdit-owned API, CLI, wheel/sdist, clean install, and real render pass |
 | npm runtime | Placeholder metadata package | Runtime exports, CLI, declarations, tests, and `npm pack --dry-run` pass |
-| HTML rendering | 53 tracked effects use their packaged original HTML/CSS/JS renderer; 21 use the portable runtime | Source comparison passes all 53 canonical entries; fallback seek hashes, tracking interpolation, injection checks, pinned-Chromium video, and VP9-alpha example pass |
+| HTML rendering | 30 selected effects use their packaged VibeEdit HTML/CSS/JS renderer families; 20 use the portable runtime | Source comparison passes all 15 unmodified canonical entries; 15 approved refinements and all 52 registered effects pass browser conformance; fallback seek hashes, tracking interpolation, injection checks, pinned-Chromium video, and VP9-alpha example pass |
 | Effects/transitions | 333 reviewed canonical presets are cloned byte-for-byte behind VibeEdit-owned adapters | Stable IDs, separate manifests, matching source/package hashes, exhaustive frame execution, and effect/transition/mask examples pass |
 | Skills | 67 tracked canonical skill directories were audited | 44 byte-identical release-safe clones install into four harness layouts; 23 rejected packages remain recorded/quarantined |
 | SFX | Many local recordings with incomplete rights evidence | Exclude/quarantine until license, rights, decode, loudness, and checksum pass |

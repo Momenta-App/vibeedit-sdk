@@ -37,9 +37,9 @@
         ],
         "shadow": {
           "dx": 2,
-          "dy": 13,
-          "blur": 9,
-          "opacity": 0.66,
+          "dy": 2,
+          "blur": 1,
+          "opacity": 0,
           "color": [
             70,
             95,
@@ -49,39 +49,30 @@
         "glows": [
           {
             "color": [
-              150,
+              176,
               255,
-              0
+              40
             ],
-            "radius": 12,
-            "opacity": 0.5
-          },
-          {
-            "color": [
-              255,
-              255,
-              255
-            ],
-            "radius": 3,
-            "opacity": 0.23
+            "radius": 1.5,
+            "opacity": 0.1
           }
         ],
         "extrude": {
           "dx": 1,
           "dy": 2,
-          "steps": 4,
+          "steps": 1,
           "color": [
             28,
             42,
             0
           ],
-          "opacity": 0.58
+          "opacity": 0.08
         },
         "reflection": {
           "dy": 31,
           "blur": 5,
           "scale_y": 0.5,
-          "opacity": 0.23,
+          "opacity": 0,
           "top": [
             115,
             170,
@@ -101,14 +92,14 @@
         },
         "turbulence": {
           "frequency": "0.023 0.18",
-          "scale": 1.2,
+          "scale": 0,
           "octaves": 2,
           "seed": 61
         },
         "blinds": {
           "step": 7,
           "height": 1.4,
-          "opacity": 0.15,
+          "opacity": 0,
           "color": [
             12,
             28,

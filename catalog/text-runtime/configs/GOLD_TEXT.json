@@ -8,19 +8,19 @@
   "font_size": 140,
   "top_color": [
     255,
-    246,
-    169,
+    224,
+    96,
     255
   ],
   "bottom_color": [
-    246,
-    217,
+    172,
+    82,
     0,
     255
   ],
   "shadow_color": [
-    32,
-    24,
+    48,
+    22,
     0,
     255
   ],
@@ -30,8 +30,8 @@
   ],
   "tracking": 0,
   "stroke_width": 8,
-  "bevel": 6,
-  "glow": 1,
+  "bevel": 8,
+  "glow": 0.62,
   "source_notes": {
     "mogrt": "V2 50 TITLES PACK PR/GOLD TEXT.mogrt",
     "effects": [

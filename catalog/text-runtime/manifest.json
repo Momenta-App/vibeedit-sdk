@@ -2,6 +2,24 @@
   "schemaVersion": "vibeedit.canonical-text-runtime.v1",
   "source": "packages/app/public/text-effect-catalog/components/html-motion-mogrt",
   "revision": "2403e3f94cfabf7236d5401bd4beeadefde1d725",
+  "refinementPolicy": "Approved beta catalogue refinements preserve each source effect family while correcting requested motion, clarity, color, shimmer, and 3D behavior.",
+  "refinedEffects": [
+    "3D_TEXT",
+    "AESTHETIC_PURPLE",
+    "AESTHETIC_STRINKING",
+    "BLUR_IN",
+    "BOTTOM_IN",
+    "CLEAN_BLUE",
+    "ELEGANT",
+    "ESMERALD",
+    "GOLD_TEXT",
+    "LEFT_IN",
+    "OPACITY_IN",
+    "RIGHT_IN",
+    "SMOOTH_OPACITY",
+    "dark_water",
+    "fluorscent"
+  ],
   "files": [
     {
       "path": "assets/fonts/AVANTE.otf",
@@ -55,8 +73,8 @@
     },
     {
       "path": "configs/3D_TEXT.json",
-      "bytes": 634,
-      "sha256": "5a84174fe77823d48d6e43f421aa2687d2fa038e795a83b00e4c4cc36a7be1ac"
+      "bytes": 633,
+      "sha256": "5bda10c31f3dce8bc101fccd54a594428b4dfe1c384c999be6ed9e5276d24315"
     },
     {
       "path": "configs/ABOVE_IN.json",
@@ -65,13 +83,13 @@
     },
     {
       "path": "configs/AESTHETIC_PURPLE.json",
-      "bytes": 4981,
-      "sha256": "4479212bb5e060b6e8150cb9276fb6937079fea7d573f22a345abd754facece6"
+      "bytes": 3492,
+      "sha256": "89b18053f7b1ed0d17122e566237df5abc1e621627132e65b060530c22bc4cf2"
     },
     {
       "path": "configs/AESTHETIC_STRINKING.json",
-      "bytes": 3744,
-      "sha256": "fa4aacfbc9292a29efdbfbfabee99e3cfc9107875ed1aec43ab5f008b912c1f8"
+      "bytes": 2754,
+      "sha256": "1269410672ea728e42a9c21cdebf30ef0c7409ec50ecf8d9d84cd02b32eb5fb8"
     },
     {
       "path": "configs/APPLE_STYLE_ANIMATION.json",
@@ -85,13 +103,13 @@
     },
     {
       "path": "configs/BLUR_IN.json",
-      "bytes": 1161,
-      "sha256": "ee4fc7e75c6e31295d2b4c3b2f0dbbdfe6f1bf8c497a52fac942aafe8eec842a"
+      "bytes": 1375,
+      "sha256": "0efafd1c7152a591807a67559df725e456f226bbb1df68680ab8a0a070c72eff"
     },
     {
       "path": "configs/BOTTOM_IN.json",
-      "bytes": 1388,
-      "sha256": "3d9003bc55caf76b4e08517b6831ed48172934523c39eaa1aefdf299b3f20198"
+      "bytes": 1599,
+      "sha256": "e2b6f1af828944ea0c73e441dadff889fcad8b727f252c372b9fd8027718551b"
     },
     {
       "path": "configs/Bubble.json",
@@ -100,8 +118,8 @@
     },
     {
       "path": "configs/CLEAN_BLUE.json",
-      "bytes": 3860,
-      "sha256": "23344682b5d604779fa38a69493dab8b270d9205b9eb0c57fdce064c0d474b2e"
+      "bytes": 3864,
+      "sha256": "627df217f608649e5edcbbf53431d23e840bf20ce987ab8450a268f66f359285"
     },
     {
       "path": "configs/CLEAN_STYLE.json",
@@ -130,8 +148,8 @@
     },
     {
       "path": "configs/ESMERALD.json",
-      "bytes": 1743,
-      "sha256": "2b63f13b1b8db346fc3ff9852cc0aa19ac7b6324aa3bb88d6493d7dc017f82d8"
+      "bytes": 1870,
+      "sha256": "26024f2c5da134f7abad59d7b47aeaa469fc75109ec863a19547a044619a7997"
     },
     {
       "path": "configs/FAST.json",
@@ -150,8 +168,8 @@
     },
     {
       "path": "configs/GOLD_TEXT.json",
-      "bytes": 692,
-      "sha256": "b7a29283e061d60480f380e81c97efa117b6fbe4a7bac759bd8d114d63e1597c"
+      "bytes": 693,
+      "sha256": "100a98dc12a2dbfe2b2f1f2119cf99a3f77947c662164e37f620061d12e67aa9"
     },
     {
       "path": "configs/GREEN_AND_GREY.json",
@@ -165,8 +183,8 @@
     },
     {
       "path": "configs/LEFT_IN.json",
-      "bytes": 1142,
-      "sha256": "e980979a15177a0cd7e7df0959398d3cbe48c09629afef6b90a2b8b6ed4a7bd9"
+      "bytes": 1353,
+      "sha256": "6f3ce9f7a2677324815f37080efd931276372d141efda9d7e5228ed5e5bb21c1"
     },
     {
       "path": "configs/OLD_MONEY.json",
@@ -180,8 +198,8 @@
     },
     {
       "path": "configs/OPACITY_IN.json",
-      "bytes": 1066,
-      "sha256": "0da57d62cdf758b956eef7455841d6cff0bf899fb1d787e7607484aa55f7356e"
+      "bytes": 1135,
+      "sha256": "1b6e949164df4414cb1b44aa041e50dd1e0719becc3b9480ea509df02f79894b"
     },
     {
       "path": "configs/ORANGE_TEXT.json",
@@ -210,8 +228,8 @@
     },
     {
       "path": "configs/RIGHT_IN.json",
-      "bytes": 1396,
-      "sha256": "01d9eede9549495fffc5bb58c5c6b7e67d83820299f5795187aac2ff6cbc0bb2"
+      "bytes": 1607,
+      "sha256": "7fa6b306c4f36c1f054b975e21341ec4b49b13be3785fd199e95c4389bd52fe5"
     },
     {
       "path": "configs/Radial_BLUR.json",
@@ -230,8 +248,8 @@
     },
     {
       "path": "configs/SMOOTH_OPACITY.json",
-      "bytes": 4425,
-      "sha256": "a9f8a413a1e1752bf49a7756f9eb0e12945db58c13d361fc31e4554d246d202c"
+      "bytes": 4436,
+      "sha256": "534fa463543e3055c28405658cd533504b35b40177678a21b36b0058706d25d1"
     },
     {
       "path": "configs/SMOOTH_UP.json",
@@ -315,8 +333,8 @@
     },
     {
       "path": "configs/fluorscent.json",
-      "bytes": 2387,
-      "sha256": "5ca27298e88ffdddb20964d5f0f9dce9c7df203167c12b36c7c3557b527d4031"
+      "bytes": 2205,
+      "sha256": "e2a40e486b1e43752470c3d123449ff627696f73a450f2752e0acdb4a62808bc"
     },
     {
       "path": "families/aesthetic-glow/assets/fonts/AVANTE.otf",
@@ -380,13 +398,13 @@
     },
     {
       "path": "families/aesthetic-glow/components/glow-composition.css",
-      "bytes": 2905,
-      "sha256": "c29577a4e0a6f973a6f3945594c6a833019eab9077df2935869e5f89d9eb6a04"
+      "bytes": 2856,
+      "sha256": "b6e76579b49f906e84167b56e478fcba4eac0163b294f6613c9215885c68d018"
     },
     {
       "path": "families/aesthetic-glow/components/glow-composition.js",
-      "bytes": 25689,
-      "sha256": "d888c7a5792b53fceb22230a37ff57f3e087fe711402d49887ccf5856e365b75"
+      "bytes": 25764,
+      "sha256": "7be84a334749a1825093dd692781dc36a7de960e0fe2e17aada45cc2617d9964"
     },
     {
       "path": "families/aesthetic-glow/index.html",
@@ -395,13 +413,13 @@
     },
     {
       "path": "families/aesthetic-glow/outputs/AESTHETIC_PURPLE.html",
-      "bytes": 6135,
-      "sha256": "40c02ff7c74bf69285bbe929aea435cbc2bab8235189edcb709a9047b98beade"
+      "bytes": 4646,
+      "sha256": "ab3e5f53ebb918049d601c32524d0df1b7dce799bdabc60c45ddcd56d92ae2f1"
     },
     {
       "path": "families/aesthetic-glow/outputs/AESTHETIC_STRINKING.html",
-      "bytes": 4907,
-      "sha256": "adc9f59e627f6c26cff0d6c1d88fc3e617e56110f929fd37e614012b0bdb01f4"
+      "bytes": 3917,
+      "sha256": "9b55e20b4fedfccbf0921bfc5c49af80fccd82dd1b1f3818eaa06797d832101e"
     },
     {
       "path": "families/aesthetic-glow/outputs/BLUE_AND_ORANGE.html",
@@ -410,8 +428,8 @@
     },
     {
       "path": "families/aesthetic-glow/outputs/ESMERALD.html",
-      "bytes": 2874,
-      "sha256": "2fe8b51139d512a89b7712b50fc6181b0ec89ab022f7c5758f5b0d2aa1e02c78"
+      "bytes": 3000,
+      "sha256": "5a50feb97b0905fc656a938a7d6904821d4f016392fc66a587b15ce800f19e0a"
     },
     {
       "path": "families/aesthetic-glow/outputs/FIRE.html",
@@ -440,8 +458,8 @@
     },
     {
       "path": "families/aesthetic-glow/outputs/fluorscent.html",
-      "bytes": 3524,
-      "sha256": "bf6b2ed4fa437f588a9d50b3dbf17c89bb870fe3102d38746a99209739c295ce"
+      "bytes": 3341,
+      "sha256": "05556ae748fb27ea131bc7c364b3147431dbee0a328bcc0d799518df1ffb65b4"
     },
     {
       "path": "families/analog-glitch/components/analog-runtime.js",
@@ -480,8 +498,8 @@
     },
     {
       "path": "families/apple-clean/outputs/CLEAN_BLUE.html",
-      "bytes": 4620,
-      "sha256": "ba0f61bb965c15652ef91d02826c7c243b3665abc660799f7b8864c5a0f2e4bb"
+      "bytes": 4624,
+      "sha256": "0c142958ac3cec9a91a25ffd9479edd90c629287a6411113023065ecb98f49f5"
     },
     {
       "path": "families/apple-clean/outputs/CLEAN_STYLE.html",
@@ -551,12 +569,12 @@
     {
       "path": "families/dimensional-metal/dimensional-metal.css",
       "bytes": 9220,
-      "sha256": "ba2e2819ddc0758e0cdb78a70318814add1d1d4a7fa7c264d662ae83ff8e9f28"
+      "sha256": "529e710c97d4c04ea2fca64cd6c73f6ee669fdb8e4ec37cfcb5b051909c5b588"
     },
     {
       "path": "families/dimensional-metal/metal-depth.js",
-      "bytes": 10348,
-      "sha256": "f0081bfc476bff917e03bbceb95cacccc0c6cc6f922eb960cceea2ae67bdffcb"
+      "bytes": 10554,
+      "sha256": "bb0e6e431c1d55a3edf642017c78ef9986eb6cdb57fb624d39767e30ae7f0465"
     },
     {
       "path": "families/dimensional-metal/renderer.html",
@@ -565,8 +583,8 @@
     },
     {
       "path": "families/elegant-misc/components/elegant-misc.css",
-      "bytes": 2066,
-      "sha256": "e9b3f4622b827c13a4012c041284b2362a6cc8d55b0c94db14a90fc02860bdcd"
+      "bytes": 2224,
+      "sha256": "d86f98a6f9dfc11ddf11b42e5918cd3e13f32f929a5e7f82e1535a086b5e1dbf"
     },
     {
       "path": "families/elegant-misc/components/elegant-misc.js",
@@ -640,8 +658,8 @@
     },
     {
       "path": "families/simple-motion/components/simple-motion.js",
-      "bytes": 46600,
-      "sha256": "9ba0def622144ab914728c6f199ffb9c999ac485a9e06f8a4b407ba27c5d46eb"
+      "bytes": 46626,
+      "sha256": "f984daa6c4d4c805b7d5b951635776ac55ef0ca2e7ad243c6a00c427ac810a38"
     },
     {
       "path": "families/simple-motion/index.html",
@@ -720,8 +738,8 @@
     },
     {
       "path": "families/water-warp/components/water-warp.js",
-      "bytes": 21135,
-      "sha256": "b82de44f04b9513866d9e2b73f84797f60d87634306624d716510bbb3d379dd1"
+      "bytes": 21088,
+      "sha256": "24fb911ec3d86ec53b5f2933f921f04599dc8008f2c8d6fbad2c38497a232d7b"
     },
     {
       "path": "families/water-warp/index.html",

@@ -608,7 +608,8 @@
         const progress = easeOutCubic((time - delay) / 0.5);
         word.style.opacity = progress.toFixed(4);
         word.style.setProperty("--enter-y", `${((1 - progress) * 14).toFixed(2)}px`);
-        word.style.filter = `blur(${((1 - progress) * 0.6).toFixed(2)}px)`;
+        const blur = (1 - progress) * (config.recipe.crossing_texts[index].start_blur ?? 4);
+        word.style.filter = `blur(${blur.toFixed(2)}px)`;
       });
     };
   }

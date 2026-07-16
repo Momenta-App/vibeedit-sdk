@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -31,6 +31,10 @@ const fullRun = selected.length === textItems.length;
 const work = await mkdtemp(join(tmpdir(), "vibeedit-text-effects-"));
 await mkdir(previewRoot, { recursive: true });
 await mkdir(evidenceRoot, { recursive: true });
+if (fullRun) {
+  const expected = new Set(textItems.map((item) => `${item.id.replace("vibeedit://text/", "")}.mp4`));
+  await Promise.all((await readdir(previewRoot)).filter((name) => name.endsWith(".mp4") && !expected.has(name)).map((name) => rm(join(previewRoot, name))));
+}
 
 const assets = await startMotionAssetServer();
 const browser = await chromium.launch({ headless: true });
@@ -203,7 +207,7 @@ try {
     sourceRevision: JSON.parse(await readFile(join(rootPath, "catalog/motion-components.json"), "utf8")).revision,
     totalRegistered: textItems.length,
     tested: results.length,
-    portableImported: 74,
+    portableImported: 50,
     baselineComponents: ["vibeedit://text/caption-rail", "vibeedit://text/negative"],
     passed: results.length - failures.length,
     failed: failures.length,
