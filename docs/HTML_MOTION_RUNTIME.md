@@ -186,5 +186,7 @@ The experimental CEF shared-texture harness in
 Chromium can composite ordinary HTML/CSS with a browser WebGPU canvas and
 deliver the result through `OnAcceleratedPaint` as an IOSurface without PNG
 capture. The experiment does not yet replace the production renderer. Its
-remaining integration is copying that callback-scoped IOSurface into the
-Rust/wgpu compositor and native encoder.
+raw-output mode copies the callback-scoped IOSurface directly to BGRA and
+encodes a review video, proving the PNG-free boundary end to end. Production
+integration still requires deterministic external frame scheduling and direct
+IOSurface import into the Rust/wgpu compositor and texture-native encoder.

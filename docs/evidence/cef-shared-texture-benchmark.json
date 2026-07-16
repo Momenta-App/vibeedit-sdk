@@ -1,41 +1,11 @@
 {
-  "schemaVersion": "vibeedit.cef-shared-texture-benchmark.v1",
+  "schemaVersion": "vibeedit.cef-shared-texture-benchmark.v2",
   "date": "2026-07-16",
-  "composition": {
-    "width": 640,
-    "height": 360,
-    "frames": 90,
-    "frameRate": 30,
-    "content": [
-      "HTML DOM text",
-      "CSS animation",
-      "CSS filters",
-      "CSS blend mode",
-      "CSS 3D transform",
-      "browser WebGPU canvas",
-      "WGSL shader"
-    ]
-  },
-  "productionCompatibleRender": {
-    "backend": "chromium-persistent PNG image2pipe plus H.264 encode",
-    "elapsedSeconds": 7.96,
-    "throughputFramesPerSecond": 11.31,
-    "outputFrames": 90,
-    "outputDurationSeconds": 3.0,
-    "outputBytes": 90047
-  },
-  "sharedSurfaceProbe": {
-    "backend": "CEF accelerated off-screen paint",
-    "browserWebgpuReady": true,
-    "surface": "IOSurface",
-    "surfaceWidth": 1280,
-    "surfaceHeight": 720,
-    "logicalWidth": 640,
-    "logicalHeight": 360,
-    "callbacks": 60,
-    "callbackFramesPerSecond": 35.78,
-    "pngBoundaryUsed": false
-  },
-  "comparisonBoundary": "The production result includes capture and software encode. The shared-surface result measures browser-to-native surface delivery only, so their throughput values are not an end-to-end speedup claim.",
-  "nextMilestone": "Import each callback-scoped IOSurface into the Rust/wgpu compositor, then feed the native hardware encoder and benchmark complete video output."
+  "composition": {"width": 640, "height": 360, "frames": 90, "frameRate": 30, "content": ["HTML DOM text", "CSS animation and filters", "browser WebGPU canvas", "WGSL shader"]},
+  "persistentScreenshotBaseline": {"settleMode": "two requestAnimationFrame waits", "elapsedSeconds": 12.1009, "throughputFramesPerSecond": 7.44},
+  "optimizedPersistentScreenshot": {"settleMode": "explicit seek plus synchronous style flush", "elapsedSeconds": 5.6041, "throughputFramesPerSecond": 16.06, "byteIdenticalToBaseline": true, "decodedSsim": 1.0, "decodedPsnr": "infinite"},
+  "sharedSurfaceRawCapture": {"surface": "IOSurface", "pixelFormat": "BGRA", "width": 640, "height": 360, "callbacks": 90, "callbackFramesPerSecond": 61.33, "rawBytes": 82944000, "rawCaptureComplete": true, "pngBoundaryUsed": false},
+  "sharedSurfaceSoftwareEncode": {"elapsedSecondsIncludingBrowserStartupAndEncode": 3.24, "effectiveFramesPerSecond": 27.78, "codec": "H.264 libx264", "frames": 90},
+  "encoderFinding": "At 640x360, libx264 encoded the raw fixture in 0.13 seconds while h264_videotoolbox took 0.58 seconds because hardware startup dominated. Hardware selection should remain resolution- and workload-aware.",
+  "claimBoundary": "The raw callback sequence is a live CEF probe, not yet the deterministic externally scheduled production renderer. Direct IOSurface-to-wgpu import and texture-native hardware encoding remain future milestones."
 }

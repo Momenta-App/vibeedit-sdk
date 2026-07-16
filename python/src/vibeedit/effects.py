@@ -1,6 +1,31 @@
 from __future__ import annotations
 
 import random
+from collections.abc import Callable
+
+
+VideoEffectFilterBuilder = Callable[[dict], str]
+_VIDEO_EFFECT_FILTERS: dict[str, VideoEffectFilterBuilder] = {}
+
+
+def register_video_effect_filter(identifier: str, builder: VideoEffectFilterBuilder, *, replace: bool = False) -> None:
+    if not identifier.startswith("vibeedit://effect/"):
+        raise ValueError("effect identifier must start with vibeedit://effect/")
+    if identifier in _VIDEO_EFFECT_FILTERS and not replace:
+        raise ValueError(f"effect filter is already registered: {identifier}")
+    _VIDEO_EFFECT_FILTERS[identifier] = builder
+
+
+def video_effect_filter(identifier: str, params: dict) -> str:
+    if identifier == "vibeedit://effect/random-frame-stutter":
+        return random_frame_stutter_filter(params)
+    builder = _VIDEO_EFFECT_FILTERS.get(identifier)
+    if builder is None:
+        raise ValueError(f"no Python/FFmpeg filter is registered for effect: {identifier}")
+    result = builder(params)
+    if not isinstance(result, str) or not result.strip():
+        raise ValueError(f"effect filter builder returned an empty filter: {identifier}")
+    return result
 
 
 def random_frame_stutter_mapping(*, seed: int, window_frames: int = 4, intensity: float = 0.75) -> tuple[int, ...]:
@@ -22,4 +47,3 @@ def random_frame_stutter_filter(params: dict) -> str:
         intensity=float(params.get("intensity", 0.75)),
     )
     return "shuffleframes=" + " ".join(str(index) for index in mapping)
-

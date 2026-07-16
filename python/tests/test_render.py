@@ -186,6 +186,64 @@ def test_mixed_source_video_and_html_overlay_renders(tmp_path: Path):
     assert report.passed, report.errors
 
 
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
+def test_mixed_python_effect_transition_and_html_overlay_render_together(tmp_path: Path):
+    pytest.importorskip("playwright")
+    import subprocess
+
+    spec = json.loads((data_path("examples", "effect-transition", "composition.json")).read_text())
+    sources = []
+    for index, color in enumerate(("0x172554", "0x4c0519")):
+        source = tmp_path / f"source-{index}.mp4"
+        subprocess.run(
+            [
+                shutil.which("ffmpeg"),
+                "-hide_banner",
+                "-loglevel",
+                "error",
+                "-y",
+                "-f",
+                "lavfi",
+                "-i",
+                f"color=c={color}:s=640x360:r=30:d=2",
+                "-c:v",
+                "libx264",
+                "-pix_fmt",
+                "yuv420p",
+                str(source),
+            ],
+            check=True,
+        )
+        sources.append({"id": f"source-{'a' if index == 0 else 'b'}", "kind": "video", "uri": str(source), "identity": {"algorithm": "generated", "value": f"source-{index}"}, "durationFrames": 60})
+    spec["sources"] = sources
+    spec["render"]["backend"] = "mixed"
+    spec["timeline"]["tracks"].append(
+        {
+            "id": "M1",
+            "kind": "motion",
+            "order": 10,
+            "items": [
+                {
+                    "id": "agent-title",
+                    "kind": "motion",
+                    "placement": {"startFrame": 0, "durationFrames": spec["durationFrames"]},
+                    "componentId": "vibeedit://motion/html",
+                    "props": {
+                        "html": '<h1>PYTHON + WEB</h1>',
+                        "css": "body{display:grid;place-items:center;background:transparent;color:white}h1{font:900 64px Arial;animation:enter .8s ease-out both}@keyframes enter{from{opacity:0;transform:translateY(60px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}",
+                    },
+                    "renderer": "html",
+                    "transparent": True,
+                }
+            ],
+        }
+    )
+    spec["verification"]["hasAudio"] = True
+    output = render(spec, tmp_path / "mixed-effect-transition.mp4")
+    report = verify_output(output, spec["verification"])
+    assert report.passed, report.errors
+
+
 def test_render_cache_records_reproducible_provenance(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("VIBEEDIT_CACHE_DIR", str(tmp_path / "cache"))
     spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())

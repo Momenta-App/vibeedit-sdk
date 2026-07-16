@@ -11,13 +11,13 @@ import re
 import tempfile
 import threading
 import urllib.parse
-from contextlib import contextmanager, nullcontext
+from contextlib import contextmanager
 from functools import lru_cache
 from html.parser import HTMLParser
 from pathlib import Path
 
 from vibeedit.data import data_path
-from vibeedit.ffmpeg import frame_stream_encoder, render_overlay_sequence
+from vibeedit.ffmpeg import frame_stream_encoder, overlay_frame_stream_encoder, render_media
 from vibeedit.spec import JSONObject
 
 
@@ -84,14 +84,18 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
         item
         for track in spec["timeline"]["tracks"]
         for item in track["items"]
-        if item["kind"] in {"image", "transition", "audio"}
+        if item["kind"] == "image"
     ]
     if unsupported:
         kinds = ", ".join(sorted({item["kind"] for item in unsupported}))
-        raise MotionRenderError(f"alpha mixed dispatcher cannot compose {kinds} inputs yet")
+        raise MotionRenderError(f"mixed dispatcher cannot compose {kinds} inputs yet")
     video = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "video"]
-    if len(video) > 1:
-        raise MotionRenderError("alpha mixed dispatcher supports at most one source-video clip")
+    if len(video) > 2:
+        raise MotionRenderError("mixed dispatcher supports at most two source-video clips")
+    audio = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "audio"]
+    transitions = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "transition"]
+    if audio and not video:
+        raise MotionRenderError("mixed audio clips currently require a source-video layer")
     try:
         from playwright.sync_api import sync_playwright
     except ImportError as error:
@@ -100,8 +104,20 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
     destination = Path(output or spec["render"]["output"]["uri"])
     destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="vibeedit-motion-") as temporary:
-        frames = Path(temporary)
-        with (nullcontext(None) if video else frame_stream_encoder(spec, destination)) as encoder, sync_playwright() as playwright, _motion_asset_server(base) as asset_urls:
+        overlay_spec = spec
+        if len(video) > 1 or audio or transitions:
+            intermediate = Path(temporary) / "python-media-base.mkv"
+            media_spec = json.loads(json.dumps(spec))
+            media_spec["timeline"]["tracks"] = [
+                {**track, "items": [item for item in track["items"] if item["kind"] != "motion"]}
+                for track in media_spec["timeline"]["tracks"]
+                if any(item["kind"] != "motion" for item in track["items"])
+            ]
+            media_spec["render"]["output"].update({"container": "mkv", "videoCodec": "ffv1", "audioCodec": "flac", "pixelFormat": "yuv420p"})
+            render_media(media_spec, intermediate, base)
+            overlay_spec = _single_video_overlay_spec(spec, intermediate)
+        encoder_context = overlay_frame_stream_encoder(overlay_spec, destination, base) if video else frame_stream_encoder(spec, destination)
+        with encoder_context as encoder, sync_playwright() as playwright, _motion_asset_server(base) as asset_urls:
             browser = playwright.chromium.launch(headless=True, args=["--enable-unsafe-webgpu"] if _requires_webgpu(spec) else [])
             context = browser.new_context(viewport={"width": spec["canvas"]["width"], "height": spec["canvas"]["height"]}, device_scale_factor=1)
             context.route("**/*", lambda route: route.continue_() if _is_local_browser_url(route.request.url, asset_urls["origin"]) else route.abort("blockedbyclient"))
@@ -121,15 +137,32 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
                 if errors:
                     raise MotionRenderError(f"browser motion component failed: {errors[0]}")
                 payload = _capture_fast_png(session)
-                if encoder is not None:
-                    encoder.write(payload)
-                else:
-                    (frames / f"frame-{frame:06d}.png").write_bytes(payload)
+                encoder.write(payload)
             context.close()
             browser.close()
-        if video:
-            return render_overlay_sequence(spec, frames / "frame-%06d.png", destination, base)
         return destination
+
+
+def _single_video_overlay_spec(spec: JSONObject, source: Path) -> JSONObject:
+    result = json.loads(json.dumps(spec))
+    result["sources"] = [{"id": "vibeedit-python-media-base", "kind": "video", "uri": str(source), "identity": {"algorithm": "generated", "value": "python-media-base"}}]
+    result["timeline"]["tracks"] = [
+        {
+            "id": "VIBEEDIT_MEDIA_BASE",
+            "kind": "video",
+            "order": 0,
+            "items": [
+                {
+                    "id": "vibeedit-python-media-base",
+                    "kind": "video",
+                    "placement": {"startFrame": 0, "durationFrames": spec["durationFrames"]},
+                    "source": {"sourceId": "vibeedit-python-media-base", "inFrame": 0, "durationFrames": spec["durationFrames"]},
+                    "effects": [],
+                }
+            ],
+        }
+    ]
+    return result
 
 
 def _persistent_document(spec: JSONObject, catalog_url: str, project_url: str, *, atoms_url: str | None = None, inline_url: str | None = None, inline_documents: dict[str, bytes] | None = None, transparent: bool = False) -> str:
@@ -379,7 +412,7 @@ def _settle_web_frames(page, spec: JSONObject, frame_number: int) -> None:
                 animation.currentTime = Math.min(context.time * 1000, end);
               }
               globalThis.dispatchEvent(new CustomEvent("vibeedit:frame", {detail: context}));
-              await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+              void document.body.offsetHeight;
             }""",
             {"frame": local_frame, "absoluteFrame": frame_number, "durationFrames": duration, "fps": fps, "time": local_frame / max(1, fps), "progress": max(0.0, min(1.0, local_frame / max(1, duration - 1)))},
         )

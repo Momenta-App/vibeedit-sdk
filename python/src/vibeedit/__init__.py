@@ -34,7 +34,9 @@ from vibeedit.ffmpeg import probe
 from vibeedit.render import render
 from vibeedit.verify import verify_output
 from vibeedit.effects import random_frame_stutter_mapping
+from vibeedit.effects import register_video_effect_filter
 from vibeedit.transitions import crossfade_filter
+from vibeedit.transitions import register_transition_filter
 from vibeedit.catalog import inspect_catalog_item
 from vibeedit.catalog import list_catalog
 from vibeedit.catalog import search_catalog
@@ -120,6 +122,8 @@ __all__ = [
     "render",
     "render_example",
     "random_frame_stutter_mapping",
+    "register_transition_filter",
+    "register_video_effect_filter",
     "regular_beat_frames",
     "remove_skill",
     "render_transition_preset",

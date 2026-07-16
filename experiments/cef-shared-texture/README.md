@@ -16,6 +16,16 @@ python3 experiments/cef-shared-texture/probe.py \
   --report docs/evidence/cef-shared-texture-mvp.json
 ```
 
+Capture the callback-scoped IOSurfaces as raw BGRA frames and encode a review
+video without PNG screenshots:
+
+```bash
+python3 experiments/cef-shared-texture/probe.py --frames 90 \
+  --raw-output /tmp/vibeedit-cef.bgra \
+  --video-output /tmp/vibeedit-cef.mp4 \
+  --report /tmp/vibeedit-cef-raw.json
+```
+
 The first run downloads about 256 MB into the user cache and builds the sample.
 Later runs may use `--skip-build`. The CEF archive and build are intentionally
 not committed to the SDK.
@@ -36,7 +46,10 @@ PYTHONPATH=python/src .venv/bin/python -m vibeedit.cli render \
 - CEF delivers the composited frame through `OnAcceleratedPaint` as an
   IOSurface on macOS, without PNG capture.
 - CEF requires the client to copy the temporary surface during the callback.
+- The probe can copy that surface to raw BGRA and encode a complete H.264 review
+  video. It deliberately keeps this CPU-copy path visible in its evidence.
 
-The remaining production step is importing the IOSurface into a Rust/wgpu-owned
-texture and sending that texture to the native compositor/encoder. This MVP
-does not claim that final zero-copy Rust handoff or hardware encoding yet.
+The remaining production steps are deterministic external frame scheduling and
+importing the IOSurface into a Rust/wgpu-owned texture for native composition
+and texture-native hardware encoding. This MVP does not claim that final GPU
+handoff yet.

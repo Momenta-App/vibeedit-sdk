@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "vibeedit.hybrid-render-benchmark.v1",
+  "date": "2026-07-16",
+  "composition": {"width": 640, "height": 360, "frames": 108, "content": ["two generated video clips", "Python-authored FFmpeg color effect", "Python-authored FFmpeg wipe transition", "procedural audio", "HTML/CSS/JavaScript motion overlay"]},
+  "oldSettlePath": {"seconds": 10.3926, "framesPerSecond": 10.39},
+  "optimizedRuns": [{"seconds": 4.9207, "framesPerSecond": 21.95}, {"seconds": 4.3267, "framesPerSecond": 24.96}, {"seconds": 4.3972, "framesPerSecond": 24.56}],
+  "bestFramesPerSecond": 24.96,
+  "speedupVersusOldSettlePath": 2.4,
+  "fidelity": {"allOptimizedOutputsSameSha256": true, "optimizedMatchesOldPathByteForByte": true, "decodedSsim": 1.0, "decodedPsnr": "infinite"},
+  "verification": {"allRunsPassed": true, "audioPresent": true, "durationFrames": 108}
+}

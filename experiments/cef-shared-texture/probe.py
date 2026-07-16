@@ -32,8 +32,14 @@ def main() -> int:
     parser.add_argument("--frames", type=int, default=60)
     parser.add_argument("--timeout", type=float, default=20)
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--raw-output", type=Path)
+    parser.add_argument("--video-output", type=Path)
     parser.add_argument("--skip-build", action="store_true")
     args = parser.parse_args()
+    if not 1 <= args.frames <= 120:
+        raise SystemExit("--frames must be between 1 and 120")
+    if args.video_output and not args.raw_output:
+        raise SystemExit("--video-output requires --raw-output")
     if sys.platform != "darwin" or platform.machine() != "arm64":
         raise SystemExit("this MVP currently pins the macOS ARM64 CEF distribution")
 
@@ -54,6 +60,7 @@ def main() -> int:
         "--enable-gpu",
         "--enable-unsafe-webgpu",
         "--off-screen-frame-rate=60",
+        "--force-device-scale-factor=1",
         "--window-size=640,360",
         "--disable-background-networking",
         "--disable-component-update",
@@ -63,7 +70,12 @@ def main() -> int:
         "--v=1",
         "--no-sandbox",
     ]
-    process = subprocess.Popen(command, cwd=root, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, bufsize=1)
+    environment = os.environ.copy()
+    if args.raw_output:
+        args.raw_output.parent.mkdir(parents=True, exist_ok=True)
+        args.raw_output.unlink(missing_ok=True)
+        environment.update({"VIBEEDIT_CEF_RAW_OUTPUT": str(args.raw_output), "VIBEEDIT_CEF_RAW_FRAMES": str(args.frames)})
+    process = subprocess.Popen(command, cwd=root, env=environment, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, bufsize=1)
     lines: queue.Queue[tuple[float, str]] = queue.Queue()
     reader = threading.Thread(target=read_lines, args=(process.stderr, lines), daemon=True)
     reader.start()
@@ -102,6 +114,41 @@ def main() -> int:
         thread.join(timeout=5)
 
     elapsed = callbacks[-1] - callbacks[0] if len(callbacks) > 1 else 0
+    raw_bytes = args.raw_output.stat().st_size if args.raw_output and args.raw_output.is_file() else 0
+    expected_raw_bytes = first_surface["width"] * first_surface["height"] * 4 * len(callbacks) if first_surface else 0
+    if args.video_output and first_surface and raw_bytes == expected_raw_bytes:
+        args.video_output.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(
+            [
+                shutil.which("ffmpeg") or "ffmpeg",
+                "-hide_banner",
+                "-loglevel",
+                "error",
+                "-y",
+                "-f",
+                "rawvideo",
+                "-pixel_format",
+                "bgra",
+                "-video_size",
+                f'{first_surface["width"]}x{first_surface["height"]}',
+                "-framerate",
+                "30",
+                "-i",
+                str(args.raw_output),
+                "-frames:v",
+                str(len(callbacks)),
+                "-c:v",
+                "libx264",
+                "-preset",
+                "veryfast",
+                "-crf",
+                "18",
+                "-pix_fmt",
+                "yuv420p",
+                str(args.video_output),
+            ],
+            check=True,
+        )
     report = {
         "schemaVersion": "vibeedit.cef-shared-texture-mvp.v1",
         "status": "passed" if len(callbacks) >= args.frames and webgpu_ready else "incomplete",
@@ -116,8 +163,10 @@ def main() -> int:
         "acceleratedPaintCallbacks": len(callbacks),
         "callbackFps": round((len(callbacks) - 1) / elapsed, 2) if elapsed > 0 else None,
         "firstSurface": first_surface,
+        "rawCapture": {"enabled": bool(args.raw_output), "bytes": raw_bytes, "expectedBytes": expected_raw_bytes, "complete": bool(args.raw_output) and raw_bytes == expected_raw_bytes},
+        "videoOutput": args.video_output.name if args.video_output and args.video_output.is_file() else None,
         "errors": errors,
-        "claimBoundary": "IOSurface delivery is proven; direct IOSurface-to-wgpu import and hardware encoding are not implemented in this MVP.",
+        "claimBoundary": "IOSurface-to-CPU raw BGRA capture and software H.264 encoding are proven; deterministic external frame scheduling, direct IOSurface-to-wgpu import, and texture-native hardware encoding are not implemented.",
     }
     payload = json.dumps(report, indent=2) + "\n"
     if args.report:
@@ -157,6 +206,8 @@ def prepare_cef(cache: Path, *, skip_build: bool) -> Path:
 
 def instrument(path: Path) -> None:
     source = path.read_text(encoding="utf-8")
+    if "#include <cstdio>" not in source:
+        source = source.replace("#include <optional>\n", "#include <cstdio>\n#include <cstdlib>\n#include <optional>\n")
     if MARKER in source and "<= 120" not in source:
         source = source.replace("<= 8", "<= 120")
     if MARKER not in source:
@@ -164,6 +215,13 @@ def instrument(path: Path) -> None:
         insertion = needle + "\n  static int vibeedit_accelerated_paint_count = 0;\n  if (++vibeedit_accelerated_paint_count <= 120) {\n    LOG(INFO) << \"VIBEEDIT_CEF_ACCELERATED_PAINT frame=\"\n              << vibeedit_accelerated_paint_count << \" width=\" << width\n              << \" height=\" << height << \" io_surface=\" << io_surface;\n  }\n"
         if source.count(needle) != 1:
             raise SystemExit("CEF accelerated-paint probe patch no longer applies cleanly")
+        source = source.replace(needle, insertion)
+    raw_marker = "  // VIBEEDIT_CEF_RAW_CAPTURE\n"
+    if raw_marker not in source:
+        needle = "  CGLTexImageIOSurface2D(cgl_context, GL_TEXTURE_RECTANGLE_ARB, GL_RGBA8, width,\n"
+        insertion = raw_marker + "  const char* vibeedit_raw_output = std::getenv(\"VIBEEDIT_CEF_RAW_OUTPUT\");\n  const char* vibeedit_raw_frames_value = std::getenv(\"VIBEEDIT_CEF_RAW_FRAMES\");\n  const int vibeedit_raw_frames = vibeedit_raw_frames_value ? std::atoi(vibeedit_raw_frames_value) : 0;\n  if (vibeedit_raw_output && vibeedit_accelerated_paint_count <= vibeedit_raw_frames) {\n    static FILE* vibeedit_raw_file = std::fopen(vibeedit_raw_output, \"ab\");\n    uint32_t seed = 0;\n    if (vibeedit_raw_file && IOSurfaceLock(io_surface, kIOSurfaceLockReadOnly, &seed) == 0) {\n      const auto* bytes = static_cast<const uint8_t*>(IOSurfaceGetBaseAddress(io_surface));\n      const size_t stride = IOSurfaceGetBytesPerRow(io_surface);\n      for (GLsizei row = 0; row < height; ++row) {\n        std::fwrite(bytes + row * stride, 1, static_cast<size_t>(width) * 4, vibeedit_raw_file);\n      }\n      std::fflush(vibeedit_raw_file);\n      IOSurfaceUnlock(io_surface, kIOSurfaceLockReadOnly, &seed);\n    }\n  }\n\n" + needle
+        if source.count(needle) != 1:
+            raise SystemExit("CEF raw-capture probe patch no longer applies cleanly")
         source = source.replace(needle, insertion)
     viewport_marker = "  // VIBEEDIT_CEF_FIXED_VIEWPORT\n"
     if viewport_marker not in source:

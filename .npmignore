@@ -1,2 +1,2 @@
-experiments/**/__pycache__/
-experiments/**/*.pyc
+**/__pycache__/**
+**/*.pyc
