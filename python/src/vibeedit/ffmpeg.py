@@ -496,7 +496,7 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
             labels.append(f"[{label}]")
     if labels:
         total = Fraction(spec["durationFrames"] * rate["denominator"], rate["numerator"])
-        chains.append(f"{''.join(labels)}amix=inputs={len(labels)}:duration=longest:normalize=0,apad,atrim=0:{float(total):.9f}[audio]")
+        chains.append(f"{''.join(labels)}amix=inputs={len(labels)}:duration=longest:normalize=0,aresample=async=1:first_pts=0,apad,atrim=0:{float(total):.9f}[audio]")
         audio_label = "audio"
 
     command.extend(["-filter_complex", ";".join(chains), "-map", f"[{video_label}]"])
