@@ -101,13 +101,19 @@ def test_audio_gain_revision_reuses_every_video_frame():
     revised["timeline"]["tracks"][1]["items"][0]["gainDb"] = -6
 
     plan = plan_revision(previous, revised)
+    previous_graph = {node["id"]: node["hash"] for node in plan_revision(previous, previous)["dependencyGraph"]["nodes"]}
+    revised_graph = {node["id"]: node["hash"] for node in plan["dependencyGraph"]["nodes"]}
 
     assert plan["revisionKind"] == "audio"
     assert plan["dirtyFrameRanges"] == []
     assert plan["dirtyAudioRanges"] == [{"startFrame": 48, "endFrame": 60}]
     assert plan["expectedReuse"]["reusedFrames"] == 108
     assert [job["kind"] for job in plan["requiredRerenderJobs"]] == ["audio-mix", "remux"]
+    assert set(plan["decodeWorkAvoided"]) == {"source-a", "source-b"}
     assert plan["executionStatus"] == "verified-audio-remix"
+    assert previous_graph["composite:video"] == revised_graph["composite:video"]
+    assert previous_graph["mix:audio"] != revised_graph["mix:audio"]
+    assert previous_graph["output:final"] != revised_graph["output:final"]
 
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
@@ -154,6 +160,7 @@ def test_external_audio_gain_revision_matches_clean_render(tmp_path: Path):
 
     incremental = render_revision(previous, revised, previous_output, tmp_path / "incremental-external.mp4")
     reference = render(revised, tmp_path / "reference-external.mp4")
+    plan = plan_revision(previous, revised)
 
     def stream_md5(path: Path, stream: str) -> str:
         result = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", stream, "-f", "framemd5", "-"], capture_output=True, text=True, check=True)
@@ -161,6 +168,8 @@ def test_external_audio_gain_revision_matches_clean_render(tmp_path: Path):
 
     assert stream_md5(incremental, "0:v:0") == stream_md5(reference, "0:v:0")
     assert stream_md5(incremental, "0:a:0") == stream_md5(reference, "0:a:0")
+    assert plan["decodeWorkAvoided"] == ["video"]
+    assert {(item["kind"], item["id"]) for item in plan["reusableArtifacts"] if item["kind"] == "source-decoding"} == {("source-decoding", "video")}
 
 
 def test_adding_face_follow_text_reuses_tracking_artifact():

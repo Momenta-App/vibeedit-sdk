@@ -49,7 +49,7 @@ def plan_revision(previous: JSONObject, revised: JSONObject) -> JSONObject:
             "reusedFrames": max(0, total_frames - dirty_frames),
             "ratio": round(max(0, total_frames - dirty_frames) / max(1, total_frames), 6),
         },
-        "decodeWorkAvoided": [source["id"] for source in revised["sources"] if source in previous["sources"]] if revision_kind != "full" else [],
+        "decodeWorkAvoided": _decode_work_avoided(previous, revised, revision_kind),
         "dependencyGraph": graph,
         "revisionKind": revision_kind,
         "incrementalEligible": revision_kind not in {"full", "none"},
@@ -59,24 +59,42 @@ def plan_revision(previous: JSONObject, revised: JSONObject) -> JSONObject:
 
 def build_render_graph(spec: JSONObject) -> JSONObject:
     validate_composition(spec)
+    source_hashes = {source["id"]: _hash(source) for source in spec["sources"]}
     source_nodes = [
-        {"id": f"source:{source['id']}", "kind": "source", "hash": _hash(source)}
+        {"id": f"source:{source['id']}", "kind": "source", "hash": source_hashes[source["id"]]}
         for source in spec["sources"]
     ]
+    artifacts = [
+        (kind, item)
+        for kind in ("tracking", "masks", "analysis")
+        for item in spec.get("artifacts", {}).get(kind, [])
+    ]
+    artifact_hashes: dict[str, str] = {}
+    for _, item in artifacts:
+        artifact_hashes[item["id"]] = _hash({
+            "artifact": item,
+            "dependencies": [artifact_hashes[item["trackingArtifactId"]]] if item.get("trackingArtifactId") in artifact_hashes else [],
+        })
+    items = [item for track in spec["timeline"]["tracks"] for item in track["items"]]
+    layer_hashes = {
+        item["id"]: _hash({
+            "layer": item,
+            "source": source_hashes.get(item.get("source", {}).get("sourceId")),
+            "artifacts": [artifact_hashes[identifier] for identifier in _item_artifact_ids(item) if identifier in artifact_hashes],
+        })
+        for item in items
+    }
     layer_nodes = [
-        {"id": f"layer:{item['id']}", "kind": item["kind"], "hash": _hash(item), "frameRange": _item_range(item)}
-        for track in spec["timeline"]["tracks"]
-        for item in track["items"]
+        {"id": f"layer:{item['id']}", "kind": item["kind"], "hash": layer_hashes[item["id"]], "frameRange": _item_range(item)}
+        for item in items
     ]
     artifact_nodes = [
-        {"id": f"artifact:{item['id']}", "kind": kind, "hash": _hash(item)}
-        for kind in ("masks", "tracking", "analysis")
-        for item in spec.get("artifacts", {}).get(kind, [])
+        {"id": f"artifact:{item['id']}", "kind": kind, "hash": artifact_hashes[item["id"]]}
+        for kind, item in artifacts
     ]
     edges = [
         {"from": f"source:{item['source']['sourceId']}", "to": f"layer:{item['id']}", "reason": "layer decodes source media"}
-        for track in spec["timeline"]["tracks"]
-        for item in track["items"]
+        for item in items
         if isinstance(item.get("source"), dict) and item["source"].get("sourceId")
     ]
     edges.extend(
@@ -97,8 +115,11 @@ def build_render_graph(spec: JSONObject) -> JSONObject:
         {"from": "composite:video", "to": "output:final", "reason": "video enters final assembly"},
         {"from": "mix:audio", "to": "output:final", "reason": "audio enters final assembly"},
     ])
+    composite_hash = _hash({"canvas": spec["canvas"], "durationFrames": spec["durationFrames"], "layers": [layer_hashes[item["id"]] for item in items if item["kind"] not in {"audio", "sound_effect"}]})
+    audio_mix_hash = _hash({"audio": spec.get("audio", {}), "layers": [layer_hashes[item["id"]] for item in items if item["kind"] in {"audio", "sound_effect"}]})
+    output_hash = _hash({"settings": spec["render"]["output"], "video": composite_hash, "audio": audio_mix_hash})
     return {
-        "nodes": [*source_nodes, *artifact_nodes, *layer_nodes, {"id": "composite:video", "kind": "composite", "hash": _hash({"canvas": spec["canvas"], "durationFrames": spec["durationFrames"]})}, {"id": "mix:audio", "kind": "audio-mix", "hash": _hash(spec.get("audio", {}))}, {"id": "output:final", "kind": "output", "hash": _hash(spec["render"]["output"])}],
+        "nodes": [*source_nodes, *artifact_nodes, *layer_nodes, {"id": "composite:video", "kind": "composite", "hash": composite_hash}, {"id": "mix:audio", "kind": "audio-mix", "hash": audio_mix_hash}, {"id": "output:final", "kind": "output", "hash": output_hash}],
         "edges": edges,
     }
 
@@ -126,6 +147,18 @@ def _items_by_id(spec: JSONObject) -> dict[str, JSONObject]:
         for track in spec["timeline"]["tracks"]
         for item in track["items"]
     }
+
+
+def _decode_work_avoided(previous: JSONObject, revised: JSONObject, revision_kind: str) -> list[str]:
+    if revision_kind == "full":
+        return []
+    decoded_sources = {
+        item["source"]["sourceId"]
+        for track in revised["timeline"]["tracks"]
+        for item in track["items"]
+        if revision_kind == "audio" and item["kind"] in {"audio", "sound_effect"} and isinstance(item.get("source"), dict)
+    }
+    return [source["id"] for source in revised["sources"] if source in previous["sources"] and source["id"] not in decoded_sources]
 
 
 def _item_range(item: JSONObject) -> JSONObject:
@@ -226,10 +259,11 @@ def _item_artifact_ids(item: JSONObject) -> list[str]:
 def _reusable_artifacts(previous: JSONObject, revised: JSONObject, revision_kind: str) -> list[JSONObject]:
     if revision_kind == "full":
         return []
+    reusable_source_ids = set(_decode_work_avoided(previous, revised, revision_kind))
     reusable = [
         {"kind": "source-decoding", "id": source["id"], "reason": "source identity is unchanged"}
         for source in revised["sources"]
-        if source in previous["sources"]
+        if source["id"] in reusable_source_ids
     ]
     for kind in ("tracking", "masks", "analysis"):
         before = {item["id"]: item for item in previous.get("artifacts", {}).get(kind, [])}
