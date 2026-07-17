@@ -139,7 +139,10 @@ and the reuse kind. Compatible container-only changes use stream-copy remuxing
 without decoding video. Audio-clip and procedural-SFX parameter revisions remix
 audio and stream-copy the encoded video. Bounded browser-text changes still
 encode the complete final frame sequence; transition-range replacement is
-planned but not yet claimed as executable.
+planned but not yet claimed as executable. A conservative video-only scene-tail
+removal can stream-copy an exact number of approved prior video frames when all
+remaining layers are unchanged and every removed layer begins at or after the
+new end. Mid-scene removal and tails retaining audio remain planned.
 
 Install the Python beta directly from its GitHub release asset:
 

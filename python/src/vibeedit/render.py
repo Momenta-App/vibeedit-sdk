@@ -59,6 +59,8 @@ def render_revision(previous: JSONObject | str | Path, revised: JSONObject | str
         return render(revised, output)
     if plan["revisionKind"] == "audio":
         return _render_audio_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan, Path(revised).parent if isinstance(revised, (str, Path)) else Path.cwd())
+    if plan["executionStatus"] == "verified-stream-copy-tail":
+        return _render_scene_tail_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan)
     if plan["revisionKind"] != "container":
         raise NotImplementedError(f"incremental execution for {plan['revisionKind']} revisions is planned but not yet verified; inspect plan_revision(...) before rendering")
     source = Path(previous_output)
@@ -89,6 +91,71 @@ def render_revision(previous: JSONObject | str | Path, revised: JSONObject | str
         },
     )
     return destination
+
+
+def _render_scene_tail_revision(spec: JSONObject, previous_output: Path, destination: Path, plan: JSONObject) -> Path:
+    if not previous_output.is_file():
+        raise FileNotFoundError(f"previous rendered output does not exist: {previous_output}")
+    _verify_previous_revision_input(previous_output, plan)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-i", str(previous_output), "-map", "0:v:0", "-an", "-c", "copy", "-frames:v", str(spec["durationFrames"]), "-map_metadata", "-1"]
+    if spec["render"]["output"]["container"] == "mp4":
+        command.extend(["-movflags", "+faststart"])
+    command.append(str(destination))
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    if result.returncode:
+        raise RuntimeError(result.stderr.strip() or f"FFmpeg tail truncation failed with exit code {result.returncode}")
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise RuntimeError("FFmpeg tail truncation returned success without a non-empty output")
+    if _video_frames(destination) != spec["durationFrames"]:
+        raise RuntimeError(f"FFmpeg tail truncation did not produce exactly {spec['durationFrames']} video frames")
+    work = {
+        "framesRendered": 0,
+        "framesReused": spec["durationFrames"],
+        "encodedVideoBytesReused": _packet_bytes(destination, "v:0"),
+        "encodedAudioBytesReused": 0,
+        "decodeWorkAvoided": plan["decodeWorkAvoided"],
+        "reuseKind": "stream-copy-tail-truncation",
+    }
+    write_artifact_provenance(
+        destination.with_suffix(destination.suffix + ".vibeedit.json"),
+        {
+            "schemaVersion": "1.0.0",
+            "compositionId": spec["id"],
+            "compositionSha256": hashlib.sha256(canonical_json(spec).encode()).hexdigest(),
+            "implementationVersion": VERSION,
+            "revisionPlan": plan,
+            "work": work,
+            "output": {"path": destination.name, "bytes": destination.stat().st_size, "sha256": hashlib.sha256(destination.read_bytes()).hexdigest()},
+        },
+    )
+    return destination
+
+
+def _verify_previous_revision_input(previous_output: Path, plan: JSONObject) -> None:
+    provenance = previous_output.with_suffix(previous_output.suffix + ".vibeedit.json")
+    if not provenance.is_file():
+        raise ValueError(f"previous rendered output provenance does not exist: {provenance}")
+    record = json.loads(provenance.read_text(encoding="utf-8"))
+    if record.get("compositionSha256") != plan["previousCompositionHash"]:
+        raise ValueError("previous rendered output provenance does not match the previous composition")
+    if record.get("output", {}).get("sha256") != hashlib.sha256(previous_output.read_bytes()).hexdigest():
+        raise ValueError("previous rendered output does not match its provenance digest")
+
+
+def _video_frames(path: Path) -> int:
+    result = subprocess.run(
+        [ffprobe_path(), "-v", "error", "-count_frames", "-select_streams", "v:0", "-show_entries", "stream=nb_read_frames", "-of", "json", str(path)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode:
+        raise RuntimeError(result.stderr.strip() or f"FFprobe frame count failed with exit code {result.returncode}")
+    streams = json.loads(result.stdout).get("streams", [])
+    if not streams or not str(streams[0].get("nb_read_frames", "")).isdigit():
+        raise RuntimeError("FFprobe did not report a video frame count")
+    return int(streams[0]["nb_read_frames"])
 
 
 def _render_audio_revision(spec: JSONObject, previous_output: Path, destination: Path, plan: JSONObject, base: Path) -> Path:

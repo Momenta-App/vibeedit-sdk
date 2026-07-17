@@ -19,6 +19,7 @@ def plan_revision(previous: JSONObject, revised: JSONObject) -> JSONObject:
     if revision_kind == "container" and not _container_compatible(revised["render"]["output"]):
         revision_kind = "full"
     dirty_ranges, dirty_audio_ranges = _dirty_ranges(revision_kind, changed_items, changed_artifacts, previous, revised, previous_items, revised_items)
+    tail_truncation = revision_kind == "scene-removal" and _tail_truncation_eligible(previous, revised, previous_items, revised_items)
     dirty_frames = sum(item["endFrame"] - item["startFrame"] for item in dirty_ranges)
     total_frames = revised["durationFrames"]
     dirty_layers = [
@@ -42,7 +43,7 @@ def plan_revision(previous: JSONObject, revised: JSONObject) -> JSONObject:
         "changedArtifacts": changed_artifacts,
         "reusableArtifacts": _reusable_artifacts(previous, revised, revision_kind),
         "requiredRerenderJobs": _rerender_jobs(revision_kind, changed_items, changed_artifacts, dirty_ranges, dirty_audio_ranges, previous_items, revised_items),
-        "stitchPlan": _stitch_plan(revision_kind, dirty_ranges, dirty_audio_ranges),
+        "stitchPlan": _stitch_plan(revision_kind, dirty_ranges, dirty_audio_ranges, tail_truncation=tail_truncation),
         "expectedReuse": {
             "totalFrames": total_frames,
             "dirtyFrames": dirty_frames,
@@ -53,7 +54,7 @@ def plan_revision(previous: JSONObject, revised: JSONObject) -> JSONObject:
         "dependencyGraph": graph,
         "revisionKind": revision_kind,
         "incrementalEligible": revision_kind not in {"full", "none"},
-        "executionStatus": "verified-frame-cache" if revision_kind == "motion" else "verified-stream-copy-remux" if revision_kind == "container" else "verified-audio-remix" if revision_kind == "audio" else "planned-not-yet-executed" if revision_kind not in {"full", "none"} else "full-render-required" if revision_kind == "full" else "no-work",
+        "executionStatus": "verified-frame-cache" if revision_kind == "motion" else "verified-stream-copy-remux" if revision_kind == "container" else "verified-audio-remix" if revision_kind == "audio" else "verified-stream-copy-tail" if tail_truncation else "planned-not-yet-executed" if revision_kind not in {"full", "none"} else "full-render-required" if revision_kind == "full" else "no-work",
     }
 
 
@@ -197,6 +198,26 @@ def _revision_kind(changed_fields: list[str], changed_items: list[str], changed_
     return "full"
 
 
+def _tail_truncation_eligible(previous: JSONObject, revised: JSONObject, previous_items: dict[str, JSONObject], revised_items: dict[str, JSONObject]) -> bool:
+    if revised["durationFrames"] >= previous["durationFrames"] or not previous_items.keys() - revised_items.keys():
+        return False
+    if any(identifier not in previous_items or previous_items[identifier] != item for identifier, item in revised_items.items()):
+        return False
+    if any(item["kind"] in {"audio", "sound_effect"} for item in revised_items.values()):
+        return False
+    if any(_item_range(previous_items[identifier])["startFrame"] < revised["durationFrames"] for identifier in previous_items.keys() - revised_items.keys()):
+        return False
+    if any(previous.get(key) != revised.get(key) for key in ("canvas", "sources", "artifacts", "audio")):
+        return False
+    if previous["render"]["backend"] != revised["render"]["backend"]:
+        return False
+    if {key: value for key, value in previous["render"]["output"].items() if key != "uri"} != {key: value for key, value in revised["render"]["output"].items() if key != "uri"}:
+        return False
+    previous_tracks = [{key: value for key, value in track.items() if key != "items"} for track in previous["timeline"]["tracks"]]
+    revised_tracks = [{key: value for key, value in track.items() if key != "items"} for track in revised["timeline"]["tracks"]]
+    return previous_tracks == revised_tracks
+
+
 def _dirty_ranges(revision_kind: str, changed_items: list[str], changed_artifacts: list[JSONObject], previous: JSONObject, revised: JSONObject, previous_items: dict[str, JSONObject], revised_items: dict[str, JSONObject]) -> tuple[list[JSONObject], list[JSONObject]]:
     item_ranges = [
         _item_range(item)
@@ -306,11 +327,11 @@ def _rerender_jobs(revision_kind: str, changed_items: list[str], changed_artifac
     return [{"kind": "full-composition", "frameRange": item, "reason": "change crosses a proven incremental contract"} for item in dirty_ranges]
 
 
-def _stitch_plan(revision_kind: str, dirty_ranges: list[JSONObject], dirty_audio_ranges: list[JSONObject]) -> JSONObject:
+def _stitch_plan(revision_kind: str, dirty_ranges: list[JSONObject], dirty_audio_ranges: list[JSONObject], *, tail_truncation: bool = False) -> JSONObject:
     strategy = {
         "motion": "content-addressed-frame-sequence",
         "transition": "replace-transition-overlap",
-        "scene-removal": "reuse-prefix-and-rebuild-timeline-tail",
+        "scene-removal": "stream-copy-tail-truncation" if tail_truncation else "reuse-prefix-and-rebuild-timeline-tail",
         "audio": "audio-only-remix-and-remux",
         "artifact": "replace-artifact-dependent-ranges",
         "container": "stream-copy-remux",

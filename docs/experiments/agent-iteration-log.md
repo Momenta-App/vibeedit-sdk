@@ -123,3 +123,20 @@
 - Result quality: encoded video and audio stream hashes matched the canonical full render exactly. Visual review confirmed unchanged pre/post-overlap frames and the intended crossfade-to-wipe change; contact-sheet SHA-256 is `ada1169ae24bcc24c1083159bbf72f5bd34566509284f2947db38392d4656797`.
 - Decision: revert both segment-cache prototypes and keep transition execution explicitly planned. Preserve the planner correction that does not claim either source decode is avoided.
 - Next question: pursue a design that can reuse final encoded GOPs without weakening correctness, or prioritize scene-tail removal where packet-level reuse may be naturally aligned.
+
+## 2026-07-17 — verified video-only scene-tail truncation
+
+- Commit: working tree after `2cd568c`.
+- Hypothesis: removing a tail exactly at the first removed layer boundary can reuse the approved encoded prefix without decoding sources or rendering frames.
+- User-style task: remove the second scene, its 30-frame transition, and tail SFX from a 300-frame 1080p edit, producing a 210-frame video-only revision.
+- Backend/environment: FFmpeg packet-counted stream copy, macOS Apple Silicon, source mode through `uv`.
+- Full timings: 4.748821s, 4.645047s, 4.999855s; mean 4.797908s.
+- Prior-render timings: 7.569177s, 7.550149s, 7.503372s. This is pre-existing approved work and is reported separately rather than included in revision latency.
+- Revision timings: 0.622083s, 0.631288s, 0.618982s; mean 0.624118s, a 7.687504x speedup.
+- Reuse: zero frames rendered, 210/210 frames reused, 2,810,506 encoded video packet bytes reused, and both source decodes avoided.
+- Result quality: every decoded output frame matches the corresponding frame of the approved prior render exactly. Independent clean rerenders score 0.993142 SSIM; visual inspection of frames 0, 105, and 209 found no visible difference. Contact-sheet SHA-256 is `4ec3720da43aae36d83909ad4925a50354db8a1cd81321f78c8fb27c52faea4b`.
+- Failed variants retained: timestamp truncation with `-t` leaked two B-frames; exact `-frames:v` packet counting fixed the duration. Retaining AAC under `-shortest` ended one partial packet (16ms) early, so retained-audio tails are explicitly not executable.
+- Safety: execution requires unchanged retained layers, all removed layers at or beyond the new end, identical sources/artifacts/render settings, a video-only revised timeline, matching prior composition/output provenance digests, and an independently verified final frame count.
+- Decision: keep.
+- Remaining limitation: this preserves the already approved encoded prefix rather than reproducing the different compression decisions of a clean re-encode. Mid-scene removal, retained audio, and changed prefix layers remain planned.
+- Next question: extend packet-level reuse only where closed-GOP and audio sample boundaries can be proved, while prioritizing artifact-dependent revision execution.

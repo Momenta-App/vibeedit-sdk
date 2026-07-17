@@ -284,6 +284,15 @@ components, exercised tracking interpolation, and reported zero npm audit
 vulnerabilities. MCP tests cover initialize, list, compact filtered catalog invocation, revision planning, and
 composition editing over the underlying library.
 
+Incremental revision execution also covers conservative video-only scene-tail
+removal. A 1080p/300-to-210-frame benchmark measured 4.797908 seconds for a
+canonical full render versus 0.624118 seconds for verified stream-copy
+truncation (7.687504x). The revised artifact preserves the prior approved 210
+decoded frames exactly, reuses 2,810,506 encoded video bytes, verifies its
+provenance digest and final frame count, and remains visually aligned with a
+clean rerender at 0.993142 SSIM. Tails retaining audio and mid-scene removals
+remain outside the executable claim.
+
 ## Definition-of-success audit
 
 | # | Status | Evidence or remaining gate |

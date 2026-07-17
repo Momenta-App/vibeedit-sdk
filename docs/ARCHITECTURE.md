@@ -119,8 +119,13 @@ layers, video composites, audio mixes, and final output stable content hashes.
 Execution support remains explicit per revision class: bounded browser-motion
 changes use content-addressed composite-frame reuse, compatible container-only
 changes stream-copy encoded packets, and explicit audio-clip/SFX parameter
-changes remix audio while stream-copying video. Planned transition, scene-tail,
-and segmentation-dependent range replacement is not reported as executable.
+changes remix audio while stream-copying video. Video-only scene-tail removal
+stream-copies an exact packet-counted prefix only when the previous artifact and
+its provenance digest match, all retained layers are unchanged, and removed
+layers begin at or beyond the new end. The output frame count is independently
+verified before reuse is reported. Planned transition, mid-scene, retained-audio
+tail, and segmentation-dependent range replacement is not reported as
+executable.
 
 ## Versioning
 
