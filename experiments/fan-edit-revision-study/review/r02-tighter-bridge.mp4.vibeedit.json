@@ -1,9 +1,9 @@
 {
   "cacheHit": false,
-  "cacheKey": "0b0a93f48458ae042909586778a1d37f6673853ed8a454dc79003bf8e2201142",
+  "cacheKey": "169fa8038ccb8151e578878b1b08de3c993cbceff480cc74ed353fa2b4a34b79",
   "compositionId": "fan-edit",
   "compositionSha256": "76dac8c097b258c221389db7604988f1f5573c8b74243bf248408c16e1a2a04a",
-  "implementationVersion": "0.1.0b2",
+  "implementationVersion": "0.1.0b3",
   "output": {
     "bytes": 214377,
     "path": "r02-tighter-bridge.mp4",

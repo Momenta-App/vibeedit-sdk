@@ -1,13 +1,13 @@
 {
   "cacheHit": false,
-  "cacheKey": "e4e24dfcf6b60cf121e2952f1802df308924623bd3fe66f5b83d23baed865e67",
+  "cacheKey": "088ce3e486d2eac49ad930c64a3b3ae297ad41484451a2f58b0de3d9630eda34",
   "compositionId": "fan-edit",
-  "compositionSha256": "3c4c2a518ae8799f92c64a5a5572cc48fab7a35a7cbc850e4dc395f8130365a7",
+  "compositionSha256": "1e25c796af1e9214d070ced3d52469de5b20154051c33d9e5b456ba68fd0256a",
   "implementationVersion": "0.1.0b3",
   "output": {
-    "bytes": 229520,
-    "path": "r00-baseline.mp4",
-    "sha256": "47c4fc155d3bc19893a94fb123560f0ee653f6e495e098fabe0d550f289abeb9"
+    "bytes": 185115,
+    "path": "r10-tighten-micro-aftershock.mp4",
+    "sha256": "99ea16857f1b8c5372013a9bc4d0d7ed0c6f483bb29f136f741e55d13f502f53"
   },
   "runtimeVersions": {
     "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
@@ -40,7 +40,7 @@
     }
   ],
   "work": {
-    "framesRendered": 180,
+    "framesRendered": 156,
     "framesReused": 0,
     "reuseKind": "none"
   }

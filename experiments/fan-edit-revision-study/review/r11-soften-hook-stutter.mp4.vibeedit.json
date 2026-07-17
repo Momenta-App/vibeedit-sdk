@@ -1,13 +1,13 @@
 {
   "cacheHit": false,
-  "cacheKey": "e4e24dfcf6b60cf121e2952f1802df308924623bd3fe66f5b83d23baed865e67",
+  "cacheKey": "2ee59b94bc992520877ce78445ff464f89b5276a1ec34c9a224d3c2f556d7006",
   "compositionId": "fan-edit",
-  "compositionSha256": "3c4c2a518ae8799f92c64a5a5572cc48fab7a35a7cbc850e4dc395f8130365a7",
+  "compositionSha256": "270a36bfe91c905e3220a3866570641a828c565f9ee5b4df056f0fa458d66bc0",
   "implementationVersion": "0.1.0b3",
   "output": {
-    "bytes": 229520,
-    "path": "r00-baseline.mp4",
-    "sha256": "47c4fc155d3bc19893a94fb123560f0ee653f6e495e098fabe0d550f289abeb9"
+    "bytes": 196289,
+    "path": "r11-soften-hook-stutter.mp4",
+    "sha256": "ad43f2e9fe097239a78b908300a44aa9bfff4ac1cc8b0325833c258c0ef2ee8b"
   },
   "runtimeVersions": {
     "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
@@ -40,7 +40,7 @@
     }
   ],
   "work": {
-    "framesRendered": 180,
+    "framesRendered": 156,
     "framesReused": 0,
     "reuseKind": "none"
   }

@@ -1,7 +1,7 @@
 {
   "compositionId": "fan-edit",
   "compositionSha256": "3bcef6f8f044c33ecc17ba5ece2fa7c9802cb75df8524d208a60273cfae3da54",
-  "implementationVersion": "0.1.0b2",
+  "implementationVersion": "0.1.0b3",
   "output": {
     "bytes": 211840,
     "path": "r04-add-pre-drop-sfx.mp4",

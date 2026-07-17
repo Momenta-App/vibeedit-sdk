@@ -1,7 +1,7 @@
 {
   "compositionId": "fan-edit",
   "compositionSha256": "50828995d5668d919a309874a702fc3b08c491d96288b5e3856a5a8fcb01ad7f",
-  "implementationVersion": "0.1.0b2",
+  "implementationVersion": "0.1.0b3",
   "output": {
     "bytes": 173481,
     "path": "r08-no-op.mp4",

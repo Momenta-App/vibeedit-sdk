@@ -11,6 +11,7 @@ import subprocess
 import time
 from pathlib import Path
 
+import vibeedit
 from vibeedit import plan_revision, render, render_revision, verify_output
 from vibeedit.data import data_path
 from vibeedit.examples import render_example
@@ -32,9 +33,18 @@ EXECUTABLE = {
 
 def main() -> None:
     REVIEW.mkdir(parents=True, exist_ok=True)
+    for pattern in ("r*.composition.json", "r*.mp4", "r*.mp4.vibeedit.json", "contact-sheet*.jpg", "fan-edit-study-report.json", "REVIEW_NOTES.md"):
+        for path in REVIEW.glob(pattern):
+            path.unlink()
     _materialize_sources()
     revisions = _revisions()
-    report = {"schemaVersion": "1.0.0", "test": "vibeedit-fan-edit-revision-study", "revisions": []}
+    module = Path(vibeedit.__file__).resolve()
+    report = {
+        "schemaVersion": "1.0.0",
+        "test": "vibeedit-fan-edit-revision-study",
+        "runtime": {"version": vibeedit.__version__, "moduleOrigin": "installed-site-packages" if "site-packages" in module.parts else "source-checkout"},
+        "revisions": [],
+    }
     previous_spec = None
     previous_output = None
     for index, revision in enumerate(revisions):
@@ -81,10 +91,11 @@ def main() -> None:
         _remove_artifact(clean_output)
         previous_spec = copy.deepcopy(spec)
         previous_output = output
+    outputs = [REVIEW / item["output"]["file"] for item in report["revisions"]]
     report["benchmarks"] = _benchmarks(revisions)
+    report["finalAudio"] = _audio_loudness(outputs[-1])
     (REVIEW / "fan-edit-study-report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     (REVIEW / "REVIEW_NOTES.md").write_text(_review_notes(report), encoding="utf-8")
-    outputs = [REVIEW / item["output"]["file"] for item in report["revisions"]]
     _contact_sheet(outputs, 0.18, "contact-sheet-build.jpg")
     _contact_sheet(outputs, 0.68, "contact-sheet-drop.jpg")
     print(json.dumps({"reviewFolder": str(REVIEW), "revisions": len(outputs), "failures": [item["id"] for item in report["revisions"] if not item["verification"]["passed"] or not item["cleanComparison"]["passed"]]}, indent=2))
@@ -162,6 +173,52 @@ def _revisions() -> list[dict]:
 
     current = copy.deepcopy(current)
     revisions.append(_revision("no-op", "Resubmit the approved composition without semantic changes", ["no-op"], current))
+
+    current = copy.deepcopy(current)
+    current["durationFrames"] = 162
+    current["verification"]["durationFrames"] = 162
+    _track(current, "V1")["items"].append({
+        "id": "micro-aftershock",
+        "kind": "video",
+        "placement": {"startFrame": 150, "durationFrames": 12},
+        "source": {"sourceId": "source-e", "inFrame": 0, "durationFrames": 12},
+        "effects": [],
+        "metadata": {
+            "fanEditRole": "aftershock",
+            "selectionReason": "one brief resolving image after the hard drop",
+            "syncAnchor": "final impact tail",
+        },
+    })
+    _track(current, "A1")["items"].append(_sfx("micro-aftershock-hit", 150, 12, 66, -15, 41))
+    current["timeline"]["markers"].append({"id": "micro-aftershock", "frame": 150, "label": "Micro aftershock", "kind": "fan-edit-structure"})
+    current["metadata"]["fanEdit"]["structure"] = ["hook", "setup", "build", "drop", "micro-aftershock"]
+    revisions.append(_revision("restore-micro-aftershock", "Restore a twelve-frame resolving image and real final impact", ["scene-add", "audio-add"], current))
+
+    current = copy.deepcopy(current)
+    current["durationFrames"] = 156
+    current["verification"]["durationFrames"] = 156
+    micro_aftershock = _item(current, "micro-aftershock")
+    micro_aftershock["placement"]["durationFrames"] = 6
+    micro_aftershock["source"]["durationFrames"] = 6
+    micro_aftershock_hit = _item(current, "micro-aftershock-hit")
+    micro_aftershock_hit["placement"]["durationFrames"] = 6
+    revisions.append(_revision("tighten-micro-aftershock", "Cut the resolving image to six frames after full-speed review", ["scene-tail-trim", "audio-change"], current))
+
+    current = copy.deepcopy(current)
+    _item(current, "hook")["effects"][0]["params"].update({"windowFrames": 1, "intensity": 0.18})
+    revisions.append(_revision("soften-hook-stutter", "Reduce the hook stutter to a one-frame punctuation", ["effect-change", "hook"], current))
+
+    current = copy.deepcopy(current)
+    _item(current, "micro-aftershock-hit").update({"gainDb": -12, "params": {"frequency": 62}})
+    revisions.append(_revision("final-impact-mix", "Raise and deepen the final impact without touching picture", ["audio-change", "mix"], current))
+
+    current = copy.deepcopy(current)
+    for item in _track(current, "A1")["items"]:
+        item["gainDb"] = item.get("gainDb", 0) + 22
+    revisions.append(_revision("final-loudness", "Lift the deliberately quiet synthetic mix to -19 LUFS with safe peak headroom", ["audio-change", "loudness"], current))
+
+    current = copy.deepcopy(current)
+    revisions.append(_revision("final-approved-no-op", "Resubmit the final approved fan edit unchanged", ["no-op", "approval"], current))
     return revisions
 
 
@@ -263,13 +320,22 @@ def _contact_sheet(outputs: list[Path], ratio: float, name: str) -> None:
         thumbnail.unlink(missing_ok=True)
 
 
+def _audio_loudness(output: Path) -> dict:
+    result = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(output), "-map", "0:a:0", "-af", "ebur128=peak=true", "-f", "null", "-"], capture_output=True, text=True, check=True)
+    integrated = re.findall(r"^\s*I:\s+(-?[0-9.]+) LUFS$", result.stderr, re.MULTILINE)
+    peaks = re.findall(r"^\s*Peak:\s+(-?[0-9.]+) dBFS$", result.stderr, re.MULTILINE)
+    if not integrated or not peaks:
+        raise RuntimeError("FFmpeg did not report final loudness and true peak")
+    return {"integratedLufs": float(integrated[-1]), "truePeakDbfs": float(peaks[-1])}
+
+
 def _review_notes(report: dict) -> str:
     rows = ["| Rev | Change | Mode | Time | Reused/rendered | Clean match |", "|---|---|---:|---:|---:|---:|"]
     for item in report["revisions"]:
         work = item.get("work") or {}
         comparison = item["cleanComparison"]
         rows.append(f"| {item['id']} | {item['label']} | {item['renderMode']} | {item['elapsedSeconds']:.3f}s | {work.get('framesReused', '?')}/{work.get('framesRendered', '?')} | clean V {comparison['videoExact']}, approved V {comparison['approvedVideoExact']}, SSIM {comparison['videoSsim']:.6f} / A {comparison['audioExact']} ({comparison['audioCorrelation']:.6f}) |")
-    rows.extend(["", "## Three-trial latency benchmarks", "", "| Class | Incremental mean | Clean mean | Speedup |", "|---|---:|---:|---:|"])
+    rows.extend(["", f"Final audio: {report['finalAudio']['integratedLufs']:.1f} LUFS integrated, {report['finalAudio']['truePeakDbfs']:.1f} dBFS true peak.", "", "## Three-trial latency benchmarks", "", "| Class | Incremental mean | Clean mean | Speedup |", "|---|---:|---:|---:|"])
     rows.extend(f"| {item['name']} | {item['incrementalMeanSeconds']:.3f}s | {item['cleanMeanSeconds']:.3f}s | {item['speedup']:.2f}x |" for item in report["benchmarks"])
     return "# Fan-edit revision review\n\nOpen the numbered videos in order. Specs, provenance, two contact sheets, and the JSON report are in this same flat folder. The companion general stress sequence covers text add/change/move/remove; this sequence preserves the fan-edit no-text default.\n\n" + "\n".join(rows) + "\n"
 

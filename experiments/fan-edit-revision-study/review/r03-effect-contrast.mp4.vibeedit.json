@@ -1,9 +1,9 @@
 {
   "cacheHit": false,
-  "cacheKey": "11083f2ea431c572a8180f0c5fa1a0a303e1eaac7cea53ab0ed1f1a5c619d0e9",
+  "cacheKey": "72412faa876256920b10397e46b88406a583d6405b80c2dfd42d3bfd42a49ecb",
   "compositionId": "fan-edit",
   "compositionSha256": "f3707fb23ede46c3a4123f2507b07d75dce2aa9e2e12c700b531d50fc3e3d603",
-  "implementationVersion": "0.1.0b2",
+  "implementationVersion": "0.1.0b3",
   "output": {
     "bytes": 210766,
     "path": "r03-effect-contrast.mp4",
