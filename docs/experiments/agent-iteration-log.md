@@ -140,3 +140,14 @@
 - Decision: keep.
 - Remaining limitation: this preserves the already approved encoded prefix rather than reproducing the different compression decisions of a clean re-encode. Mid-scene removal, retained audio, and changed prefix layers remain planned.
 - Next question: extend packet-level reuse only where closed-GOP and audio sample boundaries can be proved, while prioritizing artifact-dependent revision execution.
+
+## 2026-07-17 — transitive artifact invalidation audit
+
+- Commit: working tree after `740d58e`.
+- Hypothesis: the render graph's tracking-to-mask edge should prevent unchanged serialized masks and their layers from being claimed reusable after tracking changes.
+- User-style task: retrack a subject whose SAM mask depends on the tracking artifact, without directly editing the mask or subject layer objects.
+- Finding: graph hashes propagated correctly, but the reuse list compared artifact and layer objects directly. It incorrectly listed the unchanged mask and subject layer as reusable.
+- Change: dependency-invalidated masks are now explicit `changedArtifacts`; both those masks and every referencing layer are excluded from reusable claims. Required jobs carry both the directly changed tracking artifact and its dependent mask.
+- Result quality: the revised graph changes `artifact:sam-mask` and `layer:subject`; the dirty range remains exactly frames 0–59. Focused revision tests pass 15/15.
+- Decision: keep the correctness fix. Do not expose artifact execution until the canonical renderer consumes the declared mask/tracking artifacts rather than relying on example-specific preprocessing.
+- Next question: unify mask consumption with the canonical render path so bounded artifact revisions can be benchmarked against real output rather than planner metadata alone.

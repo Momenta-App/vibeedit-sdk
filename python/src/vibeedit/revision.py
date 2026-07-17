@@ -41,7 +41,7 @@ def plan_revision(previous: JSONObject, revised: JSONObject) -> JSONObject:
         "dirtyFrameRanges": dirty_ranges,
         "dirtyAudioRanges": dirty_audio_ranges,
         "changedArtifacts": changed_artifacts,
-        "reusableArtifacts": _reusable_artifacts(previous, revised, revision_kind),
+        "reusableArtifacts": _reusable_artifacts(previous, revised, revision_kind, changed_artifacts),
         "requiredRerenderJobs": _rerender_jobs(revision_kind, changed_items, changed_artifacts, dirty_ranges, dirty_audio_ranges, previous_items, revised_items),
         "stitchPlan": _stitch_plan(revision_kind, dirty_ranges, dirty_audio_ranges, tail_truncation=tail_truncation),
         "expectedReuse": {
@@ -258,6 +258,13 @@ def _changed_artifacts(previous: JSONObject, revised: JSONObject) -> list[JSONOb
             if isinstance(item.get("startFrame"), int) and isinstance(item.get("durationFrames"), int):
                 frame_range = {"startFrame": item["startFrame"], "endFrame": item["startFrame"] + item["durationFrames"]}
             result.append({"id": identifier, "kind": kind, "change": "added" if identifier not in before else "removed" if identifier not in after else "modified", "frameRange": frame_range, "reason": "artifact content, parameters, model, runtime, or provenance changed"})
+    invalidated = {item["id"] for item in result}
+    for item in revised.get("artifacts", {}).get("masks", []):
+        if item.get("trackingArtifactId") not in invalidated or item["id"] in invalidated:
+            continue
+        frame_range = {"startFrame": item["startFrame"], "endFrame": item["startFrame"] + item["durationFrames"]} if isinstance(item.get("startFrame"), int) and isinstance(item.get("durationFrames"), int) else None
+        result.append({"id": item["id"], "kind": "masks", "change": "dependency-invalidated", "frameRange": frame_range, "reason": f"mask depends on invalidated tracking artifact {item['trackingArtifactId']}"})
+        invalidated.add(item["id"])
     return result
 
 
@@ -279,10 +286,11 @@ def _item_artifact_ids(item: JSONObject) -> list[str]:
     ]))
 
 
-def _reusable_artifacts(previous: JSONObject, revised: JSONObject, revision_kind: str) -> list[JSONObject]:
+def _reusable_artifacts(previous: JSONObject, revised: JSONObject, revision_kind: str, changed_artifacts: list[JSONObject]) -> list[JSONObject]:
     if revision_kind == "full":
         return []
     reusable_source_ids = set(_decode_work_avoided(previous, revised, revision_kind))
+    invalidated_artifacts = {item["id"] for item in changed_artifacts}
     reusable = [
         {"kind": "source-decoding", "id": source["id"], "reason": "source identity is unchanged"}
         for source in revised["sources"]
@@ -293,7 +301,7 @@ def _reusable_artifacts(previous: JSONObject, revised: JSONObject, revision_kind
         reusable.extend(
             {"kind": kind, "id": item["id"], "reason": "artifact inputs, parameters, model, runtime, and cache identity are unchanged"}
             for item in revised.get("artifacts", {}).get(kind, [])
-            if before.get(item["id"]) == item
+            if before.get(item["id"]) == item and item["id"] not in invalidated_artifacts
         )
     if revision_kind != "audio" and previous.get("audio") == revised.get("audio"):
         reusable.append({"kind": "audio-mix", "id": "final", "reason": "audio contract is unchanged"})
@@ -301,7 +309,7 @@ def _reusable_artifacts(previous: JSONObject, revised: JSONObject, revision_kind
     reusable.extend(
         {"kind": "layer", "id": item["id"], "reason": "layer content and placement are unchanged"}
         for item in _items_by_id(revised).values()
-        if previous_items.get(item["id"]) == item
+        if previous_items.get(item["id"]) == item and not set(_item_artifact_ids(item)) & invalidated_artifacts
     )
     return reusable
 

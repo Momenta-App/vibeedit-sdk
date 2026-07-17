@@ -242,6 +242,28 @@ def test_sam_prompt_invalidates_mask_and_downstream_composite_only():
     assert [job["kind"] for job in plan["requiredRerenderJobs"]] == ["artifact", "composite"]
 
 
+def test_tracking_change_transitively_invalidates_dependent_mask_and_layer():
+    previous = json.loads(data_path("examples", "sam-segmentation", "composition.json").read_text())
+    previous["timeline"]["tracks"][0]["items"][0]["maskIds"] = ["sam-mask"]
+    previous["artifacts"]["tracking"] = [json.loads(data_path("examples", "face-follow-text", "composition.json").read_text())["artifacts"]["tracking"][0]]
+    previous["artifacts"]["masks"][0]["trackingArtifactId"] = "face-track"
+    revised = json.loads(json.dumps(previous))
+    revised["artifacts"]["tracking"][0]["provenance"]["cacheKey"] = "retracked-v2"
+
+    plan = plan_revision(previous, revised)
+    previous_graph = {node["id"]: node["hash"] for node in plan_revision(previous, previous)["dependencyGraph"]["nodes"]}
+    revised_graph = {node["id"]: node["hash"] for node in plan["dependencyGraph"]["nodes"]}
+
+    assert [(item["id"], item["change"]) for item in plan["changedArtifacts"]] == [("face-track", "modified"), ("sam-mask", "dependency-invalidated")]
+    assert plan["dirtyFrameRanges"] == [{"startFrame": 0, "endFrame": 60}]
+    assert any(item["id"] == "subject" for item in plan["dirtyLayers"])
+    assert not any(item["kind"] == "masks" and item["id"] == "sam-mask" for item in plan["reusableArtifacts"])
+    assert not any(item["kind"] == "layer" and item["id"] == "subject" for item in plan["reusableArtifacts"])
+    assert plan["requiredRerenderJobs"][0]["artifactIds"] == ["face-track", "sam-mask"]
+    assert previous_graph["artifact:sam-mask"] != revised_graph["artifact:sam-mask"]
+    assert previous_graph["layer:subject"] != revised_graph["layer:subject"]
+
+
 def test_container_only_revision_plans_stream_copy_remux():
     previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
     revised = json.loads(json.dumps(previous))

@@ -116,6 +116,10 @@ changed fields, dirty video/audio ranges, changed and reusable artifacts,
 dependency reasons, required jobs, a stitch strategy, and expected reuse. The
 dependency graph gives sources, analysis/mask/tracking artifacts, timeline
 layers, video composites, audio mixes, and final output stable content hashes.
+Invalidation follows artifact dependencies transitively: a changed tracking
+artifact invalidates masks derived from it and every layer referencing those
+masks. Dependency-invalidated artifacts and layers are excluded from reusable
+claims even when their own serialized objects are unchanged.
 Execution support remains explicit per revision class: bounded browser-motion
 changes use content-addressed composite-frame reuse, compatible container-only
 changes stream-copy encoded packets, and explicit audio-clip/SFX parameter
