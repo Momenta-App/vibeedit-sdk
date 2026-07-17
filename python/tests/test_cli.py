@@ -27,7 +27,13 @@ def test_catalog_search_supports_token_efficient_results(capsys):
     assert main(["catalog", "search", "text", "--compact", "--limit", "2", "--json"]) == 0
     payload = json.loads(capsys.readouterr().out)
     assert len(payload) == 2
-    assert set(payload[0]) == {"id", "name", "intent", "category", "requiredCapability", "backends", "determinism", "parameterCount", "preview", "compatibility", "estimatedSetupCost", "confidence", "reason"}
+    assert set(payload[0]) == {"id", "name", "intent", "category", "requiredCapability", "backends", "determinism", "parameterCount", "preview", "compatibility", "estimatedSetupCost", "estimatedRenderCost", "setupRequirements", "confidence", "reason"}
+
+
+def test_catalog_search_filters_category_capability_and_platform(capsys):
+    assert main(["catalog", "search", "impact", "--category", "sfx", "--capability", "audio", "--platform", "current", "--compact", "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert [item["id"] for item in payload] == ["vibeedit://sfx/impact-procedural"]
 
 
 def test_examples_list_explains_requirements(capsys):
@@ -49,6 +55,24 @@ def test_setup_requires_an_explicit_capability(capsys):
     payload = json.loads(capsys.readouterr().out)
     assert payload["error"] == "No optional capability selected"
     assert "--browser" in payload["hint"]
+
+
+def test_revision_plan_explains_bounded_work(tmp_path: Path, capsys):
+    previous = json.loads((Path(__file__).parents[2] / "schema" / "fixtures" / "mixed.json").read_text())
+    previous["durationFrames"] = 30
+    previous["timeline"]["tracks"][1]["items"][0]["placement"] = {"startFrame": 10, "durationFrames": 10}
+    previous["verification"]["durationFrames"] = 30
+    revised = json.loads(json.dumps(previous))
+    revised["timeline"]["tracks"][1]["items"][0]["props"]["text"] = "REVISED"
+    previous_path = tmp_path / "previous.json"
+    revised_path = tmp_path / "revised.json"
+    previous_path.write_text(json.dumps(previous))
+    revised_path.write_text(json.dumps(revised))
+
+    assert main(["revision", "plan", str(previous_path), str(revised_path), "--json"]) == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["dirtyFrameRanges"] == [{"startFrame": 10, "endFrame": 20}]
+    assert payload["executionStatus"] == "verified-frame-cache"
 
 
 def test_doctor_human_output_is_a_summary(capsys):

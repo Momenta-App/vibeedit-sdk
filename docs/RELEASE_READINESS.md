@@ -24,7 +24,7 @@ The exact archives pass byte-level comparison against the pinned canonical
 VibeEdit Git source: 44 skills and 16 preset source files match, and the archive
 scanner found zero forbidden entries. A fresh Python 3.12 environment installed
 the exact wheel with its browser extra, completed browser setup, initialized the
-10-tool MCP server, resolved the packaged catalog site, and installed/checked a
+11-tool MCP server, resolved the packaged catalog site, and installed/checked a
 Codex skill without modification. It rendered the generated 60-frame example
 and the mixed source-video/Chromium/SFX 90-frame example with zero duration
 drift. A fresh Node project installed the exact npm tarball, imported the API,
@@ -91,7 +91,7 @@ record is [public-beta-install-proof.json](evidence/public-beta-install-proof.js
 | Examples | 13 executable examples; 12 render locally or are baseline recipes, 1 is capability-gated SAM |
 | Catalog | 443 searchable items with stable IDs, prompts, code, compatibility, provenance, and validation |
 | Assets | 65 generated, hash-bound, decodable preview/audio assets: the original 13 plus 52 text-effect previews |
-| Tooling | Python and Node CLIs, four-harness skill lifecycle, static site, and 10-tool local MCP adapter |
+| Tooling | Python and Node CLIs, four-harness skill lifecycle, static site, and 11-tool local MCP adapter |
 
 The Python API owns composition, media rendering, external audio mixing, beat
 analysis, masks, effects, transitions, tracking, sound design, caching,
@@ -281,7 +281,7 @@ and retained a verified 60-frame example ledger. Clean optional-runtime validati
 and face-follow examples. Clean npm validation imported the exact tarball,
 validated CompositionSpec, searched catalog data, loaded all skills/motion
 components, exercised tracking interpolation, and reported zero npm audit
-vulnerabilities. MCP tests cover initialize, list, catalog invocation, and
+vulnerabilities. MCP tests cover initialize, list, compact filtered catalog invocation, revision planning, and
 composition editing over the underlying library.
 
 ## Definition-of-success audit
@@ -299,7 +299,7 @@ composition editing over the underlying library.
 | 9 | Pass | Packaged `catalog open --no-browser` resolves the generated local site. |
 | 10 | Pass | Site copy controls use canonical IDs, prompts, Python, and JavaScript strings. |
 | 11 | Pass | Forty-four byte-identical canonical skills install/check/update/remove across agent, Codex, Claude, and OpenCode layouts without overwriting user edits. |
-| 12 | Pass | Ten MCP tools list and execute through the underlying library. |
+| 12 | Pass | Eleven MCP tools list and execute through the underlying library. |
 | 13 | Pass on verified platform | Face/body/tracking, macOS-native pose, portable ONNX objects, SAM 2.1 setup/inference, and structured degradation all operate; 0.1 documents pose as macOS-native. |
 | 14 | Pass for included assets | Included audio is VibeEdit-generated and hash/provenance/loudness/decode audited. |
 | 15 | Pass | Local macOS ARM64/Linux ARM64 and hosted Linux x86_64/Windows/macOS builds, installs, renders, catalog, skills, assets, license scans, and release-owner rights review pass. |

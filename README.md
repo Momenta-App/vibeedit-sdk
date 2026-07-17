@@ -119,19 +119,27 @@ bodies; inspect only the selected result when more detail is needed.
 Before a human revision, inspect the dependency-aware invalidation plan:
 
 ```python
-from vibeedit import plan_revision, render
+from vibeedit import plan_revision, render_revision
 
 plan = plan_revision(previous_spec, revised_spec)
 print(plan["dirtyFrameRanges"], plan["expectedReuse"])
-render(revised_spec, "revised.mp4")
+render_revision(previous_spec, revised_spec, "previous.mp4", "revised.mkv")
+```
+
+The same preflight is available without Python code:
+
+```bash
+vibeedit revision plan previous.json revised.json --json
 ```
 
 For bounded browser-text changes with caching enabled, VibeEdit reuses
 content-addressed composite frames outside the changed layer's placement. The
 render provenance sidecar reports `work.framesRendered`, `work.framesReused`,
-and the reuse kind. This beta slice still re-encodes the complete final frame
-sequence; source-range decode avoidance and audio-only remuxing are not yet
-claimed.
+and the reuse kind. Compatible container-only changes use stream-copy remuxing
+without decoding video. Audio-clip and procedural-SFX parameter revisions remix
+audio and stream-copy the encoded video. Bounded browser-text changes still
+encode the complete final frame sequence; transition-range replacement is
+planned but not yet claimed as executable.
 
 Install the Python beta directly from its GitHub release asset:
 

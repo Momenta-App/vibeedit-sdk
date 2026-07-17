@@ -18,12 +18,28 @@ def list_catalog(category: str | None = None) -> list[JSONObject]:
     return [item for item in items if item["category"] == category] if category else list(items)
 
 
-def search_catalog(query: str) -> list[JSONObject]:
+def search_catalog(
+    query: str,
+    *,
+    category: str | None = None,
+    capability: str | None = None,
+    platform: str | None = None,
+    limit: int | None = None,
+) -> list[JSONObject]:
+    if limit is not None and limit < 1:
+        raise ValueError("catalog search limit must be at least 1")
     tokens = _query_tokens(query)
     if not tokens or _unsupported_query(tokens):
         return []
-    ranked = [(_search_score(item, tokens), item) for item in list_catalog()]
-    return [item for score, item in sorted(ranked, key=lambda value: (-value[0], value[1]["id"])) if score > 0]
+    candidates = [
+        item
+        for item in list_catalog(category)
+        if (not platform or platform in item.get("platforms", []))
+        and (not capability or capability.casefold() in _capability_text(item))
+    ]
+    ranked = [(_search_score(item, tokens), item) for item in candidates]
+    results = [item for score, item in sorted(ranked, key=lambda value: (-value[0], value[1]["id"])) if score > 0]
+    return results[:limit] if limit else results
 
 
 def inspect_catalog_item(identifier: str) -> JSONObject:
@@ -49,6 +65,8 @@ def compact_catalog_result(item: JSONObject, query: str) -> JSONObject:
         "preview": item.get("preview", {}).get("status", "unknown"),
         "compatibility": item.get("platforms", []),
         "estimatedSetupCost": "optional-model-or-asset" if requirements.get("models") or requirements.get("assets") else "none-declared",
+        "estimatedRenderCost": "browser-frame-render" if "html" in item.get("backends", []) else "media-pipeline" if item["category"] != "skill" else "workflow-dependent",
+        "setupRequirements": [*requirements.get("models", []), *requirements.get("assets", [])],
         "confidence": round(min(1.0, score / max(12, len(tokens) * 6)), 3),
         "reason": f"matched {', '.join(token for token in tokens if token in _search_text(item)) or 'catalog intent'}",
     }
@@ -107,3 +125,14 @@ def _required_capability(item: JSONObject) -> str:
     if models:
         return str(models[0])
     return {"text": "browser-motion", "transition": "media-transition", "effect": "media-effect", "sfx": "audio", "skill": "workflow"}.get(item["category"], "composition")
+
+
+def _capability_text(item: JSONObject) -> str:
+    return " ".join([
+        _required_capability(item),
+        *item.get("backends", []),
+        *item.get("tags", []),
+        *item.get("requirements", {}).get("models", []),
+        *item.get("requirements", {}).get("assets", []),
+        json.dumps(item.get("inputs", {}), ensure_ascii=False),
+    ]).casefold()

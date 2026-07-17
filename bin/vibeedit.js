@@ -43,7 +43,7 @@ async function route(name, values) {
   if (name === "catalog") return catalogCommand(values);
   if (name === "examples") return examplesCommand(values);
   if (name === "skills") return skillsCommand(values);
-  if (["setup", "preview", "render", "verify", "clean", "mcp"].includes(name)) return python(name, values);
+  if (["setup", "preview", "render", "revision", "verify", "clean", "mcp"].includes(name)) return python(name, values);
   throw new Error(`unknown command: ${name}. Run \`vibeedit --help\` to see supported commands.`);
 }
 
@@ -119,7 +119,9 @@ function catalogCommand(values) {
   if (subcommand === "search") {
     const limit = Number(option(values, "--limit") ?? 20);
     if (!Number.isInteger(limit) || limit < 1) throw new Error("--limit must be a positive integer; use --all to return every result");
-    const items = searchCatalog(query ?? "");
+    const requestedPlatform = option(values, "--platform");
+    const platform = requestedPlatform === "current" ? ({ darwin: "macos", win32: "windows" }[process.platform] ?? "linux") : requestedPlatform;
+    const items = searchCatalog(query ?? "", { category: option(values, "--category"), capability: option(values, "--capability"), platform });
     const selected = values.includes("--all") ? items : items.slice(0, limit);
     if (!values.includes("--compact")) return selected;
     return selected.map((item) => compactCatalogResult(item, query ?? ""));
@@ -193,7 +195,7 @@ function open(path) {
 }
 
 function option(values, name) { const index = values.indexOf(name); return index === -1 ? undefined : values[index + 1]; }
-function positional(values) { const optionsWithValues = new Set(["--width", "--height", "--fps", "--frames", "--id", "--output", "--spec", "--harness", "--scope", "--limit"]); return values.filter((value, index) => !value.startsWith("--") && !optionsWithValues.has(values[index - 1])); }
+function positional(values) { const optionsWithValues = new Set(["--width", "--height", "--fps", "--frames", "--id", "--output", "--spec", "--harness", "--scope", "--limit", "--category", "--capability", "--platform"]); return values.filter((value, index) => !value.startsWith("--") && !optionsWithValues.has(values[index - 1])); }
 function requirePositional(values, label) { const value = positional(values)[0]; if (!value) throw new Error(`missing ${label}`); return value; }
 function requireFile(value, label) { if (existsSync(value)) return value; throw new Error(`${label} not found: ${value}. Run \`vibeedit init composition.json\` or \`vibeedit examples create basic-generated\` first.`); }
 function jsonOutput(values) { return values.includes("--json"); }
@@ -228,6 +230,7 @@ Commands:
   skills list|install|check|update|remove
   validate                Validate a CompositionSpec
   preview|render|verify   Run through the installed Python VibeEdit package
+  revision plan          Explain dirty ranges and reusable work before rendering
   clean|mcp               Run through the installed Python VibeEdit package
 
 Use vibeedit <command> --help for command-specific guidance.`;
@@ -237,7 +240,7 @@ function commandHelp(name) {
   const messages = {
     setup: `Usage: vibeedit setup [--browser] [--effects] [--vision] [--sam] [--all] [--json]\n\nSetup runs through the Python package and downloads only explicitly selected runtimes.\n  --browser  Pinned Chromium for HTML/CSS/JS motion\n  --effects  NumPy/Pillow/OpenCV dependencies; no model download\n  --vision   Face/body/pose/object providers; may download a 29.5 MB model\n  --sam      SAM 2.1; downloads about 211.7 MB\n  --all      Every supported optional capability\n\nInstall the Python package first with: pip install "vibeedit[all]"`,
     doctor: "Usage: vibeedit doctor [--json]\n\nReports core FFmpeg readiness separately from optional HTML motion and Python media capabilities.",
-    catalog: "Usage: vibeedit catalog search <query> [--compact] [--limit N|--all] [--json]\n       vibeedit catalog open [--browser] [--json]\n\nCatalog open stays in the background unless --browser is explicit.",
+    catalog: "Usage: vibeedit catalog search <query> [--compact] [--limit N|--all] [--category TYPE] [--capability NAME] [--platform current|macos|windows|linux] [--json]\n       vibeedit catalog open [--browser] [--json]\n\nCatalog open stays in the background unless --browser is explicit.",
     examples: "Usage: vibeedit examples list [--details] [--json]\n       vibeedit examples create <id> [destination|--output directory] [--json]\n\nThe example is created as <directory>/<id> and existing files are never overwritten.",
     render: "Usage: vibeedit render <composition.json> [--output video.mp4] [--json]\n\nRequires the Python package and FFmpeg. Run vibeedit doctor first.",
   };

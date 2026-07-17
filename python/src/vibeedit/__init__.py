@@ -32,6 +32,7 @@ from vibeedit.ffmpeg import FFmpegRenderError
 from vibeedit.ffmpeg import FFmpegUnavailableError
 from vibeedit.ffmpeg import probe
 from vibeedit.render import render
+from vibeedit.render import render_revision
 from vibeedit.revision import build_render_graph
 from vibeedit.revision import plan_revision
 from vibeedit.verify import verify_output
@@ -126,6 +127,7 @@ __all__ = [
     "probe",
     "plan_revision",
     "render",
+    "render_revision",
     "render_example",
     "random_frame_stutter_mapping",
     "register_transition_filter",

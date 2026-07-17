@@ -39,7 +39,13 @@ test("Node CLI offers compact bounded catalog results", () => {
   assert.equal(result.status, 0, result.stderr);
   const payload = JSON.parse(result.stdout);
   assert.equal(payload.length, 2);
-  assert.deepEqual(Object.keys(payload[0]).sort(), ["backends", "category", "compatibility", "confidence", "determinism", "estimatedSetupCost", "id", "intent", "name", "parameterCount", "preview", "reason", "requiredCapability"]);
+  assert.deepEqual(Object.keys(payload[0]).sort(), ["backends", "category", "compatibility", "confidence", "determinism", "estimatedRenderCost", "estimatedSetupCost", "id", "intent", "name", "parameterCount", "preview", "reason", "requiredCapability", "setupRequirements"]);
+});
+
+test("Node CLI filters catalog results without treating options as query text", () => {
+  const result = spawnSync(process.execPath, ["bin/vibeedit.js", "catalog", "search", "impact", "--category", "sfx", "--capability", "audio", "--platform", "current", "--compact", "--json"], { encoding: "utf8" });
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout).map((item) => item.id), ["vibeedit://sfx/impact-procedural"]);
 });
 
 test("Node CLI explains examples and keeps catalog opening in the background", () => {

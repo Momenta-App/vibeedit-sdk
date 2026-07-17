@@ -138,6 +138,65 @@ def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | 
     return destination
 
 
+def render_audio_mix(spec: JSONObject, output: str | Path, base: str | Path = ".", *, audio_codec: str = "flac") -> Path:
+    destination = Path(output)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    rate = spec["canvas"]["frameRate"]
+    sources = {source["id"]: source for source in spec["sources"]}
+    audio_clips = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "audio"]
+    sound_effects = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "sound_effect"]
+    if not audio_clips and not sound_effects:
+        raise FFmpegRenderError("audio-only revision requires at least one audio clip or sound effect")
+    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y"]
+    for item in audio_clips:
+        source = sources.get(item["source"]["sourceId"])
+        if not source:
+            raise FFmpegRenderError(f"missing source: {item['source']['sourceId']}")
+        path = Path(source["uri"])
+        path = path if path.is_absolute() else Path(base) / path
+        if not path.is_file():
+            raise FFmpegRenderError(f"source file does not exist: {path}")
+        command.extend(["-i", str(path)])
+    for item in sound_effects:
+        duration = Fraction(item["placement"]["durationFrames"] * rate["denominator"], rate["numerator"])
+        command.extend(["-f", "lavfi", "-i", f"sine=frequency={float(item['params'].get('frequency', 72))}:sample_rate={spec['canvas'].get('audioSampleRate', 48000)}:duration={float(duration):.9f}"])
+    chains = []
+    labels = []
+    for index, item in enumerate(audio_clips):
+        start = Fraction(item["source"]["inFrame"] * rate["denominator"], rate["numerator"])
+        duration = Fraction(item["source"]["durationFrames"] * rate["denominator"], rate["numerator"])
+        delay = round(item["placement"]["startFrame"] * 1000 * rate["denominator"] / rate["numerator"])
+        pan = max(-1.0, min(1.0, float(item.get("pan", 0))))
+        filters = [f"atrim=start={float(start):.9f}:duration={float(duration):.9f}", "asetpts=PTS-STARTPTS", "aformat=channel_layouts=stereo", f"volume={item.get('gainDb', 0)}dB", f"pan=stereo|c0={1 - max(0.0, pan):.6f}*c0|c1={1 + min(0.0, pan):.6f}*c1"]
+        fade_in = item.get("fadeInFrames", 0) * rate["denominator"] / rate["numerator"]
+        fade_out = item.get("fadeOutFrames", 0) * rate["denominator"] / rate["numerator"]
+        if fade_in:
+            filters.append(f"afade=t=in:st=0:d={fade_in:.9f}")
+        if fade_out:
+            filters.append(f"afade=t=out:st={max(0.0, float(duration) - fade_out):.9f}:d={fade_out:.9f}")
+        filters.append(f"adelay={delay}|{delay}")
+        label = f"audio{index}"
+        chains.append(f"[{index}:a]{','.join(filters)}[{label}]")
+        labels.append(f"[{label}]")
+    for index, item in enumerate(sound_effects, len(audio_clips)):
+        delay = round(item["placement"]["startFrame"] * 1000 * rate["denominator"] / rate["numerator"])
+        duration = item["placement"]["durationFrames"] * rate["denominator"] / rate["numerator"]
+        fade_start = max(0.0, duration * 0.2)
+        fade_duration = max(0.001, duration - fade_start)
+        label = f"sfx{index}"
+        chains.append(f"[{index}:a]volume={item.get('gainDb', 0)}dB,afade=t=out:st={fade_start:.6f}:d={fade_duration:.6f},adelay={delay}|{delay}[{label}]")
+        labels.append(f"[{label}]")
+    total = Fraction(spec["durationFrames"] * rate["denominator"], rate["numerator"])
+    chains.append(f"{''.join(labels)}amix=inputs={len(labels)}:duration=longest:normalize=0,aresample=async=1:first_pts=0,apad,atrim=0:{float(total):.9f}[audio]")
+    command.extend(["-filter_complex", ";".join(chains), "-map", "[audio]", "-c:a", audio_codec, "-ar", str(spec["canvas"].get("audioSampleRate", 48000)), "-map_metadata", "-1", str(destination)])
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    if result.returncode:
+        raise FFmpegRenderError(result.stderr.strip() or f"ffmpeg failed with exit code {result.returncode}")
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise FFmpegRenderError("ffmpeg returned success without a non-empty audio mix")
+    return destination
+
+
 @contextmanager
 def frame_stream_encoder(spec: JSONObject, output: str | Path):
     destination = Path(output)

@@ -111,6 +111,17 @@ VibeEdit implementation version, backend/runtime version, model version, and
 schema version. Artifacts store the same inputs plus creation time and output
 hash. Users can inspect or invalidate any cached item.
 
+Incremental revision planning compares two canonical CompositionSpecs and emits
+changed fields, dirty video/audio ranges, changed and reusable artifacts,
+dependency reasons, required jobs, a stitch strategy, and expected reuse. The
+dependency graph gives sources, analysis/mask/tracking artifacts, timeline
+layers, video composites, audio mixes, and final output stable content hashes.
+Execution support remains explicit per revision class: bounded browser-motion
+changes use content-addressed composite-frame reuse, compatible container-only
+changes stream-copy encoded packets, and explicit audio-clip/SFX parameter
+changes remix audio while stream-copying video. Planned transition, scene-tail,
+and segmentation-dependent range replacement is not reported as executable.
+
 ## Versioning
 
 CompositionSpec starts at `1.0.0`. Readers reject unknown major versions and may

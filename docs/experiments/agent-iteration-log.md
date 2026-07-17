@@ -50,3 +50,51 @@
 - Regression status: focused Python and Node catalog/CLI validation follows.
 - Decision: keep the general ranking pass; do not tune against individual benchmark sentences yet.
 - Next question: add explicit task-mode/category/platform filters and score top-k relevance separately from exact first-ID accuracy.
+
+## 2026-07-17 — progressive-disclosure routing contract
+
+- Commit: working tree after `c8602aa`.
+- Hypothesis: shared filters and compact MCP defaults will reduce irrelevant results and context without changing creative implementations.
+- User-style task: search 50 predeclared requests through Python, Node, CLI, and MCP; inspect top-k and payload size.
+- Backend/environment: local catalog only, macOS Apple Silicon, source mode.
+- Commands: focused catalog/CLI/MCP tests and `scripts/benchmark_routing.py`.
+- Before/after: exact first-choice remains 38/50 (76%); newly measured top-three recall is 92%.
+- Context size: compact top-five responses average 2,406 bytes; zero skill bodies are loaded; one search tool call is used per request.
+- Result quality: category, capability, and platform filters are deterministic across Python and Node. MCP now returns at most five compact results and requires `inspect_catalog_item` for full prompts/examples/validation.
+- Final task success and wrong-route recovery: not measured by this retrieval-only benchmark and therefore not claimed.
+- Regression status: Python catalog/CLI/MCP 16/16, Node CLI 12/12, and TypeScript checks pass.
+- Decision: keep.
+- Next question: measure route recovery and completed task success with independent agents after exact intent-mode classification improves the remaining template/workflow ties.
+
+## 2026-07-17 — container-only incremental remux
+
+- Commit: working tree after `c8602aa`.
+- Hypothesis: changing only a compatible output container can stream-copy encoded packets without decoding or rendering video.
+- User-style task: revise MP4 output to Matroska while preserving H.264 video.
+- Backend/environment: FFmpeg stream-copy remux, macOS Apple Silicon, source mode.
+- Commands: `python/tests/test_revision.py`, three-run 30-frame baseline, three-run 1080p/300-frame benchmark, decoded-frame MD5, and a dynamic `testsrc2` contact sheet.
+- Small fixture: 0.065428s full versus 0.058901s remux, only 1.11× because process startup dominates. This result is retained rather than hidden.
+- 1080p/300-frame result: 2.014070s full versus 0.063070s remux, 31.93× speedup.
+- Reuse: 300/300 frames, 22,621 encoded video packet bytes, zero rendered frames.
+- Result quality: decoded frame MD5 matches a clean full render exactly. Visual review of frames 0, 22, 44, 66, and 89 from a dynamic source found the full-render and remux rows visually identical; contact-sheet SHA-256 is `e04c847a33dbcc028aada9b9bbe357e9cc39c8cb5a4fb804e2c04eb9cf188b18`.
+- Failure retained: the first integration test assumed the minimal fixture always contained `cache`; it is optional. The test now adds the policy explicitly.
+- Safety: remux is claimed only for a conservative codec/container compatibility table; incompatible H.264/WebM stays outside incremental execution.
+- Decision: keep.
+- Remaining limitation: transition, scene-removal, audio-only, and artifact invalidation now have structured plans and dependency edges but are explicitly `planned-not-yet-executed`.
+- Next question: implement audio-only remix plus video stream-copy and compare audio samples against a clean render.
+
+## 2026-07-17 — audio-gain-only incremental remix
+
+- Commit: working tree after `c8602aa`.
+- Hypothesis: an audio parameter revision can rebuild only the audio filter graph and stream-copy the prior encoded video.
+- User-style task: change one impact gain from -12 dB to -6 dB in a 10-second 1080p/300-frame composition.
+- Backend/environment: FFmpeg target-codec audio mix plus stream-copy mux, macOS Apple Silicon, source mode.
+- Commands: procedural-SFX and external-WAV equivalence tests plus three full/incremental timing pairs.
+- Before/after: 2.018530s full versus 0.121814s incremental mean, a 16.57× speedup.
+- Reuse: 300/300 video frames and 22,621 encoded video packet bytes; zero video frames rendered; audio frames 120–149 remixed.
+- Result quality: video-frame and decoded-audio framemd5 both match clean full renders exactly for procedural SFX and for a trimmed, delayed, panned, faded external WAV.
+- Failed experiment retained: encoding a lossless FLAC intermediate and then AAC changed decoded AAC samples. Encoding AAC once fixed procedural SFX, but the first external-audio attempt shortened the stream because its delayed filter output retained a positive first PTS. `aresample=async=1:first_pts=0` materializes the same leading silence as full A/V muxing; both exact tests then passed.
+- Regression status: 106 Python tests, 30 Node tests, TypeScript checks, package validation, clean wheel/npm installs, and the archive audit pass. The audit verified 44 skill clones, 16 preset source files, and zero forbidden entries; canonical Git source comparison was not requested in this local gate.
+- Decision: keep.
+- Remaining limitation: source-video embedded audio is not independently mixed by the current full renderer, so this claim covers the same explicit audio-clip and procedural-SFX domains as the canonical full render.
+- Next question: execute transition-overlap replacement without re-encoding clean ranges.

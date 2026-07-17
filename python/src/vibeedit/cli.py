@@ -13,6 +13,7 @@ from vibeedit.data import data_path
 from vibeedit.ffmpeg import probe
 from vibeedit.examples import create_example
 from vibeedit.render import render
+from vibeedit.revision import plan_revision
 from vibeedit.spec import Canvas, Composition, FrameRate
 from vibeedit.validation import validate_composition
 from vibeedit.verify import verify_output
@@ -90,6 +91,9 @@ def _parser() -> argparse.ArgumentParser:
     catalog_search.add_argument("--limit", type=int, default=20, help="maximum results to return (default: 20)")
     catalog_search.add_argument("--all", action="store_true", dest="all_results", help="return every matching result")
     catalog_search.add_argument("--compact", action="store_true", help="return token-efficient IDs, names, categories, descriptions, and preview states")
+    catalog_search.add_argument("--category", choices=["effect", "transition", "text", "motion", "template", "sfx", "skill"], help="restrict results to one catalog category")
+    catalog_search.add_argument("--capability", help="restrict results by backend, requirement, input, or capability")
+    catalog_search.add_argument("--platform", choices=["current", "macos", "windows", "linux"], help="restrict results to a supported platform")
     catalog_search.add_argument("--json", action="store_true", help="emit machine-readable results")
     catalog_search.set_defaults(handler=_catalog_search)
     catalog_open = catalog_sub.add_parser("open", help="resolve the generated local catalog without opening a browser")
@@ -151,6 +155,14 @@ def _parser() -> argparse.ArgumentParser:
     render_parser.add_argument("--output")
     render_parser.add_argument("--json", action="store_true")
     render_parser.set_defaults(handler=_render)
+
+    revision = sub.add_parser("revision", help="plan dependency-aware incremental work before rendering")
+    revision_sub = revision.add_subparsers(dest="revision_command", required=True)
+    revision_plan = revision_sub.add_parser("plan", help="compare two CompositionSpecs and explain invalidation")
+    revision_plan.add_argument("previous")
+    revision_plan.add_argument("revised")
+    revision_plan.add_argument("--json", action="store_true")
+    revision_plan.set_defaults(handler=_revision_plan)
 
     verify = sub.add_parser("verify", help="verify a rendered output")
     verify.add_argument("output")
@@ -242,7 +254,8 @@ def _catalog_search(args) -> int:
     if args.limit < 1:
         raise CLIUsageError("--limit must be at least 1", "Use a positive result limit, or pass --all.")
     query = args.query.casefold()
-    items = search_catalog(query)
+    platform = {"darwin": "macos", "win32": "windows"}.get(sys.platform, "linux") if args.platform == "current" else args.platform
+    items = search_catalog(query, category=args.category, capability=args.capability, platform=platform)
     selected = items if args.all_results else items[: args.limit]
     if args.compact:
         selected = [compact_catalog_result(item, args.query) for item in selected]
@@ -321,6 +334,13 @@ def _render(args) -> int:
     path = _require_file(args.path, "CompositionSpec")
     output = render(path, args.output)
     _emit({"ok": True, "output": str(output), "bytes": output.stat().st_size}, as_json=args.json)
+    return 0
+
+
+def _revision_plan(args) -> int:
+    previous = json.loads(_require_file(args.previous, "Previous CompositionSpec").read_text(encoding="utf-8"))
+    revised = json.loads(_require_file(args.revised, "Revised CompositionSpec").read_text(encoding="utf-8"))
+    _emit(plan_revision(previous, revised), as_json=args.json)
     return 0
 
 

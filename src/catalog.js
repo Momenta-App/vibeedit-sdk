@@ -12,10 +12,13 @@ export function listCatalog(category) {
   return category ? catalog().items.filter((item) => item.category === category) : catalog().items;
 }
 
-export function searchCatalog(query) {
+export function searchCatalog(query, options = {}) {
+  if (options.limit !== undefined && (!Number.isInteger(options.limit) || options.limit < 1)) throw new RangeError("catalog search limit must be at least 1");
   const tokens = queryTokens(query);
   if (!tokens.length || unsupportedQuery(tokens)) return [];
-  return catalog().items.map((item) => ({ item, score: searchScore(item, tokens) })).filter((result) => result.score > 0).sort((a, b) => b.score - a.score || a.item.id.localeCompare(b.item.id)).map((result) => result.item);
+  const items = catalog().items.filter((item) => (!options.category || item.category === options.category) && (!options.platform || item.platforms?.includes(options.platform)) && (!options.capability || capabilityText(item).includes(options.capability.toLocaleLowerCase())));
+  const results = items.map((item) => ({ item, score: searchScore(item, tokens) })).filter((result) => result.score > 0).sort((a, b) => b.score - a.score || a.item.id.localeCompare(b.item.id)).map((result) => result.item);
+  return options.limit ? results.slice(0, options.limit) : results;
 }
 
 export function compactCatalogResult(item, query) {
@@ -28,13 +31,15 @@ export function compactCatalogResult(item, query) {
     name: item.name,
     intent: item.description.length <= 180 ? item.description : `${item.description.slice(0, 177).trimEnd()}...`,
     category: item.category,
-    requiredCapability: item.requirements?.models?.[0] ?? ({ text: "browser-motion", transition: "media-transition", effect: "media-effect", sfx: "audio", skill: "workflow" }[item.category] ?? "composition"),
+    requiredCapability: requiredCapability(item),
     backends: item.backends ?? [],
     determinism: item.validation?.some((record) => record.status === "passed") ? "validated" : "declared",
     parameterCount: Object.keys(item.parameters?.properties ?? {}).length,
     preview: item.preview?.status ?? "unknown",
     compatibility: item.platforms ?? [],
     estimatedSetupCost: requirements.models?.length || requirements.assets?.length ? "optional-model-or-asset" : "none-declared",
+    estimatedRenderCost: item.backends?.includes("html") ? "browser-frame-render" : item.category !== "skill" ? "media-pipeline" : "workflow-dependent",
+    setupRequirements: [...(requirements.models ?? []), ...(requirements.assets ?? [])],
     confidence: Math.round(Math.min(1, score / Math.max(12, tokens.length * 6)) * 1000) / 1000,
     reason: `matched ${matched.join(", ") || "catalog intent"}`,
   };
@@ -71,6 +76,14 @@ function searchScore(item, tokens) {
     + (["template", "skill"].includes(item.category) && tokens.some((token) => ["mask", "segmentation", "tracking", "sam"].includes(token)) ? 7 : 0)
     + (item.category === "transition" && tokens.some((token) => ["transition", "transitions", "crossfade"].includes(token)) ? 7 : 0)
     + (item.category === "sfx" && tokens.some((token) => ["sound", "audio", "sfx", "procedural"].includes(token)) ? 7 : 0);
+}
+
+function requiredCapability(item) {
+  return item.requirements?.models?.[0] ?? ({ text: "browser-motion", transition: "media-transition", effect: "media-effect", sfx: "audio", skill: "workflow" }[item.category] ?? "composition");
+}
+
+function capabilityText(item) {
+  return [requiredCapability(item), ...(item.backends ?? []), ...(item.tags ?? []), ...(item.requirements?.models ?? []), ...(item.requirements?.assets ?? []), JSON.stringify(item.inputs ?? {})].join(" ").toLocaleLowerCase();
 }
 
 export function inspectCatalogItem(id) {

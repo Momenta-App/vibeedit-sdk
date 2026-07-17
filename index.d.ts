@@ -123,9 +123,12 @@ export declare function validateComposition(spec: JSONObject): JSONObject;
 export declare function canonicalJson(value: JSONValue): string;
 
 export interface CatalogManifestItem extends JSONObject { id: string; name: string; description: string; category: CatalogCategory; version: string }
+export interface CatalogSearchOptions { category?: CatalogCategory; capability?: string; platform?: "macos" | "windows" | "linux"; limit?: number }
+export interface CompactCatalogResult extends JSONObject { id: string; name: string; intent: string; category: CatalogCategory; requiredCapability: string; backends: string[]; determinism: string; parameterCount: number; preview: string; compatibility: string[]; estimatedSetupCost: string; estimatedRenderCost: string; setupRequirements: string[]; confidence: number; reason: string }
 export declare function catalog(): { schemaVersion: string; catalogVersion: string; items: CatalogManifestItem[] };
 export declare function listCatalog(category?: CatalogCategory): CatalogManifestItem[];
-export declare function searchCatalog(query: string): CatalogManifestItem[];
+export declare function searchCatalog(query: string, options?: CatalogSearchOptions): CatalogManifestItem[];
+export declare function compactCatalogResult(item: CatalogManifestItem, query: string): CompactCatalogResult;
 export declare function inspectCatalogItem(id: string): CatalogManifestItem;
 export declare function createExample(id: string, destination?: string): string;
 
