@@ -63,8 +63,10 @@ def render_revision(previous: JSONObject | str | Path, revised: JSONObject | str
         return _render_audio_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan, Path(revised).parent if isinstance(revised, (str, Path)) else Path.cwd())
     if plan["executionStatus"] == "verified-stream-copy-video-audio-remix":
         return _render_audio_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan, Path(revised).parent if isinstance(revised, (str, Path)) else Path.cwd())
+    if plan["executionStatus"] == "verified-stream-copy-tail-audio-remix":
+        return _render_scene_tail_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan, Path(revised).parent if isinstance(revised, (str, Path)) else Path.cwd(), remix_audio=True)
     if plan["executionStatus"] == "verified-stream-copy-tail":
-        return _render_scene_tail_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan)
+        return _render_scene_tail_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan, Path.cwd())
     if plan["revisionKind"] != "container":
         raise NotImplementedError(f"incremental execution for {plan['revisionKind']} revisions is planned but not yet verified; inspect plan_revision(...) before rendering")
     source = Path(previous_output)
@@ -98,18 +100,35 @@ def render_revision(previous: JSONObject | str | Path, revised: JSONObject | str
     return destination
 
 
-def _render_scene_tail_revision(spec: JSONObject, previous_output: Path, destination: Path, plan: JSONObject) -> Path:
+def _render_scene_tail_revision(spec: JSONObject, previous_output: Path, destination: Path, plan: JSONObject, base: Path, *, remix_audio: bool = False) -> Path:
     if not previous_output.is_file():
         raise FileNotFoundError(f"previous rendered output does not exist: {previous_output}")
     _verify_previous_revision_input(previous_output, plan)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-i", str(previous_output), "-map", "0:v:0", "-an", "-c", "copy", "-frames:v", str(spec["durationFrames"]), "-map_metadata", "-1"]
-    if spec["render"]["output"]["container"] == "mp4":
-        command.extend(["-movflags", "+faststart"])
-    command.append(str(destination))
-    result = subprocess.run(command, capture_output=True, text=True, check=False)
-    if result.returncode:
-        raise RuntimeError(result.stderr.strip() or f"FFmpeg tail truncation failed with exit code {result.returncode}")
+    with tempfile.TemporaryDirectory(prefix="vibeedit-tail-revision-") as temporary:
+        video = Path(temporary) / f"video{destination.suffix}"
+        command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-i", str(previous_output), "-map", "0:v:0", "-an", "-c", "copy", "-frames:v", str(spec["durationFrames"]), "-map_metadata", "-1"]
+        if spec["render"]["output"]["container"] == "mp4":
+            command.extend(["-movflags", "+faststart"])
+        command.append(str(video if remix_audio else destination))
+        result = subprocess.run(command, capture_output=True, text=True, check=False)
+        if result.returncode:
+            raise RuntimeError(result.stderr.strip() or f"FFmpeg tail truncation failed with exit code {result.returncode}")
+        if remix_audio:
+            if _video_frames(video) != spec["durationFrames"]:
+                raise RuntimeError(f"FFmpeg tail truncation did not produce exactly {spec['durationFrames']} video frames before audio remix")
+            settings = spec["render"]["output"]
+            audio_codec = settings.get("audioCodec", "aac")
+            encode_directly = spec["render"]["backend"] in {"html", "mixed"}
+            audio = render_audio_mix(spec, Path(temporary) / ("audio.mka" if encode_directly else "audio.m4a" if audio_codec == "aac" else "audio.mka"), base, audio_codec="flac" if encode_directly else audio_codec)
+            result = subprocess.run(
+                [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-i", str(video), "-i", str(audio), "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", *(["-c:a", audio_codec, "-ar", str(spec["canvas"].get("audioSampleRate", 48000))] if encode_directly else ["-c:a", "copy"]), "-map_metadata", "-1", *(["-movflags", "+faststart"] if settings["container"] == "mp4" else []), str(destination)],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if result.returncode:
+                raise RuntimeError(result.stderr.strip() or f"FFmpeg tail audio remix failed with exit code {result.returncode}")
     if not destination.is_file() or destination.stat().st_size == 0:
         raise RuntimeError("FFmpeg tail truncation returned success without a non-empty output")
     if _video_frames(destination) != spec["durationFrames"]:
@@ -119,8 +138,9 @@ def _render_scene_tail_revision(spec: JSONObject, previous_output: Path, destina
         "framesReused": spec["durationFrames"],
         "encodedVideoBytesReused": _packet_bytes(destination, "v:0"),
         "encodedAudioBytesReused": 0,
+        **({"audioRangesRemixed": plan["dirtyAudioRanges"]} if remix_audio else {}),
         "decodeWorkAvoided": plan["decodeWorkAvoided"],
-        "reuseKind": "stream-copy-tail-truncation",
+        "reuseKind": "stream-copy-video-tail-audio-remix" if remix_audio else "stream-copy-tail-truncation",
     }
     write_artifact_provenance(
         destination.with_suffix(destination.suffix + ".vibeedit.json"),

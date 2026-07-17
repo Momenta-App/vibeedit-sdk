@@ -1,13 +1,13 @@
 {
   "cacheHit": false,
-  "cacheKey": "661bce10157fe93ed3691f72b8093744ec19ecbc6c00a3376a22f7a76dbe768e",
+  "cacheKey": "872ea96efae919522cacdfcdf07e7fccb4c26c09be5d849c6c8d07ac8e915caf",
   "compositionId": "revision-stress-video",
-  "compositionSha256": "960cbed843a8171129ef6c8ba8660d79cc9aa79a6d78cd554e3d3dc6ae32d36b",
+  "compositionSha256": "6e0e84f5609012324c4dd99a9773dc6f96d9f35bdb1a918dbd22068898bb07a3",
   "implementationVersion": "0.1.0b2",
   "output": {
     "bytes": 224154,
     "path": "r13-remove-scene.mkv",
-    "sha256": "1ce9f5d489a08a26784a0ba60cbe02272478b2438b2b89270755e49fec0d9d93"
+    "sha256": "4e389ce8659c3292b2d23e97084534273e9650896756bd7dcd136391c01ee8a2"
   },
   "runtimeVersions": {
     "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",

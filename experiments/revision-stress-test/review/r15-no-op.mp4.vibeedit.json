@@ -1,6 +1,6 @@
 {
   "compositionId": "revision-stress-video",
-  "compositionSha256": "7ac1b02f5b30337494db8efec5c78ea1cfdf9628e9819d5a034d50adc2e15c31",
+  "compositionSha256": "07eb840689102ea2bd5af7b0bb05e77aa2107e99baf2a59c23e46466a11ce05b",
   "implementationVersion": "0.1.0b2",
   "output": {
     "bytes": 727886,
@@ -229,7 +229,7 @@
       "totalFrames": 210
     },
     "incrementalEligible": false,
-    "previousCompositionHash": "eef0f59754b38110a18a2893223b6d8e33aa1fc07468745b3e2c5edbb2782fe0",
+    "previousCompositionHash": "7277af7c8b36423397a4ad48d41ab6758018bc411460b1e9d782c37e49353fb9",
     "requiredRerenderJobs": [],
     "reusableArtifacts": [
       {
@@ -303,7 +303,7 @@
         "reason": "layer content and placement are unchanged"
       }
     ],
-    "revisedCompositionHash": "7ac1b02f5b30337494db8efec5c78ea1cfdf9628e9819d5a034d50adc2e15c31",
+    "revisedCompositionHash": "07eb840689102ea2bd5af7b0bb05e77aa2107e99baf2a59c23e46466a11ce05b",
     "revisionKind": "none",
     "schemaVersion": "1.0.0",
     "stitchPlan": {

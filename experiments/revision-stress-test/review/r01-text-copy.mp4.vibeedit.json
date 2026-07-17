@@ -1,8 +1,8 @@
 {
   "cacheHit": false,
-  "cacheKey": "7977a13648fffba1c0e37f7da9ddb43a8ffac7091afc825c4be5dee03d07f5e1",
+  "cacheKey": "b38e9fe7dea07cfc527faf661e86311bc839c36b4f28301929a1f04fa0f0c78f",
   "compositionId": "revision-stress-video",
-  "compositionSha256": "94efab50dc34eeaf074a016b4e8b7f926724633a81ef3e30a2300c24845a0aeb",
+  "compositionSha256": "5553bb1ac08a693653774fb7083b70deafbf7ddd051debeb42116bebbd88e835",
   "implementationVersion": "0.1.0b2",
   "output": {
     "bytes": 748619,

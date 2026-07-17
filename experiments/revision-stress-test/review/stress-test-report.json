@@ -11,8 +11,8 @@
       ],
       "renderMode": "full-initial",
       "incrementalError": null,
-      "elapsedSeconds": 7.360544,
-      "cleanRenderSeconds": 7.240053,
+      "elapsedSeconds": 7.38067,
+      "cleanRenderSeconds": 6.751589,
       "plan": null,
       "work": {
         "framesRendered": 210,
@@ -53,12 +53,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 3.84407,
-      "cleanRenderSeconds": 7.261564,
+      "elapsedSeconds": 3.833419,
+      "cleanRenderSeconds": 6.778888,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "49980a483f516684ee216bca311084b3da8c22db2880700054d3978780b68b39",
-        "revisedCompositionHash": "94efab50dc34eeaf074a016b4e8b7f926724633a81ef3e30a2300c24845a0aeb",
+        "previousCompositionHash": "3cbe1796eaee7ead43ef61020f97fc82fbed4a6891b4a5574c15d62c801bc80a",
+        "revisedCompositionHash": "5553bb1ac08a693653774fb7083b70deafbf7ddd051debeb42116bebbd88e835",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/1/items/0/props/html"
@@ -425,12 +425,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 3.836189,
-      "cleanRenderSeconds": 6.735658,
+      "elapsedSeconds": 3.800409,
+      "cleanRenderSeconds": 6.739091,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "94efab50dc34eeaf074a016b4e8b7f926724633a81ef3e30a2300c24845a0aeb",
-        "revisedCompositionHash": "903ca0554ded06a5ac6a318c2088802424fcd2192a9631d833469bbb07d3947c",
+        "previousCompositionHash": "5553bb1ac08a693653774fb7083b70deafbf7ddd051debeb42116bebbd88e835",
+        "revisedCompositionHash": "caa8fc48f9813bd1456d2407a94c4cf5060413635c7834e4a908eb0dee5906e6",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/1/items/0/props/css"
@@ -796,12 +796,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 3.339006,
-      "cleanRenderSeconds": 7.247232,
+      "elapsedSeconds": 3.316355,
+      "cleanRenderSeconds": 7.242371,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "903ca0554ded06a5ac6a318c2088802424fcd2192a9631d833469bbb07d3947c",
-        "revisedCompositionHash": "539ee5ab4d3e6383c9d17e5f50e9e6c2e52850f12eedeab3452cc7a0e4cdcd11",
+        "previousCompositionHash": "caa8fc48f9813bd1456d2407a94c4cf5060413635c7834e4a908eb0dee5906e6",
+        "revisedCompositionHash": "b184e6b8a4c2ba0c57736bfbbeac3f506467747c1b913c5e6d4571378f3bef85",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/1/items"
@@ -1187,12 +1187,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 3.310585,
-      "cleanRenderSeconds": 7.712698,
+      "elapsedSeconds": 3.303246,
+      "cleanRenderSeconds": 7.241833,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "539ee5ab4d3e6383c9d17e5f50e9e6c2e52850f12eedeab3452cc7a0e4cdcd11",
-        "revisedCompositionHash": "f5263506c0c1f2b5c5ef60eddc3cb860ea0aa78c0e2f012e50aab944d52f2ad3",
+        "previousCompositionHash": "b184e6b8a4c2ba0c57736bfbbeac3f506467747c1b913c5e6d4571378f3bef85",
+        "revisedCompositionHash": "330cbad63713361c31422d7f2a2b3b44ba618db7809eb33238822d48627fa43b",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/1/items/3/placement/durationFrames",
@@ -1579,12 +1579,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 0.05192,
-      "cleanRenderSeconds": 6.725809,
+      "elapsedSeconds": 0.050212,
+      "cleanRenderSeconds": 7.24987,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "f5263506c0c1f2b5c5ef60eddc3cb860ea0aa78c0e2f012e50aab944d52f2ad3",
-        "revisedCompositionHash": "065a0e0d28d503ec6d768498ea1385a1e1ecae24f0776e2916a70583d1ffc293",
+        "previousCompositionHash": "330cbad63713361c31422d7f2a2b3b44ba618db7809eb33238822d48627fa43b",
+        "revisedCompositionHash": "bc6255f9073e7625e6901b4e14a3b0689dcc9c00511bfefda401448b14ba1463",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/1/items"
@@ -1950,118 +1950,68 @@
       ],
       "renderMode": "clean-fallback",
       "incrementalError": null,
-      "elapsedSeconds": 2.764855,
-      "cleanRenderSeconds": 6.732674,
+      "elapsedSeconds": 2.796595,
+      "cleanRenderSeconds": 6.741349,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "065a0e0d28d503ec6d768498ea1385a1e1ecae24f0776e2916a70583d1ffc293",
-        "revisedCompositionHash": "86b6db6c73599c439343ddd1070aa046066b935bc4faec5d8f8254b8255fc0c1",
+        "previousCompositionHash": "bc6255f9073e7625e6901b4e14a3b0689dcc9c00511bfefda401448b14ba1463",
+        "revisedCompositionHash": "e796c62924c8fa8f311eadd99d27a44cfc04005d1326aebfef9de0ceaf140393",
         "changedFields": [
           "/render/output/uri",
+          "/timeline/tracks/0/items/1/placement/durationFrames",
+          "/timeline/tracks/0/items/1/placement/startFrame",
+          "/timeline/tracks/0/items/1/source/durationFrames",
           "/timeline/tracks/0/items/2/params/curve",
           "/timeline/tracks/0/items/2/placement/durationFrames",
           "/timeline/tracks/0/items/2/placement/startFrame"
         ],
         "dirtyLayers": [
           {
+            "id": "clip-b",
+            "kind": "video",
+            "reason": "composition dependency changed"
+          },
+          {
             "id": "crossfade",
             "kind": "transition",
-            "reason": "transition fields changed within its overlap"
+            "reason": "composition dependency changed"
           }
         ],
         "dirtyFrameRanges": [
           {
-            "startFrame": 90,
-            "endFrame": 120
+            "startFrame": 0,
+            "endFrame": 210
           }
         ],
         "dirtyAudioRanges": [],
         "changedArtifacts": [],
-        "reusableArtifacts": [
-          {
-            "kind": "audio-mix",
-            "id": "final",
-            "reason": "audio contract is unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "clip-a",
-            "reason": "layer content and placement are unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "clip-b",
-            "reason": "layer content and placement are unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "title",
-            "reason": "layer content and placement are unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "chapter",
-            "reason": "layer content and placement are unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "end",
-            "reason": "layer content and placement are unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "music-bed",
-            "reason": "layer content and placement are unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "opening-hit",
-            "reason": "layer content and placement are unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "transition-hit",
-            "reason": "layer content and placement are unchanged"
-          },
-          {
-            "kind": "layer",
-            "id": "final-hit",
-            "reason": "layer content and placement are unchanged"
-          }
-        ],
+        "reusableArtifacts": [],
         "requiredRerenderJobs": [
           {
-            "kind": "transition",
-            "layerIds": [
-              "crossfade"
-            ],
+            "kind": "full-composition",
             "frameRange": {
-              "startFrame": 90,
-              "endFrame": 120
+              "startFrame": 0,
+              "endFrame": 210
             },
-            "sourceHandles": [
-              "clip-a",
-              "clip-b"
-            ],
-            "reason": "transition implementation or parameters changed only within its overlap"
+            "reason": "change crosses a proven incremental contract"
           }
         ],
         "stitchPlan": {
-          "strategy": "replace-transition-overlap",
-          "reuseCleanFrames": true,
+          "strategy": "full-render",
+          "reuseCleanFrames": false,
           "ranges": [
             {
-              "startFrame": 90,
-              "endFrame": 120
+              "startFrame": 0,
+              "endFrame": 210
             }
           ],
           "audioRanges": []
         },
         "expectedReuse": {
           "totalFrames": 210,
-          "dirtyFrames": 30,
-          "reusedFrames": 180,
-          "ratio": 0.857143
+          "dirtyFrames": 210,
+          "reusedFrames": 0,
+          "ratio": 0.0
         },
         "decodeWorkAvoided": [],
         "dependencyGraph": {
@@ -2093,9 +2043,9 @@
             {
               "id": "layer:clip-b",
               "kind": "video",
-              "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+              "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
               "frameRange": {
-                "startFrame": 90,
+                "startFrame": 102,
                 "endFrame": 210
               }
             },
@@ -2174,7 +2124,7 @@
             {
               "id": "composite:video",
               "kind": "composite",
-              "hash": "cd4d4e64beea819da3dd80b70f029d97c96f9e275d85e2f52418493d252c44bb"
+              "hash": "929cc1dfb3cd6ac6f743cdcd9eaad8083edcf540490130cebd1220ff73803d24"
             },
             {
               "id": "mix:audio",
@@ -2184,7 +2134,7 @@
             {
               "id": "output:final",
               "kind": "output",
-              "hash": "eb1666c66468f9b5538ddf93db0df77dfe0fbdf8fc20e89583b3e07d29378490"
+              "hash": "53636e488a3092dd1f376c2b294be6bbc905997420490f5e708bfd12d0d32d59"
             }
           ],
           "edges": [
@@ -2265,9 +2215,9 @@
             }
           ]
         },
-        "revisionKind": "transition",
-        "incrementalEligible": true,
-        "executionStatus": "planned-not-yet-executed"
+        "revisionKind": "full",
+        "incrementalEligible": false,
+        "executionStatus": "full-render-required"
       },
       "work": {
         "framesRendered": 0,
@@ -2308,12 +2258,12 @@
       ],
       "renderMode": "clean-fallback",
       "incrementalError": null,
-      "elapsedSeconds": 2.400616,
-      "cleanRenderSeconds": 6.720131,
+      "elapsedSeconds": 2.783904,
+      "cleanRenderSeconds": 6.736294,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "86b6db6c73599c439343ddd1070aa046066b935bc4faec5d8f8254b8255fc0c1",
-        "revisedCompositionHash": "97bebf8dcc0f0a765d8308f657fb11d94a30d470d56bbcb1e6b63a7dd11dbd5e",
+        "previousCompositionHash": "e796c62924c8fa8f311eadd99d27a44cfc04005d1326aebfef9de0ceaf140393",
+        "revisedCompositionHash": "84c0f752342a453c3425aea3be57711f69d237ba79b30f5827207a8befe036de",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/0/items/0/effects/0/params/intensity",
@@ -2393,9 +2343,9 @@
             {
               "id": "layer:clip-b",
               "kind": "video",
-              "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+              "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
               "frameRange": {
-                "startFrame": 90,
+                "startFrame": 102,
                 "endFrame": 210
               }
             },
@@ -2474,7 +2424,7 @@
             {
               "id": "composite:video",
               "kind": "composite",
-              "hash": "a9a775e35ae5532a301f02f946ab06245e415d8270d3c8d20d21e67d849d8df9"
+              "hash": "0ab51007d23abccbf3b7d51dc5b51b50f8fe267f62a74d79e552309cd15cd8fe"
             },
             {
               "id": "mix:audio",
@@ -2484,7 +2434,7 @@
             {
               "id": "output:final",
               "kind": "output",
-              "hash": "96d67736e7d4fd2f21352d41a894e1abff1def767aac411425e9ca75cc803fbd"
+              "hash": "7a5df93df058fe362e7b85a6c86394a20714f92e9e7ce26c7e86967b6e730ac7"
             }
           ],
           "edges": [
@@ -2608,12 +2558,12 @@
       ],
       "renderMode": "clean-fallback",
       "incrementalError": null,
-      "elapsedSeconds": 2.732711,
-      "cleanRenderSeconds": 7.250717,
+      "elapsedSeconds": 2.782102,
+      "cleanRenderSeconds": 6.731639,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "97bebf8dcc0f0a765d8308f657fb11d94a30d470d56bbcb1e6b63a7dd11dbd5e",
-        "revisedCompositionHash": "10c6f282ed15bc014ccd290ca86dcb20ad605e06bb923b434dd95ad21fb09592",
+        "previousCompositionHash": "84c0f752342a453c3425aea3be57711f69d237ba79b30f5827207a8befe036de",
+        "revisedCompositionHash": "08484b85ce0985216129a550f69ddb07dc783b02a5db449ab21534a89511326a",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/0/items/0/effects/0/enabled"
@@ -2691,9 +2641,9 @@
             {
               "id": "layer:clip-b",
               "kind": "video",
-              "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+              "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
               "frameRange": {
-                "startFrame": 90,
+                "startFrame": 102,
                 "endFrame": 210
               }
             },
@@ -2772,7 +2722,7 @@
             {
               "id": "composite:video",
               "kind": "composite",
-              "hash": "5c2c2c515e8e674b931dd9eb8f25c165cf901312af4e0922b8870b3daba5d5e8"
+              "hash": "7f87ecf995a4997d0f77cba4897cffe46d98168584ff2d11b7b1e39c0923ed0e"
             },
             {
               "id": "mix:audio",
@@ -2782,7 +2732,7 @@
             {
               "id": "output:final",
               "kind": "output",
-              "hash": "27b1969ca9fb26cc30f366270572b0e983821246deb43a87f1bcbdbd316e9011"
+              "hash": "4f2662d771e5b9fdc5dba2c66eebceb3ecaef207817e2a231d517487f906aaae"
             }
           ],
           "edges": [
@@ -2907,12 +2857,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 0.232206,
-      "cleanRenderSeconds": 6.722537,
+      "elapsedSeconds": 0.229945,
+      "cleanRenderSeconds": 6.730712,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "10c6f282ed15bc014ccd290ca86dcb20ad605e06bb923b434dd95ad21fb09592",
-        "revisedCompositionHash": "24220ed3c6a570bb63f44294a12e8f178446fdadd36c0a8722ded01238512f9b",
+        "previousCompositionHash": "08484b85ce0985216129a550f69ddb07dc783b02a5db449ab21534a89511326a",
+        "revisedCompositionHash": "8cf4c5aca58c93dde657d10aa0132091cc1d67566ee4e7cadeba3fec8314b88a",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/2/items"
@@ -3061,9 +3011,9 @@
             {
               "id": "layer:clip-b",
               "kind": "video",
-              "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+              "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
               "frameRange": {
-                "startFrame": 90,
+                "startFrame": 102,
                 "endFrame": 210
               }
             },
@@ -3151,7 +3101,7 @@
             {
               "id": "composite:video",
               "kind": "composite",
-              "hash": "5c2c2c515e8e674b931dd9eb8f25c165cf901312af4e0922b8870b3daba5d5e8"
+              "hash": "7f87ecf995a4997d0f77cba4897cffe46d98168584ff2d11b7b1e39c0923ed0e"
             },
             {
               "id": "mix:audio",
@@ -3161,7 +3111,7 @@
             {
               "id": "output:final",
               "kind": "output",
-              "hash": "117ebbde6cd21b28e3fca2643fe126b3778ef4d05d16234533f74706586c7ba5"
+              "hash": "1e56a0cfbd5852c0b0674d926dea9d524cef96202662bcf6b21be7b189b35162"
             }
           ],
           "edges": [
@@ -3297,12 +3247,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 0.247153,
-      "cleanRenderSeconds": 6.725708,
+      "elapsedSeconds": 0.243336,
+      "cleanRenderSeconds": 6.742843,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "24220ed3c6a570bb63f44294a12e8f178446fdadd36c0a8722ded01238512f9b",
-        "revisedCompositionHash": "c7d0eea5a4bf0667992eb150c82e15377d0db78143c56e9815f318e79974f2d5",
+        "previousCompositionHash": "8cf4c5aca58c93dde657d10aa0132091cc1d67566ee4e7cadeba3fec8314b88a",
+        "revisedCompositionHash": "81506635e726194ece174e5b0755e12fb272d7c10ca31a4bfe1e733d207db179",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/2/items/0/fadeInFrames",
@@ -3456,9 +3406,9 @@
             {
               "id": "layer:clip-b",
               "kind": "video",
-              "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+              "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
               "frameRange": {
-                "startFrame": 90,
+                "startFrame": 102,
                 "endFrame": 210
               }
             },
@@ -3546,7 +3496,7 @@
             {
               "id": "composite:video",
               "kind": "composite",
-              "hash": "5c2c2c515e8e674b931dd9eb8f25c165cf901312af4e0922b8870b3daba5d5e8"
+              "hash": "7f87ecf995a4997d0f77cba4897cffe46d98168584ff2d11b7b1e39c0923ed0e"
             },
             {
               "id": "mix:audio",
@@ -3556,7 +3506,7 @@
             {
               "id": "output:final",
               "kind": "output",
-              "hash": "2d25785ab9171f1cd39c7aa03f5d2bfee1a45d196cecbb49f2122bdbda65307b"
+              "hash": "f6ea1f58356eefd4e411e4d95da96bb1e4266cc6de6efcbfcaed08a27ed48c56"
             }
           ],
           "edges": [
@@ -3691,12 +3641,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 3.738416,
-      "cleanRenderSeconds": 6.683643,
+      "elapsedSeconds": 3.743065,
+      "cleanRenderSeconds": 6.697613,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "c7d0eea5a4bf0667992eb150c82e15377d0db78143c56e9815f318e79974f2d5",
-        "revisedCompositionHash": "8fd9eb4b5029fa2d5fb1295e03930266b61ac9671bea49dd227b942537316013",
+        "previousCompositionHash": "81506635e726194ece174e5b0755e12fb272d7c10ca31a4bfe1e733d207db179",
+        "revisedCompositionHash": "c4afdb260a88a1cb9443f6c64d871476df3b976b36eea9a10f5a078bef391232",
         "changedFields": [
           "/render/output/uri",
           "/timeline/tracks/1/items/2/props/html"
@@ -3852,9 +3802,9 @@
             {
               "id": "layer:clip-b",
               "kind": "video",
-              "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+              "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
               "frameRange": {
-                "startFrame": 90,
+                "startFrame": 102,
                 "endFrame": 210
               }
             },
@@ -3942,7 +3892,7 @@
             {
               "id": "composite:video",
               "kind": "composite",
-              "hash": "03fc2e4a8bd140824e070adcb77da8b34e759dc782cb06930bd24b0d0445b305"
+              "hash": "2cae54d0fcaf17f6f5f4f321d3a1de992f78a390a04c72247997a4c050aa2882"
             },
             {
               "id": "mix:audio",
@@ -3952,7 +3902,7 @@
             {
               "id": "output:final",
               "kind": "output",
-              "hash": "83a832b67deca9e92e47bb8c0cafe2621f4a2c7ab8bb10682bdb8ce5f2904a39"
+              "hash": "5f18112eee0285b0d254906c6b5b09288824fd7cc3861d490a2b5958737a3108"
             }
           ],
           "edges": [
@@ -4081,12 +4031,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 0.247584,
-      "cleanRenderSeconds": 9.400458,
+      "elapsedSeconds": 0.244438,
+      "cleanRenderSeconds": 6.721629,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "8fd9eb4b5029fa2d5fb1295e03930266b61ac9671bea49dd227b942537316013",
-        "revisedCompositionHash": "3ab6515e82d87cd02a2dc5bbfa3814711438332cfb2d1f7079386ae7ab299388",
+        "previousCompositionHash": "c4afdb260a88a1cb9443f6c64d871476df3b976b36eea9a10f5a078bef391232",
+        "revisedCompositionHash": "354e8528239487349ac3b962e1ce1f33004fa697c30bbb52f94ed45fc8341072",
         "changedFields": [
           "/render/output/container",
           "/render/output/uri"
@@ -4231,9 +4181,9 @@
             {
               "id": "layer:clip-b",
               "kind": "video",
-              "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+              "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
               "frameRange": {
-                "startFrame": 90,
+                "startFrame": 102,
                 "endFrame": 210
               }
             },
@@ -4321,7 +4271,7 @@
             {
               "id": "composite:video",
               "kind": "composite",
-              "hash": "03fc2e4a8bd140824e070adcb77da8b34e759dc782cb06930bd24b0d0445b305"
+              "hash": "2cae54d0fcaf17f6f5f4f321d3a1de992f78a390a04c72247997a4c050aa2882"
             },
             {
               "id": "mix:audio",
@@ -4331,7 +4281,7 @@
             {
               "id": "output:final",
               "kind": "output",
-              "hash": "fa74ba69cd5b488ec349eee3e3667c055731b3b9fa58853929f59f89df71d0f7"
+              "hash": "760ef20b7de3c905758846790696997b4b07941d6d1cb81246d208a4d91c695e"
             }
           ],
           "edges": [
@@ -4454,7 +4404,7 @@
       "output": {
         "file": "r12-container.mkv",
         "bytes": 709456,
-        "sha256": "69de4abcad6f5192f47668e84de64135428efffdf3da5b72c90a6d9fd862c948"
+        "sha256": "71f78650612821549860de059bf1a8b3a84e60f709cf45900f7a19d8e6ac97b6"
       }
     },
     {
@@ -4468,12 +4418,12 @@
       ],
       "renderMode": "clean-fallback",
       "incrementalError": null,
-      "elapsedSeconds": 2.566331,
-      "cleanRenderSeconds": 4.464785,
+      "elapsedSeconds": 1.914427,
+      "cleanRenderSeconds": 3.914779,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "3ab6515e82d87cd02a2dc5bbfa3814711438332cfb2d1f7079386ae7ab299388",
-        "revisedCompositionHash": "960cbed843a8171129ef6c8ba8660d79cc9aa79a6d78cd554e3d3dc6ae32d36b",
+        "previousCompositionHash": "354e8528239487349ac3b962e1ce1f33004fa697c30bbb52f94ed45fc8341072",
+        "revisedCompositionHash": "6e0e84f5609012324c4dd99a9773dc6f96d9f35bdb1a918dbd22068898bb07a3",
         "changedFields": [
           "/durationFrames",
           "/render/output/uri",
@@ -4767,7 +4717,7 @@
       "output": {
         "file": "r13-remove-scene.mkv",
         "bytes": 224154,
-        "sha256": "1ce9f5d489a08a26784a0ba60cbe02272478b2438b2b89270755e49fec0d9d93"
+        "sha256": "4e389ce8659c3292b2d23e97084534273e9650896756bd7dcd136391c01ee8a2"
       }
     },
     {
@@ -4783,12 +4733,12 @@
       ],
       "renderMode": "clean-fallback",
       "incrementalError": null,
-      "elapsedSeconds": 7.315267,
-      "cleanRenderSeconds": 6.751713,
+      "elapsedSeconds": 6.772255,
+      "cleanRenderSeconds": 6.742479,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "960cbed843a8171129ef6c8ba8660d79cc9aa79a6d78cd554e3d3dc6ae32d36b",
-        "revisedCompositionHash": "eef0f59754b38110a18a2893223b6d8e33aa1fc07468745b3e2c5edbb2782fe0",
+        "previousCompositionHash": "6e0e84f5609012324c4dd99a9773dc6f96d9f35bdb1a918dbd22068898bb07a3",
+        "revisedCompositionHash": "7277af7c8b36423397a4ad48d41ab6758018bc411460b1e9d782c37e49353fb9",
         "changedFields": [
           "/cache/namespace",
           "/durationFrames",
@@ -5127,12 +5077,12 @@
       ],
       "renderMode": "incremental",
       "incrementalError": null,
-      "elapsedSeconds": 0.048525,
-      "cleanRenderSeconds": 6.742347,
+      "elapsedSeconds": 0.047571,
+      "cleanRenderSeconds": 6.731347,
       "plan": {
         "schemaVersion": "1.0.0",
-        "previousCompositionHash": "eef0f59754b38110a18a2893223b6d8e33aa1fc07468745b3e2c5edbb2782fe0",
-        "revisedCompositionHash": "7ac1b02f5b30337494db8efec5c78ea1cfdf9628e9819d5a034d50adc2e15c31",
+        "previousCompositionHash": "7277af7c8b36423397a4ad48d41ab6758018bc411460b1e9d782c37e49353fb9",
+        "revisedCompositionHash": "07eb840689102ea2bd5af7b0bb05e77aa2107e99baf2a59c23e46466a11ce05b",
         "changedFields": [
           "/render/output/uri"
         ],
@@ -5471,50 +5421,50 @@
     {
       "name": "bounded-text",
       "incrementalSamplesSeconds": [
-        3.8030518340528943,
-        3.8112537499982864,
-        3.8208652500179596
+        3.8264417499885894,
+        3.817719125014264,
+        3.817382500041276
       ],
       "cleanSamplesSeconds": [
-        7.242653375025839,
-        6.749886541976593,
-        7.223812290991191
+        7.248171292012557,
+        6.743826874997467,
+        6.725827375019435
       ],
-      "incrementalMeanSeconds": 3.81172361135638,
-      "cleanMeanSeconds": 7.072117402664541,
-      "speedup": 1.8553594446340167
+      "incrementalMeanSeconds": 3.8205144583480433,
+      "cleanMeanSeconds": 6.905941847343153,
+      "speedup": 1.8075947421827638
     },
     {
       "name": "audio-add",
       "incrementalSamplesSeconds": [
-        0.23052437498699874,
-        0.23026883299462497,
-        0.2340154999983497
+        0.22820858302293345,
+        0.2291413330240175,
+        0.22816866595530882
       ],
       "cleanSamplesSeconds": [
-        6.725392916006967,
-        6.7239097080309875,
-        6.74546875001397
+        6.730353374965489,
+        6.72284095804207,
+        6.716369542002212
       ],
-      "incrementalMeanSeconds": 0.23160290265999114,
-      "cleanMeanSeconds": 6.731590458017308,
-      "speedup": 29.06522492034455
+      "incrementalMeanSeconds": 0.22850619400075325,
+      "cleanMeanSeconds": 6.723187958336591,
+      "speedup": 29.422344491521436
     },
     {
       "name": "cross-container-aac",
       "incrementalSamplesSeconds": [
-        0.2485214999760501,
-        0.25245979195460677,
-        0.24598308402346447
+        0.24288783298106864,
+        0.24289366701850668,
+        0.24301949999062344
       ],
       "cleanSamplesSeconds": [
-        7.227648374973796,
-        6.745264791010413,
-        6.709675749996677
+        6.693605749984272,
+        6.690266958030406,
+        6.6943589999573305
       ],
-      "incrementalMeanSeconds": 0.24898812531804046,
-      "cleanMeanSeconds": 6.894196305326962,
-      "speedup": 27.688855830055292
+      "incrementalMeanSeconds": 0.24293366666339958,
+      "cleanMeanSeconds": 6.6927439026573365,
+      "speedup": 27.5496763975928
     }
   ]
 }

@@ -399,11 +399,10 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
         (item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "video"),
         key=lambda item: item["placement"]["startFrame"],
     )
-    if not 1 <= len(clips) <= 2:
-        raise FFmpegRenderError("alpha media renderer supports one or two video clips")
+    if not clips:
+        raise FFmpegRenderError("media renderer requires at least one video clip")
     transitions = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "transition"]
-    if len(clips) == 2 and len(transitions) != 1:
-        raise FFmpegRenderError("two-clip alpha render requires exactly one transition")
+    timeline_steps = _video_timeline_steps(clips, transitions, spec["durationFrames"])
     command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y"]
     for clip in clips:
         source = sources.get(clip["source"]["sourceId"])
@@ -448,16 +447,19 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
             for effect in clip.get("effects", [])
             if effect.get("enabled", True)
         )
+        filters.extend([f"fps={frame_rate}", f"tpad=stop_mode=clone:stop_duration={float(duration):.9f}", f"trim=duration={float(duration):.9f}", "setpts=PTS-STARTPTS", "settb=AVTB"])
         chains.append(f"[{index}:v]{','.join(filters)}[clip{index}]")
 
     video_label = "clip0"
-    if len(clips) == 2:
-        transition = transitions[0]
-        offset_frames = transition["placement"]["startFrame"] - clips[0]["placement"]["startFrame"]
-        chains.append(
-            f"[clip0][clip1]{transition_filter(transition['transitionId'], transition.get('params', {}), duration_frames=transition['placement']['durationFrames'], offset_frames=offset_frames, numerator=rate['numerator'], denominator=rate['denominator'])}[video]"
-        )
-        video_label = "video"
+    for index, transition in enumerate(timeline_steps, 1):
+        next_label = "video" if index == len(clips) - 1 else f"video{index}"
+        if transition:
+            chains.append(
+                f"[{video_label}][clip{index}]{transition_filter(transition['transitionId'], transition.get('params', {}), duration_frames=transition['placement']['durationFrames'], offset_frames=transition['placement']['startFrame'], numerator=rate['numerator'], denominator=rate['denominator'])}[{next_label}]"
+            )
+        else:
+            chains.append(f"[{video_label}][clip{index}]concat=n=2:v=1:a=0[{next_label}]")
+        video_label = next_label
 
     audio_label = None
     labels = []
@@ -513,3 +515,36 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
     if not destination.is_file() or destination.stat().st_size == 0:
         raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
     return destination
+
+
+def _video_timeline_steps(clips: list[JSONObject], transitions: list[JSONObject], duration_frames: int) -> list[JSONObject | None]:
+    if clips[0]["placement"]["startFrame"] != 0:
+        raise FFmpegRenderError("the first video clip must start at frame zero")
+    transition_by_pair = {}
+    for transition in transitions:
+        pair = (transition["fromItemId"], transition["toItemId"])
+        if pair in transition_by_pair:
+            raise FFmpegRenderError(f"duplicate transition between {pair[0]} and {pair[1]}")
+        transition_by_pair[pair] = transition
+    steps = []
+    used = set()
+    for previous, current in zip(clips, clips[1:]):
+        transition = transition_by_pair.get((previous["id"], current["id"]))
+        previous_end = previous["placement"]["startFrame"] + previous["placement"]["durationFrames"]
+        if not transition:
+            if current["placement"]["startFrame"] != previous_end:
+                raise FFmpegRenderError(f"video clips {previous['id']} and {current['id']} require a clean boundary or an explicit adjacent transition")
+            steps.append(None)
+            continue
+        overlap = transition["placement"]
+        if overlap["startFrame"] != current["placement"]["startFrame"] or overlap["startFrame"] + overlap["durationFrames"] != previous_end:
+            raise FFmpegRenderError(f"transition {transition['id']} must exactly cover the overlap between {previous['id']} and {current['id']}")
+        steps.append(transition)
+        used.add(transition["id"])
+    unused = sorted(transition["id"] for transition in transitions if transition["id"] not in used)
+    if unused:
+        raise FFmpegRenderError(f"transitions must connect adjacent video clips: {', '.join(unused)}")
+    final_end = clips[-1]["placement"]["startFrame"] + clips[-1]["placement"]["durationFrames"]
+    if final_end != duration_frames:
+        raise FFmpegRenderError(f"video timeline ends at frame {final_end}, but composition duration is {duration_frames}")
+    return steps

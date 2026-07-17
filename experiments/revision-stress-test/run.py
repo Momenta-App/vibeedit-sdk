@@ -17,6 +17,7 @@ SOURCES = ROOT / "sources"
 FPS = 30
 WIDTH = 640
 HEIGHT = 360
+RUN_ID = str(time.time_ns())
 
 
 def main() -> None:
@@ -44,7 +45,7 @@ def main() -> None:
         try:
             if previous_spec is None:
                 render(spec_path, output)
-            elif plan["executionStatus"] in {"verified-frame-cache", "verified-audio-remix", "verified-stream-copy-remux", "verified-stream-copy-video-audio-remix", "verified-stream-copy-tail", "no-work"}:
+            elif plan["executionStatus"] in {"verified-frame-cache", "verified-audio-remix", "verified-stream-copy-remux", "verified-stream-copy-video-audio-remix", "verified-stream-copy-tail", "verified-stream-copy-tail-audio-remix", "no-work"}:
                 mode = "incremental"
                 render_revision(previous_spec, spec, previous_output, output)
             else:
@@ -148,7 +149,7 @@ def _base_spec() -> dict:
             ]
         },
         "artifacts": {"masks": [], "tracking": [], "analysis": []},
-        "cache": {"enabled": True, "namespace": "revision-stress-v4"},
+        "cache": {"enabled": True, "namespace": f"revision-stress-{RUN_ID}"},
         "audio": {"targetLufs": -16, "truePeakDb": -1, "preventImmediateSfxRepeat": True, "ducking": {"musicUnderSfxDb": -3}},
         "render": {"backend": "mixed", "htmlBackend": "chromium", "threads": 1, "output": {"uri": "revision.mp4", "container": "mp4", "videoCodec": "h264", "audioCodec": "aac", "pixelFormat": "yuv420p"}, "deterministic": True},
         "verification": {"durationFrames": 210, "width": WIDTH, "height": HEIGHT, "frameRate": {"numerator": FPS, "denominator": 1}, "hasVideo": True, "hasAudio": True, "maxDurationDriftFrames": 1},
@@ -182,6 +183,9 @@ def _revisions() -> list[dict]:
     revisions.append(_revision("remove-callout", "Remove the callout", ["text-remove"], current))
 
     current = copy.deepcopy(current)
+    clip_b = _item(current, "clip-b")
+    clip_b["placement"] = {"startFrame": 102, "durationFrames": 108}
+    clip_b["source"]["durationFrames"] = 108
     transition = _item(current, "crossfade")
     transition["placement"] = {"startFrame": 102, "durationFrames": 18}
     transition["params"] = {"curve": "faster"}
@@ -226,7 +230,7 @@ def _revisions() -> list[dict]:
     revisions.append(_revision("remove-scene", "Remove the second scene and rebuild the dependent tail", ["scene-remove", "timeline-change", "audio-change"], current))
 
     current = _base_spec()
-    current["cache"]["namespace"] = "revision-stress-rebuild-v4"
+    current["cache"]["namespace"] = f"revision-stress-rebuild-{RUN_ID}"
     _item(current, "title")["props"]["html"] = _html("REBUILT", "SCENE + TEXT + SOUND RESTORED")
     _item(current, "clip-a")["effects"][0]["params"]["intensity"] = 0.12
     _item(current, "transition-hit")["gainDb"] = -9
@@ -370,7 +374,7 @@ def _benchmarks(revisions: list[dict], report: dict) -> list[dict]:
             previous_output = REVIEW / report["revisions"][previous_index]["output"]["file"]
             prime = None
             if name == "bounded-text":
-                namespace = f"stress-benchmark-text-v2-{trial}"
+                namespace = f"stress-benchmark-text-{RUN_ID}-{trial}"
                 previous["cache"] = {"enabled": True, "namespace": namespace}
                 revised["cache"] = {"enabled": True, "namespace": namespace}
                 prime = ROOT / f".benchmark-{name}-{trial}-prime.mp4"

@@ -6,7 +6,7 @@ import pytest
 
 from vibeedit import render, verify_output
 from vibeedit.data import data_path
-from vibeedit.ffmpeg import _thread_arguments
+from vibeedit.ffmpeg import FFmpegRenderError, _thread_arguments
 
 
 def test_ffmpeg_thread_arguments_honor_render_contract():
@@ -74,6 +74,61 @@ def test_external_audio_clip_is_trimmed_placed_and_mixed(tmp_path: Path):
     spec["verification"] = {"durationFrames": 60, "width": 160, "height": 90, "frameRate": {"numerator": 30, "denominator": 1}, "hasVideo": True, "hasAudio": True, "maxDurationDriftFrames": 1}
     output = render(spec, tmp_path / "external-audio.mp4")
     assert verify_output(output, spec["verification"]).passed
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
+def test_multi_clip_fan_edit_supports_clean_cuts_and_transitions(tmp_path: Path):
+    import subprocess
+
+    sources = []
+    for index, color in enumerate(("navy", "maroon", "darkgreen", "purple")):
+        path = tmp_path / f"source-{index}.mp4"
+        subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", f"color=c={color}:s=160x90:r=30:d=1", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(path)], check=True)
+        sources.append({"id": f"source-{index}", "kind": "video", "uri": str(path), "identity": {"algorithm": "generated", "value": color}, "durationFrames": 30})
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec["id"] = "multi-clip-fan-edit"
+    spec["canvas"].update({"width": 160, "height": 90})
+    spec["durationFrames"] = 102
+    spec["sources"] = sources
+    spec["timeline"]["tracks"] = [
+        {
+            "id": "V1",
+            "kind": "video",
+            "order": 0,
+            "items": [
+                {"id": "hook", "kind": "video", "placement": {"startFrame": 0, "durationFrames": 30}, "source": {"sourceId": "source-0", "inFrame": 0, "durationFrames": 30}, "effects": []},
+                {"id": "setup", "kind": "video", "placement": {"startFrame": 24, "durationFrames": 30}, "source": {"sourceId": "source-1", "inFrame": 0, "durationFrames": 30}, "effects": []},
+                {"id": "build", "kind": "video", "placement": {"startFrame": 54, "durationFrames": 24}, "source": {"sourceId": "source-2", "inFrame": 0, "durationFrames": 24}, "effects": []},
+                {"id": "payoff", "kind": "video", "placement": {"startFrame": 72, "durationFrames": 30}, "source": {"sourceId": "source-3", "inFrame": 0, "durationFrames": 30}, "effects": [{"id": "stutter", "effectId": "vibeedit://effect/random-frame-stutter", "enabled": True, "params": {"seed": 7, "windowFrames": 4, "intensity": 0.7}, "implementationVersion": "0.1.0"}]},
+                {"id": "hook-setup", "kind": "transition", "placement": {"startFrame": 24, "durationFrames": 6}, "transitionId": "vibeedit://transition/crossfade", "fromItemId": "hook", "toItemId": "setup", "params": {"curve": "linear"}, "implementationVersion": "0.1.0"},
+                {"id": "build-payoff", "kind": "transition", "placement": {"startFrame": 72, "durationFrames": 6}, "transitionId": "vibeedit://transition/crossfade", "fromItemId": "build", "toItemId": "payoff", "params": {"curve": "linear"}, "implementationVersion": "0.1.0"},
+            ],
+        }
+    ]
+    spec["verification"] = {"durationFrames": 102, "width": 160, "height": 90, "frameRate": {"numerator": 30, "denominator": 1}, "hasVideo": True, "hasAudio": False, "maxDurationDriftFrames": 1}
+
+    output = render(spec, tmp_path / "multi-clip.mp4")
+
+    assert verify_output(output, spec["verification"]).passed
+    assert json.loads(subprocess.run([shutil.which("ffprobe"), "-v", "error", "-count_frames", "-select_streams", "v:0", "-show_entries", "stream=nb_read_frames", "-of", "json", str(output)], capture_output=True, text=True, check=True).stdout)["streams"][0]["nb_read_frames"] == "102"
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
+def test_multi_clip_fan_edit_rejects_unmaterialized_timeline_gap(tmp_path: Path):
+    import subprocess
+
+    source = tmp_path / "source.mp4"
+    subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "color=c=navy:s=160x90:r=30:d=2", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(source)], check=True)
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec["canvas"].update({"width": 160, "height": 90})
+    spec["durationFrames"] = 61
+    spec["sources"] = [{"id": "source", "kind": "video", "uri": str(source), "identity": {"algorithm": "generated", "value": "source"}, "durationFrames": 60}]
+    spec["timeline"]["tracks"] = [{"id": "V1", "kind": "video", "order": 0, "items": [{"id": "a", "kind": "video", "placement": {"startFrame": 0, "durationFrames": 30}, "source": {"sourceId": "source", "inFrame": 0, "durationFrames": 30}, "effects": []}, {"id": "b", "kind": "video", "placement": {"startFrame": 31, "durationFrames": 30}, "source": {"sourceId": "source", "inFrame": 30, "durationFrames": 30}, "effects": []}]}]
+    spec["verification"]["durationFrames"] = 61
+    spec["verification"].update({"width": 160, "height": 90})
+
+    with pytest.raises(FFmpegRenderError, match="clean boundary or an explicit adjacent transition"):
+        render(spec, tmp_path / "invalid-gap.mp4")
 
 
 def test_mixed_python_html_fixture_renders(tmp_path: Path):

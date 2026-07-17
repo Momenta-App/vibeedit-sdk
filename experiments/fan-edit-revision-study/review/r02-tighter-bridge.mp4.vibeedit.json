@@ -1,0 +1,47 @@
+{
+  "cacheHit": false,
+  "cacheKey": "0b0a93f48458ae042909586778a1d37f6673853ed8a454dc79003bf8e2201142",
+  "compositionId": "fan-edit",
+  "compositionSha256": "76dac8c097b258c221389db7604988f1f5573c8b74243bf248408c16e1a2a04a",
+  "implementationVersion": "0.1.0b2",
+  "output": {
+    "bytes": 214377,
+    "path": "r02-tighter-bridge.mp4",
+    "sha256": "99a258646401074e3a660e0d2dddaa3a9f85a1bc0ddce1b30a39078c7d9d5d37"
+  },
+  "runtimeVersions": {
+    "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "schemaVersion": "1.0.0",
+  "sourceIdentities": [
+    {
+      "algorithm": "sha256",
+      "value": "d9d12e11d09a583643a84a11fba9d2fb88b08aa256db73d8e98f03e2b4944e36"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "61acb9bf2194fff37c7011e76100bc5562cb00df319008a3cb83a368114139cf"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "928720b9452bc1be3e4534b18139006d6368223a71101f599febf5ca7bb7a8ab"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "27d7b6804012548a7a6857a9ba6a08082b9440bd1438c2e35b1a1478dff8a3a0"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "99d266ada9a9d311a0e64aeb66e8e884b2d48b3898d9b8b0833c64c556c51e94"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "c418d75fe256f08572fc9a8f2b4b73c81bc6ad871d1ec204799a6f8f6a9d6a50"
+    }
+  ],
+  "work": {
+    "framesRendered": 180,
+    "framesReused": 0,
+    "reuseKind": "none"
+  }
+}

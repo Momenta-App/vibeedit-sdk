@@ -11,7 +11,7 @@ Each portable matrix job also runs `scripts/smoke_release_artifacts.py` against
 the wheel and npm tarball it just built. The script creates new Python and Node
 environments, installs the exact archives, performs browser setup, renders and
 verifies both generated and mixed HTML/media examples, exercises the packaged
-catalog and skill lifecycle, initializes and calls the 10-tool MCP adapter,
+catalog and skill lifecycle, initializes and calls the 11-tool MCP adapter,
 imports the Node API, validates CompositionSpec, and requires a zero-vulnerability
 production dependency audit. Source-tree tests cannot substitute for this gate.
 

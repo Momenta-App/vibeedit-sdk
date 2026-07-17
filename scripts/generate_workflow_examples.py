@@ -52,8 +52,8 @@ def source(identifier: str, kind: str, uri: str, duration: int):
     return {"id": identifier, "kind": kind, "uri": uri, "identity": {"algorithm": "generated", "value": f"vibeedit-{identifier}-v1"}, "durationFrames": duration, "license": {"status": "generated", "commercialOutputAllowed": True, "redistributionAllowed": True}}
 
 
-def video(identifier: str, source_id: str, start: int, duration: int, *, in_frame: int = 0, effects=None):
-    return {"id": identifier, "kind": "video", "placement": {"startFrame": start, "durationFrames": duration}, "source": {"sourceId": source_id, "inFrame": in_frame, "durationFrames": duration}, "effects": effects or []}
+def video(identifier: str, source_id: str, start: int, duration: int, *, in_frame: int = 0, effects=None, metadata=None):
+    return {"id": identifier, "kind": "video", "placement": {"startFrame": start, "durationFrames": duration}, "source": {"sourceId": source_id, "inFrame": in_frame, "durationFrames": duration}, "effects": effects or [], **({"metadata": metadata} if metadata else {})}
 
 
 def sfx(identifier: str, frame: int, *, frequency: int = 72, gain: int = -10, duration: int = 12, seed: int = 7):
@@ -72,13 +72,54 @@ def manifest(identifier: str, name: str, description: str, families: list[str], 
 
 
 def fan_edit():
-    spec = base("fan-edit", duration=108)
-    spec["sources"] = [source("source-a", "video", "sources/source-a.mp4", 66), source("source-b", "video", "sources/source-b.mp4", 54)]
-    spec["timeline"]["tracks"] = [
-        {"id": "V1", "kind": "video", "order": 0, "items": [video("training", "source-a", 0, 66, effects=[{"id": "stutter", "effectId": "vibeedit://effect/random-frame-stutter", "enabled": True, "params": {"seed": 11, "windowFrames": 3, "intensity": 0.65}, "implementationVersion": "0.1.0"}]), video("payoff", "source-b", 54, 54), {"id": "drop", "kind": "transition", "placement": {"startFrame": 54, "durationFrames": 12}, "transitionId": "vibeedit://transition/crossfade", "fromItemId": "training", "toItemId": "payoff", "params": {"curve": "linear"}, "implementationVersion": "0.1.0"}]},
-        {"id": "A1", "kind": "audio", "order": 0, "items": [sfx("setup-hit", 15, frequency=84, gain=-16, seed=11), sfx("drop-hit", 60, frequency=55, gain=-8, seed=12)]},
+    spec = base("fan-edit", duration=180)
+    spec["sources"] = [
+        source("source-a", "video", "sources/source-a.mp4", 36),
+        source("source-b", "video", "sources/source-b.mp4", 42),
+        source("source-c", "video", "sources/source-c.mp4", 42),
+        source("source-d", "video", "sources/source-d.mp4", 42),
+        source("source-e", "video", "sources/source-e.mp4", 30),
+        source("music", "audio", "sources/music.wav", 180),
     ]
-    return spec, manifest("fan-edit", "Fan Edit", "Executable setup-to-drop fan edit with beat punctuation, seeded stutter, and a frame-accurate transition.", ["fan-edit", "effects", "transitions", "sound-design"])
+    spec["timeline"]["tracks"] = [
+        {
+            "id": "V1",
+            "kind": "video",
+            "order": 0,
+            "items": [
+                video("hook", "source-a", 0, 36, metadata={"fanEditRole": "hook", "selectionReason": "immediate subject recognition and motion", "syncAnchor": "opening transient"}),
+                video("setup", "source-b", 36, 42, metadata={"fanEditRole": "setup", "selectionReason": "establish contrast before acceleration", "syncAnchor": "phrase boundary"}),
+                video("build", "source-c", 72, 42, effects=[{"id": "build-stutter", "effectId": "vibeedit://effect/random-frame-stutter", "enabled": True, "params": {"seed": 11, "windowFrames": 3, "intensity": 0.35}, "implementationVersion": "0.1.0"}], metadata={"fanEditRole": "build", "selectionReason": "increase visual instability before the drop", "syncAnchor": "riser peak"}),
+                video("drop", "source-d", 108, 42, effects=[{"id": "drop-stutter", "effectId": "vibeedit://effect/random-frame-stutter", "enabled": True, "params": {"seed": 12, "windowFrames": 4, "intensity": 0.7}, "implementationVersion": "0.1.0"}], metadata={"fanEditRole": "drop", "selectionReason": "strongest action and contrast payoff", "syncAnchor": "downbeat"}),
+                video("aftershock", "source-e", 150, 30, metadata={"fanEditRole": "aftershock", "selectionReason": "short resolving image that can hard-loop", "syncAnchor": "final phrase"}),
+                {"id": "build-bridge", "kind": "transition", "placement": {"startFrame": 72, "durationFrames": 6}, "transitionId": "vibeedit://transition/crossfade", "fromItemId": "setup", "toItemId": "build", "params": {"curve": "linear"}, "implementationVersion": "0.1.0"},
+                {"id": "drop-bridge", "kind": "transition", "placement": {"startFrame": 108, "durationFrames": 6}, "transitionId": "vibeedit://transition/crossfade", "fromItemId": "build", "toItemId": "drop", "params": {"curve": "linear"}, "implementationVersion": "0.1.0"},
+            ],
+        },
+        {
+            "id": "A1",
+            "kind": "audio",
+            "order": 0,
+            "role": "music-and-accents",
+            "items": [
+                {"id": "music-bed", "kind": "audio", "placement": {"startFrame": 0, "durationFrames": 180}, "source": {"sourceId": "music", "inFrame": 0, "durationFrames": 180}, "role": "music", "gainDb": -12, "pan": 0, "fadeInFrames": 3, "fadeOutFrames": 8, "effects": []},
+                sfx("hook-hit", 0, frequency=92, gain=-16, duration=10, seed=10),
+                sfx("build-hit", 72, frequency=76, gain=-14, seed=11),
+                sfx("drop-hit", 108, frequency=55, gain=-8, duration=18, seed=12),
+                sfx("aftershock-hit", 150, frequency=66, gain=-15, seed=13),
+            ],
+        },
+    ]
+    spec["timeline"]["markers"] = [
+        {"id": "hook", "frame": 0, "label": "Hook", "kind": "fan-edit-structure"},
+        {"id": "setup", "frame": 36, "label": "Setup", "kind": "fan-edit-structure"},
+        {"id": "build", "frame": 72, "label": "Build", "kind": "fan-edit-structure"},
+        {"id": "drop", "frame": 108, "label": "Drop", "kind": "fan-edit-structure"},
+        {"id": "aftershock", "frame": 150, "label": "Aftershock", "kind": "fan-edit-structure"},
+    ]
+    spec["audio"] = {"targetLufs": -16, "truePeakDb": -1, "preventImmediateSfxRepeat": True, "ducking": {"musicUnderSfxDb": -3}}
+    spec["metadata"] = {"fanEdit": {"concept": "pressure turns into controlled impact", "structure": ["hook", "setup", "build", "drop", "aftershock"], "audioArchitecture": "music-led with selective impact accents", "textDecision": "none", "ordering": "non-chronological moment roles"}}
+    return spec, manifest("fan-edit", "Fan Edit", "Executable five-moment hook/setup/build/drop/aftershock fan edit with clean cuts, motivated crossfades, selective stutter, music, and beat punctuation.", ["fan-edit", "multi-clip", "effects", "transitions", "sound-design"])
 
 
 def beat_synchronized():

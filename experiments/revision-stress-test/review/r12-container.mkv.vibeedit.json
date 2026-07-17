@@ -1,11 +1,11 @@
 {
   "compositionId": "revision-stress-video",
-  "compositionSha256": "3ab6515e82d87cd02a2dc5bbfa3814711438332cfb2d1f7079386ae7ab299388",
+  "compositionSha256": "354e8528239487349ac3b962e1ce1f33004fa697c30bbb52f94ed45fc8341072",
   "implementationVersion": "0.1.0b2",
   "output": {
     "bytes": 709456,
     "path": "r12-container.mkv",
-    "sha256": "69de4abcad6f5192f47668e84de64135428efffdf3da5b72c90a6d9fd862c948"
+    "sha256": "71f78650612821549860de059bf1a8b3a84e60f709cf45900f7a19d8e6ac97b6"
   },
   "revisionPlan": {
     "changedArtifacts": [],
@@ -128,9 +128,9 @@
         {
           "frameRange": {
             "endFrame": 210,
-            "startFrame": 90
+            "startFrame": 102
           },
-          "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+          "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
           "id": "layer:clip-b",
           "kind": "video"
         },
@@ -216,7 +216,7 @@
           "kind": "sound_effect"
         },
         {
-          "hash": "03fc2e4a8bd140824e070adcb77da8b34e759dc782cb06930bd24b0d0445b305",
+          "hash": "2cae54d0fcaf17f6f5f4f321d3a1de992f78a390a04c72247997a4c050aa2882",
           "id": "composite:video",
           "kind": "composite"
         },
@@ -226,7 +226,7 @@
           "kind": "audio-mix"
         },
         {
-          "hash": "fa74ba69cd5b488ec349eee3e3667c055731b3b9fa58853929f59f89df71d0f7",
+          "hash": "760ef20b7de3c905758846790696997b4b07941d6d1cb81246d208a4d91c695e",
           "id": "output:final",
           "kind": "output"
         }
@@ -248,7 +248,7 @@
       "totalFrames": 210
     },
     "incrementalEligible": true,
-    "previousCompositionHash": "8fd9eb4b5029fa2d5fb1295e03930266b61ac9671bea49dd227b942537316013",
+    "previousCompositionHash": "c4afdb260a88a1cb9443f6c64d871476df3b976b36eea9a10f5a078bef391232",
     "requiredRerenderJobs": [
       {
         "frameRange": {
@@ -330,7 +330,7 @@
         "reason": "layer content and placement are unchanged"
       }
     ],
-    "revisedCompositionHash": "3ab6515e82d87cd02a2dc5bbfa3814711438332cfb2d1f7079386ae7ab299388",
+    "revisedCompositionHash": "354e8528239487349ac3b962e1ce1f33004fa697c30bbb52f94ed45fc8341072",
     "revisionKind": "container",
     "schemaVersion": "1.0.0",
     "stitchPlan": {

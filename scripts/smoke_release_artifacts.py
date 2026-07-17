@@ -89,7 +89,7 @@ def smoke_python(python: Path, root: Path) -> dict[str, object]:
     mcp = run([str(python), "-m", "vibeedit.cli", "mcp"], input_value=requests).stdout.splitlines()
     responses = [json.loads(line) for line in mcp]
     tools = responses[1]["result"]["tools"]
-    if len(tools) != 10 or not responses[2]["result"]["structuredContent"]:
+    if len(tools) != 11 or not responses[2]["result"]["structuredContent"]:
         raise RuntimeError("clean wheel MCP smoke failed")
 
     catalog = run_json([str(python), "-m", "vibeedit.cli", "catalog", "open", "--no-browser", "--json"])

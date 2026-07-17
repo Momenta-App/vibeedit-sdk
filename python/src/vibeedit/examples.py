@@ -163,11 +163,17 @@ def _generate_declared_sources(root: Path, spec) -> None:
     sources = root / "sources"
     sources.mkdir(exist_ok=True)
     duration = spec["durationFrames"] / (spec["canvas"]["frameRate"]["numerator"] / spec["canvas"]["frameRate"]["denominator"])
+    video_index = 0
     for source in spec["sources"]:
         path = root / source["uri"]
         if source["kind"] == "video":
-            pattern = "testsrc2" if source["id"].endswith("a") or source["id"] in {"source", "subject"} else "smptebars"
-            _run([_ffmpeg(), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", f"{pattern}=size={spec['canvas']['width']}x{spec['canvas']['height']}:rate=30:duration={duration:.6f}", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(path)])
+            if spec["id"] == "fan-edit":
+                source_filter = f"testsrc2=size={spec['canvas']['width']}x{spec['canvas']['height']}:rate=30:duration={duration:.6f},hue=h={video_index * 47}:s=1.35,eq=contrast=1.1:brightness=-0.04"
+            else:
+                pattern = "testsrc2" if source["id"].endswith("a") or source["id"] in {"source", "subject"} else "smptebars"
+                source_filter = f"{pattern}=size={spec['canvas']['width']}x{spec['canvas']['height']}:rate=30:duration={duration:.6f}"
+            _run([_ffmpeg(), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", source_filter, "-c:v", "libx264", "-pix_fmt", "yuv420p", str(path)])
+            video_index += 1
         if source["kind"] == "audio":
             _write_pulse_audio(path, spec["durationFrames"], tuple(regular_beat_frames(bpm=120, duration_frames=spec["durationFrames"], frame_rate_numerator=30)))
 

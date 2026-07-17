@@ -196,3 +196,27 @@
 - Regression status: focused revision and mixed-render tests pass 22/22 before the integrated gate.
 - Decision: keep all five system improvements and the stress harness/evidence.
 - Next question: reduce the remaining full-sequence final encode for bounded motion changes, and pursue transition reuse only with a final-encoded GOP design that beats the clean control.
+
+## 2026-07-17 — five-clip fan-edit revisions and retained-audio tail execution
+
+- Commit: working tree after `9d61e7a`.
+- Hypothesis: a canonical fan edit should support more than two clips and should remove a final moment without re-encoding its approved video prefix or drifting retained music/SFX.
+- User-style task: create a hook/setup/build/drop/aftershock edit, then add and remove stutter, tighten a transition with valid source handles, add/remove an accent, rebalance music/drop impact, remove the aftershock, and submit a no-op revision.
+- Backend/environment: Python/FFmpeg, five generated H.264 sources plus explicit WAV music and procedural SFX, 320×180/30 fps, macOS Apple Silicon source mode.
+- Change: the media renderer now validates and executes arbitrary adjacent clip chains containing clean cuts and explicit transition overlaps. Effect output is normalized to the exact requested duration. Scene-tail execution can safely trim the retained last clip, packet-copy the approved video prefix, rebuild revised audio, and write provenance with separate video reuse and audio-remix accounting.
+- Revision evidence: nine retained fan-edit outputs all pass stream/duration verification. Effect and transition changes correctly use clean fallback; three audio revisions reuse all 180 video frames; aftershock removal reuses all 150 retained video frames and remixes frames 0–149; the no-op copies the verified artifact.
+- Quality: audio is exact to the clean render with zero sample delta and 1.0 correlation. The removed-tail video is exact to the approved prior prefix. It is not decoded-pixel-identical to an independently shortened H.264 encode because GOP decisions change; SSIM against that clean encode is 0.998943.
+- Three-trial audio-rebalance result: 0.220953s, 0.221093s, 0.222488s incremental (0.221511s mean) versus 0.363782s, 0.358617s, 0.361693s clean (0.361364s mean), 1.631356× speedup.
+- Three-trial retained-audio tail result: 0.334682s, 0.323580s, 0.323500s incremental (0.327254s mean) versus 0.316513s, 0.317779s, 0.317903s clean (0.317399s mean), 0.969884×. Keep for exact approved-prefix continuity and drift safety, not speed at this resolution.
+- Failure retained: the first comparison incorrectly treated clean-reencode pixel identity as the only valid equivalence basis. The evidence now reports both clean-render comparison and exact approved-artifact-prefix comparison.
+- Decision: keep. The flat review folder contains every output, CompositionSpec, provenance sidecar, two contact sheets, notes, and the machine report.
+- Next question: measure retained-audio tail removal at 1080p and pursue final-encoded GOP reuse for bounded effect/transition changes only if it beats canonical clean rendering.
+
+## 2026-07-17 — isolated rerun of the 16-round hybrid stress sequence
+
+- Hypothesis: the text/effect/transition/audio/container stress sequence remains correct under the stricter multi-clip timeline contract and fresh-cache timing controls.
+- Finding: the old transition revision moved only the transition object and no longer matched its clip overlap. The case now moves/trims the incoming clip and source handle consistently. A second finding showed static cache namespaces could reuse completed outputs from an earlier run and inflate speedups.
+- Change: every harness run and bounded-text benchmark trial now receives an isolated cache namespace. Prior completed renders cannot count as fresh incremental work.
+- Corrected three-trial results: bounded text 3.820514s incremental versus 6.905942s clean (1.807595×); SFX addition 0.228506s versus 6.723188s (29.422344×); cross-container AAC 0.242934s versus 6.692744s (27.549676×).
+- Quality: all 16 outputs pass verification and match their clean controls exactly for decoded video and audio with zero sample delta. Coverage includes text copy/style/add/move/remove, valid transition retiming, effect change/removal, SFX addition, music mix, container change, scene removal, broad rebuild, and no-op.
+- Decision: keep the stricter timeline case and isolated timing controls; discard the cache-contaminated 137.74× text figure.

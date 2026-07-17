@@ -1,7 +1,7 @@
 # Release readiness report
 
 Date: 2026-07-16
-Candidate: VibeEdit 0.1.0 beta 2 (unreleased)
+Candidate: VibeEdit 0.1.0 beta 3 (unreleased)
 Decision: **PUBLIC BETA APPROVED FOR TESTING AND COMMUNITY REVIEW**
 
 The candidate is a functional package, not a scaffold. It includes
@@ -15,7 +15,7 @@ explicitly macOS-native; SAM 3.1 remains quarantined rather than claimed.
 ## Current branch candidate verification
 
 Commit `1244d0ac02272204d84247cd3a8a371ae5db7612` was rebuilt as the distinct
-Python `0.1.0b2` and npm `0.1.0-beta.2` candidate after the Chromium/CEF
+Python `0.1.0b3` and npm `0.1.0-beta.3` candidate after the Chromium/CEF
 renderer hardening and text-catalog refinements. This is candidate verification
 only; no new registry or GitHub release was published. The already-public
 beta.1 remains immutable and retains its original artifacts.
@@ -102,8 +102,9 @@ No MoviePy or HyperFrames object is public API.
 
 ## Rendering and workflow evidence
 
-- FFmpeg renders generated media and one/two-source timelines with integer-frame
-  trim, seeded stutter, crossfade, external audio clips, gain, pan, fades,
+- FFmpeg renders generated media and arbitrary adjacent multi-clip timelines
+  with clean cuts and explicit overlaps, integer-frame trim, seeded stutter,
+  crossfade, external audio clips, gain, pan, fades,
   procedural SFX, constant-frame-rate normalization, and deterministic metadata.
 - Chromium renders seekable local HTML with escaped content and no network
   dependencies. Mixed source-video/HTML and VP9 alpha-overlay examples pass.
@@ -260,7 +261,7 @@ npm run types:check
 # passed
 
 npm run validate
-# {"ok":true,"version":"0.1.0-beta.2","catalogItems":443,"skills":44,"assets":65}
+# {"ok":true,"version":"0.1.0-beta.3","catalogItems":443,"skills":44,"assets":65}
 
 .venv/bin/python -m build --outdir /tmp/vibeedit-python-release
 # wheel and sdist built through isolated PEP 517 environments
@@ -284,14 +285,19 @@ components, exercised tracking interpolation, and reported zero npm audit
 vulnerabilities. MCP tests cover initialize, list, compact filtered catalog invocation, revision planning, and
 composition editing over the underlying library.
 
-Incremental revision execution also covers conservative video-only scene-tail
-removal. A 1080p/300-to-210-frame benchmark measured 4.797908 seconds for a
+Incremental revision execution also covers conservative scene-tail removal. A
+1080p/300-to-210-frame video-only benchmark measured 4.797908 seconds for a
 canonical full render versus 0.624118 seconds for verified stream-copy
 truncation (7.687504x). The revised artifact preserves the prior approved 210
 decoded frames exactly, reuses 2,810,506 encoded video bytes, verifies its
 provenance digest and final frame count, and remains visually aligned with a
-clean rerender at 0.993142 SSIM. Tails retaining audio and mid-scene removals
-remain outside the executable claim.
+clean rerender at 0.993142 SSIM. A separate five-clip fan-edit study verifies
+retained-audio tail removal: 150/150 video frames match the approved prefix,
+decoded audio matches the clean render with zero sample delta and 1.0
+correlation, and the clean re-encode scores 0.998943 SSIM. At 320×180 the audio
+rebuild makes this path 0.97× the clean-render latency, so it is retained for
+correctness and approval continuity rather than claimed as a small-fixture
+speedup. Mid-scene removals remain outside the executable claim.
 
 ## Definition-of-success audit
 
@@ -312,7 +318,7 @@ remain outside the executable claim.
 | 13 | Pass on verified platform | Face/body/tracking, macOS-native pose, portable ONNX objects, SAM 2.1 setup/inference, and structured degradation all operate; 0.1 documents pose as macOS-native. |
 | 14 | Pass for included assets | Included audio is VibeEdit-generated and hash/provenance/loudness/decode audited. |
 | 15 | Pass | Local macOS ARM64/Linux ARM64 and hosted Linux x86_64/Windows/macOS builds, installs, renders, catalog, skills, assets, license scans, and release-owner rights review pass. |
-| 16 | Pass | The unreleased npm `0.1.0-beta.2` and Python `0.1.0b2` identify the same candidate and share CompositionSpec 1.0.0 plus the catalog/skill compatibility policy. The existing public beta.1 retains its original immutable versions and artifacts. |
+| 16 | Pass | The unreleased npm `0.1.0-beta.3` and Python `0.1.0b3` identify the same candidate and share CompositionSpec 1.0.0 plus the catalog/skill compatibility policy. The existing public beta.1 retains its original immutable versions and artifacts. |
 | 17 | Pass for audited artifacts | No secrets, absolute developer paths, bundled weights, unapproved media, or undocumented downloads were found. |
 | 18 | Pass | This report records inventory, platforms, sizes, downloads, commands, gaps, and licensing concerns. |
 | 19 | Pass | The source repository is public and public beta publication is explicitly approved; website deployment and production rollout remain separate actions. |

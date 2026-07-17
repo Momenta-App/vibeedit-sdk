@@ -93,8 +93,6 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
         kinds = ", ".join(sorted({item["kind"] for item in unsupported}))
         raise MotionRenderError(f"mixed dispatcher cannot compose {kinds} inputs yet")
     video = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "video"]
-    if len(video) > 2:
-        raise MotionRenderError("mixed dispatcher supports at most two source-video clips")
     audio = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "audio"]
     transitions = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "transition"]
     if audio and not video:

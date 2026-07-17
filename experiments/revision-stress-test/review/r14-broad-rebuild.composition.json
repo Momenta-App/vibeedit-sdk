@@ -257,7 +257,7 @@
   },
   "cache": {
     "enabled": true,
-    "namespace": "revision-stress-rebuild-v4"
+    "namespace": "revision-stress-rebuild-1784305716152362000"
   },
   "audio": {
     "targetLufs": -16,

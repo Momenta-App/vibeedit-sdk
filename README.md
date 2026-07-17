@@ -5,7 +5,7 @@ It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
 motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
-This public repository contains the unreleased VibeEdit 0.1.0 beta 2 source
+This public repository contains the unreleased VibeEdit 0.1.0 beta 3 source
 candidate. The latest downloadable GitHub prerelease is the immutable beta 1.
 Both have been validated locally and on GitHub-hosted Linux, Windows, and macOS
 runners. These betas are for evaluation, testing, and community review; they are
@@ -139,10 +139,12 @@ and the reuse kind. Compatible container-only changes use stream-copy remuxing
 without decoding video. Audio-clip and procedural-SFX parameter revisions remix
 audio and stream-copy the encoded video. Bounded browser-text changes still
 encode the complete final frame sequence; transition-range replacement is
-planned but not yet claimed as executable. A conservative video-only scene-tail
-removal can stream-copy an exact number of approved prior video frames when all
-remaining layers are unchanged and every removed layer begins at or after the
-new end. Mid-scene removal and tails retaining audio remain planned.
+planned but not yet claimed as executable. A conservative scene-tail removal
+can stream-copy an exact number of approved prior video frames when all
+remaining visual layers are unchanged and every removed visual layer begins at
+or after the new end. If explicit music or SFX remain, VibeEdit rebuilds the
+revised audio mix instead of cutting AAC packets, then verifies the exact video
+frame count and prior artifact provenance. Mid-scene removal remains planned.
 
 Install the Python beta directly from its GitHub release asset:
 
@@ -183,9 +185,9 @@ Or build and install the exact local artifacts:
 
 ```bash
 uv build --out-dir dist/python
-uv tool install dist/python/vibeedit-0.1.0b2-py3-none-any.whl
+uv tool install dist/python/vibeedit-0.1.0b3-py3-none-any.whl
 npm pack --pack-destination dist/npm
-npm install ./dist/npm/vibeedit-0.1.0-beta.2.tgz
+npm install ./dist/npm/vibeedit-0.1.0-beta.3.tgz
 ```
 
 `setup` performs only explicitly requested work. It installs pinned browser and

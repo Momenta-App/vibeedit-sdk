@@ -1,6 +1,6 @@
 {
   "compositionId": "revision-stress-video",
-  "compositionSha256": "c7d0eea5a4bf0667992eb150c82e15377d0db78143c56e9815f318e79974f2d5",
+  "compositionSha256": "81506635e726194ece174e5b0755e12fb272d7c10ca31a4bfe1e733d207db179",
   "implementationVersion": "0.1.0b2",
   "output": {
     "bytes": 710428,
@@ -132,9 +132,9 @@
         {
           "frameRange": {
             "endFrame": 210,
-            "startFrame": 90
+            "startFrame": 102
           },
-          "hash": "b135fdffab4d46c7ba30efff3b23923ccf71c5d037b4af01490372e5a956f49c",
+          "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
           "id": "layer:clip-b",
           "kind": "video"
         },
@@ -220,7 +220,7 @@
           "kind": "sound_effect"
         },
         {
-          "hash": "5c2c2c515e8e674b931dd9eb8f25c165cf901312af4e0922b8870b3daba5d5e8",
+          "hash": "7f87ecf995a4997d0f77cba4897cffe46d98168584ff2d11b7b1e39c0923ed0e",
           "id": "composite:video",
           "kind": "composite"
         },
@@ -230,7 +230,7 @@
           "kind": "audio-mix"
         },
         {
-          "hash": "2d25785ab9171f1cd39c7aa03f5d2bfee1a45d196cecbb49f2122bdbda65307b",
+          "hash": "f6ea1f58356eefd4e411e4d95da96bb1e4266cc6de6efcbfcaed08a27ed48c56",
           "id": "output:final",
           "kind": "output"
         }
@@ -263,7 +263,7 @@
       "totalFrames": 210
     },
     "incrementalEligible": true,
-    "previousCompositionHash": "24220ed3c6a570bb63f44294a12e8f178446fdadd36c0a8722ded01238512f9b",
+    "previousCompositionHash": "8cf4c5aca58c93dde657d10aa0132091cc1d67566ee4e7cadeba3fec8314b88a",
     "requiredRerenderJobs": [
       {
         "frameRange": {
@@ -339,7 +339,7 @@
         "reason": "layer content and placement are unchanged"
       }
     ],
-    "revisedCompositionHash": "c7d0eea5a4bf0667992eb150c82e15377d0db78143c56e9815f318e79974f2d5",
+    "revisedCompositionHash": "81506635e726194ece174e5b0755e12fb272d7c10ca31a4bfe1e733d207db179",
     "revisionKind": "audio",
     "schemaVersion": "1.0.0",
     "stitchPlan": {

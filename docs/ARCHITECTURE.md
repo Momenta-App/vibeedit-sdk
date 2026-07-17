@@ -133,13 +133,15 @@ declaration was not manually edited.
 Execution support remains explicit per revision class: bounded browser-motion
 changes use content-addressed composite-frame reuse, compatible container-only
 changes stream-copy encoded packets, and explicit audio-clip/SFX parameter
-changes remix audio while stream-copying video. Video-only scene-tail removal
-stream-copies an exact packet-counted prefix only when the previous artifact and
-its provenance digest match, all retained layers are unchanged, and removed
-layers begin at or beyond the new end. The output frame count is independently
-verified before reuse is reported. Planned transition, mid-scene, retained-audio
-tail, and segmentation-dependent range replacement is not reported as
-executable.
+changes remix audio while stream-copying video. Scene-tail removal stream-copies
+an exact packet-counted video prefix only when the previous artifact and its
+provenance digest match, all retained visual layers are unchanged or safely
+trimmed at the new boundary, and removed visual layers begin at or beyond the
+new end. Retained explicit music/SFX is rebuilt from the revised timeline and
+encoded once rather than packet-truncated. The output frame count and clean
+audio sample count are independently verified before reuse is reported.
+Planned transition, mid-scene, and segmentation-dependent range replacement is
+not reported as executable.
 
 No-op or destination-only revisions copy only a provenance-verified prior
 artifact. Audio and container revision executors also require the previous

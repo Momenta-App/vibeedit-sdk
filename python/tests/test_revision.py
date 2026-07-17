@@ -157,6 +157,8 @@ def test_scene_tail_removal_stream_copies_exact_prior_prefix(tmp_path: Path):
     revised = json.loads(json.dumps(previous))
     revised["durationFrames"] = 48
     revised["timeline"]["tracks"][0]["items"] = [revised["timeline"]["tracks"][0]["items"][0]]
+    revised["timeline"]["tracks"][0]["items"][0]["placement"]["durationFrames"] = 48
+    revised["timeline"]["tracks"][0]["items"][0]["source"]["durationFrames"] = 48
     revised["timeline"]["tracks"][1]["items"] = []
     revised["verification"].update({"durationFrames": 48, "hasAudio": False})
     plan = plan_revision(previous, revised)
@@ -166,7 +168,7 @@ def test_scene_tail_removal_stream_copies_exact_prior_prefix(tmp_path: Path):
     retained_audio = json.loads(json.dumps(revised))
     retained_audio["timeline"]["tracks"][1]["items"] = [{"id": "bed", "kind": "sound_effect", "placement": {"startFrame": 0, "durationFrames": 48}, "soundEffectId": "vibeedit://sfx/impact-procedural", "params": {"frequency": 220}, "gainDb": -12, "variationSeed": 1, "avoidImmediateRepeat": True}]
     retained_audio["verification"]["hasAudio"] = True
-    assert plan_revision(previous, retained_audio)["executionStatus"] == "planned-not-yet-executed"
+    assert plan_revision(previous, retained_audio)["executionStatus"] == "verified-stream-copy-tail-audio-remix"
     previous_output = render(previous, tmp_path / "previous.mp4")
     with pytest.raises(ValueError, match="provenance"):
         render_revision(previous, revised, tmp_path / "a.mp4", tmp_path / "untrusted.mp4")
@@ -184,6 +186,55 @@ def test_scene_tail_removal_stream_copies_exact_prior_prefix(tmp_path: Path):
     assert record["work"]["framesReused"] == 48
     assert record["work"]["encodedVideoBytesReused"] > 0
     assert record["work"]["encodedAudioBytesReused"] == 0
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
+def test_scene_tail_removal_stream_copies_video_and_rebuilds_drift_free_audio(tmp_path: Path):
+    for output, source in (("a.mp4", "testsrc2=size=320x180:rate=30:duration=2"), ("b.mp4", "smptebars=size=320x180:rate=30:duration=2")):
+        subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", source, "-c:v", "libx264", "-pix_fmt", "yuv420p", str(tmp_path / output)], check=True)
+    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    previous["cache"] = {"enabled": False}
+    previous["sources"][0]["uri"] = str(tmp_path / "a.mp4")
+    previous["sources"][1]["uri"] = str(tmp_path / "b.mp4")
+    previous["timeline"]["tracks"][1]["items"].insert(0, {"id": "bed", "kind": "sound_effect", "placement": {"startFrame": 0, "durationFrames": 108}, "soundEffectId": "vibeedit://sfx/impact-procedural", "params": {"frequency": 220, "decay": 0.8}, "gainDb": -18, "variationSeed": 11, "avoidImmediateRepeat": True})
+    previous_output = render(previous, tmp_path / "previous-with-audio.mp4")
+    revised = json.loads(json.dumps(previous))
+    revised["durationFrames"] = 48
+    revised["timeline"]["tracks"][0]["items"] = [revised["timeline"]["tracks"][0]["items"][0]]
+    revised["timeline"]["tracks"][0]["items"][0]["placement"]["durationFrames"] = 48
+    revised["timeline"]["tracks"][0]["items"][0]["source"]["durationFrames"] = 48
+    revised["timeline"]["tracks"][1]["items"] = [revised["timeline"]["tracks"][1]["items"][0]]
+    revised["timeline"]["tracks"][1]["items"][0]["placement"]["durationFrames"] = 48
+    revised["timeline"]["tracks"][1]["items"][0]["gainDb"] = -12
+    revised["verification"].update({"durationFrames": 48, "hasAudio": True})
+    plan = plan_revision(previous, revised)
+
+    assert plan["executionStatus"] == "verified-stream-copy-tail-audio-remix"
+    assert plan["dirtyFrameRanges"] == []
+    assert plan["dirtyAudioRanges"] == [{"startFrame": 0, "endFrame": 48}]
+    assert plan["stitchPlan"]["strategy"] == "stream-copy-video-tail-audio-remix"
+    assert [job["kind"] for job in plan["requiredRerenderJobs"]] == ["video-tail-copy", "audio-mix", "remux"]
+
+    incremental = render_revision(previous, revised, previous_output, tmp_path / "incremental-with-audio.mp4")
+    reference = render(revised, tmp_path / "reference-with-audio.mp4")
+    record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text())
+
+    def decoded_audio(path: Path) -> bytes:
+        return subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", "0:a:0", "-f", "f32le", "-c", "pcm_f32le", "-"], capture_output=True, check=True).stdout
+
+    incremental_video = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(incremental), "-map", "0:v:0", "-f", "framemd5", "-"], capture_output=True, check=True).stdout
+    previous_prefix = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(previous_output), "-map", "0:v:0", "-frames:v", "48", "-f", "framemd5", "-"], capture_output=True, check=True).stdout
+    incremental_audio = array.array("f", decoded_audio(incremental))
+    reference_audio = array.array("f", decoded_audio(reference))
+    correlation = sum(left * right for left, right in zip(incremental_audio, reference_audio)) / math.sqrt(sum(value * value for value in incremental_audio) * sum(value * value for value in reference_audio))
+
+    assert b"\n".join(line for line in incremental_video.splitlines() if not line.startswith(b"#")) == b"\n".join(line for line in previous_prefix.splitlines() if not line.startswith(b"#"))
+    assert len(incremental_audio) == len(reference_audio)
+    assert correlation > 0.9999
+    assert record["work"]["framesRendered"] == 0
+    assert record["work"]["framesReused"] == 48
+    assert record["work"]["audioRangesRemixed"] == [{"startFrame": 0, "endFrame": 48}]
+    assert record["work"]["reuseKind"] == "stream-copy-video-tail-audio-remix"
 
 
 def test_audio_gain_revision_reuses_every_video_frame():

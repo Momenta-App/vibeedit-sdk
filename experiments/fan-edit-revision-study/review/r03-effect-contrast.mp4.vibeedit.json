@@ -1,0 +1,47 @@
+{
+  "cacheHit": false,
+  "cacheKey": "11083f2ea431c572a8180f0c5fa1a0a303e1eaac7cea53ab0ed1f1a5c619d0e9",
+  "compositionId": "fan-edit",
+  "compositionSha256": "f3707fb23ede46c3a4123f2507b07d75dce2aa9e2e12c700b531d50fc3e3d603",
+  "implementationVersion": "0.1.0b2",
+  "output": {
+    "bytes": 210766,
+    "path": "r03-effect-contrast.mp4",
+    "sha256": "5152a82fd132b57933af65818e822bc316b5e284530d3a71e39153ee66829962"
+  },
+  "runtimeVersions": {
+    "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "schemaVersion": "1.0.0",
+  "sourceIdentities": [
+    {
+      "algorithm": "sha256",
+      "value": "d9d12e11d09a583643a84a11fba9d2fb88b08aa256db73d8e98f03e2b4944e36"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "61acb9bf2194fff37c7011e76100bc5562cb00df319008a3cb83a368114139cf"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "928720b9452bc1be3e4534b18139006d6368223a71101f599febf5ca7bb7a8ab"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "27d7b6804012548a7a6857a9ba6a08082b9440bd1438c2e35b1a1478dff8a3a0"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "99d266ada9a9d311a0e64aeb66e8e884b2d48b3898d9b8b0833c64c556c51e94"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "c418d75fe256f08572fc9a8f2b4b73c81bc6ad871d1ec204799a6f8f6a9d6a50"
+    }
+  ],
+  "work": {
+    "framesRendered": 180,
+    "framesReused": 0,
+    "reuseKind": "none"
+  }
+}
