@@ -1,7 +1,7 @@
 {
   "compositionId": "fan-edit",
   "compositionSha256": "4067e6f321d11b00de88cc4c580ef0dc603253818776900b0041dea0d149798f",
-  "implementationVersion": "0.1.0b2",
+  "implementationVersion": "0.1.0b3",
   "output": {
     "bytes": 213493,
     "path": "r05-rebalance-audio.mp4",

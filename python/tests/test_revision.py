@@ -237,6 +237,20 @@ def test_scene_tail_removal_stream_copies_video_and_rebuilds_drift_free_audio(tm
     assert record["work"]["reuseKind"] == "stream-copy-video-tail-audio-remix"
 
 
+def test_final_clip_trim_requires_clean_render_until_b_frame_boundary_is_proven():
+    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    revised = json.loads(json.dumps(previous))
+    revised["durationFrames"] = 102
+    revised["timeline"]["tracks"][0]["items"][1]["placement"]["durationFrames"] = 54
+    revised["timeline"]["tracks"][0]["items"][1]["source"]["durationFrames"] = 54
+    revised["verification"]["durationFrames"] = 102
+    plan = plan_revision(previous, revised)
+
+    assert plan["revisionKind"] == "full"
+    assert plan["executionStatus"] == "full-render-required"
+    assert plan["expectedReuse"]["reusedFrames"] == 0
+
+
 def test_audio_gain_revision_reuses_every_video_frame():
     previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
     revised = json.loads(json.dumps(previous))

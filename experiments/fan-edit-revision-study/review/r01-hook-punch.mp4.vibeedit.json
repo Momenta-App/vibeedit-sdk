@@ -1,9 +1,9 @@
 {
   "cacheHit": false,
-  "cacheKey": "29af09962af3661f1fd0696e3b8c8d772e56367d8ec3e915b66e63458f813c51",
+  "cacheKey": "cf43a8c823cec4d1e80f569c17beffa1a360c3047a201e81880dfb6231bd1a7d",
   "compositionId": "fan-edit",
   "compositionSha256": "7cd263a34b79f29bbc6d6831bf1e5e7c83f772f556fa3c7d311db1ed5e6a6fc0",
-  "implementationVersion": "0.1.0b2",
+  "implementationVersion": "0.1.0b3",
   "output": {
     "bytes": 218235,
     "path": "r01-hook-punch.mp4",

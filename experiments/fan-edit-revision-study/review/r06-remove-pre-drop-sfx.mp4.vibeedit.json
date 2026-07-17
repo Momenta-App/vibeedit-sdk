@@ -1,7 +1,7 @@
 {
   "compositionId": "fan-edit",
   "compositionSha256": "de7ed19bde8df46fed7ada79af17f974e3083e7930d07f80a0f91771018ea5e0",
-  "implementationVersion": "0.1.0b2",
+  "implementationVersion": "0.1.0b3",
   "output": {
     "bytes": 212258,
     "path": "r06-remove-pre-drop-sfx.mp4",
