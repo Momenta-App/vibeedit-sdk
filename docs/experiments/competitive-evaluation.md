@@ -7,15 +7,15 @@ adversarial audit are complete.
 
 ## Status
 
-- VibeEdit baseline output: correct, but the timing run is superseded pending an
-  immutable post-fix rerun.
+- VibeEdit immutable clean-commit baseline: complete and integrity-verified.
 - video-use retained-harness run: complete and integrity-verified.
 - Remotion identical-task run: complete; native and manual paths separated.
 - HyperFrames identical-task run: complete but not strictly comparable because
   every output has 5.333 ms of container/audio duration drift.
-- Blind evaluation: in progress.
-- Adversarial audit: first pass complete; one evidence blocker remains.
-- Comparative winner claim: not available.
+- Blind evaluation: complete.
+- Adversarial audit: second pass complete; evidence blockers closed.
+- Comparative conclusion: VibeEdit leads native revision capability; the
+  video-use-associated external FFmpeg output leads blind source fidelity.
 
 ## Reproduction contract
 
@@ -59,6 +59,19 @@ decode is avoided, while the music source is necessarily decoded for the remix.
 Agent-token and retry fields remain null because this baseline was created by
 the supervising implementation session rather than a blinded competitor agent.
 It is a render-engine baseline, not yet a complete agent-experience score.
+
+The replacement run is bound to clean commit
+`2cc17d6d30aefa4d8cc823ed5b50edc323d23d77`. Its initial render took 9.140121
+seconds. Full revised samples were 9.001264, 9.106775, and 9.083458 seconds
+(9.063833-second mean); incremental samples were 0.275100, 0.266511, and
+0.276134 seconds (0.272581-second mean), a descriptive 33.251835x within-run
+speedup. It reports 0 rendered and 300 reused frames, 7,225,515 reused encoded
+video bytes, and only the video source decode avoided. Output verification and
+decoded stream equivalence passed. The manifest independently verified all 15
+files before the directory was made read-only. Result SHA-256:
+`fbe0fcd18949079d6e49dfcb72bcba5d404e6f0ca9a688f13712210958feba68`;
+manifest SHA-256:
+`6d012a9b607be3cedecc85c6ffb5df1df7a95a7e9de7481d01c907f656b48b0e`.
 
 ## Competitor repository research
 
@@ -153,6 +166,9 @@ full reference exactly, were 10.000 seconds, and applied +6 dB. A supervising
 probe reproduced full-versus-manual frame/audio equality. The manual path is an
 external optimization baseline, not a Remotion feature; native Remotion AAC
 required finishing because its direct output carried 10.048 seconds of padding.
+The retained project, logs, probes, and outputs were then sealed read-only under
+a verified evidence manifest with SHA-256
+`6462e723437238777c8108cef9633986d97c37e98f29ed2d2ac0ff7ff79e5a1b`.
 
 ### HyperFrames
 
@@ -190,6 +206,36 @@ reported 10.005333-second container/audio duration. Under the task's strict
 no-drift wording this run is recorded as near-valid and non-comparable. Four
 failed setup, check, and optimization attempts are retained; the sub-0.31-second
 path is not a native HyperFrames revision capability.
+The retained project, logs, probes, and outputs were then sealed read-only under
+a verified evidence manifest with SHA-256
+`ca6d0ac96b155f76f2098fd447698dd08e70f22b49498dc595ba9f7a8ec0bf03`.
+
+## Blind evaluation
+
+A separate evaluator received metadata-scrubbed files labeled only `quartz`,
+`ember`, `lumen`, and `nova`, plus the source assets and task. It did not receive
+system reports or identities. After the verdict, labels were mapped back as:
+quartz = video-use-associated external FFmpeg baseline, ember = VibeEdit,
+lumen = HyperFrames, and nova = Remotion.
+
+The strict blind ranking was quartz, ember, lumen, nova. Video VMAF scores were
+97.2812, 96.4893, 94.2928, and 60.8566 respectively; SSIM was 0.997991,
+0.996430, 0.992913, and 0.975586. Quartz most closely matched the mono -6 dB
+reference. Ember applied correct equal-power stereo gain with -0.0126 dB
+canonical error and 0.999930 correlation. Lumen was about +3 dB hot in canonical
+stereo power, began with a near-silent 1024-sample frame, and retained its
+10.005333-second duration drift. Nova's audio was excellent, but its decoded
+picture showed a severe visible luminance/color mismatch consistent with a
+`yuvj420p` range-handling error. All four decoded without errors.
+
+This yields no single overall winner. VibeEdit is the strongest native
+human-revision system in this task and produced the fastest valid native
+revision, but it placed second on blind source fidelity. The video-use-associated
+winner is an external FFmpeg implementation rather than a native video-use EDL
+capability. Determinism was evaluated separately from retained repeated outputs;
+error clarity was unavailable to the blind reviewer. The blind report and metric
+artifacts were sealed read-only under manifest SHA-256
+`b82e28ed0388553e5bc8ae6f716c176563ab00188445884c7accc4a9ce9afda7`.
 
 ## Interpretation rules
 
@@ -198,12 +244,16 @@ path is not a native HyperFrames revision capability.
   systems in v1.
 - Do not compare the research-only Remotion smoke timing with VibeEdit timings.
 - Do not compare the research-only HyperFrames smoke timing with VibeEdit timings.
-- Do not infer visual preference: the revision is intended to preserve video,
-  and blind evaluation has not run.
+- Treat blind source fidelity separately from native revision capability and
+  agent experience.
 - Do not infer a winner from routing or preflight quality alone.
 - Exact stream equality is measured against each system's own full revised
   reference, while cross-system output quality is evaluated separately.
 - Competitor source and generated work remain outside release archives.
+- The task wording requires no duration drift, but VibeEdit's general verifier
+  permits up to one frame; this run's VibeEdit output was exactly 10.000000
+  seconds. A future protocol revision should enforce one numeric cross-system
+  container, video, and audio duration rule in a shared verifier.
 
 ## Adversarial audit
 
@@ -215,7 +265,10 @@ and the video-use timing report lacked a retained harness and raw command logs.
 The VibeEdit harness now requires a new run directory, captures source and
 environment state, hashes every result artifact, and refuses overwrite. The
 video-use retained-harness rerun completed and its manifest verified; the
-remaining evidence-chain blocker is the post-fix immutable VibeEdit rerun.
+post-fix immutable VibeEdit rerun is complete. The second pass rehashed both
+immutable runs, reproduced stream equality and reuse, and closed both blockers.
+Remotion and HyperFrames evidence was subsequently manifested and sealed
+read-only as well.
 
 The audit also found and prompted two SDK corrections: audio revision provenance
 no longer claims music decoding was avoided, and render-graph downstream nodes
