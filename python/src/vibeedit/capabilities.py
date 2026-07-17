@@ -52,7 +52,7 @@ def doctor() -> JSONObject:
     sam = _sam_provider()
     capabilities.extend([
         Capability("sam.2.1", bool(sam and sam[1]["capability"] == "sam.2.1"), segmentation.provider if sam and sam[1]["capability"] == "sam.2.1" else None, sam[1]["version"] if sam and sam[1]["capability"] == "sam.2.1" else None, "SAM 2.1 through the checksum-declared optional provider" if sam and sam[1]["capability"] == "sam.2.1" else "Approved checksum-pinned SAM 2.1 provider is not installed", None if sam and sam[1]["capability"] == "sam.2.1" else 'Install with: pip install "vibeedit[sam]"; then run vibeedit setup --sam.'),
-        Capability("sam.3.1", bool(sam and sam[1]["capability"] == "sam.3.1"), segmentation.provider if sam and sam[1]["capability"] == "sam.3.1" else None, sam[1]["version"] if sam and sam[1]["capability"] == "sam.3.1" else None, "SAM 3.1 through a user-configured checksum-declared provider" if sam and sam[1]["capability"] == "sam.3.1" else "SAM 3.1 is quarantined until code, weights, checksum, license, and platform validation pass", None if sam and sam[1]["capability"] == "sam.3.1" else "No supported automatic setup is published yet."),
+        Capability("sam.3.1", False, None, None, "SAM 3.1 is quarantined until code, weights, checksum, license, and platform validation pass", "No supported automatic setup is published yet."),
     ])
     available = [item.id for item in capabilities if item.available]
     unavailable = [item.id for item in capabilities if not item.available]

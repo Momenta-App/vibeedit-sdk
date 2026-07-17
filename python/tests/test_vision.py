@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from vibeedit.data import data_path
+from vibeedit.capabilities import doctor
 from vibeedit.vision import CapabilityRouter
 from vibeedit.vision import Detection
 from vibeedit.vision import _assign_track_ids
@@ -159,3 +160,19 @@ def test_external_sam_requires_checksum_manifest(tmp_path: Path, monkeypatch: py
     monkeypatch.setenv("VIBEEDIT_SAM_RUNNER", str(runner))
     monkeypatch.setenv("VIBEEDIT_SAM_MODEL_MANIFEST", str(manifest))
     assert next(item for item in CapabilityRouter().status() if item["id"] == "vision.segmentation")["available"] is False
+
+
+def test_external_sam31_label_cannot_bypass_quarantine(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    runner = tmp_path / "sam31-runner"
+    runner.write_text("#!/bin/sh\nexit 0\n")
+    runner.chmod(0o755)
+    manifest = tmp_path / "sam31-model.json"
+    manifest.write_text(__import__("json").dumps({"id": "unverified-sam-3.1", "capability": "sam.3.1", "version": "3.1", "license": "declared-but-unaudited", "weightsSha256": "a" * 64}))
+    monkeypatch.setenv("VIBEEDIT_SAM_RUNNER", str(runner))
+    monkeypatch.setenv("VIBEEDIT_SAM_MODEL_MANIFEST", str(manifest))
+
+    statuses = {item["id"]: item for item in CapabilityRouter().status()}
+    assert statuses["vision.segmentation"]["available"] is False
+    capabilities = {item["id"]: item for item in doctor()["capabilities"]}
+    assert capabilities["sam.3.1"]["available"] is False
+    assert capabilities["sam.3.1"]["provider"] is None

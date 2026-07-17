@@ -152,3 +152,13 @@
 - Result quality: the revised graph changes `artifact:sam-mask` and `layer:subject`; the dirty range remains exactly frames 0–59. Replacing the beat-analysis music source also changes `artifact:beats` without requiring a manual artifact edit. Focused revision tests pass 16/16.
 - Decision: keep the correctness fix. Do not expose artifact execution until the canonical renderer consumes the declared mask/tracking artifacts rather than relying on example-specific preprocessing.
 - Next question: unify mask consumption with the canonical render path so bounded artifact revisions can be benchmarked against real output rather than planner metadata alone.
+
+## 2026-07-17 — SAM 3.1 quarantine routing audit
+
+- Commit: working tree after `1ae0450`.
+- Hypothesis: a locally declared SAM 3.1 manifest must not bypass the product's explicit quarantine.
+- Finding: the external-provider validator accepted either `sam.2.1` or `sam.3.1`; a checksum-shaped SAM 3.1 manifest could make generic segmentation and doctor capability output appear available despite the documented quarantine.
+- Change: provider registration now accepts only `sam.2.1`. Doctor reports SAM 3.1 as unconditionally unavailable with no provider or version until the quarantine requirements are deliberately changed in source.
+- Regression status: focused vision tests pass 12/12 with the vision and test extras, including approved external SAM 2.1 execution/cache reuse and rejected SAM 3.1 registration.
+- Decision: keep. No SAM 3.1 code, weights, setup, or support claim was added.
+- Next question: improve approved SAM 2.1 revision reuse only through real inference and canonical mask-consumption evidence.
