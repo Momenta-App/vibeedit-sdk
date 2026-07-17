@@ -148,6 +148,7 @@
 - User-style task: retrack a subject whose SAM mask depends on the tracking artifact, without directly editing the mask or subject layer objects.
 - Finding: graph hashes propagated correctly, but the reuse list compared artifact and layer objects directly. It incorrectly listed the unchanged mask and subject layer as reusable.
 - Change: dependency-invalidated masks are now explicit `changedArtifacts`; both those masks and every referencing layer are excluded from reusable claims. Required jobs carry both the directly changed tracking artifact and its dependent mask.
-- Result quality: the revised graph changes `artifact:sam-mask` and `layer:subject`; the dirty range remains exactly frames 0–59. Focused revision tests pass 15/15.
+- Follow-up finding: analysis artifacts declared `sourceIds`, but their graph hashes and edges omitted those sources. Source hashes and explicit source-to-analysis edges now invalidate derived analysis when source identity changes.
+- Result quality: the revised graph changes `artifact:sam-mask` and `layer:subject`; the dirty range remains exactly frames 0–59. Replacing the beat-analysis music source also changes `artifact:beats` without requiring a manual artifact edit. Focused revision tests pass 16/16.
 - Decision: keep the correctness fix. Do not expose artifact execution until the canonical renderer consumes the declared mask/tracking artifacts rather than relying on example-specific preprocessing.
 - Next question: unify mask consumption with the canonical render path so bounded artifact revisions can be benchmarked against real output rather than planner metadata alone.

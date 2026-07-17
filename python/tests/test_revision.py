@@ -264,6 +264,20 @@ def test_tracking_change_transitively_invalidates_dependent_mask_and_layer():
     assert previous_graph["layer:subject"] != revised_graph["layer:subject"]
 
 
+def test_source_change_invalidates_dependent_analysis_graph_node():
+    previous = json.loads(data_path("examples", "beat-synchronized", "composition.json").read_text())
+    revised = json.loads(json.dumps(previous))
+    next(source for source in revised["sources"] if source["id"] == "music")["identity"]["value"] = "replacement-source-v2"
+
+    plan = plan_revision(previous, revised)
+    previous_graph = {node["id"]: node["hash"] for node in plan_revision(previous, previous)["dependencyGraph"]["nodes"]}
+    revised_graph = {node["id"]: node["hash"] for node in plan["dependencyGraph"]["nodes"]}
+
+    assert any(item["id"] == "beats" and item["change"] == "dependency-invalidated" for item in plan["changedArtifacts"])
+    assert previous_graph["artifact:beats"] != revised_graph["artifact:beats"]
+    assert {"from": "source:music", "to": "artifact:beats", "reason": "analysis artifact depends on source media"} in plan["dependencyGraph"]["edges"]
+
+
 def test_container_only_revision_plans_stream_copy_remux():
     previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
     revised = json.loads(json.dumps(previous))

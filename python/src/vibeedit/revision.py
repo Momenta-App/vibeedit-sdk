@@ -75,6 +75,7 @@ def build_render_graph(spec: JSONObject) -> JSONObject:
         artifact_hashes[item["id"]] = _hash({
             "artifact": item,
             "dependencies": [artifact_hashes[item["trackingArtifactId"]]] if item.get("trackingArtifactId") in artifact_hashes else [],
+            "sources": [source_hashes[identifier] for identifier in item.get("sourceIds", []) if identifier in source_hashes],
         })
     items = [item for track in spec["timeline"]["tracks"] for item in track["items"]]
     layer_hashes = {
@@ -106,6 +107,12 @@ def build_render_graph(spec: JSONObject) -> JSONObject:
         {"from": f"artifact:{artifact_id}", "to": f"layer:{item['id']}", "reason": "layer references cached artifact"}
         for item in _items_by_id(spec).values()
         for artifact_id in _item_artifact_ids(item)
+    )
+    edges.extend(
+        {"from": f"source:{source_id}", "to": f"artifact:{item['id']}", "reason": "analysis artifact depends on source media"}
+        for _, item in artifacts
+        for source_id in item.get("sourceIds", [])
+        if source_id in source_hashes
     )
     edges.extend(
         {"from": f"artifact:{item['trackingArtifactId']}", "to": f"artifact:{item['id']}", "reason": "mask depends on tracking"}
@@ -259,6 +266,14 @@ def _changed_artifacts(previous: JSONObject, revised: JSONObject) -> list[JSONOb
                 frame_range = {"startFrame": item["startFrame"], "endFrame": item["startFrame"] + item["durationFrames"]}
             result.append({"id": identifier, "kind": kind, "change": "added" if identifier not in before else "removed" if identifier not in after else "modified", "frameRange": frame_range, "reason": "artifact content, parameters, model, runtime, or provenance changed"})
     invalidated = {item["id"] for item in result}
+    previous_sources = {item["id"]: item for item in previous["sources"]}
+    revised_sources = {item["id"]: item for item in revised["sources"]}
+    changed_sources = {identifier for identifier in previous_sources.keys() | revised_sources.keys() if previous_sources.get(identifier) != revised_sources.get(identifier)}
+    for item in revised.get("artifacts", {}).get("analysis", []):
+        if not changed_sources & set(item.get("sourceIds", [])) or item["id"] in invalidated:
+            continue
+        result.append({"id": item["id"], "kind": "analysis", "change": "dependency-invalidated", "frameRange": None, "reason": "analysis depends on changed source media"})
+        invalidated.add(item["id"])
     for item in revised.get("artifacts", {}).get("masks", []):
         if item.get("trackingArtifactId") not in invalidated or item["id"] in invalidated:
             continue

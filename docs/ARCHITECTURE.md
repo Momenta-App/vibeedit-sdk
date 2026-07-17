@@ -119,7 +119,10 @@ layers, video composites, audio mixes, and final output stable content hashes.
 Invalidation follows artifact dependencies transitively: a changed tracking
 artifact invalidates masks derived from it and every layer referencing those
 masks. Dependency-invalidated artifacts and layers are excluded from reusable
-claims even when their own serialized objects are unchanged.
+claims even when their own serialized objects are unchanged. Analysis
+`sourceIds` also contribute source hashes and explicit source-to-artifact graph
+edges, so replacing media invalidates derived analysis even if its artifact
+declaration was not manually edited.
 Execution support remains explicit per revision class: bounded browser-motion
 changes use content-addressed composite-frame reuse, compatible container-only
 changes stream-copy encoded packets, and explicit audio-clip/SFX parameter
