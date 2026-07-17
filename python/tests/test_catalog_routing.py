@@ -25,3 +25,16 @@ def test_catalog_search_rejects_invalid_limit():
         assert str(error) == "catalog search limit must be at least 1"
         return
     raise AssertionError("expected invalid limit to fail")
+
+
+def test_catalog_search_distinguishes_workflows_templates_and_mask_intent():
+    expected = {
+        "show several transitions in one edit": "vibeedit://template/multiple-transitions",
+        "add typography to my fan edit": "vibeedit://skill/fanedit-text",
+        "route the complete fan edit workflow": "vibeedit://skill/vibeedit-fan-edit",
+        "mix Python media and HTML text": "vibeedit://template/mixed-source-html",
+        "choose and place transitions for me": "vibeedit://skill/vibeedit-transition-editor",
+        "plan sound design for the whole edit": "vibeedit://skill/vibeedit-sound-design",
+        "apply an effect only inside the segmentation": "vibeedit://template/mask-subject-effect",
+    }
+    assert {query: search_catalog(query, limit=1)[0]["id"] for query in expected} == expected

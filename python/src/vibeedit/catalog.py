@@ -80,8 +80,10 @@ def _query_tokens(query: str) -> list[str]:
         "person": ["subject"], "scenes": ["transitions"], "sound": ["audio", "sfx"],
         "transition": ["transitions"], "reframe": ["framing", "tracking"], "detected": ["tracking"],
         "segment": ["segmentation", "sam"], "masks": ["mask"], "cutouts": ["segmentation"],
+        "several": ["multiple"], "inside": ["mask", "confined"], "route": ["orchestration"],
+        "transitions": ["transition"], "mix": ["mixed"], "edits": ["edit"],
     }
-    ignored = {"a", "add", "an", "and", "around", "between", "for", "from", "give", "in", "into", "it", "make", "my", "of", "on", "only", "over", "simple", "so", "the", "this", "to", "use", "with"}
+    ignored = {"a", "add", "an", "and", "around", "between", "for", "from", "give", "in", "into", "it", "make", "me", "my", "of", "on", "one", "only", "over", "simple", "so", "the", "this", "to", "use", "with"}
     original = [token for token in re.findall(r"[a-z0-9]+", query.casefold()) if token not in ignored]
     return list(dict.fromkeys(token for original_token in original for token in [original_token, *aliases.get(original_token, [])]))
 
@@ -91,11 +93,11 @@ def _unsupported_query(tokens: list[str]) -> bool:
 
 
 def _search_text(item: JSONObject) -> str:
-    return " ".join([item["id"], item["name"], item["category"], *item.get("tags", []), item["description"], *item.get("prompts", [])]).casefold().replace("-", " ")
+    return " ".join([item["id"], item["name"], item["category"], *item.get("tags", []), *item.get("backends", []), item["description"], *item.get("prompts", [])]).casefold().replace("-", " ")
 
 
 def _search_score(item: JSONObject, tokens: list[str]) -> int:
-    identity = " ".join([item["id"], item["name"], item["category"], *item.get("tags", [])]).casefold().replace("-", " ")
+    identity = " ".join([item["id"], item["name"], item["category"], *item.get("tags", []), *item.get("backends", [])]).casefold().replace("-", " ")
     details = " ".join([item["description"], *item.get("prompts", [])]).casefold().replace("-", " ")
     matched = [token for token in tokens if token in identity or token in details]
     if not matched:
@@ -109,8 +111,16 @@ def _search_score(item: JSONObject, tokens: list[str]) -> int:
         score += 12
     if item["category"] == "template" and any(token in tokens for token in ("create", "edit", "example", "workflow", "combine", "mix", "layer")):
         score += 8
-    if item["category"] == "skill" and any(token in tokens for token in ("choose", "plan", "route", "workflow")):
+    if item["category"] == "skill" and any(token in tokens for token in ("choose", "plan", "route", "orchestration")):
+        score += 16
+    elif item["category"] == "skill" and "workflow" in tokens:
         score += 7
+    if item["category"] == "skill" and "fan" in tokens and "typography" in tokens:
+        score += 7
+    if item["category"] == "skill" and "complete" in tokens and "orchestration" in details:
+        score += 6
+    if item["category"] == "skill" and "place" in tokens and "transition" in tokens and "editor" in identity:
+        score += 4
     if item["category"] in {"template", "skill"} and any(token in tokens for token in ("mask", "segmentation", "tracking", "sam")):
         score += 7
     if item["category"] == "transition" and any(token in tokens for token in ("transition", "transitions", "crossfade")):

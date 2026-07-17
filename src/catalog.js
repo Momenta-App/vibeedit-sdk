@@ -46,8 +46,8 @@ export function compactCatalogResult(item, query) {
 }
 
 function queryTokens(query) {
-  const aliases = { browser: ["html"], chromium: ["html"], css: ["html"], subtitles: ["captions"], subtitle: ["captions"], grade: ["color"], footage: ["video"], music: ["beat"], synchronized: ["beat"], follows: ["follow", "tracking"], follow: ["tracking"], person: ["subject"], scenes: ["transitions"], sound: ["audio", "sfx"], transition: ["transitions"], reframe: ["framing", "tracking"], detected: ["tracking"], segment: ["segmentation", "sam"], masks: ["mask"], cutouts: ["segmentation"] };
-  const ignored = new Set(["a", "add", "an", "and", "around", "between", "for", "from", "give", "in", "into", "it", "make", "my", "of", "on", "only", "over", "simple", "so", "the", "this", "to", "use", "with"]);
+  const aliases = { browser: ["html"], chromium: ["html"], css: ["html"], subtitles: ["captions"], subtitle: ["captions"], grade: ["color"], footage: ["video"], music: ["beat"], synchronized: ["beat"], follows: ["follow", "tracking"], follow: ["tracking"], person: ["subject"], scenes: ["transitions"], sound: ["audio", "sfx"], transition: ["transitions"], transitions: ["transition"], reframe: ["framing", "tracking"], detected: ["tracking"], segment: ["segmentation", "sam"], masks: ["mask"], cutouts: ["segmentation"], several: ["multiple"], inside: ["mask", "confined"], route: ["orchestration"], mix: ["mixed"], edits: ["edit"] };
+  const ignored = new Set(["a", "add", "an", "and", "around", "between", "for", "from", "give", "in", "into", "it", "make", "me", "my", "of", "on", "one", "only", "over", "simple", "so", "the", "this", "to", "use", "with"]);
   return [...new Set((query.toLocaleLowerCase().match(/[a-z0-9]+/g) ?? []).filter((token) => !ignored.has(token)).flatMap((token) => [token, ...(aliases[token] ?? [])]))];
 }
 
@@ -57,11 +57,11 @@ function unsupportedQuery(tokens) {
 }
 
 function searchText(item) {
-  return [item.id, item.name, item.category, ...(item.tags ?? []), item.description, ...(item.prompts ?? [])].join(" ").toLocaleLowerCase().replaceAll("-", " ");
+  return [item.id, item.name, item.category, ...(item.tags ?? []), ...(item.backends ?? []), item.description, ...(item.prompts ?? [])].join(" ").toLocaleLowerCase().replaceAll("-", " ");
 }
 
 function searchScore(item, tokens) {
-  const identity = [item.id, item.name, item.category, ...(item.tags ?? [])].join(" ").toLocaleLowerCase().replaceAll("-", " ");
+  const identity = [item.id, item.name, item.category, ...(item.tags ?? []), ...(item.backends ?? [])].join(" ").toLocaleLowerCase().replaceAll("-", " ");
   const details = [item.description, ...(item.prompts ?? [])].join(" ").toLocaleLowerCase().replaceAll("-", " ");
   const matched = tokens.filter((token) => identity.includes(token) || details.includes(token));
   if (!matched.length) return 0;
@@ -72,7 +72,10 @@ function searchScore(item, tokens) {
   return score
     + (identity.includes(phrase) ? 12 : 0)
     + (item.category === "template" && tokens.some((token) => ["create", "edit", "example", "workflow", "combine", "mix", "layer"].includes(token)) ? 8 : 0)
-    + (item.category === "skill" && tokens.some((token) => ["choose", "plan", "route", "workflow"].includes(token)) ? 7 : 0)
+    + (item.category === "skill" && tokens.some((token) => ["choose", "plan", "route", "orchestration"].includes(token)) ? 16 : item.category === "skill" && tokens.includes("workflow") ? 7 : 0)
+    + (item.category === "skill" && tokens.includes("fan") && tokens.includes("typography") ? 7 : 0)
+    + (item.category === "skill" && tokens.includes("complete") && details.includes("orchestration") ? 6 : 0)
+    + (item.category === "skill" && tokens.includes("place") && tokens.includes("transition") && identity.includes("editor") ? 4 : 0)
     + (["template", "skill"].includes(item.category) && tokens.some((token) => ["mask", "segmentation", "tracking", "sam"].includes(token)) ? 7 : 0)
     + (item.category === "transition" && tokens.some((token) => ["transition", "transitions", "crossfade"].includes(token)) ? 7 : 0)
     + (item.category === "sfx" && tokens.some((token) => ["sound", "audio", "sfx", "procedural"].includes(token)) ? 7 : 0);

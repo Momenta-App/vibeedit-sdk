@@ -66,6 +66,20 @@
 - Decision: keep.
 - Next question: measure route recovery and completed task success with independent agents after exact intent-mode classification improves the remaining template/workflow ties.
 
+## 2026-07-17 — routing intent and role pass
+
+- Commit: working tree after `46ac9b3`.
+- Hypothesis: general role cues can separate workflow skills, executable templates, and primitive catalog items without loading skill bodies or adding sentence-specific overrides.
+- User-style task: rerun the fixed 50-request suite across templates, fan-edit workflows, text, HTML, color, transitions, tracking, masks, sound, SAM, and unsupported intents.
+- Before/after: first-choice accuracy improves from 38/50 (76%) to 46/50 (92%); top-three recall improves from 92% to 98%.
+- Context behavior: compact top-five payloads average 2,410.4 bytes versus 2,406.42 before, an effectively unchanged 3.98-byte increase. Search still loads zero skill bodies and uses one call per request.
+- Change: Python and JavaScript now share aliases for role-bearing language (`several`/`multiple`, transition singular/plural, `inside`/mask confinement, mixed media, edit intent, and orchestration) plus bounded skill/editor weighting for choose/plan/route requests. Backend names participate in matching.
+- Remaining misses: three are underspecified same-look color-family choices (cinematic versus analog/music-video variants); one is a template-versus-segmentation-workflow tie. All but golden-hour remain in the top three. No benchmark-sentence override was added.
+- Regression status: Python routing/CLI/MCP tests pass 19/19, Node tests pass 31/31, and TypeScript checks pass.
+- Decision: keep.
+- Remaining limitation: final task success and wrong-route recovery after tool execution remain unmeasured by this retrieval-only suite.
+- Next question: evaluate completed task outcomes with the router contract frozen, rather than optimizing exact IDs for ambiguous style wording.
+
 ## 2026-07-17 — container-only incremental remux
 
 - Commit: working tree after `c8602aa`.
