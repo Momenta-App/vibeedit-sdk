@@ -27,7 +27,7 @@ def test_catalog_search_supports_token_efficient_results(capsys):
     assert main(["catalog", "search", "text", "--compact", "--limit", "2", "--json"]) == 0
     payload = json.loads(capsys.readouterr().out)
     assert len(payload) == 2
-    assert set(payload[0]) == {"id", "name", "category", "description", "preview"}
+    assert set(payload[0]) == {"id", "name", "intent", "category", "requiredCapability", "backends", "determinism", "parameterCount", "preview", "compatibility", "estimatedSetupCost", "confidence", "reason"}
 
 
 def test_examples_list_explains_requirements(capsys):

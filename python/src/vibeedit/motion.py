@@ -16,9 +16,11 @@ from functools import lru_cache
 from html.parser import HTMLParser
 from pathlib import Path
 
+from vibeedit.cache import cache_key, restore_cached_artifact, store_cached_artifact
 from vibeedit.data import data_path
 from vibeedit.ffmpeg import frame_stream_encoder, overlay_frame_stream_encoder, render_media
 from vibeedit.spec import JSONObject
+from vibeedit.version import VERSION
 
 
 class MotionRenderError(RuntimeError):
@@ -79,7 +81,7 @@ def motion_render_plan(spec: JSONObject) -> JSONObject:
     }
 
 
-def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str | Path = ".") -> Path:
+def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str | Path = ".", *, metrics: JSONObject | None = None) -> Path:
     unsupported = [
         item
         for track in spec["timeline"]["tracks"]
@@ -130,7 +132,20 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
             session = context.new_cdp_session(page)
             if video:
                 session.send("Emulation.setDefaultBackgroundColorOverride", {"color": {"r": 0, "g": 0, "b": 0, "a": 0}})
+            rendered_frames = 0
+            reused_frames = 0
             for frame in range(spec["durationFrames"]):
+                frame_file = Path(temporary) / f"motion-frame-{frame:08d}.png"
+                key = cache_key(
+                    "motion.composite_frame",
+                    _motion_frame_inputs(spec, frame, transparent=bool(video)),
+                    implementation_version=VERSION,
+                    runtime_versions={"playwright": _package_version("playwright"), "chromium": browser.version},
+                )
+                if spec.get("cache", {}).get("enabled", False) and restore_cached_artifact("motion.composite_frame", key, frame_file):
+                    encoder.write(frame_file.read_bytes())
+                    reused_frames += 1
+                    continue
                 _apply_persistent_frame(page, spec, frame, asset_urls["catalog"])
                 _settle_canonical_frames(page)
                 _settle_web_frames(page, spec, frame)
@@ -138,9 +153,42 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
                     raise MotionRenderError(f"browser motion component failed: {errors[0]}")
                 payload = _capture_fast_png(session)
                 encoder.write(payload)
+                rendered_frames += 1
+                if spec.get("cache", {}).get("enabled", False):
+                    frame_file.write_bytes(payload)
+                    store_cached_artifact("motion.composite_frame", key, frame_file)
             context.close()
             browser.close()
+            if metrics is not None:
+                metrics.update({"framesRendered": rendered_frames, "framesReused": reused_frames, "reuseKind": "content-addressed-composite-frames" if reused_frames else "none"})
         return destination
+
+
+def _motion_frame_inputs(spec: JSONObject, frame: int, *, transparent: bool) -> JSONObject:
+    active = [
+        {"trackOrder": track["order"], "item": item}
+        for track in spec["timeline"]["tracks"]
+        for item in track["items"]
+        if item["kind"] == "motion"
+        and item["placement"]["startFrame"] <= frame < item["placement"]["startFrame"] + item["placement"]["durationFrames"]
+    ]
+    return {
+        "contractVersion": 1,
+        "namespace": spec.get("cache", {}).get("namespace", "default"),
+        "canvas": spec["canvas"],
+        "frame": frame,
+        "transparent": transparent,
+        "activeMotionLayers": active,
+    }
+
+
+def _package_version(name: str) -> str:
+    from importlib.metadata import PackageNotFoundError, version
+
+    try:
+        return version(name)
+    except PackageNotFoundError:
+        return "unavailable"
 
 
 def _single_video_overlay_spec(spec: JSONObject, source: Path) -> JSONObject:

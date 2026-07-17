@@ -32,12 +32,15 @@ from vibeedit.ffmpeg import FFmpegRenderError
 from vibeedit.ffmpeg import FFmpegUnavailableError
 from vibeedit.ffmpeg import probe
 from vibeedit.render import render
+from vibeedit.revision import build_render_graph
+from vibeedit.revision import plan_revision
 from vibeedit.verify import verify_output
 from vibeedit.effects import random_frame_stutter_mapping
 from vibeedit.effects import register_video_effect_filter
 from vibeedit.transitions import crossfade_filter
 from vibeedit.transitions import register_transition_filter
 from vibeedit.catalog import inspect_catalog_item
+from vibeedit.catalog import compact_catalog_result
 from vibeedit.catalog import list_catalog
 from vibeedit.catalog import search_catalog
 from vibeedit.skills import check_skill
@@ -101,10 +104,12 @@ __all__ = [
     "VerificationReport",
     "VideoClip",
     "canonical_json",
+    "compact_catalog_result",
     "create_example",
     "apply_media_preset",
     "analyze_beats",
     "build_media_preset_plan",
+    "build_render_graph",
     "crossfade_filter",
     "composite_with_mask",
     "doctor",
@@ -119,6 +124,7 @@ __all__ = [
     "list_motion_components",
     "motion_render_plan",
     "probe",
+    "plan_revision",
     "render",
     "render_example",
     "random_frame_stutter_mapping",

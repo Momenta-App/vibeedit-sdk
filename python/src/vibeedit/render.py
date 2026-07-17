@@ -28,8 +28,9 @@ def render(spec: JSONObject | str | Path, output: str | Path | None = None) -> P
     if composition.get("cache", {}).get("enabled", False) and cached.is_file():
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(cached, destination)
-        _write_render_provenance(destination, composition, key, versions, cache_hit=True)
+        _write_render_provenance(destination, composition, key, versions, cache_hit=True, work={"framesRendered": 0, "framesReused": composition["durationFrames"], "reuseKind": "final-render"})
         return destination
+    work = {"framesRendered": composition["durationFrames"], "framesReused": 0, "reuseKind": "none"}
     if backend in {"auto", "ffmpeg", "python"}:
         if any(item["kind"] == "video" for track in composition["timeline"]["tracks"] for item in track["items"]):
             result = render_media(composition, destination, base)
@@ -38,13 +39,13 @@ def render(spec: JSONObject | str | Path, output: str | Path | None = None) -> P
     elif backend in {"html", "mixed"}:
         from vibeedit.motion import render_mixed
 
-        result = render_mixed(composition, destination, base)
+        result = render_mixed(composition, destination, base, metrics=work)
     else:
         raise NotImplementedError(f"render backend {backend!r} is not available in the lightweight installation")
     if composition.get("cache", {}).get("enabled", False):
         cached.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(result, cached)
-    _write_render_provenance(result, composition, key, versions, cache_hit=False)
+    _write_render_provenance(result, composition, key, versions, cache_hit=False, work=work)
     return result
 
 
@@ -61,7 +62,7 @@ def _runtime_versions(backend: str) -> dict[str, str]:
     return versions
 
 
-def _write_render_provenance(output: Path, spec: JSONObject, key: str, versions: dict[str, str], *, cache_hit: bool) -> None:
+def _write_render_provenance(output: Path, spec: JSONObject, key: str, versions: dict[str, str], *, cache_hit: bool, work: JSONObject) -> None:
     write_artifact_provenance(
         output.with_suffix(output.suffix + ".vibeedit.json"),
         {
@@ -73,6 +74,7 @@ def _write_render_provenance(output: Path, spec: JSONObject, key: str, versions:
             "runtimeVersions": versions,
             "cacheKey": key,
             "cacheHit": cache_hit,
+            "work": work,
             "output": {"path": output.name, "bytes": output.stat().st_size, "sha256": hashlib.sha256(output.read_bytes()).hexdigest()},
         },
     )

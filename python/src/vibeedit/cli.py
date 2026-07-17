@@ -16,7 +16,7 @@ from vibeedit.render import render
 from vibeedit.spec import Canvas, Composition, FrameRate
 from vibeedit.validation import validate_composition
 from vibeedit.verify import verify_output
-from vibeedit.catalog import list_catalog, search_catalog
+from vibeedit.catalog import compact_catalog_result, list_catalog, search_catalog
 from vibeedit.skills import check_skill, install_skill, list_skills, remove_skill, update_skill
 from vibeedit.version import VERSION
 
@@ -245,16 +245,7 @@ def _catalog_search(args) -> int:
     items = search_catalog(query)
     selected = items if args.all_results else items[: args.limit]
     if args.compact:
-        selected = [
-            {
-                "id": item["id"],
-                "name": item["name"],
-                "category": item["category"],
-                "description": item["description"] if len(item["description"]) <= 180 else item["description"][:177].rstrip() + "...",
-                "preview": item.get("preview", {}).get("status", "unknown"),
-            }
-            for item in selected
-        ]
+        selected = [compact_catalog_result(item, args.query) for item in selected]
     _emit(selected, as_json=args.json)
     return 0 if items else 2
 

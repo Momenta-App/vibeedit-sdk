@@ -39,7 +39,7 @@ test("Node CLI offers compact bounded catalog results", () => {
   assert.equal(result.status, 0, result.stderr);
   const payload = JSON.parse(result.stdout);
   assert.equal(payload.length, 2);
-  assert.deepEqual(Object.keys(payload[0]).sort(), ["category", "description", "id", "name", "preview"]);
+  assert.deepEqual(Object.keys(payload[0]).sort(), ["backends", "category", "compatibility", "confidence", "determinism", "estimatedSetupCost", "id", "intent", "name", "parameterCount", "preview", "reason", "requiredCapability"]);
 });
 
 test("Node CLI explains examples and keeps catalog opening in the background", () => {

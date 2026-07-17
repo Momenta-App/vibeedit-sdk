@@ -5,7 +5,7 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { platform } from "node:os";
 import { join, resolve } from "node:path";
 import process from "node:process";
-import { catalog, checkSkill, createExample, installSkill, listSkills, removeSkill, searchCatalog, updateSkill, validateComposition } from "../src/index.js";
+import { catalog, checkSkill, compactCatalogResult, createExample, installSkill, listSkills, removeSkill, searchCatalog, updateSkill, validateComposition } from "../src/index.js";
 import { dataPath } from "../src/data.js";
 import { VERSION } from "../src/version.js";
 
@@ -122,7 +122,7 @@ function catalogCommand(values) {
     const items = searchCatalog(query ?? "");
     const selected = values.includes("--all") ? items : items.slice(0, limit);
     if (!values.includes("--compact")) return selected;
-    return selected.map((item) => ({ id: item.id, name: item.name, category: item.category, description: item.description.length <= 180 ? item.description : `${item.description.slice(0, 177).trimEnd()}...`, preview: item.preview?.status ?? "unknown" }));
+    return selected.map((item) => compactCatalogResult(item, query ?? ""));
   }
   if (subcommand === "open") {
     const path = dataPath("site/index.html");

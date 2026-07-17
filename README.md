@@ -111,6 +111,28 @@ optional model or browser capability is installed; inspect the `readiness` and
 for low-token agent discovery. Omit `--compact` when the full parameter,
 provenance, prompt, and validation contract is needed.
 
+Compact results are ranked deterministically and include the selected stable ID,
+intent, required capability, backend, determinism, parameter count, platform
+compatibility, setup cost, confidence, and reason. Search does not load skill
+bodies; inspect only the selected result when more detail is needed.
+
+Before a human revision, inspect the dependency-aware invalidation plan:
+
+```python
+from vibeedit import plan_revision, render
+
+plan = plan_revision(previous_spec, revised_spec)
+print(plan["dirtyFrameRanges"], plan["expectedReuse"])
+render(revised_spec, "revised.mp4")
+```
+
+For bounded browser-text changes with caching enabled, VibeEdit reuses
+content-addressed composite frames outside the changed layer's placement. The
+render provenance sidecar reports `work.framesRendered`, `work.framesReused`,
+and the reuse kind. This beta slice still re-encodes the complete final frame
+sequence; source-range decode avoidance and audio-only remuxing are not yet
+claimed.
+
 Install the Python beta directly from its GitHub release asset:
 
 ```bash
