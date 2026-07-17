@@ -55,9 +55,13 @@ def render_revision(previous: JSONObject | str | Path, revised: JSONObject | str
     previous_spec = json.loads(Path(previous).read_text(encoding="utf-8")) if isinstance(previous, (str, Path)) else previous
     revised_spec = json.loads(Path(revised).read_text(encoding="utf-8")) if isinstance(revised, (str, Path)) else revised
     plan = plan_revision(previous_spec, revised_spec)
+    if plan["revisionKind"] == "none":
+        return _reuse_previous_output(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan)
     if plan["revisionKind"] == "motion":
         return render(revised, output)
     if plan["revisionKind"] == "audio":
+        return _render_audio_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan, Path(revised).parent if isinstance(revised, (str, Path)) else Path.cwd())
+    if plan["executionStatus"] == "verified-stream-copy-video-audio-remix":
         return _render_audio_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan, Path(revised).parent if isinstance(revised, (str, Path)) else Path.cwd())
     if plan["executionStatus"] == "verified-stream-copy-tail":
         return _render_scene_tail_revision(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan)
@@ -66,6 +70,7 @@ def render_revision(previous: JSONObject | str | Path, revised: JSONObject | str
     source = Path(previous_output)
     if not source.is_file():
         raise FileNotFoundError(f"previous rendered output does not exist: {source}")
+    _verify_previous_revision_input(source, plan)
     destination = Path(output or revised_spec["render"]["output"]["uri"])
     destination.parent.mkdir(parents=True, exist_ok=True)
     result = subprocess.run(
@@ -132,6 +137,28 @@ def _render_scene_tail_revision(spec: JSONObject, previous_output: Path, destina
     return destination
 
 
+def _reuse_previous_output(spec: JSONObject, previous_output: Path, destination: Path, plan: JSONObject) -> Path:
+    if not previous_output.is_file():
+        raise FileNotFoundError(f"previous rendered output does not exist: {previous_output}")
+    _verify_previous_revision_input(previous_output, plan)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if previous_output.resolve() != destination.resolve():
+        shutil.copy2(previous_output, destination)
+    write_artifact_provenance(
+        destination.with_suffix(destination.suffix + ".vibeedit.json"),
+        {
+            "schemaVersion": "1.0.0",
+            "compositionId": spec["id"],
+            "compositionSha256": hashlib.sha256(canonical_json(spec).encode()).hexdigest(),
+            "implementationVersion": VERSION,
+            "revisionPlan": plan,
+            "work": {"framesRendered": 0, "framesReused": spec["durationFrames"], "encodedVideoBytesReused": _packet_bytes(previous_output, "v:0"), "decodeWorkAvoided": plan["decodeWorkAvoided"], "reuseKind": "no-op-artifact-copy"},
+            "output": {"path": destination.name, "bytes": destination.stat().st_size, "sha256": hashlib.sha256(destination.read_bytes()).hexdigest()},
+        },
+    )
+    return destination
+
+
 def _verify_previous_revision_input(previous_output: Path, plan: JSONObject) -> None:
     provenance = previous_output.with_suffix(previous_output.suffix + ".vibeedit.json")
     if not provenance.is_file():
@@ -161,13 +188,15 @@ def _video_frames(path: Path) -> int:
 def _render_audio_revision(spec: JSONObject, previous_output: Path, destination: Path, plan: JSONObject, base: Path) -> Path:
     if not previous_output.is_file():
         raise FileNotFoundError(f"previous rendered output does not exist: {previous_output}")
+    _verify_previous_revision_input(previous_output, plan)
     destination.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="vibeedit-audio-revision-") as temporary:
         settings = spec["render"]["output"]
         audio_codec = settings.get("audioCodec", "aac")
-        audio = render_audio_mix(spec, Path(temporary) / ("audio.m4a" if audio_codec == "aac" else "audio.mka"), base, audio_codec=audio_codec)
+        encode_directly = plan["revisionKind"] == "container" or spec["render"]["backend"] in {"html", "mixed"}
+        audio = render_audio_mix(spec, Path(temporary) / ("audio.mka" if encode_directly else "audio.m4a" if audio_codec == "aac" else "audio.mka"), base, audio_codec="flac" if encode_directly else audio_codec)
         result = subprocess.run(
-            [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-i", str(previous_output), "-i", str(audio), "-map", "0:v:0", "-map", "1:a:0", "-c", "copy", "-map_metadata", "-1", *(["-movflags", "+faststart"] if settings["container"] == "mp4" else []), str(destination)],
+            [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y", "-i", str(previous_output), "-i", str(audio), "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", *(["-c:a", audio_codec, "-ar", str(spec["canvas"].get("audioSampleRate", 48000))] if encode_directly else ["-c:a", "copy"]), "-map_metadata", "-1", *(["-movflags", "+faststart"] if settings["container"] == "mp4" else []), str(destination)],
             capture_output=True,
             text=True,
             check=False,
@@ -184,7 +213,7 @@ def _render_audio_revision(spec: JSONObject, previous_output: Path, destination:
             "compositionSha256": hashlib.sha256(canonical_json(spec).encode()).hexdigest(),
             "implementationVersion": VERSION,
             "revisionPlan": plan,
-            "work": {"framesRendered": 0, "framesReused": spec["durationFrames"], "encodedVideoBytesReused": _packet_bytes(previous_output, "v:0"), "audioRangesRemixed": plan["dirtyAudioRanges"], "decodeWorkAvoided": plan["decodeWorkAvoided"], "reuseKind": "audio-only-remix"},
+            "work": {"framesRendered": 0, "framesReused": spec["durationFrames"], "encodedVideoBytesReused": _packet_bytes(previous_output, "v:0"), "audioRangesRemixed": plan["dirtyAudioRanges"], "decodeWorkAvoided": plan["decodeWorkAvoided"], "reuseKind": "container-safe-audio-remix" if plan["revisionKind"] == "container" else "audio-only-remix"},
             "output": {"path": destination.name, "bytes": destination.stat().st_size, "sha256": hashlib.sha256(destination.read_bytes()).hexdigest()},
         },
     )

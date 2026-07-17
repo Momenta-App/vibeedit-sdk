@@ -176,3 +176,23 @@
 - Regression status: focused vision tests pass 12/12 with the vision and test extras, including approved external SAM 2.1 execution/cache reuse and rejected SAM 3.1 registration.
 - Decision: keep. No SAM 3.1 code, weights, setup, or support claim was added.
 - Next question: improve approved SAM 2.1 revision reuse only through real inference and canonical mask-consumption evidence.
+
+## 2026-07-17 — 16-round hybrid human-revision stress test
+
+- Commit: working tree after `a4658d5`.
+- Hypothesis: a real hybrid edit can survive repeated text, transition, effect, audio, container, scene, broad-rebuild, and no-op revisions without picture/audio drift, while supported narrow changes avoid unnecessary work.
+- User-style task: create one 210-frame 640×360/30fps video from two generated source clips, a crossfade, deterministic stutter, three HTML/CSS text sections, music, and procedural SFX; retain 16 numbered review versions in a flat folder.
+- Backend/environment: mixed persistent Chromium + Python/FFmpeg, H.264/AAC MP4 and Matroska, macOS Apple Silicon, source mode through `uv`.
+- Commands: `PYTHONPATH=python/src uv run --extra browser python experiments/revision-stress-test/run.py`, decoded raw-video MD5, decoded stereo PCM comparison, `verify_output`, and three isolated timing trials for text, SFX, and cross-container AAC revisions.
+- Revision coverage: baseline; text copy; text style; add/move/remove callout; transition timing; effect intensity; effect removal; SFX addition; music gain/pan/fades; ending copy; container change; scene removal; broad rebuild; semantic no-op.
+- Baseline findings: changing the output URI alongside text incorrectly classified the revision as full; hybrid text changes rebuilt the unchanged media base; MP4→Matroska AAC packet copy added 1,024 samples (21.33ms); audio/container reuse did not verify the prior artifact provenance; URI-only revisions were classified as container work.
+- Improvements retained: output URI is non-semantic in revision classification and render-graph output hashes; unchanged hybrid media bases are content-addressed and cached with FFmpeg/runtime provenance; work records distinguish motion capture/reuse, media-base rendering, and final encoding; audio/container reuse verifies the prior composition and output digest; cross-family AAC revisions rebuild audio directly into the target container while stream-copying video; destination-only/no-op revisions copy the verified artifact without rendering.
+- Three-trial bounded-text result: incremental samples 3.803052s, 3.811254s, 3.820865s (mean 3.811724s) versus clean samples 7.242653s, 6.749887s, 7.223812s (mean 7.072117s), 1.855359× speedup. Each revision captured 70/210 motion frames, reused 140 overlay frames, reused the unchanged media base, and still encoded 210 final video frames.
+- Three-trial SFX-add result: incremental samples 0.230524s, 0.230269s, 0.234015s (mean 0.231603s) versus clean mean 6.731590s, 29.065225× speedup; zero video frames rendered and 210 reused.
+- Three-trial MP4→Matroska AAC result: incremental samples 0.248521s, 0.252460s, 0.245983s (mean 0.248988s) versus clean mean 6.894196s, 27.688856× speedup; video is stream-copied and audio is rebuilt/encoded for the target container.
+- Result quality: all 16 retained outputs pass dimensions, 210/120-frame duration as applicable, frame-rate, stream-presence, and drift verification. Every output matches its clean reference by decoded raw-video MD5. Every decoded audio comparison is exact with zero sample delta after the fixes, including the container revision.
+- Visual review: early and late 4×4 contact sheets confirm the intended copy, callout, scene, transition/effect, removal, and rebuild states. The review folder contains the numbered outputs, CompositionSpecs, provenance records, contact sheets, review notes, and machine-readable report without nested folders.
+- Failure retained: transition-overlap replacement remains planned because the prior exact segment prototypes were slower than clean rendering. Effect-stack changes and the mixed retained-audio scene removal also use a clean fallback. This test does not claim partial execution for those classes.
+- Regression status: focused revision and mixed-render tests pass 22/22 before the integrated gate.
+- Decision: keep all five system improvements and the stress harness/evidence.
+- Next question: reduce the remaining full-sequence final encode for bounded motion changes, and pursue transition reuse only with a final-encoded GOP design that beats the clean control.

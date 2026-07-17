@@ -1,5 +1,7 @@
+import array
 import hashlib
 import json
+import math
 import shutil
 import subprocess
 from pathlib import Path
@@ -50,6 +52,53 @@ def test_revision_plan_invalidates_only_bounded_text_range():
     assert plan["expectedReuse"] == {"totalFrames": 30, "dirtyFrames": 10, "reusedFrames": 20, "ratio": 0.666667}
     assert plan["requiredRerenderJobs"][0]["kind"] == "motion-layer"
     assert plan["executionStatus"] == "verified-frame-cache"
+
+
+def test_output_uri_does_not_expand_a_motion_revision_or_change_its_hash():
+    previous = _bounded_text_spec()
+    revised = json.loads(json.dumps(previous))
+    revised["render"]["output"]["uri"] = "review/revision-02.mp4"
+    revised["timeline"]["tracks"][0]["items"][0]["props"]["text"] = "REVISED CUT"
+    same_revision_at_original_uri = json.loads(json.dumps(revised))
+    same_revision_at_original_uri["render"]["output"]["uri"] = previous["render"]["output"]["uri"]
+
+    plan = plan_revision(previous, revised)
+    original_uri_graph = {node["id"]: node["hash"] for node in plan_revision(previous, same_revision_at_original_uri)["dependencyGraph"]["nodes"]}
+
+    assert plan["revisionKind"] == "motion"
+    assert plan["dirtyFrameRanges"] == [{"startFrame": 10, "endFrame": 20}]
+    assert plan["dependencyGraph"]["nodes"][-1]["hash"] == original_uri_graph["output:final"]
+
+
+def test_output_uri_only_revision_is_no_work_and_keeps_output_hash():
+    previous = _bounded_text_spec()
+    revised = json.loads(json.dumps(previous))
+    revised["render"]["output"]["uri"] = "review/revision-02.mp4"
+
+    plan = plan_revision(previous, revised)
+    previous_graph = {node["id"]: node["hash"] for node in plan_revision(previous, previous)["dependencyGraph"]["nodes"]}
+    revised_graph = {node["id"]: node["hash"] for node in plan["dependencyGraph"]["nodes"]}
+
+    assert plan["revisionKind"] == "none"
+    assert plan["executionStatus"] == "no-work"
+    assert revised_graph["output:final"] == previous_graph["output:final"]
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
+def test_output_uri_only_revision_copies_verified_artifact(tmp_path: Path):
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous["cache"] = {"enabled": False}
+    previous_output = render(previous, tmp_path / "previous.mp4")
+    revised = json.loads(json.dumps(previous))
+    revised["render"]["output"]["uri"] = "revised.mp4"
+
+    result = render_revision(previous, revised, previous_output, tmp_path / "revised.mp4")
+    record = json.loads(result.with_suffix(".mp4.vibeedit.json").read_text())
+
+    assert result.read_bytes() == previous_output.read_bytes()
+    assert record["work"]["framesRendered"] == 0
+    assert record["work"]["framesReused"] == previous["durationFrames"]
+    assert record["work"]["reuseKind"] == "no-op-artifact-copy"
 
 
 def test_text_color_revision_reuses_sources_tracking_audio_and_unrelated_layers():
@@ -292,6 +341,24 @@ def test_container_only_revision_plans_stream_copy_remux():
     assert plan["requiredRerenderJobs"] == [{"kind": "remux", "reason": "container changed while encoded streams remain compatible"}]
 
 
+def test_cross_family_aac_container_revision_plans_safe_audio_remix():
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous["sources"] = [{"id": "music", "kind": "audio", "uri": "music.wav", "identity": {"algorithm": "sha256", "value": "music-v1"}, "durationFrames": previous["durationFrames"]}]
+    previous["timeline"]["tracks"] = [{"id": "A1", "kind": "audio", "order": 0, "items": [{"id": "music", "kind": "audio", "placement": {"startFrame": 0, "durationFrames": previous["durationFrames"]}, "source": {"sourceId": "music", "inFrame": 0, "durationFrames": previous["durationFrames"]}, "role": "music", "gainDb": -12, "pan": 0, "fadeInFrames": 0, "fadeOutFrames": 0, "effects": []}]}]
+    previous["verification"]["hasAudio"] = True
+    revised = json.loads(json.dumps(previous))
+    revised["render"]["output"].update({"container": "mkv", "uri": "output.mkv"})
+
+    plan = plan_revision(previous, revised)
+
+    assert plan["revisionKind"] == "container"
+    assert plan["executionStatus"] == "verified-stream-copy-video-audio-remix"
+    assert plan["dirtyAudioRanges"] == [{"startFrame": 0, "endFrame": previous["durationFrames"]}]
+    assert plan["stitchPlan"]["strategy"] == "stream-copy-video-audio-remix"
+    assert not any(item["kind"] == "audio-mix" for item in plan["reusableArtifacts"])
+    assert "music" not in plan["decodeWorkAvoided"]
+
+
 def test_incompatible_container_codec_does_not_claim_remux_support():
     previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
     revised = json.loads(json.dumps(previous))
@@ -327,6 +394,48 @@ def test_container_only_revision_stream_copies_video_and_matches_full_render(tmp
 
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
+def test_cross_family_aac_container_revision_preserves_timing_and_fidelity(tmp_path: Path):
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous["cache"] = {"enabled": False}
+    previous["timeline"]["tracks"] = [{"id": "A1", "kind": "audio", "order": 0, "items": [{"id": "impact", "kind": "sound_effect", "placement": {"startFrame": 5, "durationFrames": 10}, "soundEffectId": "vibeedit://sfx/impact-procedural", "params": {"frequency": 72}, "gainDb": -12, "variationSeed": 1, "avoidImmediateRepeat": True}]}]
+    previous["verification"]["hasAudio"] = True
+    previous_output = render(previous, tmp_path / "previous.mp4")
+    revised = json.loads(json.dumps(previous))
+    revised["render"]["output"].update({"container": "mkv", "uri": "revised.mkv"})
+    untrusted = tmp_path / "untrusted.mp4"
+    shutil.copy2(previous_output, untrusted)
+
+    with pytest.raises(ValueError, match="provenance"):
+        render_revision(previous, revised, untrusted, tmp_path / "rejected.mkv")
+    incremental = render_revision(previous, revised, previous_output, tmp_path / "incremental.mkv")
+    reference = render(revised, tmp_path / "reference.mkv")
+    record = json.loads(incremental.with_suffix(".mkv.vibeedit.json").read_text())
+
+    def decoded_md5(path: Path, stream: str) -> str:
+        result = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", stream, "-f", "md5", "-"], capture_output=True, text=True, check=True)
+        return result.stdout.strip()
+
+    assert decoded_md5(incremental, "0:v:0") == decoded_md5(reference, "0:v:0")
+
+    def decoded_pcm(path: Path) -> array.array:
+        result = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", "0:a:0", "-f", "s16le", "-acodec", "pcm_s16le", "-ac", "2", "-ar", "48000", "-"], capture_output=True, check=True)
+        samples = array.array("h")
+        samples.frombytes(result.stdout)
+        return samples
+
+    incremental_audio = decoded_pcm(incremental)
+    reference_audio = decoded_pcm(reference)
+    dot = sum(int(left) * int(right) for left, right in zip(incremental_audio, reference_audio))
+    incremental_energy = sum(int(value) ** 2 for value in incremental_audio)
+    reference_energy = sum(int(value) ** 2 for value in reference_audio)
+
+    assert len(incremental_audio) == len(reference_audio)
+    assert dot / math.sqrt(incremental_energy * reference_energy) > 0.9999
+    assert record["work"]["framesRendered"] == 0
+    assert record["work"]["reuseKind"] == "container-safe-audio-remix"
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_bounded_text_revision_reuses_clean_frames_and_matches_full_render(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     pytest.importorskip("playwright")
     monkeypatch.setenv("VIBEEDIT_CACHE_DIR", str(tmp_path / "cache"))
@@ -341,5 +450,12 @@ def test_bounded_text_revision_reuses_clean_frames_and_matches_full_render(tmp_p
     revised["cache"]["enabled"] = False
     reference = render(revised, tmp_path / "reference.mp4")
 
-    assert incremental_record["work"] == {"framesRendered": 10, "framesReused": 20, "reuseKind": "content-addressed-composite-frames"}
+    assert incremental_record["work"] == {
+        "framesRendered": 10,
+        "framesReused": 20,
+        "motionFramesCaptured": 10,
+        "motionFramesReused": 20,
+        "videoFramesEncoded": 30,
+        "reuseKind": "content-addressed-composite-frames",
+    }
     assert hashlib.sha256(incremental.read_bytes()).hexdigest() == hashlib.sha256(reference.read_bytes()).hexdigest()

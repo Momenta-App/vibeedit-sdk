@@ -111,6 +111,13 @@ VibeEdit implementation version, backend/runtime version, model version, and
 schema version. Artifacts store the same inputs plus creation time and output
 hash. Users can inspect or invalidate any cached item.
 
+Output URIs are destinations rather than pixel or sample inputs. Render and
+revision hashes therefore exclude the URI while retaining container and codec
+settings. Hybrid renders also cache the lossless Python/FFmpeg media base
+separately from browser motion overlays, so a bounded text revision does not
+rebuild unchanged source clips, effects, transitions, or audio before final
+assembly.
+
 Incremental revision planning compares two canonical CompositionSpecs and emits
 changed fields, dirty video/audio ranges, changed and reusable artifacts,
 dependency reasons, required jobs, a stitch strategy, and expected reuse. The
@@ -133,6 +140,13 @@ layers begin at or beyond the new end. The output frame count is independently
 verified before reuse is reported. Planned transition, mid-scene, retained-audio
 tail, and segmentation-dependent range replacement is not reported as
 executable.
+
+No-op or destination-only revisions copy only a provenance-verified prior
+artifact. Audio and container revision executors also require the previous
+composition hash and output digest before reuse. Cross-family AAC container
+changes (for example MP4 to Matroska) do not blindly stream-copy audio because
+that can lose encoder-delay metadata; VibeEdit stream-copies video while
+rebuilding and encoding the audio mix directly into the target container.
 
 ## Versioning
 

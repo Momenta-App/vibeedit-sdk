@@ -194,10 +194,11 @@ def test_mixed_source_video_and_html_overlay_renders(tmp_path: Path):
 
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
-def test_mixed_python_effect_transition_and_html_overlay_render_together(tmp_path: Path):
+def test_mixed_python_effect_transition_and_html_overlay_render_together(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     pytest.importorskip("playwright")
     import subprocess
 
+    monkeypatch.setenv("VIBEEDIT_CACHE_DIR", str(tmp_path / "cache"))
     spec = json.loads((data_path("examples", "effect-transition", "composition.json")).read_text())
     sources = []
     for index, color in enumerate(("0x172554", "0x4c0519")):
@@ -246,9 +247,21 @@ def test_mixed_python_effect_transition_and_html_overlay_render_together(tmp_pat
         }
     )
     spec["verification"]["hasAudio"] = True
+    spec["cache"] = {"enabled": True, "namespace": "mixed-media-base-test"}
     output = render(spec, tmp_path / "mixed-effect-transition.mp4")
     report = verify_output(output, spec["verification"])
     assert report.passed, report.errors
+    first_record = json.loads(output.with_suffix(".mp4.vibeedit.json").read_text())
+
+    spec["timeline"]["tracks"][-1]["items"][0]["props"]["html"] = "<h1>REVISED WEB LAYER</h1>"
+    revised = render(spec, tmp_path / "mixed-effect-transition-revised.mp4")
+    revised_record = json.loads(revised.with_suffix(".mp4.vibeedit.json").read_text())
+
+    assert first_record["work"]["mediaBaseCacheHit"] is False
+    assert first_record["work"]["mediaBaseFramesRendered"] == spec["durationFrames"]
+    assert revised_record["work"]["mediaBaseCacheHit"] is True
+    assert revised_record["work"]["mediaBaseFramesRendered"] == 0
+    assert revised_record["work"]["videoFramesEncoded"] == spec["durationFrames"]
 
 
 def test_render_cache_records_reproducible_provenance(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):

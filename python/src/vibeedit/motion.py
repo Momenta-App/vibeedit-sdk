@@ -8,6 +8,7 @@ import json
 import math
 import mimetypes
 import re
+import subprocess
 import tempfile
 import threading
 import urllib.parse
@@ -18,7 +19,7 @@ from pathlib import Path
 
 from vibeedit.cache import cache_key, restore_cached_artifact, store_cached_artifact
 from vibeedit.data import data_path
-from vibeedit.ffmpeg import frame_stream_encoder, overlay_frame_stream_encoder, render_media
+from vibeedit.ffmpeg import ffmpeg_path, frame_stream_encoder, overlay_frame_stream_encoder, render_media
 from vibeedit.spec import JSONObject
 from vibeedit.version import VERSION
 
@@ -116,7 +117,20 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
                 if any(item["kind"] != "motion" for item in track["items"])
             ]
             media_spec["render"]["output"].update({"container": "mkv", "videoCodec": "ffv1", "audioCodec": "flac", "pixelFormat": "yuv420p"})
-            render_media(media_spec, intermediate, base)
+            media_spec["render"]["output"]["uri"] = "<internal-media-base>"
+            media_key = cache_key(
+                "motion.media_base",
+                media_spec,
+                implementation_version=VERSION,
+                runtime_versions={"ffmpeg": _ffmpeg_version()},
+            )
+            media_cache_hit = spec.get("cache", {}).get("enabled", False) and restore_cached_artifact("motion.media_base", media_key, intermediate)
+            if not media_cache_hit:
+                render_media(media_spec, intermediate, base)
+                if spec.get("cache", {}).get("enabled", False):
+                    store_cached_artifact("motion.media_base", media_key, intermediate)
+            if metrics is not None:
+                metrics.update({"mediaBaseCacheHit": media_cache_hit, "mediaBaseFramesRendered": 0 if media_cache_hit else spec["durationFrames"]})
             overlay_spec = _single_video_overlay_spec(spec, intermediate)
         encoder_context = overlay_frame_stream_encoder(overlay_spec, destination, base) if video else frame_stream_encoder(spec, destination)
         with encoder_context as encoder, sync_playwright() as playwright, _motion_asset_server(base) as asset_urls:
@@ -160,7 +174,16 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
             context.close()
             browser.close()
             if metrics is not None:
-                metrics.update({"framesRendered": rendered_frames, "framesReused": reused_frames, "reuseKind": "content-addressed-composite-frames" if reused_frames else "none"})
+                metrics.update(
+                    {
+                        "framesRendered": rendered_frames,
+                        "framesReused": reused_frames,
+                        "motionFramesCaptured": rendered_frames,
+                        "motionFramesReused": reused_frames,
+                        "videoFramesEncoded": spec["durationFrames"],
+                        "reuseKind": "content-addressed-motion-overlay-frames" if video and reused_frames else "content-addressed-composite-frames" if reused_frames else "none",
+                    }
+                )
         return destination
 
 
@@ -189,6 +212,12 @@ def _package_version(name: str) -> str:
         return version(name)
     except PackageNotFoundError:
         return "unavailable"
+
+
+@lru_cache(maxsize=1)
+def _ffmpeg_version() -> str:
+    result = subprocess.run([ffmpeg_path(), "-version"], capture_output=True, text=True, check=False)
+    return (result.stdout or result.stderr).splitlines()[0] if result.returncode == 0 else "unavailable"
 
 
 def _single_video_overlay_spec(spec: JSONObject, source: Path) -> JSONObject:

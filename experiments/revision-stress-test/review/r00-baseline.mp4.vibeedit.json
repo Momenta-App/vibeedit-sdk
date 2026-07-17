@@ -1,0 +1,41 @@
+{
+  "cacheHit": false,
+  "cacheKey": "56389fe38824481a4cd3e9cc8c1608565ffde788c6e2683b601766c85ef47d62",
+  "compositionId": "revision-stress-video",
+  "compositionSha256": "49980a483f516684ee216bca311084b3da8c22db2880700054d3978780b68b39",
+  "implementationVersion": "0.1.0b2",
+  "output": {
+    "bytes": 748811,
+    "path": "r00-baseline.mp4",
+    "sha256": "1e12ea4a7a90e217cb46280bc1377d7572d29ca942b44db14112344344ead339"
+  },
+  "runtimeVersions": {
+    "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "playwright": "1.61.0"
+  },
+  "schemaVersion": "1.0.0",
+  "sourceIdentities": [
+    {
+      "algorithm": "sha256",
+      "value": "a1dc48066419716572ad684e13315335426549d6a03186b2d42ef46c247fcc4d"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "8a057f1025684b1c4f332cc74017461258bda4a41b07b780b8dc7199ede387d9"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "ac9b358a64e95d4a430695750b91ca2063b4839f8ae8d38eb25f1d11bd746c0c"
+    }
+  ],
+  "work": {
+    "framesRendered": 210,
+    "framesReused": 0,
+    "mediaBaseCacheHit": false,
+    "mediaBaseFramesRendered": 210,
+    "motionFramesCaptured": 210,
+    "motionFramesReused": 0,
+    "reuseKind": "none",
+    "videoFramesEncoded": 210
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "cacheHit": false,
+  "cacheKey": "1fc303026f23f87780c41f91cbae6c4e524b67b4bf6be101964c56b355e82c9a",
+  "compositionId": "revision-stress-video",
+  "compositionSha256": "97bebf8dcc0f0a765d8308f657fb11d94a30d470d56bbcb1e6b63a7dd11dbd5e",
+  "implementationVersion": "0.1.0b2",
+  "output": {
+    "bytes": 703064,
+    "path": "r07-effect-heavy.mp4",
+    "sha256": "7f80e96da4ef12f3d1900252d1df65b6780a02e479fd6187c114dc1e58e2e29c"
+  },
+  "runtimeVersions": {
+    "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "playwright": "1.61.0"
+  },
+  "schemaVersion": "1.0.0",
+  "sourceIdentities": [
+    {
+      "algorithm": "sha256",
+      "value": "a1dc48066419716572ad684e13315335426549d6a03186b2d42ef46c247fcc4d"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "8a057f1025684b1c4f332cc74017461258bda4a41b07b780b8dc7199ede387d9"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "ac9b358a64e95d4a430695750b91ca2063b4839f8ae8d38eb25f1d11bd746c0c"
+    }
+  ],
+  "work": {
+    "framesRendered": 0,
+    "framesReused": 210,
+    "mediaBaseCacheHit": false,
+    "mediaBaseFramesRendered": 210,
+    "motionFramesCaptured": 0,
+    "motionFramesReused": 210,
+    "reuseKind": "content-addressed-motion-overlay-frames",
+    "videoFramesEncoded": 210
+  }
+}
