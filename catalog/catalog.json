@@ -323,12 +323,13 @@
     {
       "id": "vibeedit://template/fan-edit",
       "name": "Fan Edit",
-      "description": "Executable setup-to-drop fan edit with beat punctuation, seeded stutter, and a frame-accurate transition.",
+      "description": "Executable five-moment hook/setup/build/drop/aftershock fan edit with clean cuts, motivated crossfades, selective stutter, music, and beat punctuation.",
       "category": "template",
       "tags": [
         "template",
         "executable",
         "fan-edit",
+        "multi-clip",
         "effects",
         "transitions",
         "sound-design"

@@ -1,0 +1,464 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "fan-edit",
+  "canvas": {
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "backgroundColor": "#101217",
+    "audioSampleRate": 48000
+  },
+  "durationFrames": 180,
+  "sources": [
+    {
+      "id": "source-a",
+      "kind": "video",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/fan-edit-revision-study/sources/sources/source-a.mp4",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "d9d12e11d09a583643a84a11fba9d2fb88b08aa256db73d8e98f03e2b4944e36"
+      },
+      "durationFrames": 36,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    },
+    {
+      "id": "source-b",
+      "kind": "video",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/fan-edit-revision-study/sources/sources/source-b.mp4",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "61acb9bf2194fff37c7011e76100bc5562cb00df319008a3cb83a368114139cf"
+      },
+      "durationFrames": 42,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    },
+    {
+      "id": "source-c",
+      "kind": "video",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/fan-edit-revision-study/sources/sources/source-c.mp4",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "928720b9452bc1be3e4534b18139006d6368223a71101f599febf5ca7bb7a8ab"
+      },
+      "durationFrames": 42,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    },
+    {
+      "id": "source-d",
+      "kind": "video",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/fan-edit-revision-study/sources/sources/source-d.mp4",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "27d7b6804012548a7a6857a9ba6a08082b9440bd1438c2e35b1a1478dff8a3a0"
+      },
+      "durationFrames": 42,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    },
+    {
+      "id": "source-e",
+      "kind": "video",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/fan-edit-revision-study/sources/sources/source-e.mp4",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "99d266ada9a9d311a0e64aeb66e8e884b2d48b3898d9b8b0833c64c556c51e94"
+      },
+      "durationFrames": 30,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    },
+    {
+      "id": "music",
+      "kind": "audio",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/fan-edit-revision-study/sources/sources/music.wav",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "c418d75fe256f08572fc9a8f2b4b73c81bc6ad871d1ec204799a6f8f6a9d6a50"
+      },
+      "durationFrames": 180,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "V1",
+        "kind": "video",
+        "order": 0,
+        "items": [
+          {
+            "id": "hook",
+            "kind": "video",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 36
+            },
+            "source": {
+              "sourceId": "source-a",
+              "inFrame": 0,
+              "durationFrames": 36
+            },
+            "effects": [
+              {
+                "id": "hook-stutter",
+                "effectId": "vibeedit://effect/random-frame-stutter",
+                "enabled": true,
+                "params": {
+                  "seed": 21,
+                  "windowFrames": 2,
+                  "intensity": 0.25
+                },
+                "implementationVersion": "0.1.0"
+              }
+            ],
+            "metadata": {
+              "fanEditRole": "hook",
+              "selectionReason": "immediate subject recognition and motion",
+              "syncAnchor": "opening transient"
+            }
+          },
+          {
+            "id": "setup",
+            "kind": "video",
+            "placement": {
+              "startFrame": 36,
+              "durationFrames": 40
+            },
+            "source": {
+              "sourceId": "source-b",
+              "inFrame": 0,
+              "durationFrames": 40
+            },
+            "effects": [],
+            "metadata": {
+              "fanEditRole": "setup",
+              "selectionReason": "establish contrast before acceleration",
+              "syncAnchor": "phrase boundary"
+            }
+          },
+          {
+            "id": "build",
+            "kind": "video",
+            "placement": {
+              "startFrame": 74,
+              "durationFrames": 40
+            },
+            "source": {
+              "sourceId": "source-c",
+              "inFrame": 0,
+              "durationFrames": 40
+            },
+            "effects": [
+              {
+                "id": "build-stutter",
+                "effectId": "vibeedit://effect/random-frame-stutter",
+                "enabled": true,
+                "params": {
+                  "seed": 11,
+                  "windowFrames": 2,
+                  "intensity": 0.58
+                },
+                "implementationVersion": "0.1.0"
+              }
+            ],
+            "metadata": {
+              "fanEditRole": "build",
+              "selectionReason": "increase visual instability before the drop",
+              "syncAnchor": "riser peak"
+            }
+          },
+          {
+            "id": "drop",
+            "kind": "video",
+            "placement": {
+              "startFrame": 108,
+              "durationFrames": 42
+            },
+            "source": {
+              "sourceId": "source-d",
+              "inFrame": 0,
+              "durationFrames": 42
+            },
+            "effects": [],
+            "metadata": {
+              "fanEditRole": "drop",
+              "selectionReason": "strongest action and contrast payoff",
+              "syncAnchor": "downbeat"
+            }
+          },
+          {
+            "id": "aftershock",
+            "kind": "video",
+            "placement": {
+              "startFrame": 150,
+              "durationFrames": 30
+            },
+            "source": {
+              "sourceId": "source-e",
+              "inFrame": 0,
+              "durationFrames": 30
+            },
+            "effects": [],
+            "metadata": {
+              "fanEditRole": "aftershock",
+              "selectionReason": "short resolving image that can hard-loop",
+              "syncAnchor": "final phrase"
+            }
+          },
+          {
+            "id": "build-bridge",
+            "kind": "transition",
+            "placement": {
+              "startFrame": 74,
+              "durationFrames": 2
+            },
+            "transitionId": "vibeedit://transition/crossfade",
+            "fromItemId": "setup",
+            "toItemId": "build",
+            "params": {
+              "curve": "faster"
+            },
+            "implementationVersion": "0.1.0"
+          },
+          {
+            "id": "drop-bridge",
+            "kind": "transition",
+            "placement": {
+              "startFrame": 108,
+              "durationFrames": 6
+            },
+            "transitionId": "vibeedit://transition/crossfade",
+            "fromItemId": "build",
+            "toItemId": "drop",
+            "params": {
+              "curve": "linear"
+            },
+            "implementationVersion": "0.1.0"
+          }
+        ]
+      },
+      {
+        "id": "A1",
+        "kind": "audio",
+        "order": 0,
+        "role": "music-and-accents",
+        "items": [
+          {
+            "id": "music-bed",
+            "kind": "audio",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 180
+            },
+            "source": {
+              "sourceId": "music",
+              "inFrame": 0,
+              "durationFrames": 180
+            },
+            "role": "music",
+            "gainDb": -15,
+            "pan": -0.12,
+            "fadeInFrames": 6,
+            "fadeOutFrames": 14,
+            "effects": []
+          },
+          {
+            "id": "hook-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 10
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 92
+            },
+            "gainDb": -16,
+            "variationSeed": 10,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "build-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 72,
+              "durationFrames": 12
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 76
+            },
+            "gainDb": -14,
+            "variationSeed": 11,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "drop-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 108,
+              "durationFrames": 18
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 55
+            },
+            "gainDb": -6,
+            "variationSeed": 12,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "aftershock-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 150,
+              "durationFrames": 12
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 66
+            },
+            "gainDb": -15,
+            "variationSeed": 13,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "pre-drop-tick",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 104,
+              "durationFrames": 4
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 132
+            },
+            "gainDb": -18,
+            "variationSeed": 31,
+            "avoidImmediateRepeat": true
+          }
+        ]
+      }
+    ],
+    "markers": [
+      {
+        "id": "hook",
+        "frame": 0,
+        "label": "Hook",
+        "kind": "fan-edit-structure"
+      },
+      {
+        "id": "setup",
+        "frame": 36,
+        "label": "Setup",
+        "kind": "fan-edit-structure"
+      },
+      {
+        "id": "build",
+        "frame": 72,
+        "label": "Build",
+        "kind": "fan-edit-structure"
+      },
+      {
+        "id": "drop",
+        "frame": 108,
+        "label": "Drop",
+        "kind": "fan-edit-structure"
+      },
+      {
+        "id": "aftershock",
+        "frame": 150,
+        "label": "Aftershock",
+        "kind": "fan-edit-structure"
+      }
+    ]
+  },
+  "artifacts": {
+    "masks": [],
+    "tracking": [],
+    "analysis": []
+  },
+  "render": {
+    "backend": "ffmpeg",
+    "output": {
+      "uri": "r05-rebalance-audio.mp4",
+      "container": "mp4",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "pixelFormat": "yuv420p"
+    },
+    "deterministic": true
+  },
+  "verification": {
+    "durationFrames": 180,
+    "width": 320,
+    "height": 180,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "hasVideo": true,
+    "hasAudio": true,
+    "maxDurationDriftFrames": 1
+  },
+  "provenance": {
+    "generator": "vibeedit-fan-edit-revision-study",
+    "generatorVersion": "0.1.0",
+    "createdAt": "2026-07-13T00:00:00Z",
+    "schemaSource": "schema/composition.schema.json",
+    "catalogVersion": "0.1.0"
+  },
+  "audio": {
+    "targetLufs": -16,
+    "truePeakDb": -1,
+    "preventImmediateSfxRepeat": true,
+    "ducking": {
+      "musicUnderSfxDb": -3
+    }
+  },
+  "metadata": {
+    "fanEdit": {
+      "concept": "pressure turns into controlled impact",
+      "structure": [
+        "hook",
+        "setup",
+        "build",
+        "drop",
+        "aftershock"
+      ],
+      "audioArchitecture": "music-led with selective impact accents",
+      "textDecision": "none",
+      "ordering": "non-chronological moment roles"
+    }
+  },
+  "cache": {
+    "enabled": false,
+    "namespace": "fan-edit-revision-study"
+  }
+}

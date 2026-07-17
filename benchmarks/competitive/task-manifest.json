@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "benchmarkId": "agent-video-revision-v1",
+  "canvas": {"width": 1920, "height": 1080, "frameRate": {"numerator": 30, "denominator": 1}},
+  "durationFrames": 300,
+  "timeLimitMinutes": 15,
+  "assets": [
+    {"id": "source", "file": "source.mp4", "kind": "video", "origin": "generated-ffmpeg-testsrc2"},
+    {"id": "music", "file": "music.wav", "kind": "audio", "origin": "generated-ffmpeg-sine-220hz"}
+  ],
+  "tasks": [
+    {
+      "id": "initial",
+      "request": "Create a deterministic 10-second 1920x1080 30 fps video using source.mp4. Mix music.wav from frame 0 through frame 299 at -12 dB. Produce H.264/AAC MP4 with no duration drift."
+    },
+    {
+      "id": "explain-revision",
+      "request": "Before rendering, explain exactly what work will be invalidated and reused if only the music gain changes from -12 dB to -6 dB. Return structured data when the system supports it."
+    },
+    {
+      "id": "audio-gain-revision",
+      "request": "Change only the music gain from -12 dB to -6 dB and return a revised H.264/AAC MP4. Preserve every video frame exactly."
+    }
+  ],
+  "requiredMeasurements": [
+    "setupSeconds", "agentInputTokens", "agentOutputTokens", "toolCalls",
+    "failedAttempts", "timeToFirstPreviewSeconds", "timeToValidOutputSeconds",
+    "fullRenderSamplesSeconds", "revisionSamplesSeconds", "framesRendered",
+    "framesReused", "encodedVideoBytesReused", "outputVerification",
+    "decodedVideoEquivalence", "decodedAudioEquivalence", "recoveryNotes"
+  ],
+  "blindEvaluation": {
+    "criteria": ["correctness", "visualQuality", "audioCorrectness", "determinism", "errorClarity"],
+    "hideSystemIdentity": true
+  }
+}

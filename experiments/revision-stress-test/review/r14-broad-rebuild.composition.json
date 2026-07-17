@@ -1,0 +1,306 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "vibeedit.composition",
+  "id": "revision-stress-video",
+  "title": "Revision Stress Test",
+  "canvas": {
+    "width": 640,
+    "height": 360,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "backgroundColor": "#050810",
+    "audioSampleRate": 48000
+  },
+  "durationFrames": 210,
+  "sources": [
+    {
+      "id": "scene-a",
+      "kind": "video",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/revision-stress-test/sources/scene-a.mp4",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "a1dc48066419716572ad684e13315335426549d6a03186b2d42ef46c247fcc4d"
+      },
+      "durationFrames": 120,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    },
+    {
+      "id": "scene-b",
+      "kind": "video",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/revision-stress-test/sources/scene-b.mp4",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "8a057f1025684b1c4f332cc74017461258bda4a41b07b780b8dc7199ede387d9"
+      },
+      "durationFrames": 120,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    },
+    {
+      "id": "music",
+      "kind": "audio",
+      "uri": "/Users/everett/Documents/Code3/vibeedit-sdk-package-ux/experiments/revision-stress-test/sources/music.wav",
+      "identity": {
+        "algorithm": "sha256",
+        "value": "ac9b358a64e95d4a430695750b91ca2063b4839f8ae8d38eb25f1d11bd746c0c"
+      },
+      "durationFrames": 240,
+      "license": {
+        "status": "generated",
+        "commercialOutputAllowed": true,
+        "redistributionAllowed": true
+      }
+    }
+  ],
+  "timeline": {
+    "tracks": [
+      {
+        "id": "V1",
+        "kind": "video",
+        "order": 0,
+        "items": [
+          {
+            "id": "clip-a",
+            "kind": "video",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 120
+            },
+            "source": {
+              "sourceId": "scene-a",
+              "inFrame": 0,
+              "durationFrames": 120
+            },
+            "effects": [
+              {
+                "id": "stutter",
+                "effectId": "vibeedit://effect/random-frame-stutter",
+                "enabled": true,
+                "params": {
+                  "seed": 17,
+                  "windowFrames": 4,
+                  "intensity": 0.12
+                },
+                "implementationVersion": "0.1.0"
+              }
+            ]
+          },
+          {
+            "id": "clip-b",
+            "kind": "video",
+            "placement": {
+              "startFrame": 90,
+              "durationFrames": 120
+            },
+            "source": {
+              "sourceId": "scene-b",
+              "inFrame": 0,
+              "durationFrames": 120
+            },
+            "effects": []
+          },
+          {
+            "id": "crossfade",
+            "kind": "transition",
+            "placement": {
+              "startFrame": 90,
+              "durationFrames": 30
+            },
+            "transitionId": "vibeedit://transition/crossfade",
+            "fromItemId": "clip-a",
+            "toItemId": "clip-b",
+            "params": {
+              "curve": "linear"
+            },
+            "implementationVersion": "0.1.0"
+          }
+        ]
+      },
+      {
+        "id": "M1",
+        "kind": "motion",
+        "order": 10,
+        "items": [
+          {
+            "id": "title",
+            "kind": "motion",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 70
+            },
+            "componentId": "vibeedit://motion/html-css",
+            "props": {
+              "html": "<main class=\"stage\"><section class=\"panel\"><div class=\"eyebrow\">VIBEEDIT STRESS LAB</div><h1>REBUILT</h1><p>SCENE + TEXT + SOUND RESTORED</p></section></main>",
+              "css": "\nhtml,body{margin:0;width:100%;height:100%;background:transparent;overflow:hidden;font-family:Arial,sans-serif}\n.stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:42px;color:white}\n.panel,.badge{position:relative;max-width:86%;padding:20px 26px;border:1px solid rgba(255,255,255,.32);background:linear-gradient(135deg,rgba(5,8,16,.82),rgba(5,8,16,.2));backdrop-filter:blur(10px);box-shadow:0 20px 70px rgba(0,0,0,.45);animation:enter .72s cubic-bezier(.16,.8,.2,1) both}\n.badge{max-width:64%;padding:14px 18px}\n.eyebrow{font-size:12px;font-weight:800;letter-spacing:.28em;color:rgba(255,255,255,.72);margin-bottom:9px}\nh1{margin:0;font-size:68px;line-height:.93;letter-spacing:-.045em;color:#f3ff70;text-shadow:0 8px 30px rgba(0,0,0,.55)}\np{margin:10px 0 0;font-size:16px;font-weight:700;letter-spacing:.12em;color:white}\n.panel:after,.badge:after{content:'';position:absolute;left:-1px;bottom:-1px;width:52%;height:3px;background:#f3ff70;box-shadow:0 0 22px #f3ff70}\n@keyframes enter{from{opacity:0;transform:translateY(30px) scale(.96);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}\n"
+            },
+            "renderer": "auto",
+            "transparent": true
+          },
+          {
+            "id": "chapter",
+            "kind": "motion",
+            "placement": {
+              "startFrame": 72,
+              "durationFrames": 78
+            },
+            "componentId": "vibeedit://motion/html-css",
+            "props": {
+              "html": "<main class=\"stage\"><section class=\"panel\"><div class=\"eyebrow\">VIBEEDIT STRESS LAB</div><h1>CUT. LAYER. REBUILD.</h1><p>EVERY FRAME ACCOUNTED FOR</p></section></main>",
+              "css": "\nhtml,body{margin:0;width:100%;height:100%;background:transparent;overflow:hidden;font-family:Arial,sans-serif}\n.stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:42px;color:white}\n.panel,.badge{position:relative;max-width:86%;padding:20px 26px;border:1px solid rgba(255,255,255,.32);background:linear-gradient(135deg,rgba(5,8,16,.82),rgba(5,8,16,.2));backdrop-filter:blur(10px);box-shadow:0 20px 70px rgba(0,0,0,.45);animation:enter .72s cubic-bezier(.16,.8,.2,1) both}\n.badge{max-width:64%;padding:14px 18px}\n.eyebrow{font-size:12px;font-weight:800;letter-spacing:.28em;color:rgba(255,255,255,.72);margin-bottom:9px}\nh1{margin:0;font-size:68px;line-height:.93;letter-spacing:-.045em;color:#7be7ff;text-shadow:0 8px 30px rgba(0,0,0,.55)}\np{margin:10px 0 0;font-size:16px;font-weight:700;letter-spacing:.12em;color:white}\n.panel:after,.badge:after{content:'';position:absolute;left:-1px;bottom:-1px;width:52%;height:3px;background:#7be7ff;box-shadow:0 0 22px #7be7ff}\n@keyframes enter{from{opacity:0;transform:translateY(30px) scale(.96);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}\n"
+            },
+            "renderer": "auto",
+            "transparent": true
+          },
+          {
+            "id": "end",
+            "kind": "motion",
+            "placement": {
+              "startFrame": 152,
+              "durationFrames": 58
+            },
+            "componentId": "vibeedit://motion/html-css",
+            "props": {
+              "html": "<main class=\"stage\"><section class=\"panel\"><div class=\"eyebrow\">VIBEEDIT STRESS LAB</div><h1>STAY IN SYNC</h1><p>PICTURE + SOUND</p></section></main>",
+              "css": "\nhtml,body{margin:0;width:100%;height:100%;background:transparent;overflow:hidden;font-family:Arial,sans-serif}\n.stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:42px;color:white}\n.panel,.badge{position:relative;max-width:86%;padding:20px 26px;border:1px solid rgba(255,255,255,.32);background:linear-gradient(135deg,rgba(5,8,16,.82),rgba(5,8,16,.2));backdrop-filter:blur(10px);box-shadow:0 20px 70px rgba(0,0,0,.45);animation:enter .72s cubic-bezier(.16,.8,.2,1) both}\n.badge{max-width:64%;padding:14px 18px}\n.eyebrow{font-size:12px;font-weight:800;letter-spacing:.28em;color:rgba(255,255,255,.72);margin-bottom:9px}\nh1{margin:0;font-size:68px;line-height:.93;letter-spacing:-.045em;color:#ff729f;text-shadow:0 8px 30px rgba(0,0,0,.55)}\np{margin:10px 0 0;font-size:16px;font-weight:700;letter-spacing:.12em;color:white}\n.panel:after,.badge:after{content:'';position:absolute;left:-1px;bottom:-1px;width:52%;height:3px;background:#ff729f;box-shadow:0 0 22px #ff729f}\n@keyframes enter{from{opacity:0;transform:translateY(30px) scale(.96);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}\n"
+            },
+            "renderer": "auto",
+            "transparent": true
+          }
+        ]
+      },
+      {
+        "id": "A1",
+        "kind": "audio",
+        "order": 0,
+        "items": [
+          {
+            "id": "music-bed",
+            "kind": "audio",
+            "placement": {
+              "startFrame": 0,
+              "durationFrames": 210
+            },
+            "source": {
+              "sourceId": "music",
+              "inFrame": 0,
+              "durationFrames": 210
+            },
+            "role": "music",
+            "gainDb": -8,
+            "pan": 0,
+            "fadeInFrames": 8,
+            "fadeOutFrames": 12,
+            "effects": []
+          },
+          {
+            "id": "opening-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 8,
+              "durationFrames": 18
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 62
+            },
+            "gainDb": -13,
+            "variationSeed": 101,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "transition-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 90,
+              "durationFrames": 18
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 78
+            },
+            "gainDb": -9,
+            "variationSeed": 102,
+            "avoidImmediateRepeat": true
+          },
+          {
+            "id": "final-hit",
+            "kind": "sound_effect",
+            "placement": {
+              "startFrame": 174,
+              "durationFrames": 18
+            },
+            "soundEffectId": "vibeedit://sfx/impact-procedural",
+            "params": {
+              "frequency": 54
+            },
+            "gainDb": -12,
+            "variationSeed": 103,
+            "avoidImmediateRepeat": true
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "masks": [],
+    "tracking": [],
+    "analysis": []
+  },
+  "cache": {
+    "enabled": true,
+    "namespace": "revision-stress-rebuild-1784305716152362000"
+  },
+  "audio": {
+    "targetLufs": -16,
+    "truePeakDb": -1,
+    "preventImmediateSfxRepeat": true,
+    "ducking": {
+      "musicUnderSfxDb": -3
+    }
+  },
+  "render": {
+    "backend": "mixed",
+    "htmlBackend": "chromium",
+    "threads": 1,
+    "output": {
+      "uri": "r14-broad-rebuild.mp4",
+      "container": "mp4",
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "pixelFormat": "yuv420p"
+    },
+    "deterministic": true
+  },
+  "verification": {
+    "durationFrames": 210,
+    "width": 640,
+    "height": 360,
+    "frameRate": {
+      "numerator": 30,
+      "denominator": 1
+    },
+    "hasVideo": true,
+    "hasAudio": true,
+    "maxDurationDriftFrames": 1
+  },
+  "provenance": {
+    "generator": "vibeedit-revision-stress-test",
+    "generatorVersion": "1.0.0",
+    "createdAt": "2026-07-17T00:00:00Z",
+    "schemaSource": "schema/composition.schema.json",
+    "catalogVersion": "0.1.0",
+    "skillPackages": [
+      "vibeedit://skill/vibeedit-lead-editor",
+      "vibeedit://skill/vibeedit-project-json-editor"
+    ]
+  }
+}

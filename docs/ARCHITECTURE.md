@@ -111,6 +111,45 @@ VibeEdit implementation version, backend/runtime version, model version, and
 schema version. Artifacts store the same inputs plus creation time and output
 hash. Users can inspect or invalidate any cached item.
 
+Output URIs are destinations rather than pixel or sample inputs. Render and
+revision hashes therefore exclude the URI while retaining container and codec
+settings. Hybrid renders also cache the lossless Python/FFmpeg media base
+separately from browser motion overlays, so a bounded text revision does not
+rebuild unchanged source clips, effects, transitions, or audio before final
+assembly.
+
+Incremental revision planning compares two canonical CompositionSpecs and emits
+changed fields, dirty video/audio ranges, changed and reusable artifacts,
+dependency reasons, required jobs, a stitch strategy, and expected reuse. The
+dependency graph gives sources, analysis/mask/tracking artifacts, timeline
+layers, video composites, audio mixes, and final output stable content hashes.
+Invalidation follows artifact dependencies transitively: a changed tracking
+artifact invalidates masks derived from it and every layer referencing those
+masks. Dependency-invalidated artifacts and layers are excluded from reusable
+claims even when their own serialized objects are unchanged. Analysis
+`sourceIds` also contribute source hashes and explicit source-to-artifact graph
+edges, so replacing media invalidates derived analysis even if its artifact
+declaration was not manually edited.
+Execution support remains explicit per revision class: bounded browser-motion
+changes use content-addressed composite-frame reuse, compatible container-only
+changes stream-copy encoded packets, and explicit audio-clip/SFX parameter
+changes remix audio while stream-copying video. Scene-tail removal stream-copies
+an exact packet-counted video prefix only when the previous artifact and its
+provenance digest match, all retained visual layers are unchanged or safely
+trimmed at the new boundary, and removed visual layers begin at or beyond the
+new end. Retained explicit music/SFX is rebuilt from the revised timeline and
+encoded once rather than packet-truncated. The output frame count and clean
+audio sample count are independently verified before reuse is reported.
+Planned transition, mid-scene, and segmentation-dependent range replacement is
+not reported as executable.
+
+No-op or destination-only revisions copy only a provenance-verified prior
+artifact. Audio and container revision executors also require the previous
+composition hash and output digest before reuse. Cross-family AAC container
+changes (for example MP4 to Matroska) do not blindly stream-copy audio because
+that can lose encoder-delay metadata; VibeEdit stream-copies video while
+rebuilding and encoding the audio mix directly into the target container.
+
 ## Versioning
 
 CompositionSpec starts at `1.0.0`. Readers reject unknown major versions and may

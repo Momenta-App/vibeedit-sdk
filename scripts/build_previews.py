@@ -67,6 +67,7 @@ with tempfile.TemporaryDirectory(prefix="vibeedit-preview-") as temporary:
 
 subprocess.run([ffmpeg, "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "sine=frequency=72:sample_rate=48000:duration=0.4", "-af", "volume=-10dB,afade=t=out:st=0.08:d=0.32", str(previews / "impact.wav")], check=True)
 
+existing_assets = json.loads((root / "catalog" / "assets.json").read_text(encoding="utf-8"))["assets"]
 assets = []
 for path, category, tags, gain in (
     (previews / "effect-transition.mp4", "preview-video", ["effect", "transition"], None),
@@ -104,11 +105,12 @@ for path, category, tags, gain in (
         "commercialOutputAllowed": True,
         "decodable": True,
     })
+assets.extend(asset for asset in existing_assets if "text-effect-conformance" in asset.get("tags", []))
 (root / "catalog" / "assets.json").write_text(json.dumps({"schemaVersion": "1.0.0", "assets": assets}, indent=2) + "\n")
 catalog_path = root / "catalog" / "catalog.json"
 catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
 for item in catalog["items"]:
-    if item["id"] in {"vibeedit://text/mogrt-aesthetic-purple", "vibeedit://text/caption-highlight", "vibeedit://template/portable-motion-showcase"}:
+    if item["id"] == "vibeedit://template/portable-motion-showcase":
         item["preview"] = {"status": "verified", "uri": "previews/portable-motion-showcase.mp4", "mediaType": "video/mp4", "note": "Rendered from the packaged portable-motion-showcase example through pinned Chromium and FFmpeg."}
     if item["id"].startswith("vibeedit://template/") and item["id"].rsplit("/", 1)[-1] in {"fan-edit", "beat-synchronized", "sound-design-layering", "face-follow-text", "mask-subject-effect", "multiple-transitions", "transparent-motion-overlay"}:
         identifier = item["id"].rsplit("/", 1)[-1]

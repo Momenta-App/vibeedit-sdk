@@ -1,6 +1,6 @@
 {
   "name": "vibeedit",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0-beta.3",
   "description": "VibeEdit-owned CompositionSpec, deterministic HTML motion runtime, catalog, and Node CLI.",
   "type": "module",
   "main": "./src/index.js",
@@ -35,6 +35,8 @@
     "!experiments/**/target/",
     "!experiments/**/output/",
     "!experiments/**/concurrency-output/",
+    "!experiments/**/review/",
+    "!experiments/**/sources/",
     "!experiments/**/__pycache__/",
     "!experiments/**/*.pyc",
     "index.d.ts",

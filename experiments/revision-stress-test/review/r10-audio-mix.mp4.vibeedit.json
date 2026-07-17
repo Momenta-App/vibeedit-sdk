@@ -1,0 +1,374 @@
+{
+  "compositionId": "revision-stress-video",
+  "compositionSha256": "81506635e726194ece174e5b0755e12fb272d7c10ca31a4bfe1e733d207db179",
+  "implementationVersion": "0.1.0b2",
+  "output": {
+    "bytes": 710428,
+    "path": "r10-audio-mix.mp4",
+    "sha256": "ce96f0da3dd5fcc9796247880fa7c69f1af60870d359bff37f68b525e86173d3"
+  },
+  "revisionPlan": {
+    "changedArtifacts": [],
+    "changedFields": [
+      "/render/output/uri",
+      "/timeline/tracks/2/items/0/fadeInFrames",
+      "/timeline/tracks/2/items/0/fadeOutFrames",
+      "/timeline/tracks/2/items/0/gainDb",
+      "/timeline/tracks/2/items/0/pan",
+      "/timeline/tracks/2/items/2/gainDb"
+    ],
+    "decodeWorkAvoided": [
+      "scene-a",
+      "scene-b"
+    ],
+    "dependencyGraph": {
+      "edges": [
+        {
+          "from": "source:scene-a",
+          "reason": "layer decodes source media",
+          "to": "layer:clip-a"
+        },
+        {
+          "from": "source:scene-b",
+          "reason": "layer decodes source media",
+          "to": "layer:clip-b"
+        },
+        {
+          "from": "source:music",
+          "reason": "layer decodes source media",
+          "to": "layer:music-bed"
+        },
+        {
+          "from": "layer:clip-a",
+          "reason": "active layer contributes pixels",
+          "to": "composite:video"
+        },
+        {
+          "from": "layer:clip-b",
+          "reason": "active layer contributes pixels",
+          "to": "composite:video"
+        },
+        {
+          "from": "layer:crossfade",
+          "reason": "active layer contributes pixels",
+          "to": "composite:video"
+        },
+        {
+          "from": "layer:title",
+          "reason": "active layer contributes pixels",
+          "to": "composite:video"
+        },
+        {
+          "from": "layer:chapter",
+          "reason": "active layer contributes pixels",
+          "to": "composite:video"
+        },
+        {
+          "from": "layer:end",
+          "reason": "active layer contributes pixels",
+          "to": "composite:video"
+        },
+        {
+          "from": "layer:music-bed",
+          "reason": "active layer contributes samples",
+          "to": "mix:audio"
+        },
+        {
+          "from": "layer:opening-hit",
+          "reason": "active layer contributes samples",
+          "to": "mix:audio"
+        },
+        {
+          "from": "layer:transition-hit",
+          "reason": "active layer contributes samples",
+          "to": "mix:audio"
+        },
+        {
+          "from": "layer:final-hit",
+          "reason": "active layer contributes samples",
+          "to": "mix:audio"
+        },
+        {
+          "from": "layer:accent-hit",
+          "reason": "active layer contributes samples",
+          "to": "mix:audio"
+        },
+        {
+          "from": "composite:video",
+          "reason": "video enters final assembly",
+          "to": "output:final"
+        },
+        {
+          "from": "mix:audio",
+          "reason": "audio enters final assembly",
+          "to": "output:final"
+        }
+      ],
+      "nodes": [
+        {
+          "hash": "90fb161b5602db8bf8002c894f97b67ba6904143509a0db54faebc77c3069679",
+          "id": "source:scene-a",
+          "kind": "source"
+        },
+        {
+          "hash": "84d4fe9fcb11a78951ae8e7d38f66793d7da5038b794660ab3cd598f5cb1b40e",
+          "id": "source:scene-b",
+          "kind": "source"
+        },
+        {
+          "hash": "9fde0cc6ff0c7ddd164bf0c24174753f866cf566f577a58b8bc2845ef8f18c96",
+          "id": "source:music",
+          "kind": "source"
+        },
+        {
+          "frameRange": {
+            "endFrame": 120,
+            "startFrame": 0
+          },
+          "hash": "96bb3516cb59cf78fb97eb5c3fe9b96d30be70bc9161d4931304927f7a286ad0",
+          "id": "layer:clip-a",
+          "kind": "video"
+        },
+        {
+          "frameRange": {
+            "endFrame": 210,
+            "startFrame": 102
+          },
+          "hash": "905810fb00b4d62c6e1aa605c340a7437fcd352b7ca9b47a6e3bd94cade12df4",
+          "id": "layer:clip-b",
+          "kind": "video"
+        },
+        {
+          "frameRange": {
+            "endFrame": 120,
+            "startFrame": 102
+          },
+          "hash": "0857d069df7921273a888436c3f5fa9f41e807003a525ffd6c912e50ad6e0fbd",
+          "id": "layer:crossfade",
+          "kind": "transition"
+        },
+        {
+          "frameRange": {
+            "endFrame": 70,
+            "startFrame": 0
+          },
+          "hash": "412780d50d0fceac1a2e7b712c43c1705daf2530674acd2e3547ecea618d80f8",
+          "id": "layer:title",
+          "kind": "motion"
+        },
+        {
+          "frameRange": {
+            "endFrame": 150,
+            "startFrame": 72
+          },
+          "hash": "4c8df256d33ca9e9409acfc5c77087337e156db63279bc59de82d731162ab7c8",
+          "id": "layer:chapter",
+          "kind": "motion"
+        },
+        {
+          "frameRange": {
+            "endFrame": 210,
+            "startFrame": 152
+          },
+          "hash": "f83363baeb7baca398654f0bd88be5ea7905aec7d270660d1476477c5e26432f",
+          "id": "layer:end",
+          "kind": "motion"
+        },
+        {
+          "frameRange": {
+            "endFrame": 210,
+            "startFrame": 0
+          },
+          "hash": "ee94b2af3a28a40121a73cfa5762823c13f6364b5cf89dd395f5245e7e753d03",
+          "id": "layer:music-bed",
+          "kind": "audio"
+        },
+        {
+          "frameRange": {
+            "endFrame": 26,
+            "startFrame": 8
+          },
+          "hash": "0876108a3c9c424be6c5697dcb847f6c8e189abbc8b5c6178067df4e455e812b",
+          "id": "layer:opening-hit",
+          "kind": "sound_effect"
+        },
+        {
+          "frameRange": {
+            "endFrame": 108,
+            "startFrame": 90
+          },
+          "hash": "aeac14b7665725eb55b9c6c7b33d76d0775acdd4072a7c063726d1b67da835d4",
+          "id": "layer:transition-hit",
+          "kind": "sound_effect"
+        },
+        {
+          "frameRange": {
+            "endFrame": 192,
+            "startFrame": 174
+          },
+          "hash": "19a0ed0ca6670d1aa8ab69fdfc7e0438f23fe6053de840ffd48d0487b4dd8944",
+          "id": "layer:final-hit",
+          "kind": "sound_effect"
+        },
+        {
+          "frameRange": {
+            "endFrame": 146,
+            "startFrame": 132
+          },
+          "hash": "88654aea50a0bf489216222d91d3febc031bf6508f5ff8acdc4d9175fc99064a",
+          "id": "layer:accent-hit",
+          "kind": "sound_effect"
+        },
+        {
+          "hash": "7f87ecf995a4997d0f77cba4897cffe46d98168584ff2d11b7b1e39c0923ed0e",
+          "id": "composite:video",
+          "kind": "composite"
+        },
+        {
+          "hash": "d1b56b5fa3b1eb1f63eb5b051e53438c0a3b0f199d055ae6c3a647d77058ed0c",
+          "id": "mix:audio",
+          "kind": "audio-mix"
+        },
+        {
+          "hash": "f6ea1f58356eefd4e411e4d95da96bb1e4266cc6de6efcbfcaed08a27ed48c56",
+          "id": "output:final",
+          "kind": "output"
+        }
+      ]
+    },
+    "dirtyAudioRanges": [
+      {
+        "endFrame": 210,
+        "startFrame": 0
+      }
+    ],
+    "dirtyFrameRanges": [],
+    "dirtyLayers": [
+      {
+        "id": "music-bed",
+        "kind": "audio",
+        "reason": "audio layer parameters changed"
+      },
+      {
+        "id": "transition-hit",
+        "kind": "sound_effect",
+        "reason": "audio layer parameters changed"
+      }
+    ],
+    "executionStatus": "verified-audio-remix",
+    "expectedReuse": {
+      "dirtyFrames": 0,
+      "ratio": 1.0,
+      "reusedFrames": 210,
+      "totalFrames": 210
+    },
+    "incrementalEligible": true,
+    "previousCompositionHash": "8cf4c5aca58c93dde657d10aa0132091cc1d67566ee4e7cadeba3fec8314b88a",
+    "requiredRerenderJobs": [
+      {
+        "frameRange": {
+          "endFrame": 210,
+          "startFrame": 0
+        },
+        "kind": "audio-mix",
+        "layerIds": [
+          "music-bed",
+          "transition-hit"
+        ],
+        "reason": "audio parameters changed without changing video pixels"
+      },
+      {
+        "kind": "remux",
+        "reason": "replace the audio stream while reusing encoded video"
+      }
+    ],
+    "reusableArtifacts": [
+      {
+        "id": "scene-a",
+        "kind": "source-decoding",
+        "reason": "source identity is unchanged"
+      },
+      {
+        "id": "scene-b",
+        "kind": "source-decoding",
+        "reason": "source identity is unchanged"
+      },
+      {
+        "id": "clip-a",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      },
+      {
+        "id": "clip-b",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      },
+      {
+        "id": "crossfade",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      },
+      {
+        "id": "title",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      },
+      {
+        "id": "chapter",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      },
+      {
+        "id": "end",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      },
+      {
+        "id": "opening-hit",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      },
+      {
+        "id": "final-hit",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      },
+      {
+        "id": "accent-hit",
+        "kind": "layer",
+        "reason": "layer content and placement are unchanged"
+      }
+    ],
+    "revisedCompositionHash": "81506635e726194ece174e5b0755e12fb272d7c10ca31a4bfe1e733d207db179",
+    "revisionKind": "audio",
+    "schemaVersion": "1.0.0",
+    "stitchPlan": {
+      "audioRanges": [
+        {
+          "endFrame": 210,
+          "startFrame": 0
+        }
+      ],
+      "ranges": [],
+      "reuseCleanFrames": true,
+      "strategy": "audio-only-remix-and-remux"
+    }
+  },
+  "schemaVersion": "1.0.0",
+  "work": {
+    "audioRangesRemixed": [
+      {
+        "endFrame": 210,
+        "startFrame": 0
+      }
+    ],
+    "decodeWorkAvoided": [
+      "scene-a",
+      "scene-b"
+    ],
+    "encodedVideoBytesReused": 592814,
+    "framesRendered": 0,
+    "framesReused": 210,
+    "reuseKind": "audio-only-remix"
+  }
+}

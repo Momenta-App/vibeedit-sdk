@@ -138,6 +138,65 @@ def render_frame_sequence(spec: JSONObject, sequence: str | Path, output: str | 
     return destination
 
 
+def render_audio_mix(spec: JSONObject, output: str | Path, base: str | Path = ".", *, audio_codec: str = "flac") -> Path:
+    destination = Path(output)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    rate = spec["canvas"]["frameRate"]
+    sources = {source["id"]: source for source in spec["sources"]}
+    audio_clips = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "audio"]
+    sound_effects = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "sound_effect"]
+    if not audio_clips and not sound_effects:
+        raise FFmpegRenderError("audio-only revision requires at least one audio clip or sound effect")
+    command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y"]
+    for item in audio_clips:
+        source = sources.get(item["source"]["sourceId"])
+        if not source:
+            raise FFmpegRenderError(f"missing source: {item['source']['sourceId']}")
+        path = Path(source["uri"])
+        path = path if path.is_absolute() else Path(base) / path
+        if not path.is_file():
+            raise FFmpegRenderError(f"source file does not exist: {path}")
+        command.extend(["-i", str(path)])
+    for item in sound_effects:
+        duration = Fraction(item["placement"]["durationFrames"] * rate["denominator"], rate["numerator"])
+        command.extend(["-f", "lavfi", "-i", f"sine=frequency={float(item['params'].get('frequency', 72))}:sample_rate={spec['canvas'].get('audioSampleRate', 48000)}:duration={float(duration):.9f}"])
+    chains = []
+    labels = []
+    for index, item in enumerate(audio_clips):
+        start = Fraction(item["source"]["inFrame"] * rate["denominator"], rate["numerator"])
+        duration = Fraction(item["source"]["durationFrames"] * rate["denominator"], rate["numerator"])
+        delay = round(item["placement"]["startFrame"] * 1000 * rate["denominator"] / rate["numerator"])
+        pan = max(-1.0, min(1.0, float(item.get("pan", 0))))
+        filters = [f"atrim=start={float(start):.9f}:duration={float(duration):.9f}", "asetpts=PTS-STARTPTS", "aformat=channel_layouts=stereo", f"volume={item.get('gainDb', 0)}dB", f"pan=stereo|c0={1 - max(0.0, pan):.6f}*c0|c1={1 + min(0.0, pan):.6f}*c1"]
+        fade_in = item.get("fadeInFrames", 0) * rate["denominator"] / rate["numerator"]
+        fade_out = item.get("fadeOutFrames", 0) * rate["denominator"] / rate["numerator"]
+        if fade_in:
+            filters.append(f"afade=t=in:st=0:d={fade_in:.9f}")
+        if fade_out:
+            filters.append(f"afade=t=out:st={max(0.0, float(duration) - fade_out):.9f}:d={fade_out:.9f}")
+        filters.append(f"adelay={delay}|{delay}")
+        label = f"audio{index}"
+        chains.append(f"[{index}:a]{','.join(filters)}[{label}]")
+        labels.append(f"[{label}]")
+    for index, item in enumerate(sound_effects, len(audio_clips)):
+        delay = round(item["placement"]["startFrame"] * 1000 * rate["denominator"] / rate["numerator"])
+        duration = item["placement"]["durationFrames"] * rate["denominator"] / rate["numerator"]
+        fade_start = max(0.0, duration * 0.2)
+        fade_duration = max(0.001, duration - fade_start)
+        label = f"sfx{index}"
+        chains.append(f"[{index}:a]volume={item.get('gainDb', 0)}dB,afade=t=out:st={fade_start:.6f}:d={fade_duration:.6f},adelay={delay}|{delay}[{label}]")
+        labels.append(f"[{label}]")
+    total = Fraction(spec["durationFrames"] * rate["denominator"], rate["numerator"])
+    chains.append(f"{''.join(labels)}amix=inputs={len(labels)}:duration=longest:normalize=0,aresample=async=1:first_pts=0,apad,atrim=0:{float(total):.9f}[audio]")
+    command.extend(["-filter_complex", ";".join(chains), "-map", "[audio]", "-c:a", audio_codec, "-ar", str(spec["canvas"].get("audioSampleRate", 48000)), "-map_metadata", "-1", str(destination)])
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    if result.returncode:
+        raise FFmpegRenderError(result.stderr.strip() or f"ffmpeg failed with exit code {result.returncode}")
+    if not destination.is_file() or destination.stat().st_size == 0:
+        raise FFmpegRenderError("ffmpeg returned success without a non-empty audio mix")
+    return destination
+
+
 @contextmanager
 def frame_stream_encoder(spec: JSONObject, output: str | Path):
     destination = Path(output)
@@ -340,11 +399,10 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
         (item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "video"),
         key=lambda item: item["placement"]["startFrame"],
     )
-    if not 1 <= len(clips) <= 2:
-        raise FFmpegRenderError("alpha media renderer supports one or two video clips")
+    if not clips:
+        raise FFmpegRenderError("media renderer requires at least one video clip")
     transitions = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "transition"]
-    if len(clips) == 2 and len(transitions) != 1:
-        raise FFmpegRenderError("two-clip alpha render requires exactly one transition")
+    timeline_steps = _video_timeline_steps(clips, transitions, spec["durationFrames"])
     command = [ffmpeg_path(), "-hide_banner", "-loglevel", "error", "-y"]
     for clip in clips:
         source = sources.get(clip["source"]["sourceId"])
@@ -389,16 +447,19 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
             for effect in clip.get("effects", [])
             if effect.get("enabled", True)
         )
+        filters.extend([f"fps={frame_rate}", f"tpad=stop_mode=clone:stop_duration={float(duration):.9f}", f"trim=duration={float(duration):.9f}", "setpts=PTS-STARTPTS", "settb=AVTB"])
         chains.append(f"[{index}:v]{','.join(filters)}[clip{index}]")
 
     video_label = "clip0"
-    if len(clips) == 2:
-        transition = transitions[0]
-        offset_frames = transition["placement"]["startFrame"] - clips[0]["placement"]["startFrame"]
-        chains.append(
-            f"[clip0][clip1]{transition_filter(transition['transitionId'], transition.get('params', {}), duration_frames=transition['placement']['durationFrames'], offset_frames=offset_frames, numerator=rate['numerator'], denominator=rate['denominator'])}[video]"
-        )
-        video_label = "video"
+    for index, transition in enumerate(timeline_steps, 1):
+        next_label = "video" if index == len(clips) - 1 else f"video{index}"
+        if transition:
+            chains.append(
+                f"[{video_label}][clip{index}]{transition_filter(transition['transitionId'], transition.get('params', {}), duration_frames=transition['placement']['durationFrames'], offset_frames=transition['placement']['startFrame'], numerator=rate['numerator'], denominator=rate['denominator'])}[{next_label}]"
+            )
+        else:
+            chains.append(f"[{video_label}][clip{index}]concat=n=2:v=1:a=0[{next_label}]")
+        video_label = next_label
 
     audio_label = None
     labels = []
@@ -435,7 +496,7 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
             labels.append(f"[{label}]")
     if labels:
         total = Fraction(spec["durationFrames"] * rate["denominator"], rate["numerator"])
-        chains.append(f"{''.join(labels)}amix=inputs={len(labels)}:duration=longest:normalize=0,apad,atrim=0:{float(total):.9f}[audio]")
+        chains.append(f"{''.join(labels)}amix=inputs={len(labels)}:duration=longest:normalize=0,aresample=async=1:first_pts=0,apad,atrim=0:{float(total):.9f}[audio]")
         audio_label = "audio"
 
     command.extend(["-filter_complex", ";".join(chains), "-map", f"[{video_label}]"])
@@ -454,3 +515,36 @@ def render_media(spec: JSONObject, output: str | Path | None = None, base: str |
     if not destination.is_file() or destination.stat().st_size == 0:
         raise FFmpegRenderError("ffmpeg returned success without a non-empty output")
     return destination
+
+
+def _video_timeline_steps(clips: list[JSONObject], transitions: list[JSONObject], duration_frames: int) -> list[JSONObject | None]:
+    if clips[0]["placement"]["startFrame"] != 0:
+        raise FFmpegRenderError("the first video clip must start at frame zero")
+    transition_by_pair = {}
+    for transition in transitions:
+        pair = (transition["fromItemId"], transition["toItemId"])
+        if pair in transition_by_pair:
+            raise FFmpegRenderError(f"duplicate transition between {pair[0]} and {pair[1]}")
+        transition_by_pair[pair] = transition
+    steps = []
+    used = set()
+    for previous, current in zip(clips, clips[1:]):
+        transition = transition_by_pair.get((previous["id"], current["id"]))
+        previous_end = previous["placement"]["startFrame"] + previous["placement"]["durationFrames"]
+        if not transition:
+            if current["placement"]["startFrame"] != previous_end:
+                raise FFmpegRenderError(f"video clips {previous['id']} and {current['id']} require a clean boundary or an explicit adjacent transition")
+            steps.append(None)
+            continue
+        overlap = transition["placement"]
+        if overlap["startFrame"] != current["placement"]["startFrame"] or overlap["startFrame"] + overlap["durationFrames"] != previous_end:
+            raise FFmpegRenderError(f"transition {transition['id']} must exactly cover the overlap between {previous['id']} and {current['id']}")
+        steps.append(transition)
+        used.add(transition["id"])
+    unused = sorted(transition["id"] for transition in transitions if transition["id"] not in used)
+    if unused:
+        raise FFmpegRenderError(f"transitions must connect adjacent video clips: {', '.join(unused)}")
+    final_end = clips[-1]["placement"]["startFrame"] + clips[-1]["placement"]["durationFrames"]
+    if final_end != duration_frames:
+        raise FFmpegRenderError(f"video timeline ends at frame {final_end}, but composition duration is {duration_frames}")
+    return steps

@@ -332,7 +332,7 @@ def _sam_provider() -> tuple[tuple[str, ...], JSONObject] | None:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return None
-    if manifest.get("capability") not in {"sam.2.1", "sam.3.1"}:
+    if manifest.get("capability") != "sam.2.1":
         return None
     if not all(isinstance(manifest.get(key), str) and manifest[key] for key in ("id", "version", "license")):
         return None

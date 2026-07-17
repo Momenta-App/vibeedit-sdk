@@ -123,9 +123,12 @@ export declare function validateComposition(spec: JSONObject): JSONObject;
 export declare function canonicalJson(value: JSONValue): string;
 
 export interface CatalogManifestItem extends JSONObject { id: string; name: string; description: string; category: CatalogCategory; version: string }
+export interface CatalogSearchOptions { category?: CatalogCategory; capability?: string; platform?: "macos" | "windows" | "linux"; limit?: number }
+export interface CompactCatalogResult extends JSONObject { id: string; name: string; intent: string; category: CatalogCategory; requiredCapability: string; backends: string[]; determinism: string; parameterCount: number; preview: string; compatibility: string[]; estimatedSetupCost: string; estimatedRenderCost: string; setupRequirements: string[]; confidence: number; reason: string }
 export declare function catalog(): { schemaVersion: string; catalogVersion: string; items: CatalogManifestItem[] };
 export declare function listCatalog(category?: CatalogCategory): CatalogManifestItem[];
-export declare function searchCatalog(query: string): CatalogManifestItem[];
+export declare function searchCatalog(query: string, options?: CatalogSearchOptions): CatalogManifestItem[];
+export declare function compactCatalogResult(item: CatalogManifestItem, query: string): CompactCatalogResult;
 export declare function inspectCatalogItem(id: string): CatalogManifestItem;
 export declare function createExample(id: string, destination?: string): string;
 
@@ -143,6 +146,6 @@ export declare function documentForFrame(spec: JSONObject, frame: number, option
 export declare function trackingPointAt(points: JSONObject[], frame: number, fallback?: { x: number; y: number }): Readonly<{ x: number; y: number }>;
 export declare function renderMotionFrame(spec: JSONObject, frame: number, output: string, options?: { transparent?: boolean }): Promise<string>;
 
-export declare const VERSION: "0.1.0-beta.2";
-export declare const vibeedit: Readonly<{ name: "VibeEdit"; version: "0.1.0-beta.2"; website: "https://vibeedit.com"; npm: "https://www.npmjs.com/package/vibeedit"; schemaVersion: "1.0.0"; catalogVersion: "0.1.0" }>;
+export declare const VERSION: "0.1.0-beta.3";
+export declare const vibeedit: Readonly<{ name: "VibeEdit"; version: "0.1.0-beta.3"; website: "https://vibeedit.com"; npm: "https://www.npmjs.com/package/vibeedit"; schemaVersion: "1.0.0"; catalogVersion: "0.1.0" }>;
 export default vibeedit;

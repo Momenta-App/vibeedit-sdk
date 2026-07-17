@@ -1,6 +1,27 @@
 # Changelog
 
+## 0.1.0 beta 3 - Unreleased
+
+- Expand the canonical FFmpeg media path from one/two clips to validated
+  multi-clip fan-edit timelines with mixed clean cuts and explicit overlaps.
+- Replace the two-shot fan-edit example with a five-moment
+  hook/setup/build/drop/aftershock structure, selective stutter, music, and SFX.
+- Add retained-audio scene-tail revisions that stream-copy the exact approved
+  video prefix, rebuild audio without AAC packet drift, and verify provenance,
+  frame count, samples, and clean-render correlation.
+- Add nine-round fan-edit and sixteen-round hybrid revision studies with flat
+  review folders, clean controls, contact sheets, and isolated timing trials.
+- Preserve text-effect asset ledger entries when rebuilding workflow previews.
+- Exclude generated experiment review media and source fixtures from package
+  archives.
+
 ## 0.1.0 beta 2 - Unreleased
+
+- Clarify beta.1 release versus beta.2 source-candidate messaging.
+- Add token-efficient bounded catalog search and detailed example discovery.
+- Add explicit core-versus-optional readiness summaries and setup guidance.
+- Add actionable missing-file errors and richer Node/Python command help.
+- Keep catalog browsing background-only unless `--browser` is explicit in both CLIs.
 
 - Give the materially changed post-beta.1 candidate a distinct npm/Python
   package identity so it cannot be confused with or overwrite the existing

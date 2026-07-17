@@ -1,0 +1,47 @@
+{
+  "cacheHit": false,
+  "cacheKey": "29af09962af3661f1fd0696e3b8c8d772e56367d8ec3e915b66e63458f813c51",
+  "compositionId": "fan-edit",
+  "compositionSha256": "7cd263a34b79f29bbc6d6831bf1e5e7c83f772f556fa3c7d311db1ed5e6a6fc0",
+  "implementationVersion": "0.1.0b2",
+  "output": {
+    "bytes": 218235,
+    "path": "r01-hook-punch.mp4",
+    "sha256": "5d05c30de6038fb6c20bc5513bf5f5d49edc01438b936ed50cc77b7f9ddffa7d"
+  },
+  "runtimeVersions": {
+    "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "schemaVersion": "1.0.0",
+  "sourceIdentities": [
+    {
+      "algorithm": "sha256",
+      "value": "d9d12e11d09a583643a84a11fba9d2fb88b08aa256db73d8e98f03e2b4944e36"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "61acb9bf2194fff37c7011e76100bc5562cb00df319008a3cb83a368114139cf"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "928720b9452bc1be3e4534b18139006d6368223a71101f599febf5ca7bb7a8ab"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "27d7b6804012548a7a6857a9ba6a08082b9440bd1438c2e35b1a1478dff8a3a0"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "99d266ada9a9d311a0e64aeb66e8e884b2d48b3898d9b8b0833c64c556c51e94"
+    },
+    {
+      "algorithm": "sha256",
+      "value": "c418d75fe256f08572fc9a8f2b4b73c81bc6ad871d1ec204799a6f8f6a9d6a50"
+    }
+  ],
+  "work": {
+    "framesRendered": 180,
+    "framesReused": 0,
+    "reuseKind": "none"
+  }
+}

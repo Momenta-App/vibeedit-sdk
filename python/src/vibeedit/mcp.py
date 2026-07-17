@@ -4,9 +4,10 @@ import json
 import sys
 from pathlib import Path
 
-from vibeedit.catalog import inspect_catalog_item, search_catalog
+from vibeedit.catalog import compact_catalog_result, inspect_catalog_item, search_catalog
 from vibeedit.ffmpeg import probe
 from vibeedit.render import render
+from vibeedit.revision import plan_revision
 from vibeedit.spec import JSONObject
 from vibeedit.validation import validate_composition
 from vibeedit.verify import verify_output
@@ -14,8 +15,9 @@ from vibeedit.version import VERSION
 
 
 TOOLS = [
-    {"name": "search_catalog", "description": "Search VibeEdit capabilities", "inputSchema": {"type": "object", "required": ["query"], "properties": {"query": {"type": "string"}}}},
+    {"name": "search_catalog", "description": "Return up to five compact ranked VibeEdit capabilities; inspect one stable ID for full details", "inputSchema": {"type": "object", "required": ["query"], "properties": {"query": {"type": "string"}, "limit": {"type": "integer", "minimum": 1, "maximum": 20, "default": 5}, "category": {"type": "string"}, "capability": {"type": "string"}, "platform": {"enum": ["macos", "windows", "linux"]}}}},
     {"name": "inspect_catalog_item", "description": "Inspect one stable catalog item", "inputSchema": {"type": "object", "required": ["id"], "properties": {"id": {"type": "string"}}}},
+    {"name": "plan_revision", "description": "Compare previous and revised CompositionSpecs and explain dirty ranges, reusable artifacts, jobs, and execution support", "inputSchema": {"type": "object", "required": ["previous", "revised"], "properties": {"previous": {"type": "object"}, "revised": {"type": "object"}}}},
     {"name": "inspect_media", "description": "Probe a local media file", "inputSchema": {"type": "object", "required": ["path"], "properties": {"path": {"type": "string"}}}},
     {"name": "create_composition", "description": "Write a supplied CompositionSpec after validation", "inputSchema": {"type": "object", "required": ["spec", "path"], "properties": {"spec": {"type": "object"}, "path": {"type": "string"}}}},
     {"name": "apply_effect", "description": "Apply an effect entry to a clip in a CompositionSpec", "inputSchema": {"type": "object", "required": ["spec", "clipId", "effect"], "properties": {"spec": {"type": "object"}, "clipId": {"type": "string"}, "effect": {"type": "object"}}}},
@@ -49,9 +51,24 @@ def handle_request(request: JSONObject) -> JSONObject | None:
 
 def call_tool(name: str, arguments: JSONObject) -> JSONObject | list[JSONObject]:
     if name == "search_catalog":
-        return search_catalog(str(arguments["query"]))
+        limit = int(arguments.get("limit", 5))
+        if limit > 20:
+            raise ValueError("search_catalog limit cannot exceed 20")
+        query = str(arguments["query"])
+        return [
+            compact_catalog_result(item, query)
+            for item in search_catalog(
+                query,
+                category=str(arguments["category"]) if arguments.get("category") else None,
+                capability=str(arguments["capability"]) if arguments.get("capability") else None,
+                platform=str(arguments["platform"]) if arguments.get("platform") else None,
+                limit=limit,
+            )
+        ]
     if name == "inspect_catalog_item":
         return inspect_catalog_item(str(arguments["id"]))
+    if name == "plan_revision":
+        return plan_revision(arguments["previous"], arguments["revised"])
     if name == "inspect_media":
         return probe(str(arguments["path"]))
     if name == "create_composition":

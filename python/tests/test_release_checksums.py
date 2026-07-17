@@ -15,9 +15,9 @@ def test_release_checksums_match_flat_github_assets_and_nested_workflow_artifact
     npm.mkdir()
     python.mkdir()
     (python / ".gitignore").write_text("*\n", encoding="utf-8")
-    (npm / "vibeedit-0.1.0-beta.2.tgz").write_bytes(b"npm archive")
-    (python / "vibeedit-0.1.0b2-py3-none-any.whl").write_bytes(b"wheel archive")
-    (python / "vibeedit-0.1.0b2.tar.gz").write_bytes(b"source archive")
+    (npm / "vibeedit-0.1.0-beta.3.tgz").write_bytes(b"npm archive")
+    (python / "vibeedit-0.1.0b3-py3-none-any.whl").write_bytes(b"wheel archive")
+    (python / "vibeedit-0.1.0b3.tar.gz").write_bytes(b"source archive")
     flat = tmp_path / "SHA256SUMS"
     tree = tmp_path / "SHA256SUMS.tree"
 
@@ -38,14 +38,14 @@ def test_release_checksums_match_flat_github_assets_and_nested_workflow_artifact
     )
 
     assert _manifest(flat) == {
-        "vibeedit-0.1.0-beta.2.tgz": _sha256(npm / "vibeedit-0.1.0-beta.2.tgz"),
-        "vibeedit-0.1.0b2-py3-none-any.whl": _sha256(python / "vibeedit-0.1.0b2-py3-none-any.whl"),
-        "vibeedit-0.1.0b2.tar.gz": _sha256(python / "vibeedit-0.1.0b2.tar.gz"),
+        "vibeedit-0.1.0-beta.3.tgz": _sha256(npm / "vibeedit-0.1.0-beta.3.tgz"),
+        "vibeedit-0.1.0b3-py3-none-any.whl": _sha256(python / "vibeedit-0.1.0b3-py3-none-any.whl"),
+        "vibeedit-0.1.0b3.tar.gz": _sha256(python / "vibeedit-0.1.0b3.tar.gz"),
     }
     assert _manifest(tree) == {
-        "npm/vibeedit-0.1.0-beta.2.tgz": _sha256(npm / "vibeedit-0.1.0-beta.2.tgz"),
-        "python/vibeedit-0.1.0b2-py3-none-any.whl": _sha256(python / "vibeedit-0.1.0b2-py3-none-any.whl"),
-        "python/vibeedit-0.1.0b2.tar.gz": _sha256(python / "vibeedit-0.1.0b2.tar.gz"),
+        "npm/vibeedit-0.1.0-beta.3.tgz": _sha256(npm / "vibeedit-0.1.0-beta.3.tgz"),
+        "python/vibeedit-0.1.0b3-py3-none-any.whl": _sha256(python / "vibeedit-0.1.0b3-py3-none-any.whl"),
+        "python/vibeedit-0.1.0b3.tar.gz": _sha256(python / "vibeedit-0.1.0b3.tar.gz"),
     }
 
 
