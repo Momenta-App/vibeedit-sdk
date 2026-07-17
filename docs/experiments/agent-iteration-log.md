@@ -98,3 +98,28 @@
 - Decision: keep.
 - Remaining limitation: source-video embedded audio is not independently mixed by the current full renderer, so this claim covers the same explicit audio-clip and procedural-SFX domains as the canonical full render.
 - Next question: execute transition-overlap replacement without re-encoding clean ranges.
+
+## 2026-07-17 — rejected monolithic transition cache
+
+- Commit: working tree after `0b66c66`.
+- Hypothesis: rebuilding one full lossless FFV1 composite from a cached previous render plus a newly rendered transition overlap would reduce revision latency.
+- User-style task: replace a 30-frame crossfade with a wipe in a 300-frame 1080p composition.
+- Backend/environment: FFmpeg FFV1 cache and H.264 final encode, macOS Apple Silicon, source mode through `uv`.
+- Initial comparison: 7.799261s nominal full mean versus 8.415449s incremental mean, a 0.926779x result and therefore a regression even before control correction. Later audit found the nominal baseline was cache-primed rather than canonical; the fair control is recorded below.
+- Reuse accounting: the output was exact and the plan identified 30 rendered/270 reusable frames, but the implementation re-encoded all 300 frames into a monolithic FFV1 intermediate before the final encode.
+- Decision: revert the monolithic intermediate design. Retain this negative result so the work counter is not mistaken for elapsed-time improvement.
+- Next question: preserve clean ranges as independently addressable lossless segments and concatenate them directly into the final encoder.
+
+## 2026-07-17 — rejected lossless transition-segment cache
+
+- Commit: working tree after `0b66c66`.
+- Hypothesis: a content-addressed segment manifest can replace only the dirty transition overlap without rebuilding a monolithic lossless cache.
+- User-style task: replace a 30-frame crossfade with a wipe in a 300-frame 1920x1080 composition, with an independently primed cache for each timing sample.
+- Backend/environment: FFmpeg lossless segments and deterministic H.264 final encode, macOS Apple Silicon, source mode through `uv`.
+- First result: FFV1 segments appeared to improve 7.754292s to 5.431526s (1.427645x), with 30 rendered/270 reused frames and byte-identical output. Audit found that the supposed full baseline also built the lossless cache, so it measured a 7.754292s cache-prime render rather than canonical cache-disabled full rendering. This result is invalid as a speedup claim.
+- Corrected control: canonical cache-disabled full samples were 4.744780s, 4.637785s, and 4.661931s; mean 4.681498s.
+- Follow-up: lossless H.264 segments reduced cache size while preserving exact encoded video and audio streams. Cache-prime samples were 13.497220s, 13.503817s, and 13.468124s. Warm revisions were 6.011497s, 5.848857s, and 5.869325s; mean 5.909893s, only 0.792146x the corrected full baseline and therefore 26.2% slower.
+- Reuse accounting: the prototype rendered 30 transition frames, reused 270 lossless composite frames and 10,581 encoded audio packet bytes, and correctly reported no avoided source decode. Those work counters did not translate into lower latency because lossless-segment decoding plus the required final H.264 encode cost more than direct source compositing.
+- Result quality: encoded video and audio stream hashes matched the canonical full render exactly. Visual review confirmed unchanged pre/post-overlap frames and the intended crossfade-to-wipe change; contact-sheet SHA-256 is `ada1169ae24bcc24c1083159bbf72f5bd34566509284f2947db38392d4656797`.
+- Decision: revert both segment-cache prototypes and keep transition execution explicitly planned. Preserve the planner correction that does not claim either source decode is avoided.
+- Next question: pursue a design that can reuse final encoded GOPs without weakening correctness, or prioritize scene-tail removal where packet-level reuse may be naturally aligned.

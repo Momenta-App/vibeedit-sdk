@@ -76,6 +76,7 @@ def test_transition_revision_invalidates_only_overlap_and_handles():
     assert plan["dirtyFrameRanges"] == [{"startFrame": 48, "endFrame": 60}]
     assert plan["requiredRerenderJobs"] == [{"kind": "transition", "layerIds": ["crossfade"], "frameRange": {"startFrame": 48, "endFrame": 60}, "sourceHandles": ["clip-a", "clip-b"], "reason": "transition implementation or parameters changed only within its overlap"}]
     assert plan["executionStatus"] == "planned-not-yet-executed"
+    assert plan["decodeWorkAvoided"] == []
 
 
 def test_scene_removal_reuses_prefix_and_source_artifacts():

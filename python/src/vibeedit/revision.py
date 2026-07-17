@@ -152,6 +152,8 @@ def _items_by_id(spec: JSONObject) -> dict[str, JSONObject]:
 def _decode_work_avoided(previous: JSONObject, revised: JSONObject, revision_kind: str) -> list[str]:
     if revision_kind == "full":
         return []
+    if revision_kind == "transition":
+        return []
     decoded_sources = {
         item["source"]["sourceId"]
         for track in revised["timeline"]["tracks"]
