@@ -78,6 +78,12 @@ def smoke_python(python: Path, root: Path) -> dict[str, object]:
     if not basic_report.get("passed") or not mixed_report.get("passed"):
         raise RuntimeError("clean wheel render verification failed")
 
+    browser_project = Path(run_json([str(python), "-m", "vibeedit.cli", "examples", "create", "browser-composition", str(examples), "--json"])["path"])
+    browser_report = run_json([str(python), "-m", "vibeedit.cli", "render-browser", str(browser_project / "job.json"), "--output", str(root / "browser.mp4"), "--backend", "screenshot", "--json"])
+    if browser_report.get("frames") != 12 or browser_report.get("backend") != "screenshot":
+        raise RuntimeError("clean wheel ordinary browser composition failed")
+    run([str(python), "-c", "from vibeedit.data import data_path; from vibeedit.browser_setup import native_paths; assert data_path('browser-renderer/host/host.mm').is_file(); assert data_path('browser-renderer/surface-bridge/src/lib.rs').is_file(); import vibeedit.browser_render; print(native_paths())"])
+
     requests = "\n".join(
         json.dumps(value)
         for value in (
@@ -107,6 +113,7 @@ def smoke_python(python: Path, root: Path) -> dict[str, object]:
         raise RuntimeError("clean wheel catalog or skill lifecycle smoke failed")
 
     return {
+        "browserComposition": browser_report,
         "version": run([str(python), "-m", "vibeedit.cli", "--version"]).stdout.strip(),
         "doctorReady": True,
         "browserSetupComplete": True,

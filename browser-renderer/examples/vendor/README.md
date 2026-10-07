@@ -1,0 +1,1 @@
+GSAP 3.13.0 is included for renderer timing qualification. Source: https://registry.npmjs.org/gsap/-/gsap-3.13.0.tgz. Its copyright and standard-license URL remain in the source header: https://gsap.com/standard-license.

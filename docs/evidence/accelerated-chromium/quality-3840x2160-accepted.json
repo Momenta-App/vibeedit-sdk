@@ -1,0 +1,286 @@
+{
+  "originalReportSha256": "a0ddecb2129d8fca4ae499cf1c38d544fd4be83532e997dbac1b167949f88381",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "job": "/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/tmpqn8yhp0f/job.json",
+    "threshold": {
+      "minimumPSNRdB": 32,
+      "meanPSNRdB": 35
+    },
+    "exports": [
+      {
+        "backend": "cef",
+        "meanPSNRdB": 47.07790334004872,
+        "minimumPSNRdB": 45.91461860661006,
+        "bytes": 13598588,
+        "render": {
+          "backend": "cef",
+          "browser": {
+            "jsVersion": "14.4.258.49",
+            "product": "Chrome/144.0.7559.257",
+            "protocolVersion": "1.3",
+            "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+          },
+          "platform": [
+            "macOS-26.4-arm64-arm-64bit",
+            "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+            "arm64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 90,
+          "dimensions": [
+            3840,
+            2160
+          ],
+          "bootstrapReadbackPixels": 8294400,
+          "frameRate": "30000/1001",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": 82944000,
+            "nativeHardwareRequired": true,
+            "matte": "black"
+          },
+          "audioVerification": {
+            "requestedSamples": 144144,
+            "packetSamples": 144144,
+            "roundingDriftSamples": 0,
+            "toleranceSamples": 1,
+            "sampleRate": 48000
+          },
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Menlo",
+                "custom": false,
+                "glyphCount": 13
+              },
+              {
+                "family": "Poppins",
+                "custom": true,
+                "glyphCount": 42
+              },
+              {
+                "family": "Helvetica",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "Apple Color Emoji",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "Kohinoor Devanagari",
+                "custom": false,
+                "glyphCount": 18
+              },
+              {
+                "family": "Apple SD Gothic Neo",
+                "custom": false,
+                "glyphCount": 3
+              },
+              {
+                "family": "Georgia",
+                "custom": false,
+                "glyphCount": 24
+              },
+              {
+                "family": "\u860b\u65b9-\u7c21",
+                "custom": false,
+                "glyphCount": 9
+              },
+              {
+                "family": "Geeza Pro",
+                "custom": false,
+                "glyphCount": 17
+              }
+            ],
+            "nodesExamined": 25,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+            "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+            "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+            "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+            "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+            "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+          },
+          "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+          "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 28.826389915997424,
+          "endToEndFps": 3.122139132311321,
+          "timingsSeconds": {
+            "seek": 2.226522745007969,
+            "captureEncode": 22.484483168016595,
+            "mux": 2.0518437909995555,
+            "preparation": 1.7044290000012552,
+            "assetReadinessSeconds": 0.002600000001490115,
+            "automaticAnimationSeconds": 0.0035000000037252897,
+            "browserSubmissionSeconds": 0.12969999999925488,
+            "customScriptSeconds": 0.07419999999552954,
+            "forcedLayoutSeconds": 0.012300000011920935,
+            "mediaSeekSeconds": 1.9494999999925495,
+            "gpuTransferConversionSeconds": 0.05232895833614748,
+            "nativeWaitSeconds": 0.11132216900000001,
+            "encoderAppendSeconds": 0.004315624000000001,
+            "encoderFlushSeconds": 0.00428175
+          },
+          "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-quality-du24vyl6/cef.mp4",
+          "sha256": "8a04de4590161e78637ca4898e61ccec011212ebab6b62fa871d18ecde145d32"
+        },
+        "passed": true
+      },
+      {
+        "backend": "screenshot",
+        "meanPSNRdB": 47.24716699911197,
+        "minimumPSNRdB": 45.54819112915068,
+        "bytes": 27036289,
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "jsVersion": "14.4.258.49",
+            "product": "Chrome/144.0.7559.257",
+            "protocolVersion": "1.3",
+            "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+          },
+          "platform": [
+            "macOS-26.4-arm64-arm-64bit",
+            "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+            "arm64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 90,
+          "dimensions": [
+            3840,
+            2160
+          ],
+          "bootstrapReadbackPixels": 8294400,
+          "frameRate": "30000/1001",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": 82944000,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": {
+            "requestedSamples": 144144,
+            "packetSamples": 144144,
+            "roundingDriftSamples": 0,
+            "toleranceSamples": 1,
+            "sampleRate": 48000
+          },
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Menlo",
+                "custom": false,
+                "glyphCount": 13
+              },
+              {
+                "family": "Poppins",
+                "custom": true,
+                "glyphCount": 42
+              },
+              {
+                "family": "Helvetica",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "Apple Color Emoji",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "Kohinoor Devanagari",
+                "custom": false,
+                "glyphCount": 18
+              },
+              {
+                "family": "Apple SD Gothic Neo",
+                "custom": false,
+                "glyphCount": 3
+              },
+              {
+                "family": "Georgia",
+                "custom": false,
+                "glyphCount": 24
+              },
+              {
+                "family": "\u860b\u65b9-\u7c21",
+                "custom": false,
+                "glyphCount": 9
+              },
+              {
+                "family": "Geeza Pro",
+                "custom": false,
+                "glyphCount": 17
+              }
+            ],
+            "nodesExamined": 25,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+            "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+            "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+            "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+            "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+            "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+          },
+          "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 32.40742029199828,
+          "endToEndFps": 2.7771417530022258,
+          "timingsSeconds": {
+            "seek": 2.262054008009727,
+            "captureEncode": 24.1163704630344,
+            "mux": 3.22211095899911,
+            "preparation": 1.815627374999167,
+            "assetReadinessSeconds": 0.00369999998062849,
+            "automaticAnimationSeconds": 0.0038000000044703477,
+            "browserSubmissionSeconds": 0.13349999999999992,
+            "customScriptSeconds": 0.07419999998062846,
+            "forcedLayoutSeconds": 0.013100000020116574,
+            "mediaSeekSeconds": 1.9586000000126655
+          },
+          "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-quality-du24vyl6/screenshot.mp4",
+          "sha256": "feff4a6e3b6e4e4a8514da21212804252a66a8fa793ec56dcef4ae073ec09ac6"
+        },
+        "passed": true
+      }
+    ],
+    "passed": true
+  }
+}

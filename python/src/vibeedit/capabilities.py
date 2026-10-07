@@ -47,6 +47,10 @@ def doctor() -> JSONObject:
         Capability("media.presets", numpy[0] and pillow[0], "numpy+pillow" if numpy[0] and pillow[0] else None, numpy[1], "333 deterministic image/effect/transition presets", 'Install with: pip install "vibeedit[effects]" or run vibeedit setup --effects.'),
         Capability("motion.html", playwright[0], "playwright" if playwright[0] else None, playwright[1], "Deterministic browser motion rendering", 'Install with: pip install "vibeedit[browser]"; then run vibeedit setup --browser.'),
     ]
+    from vibeedit.browser_setup import native_status
+
+    cef = native_status()
+    capabilities.append(Capability(cef["id"], cef["available"], cef["provider"], cef["version"], cef["detail"], cef["setup"]))
     capabilities.extend(Capability(item["id"], item["available"], item["provider"], None, item["detail"], item["setup"]) for item in CapabilityRouter().status())
     segmentation = next(item for item in capabilities if item.id == "vision.segmentation")
     sam = _sam_provider()
