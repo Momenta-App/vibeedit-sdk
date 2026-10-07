@@ -149,13 +149,13 @@ frame count and prior artifact provenance. Mid-scene removal remains planned.
 Install the Python beta directly from its GitHub release asset:
 
 ```bash
-uv tool install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.1/vibeedit-0.1.0b1-py3-none-any.whl
+uv tool install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.4/vibeedit-0.1.0b4-py3-none-any.whl
 ```
 
 Install the Node beta tarball in a project:
 
 ```bash
-npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.1/vibeedit-0.1.0-beta.1.tgz
+npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.4/vibeedit-0.1.0-beta.4.tgz
 ```
 
 When downloading all three beta-1 release archives manually, place them beside
@@ -185,9 +185,9 @@ Or build and install the exact local artifacts:
 
 ```bash
 uv build --out-dir dist/python
-uv tool install dist/python/vibeedit-0.1.0b3-py3-none-any.whl
+uv tool install dist/python/vibeedit-0.1.0b4-py3-none-any.whl
 npm pack --pack-destination dist/npm
-npm install ./dist/npm/vibeedit-0.1.0-beta.3.tgz
+npm install ./dist/npm/vibeedit-0.1.0-beta.4.tgz
 ```
 
 `setup` performs only explicitly requested work. It installs pinned browser and
@@ -199,6 +199,27 @@ binary SHA-256 and declared capability list, then downloads the exact portable
 object model declared in `runtime-models/manifest.json`. SAM setup downloads
 only its separately declared exact URLs, sizes, and SHA-256 values. No runtime
 model is included in the base wheel or npm archive.
+
+## Accelerated ordinary browser compositions
+
+The Python package accepts normal bundled HTML/CSS/JS with local media. Chromium owns fonts, layout, graphics and composition. No CompositionSpec is needed for this workflow. On macOS 15+ ARM64, the CEF backend captures GPU surfaces, converts on Metal, and encodes opaque H.264 with VideoToolbox.
+
+Install the exact beta.4 release wheel with the browser extra. Native setup requires FFmpeg, Xcode command-line tools, CMake, Ninja and Rust; it explicitly downloads the checksum-pinned CEF runtime and builds the bundled sources into the user cache:
+
+```bash
+vibeedit setup --cef --json
+vibeedit examples create browser-composition ./projects
+vibeedit render-browser ./projects/browser-composition/job.json --output ./movie.mp4 --backend cef --json
+```
+
+For portable Windows/Linux/macOS screenshot rendering:
+
+```bash
+vibeedit setup --browser --json
+vibeedit render-browser ./projects/browser-composition/job.json --output ./movie.mp4 --backend screenshot --json
+```
+
+`vibeedit browser-worker --backend cef` accepts JSON lines containing `id`, `job`, and `output` to reuse a warm background browser. Python callers can import `CEFService` and `render_browser_job` from `vibeedit.browser_render`. The Node CLI delegates these commands to an installed Python package. Rendering does not download dependencies. Alpha exports use the screenshot fallback; native acceleration is currently macOS ARM64 only. See [the renderer guide](browser-renderer/README.md) for media preparation, timing adapters and performance evidence.
 
 ## One composition contract
 

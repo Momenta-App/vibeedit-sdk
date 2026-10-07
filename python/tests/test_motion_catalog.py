@@ -103,7 +103,7 @@ def test_persistent_html_runtime_seeks_css_and_loads_project_fonts():
             ]
         },
     }
-    with playwright.sync_playwright() as runtime, _motion_asset_server(Path.cwd()) as urls:
+    with playwright.sync_playwright() as runtime, _motion_asset_server(data_path()) as urls:
         browser = runtime.chromium.launch(headless=True)
         context = browser.new_context(viewport={"width": 640, "height": 360})
         page = context.new_page()
@@ -180,7 +180,7 @@ def test_raw_html_css_atoms_render_and_seek_without_authored_javascript():
         "html": '<main class="ve-stage ve-center"><h1 id="title" class="ve-text ve-enter ve-gradient ve-shimmer ve-perspective ve-tilt" data-ve-from="bottom">ATOMS</h1><p id="blur" class="ve-text ve-blur-in ve-shadow">COMPOSED</p></main>',
         "css": ":root{--ve-duration:1s;--ve-rotate-y:18deg;--ve-gradient:linear-gradient(90deg,#fff,#8cf)}#title::after{content:' CSS';color:white}",
     }
-    with playwright.sync_playwright() as runtime, _motion_asset_server(Path.cwd()) as urls:
+    with playwright.sync_playwright() as runtime, _motion_asset_server(data_path()) as urls:
         browser = runtime.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": 640, "height": 360})
         _load_persistent_page(page, spec, urls)
@@ -210,7 +210,7 @@ def test_local_webgpu_project_can_compile_wgsl_when_adapter_is_available():
     item = spec["timeline"]["tracks"][0]["items"][0]
     item["renderer"] = "webgpu"
     item["props"] = {"html": "<canvas></canvas>", "javascript": "window.vibeedit={seek(){}} // WGSL"}
-    with playwright.sync_playwright() as runtime, _motion_asset_server(Path.cwd()) as urls:
+    with playwright.sync_playwright() as runtime, _motion_asset_server(data_path()) as urls:
         browser = runtime.chromium.launch(headless=True, args=["--enable-unsafe-webgpu"])
         page = browser.new_page(viewport={"width": 640, "height": 360})
         _load_persistent_page(page, spec, urls)

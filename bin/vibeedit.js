@@ -43,7 +43,7 @@ async function route(name, values) {
   if (name === "catalog") return catalogCommand(values);
   if (name === "examples") return examplesCommand(values);
   if (name === "skills") return skillsCommand(values);
-  if (["setup", "preview", "render", "revision", "verify", "clean", "mcp"].includes(name)) return python(name, values);
+  if (["setup", "preview", "render", "render-browser", "browser-worker", "revision", "verify", "clean", "mcp"].includes(name)) return python(name, values);
   throw new Error(`unknown command: ${name}. Run \`vibeedit --help\` to see supported commands.`);
 }
 
@@ -166,6 +166,12 @@ function skillsCommand(values) {
 function python(name, values) {
   const bridge = pythonBridge();
   if (!bridge.available) throw new Error('media commands require the Python distribution. Install it with: pip install "vibeedit[all]"');
+  if (name === "browser-worker") {
+    const worker = spawnSync(bridge.executable, [...bridge.prefix, "-m", "vibeedit", name, ...values], { stdio: "inherit" });
+    if (worker.error) throw worker.error;
+    process.exitCode = worker.status ?? 1;
+    return;
+  }
   const result = spawnSync(bridge.executable, [...bridge.prefix, "-m", "vibeedit", name, ...values], { encoding: "utf8" });
   if (result.status !== 0) throw new Error((result.stderr || result.stdout || `Python VibeEdit exited ${result.status}`).trim());
   const output = result.stdout.trim();
@@ -230,6 +236,8 @@ Commands:
   skills list|install|check|update|remove
   validate                Validate a CompositionSpec
   preview|render|verify   Run through the installed Python VibeEdit package
+  render-browser          Render an ordinary HTML/CSS/JS project through Python
+  browser-worker          Keep a browser warm for JSON-lines render jobs
   revision plan          Explain dirty ranges and reusable work before rendering
   clean|mcp               Run through the installed Python VibeEdit package
 
@@ -238,10 +246,12 @@ Use vibeedit <command> --help for command-specific guidance.`;
 
 function commandHelp(name) {
   const messages = {
-    setup: `Usage: vibeedit setup [--browser] [--effects] [--vision] [--sam] [--all] [--json]\n\nSetup runs through the Python package and downloads only explicitly selected runtimes.\n  --browser  Pinned Chromium for HTML/CSS/JS motion\n  --effects  NumPy/Pillow/OpenCV dependencies; no model download\n  --vision   Face/body/pose/object providers; may download a 29.5 MB model\n  --sam      SAM 2.1; downloads about 211.7 MB\n  --all      Every supported optional capability\n\nInstall the Python package first with: pip install "vibeedit[all]"`,
+    setup: `Usage: vibeedit setup [--cef] [--browser] [--effects] [--vision] [--sam] [--all] [--json]\n\nSetup runs through the Python package and downloads only explicitly selected runtimes.\n  --cef      Build accelerated CEF (macOS ARM64, Xcode/CMake/Ninja/Rust required)\n  --browser  Pinned Chromium for HTML/CSS/JS motion\n  --effects  NumPy/Pillow/OpenCV dependencies; no model download\n  --vision   Face/body/pose/object providers; may download a 29.5 MB model\n  --sam      SAM 2.1; downloads about 211.7 MB\n  --all      Every supported optional capability\n\nInstall the Python package first with: pip install "vibeedit[all]"`,
     doctor: "Usage: vibeedit doctor [--json]\n\nReports core FFmpeg readiness separately from optional HTML motion and Python media capabilities.",
     catalog: "Usage: vibeedit catalog search <query> [--compact] [--limit N|--all] [--category TYPE] [--capability NAME] [--platform current|macos|windows|linux] [--json]\n       vibeedit catalog open [--browser] [--json]\n\nCatalog open stays in the background unless --browser is explicit.",
     examples: "Usage: vibeedit examples list [--details] [--json]\n       vibeedit examples create <id> [destination|--output directory] [--json]\n\nThe example is created as <directory>/<id> and existing files are never overwritten.",
+    "render-browser": "Usage: vibeedit render-browser <job.json> --output video.mp4 [--backend cef|screenshot|auto] [--json]\n\nRequires Python VibeEdit and FFmpeg. Run vibeedit setup --cef for native acceleration or setup --browser for portable screenshots.",
+    "browser-worker": "Usage: vibeedit browser-worker [--backend cef|screenshot|auto]\n\nReads one JSON object per line with id, job, and output fields; requires the installed Python package.",
     render: "Usage: vibeedit render <composition.json> [--output video.mp4] [--json]\n\nRequires the Python package and FFmpeg. Run vibeedit doctor first.",
   };
   return messages[name] ?? help();

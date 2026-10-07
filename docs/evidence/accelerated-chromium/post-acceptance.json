@@ -1,0 +1,12 @@
+{
+  "originalReportSha256": "eddb1478488e1b9b77ffa26b3e7bd14243d4ad66e58ba0f2746cfe090a6b9ef2",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "passed": true,
+    "coldCLI": "cold-cli-accepted.json",
+    "quality": [
+      "quality-1920x1080-accepted.json",
+      "quality-3840x2160-accepted.json"
+    ]
+  }
+}

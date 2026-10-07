@@ -1,0 +1,16 @@
+{
+  "id": "browser-composition",
+  "name": "Ordinary Chromium composition",
+  "description": "Normal HTML/CSS/JS with exact frame timing. Render job.json using render-browser.",
+  "families": [
+    "browser",
+    "motion"
+  ],
+  "requirements": {
+    "extras": [
+      "browser"
+    ],
+    "models": []
+  },
+  "conditional": false
+}

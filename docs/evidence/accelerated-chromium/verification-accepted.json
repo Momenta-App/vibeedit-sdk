@@ -1,0 +1,194 @@
+{
+  "originalReportSha256": "a766f916ae5f9dd2859e8f4778eaafba3ab6fa230206def92d3d1513693fe962",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "started": 1791171268.221546,
+    "runs": [
+      {
+        "name": "integration",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/test_browser_render.py",
+          "tests/test_cli.py",
+          "tests/test_render.py",
+          "-q",
+          "--basetemp=/private/var/tmp/vibeedit-renderer-qualified-tests-20261004"
+        ],
+        "cwd": "<sdk-checkout>/python",
+        "exitCode": 0,
+        "seconds": 23.667576167001243
+      },
+      {
+        "name": "conformance",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/conformance.py",
+          "browser-renderer/examples/basic/job.json",
+          "browser-renderer/examples/corpus/job.json",
+          "browser-renderer/examples/features/job.json",
+          "browser-renderer/examples/gpu/job.json",
+          "--report",
+          "browser-renderer/evidence/conformance-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 11.285874916000466
+      },
+      {
+        "name": "media",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/media_check.py",
+          "--report",
+          "browser-renderer/evidence/media-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 14.730886875000579
+      },
+      {
+        "name": "normalized-media",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/media_check.py",
+          "--h264",
+          "--report",
+          "browser-renderer/evidence/normalized-media-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 12.001893707998534
+      },
+      {
+        "name": "browser-color",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/color_roundtrip.py",
+          "--report",
+          "browser-renderer/evidence/browser-color-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 12.620360499997332
+      },
+      {
+        "name": "reliability",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/reliability.py",
+          "--report",
+          "browser-renderer/evidence/reliability-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 15.473690874998283
+      },
+      {
+        "name": "gpu-recovery",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/gpu_recovery.py",
+          "--report",
+          "browser-renderer/evidence/gpu-recovery-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 17.060864792001667
+      },
+      {
+        "name": "service",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/service_check.py",
+          "--report",
+          "browser-renderer/evidence/service-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 11.673685290999856
+      },
+      {
+        "name": "memory",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/memory_check.py",
+          "--report",
+          "browser-renderer/evidence/memory-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 17.189673832999688
+      },
+      {
+        "name": "alpha",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/alpha_check.py",
+          "--report",
+          "browser-renderer/evidence/alpha-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 1.8947475829991163
+      },
+      {
+        "name": "quality",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/quality.py",
+          "browser-renderer/examples/corpus/job.json",
+          "--report",
+          "browser-renderer/evidence/quality-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 6.894649041998491
+      },
+      {
+        "name": "profile",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/profile.py",
+          "--report",
+          "browser-renderer/evidence/profile-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 78.07261066700084
+      },
+      {
+        "name": "benchmark",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/benchmark.py",
+          "--frames",
+          "900",
+          "--repeats",
+          "2",
+          "--report",
+          "browser-renderer/evidence/benchmark-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 1345.0334499580022
+      },
+      {
+        "name": "soak",
+        "command": [
+          "<sdk-checkout>/.venv/bin/python",
+          "browser-renderer/soak.py",
+          "--seconds",
+          "600",
+          "--report",
+          "browser-renderer/evidence/soak-accepted.json"
+        ],
+        "cwd": "<sdk-checkout>",
+        "exitCode": 0,
+        "seconds": 630.3381283750023
+      }
+    ],
+    "passed": true
+  }
+}

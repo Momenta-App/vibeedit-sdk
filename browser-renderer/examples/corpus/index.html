@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><style>
+@font-face{font-family:Poppins;src:url(media/Poppins-Bold.ttf)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#10242f;color:white}
+#footage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8)}
+#second{position:absolute;right:4%;top:8%;width:27%;border-radius:8%;clip-path:polygon(0 0,100% 0,90% 100%,0 90%);mix-blend-mode:screen;transform:rotate(-7deg)}
+#effect{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:screen;opacity:.6}
+.card{position:absolute;left:6%;top:16%;width:70%;padding:3%;background:#10242f80;backdrop-filter:blur(14px);border:1px solid #ffffff50;transform:perspective(800px) rotateY(-8deg)}
+h1{font:700 4.5vw Poppins,sans-serif;line-height:1.05;margin:0;letter-spacing:-.045em}
+.multi{font:2vw sans-serif;line-height:1.6;white-space:nowrap}.ligature{font-family:Georgia;font-variant-ligatures:common-ligatures}
+svg{position:absolute;right:9%;bottom:12%;width:20%;filter:drop-shadow(0 0 10px #aaffdd);animation:pulse 2s linear infinite alternate}
+@keyframes pulse{from{opacity:.4;transform:rotate(0)}to{opacity:1;transform:rotate(40deg)}}
+canvas{position:absolute;bottom:8%;left:6%;width:30%;height:12%;mix-blend-mode:screen}
+#number{position:absolute;bottom:4%;right:4%;font:1.3vw monospace}
+</style></head><body>
+<video id="footage" muted loop preload="auto" src="media/footage.webm"></video>
+<video id="second" muted loop preload="auto" data-source-offset=".3" data-source-rate=".7" src="media/footage.webm"></video>
+<video id="effect" muted loop preload="auto" src="media/effect.webm"></video>
+<div class="card"><h1>Tools make media.<br>Chromium makes the scene.</h1>
+<div class="multi"><span dir="rtl" lang="ar">العربية تجربة جميلة</span><br><span lang="hi">देवनागरी नमस्ते दुनिया</span><br><span lang="zh">中文字体 日本語 한국어</span><br><span class="ligature">office affine ffi — café</span> 🎬 👨‍👩‍👧‍👦</div></div>
+<svg viewBox="0 0 200 100"><defs><linearGradient id="g"><stop stop-color="#4eeac5"/><stop offset="1" stop-color="#ffcc99"/></linearGradient></defs><path fill="url(#g)" d="M0 50Q50 0 100 50T200 50L200 100H0Z"/></svg>
+<canvas id="drawing" width="480" height="120"></canvas><div id="number"></div>
+<script src="media/gsap.min.js"></script><script type="module">
+const title=document.querySelector('h1');gsap.fromTo(title,{x:-20,opacity:.2},{x:0,opacity:1,duration:1.2});
+const context=document.querySelector('canvas').getContext('2d');
+window.renderFrame=async(frame,time)=>{
+ if(frame===7)await new Promise(resolve=>setTimeout(resolve,60));
+ context.clearRect(0,0,480,120);context.strokeStyle='#69ffd3';context.lineWidth=5;context.beginPath();
+ for(let x=0;x<480;x++)context.lineTo(x,60+35*Math.sin(x*.04+time*3));context.stroke();
+ document.querySelector('#number').textContent=`${frame} | ${time.toFixed(6)}`;
+};
+</script></body></html>

@@ -1,0 +1,107 @@
+{
+  "originalReportSha256": "9c660458071ff7fe1ea9501616fd08667dd0a9eb782ba87478ef0d9292d5b1c1",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "runs": [
+      {
+        "job": 0,
+        "rssMiB": 679.25,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 1,
+        "rssMiB": 680.25,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 2,
+        "rssMiB": 683.046875,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 3,
+        "rssMiB": 680.6875,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 4,
+        "rssMiB": 681.296875,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 5,
+        "rssMiB": 680.96875,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 6,
+        "rssMiB": 682.28125,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 7,
+        "rssMiB": 683.203125,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 8,
+        "rssMiB": 681.796875,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 9,
+        "rssMiB": 684.5,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 10,
+        "rssMiB": 683.859375,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      },
+      {
+        "job": 11,
+        "rssMiB": 683.9375,
+        "renderers": 2,
+        "historyEntries": 1,
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5"
+      }
+    ],
+    "scope": "owned CEF process tree after completed jobs",
+    "growthMiB": 4.6875,
+    "passed": true
+  }
+}

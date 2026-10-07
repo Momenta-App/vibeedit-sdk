@@ -1,0 +1,749 @@
+{
+  "originalReportSha256": "989a577743d743796d76694016f7e81e2c49a538f8b9c7ab89a58540f6e20c41",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "reference": "CEF 144.0.7559.257 Page.captureScreenshot",
+    "losslessThreshold": {
+      "maxChannelError": 0
+    },
+    "runs": [
+      {
+        "job": "browser-renderer/examples/basic/job.json",
+        "render": {
+          "backend": "cef",
+          "browser": {
+            "jsVersion": "14.4.258.49",
+            "product": "Chrome/144.0.7559.257",
+            "protocolVersion": "1.3",
+            "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+          },
+          "platform": [
+            "macOS-26.4-arm64-arm-64bit",
+            "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+            "arm64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 12,
+          "dimensions": [
+            640,
+            360
+          ],
+          "bootstrapReadbackPixels": 230400,
+          "frameRate": "30000/1001",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": 2000000,
+            "nativeHardwareRequired": true,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Arial",
+                "custom": false,
+                "glyphCount": 18
+              },
+              {
+                "family": "Menlo",
+                "custom": false,
+                "glyphCount": 19
+              }
+            ],
+            "nodesExamined": 4,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "9b64cac41ed11f3bc9a52497b36f964d976a55215a51bb9891c14d466050033e"
+          },
+          "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+          "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 1.0906872080013272,
+          "endToEndFps": 11.002237774466863,
+          "timingsSeconds": {
+            "seek": 0.11762337599429884,
+            "captureEncode": 0.47737437400064664,
+            "mux": 0.08520404199953191,
+            "preparation": 0.1232720829975733,
+            "assetReadinessSeconds": 0.0004999999925494194,
+            "automaticAnimationSeconds": 0.00030000000074505807,
+            "browserSubmissionSeconds": 0.012699999991804364,
+            "customScriptSeconds": 0.09470000000670553,
+            "forcedLayoutSeconds": 0.003,
+            "mediaSeekSeconds": 0.00010000000149011611,
+            "gpuTransferConversionSeconds": 0.00303291666568839,
+            "nativeWaitSeconds": 0.013067081,
+            "encoderAppendSeconds": 0.0005959580000000001,
+            "encoderFlushSeconds": 0.002774333
+          },
+          "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-conformance-4_0zg0dy/video.mp4",
+          "sha256": "a37abe37385d5644a86e589b15722a3ce17ae8912c0f0d0d8e9f2572d792e3ac"
+        },
+        "frames": [
+          {
+            "frame": 0,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 1,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 2,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 3,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 4,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 5,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 6,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 7,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 8,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 9,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 10,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 11,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          }
+        ],
+        "timestampMaxDriftSeconds": 3.33333333379926e-07,
+        "passed": true
+      },
+      {
+        "job": "browser-renderer/examples/corpus/job.json",
+        "render": {
+          "backend": "cef",
+          "browser": {
+            "jsVersion": "14.4.258.49",
+            "product": "Chrome/144.0.7559.257",
+            "protocolVersion": "1.3",
+            "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+          },
+          "platform": [
+            "macOS-26.4-arm64-arm-64bit",
+            "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+            "arm64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 18,
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bootstrapReadbackPixels": 921600,
+          "frameRate": "30000/1001",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": 12000000,
+            "nativeHardwareRequired": true,
+            "matte": "black"
+          },
+          "audioVerification": {
+            "requestedSamples": 28829,
+            "packetSamples": 28829,
+            "roundingDriftSamples": 0,
+            "toleranceSamples": 1,
+            "sampleRate": 48000
+          },
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Menlo",
+                "custom": false,
+                "glyphCount": 13
+              },
+              {
+                "family": "Poppins",
+                "custom": true,
+                "glyphCount": 42
+              },
+              {
+                "family": "Helvetica",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "Apple Color Emoji",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "Kohinoor Devanagari",
+                "custom": false,
+                "glyphCount": 18
+              },
+              {
+                "family": "Apple SD Gothic Neo",
+                "custom": false,
+                "glyphCount": 3
+              },
+              {
+                "family": "Georgia",
+                "custom": false,
+                "glyphCount": 24
+              },
+              {
+                "family": "\u860b\u65b9-\u7c21",
+                "custom": false,
+                "glyphCount": 9
+              },
+              {
+                "family": "Geeza Pro",
+                "custom": false,
+                "glyphCount": 17
+              }
+            ],
+            "nodesExamined": 25,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+            "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+            "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+            "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+            "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+            "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+          },
+          "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+          "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 3.7795687500001804,
+          "endToEndFps": 4.762448096756843,
+          "timingsSeconds": {
+            "seek": 0.44008341899098014,
+            "captureEncode": 1.9787677050007915,
+            "mux": 0.2538137499977893,
+            "preparation": 0.6032199590008531,
+            "assetReadinessSeconds": 0.0004999999962747096,
+            "automaticAnimationSeconds": 0.0013999999947845935,
+            "browserSubmissionSeconds": 0.037500000007450594,
+            "customScriptSeconds": 0.06420000000298019,
+            "forcedLayoutSeconds": 0.003399999991059304,
+            "mediaSeekSeconds": 0.3222000000029802,
+            "gpuTransferConversionSeconds": 0.002531583340896759,
+            "nativeWaitSeconds": 0.012479459,
+            "encoderAppendSeconds": 0.000823042,
+            "encoderFlushSeconds": 0.002293458
+          },
+          "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-conformance-0_t0i8y5/video.mp4",
+          "sha256": "5bc6bb11193b3bccc3919f49f99ed82278a495843b6a730027060570dc61afcf"
+        },
+        "frames": [
+          {
+            "frame": 0,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 1,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 2,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 3,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 4,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 5,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 6,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 7,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 8,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 9,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 10,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 11,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 12,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 13,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 14,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 15,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 16,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 17,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          }
+        ],
+        "timestampMaxDriftSeconds": 3.33333333379926e-07,
+        "passed": true
+      },
+      {
+        "job": "browser-renderer/examples/features/job.json",
+        "render": {
+          "backend": "cef",
+          "browser": {
+            "jsVersion": "14.4.258.49",
+            "product": "Chrome/144.0.7559.257",
+            "protocolVersion": "1.3",
+            "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+          },
+          "platform": [
+            "macOS-26.4-arm64-arm-64bit",
+            "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+            "arm64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 18,
+          "dimensions": [
+            640,
+            360
+          ],
+          "bootstrapReadbackPixels": 230400,
+          "frameRate": "30",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": 2000000,
+            "nativeHardwareRequired": true,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Roboto",
+                "custom": true,
+                "glyphCount": 34
+              }
+            ],
+            "nodesExamined": 5,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "45d3ef616f9e19430a287b11446894b97c2a6dcfab8c69c8ac6bdd0a04cb7e28",
+            "motion.js": "4ac1ed146c26e20e7e223ec671f2f003b45f9f342d8bb49ce0d3c15318f9c1ba",
+            "media/Roboto.ttf": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134"
+          },
+          "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+          "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 1.1563817920032307,
+          "endToEndFps": 15.565793343060276,
+          "timingsSeconds": {
+            "seek": 0.04141654500563163,
+            "captureEncode": 0.7092537490061659,
+            "mux": 0.08737737499905052,
+            "preparation": 0.17604462500094087,
+            "assetReadinessSeconds": 0.0009999999999999998,
+            "automaticAnimationSeconds": 0.0005000000074505805,
+            "browserSubmissionSeconds": 0.019599999997764832,
+            "customScriptSeconds": 0.0029999999888241295,
+            "forcedLayoutSeconds": 0.008900000002235176,
+            "mediaSeekSeconds": 0.00010000000149011611,
+            "gpuTransferConversionSeconds": 0.0020675416599260643,
+            "nativeWaitSeconds": 0.012649543,
+            "encoderAppendSeconds": 0.000814833,
+            "encoderFlushSeconds": 0.001976417
+          },
+          "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-conformance-ynet0pb3/video.mp4",
+          "sha256": "84145fb7698c12bc031cc041b03281fcb1eb9af840b380431ffbe2437a814f28"
+        },
+        "frames": [
+          {
+            "frame": 0,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 1,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 2,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 3,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 4,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 5,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 6,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 7,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 8,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 9,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 10,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 11,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 12,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 13,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 14,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 15,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 16,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 17,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          }
+        ],
+        "timestampMaxDriftSeconds": 3.33333333379926e-07,
+        "passed": true
+      },
+      {
+        "job": "browser-renderer/examples/gpu/job.json",
+        "render": {
+          "backend": "cef",
+          "browser": {
+            "jsVersion": "14.4.258.49",
+            "product": "Chrome/144.0.7559.257",
+            "protocolVersion": "1.3",
+            "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+          },
+          "platform": [
+            "macOS-26.4-arm64-arm-64bit",
+            "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+            "arm64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 18,
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bootstrapReadbackPixels": 921600,
+          "frameRate": "30",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": 7372800,
+            "nativeHardwareRequired": true,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Inter",
+                "custom": false,
+                "glyphCount": 13
+              }
+            ],
+            "nodesExamined": 10,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "experiments/cef-shared-texture/webgpu-html-css.html": "55a6ec58e38a6db34300795346858ab01d7228ca9cb3a2e477bd54e6eccd1747"
+          },
+          "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+          "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 3.1397138749998703,
+          "endToEndFps": 5.733006482955631,
+          "timingsSeconds": {
+            "seek": 0.4027423350016761,
+            "captureEncode": 2.057870083004673,
+            "mux": 0.12836583299940685,
+            "preparation": 0.4437092090010992,
+            "assetReadinessSeconds": 0.0012999999895691866,
+            "automaticAnimationSeconds": 0.00040000000223517414,
+            "browserSubmissionSeconds": 0.3698999999947846,
+            "customScriptSeconds": 0.02060000000521541,
+            "forcedLayoutSeconds": 0.00019999999552965163,
+            "mediaSeekSeconds": 0.0003999999985098839,
+            "gpuTransferConversionSeconds": 0.0027982499996141996,
+            "nativeWaitSeconds": 0.013637625,
+            "encoderAppendSeconds": 0.0007799580000000001,
+            "encoderFlushSeconds": 0.007693625
+          },
+          "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-conformance-mst530jz/video.mp4",
+          "sha256": "4b87b0f29ef516c721f5df89ab0daeb734225b11acd051520fb9b45c3b382796"
+        },
+        "frames": [
+          {
+            "frame": 0,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 1,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 2,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 3,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 4,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 5,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 6,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 7,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 8,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 9,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 10,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 11,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 12,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 13,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 14,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 15,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 16,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          },
+          {
+            "frame": 17,
+            "maxChannelError": 0,
+            "meanChannelError": 0.0
+          }
+        ],
+        "timestampMaxDriftSeconds": 3.33333333379926e-07,
+        "passed": true
+      }
+    ],
+    "passed": true
+  }
+}

@@ -1,0 +1,395 @@
+{
+  "originalReportSha256": "1dfae4244b19e04a9aaac0dc3018bba4c792d7aa4fb9d68c631836c4989de325",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "architecture": "AMD64",
+    "adapter": "Playwright screenshot/FFmpeg",
+    "nativeAccelerated": false,
+    "runs": [
+      {
+        "example": "basic",
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "protocolVersion": "1.3",
+            "product": "HeadlessChrome/149.0.7827.55",
+            "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.55 Safari/537.36",
+            "jsVersion": "14.9.207.21"
+          },
+          "platform": [
+            "Windows-10-10.0.19045-SP0",
+            "10.0.19045",
+            "AMD64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 12,
+          "dimensions": [
+            640,
+            360
+          ],
+          "bootstrapReadbackPixels": 0,
+          "frameRate": "30000/1001",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": null,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Arial Black",
+                "custom": false,
+                "glyphCount": 18
+              },
+              {
+                "family": "Consolas",
+                "custom": false,
+                "glyphCount": 19
+              }
+            ],
+            "nodesExamined": 4,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "9b64cac41ed11f3bc9a52497b36f964d976a55215a51bb9891c14d466050033e"
+          },
+          "hostSha256": null,
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 1.0321008000173606,
+          "endToEndFps": 11.626771338417868,
+          "timingsSeconds": {
+            "seek": 0.38232299988158047,
+            "captureEncode": 0.30201330001000315,
+            "mux": 0.06824210000922903,
+            "preparation": 0.09012200002325699,
+            "assetReadinessSeconds": 0.0008000000715255737,
+            "automaticAnimationSeconds": 0.0003999999761581421,
+            "mediaSeekSeconds": 0.00019999998807907106,
+            "customScriptSeconds": 0.09930000001192094,
+            "forcedLayoutSeconds": 0.005700000047683714,
+            "browserSubmissionSeconds": 0.21989999997615814
+          },
+          "output": "C:\\Users\\momen\\AppData\\Local\\Temp\\tmp5aiyy5iu\\basic.mp4",
+          "sha256": "1dacff5e937b95a5133532e3a2915565732f421d3182c25867595c472c0cf438"
+        }
+      },
+      {
+        "example": "corpus",
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "protocolVersion": "1.3",
+            "product": "HeadlessChrome/149.0.7827.55",
+            "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.55 Safari/537.36",
+            "jsVersion": "14.9.207.21"
+          },
+          "platform": [
+            "Windows-10-10.0.19045-SP0",
+            "10.0.19045",
+            "AMD64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 18,
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bootstrapReadbackPixels": 0,
+          "frameRate": "30000/1001",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": 12000000,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": {
+            "requestedSamples": 28829,
+            "packetSamples": 28829,
+            "roundingDriftSamples": 0,
+            "toleranceSamples": 1,
+            "sampleRate": 48000
+          },
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Consolas",
+                "custom": false,
+                "glyphCount": 13
+              },
+              {
+                "family": "Arial",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "Segoe UI Emoji",
+                "custom": false,
+                "glyphCount": 5
+              },
+              {
+                "family": "Poppins",
+                "custom": true,
+                "glyphCount": 42
+              },
+              {
+                "family": "Malgun Gothic",
+                "custom": false,
+                "glyphCount": 3
+              },
+              {
+                "family": "Microsoft YaHei",
+                "custom": false,
+                "glyphCount": 9
+              },
+              {
+                "family": "Georgia",
+                "custom": false,
+                "glyphCount": 24
+              },
+              {
+                "family": "Segoe UI",
+                "custom": false,
+                "glyphCount": 19
+              },
+              {
+                "family": "Nirmala UI",
+                "custom": false,
+                "glyphCount": 18
+              }
+            ],
+            "nodesExamined": 25,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+            "media\\gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+            "media\\footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+            "media\\effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+            "media\\Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+            "media\\pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+          },
+          "hostSha256": null,
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 4.1303367000073195,
+          "endToEndFps": 4.357998223236401,
+          "timingsSeconds": {
+            "seek": 1.2902464999933727,
+            "captureEncode": 1.706513000128325,
+            "mux": 0.23430229997029528,
+            "preparation": 0.2735274999868125,
+            "assetReadinessSeconds": 0.00030000001192092895,
+            "automaticAnimationSeconds": 0.0018000000715255743,
+            "mediaSeekSeconds": 0.6538999999165535,
+            "customScriptSeconds": 0.06280000019073485,
+            "forcedLayoutSeconds": 0.0033999999761581416,
+            "browserSubmissionSeconds": 0.5194000000357628
+          },
+          "output": "C:\\Users\\momen\\AppData\\Local\\Temp\\tmp5aiyy5iu\\corpus.mp4",
+          "sha256": "c830036d10f83f43c99333b7d57ee1538ff2af926298fc8b7b8a11e98980de29"
+        }
+      },
+      {
+        "example": "features",
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "protocolVersion": "1.3",
+            "product": "HeadlessChrome/149.0.7827.55",
+            "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.55 Safari/537.36",
+            "jsVersion": "14.9.207.21"
+          },
+          "platform": [
+            "Windows-10-10.0.19045-SP0",
+            "10.0.19045",
+            "AMD64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 18,
+          "dimensions": [
+            640,
+            360
+          ],
+          "bootstrapReadbackPixels": 0,
+          "frameRate": "30",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": null,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Roboto",
+                "custom": true,
+                "glyphCount": 34
+              }
+            ],
+            "nodesExamined": 5,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "45d3ef616f9e19430a287b11446894b97c2a6dcfab8c69c8ac6bdd0a04cb7e28",
+            "motion.js": "4ac1ed146c26e20e7e223ec671f2f003b45f9f342d8bb49ce0d3c15318f9c1ba",
+            "media\\Roboto.ttf": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134"
+          },
+          "hostSha256": null,
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 1.5698989999946207,
+          "endToEndFps": 11.465705755632483,
+          "timingsSeconds": {
+            "seek": 0.47966279997490346,
+            "captureEncode": 0.4158887000521645,
+            "mux": 0.07130070001585409,
+            "preparation": 0.08068839996121824,
+            "assetReadinessSeconds": 0.0007000000476837158,
+            "automaticAnimationSeconds": 0.0005000001192092896,
+            "mediaSeekSeconds": 0.0,
+            "customScriptSeconds": 0.003199999988079071,
+            "forcedLayoutSeconds": 0.10819999998807907,
+            "browserSubmissionSeconds": 0.30560000002384186
+          },
+          "output": "C:\\Users\\momen\\AppData\\Local\\Temp\\tmp5aiyy5iu\\features.mp4",
+          "sha256": "669df103cd720f53ec5ba9b63e3c4c66f129b1f2ee2095fe2079ed829c3c415d"
+        }
+      },
+      {
+        "example": "nested-entry",
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "protocolVersion": "1.3",
+            "product": "HeadlessChrome/149.0.7827.55",
+            "revision": "@3188f8a607ae7e067593be8aab7f02d2451fec07",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.55 Safari/537.36",
+            "jsVersion": "14.9.207.21"
+          },
+          "platform": [
+            "Windows-10-10.0.19045-SP0",
+            "10.0.19045",
+            "AMD64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 3,
+          "dimensions": [
+            640,
+            360
+          ],
+          "bootstrapReadbackPixels": 0,
+          "frameRate": "30",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": null,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Roboto",
+                "custom": true,
+                "glyphCount": 34
+              }
+            ],
+            "nodesExamined": 5,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "nested\\site\\index.html": "45d3ef616f9e19430a287b11446894b97c2a6dcfab8c69c8ac6bdd0a04cb7e28",
+            "nested\\site\\motion.js": "4ac1ed146c26e20e7e223ec671f2f003b45f9f342d8bb49ce0d3c15318f9c1ba",
+            "nested\\site\\media\\Roboto.ttf": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134"
+          },
+          "hostSha256": null,
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 0.5453968999790959,
+          "endToEndFps": 5.500581319979972,
+          "timingsSeconds": {
+            "seek": 0.08062270004302263,
+            "captureEncode": 0.06688100000610575,
+            "mux": 0.06441910000285134,
+            "preparation": 0.07882970001082867,
+            "assetReadinessSeconds": 0.0002999999523162842,
+            "automaticAnimationSeconds": 0.0,
+            "mediaSeekSeconds": 0.00010000002384185791,
+            "customScriptSeconds": 0.00040000003576278685,
+            "forcedLayoutSeconds": 0.009499999940395354,
+            "browserSubmissionSeconds": 0.06230000007152558
+          },
+          "output": "C:\\Users\\momen\\AppData\\Local\\Temp\\tmp5aiyy5iu\\nested.mp4",
+          "sha256": "f0f7749fca74d150431eeaa9592b4c9771e119b6972a0de91a0d7b06936c4f4f"
+        }
+      }
+    ],
+    "deadlineRecovery": {
+      "seconds": 2.047000000020489,
+      "closed": true,
+      "loopStopped": true
+    },
+    "freshBrowserAfterDeadline": true,
+    "passed": true
+  }
+}

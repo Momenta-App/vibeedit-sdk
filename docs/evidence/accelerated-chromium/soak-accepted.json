@@ -1,0 +1,3165 @@
+{
+  "originalReportSha256": "eaea4e7fea807bf3cee2ec107b9ce1a091b419a816f575d7dced4241073c142f",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "machine": "macOS-26.4-arm64-arm-64bit",
+    "requestedSeconds": 600.0,
+    "runs": [
+      {
+        "backend": "cef",
+        "browser": {
+          "jsVersion": "14.4.258.49",
+          "product": "Chrome/144.0.7559.257",
+          "protocolVersion": "1.3",
+          "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+        },
+        "platform": [
+          "macOS-26.4-arm64-arm-64bit",
+          "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+          "arm64"
+        ],
+        "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+        "frames": 3600,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "bootstrapReadbackPixels": 2073600,
+        "frameRate": "30000/1001",
+        "export": {
+          "codec": "h264",
+          "alpha": false,
+          "color": {
+            "primaries": "bt709",
+            "transfer": "iec61966-2-1",
+            "matrix": "bt709",
+            "range": "limited"
+          },
+          "bitrate": 12000000,
+          "nativeHardwareRequired": true,
+          "matte": "black"
+        },
+        "audioVerification": {
+          "requestedSamples": 5765760,
+          "packetSamples": 5765760,
+          "roundingDriftSamples": 0,
+          "toleranceSamples": 1,
+          "sampleRate": 48000
+        },
+        "mediaConversions": {},
+        "normalizedSourceTypeHints": [],
+        "browserProfile": null,
+        "fontDiagnostics": {
+          "platformFonts": [
+            {
+              "family": "Menlo",
+              "custom": false,
+              "glyphCount": 17
+            },
+            {
+              "family": "Poppins",
+              "custom": true,
+              "glyphCount": 42
+            },
+            {
+              "family": "Helvetica",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Apple Color Emoji",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Kohinoor Devanagari",
+              "custom": false,
+              "glyphCount": 18
+            },
+            {
+              "family": "Apple SD Gothic Neo",
+              "custom": false,
+              "glyphCount": 3
+            },
+            {
+              "family": "Georgia",
+              "custom": false,
+              "glyphCount": 24
+            },
+            {
+              "family": "\u860b\u65b9-\u7c21",
+              "custom": false,
+              "glyphCount": 9
+            },
+            {
+              "family": "Geeza Pro",
+              "custom": false,
+              "glyphCount": 17
+            }
+          ],
+          "nodesExamined": 25,
+          "truncated": false,
+          "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+        },
+        "dependencyIdentities": {
+          "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+          "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+          "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+          "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+          "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+          "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+        },
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+        "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+        "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+        "elapsedSeconds": 173.84220329099844,
+        "endToEndFps": 20.708435189203612,
+        "timingsSeconds": {
+          "seek": 98.53415172190216,
+          "captureEncode": 51.33674233095735,
+          "mux": 22.561653624998144,
+          "preparation": 0.7772357079993526,
+          "assetReadinessSeconds": 0.118299999993296,
+          "automaticAnimationSeconds": 0.08050000004097867,
+          "browserSubmissionSeconds": 7.441199999898801,
+          "customScriptSeconds": 0.5361000000313041,
+          "forcedLayoutSeconds": 0.4288000000678102,
+          "mediaSeekSeconds": 87.8689999999549,
+          "gpuTransferConversionSeconds": 1.0087262501001533,
+          "nativeWaitSeconds": 2.9280665289999956,
+          "encoderAppendSeconds": 0.17483287700000016,
+          "encoderFlushSeconds": 0.009615292
+        },
+        "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-soak-j2z_q983/video.mp4",
+        "sha256": "b0a67b65af144e0d1e38499620e755ce4f0fb07295a0d1c09bef20463e347de8"
+      },
+      {
+        "backend": "cef",
+        "browser": {
+          "jsVersion": "14.4.258.49",
+          "product": "Chrome/144.0.7559.257",
+          "protocolVersion": "1.3",
+          "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+        },
+        "platform": [
+          "macOS-26.4-arm64-arm-64bit",
+          "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+          "arm64"
+        ],
+        "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+        "frames": 1800,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "bootstrapReadbackPixels": 8294400,
+        "frameRate": "30000/1001",
+        "export": {
+          "codec": "h264",
+          "alpha": false,
+          "color": {
+            "primaries": "bt709",
+            "transfer": "iec61966-2-1",
+            "matrix": "bt709",
+            "range": "limited"
+          },
+          "bitrate": 12000000,
+          "nativeHardwareRequired": true,
+          "matte": "black"
+        },
+        "audioVerification": {
+          "requestedSamples": 2882880,
+          "packetSamples": 2882880,
+          "roundingDriftSamples": 0,
+          "toleranceSamples": 1,
+          "sampleRate": 48000
+        },
+        "mediaConversions": {},
+        "normalizedSourceTypeHints": [],
+        "browserProfile": null,
+        "fontDiagnostics": {
+          "platformFonts": [
+            {
+              "family": "Menlo",
+              "custom": false,
+              "glyphCount": 16
+            },
+            {
+              "family": "Poppins",
+              "custom": true,
+              "glyphCount": 42
+            },
+            {
+              "family": "Helvetica",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Apple Color Emoji",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Kohinoor Devanagari",
+              "custom": false,
+              "glyphCount": 18
+            },
+            {
+              "family": "Apple SD Gothic Neo",
+              "custom": false,
+              "glyphCount": 3
+            },
+            {
+              "family": "Georgia",
+              "custom": false,
+              "glyphCount": 24
+            },
+            {
+              "family": "\u860b\u65b9-\u7c21",
+              "custom": false,
+              "glyphCount": 9
+            },
+            {
+              "family": "Geeza Pro",
+              "custom": false,
+              "glyphCount": 17
+            }
+          ],
+          "nodesExamined": 25,
+          "truncated": false,
+          "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+        },
+        "dependencyIdentities": {
+          "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+          "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+          "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+          "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+          "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+          "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+        },
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+        "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+        "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+        "elapsedSeconds": 97.59142262499881,
+        "endToEndFps": 18.44424388520919,
+        "timingsSeconds": {
+          "seek": 49.32764629198209,
+          "captureEncode": 26.076983078917692,
+          "mux": 20.343122709000454,
+          "preparation": 1.7157689159976144,
+          "assetReadinessSeconds": 0.06810000003874321,
+          "automaticAnimationSeconds": 0.04470000002533201,
+          "browserSubmissionSeconds": 3.4003000000118964,
+          "customScriptSeconds": 0.29959999993070835,
+          "forcedLayoutSeconds": 0.22000000004097428,
+          "mediaSeekSeconds": 44.26439999995378,
+          "gpuTransferConversionSeconds": 1.1941058749580407,
+          "nativeWaitSeconds": 2.183677222999996,
+          "encoderAppendSeconds": 0.08863835900000008,
+          "encoderFlushSeconds": 0.023097583
+        },
+        "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-soak-j2z_q983/video.mp4",
+        "sha256": "768985a0ce8327f11faba5336dea5213c246eb6bfc03bc8b91a0faf8e941499c"
+      },
+      {
+        "backend": "cef",
+        "browser": {
+          "jsVersion": "14.4.258.49",
+          "product": "Chrome/144.0.7559.257",
+          "protocolVersion": "1.3",
+          "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+        },
+        "platform": [
+          "macOS-26.4-arm64-arm-64bit",
+          "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+          "arm64"
+        ],
+        "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+        "frames": 1800,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "bootstrapReadbackPixels": 921600,
+        "frameRate": "30000/1001",
+        "export": {
+          "codec": "h264",
+          "alpha": false,
+          "color": {
+            "primaries": "bt709",
+            "transfer": "iec61966-2-1",
+            "matrix": "bt709",
+            "range": "limited"
+          },
+          "bitrate": 12000000,
+          "nativeHardwareRequired": true,
+          "matte": "black"
+        },
+        "audioVerification": {
+          "requestedSamples": 2882880,
+          "packetSamples": 2882880,
+          "roundingDriftSamples": 0,
+          "toleranceSamples": 1,
+          "sampleRate": 48000
+        },
+        "mediaConversions": {},
+        "normalizedSourceTypeHints": [],
+        "browserProfile": null,
+        "fontDiagnostics": {
+          "platformFonts": [
+            {
+              "family": "Menlo",
+              "custom": false,
+              "glyphCount": 16
+            },
+            {
+              "family": "Poppins",
+              "custom": true,
+              "glyphCount": 42
+            },
+            {
+              "family": "Helvetica",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Apple Color Emoji",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Kohinoor Devanagari",
+              "custom": false,
+              "glyphCount": 18
+            },
+            {
+              "family": "Apple SD Gothic Neo",
+              "custom": false,
+              "glyphCount": 3
+            },
+            {
+              "family": "Georgia",
+              "custom": false,
+              "glyphCount": 24
+            },
+            {
+              "family": "\u860b\u65b9-\u7c21",
+              "custom": false,
+              "glyphCount": 9
+            },
+            {
+              "family": "Geeza Pro",
+              "custom": false,
+              "glyphCount": 17
+            }
+          ],
+          "nodesExamined": 25,
+          "truncated": false,
+          "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+        },
+        "dependencyIdentities": {
+          "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+          "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+          "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+          "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+          "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+          "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+        },
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+        "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+        "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+        "elapsedSeconds": 85.49364133400013,
+        "endToEndFps": 21.054197387240713,
+        "timingsSeconds": {
+          "seek": 49.35657854783858,
+          "captureEncode": 25.90489573395098,
+          "mux": 9.193065167000896,
+          "preparation": 0.541187999999238,
+          "assetReadinessSeconds": 0.05569999998435382,
+          "automaticAnimationSeconds": 0.03910000002384189,
+          "browserSubmissionSeconds": 3.5970000000446736,
+          "customScriptSeconds": 0.2915000000409764,
+          "forcedLayoutSeconds": 0.2165999999269813,
+          "mediaSeekSeconds": 44.17200000001857,
+          "gpuTransferConversionSeconds": 0.293056666629127,
+          "nativeWaitSeconds": 1.242328358000002,
+          "encoderAppendSeconds": 0.08317030499999993,
+          "encoderFlushSeconds": 0.007379042
+        },
+        "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-soak-j2z_q983/video.mp4",
+        "sha256": "e068c4fd22a0b1efb7d2c3e1c6dbb2ac4ec3b244c1ce546f88c33dbeacfc3b88"
+      },
+      {
+        "backend": "cef",
+        "browser": {
+          "jsVersion": "14.4.258.49",
+          "product": "Chrome/144.0.7559.257",
+          "protocolVersion": "1.3",
+          "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+        },
+        "platform": [
+          "macOS-26.4-arm64-arm-64bit",
+          "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+          "arm64"
+        ],
+        "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+        "frames": 1800,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "bootstrapReadbackPixels": 2073600,
+        "frameRate": "30000/1001",
+        "export": {
+          "codec": "h264",
+          "alpha": false,
+          "color": {
+            "primaries": "bt709",
+            "transfer": "iec61966-2-1",
+            "matrix": "bt709",
+            "range": "limited"
+          },
+          "bitrate": 12000000,
+          "nativeHardwareRequired": true,
+          "matte": "black"
+        },
+        "audioVerification": {
+          "requestedSamples": 2882880,
+          "packetSamples": 2882880,
+          "roundingDriftSamples": 0,
+          "toleranceSamples": 1,
+          "sampleRate": 48000
+        },
+        "mediaConversions": {},
+        "normalizedSourceTypeHints": [],
+        "browserProfile": null,
+        "fontDiagnostics": {
+          "platformFonts": [
+            {
+              "family": "Menlo",
+              "custom": false,
+              "glyphCount": 16
+            },
+            {
+              "family": "Poppins",
+              "custom": true,
+              "glyphCount": 42
+            },
+            {
+              "family": "Helvetica",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Apple Color Emoji",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Kohinoor Devanagari",
+              "custom": false,
+              "glyphCount": 18
+            },
+            {
+              "family": "Apple SD Gothic Neo",
+              "custom": false,
+              "glyphCount": 3
+            },
+            {
+              "family": "Georgia",
+              "custom": false,
+              "glyphCount": 24
+            },
+            {
+              "family": "\u860b\u65b9-\u7c21",
+              "custom": false,
+              "glyphCount": 9
+            },
+            {
+              "family": "Geeza Pro",
+              "custom": false,
+              "glyphCount": 17
+            }
+          ],
+          "nodesExamined": 25,
+          "truncated": false,
+          "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+        },
+        "dependencyIdentities": {
+          "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+          "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+          "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+          "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+          "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+          "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+        },
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+        "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+        "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+        "elapsedSeconds": 87.49680458399962,
+        "endToEndFps": 20.572179847687405,
+        "timingsSeconds": {
+          "seek": 49.86002290097895,
+          "captureEncode": 25.26635100187559,
+          "mux": 11.460327207998489,
+          "preparation": 0.7545460420005838,
+          "assetReadinessSeconds": 0.06239999992400412,
+          "automaticAnimationSeconds": 0.04259999993070962,
+          "browserSubmissionSeconds": 3.786100000027543,
+          "customScriptSeconds": 0.299099999997764,
+          "forcedLayoutSeconds": 0.2214999999254903,
+          "mediaSeekSeconds": 44.42860000013185,
+          "gpuTransferConversionSeconds": 0.5023040001105983,
+          "nativeWaitSeconds": 1.4562173210000018,
+          "encoderAppendSeconds": 0.091933035,
+          "encoderFlushSeconds": 0.008135958
+        },
+        "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-soak-j2z_q983/video.mp4",
+        "sha256": "8bb12c7b591241b73003cb906b05c6c2141793214290290ca21867bf4808aa8b"
+      },
+      {
+        "backend": "cef",
+        "browser": {
+          "jsVersion": "14.4.258.49",
+          "product": "Chrome/144.0.7559.257",
+          "protocolVersion": "1.3",
+          "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+        },
+        "platform": [
+          "macOS-26.4-arm64-arm-64bit",
+          "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+          "arm64"
+        ],
+        "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+        "frames": 1800,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "bootstrapReadbackPixels": 8294400,
+        "frameRate": "30000/1001",
+        "export": {
+          "codec": "h264",
+          "alpha": false,
+          "color": {
+            "primaries": "bt709",
+            "transfer": "iec61966-2-1",
+            "matrix": "bt709",
+            "range": "limited"
+          },
+          "bitrate": 12000000,
+          "nativeHardwareRequired": true,
+          "matte": "black"
+        },
+        "audioVerification": {
+          "requestedSamples": 2882880,
+          "packetSamples": 2882880,
+          "roundingDriftSamples": 0,
+          "toleranceSamples": 1,
+          "sampleRate": 48000
+        },
+        "mediaConversions": {},
+        "normalizedSourceTypeHints": [],
+        "browserProfile": null,
+        "fontDiagnostics": {
+          "platformFonts": [
+            {
+              "family": "Menlo",
+              "custom": false,
+              "glyphCount": 16
+            },
+            {
+              "family": "Poppins",
+              "custom": true,
+              "glyphCount": 42
+            },
+            {
+              "family": "Helvetica",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Apple Color Emoji",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Kohinoor Devanagari",
+              "custom": false,
+              "glyphCount": 18
+            },
+            {
+              "family": "Apple SD Gothic Neo",
+              "custom": false,
+              "glyphCount": 3
+            },
+            {
+              "family": "Georgia",
+              "custom": false,
+              "glyphCount": 24
+            },
+            {
+              "family": "\u860b\u65b9-\u7c21",
+              "custom": false,
+              "glyphCount": 9
+            },
+            {
+              "family": "Geeza Pro",
+              "custom": false,
+              "glyphCount": 17
+            }
+          ],
+          "nodesExamined": 25,
+          "truncated": false,
+          "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+        },
+        "dependencyIdentities": {
+          "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+          "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+          "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+          "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+          "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+          "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+        },
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+        "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+        "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+        "elapsedSeconds": 98.05605345799995,
+        "endToEndFps": 18.356847298275046,
+        "timingsSeconds": {
+          "seek": 49.282100475033076,
+          "captureEncode": 26.410623950927402,
+          "mux": 20.339332583000214,
+          "preparation": 1.7045906669991382,
+          "assetReadinessSeconds": 0.06590000000968589,
+          "automaticAnimationSeconds": 0.04210000004991893,
+          "browserSubmissionSeconds": 3.4322999999448385,
+          "customScriptSeconds": 0.29370000016316616,
+          "forcedLayoutSeconds": 0.22389999989419807,
+          "mediaSeekSeconds": 44.19449999993665,
+          "gpuTransferConversionSeconds": 1.2057204167394957,
+          "nativeWaitSeconds": 2.203857813999997,
+          "encoderAppendSeconds": 0.08830157800000026,
+          "encoderFlushSeconds": 0.023324417
+        },
+        "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-soak-j2z_q983/video.mp4",
+        "sha256": "00ff4449cb475a45b7f0b0da43137eebfe8eae32c6ece3dfcad05e1850dba257"
+      },
+      {
+        "backend": "cef",
+        "browser": {
+          "jsVersion": "14.4.258.49",
+          "product": "Chrome/144.0.7559.257",
+          "protocolVersion": "1.3",
+          "revision": "@5ed83977fcfa0f34249cafc7d96cab43b045927f",
+          "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+        },
+        "platform": [
+          "macOS-26.4-arm64-arm-64bit",
+          "Darwin Kernel Version 25.4.0: Thu Mar 19 19:30:44 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6000",
+          "arm64"
+        ],
+        "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+        "frames": 1800,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "bootstrapReadbackPixels": 921600,
+        "frameRate": "30000/1001",
+        "export": {
+          "codec": "h264",
+          "alpha": false,
+          "color": {
+            "primaries": "bt709",
+            "transfer": "iec61966-2-1",
+            "matrix": "bt709",
+            "range": "limited"
+          },
+          "bitrate": 12000000,
+          "nativeHardwareRequired": true,
+          "matte": "black"
+        },
+        "audioVerification": {
+          "requestedSamples": 2882880,
+          "packetSamples": 2882880,
+          "roundingDriftSamples": 0,
+          "toleranceSamples": 1,
+          "sampleRate": 48000
+        },
+        "mediaConversions": {},
+        "normalizedSourceTypeHints": [],
+        "browserProfile": null,
+        "fontDiagnostics": {
+          "platformFonts": [
+            {
+              "family": "Menlo",
+              "custom": false,
+              "glyphCount": 16
+            },
+            {
+              "family": "Poppins",
+              "custom": true,
+              "glyphCount": 42
+            },
+            {
+              "family": "Helvetica",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Apple Color Emoji",
+              "custom": false,
+              "glyphCount": 2
+            },
+            {
+              "family": "Kohinoor Devanagari",
+              "custom": false,
+              "glyphCount": 18
+            },
+            {
+              "family": "Apple SD Gothic Neo",
+              "custom": false,
+              "glyphCount": 3
+            },
+            {
+              "family": "Georgia",
+              "custom": false,
+              "glyphCount": 24
+            },
+            {
+              "family": "\u860b\u65b9-\u7c21",
+              "custom": false,
+              "glyphCount": 9
+            },
+            {
+              "family": "Geeza Pro",
+              "custom": false,
+              "glyphCount": 17
+            }
+          ],
+          "nodesExamined": 25,
+          "truncated": false,
+          "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+        },
+        "dependencyIdentities": {
+          "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+          "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+          "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+          "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+          "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+          "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+        },
+        "hostSha256": "5da487e489051f5ec0705aafa7c62c96f7ba8d0f8c614ab9fe29ddab4306aad5",
+        "bridgeSha256": "0f66652f2e84ebb0d5b7adc2583bef666e83d18052bb1c4c0fd18e14f82158e1",
+        "implementationSha256": "b67134255b986f21c534e6ecb68cbda38a662702829c55e862f5c57341231c00",
+        "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+        "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+        "elapsedSeconds": 85.00619116600137,
+        "endToEndFps": 21.17492826475348,
+        "timingsSeconds": {
+          "seek": 49.082018499993865,
+          "captureEncode": 25.901377637055703,
+          "mux": 9.094233792002342,
+          "preparation": 0.5406828749983106,
+          "assetReadinessSeconds": 0.055400000002235224,
+          "automaticAnimationSeconds": 0.04000000001117591,
+          "browserSubmissionSeconds": 3.7552000000998085,
+          "customScriptSeconds": 0.2944999999888227,
+          "forcedLayoutSeconds": 0.2130999999530578,
+          "mediaSeekSeconds": 43.736599999982886,
+          "gpuTransferConversionSeconds": 0.29790958336525364,
+          "nativeWaitSeconds": 1.2571295180000022,
+          "encoderAppendSeconds": 0.08492844999999988,
+          "encoderFlushSeconds": 0.007532458
+        },
+        "output": "/private/var/folders/ml/5_qnbgls7rqds5s4jd13ctbm0000gn/T/vibeedit-soak-j2z_q983/video.mp4",
+        "sha256": "d78ff7b8a30c013c21e5d3135cc495921d4f6944c3ac2b0b0b14e96beff7e678"
+      }
+    ],
+    "memorySamples": [
+      {
+        "seconds": 3.1019274999998743,
+        "rssMiB": 722.203125
+      },
+      {
+        "seconds": 4.159311250001338,
+        "rssMiB": 738.703125
+      },
+      {
+        "seconds": 5.225905667000916,
+        "rssMiB": 742.515625
+      },
+      {
+        "seconds": 6.2858779589987535,
+        "rssMiB": 744.015625
+      },
+      {
+        "seconds": 7.349160000001575,
+        "rssMiB": 743.4375
+      },
+      {
+        "seconds": 8.416771416999836,
+        "rssMiB": 737.0
+      },
+      {
+        "seconds": 9.47809929199866,
+        "rssMiB": 737.921875
+      },
+      {
+        "seconds": 10.542133667000599,
+        "rssMiB": 739.1875
+      },
+      {
+        "seconds": 11.614405791999161,
+        "rssMiB": 743.609375
+      },
+      {
+        "seconds": 12.674800875000074,
+        "rssMiB": 744.296875
+      },
+      {
+        "seconds": 13.7357554170012,
+        "rssMiB": 745.203125
+      },
+      {
+        "seconds": 14.804135624999617,
+        "rssMiB": 745.984375
+      },
+      {
+        "seconds": 15.871038834000501,
+        "rssMiB": 746.765625
+      },
+      {
+        "seconds": 16.937166667001293,
+        "rssMiB": 747.8125
+      },
+      {
+        "seconds": 17.992658374998427,
+        "rssMiB": 749.171875
+      },
+      {
+        "seconds": 19.052898292000464,
+        "rssMiB": 749.34375
+      },
+      {
+        "seconds": 20.106996292000986,
+        "rssMiB": 750.171875
+      },
+      {
+        "seconds": 21.169879500001116,
+        "rssMiB": 750.234375
+      },
+      {
+        "seconds": 22.230228249998618,
+        "rssMiB": 751.390625
+      },
+      {
+        "seconds": 23.295247166999616,
+        "rssMiB": 752.578125
+      },
+      {
+        "seconds": 24.35479262499939,
+        "rssMiB": 753.625
+      },
+      {
+        "seconds": 25.42261491699901,
+        "rssMiB": 753.828125
+      },
+      {
+        "seconds": 26.4864883750015,
+        "rssMiB": 753.890625
+      },
+      {
+        "seconds": 27.55329150000034,
+        "rssMiB": 753.734375
+      },
+      {
+        "seconds": 28.625531042001967,
+        "rssMiB": 754.0
+      },
+      {
+        "seconds": 29.69005033400026,
+        "rssMiB": 753.953125
+      },
+      {
+        "seconds": 30.757872792000853,
+        "rssMiB": 754.46875
+      },
+      {
+        "seconds": 31.83047599999918,
+        "rssMiB": 754.375
+      },
+      {
+        "seconds": 32.89719262500148,
+        "rssMiB": 744.984375
+      },
+      {
+        "seconds": 33.966911499999696,
+        "rssMiB": 744.765625
+      },
+      {
+        "seconds": 35.02493862499978,
+        "rssMiB": 745.375
+      },
+      {
+        "seconds": 36.09060254200085,
+        "rssMiB": 745.328125
+      },
+      {
+        "seconds": 37.15769829200144,
+        "rssMiB": 745.671875
+      },
+      {
+        "seconds": 38.22392200000104,
+        "rssMiB": 747.109375
+      },
+      {
+        "seconds": 39.29064495900093,
+        "rssMiB": 747.34375
+      },
+      {
+        "seconds": 40.35465745900001,
+        "rssMiB": 748.078125
+      },
+      {
+        "seconds": 41.41767550000077,
+        "rssMiB": 748.671875
+      },
+      {
+        "seconds": 42.4834773750008,
+        "rssMiB": 748.90625
+      },
+      {
+        "seconds": 43.54303558399988,
+        "rssMiB": 750.140625
+      },
+      {
+        "seconds": 44.608995292001055,
+        "rssMiB": 749.8125
+      },
+      {
+        "seconds": 45.6686684999986,
+        "rssMiB": 751.09375
+      },
+      {
+        "seconds": 46.73660216699864,
+        "rssMiB": 751.46875
+      },
+      {
+        "seconds": 47.80262058399967,
+        "rssMiB": 751.890625
+      },
+      {
+        "seconds": 48.87443079199875,
+        "rssMiB": 752.78125
+      },
+      {
+        "seconds": 49.93818391700188,
+        "rssMiB": 753.28125
+      },
+      {
+        "seconds": 51.00576370899944,
+        "rssMiB": 753.515625
+      },
+      {
+        "seconds": 52.07320195899956,
+        "rssMiB": 753.578125
+      },
+      {
+        "seconds": 53.13778425000055,
+        "rssMiB": 753.984375
+      },
+      {
+        "seconds": 54.20321208400128,
+        "rssMiB": 753.75
+      },
+      {
+        "seconds": 55.26743500000157,
+        "rssMiB": 754.03125
+      },
+      {
+        "seconds": 56.3300296669986,
+        "rssMiB": 753.453125
+      },
+      {
+        "seconds": 57.38618783399943,
+        "rssMiB": 753.71875
+      },
+      {
+        "seconds": 58.44420312500006,
+        "rssMiB": 754.421875
+      },
+      {
+        "seconds": 59.50197387500157,
+        "rssMiB": 754.0
+      },
+      {
+        "seconds": 60.55846066700178,
+        "rssMiB": 754.453125
+      },
+      {
+        "seconds": 61.62270641700161,
+        "rssMiB": 754.40625
+      },
+      {
+        "seconds": 62.68578016700121,
+        "rssMiB": 754.609375
+      },
+      {
+        "seconds": 63.749053333998745,
+        "rssMiB": 755.296875
+      },
+      {
+        "seconds": 64.808199916999,
+        "rssMiB": 755.9375
+      },
+      {
+        "seconds": 65.8665302920017,
+        "rssMiB": 756.109375
+      },
+      {
+        "seconds": 66.92856024999855,
+        "rssMiB": 756.359375
+      },
+      {
+        "seconds": 67.99560820899933,
+        "rssMiB": 756.671875
+      },
+      {
+        "seconds": 69.05702591700174,
+        "rssMiB": 756.5625
+      },
+      {
+        "seconds": 70.11587258399959,
+        "rssMiB": 756.625
+      },
+      {
+        "seconds": 71.18003600000156,
+        "rssMiB": 756.078125
+      },
+      {
+        "seconds": 72.24950229200113,
+        "rssMiB": 756.296875
+      },
+      {
+        "seconds": 73.31233112500195,
+        "rssMiB": 756.890625
+      },
+      {
+        "seconds": 74.36995816700073,
+        "rssMiB": 756.390625
+      },
+      {
+        "seconds": 75.43013070899906,
+        "rssMiB": 756.453125
+      },
+      {
+        "seconds": 76.49869062500147,
+        "rssMiB": 756.046875
+      },
+      {
+        "seconds": 77.55460666699946,
+        "rssMiB": 756.0625
+      },
+      {
+        "seconds": 78.62350683399927,
+        "rssMiB": 757.140625
+      },
+      {
+        "seconds": 79.69159862499873,
+        "rssMiB": 756.375
+      },
+      {
+        "seconds": 80.74563704200045,
+        "rssMiB": 757.0
+      },
+      {
+        "seconds": 81.81298866699944,
+        "rssMiB": 757.265625
+      },
+      {
+        "seconds": 82.87656937499924,
+        "rssMiB": 757.34375
+      },
+      {
+        "seconds": 83.93712666699867,
+        "rssMiB": 755.796875
+      },
+      {
+        "seconds": 85.00264287499886,
+        "rssMiB": 756.03125
+      },
+      {
+        "seconds": 86.0708148340018,
+        "rssMiB": 755.796875
+      },
+      {
+        "seconds": 87.13152170900139,
+        "rssMiB": 755.96875
+      },
+      {
+        "seconds": 88.19497587500155,
+        "rssMiB": 756.6875
+      },
+      {
+        "seconds": 89.24925979199907,
+        "rssMiB": 756.546875
+      },
+      {
+        "seconds": 90.31671454200114,
+        "rssMiB": 756.703125
+      },
+      {
+        "seconds": 91.38435562499944,
+        "rssMiB": 756.765625
+      },
+      {
+        "seconds": 92.45355162499982,
+        "rssMiB": 756.890625
+      },
+      {
+        "seconds": 93.5197514169995,
+        "rssMiB": 757.53125
+      },
+      {
+        "seconds": 94.58383749999848,
+        "rssMiB": 756.96875
+      },
+      {
+        "seconds": 95.64474795899878,
+        "rssMiB": 757.203125
+      },
+      {
+        "seconds": 96.70950783399894,
+        "rssMiB": 756.96875
+      },
+      {
+        "seconds": 97.7679320419993,
+        "rssMiB": 757.203125
+      },
+      {
+        "seconds": 98.82632525000008,
+        "rssMiB": 757.71875
+      },
+      {
+        "seconds": 99.89389345900054,
+        "rssMiB": 757.78125
+      },
+      {
+        "seconds": 100.9509593340008,
+        "rssMiB": 757.953125
+      },
+      {
+        "seconds": 102.01927825000166,
+        "rssMiB": 757.96875
+      },
+      {
+        "seconds": 103.07637470899863,
+        "rssMiB": 758.109375
+      },
+      {
+        "seconds": 104.13957095899968,
+        "rssMiB": 757.6875
+      },
+      {
+        "seconds": 105.2053627919995,
+        "rssMiB": 757.84375
+      },
+      {
+        "seconds": 106.27120037499844,
+        "rssMiB": 757.21875
+      },
+      {
+        "seconds": 107.33161362499959,
+        "rssMiB": 757.4375
+      },
+      {
+        "seconds": 108.3994336249998,
+        "rssMiB": 757.796875
+      },
+      {
+        "seconds": 109.46295516700047,
+        "rssMiB": 757.4375
+      },
+      {
+        "seconds": 110.53518824999992,
+        "rssMiB": 757.75
+      },
+      {
+        "seconds": 111.60023462499885,
+        "rssMiB": 757.40625
+      },
+      {
+        "seconds": 112.66980604199853,
+        "rssMiB": 757.21875
+      },
+      {
+        "seconds": 113.73942070900011,
+        "rssMiB": 757.53125
+      },
+      {
+        "seconds": 114.799327834,
+        "rssMiB": 757.609375
+      },
+      {
+        "seconds": 115.86570287499853,
+        "rssMiB": 757.78125
+      },
+      {
+        "seconds": 116.92425008400096,
+        "rssMiB": 757.53125
+      },
+      {
+        "seconds": 117.9884521669992,
+        "rssMiB": 757.578125
+      },
+      {
+        "seconds": 119.08465241700105,
+        "rssMiB": 758.0
+      },
+      {
+        "seconds": 120.15159499999936,
+        "rssMiB": 757.96875
+      },
+      {
+        "seconds": 121.22069945900148,
+        "rssMiB": 757.734375
+      },
+      {
+        "seconds": 122.29705349999858,
+        "rssMiB": 757.953125
+      },
+      {
+        "seconds": 123.35855224999978,
+        "rssMiB": 758.5625
+      },
+      {
+        "seconds": 124.41946441700202,
+        "rssMiB": 758.046875
+      },
+      {
+        "seconds": 125.48251979199995,
+        "rssMiB": 758.546875
+      },
+      {
+        "seconds": 126.54544958399856,
+        "rssMiB": 758.515625
+      },
+      {
+        "seconds": 127.61455249999926,
+        "rssMiB": 758.328125
+      },
+      {
+        "seconds": 128.6718050419986,
+        "rssMiB": 758.71875
+      },
+      {
+        "seconds": 129.73517091699978,
+        "rssMiB": 758.4375
+      },
+      {
+        "seconds": 130.79200074999972,
+        "rssMiB": 758.578125
+      },
+      {
+        "seconds": 131.8540568339995,
+        "rssMiB": 758.78125
+      },
+      {
+        "seconds": 132.91944516700096,
+        "rssMiB": 759.59375
+      },
+      {
+        "seconds": 133.98513804200047,
+        "rssMiB": 758.765625
+      },
+      {
+        "seconds": 135.04740604200197,
+        "rssMiB": 759.109375
+      },
+      {
+        "seconds": 136.11123970900007,
+        "rssMiB": 758.03125
+      },
+      {
+        "seconds": 137.17822708400126,
+        "rssMiB": 758.140625
+      },
+      {
+        "seconds": 138.2341887500006,
+        "rssMiB": 758.296875
+      },
+      {
+        "seconds": 139.29111724999893,
+        "rssMiB": 758.46875
+      },
+      {
+        "seconds": 140.3611809590002,
+        "rssMiB": 758.5625
+      },
+      {
+        "seconds": 141.4194845839993,
+        "rssMiB": 758.15625
+      },
+      {
+        "seconds": 142.63268012499975,
+        "rssMiB": 758.421875
+      },
+      {
+        "seconds": 143.69691558400154,
+        "rssMiB": 758.953125
+      },
+      {
+        "seconds": 144.78263945900108,
+        "rssMiB": 758.65625
+      },
+      {
+        "seconds": 145.84308975000022,
+        "rssMiB": 759.125
+      },
+      {
+        "seconds": 146.90138008400027,
+        "rssMiB": 759.234375
+      },
+      {
+        "seconds": 147.96175112499986,
+        "rssMiB": 759.484375
+      },
+      {
+        "seconds": 149.0199010840006,
+        "rssMiB": 759.703125
+      },
+      {
+        "seconds": 150.0822389999994,
+        "rssMiB": 759.46875
+      },
+      {
+        "seconds": 151.14534354200077,
+        "rssMiB": 759.21875
+      },
+      {
+        "seconds": 152.20758983400083,
+        "rssMiB": 759.328125
+      },
+      {
+        "seconds": 153.26799545899848,
+        "rssMiB": 786.6875
+      },
+      {
+        "seconds": 154.32862891699915,
+        "rssMiB": 800.375
+      },
+      {
+        "seconds": 155.38911020900196,
+        "rssMiB": 800.390625
+      },
+      {
+        "seconds": 156.4484635000008,
+        "rssMiB": 800.703125
+      },
+      {
+        "seconds": 157.4988411250015,
+        "rssMiB": 800.671875
+      },
+      {
+        "seconds": 158.5580904999988,
+        "rssMiB": 800.5625
+      },
+      {
+        "seconds": 159.6184827090001,
+        "rssMiB": 800.5625
+      },
+      {
+        "seconds": 160.67689099999916,
+        "rssMiB": 799.5
+      },
+      {
+        "seconds": 161.73246745900178,
+        "rssMiB": 799.5
+      },
+      {
+        "seconds": 162.79055637499914,
+        "rssMiB": 799.5
+      },
+      {
+        "seconds": 163.84368320900103,
+        "rssMiB": 799.53125
+      },
+      {
+        "seconds": 164.90430429199841,
+        "rssMiB": 799.5625
+      },
+      {
+        "seconds": 165.9593882090012,
+        "rssMiB": 799.5625
+      },
+      {
+        "seconds": 167.01409487500132,
+        "rssMiB": 799.5625
+      },
+      {
+        "seconds": 168.07667004199902,
+        "rssMiB": 799.578125
+      },
+      {
+        "seconds": 169.13722854200023,
+        "rssMiB": 799.5625
+      },
+      {
+        "seconds": 170.19080504199883,
+        "rssMiB": 799.5625
+      },
+      {
+        "seconds": 171.24735599999985,
+        "rssMiB": 799.578125
+      },
+      {
+        "seconds": 172.30620933400132,
+        "rssMiB": 799.578125
+      },
+      {
+        "seconds": 173.3638901250015,
+        "rssMiB": 799.59375
+      },
+      {
+        "seconds": 174.42426454200177,
+        "rssMiB": 799.59375
+      },
+      {
+        "seconds": 175.48140833399884,
+        "rssMiB": 754.703125
+      },
+      {
+        "seconds": 176.53263645900006,
+        "rssMiB": 806.296875
+      },
+      {
+        "seconds": 177.5917772920002,
+        "rssMiB": 810.3125
+      },
+      {
+        "seconds": 178.65517470900159,
+        "rssMiB": 805.859375
+      },
+      {
+        "seconds": 179.71728037499997,
+        "rssMiB": 807.421875
+      },
+      {
+        "seconds": 180.78302666699892,
+        "rssMiB": 808.078125
+      },
+      {
+        "seconds": 181.84113637500195,
+        "rssMiB": 807.984375
+      },
+      {
+        "seconds": 182.8985619999985,
+        "rssMiB": 777.28125
+      },
+      {
+        "seconds": 183.95576966700173,
+        "rssMiB": 777.984375
+      },
+      {
+        "seconds": 185.0189972920016,
+        "rssMiB": 777.984375
+      },
+      {
+        "seconds": 186.08222491700144,
+        "rssMiB": 782.5
+      },
+      {
+        "seconds": 187.13722483400124,
+        "rssMiB": 783.25
+      },
+      {
+        "seconds": 188.20038829199984,
+        "rssMiB": 784.484375
+      },
+      {
+        "seconds": 189.2623819170003,
+        "rssMiB": 784.734375
+      },
+      {
+        "seconds": 190.32561350000105,
+        "rssMiB": 785.34375
+      },
+      {
+        "seconds": 191.39333741700102,
+        "rssMiB": 785.859375
+      },
+      {
+        "seconds": 192.45932845900097,
+        "rssMiB": 787.0625
+      },
+      {
+        "seconds": 193.52703008400204,
+        "rssMiB": 788.796875
+      },
+      {
+        "seconds": 194.59430354199867,
+        "rssMiB": 788.8125
+      },
+      {
+        "seconds": 195.66378633400018,
+        "rssMiB": 789.484375
+      },
+      {
+        "seconds": 196.73180941700048,
+        "rssMiB": 791.046875
+      },
+      {
+        "seconds": 197.79940929200166,
+        "rssMiB": 791.265625
+      },
+      {
+        "seconds": 198.8716605840018,
+        "rssMiB": 791.625
+      },
+      {
+        "seconds": 199.9333625420004,
+        "rssMiB": 791.8125
+      },
+      {
+        "seconds": 201.002243834002,
+        "rssMiB": 792.03125
+      },
+      {
+        "seconds": 202.07338408400028,
+        "rssMiB": 786.671875
+      },
+      {
+        "seconds": 203.13525474999915,
+        "rssMiB": 785.953125
+      },
+      {
+        "seconds": 204.19908275000125,
+        "rssMiB": 786.546875
+      },
+      {
+        "seconds": 205.2678703749989,
+        "rssMiB": 786.140625
+      },
+      {
+        "seconds": 206.3342731670018,
+        "rssMiB": 777.65625
+      },
+      {
+        "seconds": 207.40216895900085,
+        "rssMiB": 778.109375
+      },
+      {
+        "seconds": 208.4617807499999,
+        "rssMiB": 778.9375
+      },
+      {
+        "seconds": 209.52736487500079,
+        "rssMiB": 778.484375
+      },
+      {
+        "seconds": 210.58974245900026,
+        "rssMiB": 779.0625
+      },
+      {
+        "seconds": 211.64870979199986,
+        "rssMiB": 779.234375
+      },
+      {
+        "seconds": 212.71934470899942,
+        "rssMiB": 774.390625
+      },
+      {
+        "seconds": 213.78596712500075,
+        "rssMiB": 775.734375
+      },
+      {
+        "seconds": 214.84987862500202,
+        "rssMiB": 775.9375
+      },
+      {
+        "seconds": 215.91319995899903,
+        "rssMiB": 776.6875
+      },
+      {
+        "seconds": 216.98889937499916,
+        "rssMiB": 778.359375
+      },
+      {
+        "seconds": 218.0605844169986,
+        "rssMiB": 778.75
+      },
+      {
+        "seconds": 219.1197973749986,
+        "rssMiB": 779.671875
+      },
+      {
+        "seconds": 220.1801668750013,
+        "rssMiB": 780.109375
+      },
+      {
+        "seconds": 221.24101425000117,
+        "rssMiB": 781.171875
+      },
+      {
+        "seconds": 222.30640479200156,
+        "rssMiB": 781.5625
+      },
+      {
+        "seconds": 223.3640061670012,
+        "rssMiB": 782.28125
+      },
+      {
+        "seconds": 224.42312658399896,
+        "rssMiB": 782.140625
+      },
+      {
+        "seconds": 225.48099716700017,
+        "rssMiB": 781.9375
+      },
+      {
+        "seconds": 226.53663229200174,
+        "rssMiB": 781.890625
+      },
+      {
+        "seconds": 227.6020462919987,
+        "rssMiB": 781.875
+      },
+      {
+        "seconds": 228.6626104169991,
+        "rssMiB": 782.90625
+      },
+      {
+        "seconds": 229.73290650000126,
+        "rssMiB": 782.140625
+      },
+      {
+        "seconds": 230.800392000001,
+        "rssMiB": 781.5625
+      },
+      {
+        "seconds": 231.8673664170019,
+        "rssMiB": 781.578125
+      },
+      {
+        "seconds": 232.93426133400135,
+        "rssMiB": 781.4375
+      },
+      {
+        "seconds": 233.98893658399902,
+        "rssMiB": 781.8125
+      },
+      {
+        "seconds": 235.04661987500003,
+        "rssMiB": 782.046875
+      },
+      {
+        "seconds": 236.11218112500137,
+        "rssMiB": 782.21875
+      },
+      {
+        "seconds": 237.1781313749998,
+        "rssMiB": 782.546875
+      },
+      {
+        "seconds": 238.247962292,
+        "rssMiB": 782.859375
+      },
+      {
+        "seconds": 239.3111849170018,
+        "rssMiB": 783.90625
+      },
+      {
+        "seconds": 240.37972900000022,
+        "rssMiB": 783.421875
+      },
+      {
+        "seconds": 241.44653641699915,
+        "rssMiB": 783.46875
+      },
+      {
+        "seconds": 242.50890295900172,
+        "rssMiB": 784.09375
+      },
+      {
+        "seconds": 243.57457154200165,
+        "rssMiB": 783.796875
+      },
+      {
+        "seconds": 244.64035675000196,
+        "rssMiB": 783.40625
+      },
+      {
+        "seconds": 245.70913733400084,
+        "rssMiB": 783.359375
+      },
+      {
+        "seconds": 246.7782745000004,
+        "rssMiB": 783.25
+      },
+      {
+        "seconds": 247.84716704200036,
+        "rssMiB": 783.125
+      },
+      {
+        "seconds": 248.90407562499968,
+        "rssMiB": 783.28125
+      },
+      {
+        "seconds": 249.97393133399964,
+        "rssMiB": 783.203125
+      },
+      {
+        "seconds": 251.04067049999867,
+        "rssMiB": 783.421875
+      },
+      {
+        "seconds": 252.1055448340012,
+        "rssMiB": 783.21875
+      },
+      {
+        "seconds": 253.16796108400013,
+        "rssMiB": 783.046875
+      },
+      {
+        "seconds": 254.22643750000134,
+        "rssMiB": 836.90625
+      },
+      {
+        "seconds": 255.27879470900007,
+        "rssMiB": 832.75
+      },
+      {
+        "seconds": 256.3375121249992,
+        "rssMiB": 832.765625
+      },
+      {
+        "seconds": 257.39554812500137,
+        "rssMiB": 832.78125
+      },
+      {
+        "seconds": 258.4551574590005,
+        "rssMiB": 832.734375
+      },
+      {
+        "seconds": 259.5148305420007,
+        "rssMiB": 832.140625
+      },
+      {
+        "seconds": 260.57456070899934,
+        "rssMiB": 832.140625
+      },
+      {
+        "seconds": 261.63191975000154,
+        "rssMiB": 832.140625
+      },
+      {
+        "seconds": 262.69189800000095,
+        "rssMiB": 832.140625
+      },
+      {
+        "seconds": 263.7533050839993,
+        "rssMiB": 832.140625
+      },
+      {
+        "seconds": 264.81074991700007,
+        "rssMiB": 832.140625
+      },
+      {
+        "seconds": 265.8734296670009,
+        "rssMiB": 832.140625
+      },
+      {
+        "seconds": 266.9361109999991,
+        "rssMiB": 832.109375
+      },
+      {
+        "seconds": 267.99323812500006,
+        "rssMiB": 832.109375
+      },
+      {
+        "seconds": 269.05327766700066,
+        "rssMiB": 832.109375
+      },
+      {
+        "seconds": 270.1150247500009,
+        "rssMiB": 832.375
+      },
+      {
+        "seconds": 271.17262004200165,
+        "rssMiB": 832.375
+      },
+      {
+        "seconds": 272.23178991700115,
+        "rssMiB": 832.390625
+      },
+      {
+        "seconds": 273.29139433399905,
+        "rssMiB": 832.375
+      },
+      {
+        "seconds": 274.35448325000107,
+        "rssMiB": 748.90625
+      },
+      {
+        "seconds": 275.4094356249989,
+        "rssMiB": 762.015625
+      },
+      {
+        "seconds": 276.4651664590019,
+        "rssMiB": 763.0
+      },
+      {
+        "seconds": 277.52337845900183,
+        "rssMiB": 763.578125
+      },
+      {
+        "seconds": 278.58738845900007,
+        "rssMiB": 764.3125
+      },
+      {
+        "seconds": 279.6472779169999,
+        "rssMiB": 761.96875
+      },
+      {
+        "seconds": 280.71176079200086,
+        "rssMiB": 762.515625
+      },
+      {
+        "seconds": 281.77423866699974,
+        "rssMiB": 763.25
+      },
+      {
+        "seconds": 282.8340099170018,
+        "rssMiB": 767.5625
+      },
+      {
+        "seconds": 283.8950834589996,
+        "rssMiB": 768.453125
+      },
+      {
+        "seconds": 284.9606205000018,
+        "rssMiB": 769.484375
+      },
+      {
+        "seconds": 286.02501654200023,
+        "rssMiB": 769.890625
+      },
+      {
+        "seconds": 287.0805210840008,
+        "rssMiB": 770.484375
+      },
+      {
+        "seconds": 288.14325391700186,
+        "rssMiB": 770.71875
+      },
+      {
+        "seconds": 289.20306133399936,
+        "rssMiB": 771.46875
+      },
+      {
+        "seconds": 290.2679395000014,
+        "rssMiB": 772.453125
+      },
+      {
+        "seconds": 291.33250812500046,
+        "rssMiB": 773.078125
+      },
+      {
+        "seconds": 292.399928750001,
+        "rssMiB": 774.90625
+      },
+      {
+        "seconds": 293.458562333999,
+        "rssMiB": 775.3125
+      },
+      {
+        "seconds": 294.52171258399903,
+        "rssMiB": 775.46875
+      },
+      {
+        "seconds": 295.58537604199955,
+        "rssMiB": 776.03125
+      },
+      {
+        "seconds": 296.6393064170006,
+        "rssMiB": 776.171875
+      },
+      {
+        "seconds": 297.70377583400114,
+        "rssMiB": 775.71875
+      },
+      {
+        "seconds": 298.7693640840007,
+        "rssMiB": 775.890625
+      },
+      {
+        "seconds": 299.8335949169996,
+        "rssMiB": 776.59375
+      },
+      {
+        "seconds": 300.89613441700203,
+        "rssMiB": 776.15625
+      },
+      {
+        "seconds": 301.9551222500013,
+        "rssMiB": 776.234375
+      },
+      {
+        "seconds": 303.0246829589996,
+        "rssMiB": 776.390625
+      },
+      {
+        "seconds": 304.08450399999856,
+        "rssMiB": 767.09375
+      },
+      {
+        "seconds": 305.14873566700044,
+        "rssMiB": 767.109375
+      },
+      {
+        "seconds": 306.20963479200145,
+        "rssMiB": 767.15625
+      },
+      {
+        "seconds": 307.27317224999933,
+        "rssMiB": 767.71875
+      },
+      {
+        "seconds": 308.3406982500019,
+        "rssMiB": 768.265625
+      },
+      {
+        "seconds": 309.39916533400174,
+        "rssMiB": 768.453125
+      },
+      {
+        "seconds": 310.4564834590019,
+        "rssMiB": 769.671875
+      },
+      {
+        "seconds": 311.5295310420006,
+        "rssMiB": 769.8125
+      },
+      {
+        "seconds": 312.5941652090005,
+        "rssMiB": 770.046875
+      },
+      {
+        "seconds": 313.65782120899894,
+        "rssMiB": 770.796875
+      },
+      {
+        "seconds": 314.71546333399965,
+        "rssMiB": 771.5
+      },
+      {
+        "seconds": 315.77755329199863,
+        "rssMiB": 772.03125
+      },
+      {
+        "seconds": 316.84355220900034,
+        "rssMiB": 772.53125
+      },
+      {
+        "seconds": 317.8998452090018,
+        "rssMiB": 773.640625
+      },
+      {
+        "seconds": 318.96993133399883,
+        "rssMiB": 774.28125
+      },
+      {
+        "seconds": 320.0323876670009,
+        "rssMiB": 775.15625
+      },
+      {
+        "seconds": 321.1030661670011,
+        "rssMiB": 775.109375
+      },
+      {
+        "seconds": 322.16435116700086,
+        "rssMiB": 775.375
+      },
+      {
+        "seconds": 323.2223919999997,
+        "rssMiB": 775.28125
+      },
+      {
+        "seconds": 324.2846979999995,
+        "rssMiB": 775.609375
+      },
+      {
+        "seconds": 325.3443522919988,
+        "rssMiB": 776.15625
+      },
+      {
+        "seconds": 326.4115375000001,
+        "rssMiB": 775.640625
+      },
+      {
+        "seconds": 327.4738380000017,
+        "rssMiB": 775.5
+      },
+      {
+        "seconds": 328.5289452090001,
+        "rssMiB": 775.15625
+      },
+      {
+        "seconds": 329.5918655839996,
+        "rssMiB": 775.296875
+      },
+      {
+        "seconds": 330.661160292002,
+        "rssMiB": 775.0625
+      },
+      {
+        "seconds": 331.7315308340003,
+        "rssMiB": 775.328125
+      },
+      {
+        "seconds": 332.7855577500013,
+        "rssMiB": 775.28125
+      },
+      {
+        "seconds": 333.851831750002,
+        "rssMiB": 775.4375
+      },
+      {
+        "seconds": 334.9209995839992,
+        "rssMiB": 775.96875
+      },
+      {
+        "seconds": 335.9834979590014,
+        "rssMiB": 776.578125
+      },
+      {
+        "seconds": 337.0413604999994,
+        "rssMiB": 777.109375
+      },
+      {
+        "seconds": 338.1056035420006,
+        "rssMiB": 777.125
+      },
+      {
+        "seconds": 339.1702350839987,
+        "rssMiB": 777.546875
+      },
+      {
+        "seconds": 340.2351685419999,
+        "rssMiB": 778.265625
+      },
+      {
+        "seconds": 341.2947747090002,
+        "rssMiB": 777.21875
+      },
+      {
+        "seconds": 342.3604252920013,
+        "rssMiB": 777.109375
+      },
+      {
+        "seconds": 343.4218756670016,
+        "rssMiB": 777.203125
+      },
+      {
+        "seconds": 344.49402304199975,
+        "rssMiB": 776.953125
+      },
+      {
+        "seconds": 345.5583206250012,
+        "rssMiB": 777.40625
+      },
+      {
+        "seconds": 346.62190758400175,
+        "rssMiB": 777.390625
+      },
+      {
+        "seconds": 347.6821954590014,
+        "rssMiB": 777.015625
+      },
+      {
+        "seconds": 348.7486107920013,
+        "rssMiB": 777.1875
+      },
+      {
+        "seconds": 349.81049124999845,
+        "rssMiB": 799.546875
+      },
+      {
+        "seconds": 350.8598395000008,
+        "rssMiB": 810.09375
+      },
+      {
+        "seconds": 351.91441275000034,
+        "rssMiB": 805.640625
+      },
+      {
+        "seconds": 352.97476449999886,
+        "rssMiB": 805.640625
+      },
+      {
+        "seconds": 354.02646308399926,
+        "rssMiB": 805.640625
+      },
+      {
+        "seconds": 355.0864330000004,
+        "rssMiB": 805.484375
+      },
+      {
+        "seconds": 356.1449339999999,
+        "rssMiB": 805.484375
+      },
+      {
+        "seconds": 357.2035050839986,
+        "rssMiB": 804.734375
+      },
+      {
+        "seconds": 358.2612008340002,
+        "rssMiB": 804.734375
+      },
+      {
+        "seconds": 359.32556308399944,
+        "rssMiB": 803.828125
+      },
+      {
+        "seconds": 360.3858086250002,
+        "rssMiB": 762.484375
+      },
+      {
+        "seconds": 361.4491554589986,
+        "rssMiB": 769.921875
+      },
+      {
+        "seconds": 362.51365479200103,
+        "rssMiB": 771.03125
+      },
+      {
+        "seconds": 363.57860775000154,
+        "rssMiB": 771.65625
+      },
+      {
+        "seconds": 364.6481620839986,
+        "rssMiB": 763.90625
+      },
+      {
+        "seconds": 365.714692542002,
+        "rssMiB": 764.9375
+      },
+      {
+        "seconds": 366.7773232090003,
+        "rssMiB": 765.09375
+      },
+      {
+        "seconds": 367.8473267920017,
+        "rssMiB": 766.390625
+      },
+      {
+        "seconds": 368.9110555420011,
+        "rssMiB": 770.625
+      },
+      {
+        "seconds": 369.9753093340005,
+        "rssMiB": 771.171875
+      },
+      {
+        "seconds": 371.0397633339999,
+        "rssMiB": 772.0625
+      },
+      {
+        "seconds": 372.1021198749986,
+        "rssMiB": 772.4375
+      },
+      {
+        "seconds": 373.1701327920018,
+        "rssMiB": 773.3125
+      },
+      {
+        "seconds": 374.241425917,
+        "rssMiB": 774.0625
+      },
+      {
+        "seconds": 375.31118566700025,
+        "rssMiB": 775.1875
+      },
+      {
+        "seconds": 376.3706833340002,
+        "rssMiB": 775.6875
+      },
+      {
+        "seconds": 377.43473666700083,
+        "rssMiB": 776.53125
+      },
+      {
+        "seconds": 378.4920562920015,
+        "rssMiB": 777.296875
+      },
+      {
+        "seconds": 379.55405995899855,
+        "rssMiB": 777.8125
+      },
+      {
+        "seconds": 380.62259237499893,
+        "rssMiB": 778.28125
+      },
+      {
+        "seconds": 381.6877050840012,
+        "rssMiB": 778.15625
+      },
+      {
+        "seconds": 382.7556196250007,
+        "rssMiB": 778.453125
+      },
+      {
+        "seconds": 383.82268575000126,
+        "rssMiB": 778.34375
+      },
+      {
+        "seconds": 384.9025133750001,
+        "rssMiB": 778.25
+      },
+      {
+        "seconds": 385.9716605419999,
+        "rssMiB": 778.640625
+      },
+      {
+        "seconds": 387.03661716699935,
+        "rssMiB": 778.609375
+      },
+      {
+        "seconds": 388.1074815840002,
+        "rssMiB": 778.796875
+      },
+      {
+        "seconds": 389.1751949589998,
+        "rssMiB": 778.3125
+      },
+      {
+        "seconds": 390.24183120900125,
+        "rssMiB": 769.96875
+      },
+      {
+        "seconds": 391.3080765420018,
+        "rssMiB": 769.890625
+      },
+      {
+        "seconds": 392.3728093339996,
+        "rssMiB": 770.5
+      },
+      {
+        "seconds": 393.44305320900094,
+        "rssMiB": 770.234375
+      },
+      {
+        "seconds": 394.5097891250007,
+        "rssMiB": 770.84375
+      },
+      {
+        "seconds": 395.56887958399966,
+        "rssMiB": 771.90625
+      },
+      {
+        "seconds": 396.6370370420009,
+        "rssMiB": 772.53125
+      },
+      {
+        "seconds": 397.7003319590003,
+        "rssMiB": 773.09375
+      },
+      {
+        "seconds": 398.76312091699947,
+        "rssMiB": 773.21875
+      },
+      {
+        "seconds": 399.8369976670001,
+        "rssMiB": 773.5625
+      },
+      {
+        "seconds": 400.898365584002,
+        "rssMiB": 775.0
+      },
+      {
+        "seconds": 401.966665750002,
+        "rssMiB": 774.9375
+      },
+      {
+        "seconds": 403.02797275000194,
+        "rssMiB": 776.03125
+      },
+      {
+        "seconds": 404.0959666250019,
+        "rssMiB": 776.34375
+      },
+      {
+        "seconds": 405.15675954200196,
+        "rssMiB": 776.5625
+      },
+      {
+        "seconds": 406.22178770900064,
+        "rssMiB": 777.140625
+      },
+      {
+        "seconds": 407.2882309589986,
+        "rssMiB": 777.40625
+      },
+      {
+        "seconds": 408.3537132499987,
+        "rssMiB": 777.65625
+      },
+      {
+        "seconds": 409.41782170900115,
+        "rssMiB": 777.484375
+      },
+      {
+        "seconds": 410.4853394589991,
+        "rssMiB": 778.359375
+      },
+      {
+        "seconds": 411.553055417,
+        "rssMiB": 777.84375
+      },
+      {
+        "seconds": 412.62114283399933,
+        "rssMiB": 778.0
+      },
+      {
+        "seconds": 413.6805832499995,
+        "rssMiB": 777.546875
+      },
+      {
+        "seconds": 414.74801037499856,
+        "rssMiB": 777.890625
+      },
+      {
+        "seconds": 415.81698937500187,
+        "rssMiB": 778.65625
+      },
+      {
+        "seconds": 416.88160066699857,
+        "rssMiB": 778.40625
+      },
+      {
+        "seconds": 417.9438420840015,
+        "rssMiB": 778.78125
+      },
+      {
+        "seconds": 419.00722529199993,
+        "rssMiB": 778.40625
+      },
+      {
+        "seconds": 420.0685494999998,
+        "rssMiB": 778.234375
+      },
+      {
+        "seconds": 421.12659208400146,
+        "rssMiB": 778.4375
+      },
+      {
+        "seconds": 422.19583904200044,
+        "rssMiB": 779.3125
+      },
+      {
+        "seconds": 423.2623040840008,
+        "rssMiB": 779.671875
+      },
+      {
+        "seconds": 424.3237058750019,
+        "rssMiB": 779.90625
+      },
+      {
+        "seconds": 425.3867734170017,
+        "rssMiB": 780.65625
+      },
+      {
+        "seconds": 426.4518452500015,
+        "rssMiB": 779.890625
+      },
+      {
+        "seconds": 427.51500591700096,
+        "rssMiB": 780.0
+      },
+      {
+        "seconds": 428.57649704199866,
+        "rssMiB": 779.359375
+      },
+      {
+        "seconds": 429.6406816250019,
+        "rssMiB": 779.21875
+      },
+      {
+        "seconds": 430.7016912090003,
+        "rssMiB": 780.078125
+      },
+      {
+        "seconds": 431.76608354199925,
+        "rssMiB": 779.3125
+      },
+      {
+        "seconds": 432.82726750000074,
+        "rssMiB": 779.515625
+      },
+      {
+        "seconds": 433.8940360000015,
+        "rssMiB": 779.75
+      },
+      {
+        "seconds": 434.95861804200104,
+        "rssMiB": 779.703125
+      },
+      {
+        "seconds": 436.0187251669995,
+        "rssMiB": 824.296875
+      },
+      {
+        "seconds": 437.13579129199934,
+        "rssMiB": 820.5
+      },
+      {
+        "seconds": 438.19674820900036,
+        "rssMiB": 820.5
+      },
+      {
+        "seconds": 439.2508962920001,
+        "rssMiB": 820.453125
+      },
+      {
+        "seconds": 440.309070416999,
+        "rssMiB": 820.40625
+      },
+      {
+        "seconds": 441.3693548750016,
+        "rssMiB": 820.34375
+      },
+      {
+        "seconds": 442.4313871250015,
+        "rssMiB": 820.34375
+      },
+      {
+        "seconds": 443.49484629200015,
+        "rssMiB": 820.34375
+      },
+      {
+        "seconds": 444.5513155840017,
+        "rssMiB": 820.34375
+      },
+      {
+        "seconds": 445.60186766699917,
+        "rssMiB": 820.359375
+      },
+      {
+        "seconds": 446.6635884999996,
+        "rssMiB": 774.6875
+      },
+      {
+        "seconds": 447.72371125000063,
+        "rssMiB": 819.90625
+      },
+      {
+        "seconds": 448.79011312500006,
+        "rssMiB": 805.140625
+      },
+      {
+        "seconds": 449.8527389590017,
+        "rssMiB": 813.234375
+      },
+      {
+        "seconds": 450.9268325839985,
+        "rssMiB": 814.234375
+      },
+      {
+        "seconds": 451.99641254200105,
+        "rssMiB": 814.609375
+      },
+      {
+        "seconds": 453.0654382499997,
+        "rssMiB": 814.640625
+      },
+      {
+        "seconds": 454.1332437919991,
+        "rssMiB": 783.84375
+      },
+      {
+        "seconds": 455.1931098749992,
+        "rssMiB": 783.75
+      },
+      {
+        "seconds": 456.25912937500107,
+        "rssMiB": 784.640625
+      },
+      {
+        "seconds": 457.31591545899937,
+        "rssMiB": 789.1875
+      },
+      {
+        "seconds": 458.3827939170005,
+        "rssMiB": 789.546875
+      },
+      {
+        "seconds": 459.4483036249985,
+        "rssMiB": 790.640625
+      },
+      {
+        "seconds": 460.5056679590016,
+        "rssMiB": 791.0625
+      },
+      {
+        "seconds": 461.5681047500002,
+        "rssMiB": 791.6875
+      },
+      {
+        "seconds": 462.6355262090001,
+        "rssMiB": 792.296875
+      },
+      {
+        "seconds": 463.6997724590001,
+        "rssMiB": 792.765625
+      },
+      {
+        "seconds": 464.7658714169993,
+        "rssMiB": 793.828125
+      },
+      {
+        "seconds": 465.83012016700013,
+        "rssMiB": 794.46875
+      },
+      {
+        "seconds": 466.89989445899846,
+        "rssMiB": 795.25
+      },
+      {
+        "seconds": 467.9682986250009,
+        "rssMiB": 797.03125
+      },
+      {
+        "seconds": 469.03677354200045,
+        "rssMiB": 797.515625
+      },
+      {
+        "seconds": 470.1039231249997,
+        "rssMiB": 797.578125
+      },
+      {
+        "seconds": 471.1642220419999,
+        "rssMiB": 792.296875
+      },
+      {
+        "seconds": 472.2219650420011,
+        "rssMiB": 792.4375
+      },
+      {
+        "seconds": 473.286023167002,
+        "rssMiB": 792.5
+      },
+      {
+        "seconds": 474.3497523750011,
+        "rssMiB": 792.984375
+      },
+      {
+        "seconds": 475.40364720900106,
+        "rssMiB": 792.671875
+      },
+      {
+        "seconds": 476.4671960839987,
+        "rssMiB": 792.609375
+      },
+      {
+        "seconds": 477.533014749999,
+        "rssMiB": 783.0625
+      },
+      {
+        "seconds": 478.6013336249998,
+        "rssMiB": 782.65625
+      },
+      {
+        "seconds": 479.66401804199995,
+        "rssMiB": 783.546875
+      },
+      {
+        "seconds": 480.7330924589987,
+        "rssMiB": 783.421875
+      },
+      {
+        "seconds": 481.78866833400025,
+        "rssMiB": 778.890625
+      },
+      {
+        "seconds": 482.8579992090017,
+        "rssMiB": 779.34375
+      },
+      {
+        "seconds": 483.91750941699866,
+        "rssMiB": 779.515625
+      },
+      {
+        "seconds": 484.9845659999992,
+        "rssMiB": 781.078125
+      },
+      {
+        "seconds": 486.0387401670014,
+        "rssMiB": 781.484375
+      },
+      {
+        "seconds": 487.104796833999,
+        "rssMiB": 781.8125
+      },
+      {
+        "seconds": 488.1676532499987,
+        "rssMiB": 782.375
+      },
+      {
+        "seconds": 489.2325371250008,
+        "rssMiB": 783.5
+      },
+      {
+        "seconds": 490.29001787499874,
+        "rssMiB": 783.734375
+      },
+      {
+        "seconds": 491.3578942919994,
+        "rssMiB": 784.03125
+      },
+      {
+        "seconds": 492.42802645900156,
+        "rssMiB": 784.828125
+      },
+      {
+        "seconds": 493.49628612499873,
+        "rssMiB": 785.75
+      },
+      {
+        "seconds": 494.5605727500006,
+        "rssMiB": 786.640625
+      },
+      {
+        "seconds": 495.6271913339988,
+        "rssMiB": 786.15625
+      },
+      {
+        "seconds": 496.6923363749993,
+        "rssMiB": 786.1875
+      },
+      {
+        "seconds": 497.76047983399985,
+        "rssMiB": 786.15625
+      },
+      {
+        "seconds": 498.82559383400076,
+        "rssMiB": 785.96875
+      },
+      {
+        "seconds": 499.8913783749995,
+        "rssMiB": 786.265625
+      },
+      {
+        "seconds": 500.9513535840015,
+        "rssMiB": 785.96875
+      },
+      {
+        "seconds": 502.0090283339996,
+        "rssMiB": 786.25
+      },
+      {
+        "seconds": 503.07601649999924,
+        "rssMiB": 786.09375
+      },
+      {
+        "seconds": 504.14810379199844,
+        "rssMiB": 785.9375
+      },
+      {
+        "seconds": 505.21585612499985,
+        "rssMiB": 786.203125
+      },
+      {
+        "seconds": 506.28158729200004,
+        "rssMiB": 786.203125
+      },
+      {
+        "seconds": 507.347570083999,
+        "rssMiB": 786.34375
+      },
+      {
+        "seconds": 508.41132645900143,
+        "rssMiB": 786.46875
+      },
+      {
+        "seconds": 509.47157462500036,
+        "rssMiB": 787.015625
+      },
+      {
+        "seconds": 510.5396644169996,
+        "rssMiB": 787.84375
+      },
+      {
+        "seconds": 511.60692570899846,
+        "rssMiB": 787.375
+      },
+      {
+        "seconds": 512.673738542002,
+        "rssMiB": 787.421875
+      },
+      {
+        "seconds": 513.7430888749986,
+        "rssMiB": 788.015625
+      },
+      {
+        "seconds": 514.8089275419989,
+        "rssMiB": 788.3125
+      },
+      {
+        "seconds": 515.8770275839997,
+        "rssMiB": 788.796875
+      },
+      {
+        "seconds": 516.9462916670018,
+        "rssMiB": 788.9375
+      },
+      {
+        "seconds": 518.0083134170018,
+        "rssMiB": 788.9375
+      },
+      {
+        "seconds": 519.0820784169991,
+        "rssMiB": 788.765625
+      },
+      {
+        "seconds": 520.1470957919992,
+        "rssMiB": 789.359375
+      },
+      {
+        "seconds": 521.203222209002,
+        "rssMiB": 789.4375
+      },
+      {
+        "seconds": 522.2657812920006,
+        "rssMiB": 789.609375
+      },
+      {
+        "seconds": 523.3279986669986,
+        "rssMiB": 789.5
+      },
+      {
+        "seconds": 524.390217791999,
+        "rssMiB": 804.0625
+      },
+      {
+        "seconds": 525.4481871249991,
+        "rssMiB": 848.03125
+      },
+      {
+        "seconds": 526.5085793340004,
+        "rssMiB": 842.359375
+      },
+      {
+        "seconds": 527.560396375,
+        "rssMiB": 842.375
+      },
+      {
+        "seconds": 528.6181148340002,
+        "rssMiB": 842.375
+      },
+      {
+        "seconds": 529.6834811670014,
+        "rssMiB": 842.234375
+      },
+      {
+        "seconds": 530.7426378749988,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 531.8023052499993,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 532.8598203750007,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 533.9213292919994,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 534.9761606249995,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 536.0351588750018,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 537.086397334002,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 538.1450470839991,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 539.2024762500005,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 540.2609062920019,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 541.3197795839988,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 542.375077875,
+        "rssMiB": 841.4375
+      },
+      {
+        "seconds": 543.4355328339989,
+        "rssMiB": 841.421875
+      },
+      {
+        "seconds": 544.4967747500014,
+        "rssMiB": 819.296875
+      },
+      {
+        "seconds": 545.5549289590017,
+        "rssMiB": 755.375
+      },
+      {
+        "seconds": 546.6170475420004,
+        "rssMiB": 769.03125
+      },
+      {
+        "seconds": 547.6818126670005,
+        "rssMiB": 770.375
+      },
+      {
+        "seconds": 548.7406725420005,
+        "rssMiB": 770.5625
+      },
+      {
+        "seconds": 549.8000042919994,
+        "rssMiB": 771.328125
+      },
+      {
+        "seconds": 550.8618727920002,
+        "rssMiB": 769.125
+      },
+      {
+        "seconds": 551.9248514169994,
+        "rssMiB": 769.09375
+      },
+      {
+        "seconds": 552.9898278750006,
+        "rssMiB": 770.28125
+      },
+      {
+        "seconds": 554.0519598749997,
+        "rssMiB": 774.421875
+      },
+      {
+        "seconds": 555.1239585420008,
+        "rssMiB": 774.953125
+      },
+      {
+        "seconds": 556.1866091670017,
+        "rssMiB": 776.421875
+      },
+      {
+        "seconds": 557.2435200840009,
+        "rssMiB": 776.671875
+      },
+      {
+        "seconds": 558.3038876669998,
+        "rssMiB": 777.28125
+      },
+      {
+        "seconds": 559.3644290000011,
+        "rssMiB": 777.953125
+      },
+      {
+        "seconds": 560.4271489589992,
+        "rssMiB": 779.015625
+      },
+      {
+        "seconds": 561.4872464170003,
+        "rssMiB": 779.359375
+      },
+      {
+        "seconds": 562.5431383340001,
+        "rssMiB": 780.1875
+      },
+      {
+        "seconds": 563.604764959,
+        "rssMiB": 780.765625
+      },
+      {
+        "seconds": 564.6645475000005,
+        "rssMiB": 782.25
+      },
+      {
+        "seconds": 565.7290627920011,
+        "rssMiB": 782.890625
+      },
+      {
+        "seconds": 566.7967308750012,
+        "rssMiB": 782.546875
+      },
+      {
+        "seconds": 567.8525541669987,
+        "rssMiB": 783.25
+      },
+      {
+        "seconds": 568.920365334001,
+        "rssMiB": 782.953125
+      },
+      {
+        "seconds": 569.9917591670019,
+        "rssMiB": 782.71875
+      },
+      {
+        "seconds": 571.054887541999,
+        "rssMiB": 783.015625
+      },
+      {
+        "seconds": 572.1154005419994,
+        "rssMiB": 782.921875
+      },
+      {
+        "seconds": 573.1740830419985,
+        "rssMiB": 783.1875
+      },
+      {
+        "seconds": 574.2363670000013,
+        "rssMiB": 783.375
+      },
+      {
+        "seconds": 575.3004020420012,
+        "rssMiB": 774.0625
+      },
+      {
+        "seconds": 576.3618184170009,
+        "rssMiB": 774.21875
+      },
+      {
+        "seconds": 577.4285740839987,
+        "rssMiB": 774.5
+      },
+      {
+        "seconds": 578.492142916999,
+        "rssMiB": 774.453125
+      },
+      {
+        "seconds": 579.556102999999,
+        "rssMiB": 774.96875
+      },
+      {
+        "seconds": 580.6178819170018,
+        "rssMiB": 775.28125
+      },
+      {
+        "seconds": 581.680119875,
+        "rssMiB": 776.203125
+      },
+      {
+        "seconds": 582.7415424999999,
+        "rssMiB": 776.625
+      },
+      {
+        "seconds": 583.8039854999988,
+        "rssMiB": 777.15625
+      },
+      {
+        "seconds": 584.8720082090003,
+        "rssMiB": 777.859375
+      },
+      {
+        "seconds": 585.940946499999,
+        "rssMiB": 779.125
+      },
+      {
+        "seconds": 587.0078925839989,
+        "rssMiB": 779.609375
+      },
+      {
+        "seconds": 588.0754860839988,
+        "rssMiB": 780.28125
+      },
+      {
+        "seconds": 589.1340726250019,
+        "rssMiB": 780.515625
+      },
+      {
+        "seconds": 590.208262125001,
+        "rssMiB": 780.640625
+      },
+      {
+        "seconds": 591.274637292001,
+        "rssMiB": 781.6875
+      },
+      {
+        "seconds": 592.3429746250004,
+        "rssMiB": 781.671875
+      },
+      {
+        "seconds": 593.4054753749988,
+        "rssMiB": 781.984375
+      },
+      {
+        "seconds": 594.4698906250014,
+        "rssMiB": 782.015625
+      },
+      {
+        "seconds": 595.5372837089999,
+        "rssMiB": 782.046875
+      },
+      {
+        "seconds": 596.5958445420001,
+        "rssMiB": 782.515625
+      },
+      {
+        "seconds": 597.6615459169989,
+        "rssMiB": 782.296875
+      },
+      {
+        "seconds": 598.7241558339992,
+        "rssMiB": 782.125
+      },
+      {
+        "seconds": 599.7882292499999,
+        "rssMiB": 782.234375
+      },
+      {
+        "seconds": 600.842769834002,
+        "rssMiB": 782.609375
+      },
+      {
+        "seconds": 601.9079451670004,
+        "rssMiB": 782.484375
+      },
+      {
+        "seconds": 602.9670870000009,
+        "rssMiB": 782.5
+      },
+      {
+        "seconds": 604.0246581249994,
+        "rssMiB": 782.546875
+      },
+      {
+        "seconds": 605.0815008749996,
+        "rssMiB": 782.546875
+      },
+      {
+        "seconds": 606.1397995840016,
+        "rssMiB": 783.296875
+      },
+      {
+        "seconds": 607.1948863750004,
+        "rssMiB": 784.203125
+      },
+      {
+        "seconds": 608.2549442089985,
+        "rssMiB": 784.265625
+      },
+      {
+        "seconds": 609.3135358750005,
+        "rssMiB": 784.125
+      },
+      {
+        "seconds": 610.3804114999984,
+        "rssMiB": 784.28125
+      },
+      {
+        "seconds": 611.4458274999997,
+        "rssMiB": 784.875
+      },
+      {
+        "seconds": 612.5076116669989,
+        "rssMiB": 784.5
+      },
+      {
+        "seconds": 613.5728346670003,
+        "rssMiB": 784.359375
+      },
+      {
+        "seconds": 614.6399259589998,
+        "rssMiB": 784.328125
+      },
+      {
+        "seconds": 615.699064667002,
+        "rssMiB": 785.03125
+      },
+      {
+        "seconds": 616.7650712089999,
+        "rssMiB": 783.953125
+      },
+      {
+        "seconds": 617.8293544590015,
+        "rssMiB": 784.171875
+      },
+      {
+        "seconds": 618.884080374999,
+        "rssMiB": 783.734375
+      },
+      {
+        "seconds": 619.9403359999997,
+        "rssMiB": 783.796875
+      },
+      {
+        "seconds": 620.9991725,
+        "rssMiB": 815.546875
+      },
+      {
+        "seconds": 622.0527351249984,
+        "rssMiB": 816.9375
+      },
+      {
+        "seconds": 623.1051139170013,
+        "rssMiB": 812.15625
+      },
+      {
+        "seconds": 624.1650494999994,
+        "rssMiB": 812.15625
+      },
+      {
+        "seconds": 625.2154025419986,
+        "rssMiB": 812.109375
+      },
+      {
+        "seconds": 626.2742400419993,
+        "rssMiB": 812.265625
+      },
+      {
+        "seconds": 627.3248352920018,
+        "rssMiB": 812.265625
+      },
+      {
+        "seconds": 628.373299875002,
+        "rssMiB": 812.265625
+      },
+      {
+        "seconds": 629.4243594170002,
+        "rssMiB": 812.265625
+      }
+    ],
+    "memoryLimitMiB": 4096,
+    "qualifiedConcurrency": 1,
+    "memoryScope": "orchestrator and all owned descendants, including CEF and FFmpeg",
+    "startupSeconds": 2.0399243339998065,
+    "elapsedSeconds": 629.9507704589996,
+    "peakRSSMiB": 848.03125,
+    "passed": true
+  }
+}

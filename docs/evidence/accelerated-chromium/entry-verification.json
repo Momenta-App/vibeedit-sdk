@@ -1,0 +1,21 @@
+{
+  "originalReportSha256": "6e1c136fd1a7a080ffcb02828415b485c00800658489c045b4baff94e8adfc68",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "runs": [
+      {
+        "name": "integration",
+        "exitCode": 0
+      },
+      {
+        "name": "conformance",
+        "exitCode": 0
+      },
+      {
+        "name": "service",
+        "exitCode": 0
+      }
+    ],
+    "passed": true
+  }
+}

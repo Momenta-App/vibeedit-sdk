@@ -1,0 +1,390 @@
+{
+  "originalReportSha256": "ba92adc1e4176ac4b1a862a0681033bcfebac6e39e8e2ed11a2b0cf72d365042",
+  "redaction": "Local checkout, user-home and artifact paths replaced; original report digest retained. These are source-backend qualification results preceding beta.4 packaging.",
+  "report": {
+    "platform": "Linux-5.15.49-linuxkit-aarch64-with-glibc2.39",
+    "architecture": "aarch64",
+    "adapter": "Playwright screenshot/FFmpeg",
+    "nativeAccelerated": false,
+    "runs": [
+      {
+        "example": "basic",
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "protocolVersion": "1.3",
+            "product": "HeadlessChrome/149.0.7827.0",
+            "revision": "@9f3e9aaccba63bd2ec30334e45e0bfd07ebcc8f1",
+            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.0 Safari/537.36",
+            "jsVersion": "14.9.207"
+          },
+          "platform": [
+            "Linux-5.15.49-linuxkit-aarch64-with-glibc2.39",
+            "#1 SMP PREEMPT Tue Sep 13 07:51:32 UTC 2022",
+            "aarch64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 12,
+          "dimensions": [
+            640,
+            360
+          ],
+          "bootstrapReadbackPixels": 0,
+          "frameRate": "30000/1001",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": null,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Liberation Sans",
+                "custom": false,
+                "glyphCount": 18
+              },
+              {
+                "family": "WenQuanYi Zen Hei Mono",
+                "custom": false,
+                "glyphCount": 19
+              }
+            ],
+            "nodesExamined": 4,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "9b64cac41ed11f3bc9a52497b36f964d976a55215a51bb9891c14d466050033e"
+          },
+          "hostSha256": null,
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 1.0601729589998286,
+          "endToEndFps": 11.318907823607242,
+          "timingsSeconds": {
+            "seek": 0.39766379200227675,
+            "captureEncode": 0.2705189579974103,
+            "mux": 0.13531537499875412,
+            "preparation": 0.11530883299928973,
+            "assetReadinessSeconds": 0.0006000000033527613,
+            "automaticAnimationSeconds": 0.000899999998509884,
+            "mediaSeekSeconds": 9.999999962747097e-05,
+            "customScriptSeconds": 0.09320000000484285,
+            "forcedLayoutSeconds": 0.027199999997392296,
+            "browserSubmissionSeconds": 0.2363000000026077
+          },
+          "output": "/tmp/tmp3c92amdg/basic.mp4",
+          "sha256": "8edc6efcfcd0ff99798c0da345b864934266c5030ef03b5fc8ab801f8c85f2cd"
+        }
+      },
+      {
+        "example": "corpus",
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "protocolVersion": "1.3",
+            "product": "HeadlessChrome/149.0.7827.0",
+            "revision": "@9f3e9aaccba63bd2ec30334e45e0bfd07ebcc8f1",
+            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.0 Safari/537.36",
+            "jsVersion": "14.9.207"
+          },
+          "platform": [
+            "Linux-5.15.49-linuxkit-aarch64-with-glibc2.39",
+            "#1 SMP PREEMPT Tue Sep 13 07:51:32 UTC 2022",
+            "aarch64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 18,
+          "dimensions": [
+            1280,
+            720
+          ],
+          "bootstrapReadbackPixels": 0,
+          "frameRate": "30000/1001",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": 12000000,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": {
+            "requestedSamples": 28829,
+            "packetSamples": 28830,
+            "roundingDriftSamples": 1,
+            "toleranceSamples": 1,
+            "sampleRate": 48000
+          },
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "WenQuanYi Zen Hei Mono",
+                "custom": false,
+                "glyphCount": 13
+              },
+              {
+                "family": "Liberation Sans",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "Poppins",
+                "custom": true,
+                "glyphCount": 42
+              },
+              {
+                "family": "Noto Color Emoji",
+                "custom": false,
+                "glyphCount": 2
+              },
+              {
+                "family": "FreeSans",
+                "custom": false,
+                "glyphCount": 19
+              },
+              {
+                "family": "FreeSerif",
+                "custom": false,
+                "glyphCount": 17
+              },
+              {
+                "family": "Liberation Serif",
+                "custom": false,
+                "glyphCount": 24
+              },
+              {
+                "family": "WenQuanYi Zen Hei",
+                "custom": false,
+                "glyphCount": 10
+              }
+            ],
+            "nodesExamined": 25,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "9ed160ca7a2723d07ceecc36c3feeeba0f0dc09e7fab14237d7dbc1175339364",
+            "media/gsap.min.js": "96c01b81f44a3290e2b4532f55e2c9534b2adc43273a19f3756b2cb41f0fd0b6",
+            "media/footage.webm": "61b826cf60d45dbd9478bbf7772308a47792d0854a6b5af3824dfe098bbb2cf9",
+            "media/effect.webm": "360a214a7dcbde730a0f1c7278d266bcbec17140dd42e3187b4eefd4cc779c17",
+            "media/Poppins-Bold.ttf": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875",
+            "media/pulse.wav": "9fead8b961e38341f8e85b9a55ce1ac0cfbaeafc9f2706e4fc41fcb9298770cd"
+          },
+          "hostSha256": null,
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 6.103215920000366,
+          "endToEndFps": 2.949264819718015,
+          "timingsSeconds": {
+            "seek": 2.0061210400017444,
+            "captureEncode": 2.7126754589953634,
+            "mux": 0.4035167920010281,
+            "preparation": 0.5049189170003956,
+            "assetReadinessSeconds": 0.001300000000745058,
+            "automaticAnimationSeconds": 0.002499999998137355,
+            "mediaSeekSeconds": 0.9479000000022351,
+            "customScriptSeconds": 0.06669999999552964,
+            "forcedLayoutSeconds": 0.005600000003352763,
+            "browserSubmissionSeconds": 0.8730999999977649
+          },
+          "output": "/tmp/tmp3c92amdg/corpus.mp4",
+          "sha256": "9153f9f3c07dafb7dcbc64dabde5dadb865f12cc5adda87be27463cf49726ae3"
+        }
+      },
+      {
+        "example": "features",
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "protocolVersion": "1.3",
+            "product": "HeadlessChrome/149.0.7827.0",
+            "revision": "@9f3e9aaccba63bd2ec30334e45e0bfd07ebcc8f1",
+            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.0 Safari/537.36",
+            "jsVersion": "14.9.207"
+          },
+          "platform": [
+            "Linux-5.15.49-linuxkit-aarch64-with-glibc2.39",
+            "#1 SMP PREEMPT Tue Sep 13 07:51:32 UTC 2022",
+            "aarch64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 18,
+          "dimensions": [
+            640,
+            360
+          ],
+          "bootstrapReadbackPixels": 0,
+          "frameRate": "30",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": null,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Roboto",
+                "custom": true,
+                "glyphCount": 34
+              }
+            ],
+            "nodesExamined": 5,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "index.html": "45d3ef616f9e19430a287b11446894b97c2a6dcfab8c69c8ac6bdd0a04cb7e28",
+            "motion.js": "4ac1ed146c26e20e7e223ec671f2f003b45f9f342d8bb49ce0d3c15318f9c1ba",
+            "media/Roboto.ttf": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134"
+          },
+          "hostSha256": null,
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 1.5743826679990889,
+          "endToEndFps": 11.433052691615643,
+          "timingsSeconds": {
+            "seek": 0.46167837400025746,
+            "captureEncode": 0.43591404099606734,
+            "mux": 0.13666891700086126,
+            "preparation": 0.11750920799931919,
+            "assetReadinessSeconds": 0.001600000003352761,
+            "automaticAnimationSeconds": 0.001200000001117587,
+            "mediaSeekSeconds": 0.0002999999988824129,
+            "customScriptSeconds": 0.005699999997392298,
+            "forcedLayoutSeconds": 0.008900000002235177,
+            "browserSubmissionSeconds": 0.38230000000074504
+          },
+          "output": "/tmp/tmp3c92amdg/features.mp4",
+          "sha256": "5c2ce54fa6ff79434daa3d4821eb3c2e4b0c4e79694ab70eb384fbfb73a9cdbb"
+        }
+      },
+      {
+        "example": "nested-entry",
+        "render": {
+          "backend": "screenshot",
+          "browser": {
+            "protocolVersion": "1.3",
+            "product": "HeadlessChrome/149.0.7827.0",
+            "revision": "@9f3e9aaccba63bd2ec30334e45e0bfd07ebcc8f1",
+            "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.7827.0 Safari/537.36",
+            "jsVersion": "14.9.207"
+          },
+          "platform": [
+            "Linux-5.15.49-linuxkit-aarch64-with-glibc2.39",
+            "#1 SMP PREEMPT Tue Sep 13 07:51:32 UTC 2022",
+            "aarch64"
+          ],
+          "mediaTiming": "Exact decoded source PTS; repeated source frames are retained; requested times are supplied in context.media",
+          "frames": 3,
+          "dimensions": [
+            640,
+            360
+          ],
+          "bootstrapReadbackPixels": 0,
+          "frameRate": "30",
+          "export": {
+            "codec": "h264",
+            "alpha": false,
+            "color": {
+              "primaries": "bt709",
+              "transfer": "iec61966-2-1",
+              "matrix": "bt709",
+              "range": "limited"
+            },
+            "bitrate": null,
+            "nativeHardwareRequired": false,
+            "matte": "black"
+          },
+          "audioVerification": null,
+          "mediaConversions": {},
+          "normalizedSourceTypeHints": [],
+          "browserProfile": null,
+          "fontDiagnostics": {
+            "platformFonts": [
+              {
+                "family": "Roboto",
+                "custom": true,
+                "glyphCount": 34
+              }
+            ],
+            "nodesExamined": 5,
+            "truncated": false,
+            "coverage": "Chromium platform-font usage; LastResort rejected; full codepoint coverage not proven"
+          },
+          "dependencyIdentities": {
+            "nested/site/index.html": "45d3ef616f9e19430a287b11446894b97c2a6dcfab8c69c8ac6bdd0a04cb7e28",
+            "nested/site/motion.js": "4ac1ed146c26e20e7e223ec671f2f003b45f9f342d8bb49ce0d3c15318f9c1ba",
+            "nested/site/media/Roboto.ttf": "d7598e12c5dbef095ff8272cfc55da0250bd07fbdecbac8a530b9b277872a134"
+          },
+          "hostSha256": null,
+          "bridgeSha256": null,
+          "implementationSha256": "3e3631ad4699a89624a019630d31328411c13684a52cd048f991cae40f21faf2",
+          "mediaPreparationSha256": "02e52e29516e63bbc4f2b70e05fdd2509127512453a7df5413c51d84463b0cea",
+          "adapterSha256": "35b2cae3e44c114954efd5cc8ecd6729bd16c4013c0dc796d6dd8f441036eaa5",
+          "elapsedSeconds": 0.546305374999065,
+          "endToEndFps": 5.491434163548427,
+          "timingsSeconds": {
+            "seek": 0.07910495700161846,
+            "captureEncode": 0.07124116599879926,
+            "mux": 0.13256045900016034,
+            "preparation": 0.08987479099960183,
+            "assetReadinessSeconds": 0.0002000000011175871,
+            "automaticAnimationSeconds": 0.00019999999925494194,
+            "mediaSeekSeconds": 0.0,
+            "customScriptSeconds": 0.0009999999981373548,
+            "forcedLayoutSeconds": 0.001000000001862645,
+            "browserSubmissionSeconds": 0.06759999999962747
+          },
+          "output": "/tmp/tmp3c92amdg/nested.mp4",
+          "sha256": "860c5bbf9d99486fd0a2d8f42947f395ec2d30d975d7dd858b33ef1576e40801"
+        }
+      }
+    ],
+    "deadlineRecovery": {
+      "seconds": 2.1086448349997227,
+      "closed": true,
+      "loopStopped": true
+    },
+    "freshBrowserAfterDeadline": true,
+    "passed": true
+  }
+}

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-beta.4
+
+- Package the accelerated CEF browser renderer, Rust/Metal/VideoToolbox bridge sources, exact browser timing adapter, and warm worker.
+- Add `vibeedit setup --cef`, `render-browser`, and `browser-worker` to installed Python and Node CLIs. Native builds live in the versioned user cache, so installed wheels need no source checkout.
+- Include a runnable ordinary HTML/CSS/JS example, portable screenshot fallback, tests, and renderer qualification tools. Native acceleration requires macOS 15+ ARM64, FFmpeg, Xcode command-line tools, CMake, Ninja and Rust.
+
+
 ## 0.1.0 beta 3 - Unreleased
 
 - Expand the canonical FFmpeg media path from one/two clips to validated

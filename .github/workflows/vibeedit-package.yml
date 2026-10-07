@@ -8,8 +8,8 @@ permissions:
   contents: read
 
 env:
-  NPM_PACKAGE_VERSION: 0.1.0-beta.3
-  PYTHON_PACKAGE_VERSION: 0.1.0b3
+  NPM_PACKAGE_VERSION: 0.1.0-beta.4
+  PYTHON_PACKAGE_VERSION: 0.1.0b4
 
 jobs:
   portable-smoke:
@@ -79,7 +79,8 @@ jobs:
           npm run types:check
           npm run validate
       - name: Run portable Python checks
-        run: uv run pytest python/tests -q
+        working-directory: python
+        run: uv run pytest tests -q
       - name: Smoke install built packages
         run: |
           node -e "require('fs').mkdirSync('dist/smoke', { recursive: true })"
@@ -123,7 +124,8 @@ jobs:
           npm run types:check
           npm run validate
       - name: Validate Python package
-        run: uv run pytest python/tests -q
+        working-directory: python
+        run: uv run pytest tests -q
       - name: Build publishable artifacts
         run: |
           mkdir -p dist/npm dist/python

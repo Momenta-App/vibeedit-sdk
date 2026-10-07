@@ -65,6 +65,7 @@ def _parser() -> argparse.ArgumentParser:
 
     setup = sub.add_parser("setup", help="prepare only the optional runtimes you explicitly select", description="Install and verify pinned optional runtimes. Nothing is downloaded unless its flag is present.")
     setup.add_argument("--all", action="store_true", help="prepare every supported optional capability; includes Chromium and model downloads")
+    setup.add_argument("--cef", action="store_true", help="build the accelerated macOS ARM64 CEF runtime")
     setup.add_argument("--browser", action="store_true", help="install and checksum Playwright Chromium for HTML/CSS/JS motion rendering")
     setup.add_argument("--effects", action="store_true", help="install NumPy/Pillow/OpenCV dependencies for media presets; no model download")
     setup.add_argument("--vision", action="store_true", help="prepare face/body/pose/object providers; may download the pinned 29.5 MB object model")
@@ -163,6 +164,19 @@ def _parser() -> argparse.ArgumentParser:
     revision_plan.add_argument("revised")
     revision_plan.add_argument("--json", action="store_true")
     revision_plan.set_defaults(handler=_revision_plan)
+    browser_render = sub.add_parser("render-browser", help="render an ordinary bundled HTML/CSS/JS project")
+    browser_render.add_argument("path")
+    browser_render.add_argument("--output", required=True)
+    browser_render.add_argument("--backend", choices=("cef", "screenshot", "auto"), default="screenshot")
+    browser_render.add_argument("--cache", type=Path, help="content-addressed export cache outside the authoring root")
+    browser_render.add_argument("--raw", type=Path, help="lossless BGRA evidence (CEF only)")
+    browser_render.add_argument("--screenshots", type=Path, help="same-browser PNG evidence")
+    browser_render.add_argument("--json", action="store_true")
+    browser_render.set_defaults(handler=_render_browser)
+
+    browser_worker = sub.add_parser("browser-worker", help="serve serial browser jobs over JSON lines in a warm background process")
+    browser_worker.add_argument("--backend",choices=("cef","screenshot"),default="cef")
+    browser_worker.set_defaults(handler=_browser_worker)
 
     verify = sub.add_parser("verify", help="verify a rendered output")
     verify.add_argument("output")
@@ -189,6 +203,23 @@ def _emit(value, *, as_json: bool) -> None:
     print(json.dumps(value, indent=2))
 
 
+def _render_browser(args) -> int:
+    from vibeedit.browser_render import browser_signals, render_browser_job
+
+    with browser_signals():
+        _emit(render_browser_job(Path(args.path), Path(args.output), backend=args.backend,
+            raw=args.raw, screenshots=args.screenshots, cache=args.cache), as_json=args.json)
+    return 0
+
+
+def _browser_worker(args) -> int:
+    from vibeedit.browser_render import browser_signals, serve_browser_jobs
+
+    with browser_signals():
+        serve_browser_jobs(backend=args.backend)
+    return 0
+
+
 def _init(args) -> int:
     numerator, denominator = (int(value) for value in args.fps.split("/", 1)) if "/" in args.fps else (int(args.fps), 1)
     composition = Composition(args.id, Canvas(args.width, args.height, FrameRate(numerator, denominator)), args.frames)
@@ -200,10 +231,14 @@ def _init(args) -> int:
 def _setup(args) -> int:
     from vibeedit.setup import install_setup_dependencies, setup_capabilities
 
-    if not any((args.all, args.browser, args.effects, args.vision, args.sam)):
-        raise CLIUsageError("No optional capability selected", "Choose --browser, --effects, --vision, --sam, or --all. Run `vibeedit setup --help` for download details.")
+    if not any((args.all, args.browser, args.effects, args.vision, args.sam, args.cef)):
+        raise CLIUsageError("No optional capability selected", "Choose --cef, --browser, --effects, --vision, --sam, or --all. Run `vibeedit setup --help` for download details.")
     dependencies = install_setup_dependencies(browser=args.all or args.browser, effects=args.all or args.effects, vision=args.all or args.vision, sam=args.all or args.sam)
     result = setup_capabilities(browser=args.all or args.browser, effects=args.all or args.effects, vision=args.all or args.vision, sam=args.all or args.sam)
+    if args.cef:
+        from vibeedit.browser_setup import setup_cef
+
+        result["results"].append(setup_cef())
     result["dependencies"] = dependencies
     result["ok"] = True
     result["complete"] = all(item.get("available", False) for item in result["results"] if item.get("required", False))
