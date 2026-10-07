@@ -503,6 +503,10 @@ def project_server(
         yield f"http://127.0.0.1:{server.server_port}/"
         if failures:
             raise BrowserRenderError(f"Media preparation failed: {failures[:5]}")
+    except Exception as error:
+        if failures:
+            raise BrowserRenderError(f"Media preparation failed: {failures[:5]}") from error
+        raise
     finally:
         canceled.set()
         for process in preparing.copy():

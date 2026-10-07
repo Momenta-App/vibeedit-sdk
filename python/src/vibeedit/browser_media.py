@@ -66,7 +66,7 @@ def prepare_cef_media(source: Path, browser_version, processes, canceled):
         "container": "mp4",
         "timeBase": video["time_base"],
         "audio": "opus if present",
-        "revision": 1,
+        "revision": 2,
     }
     key = hashlib.sha256(json.dumps(recipe, sort_keys=True).encode()).hexdigest()
     cache = Path.home() / "Library/Caches/vibeedit/browser-media"
@@ -113,7 +113,7 @@ def prepare_cef_media(source: Path, browser_version, processes, canceled):
             "-fps_mode",
             "passthrough",
             "-enc_time_base:v",
-            "-1",
+            video["time_base"],
             "-video_track_timescale",
             str(Fraction(video["time_base"]).denominator),
             "-c:a",

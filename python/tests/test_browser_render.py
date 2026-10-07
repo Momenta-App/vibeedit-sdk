@@ -324,3 +324,10 @@ def test_nested_browser_project_modules_fonts_and_capture(tmp_path):
         )
         assert np.array_equal(frames[index][:, :, [2, 1, 0, 3]], reference)
     assert not np.array_equal(frames[0], frames[2])
+
+
+def test_media_preparation_error_survives_http_failure(tmp_path):
+    (tmp_path / "invalid.mp4").write_bytes(b"invalid video")
+    with pytest.raises(BrowserRenderError, match="Media preparation failed"):
+        with project_server(tmp_path, normalize=True, browser_version={}) as url:
+            urllib.request.urlopen(urllib.request.Request(url + "invalid.mp4", headers={"Sec-Fetch-Dest": "video"}))
