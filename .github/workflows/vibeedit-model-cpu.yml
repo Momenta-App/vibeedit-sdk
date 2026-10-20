@@ -67,6 +67,24 @@ jobs:
         with:
           version: '0.11.6'
           enable-cache: false
+      - name: Establish pinned Ubuntu FFmpeg prerequisites before source or models
+        timeout-minutes: 3
+        env:
+          MODEL_PACK: ${{ matrix.pack }}
+        run: |
+          python -I scripts/qualify_model_cpu.py preflight --pack "$MODEL_PACK"
+          python -c 'import json,shutil; print(json.dumps({name: shutil.which(name) for name in ("uv", "ffmpeg", "ffprobe")}))'
+          test "$(uv --version)" = "uv 0.11.6"
+          sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update
+          apt-cache policy ffmpeg
+          sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=30 install --yes --no-install-recommends ffmpeg=7:6.1.1-3ubuntu5
+          command -v uv ffmpeg ffprobe
+          uv --version
+          ffmpeg -version
+          ffprobe -version
+          dpkg-query -W ffmpeg
+          sha256sum /usr/bin/ffmpeg /usr/bin/ffprobe
+          python -I scripts/qualify_model_cpu.py preflight --pack "$MODEL_PACK"
       - name: Download only the reviewed canonical artifact
         timeout-minutes: 3
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
