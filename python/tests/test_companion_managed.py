@@ -176,7 +176,8 @@ try:
  print(json.dumps({'originalRemoteId':result['managedOperationId'],'retailMicros':2,'providerCalls':1,'replayed':False}))
 finally: proxy.close();s.close();faulthandler.cancel_dump_traceback_later()
 '''
-    result=subprocess.run([sys.executable,'-c',script,str(project)],env=env,check=True,text=True,capture_output=True,timeout=60)
+    result=subprocess.run([sys.executable,'-c',script,str(project)],env=env,text=True,encoding='utf-8',capture_output=True,timeout=60)
+    assert result.returncode==0,result.stderr
     assert json.loads(result.stdout)['replayed'] is False and state['posts']==1 and state['cancelPosts']==1
 
 
