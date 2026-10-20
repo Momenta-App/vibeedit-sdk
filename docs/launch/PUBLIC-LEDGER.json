@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-20T20:31:33.602172+00:00",
+  "updatedAt": "2026-10-20T20:56:20.309482+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
@@ -11,7 +11,7 @@
     "finalArchive": null,
     "exactPublicPackageVersions": null,
     "finalAcceptanceEvidence": null,
-    "latestHistoricalCheckpoint": "1cc09b48f2c347803d117dc8366f1d37d57b0c39"
+    "latestHistoricalCheckpoint": "f8b3f956bed96c67c520037952cea6f5d3b30384"
   },
   "sourceOwnership": {
     "implementation": "Existing public VibeEdit SDK foundation and VibeEdit-owned agent integration source; MIT governs owned code.",
@@ -77,7 +77,8 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "setup-interim",
-        "platform-loopback-canonical"
+        "platform-loopback-canonical",
+        "platform-six-source"
       ]
     },
     {
@@ -88,7 +89,8 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "face-original-operation",
-        "commercial-local"
+        "commercial-local",
+        "customer-scoped-keys"
       ]
     },
     {
@@ -101,7 +103,8 @@
         "review-words",
         "review-beats",
         "review-final-video",
-        "review-clock"
+        "review-clock",
+        "editorial-negative-animation"
       ]
     },
     {
@@ -145,7 +148,8 @@
       "evidenceRefs": [
         "companion-managed",
         "auto-topup-local",
-        "commercial-local"
+        "commercial-local",
+        "customer-scoped-keys"
       ]
     },
     {
@@ -157,7 +161,8 @@
       "evidenceRefs": [
         "editorial-social-revision",
         "acquisition-interim",
-        "creative-portability"
+        "creative-portability",
+        "editorial-negative-animation"
       ]
     },
     {
@@ -168,7 +173,9 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "archive-interim",
-        "platform-loopback-canonical"
+        "platform-loopback-canonical",
+        "platform-six-source",
+        "archive-bytecode-fix"
       ]
     },
     {
@@ -204,7 +211,8 @@
         "review-beats",
         "editorial-social-revision",
         "acquisition-interim",
-        "creative-portability"
+        "creative-portability",
+        "editorial-negative-animation"
       ]
     },
     {
@@ -217,7 +225,8 @@
       "evidenceRefs": [
         "face-original-operation",
         "auto-topup-local",
-        "commercial-local"
+        "commercial-local",
+        "customer-scoped-keys"
       ]
     },
     {
@@ -231,7 +240,8 @@
         "review-words",
         "review-beats",
         "review-final-video",
-        "review-clock"
+        "review-clock",
+        "editorial-negative-animation"
       ]
     },
     {
@@ -265,7 +275,8 @@
       "journeyPassed": false,
       "operatorProgress": "not-started",
       "evidenceRefs": [
-        "face-original-operation"
+        "face-original-operation",
+        "customer-scoped-keys"
       ]
     }
   ],
@@ -313,7 +324,8 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "face-original-operation",
-        "commercial-local"
+        "commercial-local",
+        "customer-scoped-keys"
       ]
     },
     {
@@ -336,7 +348,8 @@
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "commercial-local"
+        "commercial-local",
+        "customer-scoped-keys"
       ]
     },
     {
@@ -419,7 +432,8 @@
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "auto-topup-local"
+        "auto-topup-local",
+        "customer-scoped-keys"
       ]
     },
     {
@@ -430,7 +444,8 @@
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "editorial-social-revision"
+        "editorial-social-revision",
+        "editorial-negative-animation"
       ]
     },
     {
@@ -453,7 +468,8 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "editorial-social-revision",
-        "creative-portability"
+        "creative-portability",
+        "editorial-negative-animation"
       ]
     },
     {
@@ -465,7 +481,9 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "setup-interim",
-        "platform-loopback-canonical"
+        "platform-loopback-canonical",
+        "platform-six-source",
+        "archive-bytecode-fix"
       ]
     },
     {
@@ -478,7 +496,9 @@
       "evidenceRefs": [
         "review-words",
         "archive-interim",
-        "platform-loopback-canonical"
+        "platform-loopback-canonical",
+        "platform-six-source",
+        "archive-bytecode-fix"
       ]
     },
     {
@@ -754,6 +774,66 @@
         "A18"
       ],
       "summary": "266 source checks passed with six optional skips; reverse-DNS loopback lease defect fixed. Same immutable canonical archive gate implemented for six matrix entries; actual final matrix remains pending.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "platform-six-source",
+      "receiptSha256": "ebb5560c1c1d47896da7eb18c5394ca478bf6eae71662aa0b08131f1e40267a8",
+      "receiptBytes": 5498,
+      "scope": "bounded-local-or-interim",
+      "supportsRequirements": [
+        "P1",
+        "P9",
+        "A17",
+        "A18"
+      ],
+      "summary": "All six hosted source and per-platform archives passed. Build audit rejected setup bytecode; final canonical stage remained skipped.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "archive-bytecode-fix",
+      "receiptSha256": "df69429d310bafb78ce5f11bfbc55c2ba6f2eb632bf5283e93ab66cbbd948d6d",
+      "receiptBytes": 5650,
+      "scope": "bounded-local-or-interim",
+      "supportsRequirements": [
+        "P9",
+        "A17",
+        "A18"
+      ],
+      "summary": "Explicit npm bytecode exclusions; actual wheel/sdist/npm audits pass and five contaminated archive cases are rejected. Interim bytes, not final release.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "customer-scoped-keys",
+      "receiptSha256": "c75f93887f07e3345e11e7054860cd20aa776ebde3a7571f0ee428214837665d",
+      "receiptBytes": 3946,
+      "scope": "bounded-local-or-interim",
+      "supportsRequirements": [
+        "P2",
+        "P7",
+        "A04",
+        "A06",
+        "A13",
+        "J3",
+        "J7"
+      ],
+      "summary": "35 bounded payment/scope/commercial checks and inert local browser checks; no fresh customer, signed payment or deployed paid-service proof.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "editorial-negative-animation",
+      "receiptSha256": "9d8fbf8f37b5171cd627a0a9808231c13c9e2ac579289712b6df19d56f05deab",
+      "receiptBytes": 2805,
+      "scope": "bounded-local-or-interim",
+      "supportsRequirements": [
+        "P3",
+        "P8",
+        "A14",
+        "A16",
+        "J2",
+        "J4"
+      ],
+      "summary": "Actual acquired animation revised to early inverse word hits and unobstructed visual punchline; 252-frame picture checks, dense OCR and bit-identical restore/rerender. Human/audio acceptance remains open.",
       "establishesLaunchAcceptance": false
     }
   ],

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "vibeedit.publicRelease.v1",
+  "status": "candidate",
+  "pythonVersion": "0.2.0b1",
+  "npmVersion": "0.2.0-beta.1",
+  "sourceRevision": null,
+  "manifestUrl": null,
+  "manifestSha256": null,
+  "setupSkillUrl": null,
+  "setupSkillSha256": null,
+  "acceptanceEvidenceUrl": "https://github.com/Momenta-App/vibeedit-sdk/blob/agent-package-launch/docs/LAUNCH_STATUS.md"
+}

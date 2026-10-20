@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-20T20:31:34.121484+00:00",
+  "recordedAt": "2026-10-20T20:56:53.890598+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "1cc09b48f2c347803d117dc8366f1d37d57b0c39",
-    "inventoryPaths": 151,
-    "existingFiles": 151,
-    "bytesRead": 2739761,
-    "sourceInventorySha256": "a117aa883b690d08953150c289ee873f232286638c1ff6806c15c98e1cb90ca9",
+    "gitHead": "f8b3f956bed96c67c520037952cea6f5d3b30384",
+    "inventoryPaths": 166,
+    "existingFiles": 166,
+    "bytesRead": 3386899,
+    "sourceInventorySha256": "94bd0662027aec4a956b973147b55e8d68368a51dd0fb27e5e72807f0e9be828",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -34,6 +34,16 @@
     "findings": [
       {
         "path": "docs/launch/CATALOG.md",
+        "category": "local_personal_path",
+        "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/CLAUDE-BROWSER.md",
         "category": "local_personal_path",
         "count": 1,
         "matchHashes": [
@@ -104,6 +114,16 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/companion-archive-audit-fix.json",
+        "category": "local_personal_path",
+        "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/companion-archive-probe.py",
         "category": "credential_assignment",
         "count": 1,
@@ -117,6 +137,16 @@
         "path": "docs/launch/evidence/companion-catalog.json",
         "category": "local_personal_path",
         "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/companion-claude-browser.json",
+        "category": "local_personal_path",
+        "count": 5,
         "matchHashes": [
           "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
         ],
@@ -318,26 +348,6 @@
         ],
         "classification": "raw operator record excluded; candidate is not asserted to be a credential",
         "disposition": "exclude_raw"
-      },
-      {
-        "path": "python/src/vibeedit/worker.py",
-        "category": "credential_assignment",
-        "count": 1,
-        "matchHashes": [
-          "56791aaf323dc29ae7ce12ffa86a05170d65d2f62de92f528c89796f01f5d4bb"
-        ],
-        "classification": "literal environment-variable interpolation; no embedded credential",
-        "disposition": "reviewed_false_positive"
-      },
-      {
-        "path": "python/src/vibeedit/worker.py",
-        "category": "high_entropy_alphanumeric_candidate",
-        "count": 1,
-        "matchHashes": [
-          "540363d1071a002997290cd8f4a2bdf3acd0355ffad3b3f25f52aad6ebad936a"
-        ],
-        "classification": "complete identifier validation alphabet, verified by character-set and AST context",
-        "disposition": "reviewed_false_positive"
       }
     ],
     "limits": [
@@ -487,6 +497,28 @@
         "byteLength": 744936,
         "pinnedOFLMatch": true,
         "license": "OFL-1.1"
+      }
+    ],
+    "websiteFontAssets": [
+      {
+        "path": "website/agent-package/fonts/BebasNeue-Regular.ttf",
+        "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
+        "pinnedCatalogIdentityMatch": true
+      },
+      {
+        "path": "website/agent-package/fonts/Montserrat-Variable.ttf",
+        "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+        "pinnedCatalogIdentityMatch": true
+      },
+      {
+        "path": "website/agent-package/fonts/OFL-bebasneue.txt",
+        "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341",
+        "pinnedCatalogIdentityMatch": true
+      },
+      {
+        "path": "website/agent-package/fonts/OFL-montserrat.txt",
+        "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+        "pinnedCatalogIdentityMatch": true
       }
     ],
     "fontNotices": [
@@ -1264,63 +1296,93 @@
     "policy": "Explicit named paths only, pinned to SHA/size; reject drift/new paths; do not git add entire docs or repo. Only curated docs/LAUNCH_STATUS.md, docs/launch/PUBLIC-LEDGER.json and this sanitized audit are exceptions to raw launch-record quarantine. This proposal authorizes no commit.",
     "include": [
       {
-        "path": ".github/workflows/vibeedit-package.yml",
-        "byteLength": 11423,
-        "sha256": "2f6bf5fb2cf483549e4711370fe95f5430554288b93a8794fe5bd8989be0d201",
+        "path": "docs/LAUNCH_STATUS.md",
+        "byteLength": 4521,
+        "sha256": "b683d09e231e38708b112b90d17c36ed1c2afa85b9bf3826a09267f4d7e9232b",
         "format": "text"
       },
       {
-        "path": "docs/LAUNCH_STATUS.md",
-        "byteLength": 4103,
-        "sha256": "1aa5c834ee88486317f2cbbb4acc6d08eb11b0b2809ef21eb3abea5a913cbfb7",
+        "path": "docs/MYRIOGRAPH.md",
+        "byteLength": 4745,
+        "sha256": "6d790dc828fffca5eee35bf7de223151523d88d3aa24e854c9a9a274d68ab58f",
+        "format": "text"
+      },
+      {
+        "path": "docs/SECURITY.md",
+        "byteLength": 3327,
+        "sha256": "3d2fc41d382622b9ab69272b7f65b016f0ca40be278bcc6b9aa0e530431a7b4a",
         "format": "text"
       },
       {
         "path": "docs/launch/PUBLIC-LEDGER.json",
-        "byteLength": 30042,
-        "sha256": "b1c3254bb63c349bc383abcbb53d0411bedb32a903e1de2cb3706186c21f4474",
+        "byteLength": 32910,
+        "sha256": "308bc3d2d59b2184bbaff5e46fc8f32c4a4e453a4c657f05ffba3d08e7cae2cb",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/browser_render.py",
-        "byteLength": 57147,
-        "sha256": "97adace60400c889cb335b99d76af08686de707c5247070dc98dcc1cda8c2dd1",
+        "path": "package.json",
+        "byteLength": 3337,
+        "sha256": "8649f3d8243b9c15d3fba543405f5b6f87826a14ccd2d2f9d367b54f850c7eb8",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/local_http.py",
-        "byteLength": 727,
-        "sha256": "328065207de9e755d3d895a1c341053e4ec3dcaec187f0edfd11f1f905599d30",
+        "path": "scripts/audit_release_artifacts.py",
+        "byteLength": 11121,
+        "sha256": "52a5f98adea72617b7e9c2b9d240f54dc99b8b09f4a9e5fdc57ee66a16c30ed0",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/motion.py",
-        "byteLength": 47243,
-        "sha256": "c3fcb05bb8dd1ee64e2c7e5e4dd648e92ea05f3e61d58c1ce2c2573559c02eae",
+        "path": "website/agent-package/README.md",
+        "byteLength": 1904,
+        "sha256": "8eba409d644f90f6150861250ae818b503b33ac4176cf4eff5391923755b10cd",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/review.py",
-        "byteLength": 26550,
-        "sha256": "46a2b5b3d763a498f4b4120738b7248cfb04b2df6596d5d49ccb9c332febe123",
+        "path": "website/agent-package/fonts/BebasNeue-Regular.ttf",
+        "byteLength": 61400,
+        "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
+        "format": "binary"
+      },
+      {
+        "path": "website/agent-package/fonts/Montserrat-Variable.ttf",
+        "byteLength": 744936,
+        "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+        "format": "binary"
+      },
+      {
+        "path": "website/agent-package/fonts/OFL-bebasneue.txt",
+        "byteLength": 4337,
+        "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/worker.py",
-        "byteLength": 97430,
-        "sha256": "8837e3f94d0015027e4d2369e5a2ca267bbdef77ada28ff1191dfd7d2bf52478",
+        "path": "website/agent-package/fonts/OFL-montserrat.txt",
+        "byteLength": 4400,
+        "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
         "format": "text"
       },
       {
-        "path": "python/tests/test_review.py",
-        "byteLength": 3318,
-        "sha256": "c88a8695272d72831aa1eb57320b8862a5330af856ce76deb0b3586f4205abb7",
+        "path": "website/agent-package/index.html",
+        "byteLength": 7576,
+        "sha256": "6ba9b3ddfb65420031ad035140461f1c026075b0944ba1053f59c8b7cb2e1ab4",
         "format": "text"
       },
       {
-        "path": "scripts/smoke_release_artifacts.py",
-        "byteLength": 20952,
-        "sha256": "4ba34a70407a869587001906b36102af9e47dc352ec9aaa129d726c844db9fd3",
+        "path": "website/agent-package/page.css",
+        "byteLength": 5888,
+        "sha256": "7506119a4ee79a067da540e68bd042c67231dd0b818c5b79cd62e9bb16077a64",
+        "format": "text"
+      },
+      {
+        "path": "website/agent-package/page.js",
+        "byteLength": 2985,
+        "sha256": "6ea7ba895e6804ec8b05b8bb3e04577a822b708786557ae39285888fb26e0cff",
+        "format": "text"
+      },
+      {
+        "path": "website/agent-package/release.json",
+        "byteLength": 388,
+        "sha256": "272d46370219465281e6965307bf7cc8f8be239a226ac407b79582cdc8494ee4",
         "format": "text"
       }
     ],
@@ -1342,22 +1404,29 @@
       },
       {
         "path": "docs/launch/CATALOG.md",
-        "byteLength": 13802,
-        "sha256": "d984993e80e76b52b9c9c21e1ed1d4f457c12f446a7cd9c0cf6e5a3dbe27e861",
+        "byteLength": 15515,
+        "sha256": "bdb6dfb6157b6d9f77050dd30632c70a702dd6e4db8e04b965ffa00786bfa6de",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/CLAUDE-BROWSER.md",
+        "byteLength": 3958,
+        "sha256": "cbd1686fc642c276428b51de99d6dc3a8a8033bc938b65e3de88ede24e1ede22",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
         "path": "docs/launch/COMMERCIAL.md",
-        "byteLength": 32198,
-        "sha256": "8cd2edb75ada0b1bfece9efcb375248a43846b78836a8f36ab58cb02cc4a29c8",
+        "byteLength": 35828,
+        "sha256": "7ce0991c820b8c923a9089f6a5cfce16f039505bb3c9e5d71074c77dfc2a6414",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
         "path": "docs/launch/COMPANION.md",
-        "byteLength": 29692,
-        "sha256": "c3df6983f15b5ac898e22703c7a01e22aa888c64109ea8c696d8284365dfbff8",
+        "byteLength": 30170,
+        "sha256": "96d85409d1a8a03a1fb84cb15c0ffdcc01cebefbfc4851129aec4b111084a48d",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1391,8 +1460,8 @@
       },
       {
         "path": "docs/launch/STATE.md",
-        "byteLength": 15251,
-        "sha256": "fcf29d01a6c684127228ab2dc784047c05a10c2b6d3c22d8b593cdac33eef23a",
+        "byteLength": 18499,
+        "sha256": "d6c27e6f4a0ec07eb1ffece9b68c2beaef2424c8eca75872e8a227e1214bc18a",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1441,6 +1510,24 @@
             "byteLength": 20351601
           }
         ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/backend-r3-root-review-20261020.json",
+        "byteLength": 3548,
+        "sha256": "60379260497ea86b813f66f69d896d5df347da30163e125fe0bd0cc5abcb4c0a",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/backend-r5-root-review-20261020.json",
+        "byteLength": 1777,
+        "sha256": "baeb4b8268d8d99dd42384e8e16b662d9da7e130b8ddfb5c0410c029b04044c9",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
@@ -1513,6 +1600,15 @@
         "path": "docs/launch/evidence/bootstrap-source-proof.json",
         "byteLength": 932,
         "sha256": "64b85f513c535012896f5b97efd3ede91a345665cca6357f05116d75e1f6aae7",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/campaign-authorization-20261020.json",
+        "byteLength": 818,
+        "sha256": "46e3572427a463637eb527d096b2dd9e5429e9098bdaccb14dc3e044f334c8c9",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
@@ -1618,6 +1714,21 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/commercial-frozen-candidate-20261020-r5.json",
+        "byteLength": 1693,
+        "sha256": "41c8a77e1342164c8c57c2b020095b13fda43476f3925c4b5bdee7eb425e2402",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "4f2ae5949fe458a7f8ed59d961daee209ac2fd29f6db7bc345883da35f6cea87",
+            "byteLength": 19936
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/commercial-local-verification.json",
         "byteLength": 1128,
         "sha256": "85c2b5e41a8c0cbdc2eea220a347db4e5ce7dceafd2cc1ae06541b65fb9ed8e8",
@@ -1686,6 +1797,46 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/companion-archive-audit-fix.json",
+        "byteLength": 5650,
+        "sha256": "df69429d310bafb78ce5f11bfbc55c2ba6f2eb632bf5283e93ab66cbbd948d6d",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "8649f3d8243b9c15d3fba543405f5b6f87826a14ccd2d2f9d367b54f850c7eb8",
+            "byteLength": 3337
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "52a5f98adea72617b7e9c2b9d240f54dc99b8b09f4a9e5fdc57ee66a16c30ed0",
+            "byteLength": 11121
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+            "byteLength": 17420224
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5b5234db2488bc05e03ccbb38a6501c10a9caf000566f2238de94dd7efbdbeaf",
+            "byteLength": 21640152
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "2d442fb180de2c5effcd2b3c1e9cfb15f6ce9fc4be44279c27d1f5512416c546",
+            "byteLength": 22207625
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "b0197edfacb0cdfe66a807d7f4f35aad655ecce2f974ed7b827b31dcfb9a7e7d",
+            "byteLength": 2269
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/companion-archive-probe.py",
         "byteLength": 6849,
         "sha256": "e5e38ebb866ba5b4523b79e2833598095893e71f5c29aaf4c900444466892fe0",
@@ -1745,8 +1896,8 @@
       },
       {
         "path": "docs/launch/evidence/companion-catalog-activation-candidate.json",
-        "byteLength": 15610,
-        "sha256": "dc319f96076a3dfd2d7c89f6ff4154b120d8b962bc1fbd3c85133bfcc84dea9e",
+        "byteLength": 17590,
+        "sha256": "eb11105fef9b1ae9a22c3b390371bdde69afc2d20d8d4c8114e95153a431526e",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
@@ -1754,8 +1905,8 @@
       },
       {
         "path": "docs/launch/evidence/companion-catalog-operating-candidate.json",
-        "byteLength": 17428,
-        "sha256": "4797f5c114df2d8ef7cee1732984097cb42befda1248abbde1ced2a02cce353c",
+        "byteLength": 19445,
+        "sha256": "c39f0bd9bc7ad7d0417e03e2afc78aae0bac46605e952a8ad2e628b636ee4e79",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
@@ -1763,15 +1914,15 @@
       },
       {
         "path": "docs/launch/evidence/companion-catalog.json",
-        "byteLength": 6993,
-        "sha256": "fa8d868e8d53771849a423265cf9b5a84cb8a680b66024324b0c24e5d8808a70",
+        "byteLength": 8122,
+        "sha256": "9846e353d09a2d7b1ce59b562fd16d53f23e956b2638c5fac8fa914fc75a2fd9",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [
           {
             "digestRole": "sha256",
-            "sha256": "bfef97e68575cfe5a126c08929508c8e2a55a19e41582c3b572c0db171215ee7",
-            "byteLength": 18818
+            "sha256": "bfb99f8a680df0aa8950dd7c56af158b445d7f86f0fca5a8548bdc0d2b0cef9f",
+            "byteLength": 20862
           },
           {
             "digestRole": "sha256",
@@ -1780,8 +1931,8 @@
           },
           {
             "digestRole": "sha256",
-            "sha256": "7360e4dcbb0bff94df2b94e25da6560650e0adc061a97f094be83a54f96d21b2",
-            "byteLength": 24327
+            "sha256": "8b38cdc71688b7280e33099ec02ae77846f5a87c4dc07d4ca750900aea2f0a30",
+            "byteLength": 28598
           },
           {
             "digestRole": "sha256",
@@ -1795,8 +1946,8 @@
           },
           {
             "digestRole": "sha256",
-            "sha256": "448504c476a82bee23b8e795754a2b481c41456fc87ccffdb14824e1d6c0a896",
-            "byteLength": 3040
+            "sha256": "377bba696d5cd049cb41a17918fbc6ca6812c38b526d9214615ce59411653b39",
+            "byteLength": 3557
           },
           {
             "digestRole": "sha256",
@@ -1822,16 +1973,76 @@
             "digestRole": "sha256",
             "sha256": "f40019a24308605ad434ddd60594fa252397ac9df14e6365becb162045ef13d4",
             "byteLength": 1547
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8dbf4c1063363ef64dc6897aa8d6f0f4a163c20127f3729ad3d0c06976b1c2e5",
+            "byteLength": 7816
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
         "path": "docs/launch/evidence/companion-catalog.junit.xml",
-        "byteLength": 3040,
-        "sha256": "448504c476a82bee23b8e795754a2b481c41456fc87ccffdb14824e1d6c0a896",
+        "byteLength": 3557,
+        "sha256": "377bba696d5cd049cb41a17918fbc6ca6812c38b526d9214615ce59411653b39",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/evidence/companion-claude-browser.json",
+        "byteLength": 6701,
+        "sha256": "e6e7fcff84c9c05ef7cb980b2df4925795f9482eacc9ee26a6f70dac10ce1bbb",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "fb75cf159f4bd5d880e0ea95600858f6404d57c9048aae71c12da7ee59a26836",
+            "byteLength": 102766912
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "99bd915a3819b1fee3722328ae904dde5459e9b15d56abd98b903c770a2f582c",
+            "byteLength": 9022
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5048249652dfd1349d858f574963596a717531b96c528fea6107178ec3f279c1",
+            "byteLength": 1726
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "54e515020a2fe229097b8149c1bed583e3f460f6d515692b6a06aefe1d782970",
+            "byteLength": 715
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "2628e5c4c29328283f0b41385197ccd93793f9b99a02367ecdc6f4d941b537af",
+            "byteLength": 692
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "992edcd58d74acbe2cd4a94ff3e81378fd36b89b4ab355c3a5666aa1f38b1152",
+            "byteLength": 3630
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "72c7ac2c3d35ffb6b0611779d536a56b8c070b686c19e7d3da73cce826d089b3",
+            "byteLength": 40988
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "876555ebcaad00bda51481b19af10692c0eca2d52b528d9d6f8ff984fb1c5c27",
+            "byteLength": 1092
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d48e92fa1b09d02f3ff9ef3eca697c82d8f24e7a2f09415128995e6264aa84d2",
+            "byteLength": 3239
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
         "path": "docs/launch/evidence/companion-claude-host-proposal.json",
@@ -2593,6 +2804,44 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/customer-scoped-keys-20261020.json",
+        "byteLength": 3946,
+        "sha256": "c75f93887f07e3345e11e7054860cd20aa776ebde3a7571f0ee428214837665d",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "ee78eb7ed605a5ff952a99ab0da15db2c257f51c5b476c40b4c18a421e84550b",
+            "byteLength": 3041
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0be5c87c384dedb083249763fb0a0830c56b2c67782686f5511ab93d93944b95",
+            "byteLength": 126186
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "322f1ddbacdac91e62d035a62e871932608197f0aa6e9ed8de7ae0640e63dee1",
+            "byteLength": 8031
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4af05dec6fb10f2fc11c5fbb6264d957ce9c2de90ce4e9d9cf1f6d563b6cf200",
+            "byteLength": 24494
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "373148e84463eb9533af50bc0f1c5ed53394ad1394d283756bdd7a6b8fe16b02"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "670fa4d48b018b2efed6b3e145e2fa1128874dd7df2d27deaedec911f9e119fa"
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/dialogue-quote-review-v2/apple-vision.json",
         "byteLength": 3852,
         "sha256": "d4240b4cd4dc951d22c6bf9ef4ad0e57a9b3929864b5de36d11419586f61f7bf",
@@ -2885,6 +3134,20 @@
             "digestRole": "sha256",
             "sha256": "6c3412fd24bcf4c4e776520f231b1433e167562edb99a6979fbfb66b7e41905d",
             "byteLength": 25697
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/editorial-animation-negative-v6-20261020.json",
+        "byteLength": 2805,
+        "sha256": "9d8fbf8f37b5171cd627a0a9808231c13c9e2ac579289712b6df19d56f05deab",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "0fa2c62bc28e5f93ce6fed296efce050b22f0d5d57b568b2c2d4d5345685f1e7"
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
@@ -3562,6 +3825,56 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/evidence/platform-ci-fourth-run-20261020.json",
+        "byteLength": 5498,
+        "sha256": "ebb5560c1c1d47896da7eb18c5394ca478bf6eae71662aa0b08131f1e40267a8",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+            "byteLength": 17420224
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "52278d7e7bede0e3bff2985c5c4b0bb6249bd6ac076fa57392b0942ba6edad24",
+            "byteLength": 22261355
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "49df2dca46dbb2d670fc5ad54c9bc326d26bf2547fcbb874a26f8514f5871a1f",
+            "byteLength": 22261355
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "97ddef5cce9a9d1d17d4b62f32b74eab3eecded2b2a79ed80e6856831bb1320f",
+            "byteLength": 22261918
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ba927690e166bf677fbdd11e6957c9cc9ea7dd1ba935b1bb51426da761e0b22e",
+            "byteLength": 22261364
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5e5d9310b9b03b62a9379f41d1a5fb672cd953d8b281cbe34ded887439491087",
+            "byteLength": 22261397
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1cdbecdd1230b656fc667a4db7cd12aa2e2c0e15ba82366cf465688cead99fb1",
+            "byteLength": 17420224
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "17b92b4117d1218e1b8ecaca0cc2e86ea391caa756c738b951e21fb2c5a65151",
+            "byteLength": 22261288
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/platform-ci-second-run-20261020.json",
         "byteLength": 28726,
         "sha256": "66cd31b63f33fd86952673ce95e188614c04689af3c32fea5246e71be366270c",
@@ -4059,8 +4372,8 @@
       },
       {
         "path": "docs/launch/ledger.json",
-        "byteLength": 23482,
-        "sha256": "ed5b8d2d2b8df90998dddbec8adf398f69fa19999109709bf860f2b597ca7f15",
+        "byteLength": 24674,
+        "sha256": "3ba0c87cc476b7552db1107237863a687938cdc789e272f2dc52794c45e4bd22",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],

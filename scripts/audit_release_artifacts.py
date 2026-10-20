@@ -69,8 +69,19 @@ def main(argv: list[str] | None = None) -> int:
             "npm": (npm, f"package/skills/{skill['name']}"),
         }
         for label, (files, prefix) in prefixes.items():
-            if _tree_checksum(files, prefix) != skill["checksum"]:
-                raise RuntimeError(f"{label} skill tree differs from pinned source digest: {skill['name']}")
+            actual = _tree_checksum(files, prefix)
+            if actual != skill["checksum"]:
+                details = f"expected {skill['checksum']}, got {actual}"
+                if label != "wheel":
+                    reference = _tree_entries(wheel, prefixes["wheel"][1])
+                    packaged = _tree_entries(files, prefix)
+                    differences = {
+                        "missing": sorted(reference.keys() - packaged.keys()),
+                        "unexpected": sorted(packaged.keys() - reference.keys()),
+                        "changed": sorted(name for name in reference.keys() & packaged.keys() if reference[name] != packaged[name]),
+                    }
+                    details += "; " + "; ".join(f"{kind}: {', '.join(names[:16])}" for kind, names in differences.items() if names)
+                raise RuntimeError(f"{label} skill tree differs from pinned source digest: {skill['name']} ({details})")
 
     for file in preset_report["source"]["files"]:
         if file["sha256"] != file["packageSha256"] or file["identical"] is not True:
@@ -137,12 +148,16 @@ def _sdist_directory(files: dict[str, bytes], relative: str) -> str:
     return matches.pop()
 
 
+def _tree_entries(files: dict[str, bytes], prefix: str) -> dict[str, bytes]:
+    return {name[len(prefix) + 1 :]: value for name, value in files.items() if name.startswith(f"{prefix}/")}
+
+
 def _tree_checksum(files: dict[str, bytes], prefix: str) -> str:
-    entries = [(name[len(prefix) + 1 :], value) for name, value in files.items() if name.startswith(f"{prefix}/")]
+    entries = _tree_entries(files, prefix)
     if not entries:
         raise RuntimeError(f"archive tree is missing: {prefix}")
     digest = hashlib.sha256()
-    for relative, value in sorted(entries):
+    for relative, value in sorted(entries.items()):
         digest.update(relative.encode())
         digest.update(b"\0")
         digest.update(value)

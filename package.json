@@ -53,6 +53,8 @@
     "schema/",
     "site/",
     "skills/",
+    "!**/__pycache__/",
+    "!**/*.pyc",
     "src/",
     "THIRD_PARTY_NOTICES.md",
     "browser-renderer/",

@@ -2,9 +2,7 @@
 
 VibeEdit reads local CompositionSpecs and media, invokes local executables, and
 writes user-selected outputs and cache artifacts. It does not require a cloud
-service. Network access occurs only during an explicit setup command for
-approved pinned browser/vision packages and runtimes. SAM model downloads occur
-only when the user explicitly requests `setup --sam` or `setup --all`.
+service. Optional network operations include explicit pinned runtime/model setup, browser source acquisition, selected Myriograph jobs and BYOK/managed companion inference. Ordinary installed local editing does not require those services. Paid calls require customer credentials and an explicit operation/retail ceiling; companion workers also carry tool, project, call and deadline bounds. Read [Myriograph account guidance](MYRIOGRAPH.md) before providing a customer config. Model downloads occur only for requested optional packs; their manifests declare exact sizes, terms and checksums.
 
 - Subprocesses receive argument arrays; user values are not interpolated into a
   shell command.
@@ -40,7 +38,4 @@ only when the user explicitly requests `setup --sam` or `setup --all`.
 Untrusted CompositionSpecs can request local file reads and expensive renders.
 Run them with ordinary user permissions in a restricted working directory.
 Treat optional browser components, plugins, model files, and external FFmpeg
-builds as separate supply-chain inputs. The portable object checkpoint is about
-29.5 MB; SAM source and weights are about 211.7 MB before Python runtime
-dependencies and execute local model code with access
-to the selected media and output path.
+builds as separate supply-chain inputs. Optional model code executes with access to the selected media and output path. Model catalog download sizes exclude Python/runtime overhead; use its resource gates and actual platform qualification rather than assuming every backend works on every supported core platform.
