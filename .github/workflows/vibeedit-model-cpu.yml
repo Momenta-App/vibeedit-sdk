@@ -74,7 +74,7 @@ jobs:
         run: |
           python -I scripts/qualify_model_cpu.py preflight --pack "$MODEL_PACK"
           python -c 'import json,shutil; print(json.dumps({name: shutil.which(name) for name in ("uv", "ffmpeg", "ffprobe")}))'
-          test "$(uv --version)" = "uv 0.11.6"
+          python -c 'import subprocess; version = subprocess.check_output(["uv", "--version"], text=True).strip(); print(version); assert version.split()[:2] == ["uv", "0.11.6"], "Unexpected uv version"'
           sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update
           apt-cache policy ffmpeg
           sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=30 install --yes --no-install-recommends ffmpeg=7:6.1.1-3ubuntu5
