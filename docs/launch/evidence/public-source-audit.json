@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-20T19:59:37.067585+00:00",
+  "recordedAt": "2026-10-20T20:31:34.121484+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "98275016df8ced07b5645f97f6116302de7092b2",
-    "inventoryPaths": 195,
-    "existingFiles": 195,
-    "bytesRead": 5754566,
-    "sourceInventorySha256": "697bf250e1604b1a6efb7c696a2999da08810f1ef74d35b0868a53c44bac293c",
+    "gitHead": "1cc09b48f2c347803d117dc8366f1d37d57b0c39",
+    "inventoryPaths": 151,
+    "existingFiles": 151,
+    "bytesRead": 2739761,
+    "sourceInventorySha256": "a117aa883b690d08953150c289ee873f232286638c1ff6806c15c98e1cb90ca9",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -227,6 +227,17 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/models-source-fixture-20261020.json",
+        "category": "local_personal_path",
+        "count": 5,
+        "matchHashes": [
+          "4be13d1bef5461c94346a446c29e9dd89bfa360e268da5a9eac5882056190fbf",
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/python-source-before-expectation-refresh.junit.xml",
         "category": "local_personal_path",
         "count": 7,
@@ -238,6 +249,16 @@
       },
       {
         "path": "docs/launch/evidence/python-source-current.junit.xml",
+        "category": "local_personal_path",
+        "count": 6,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/python-source-loopback-fix.junit.xml",
         "category": "local_personal_path",
         "count": 6,
         "matchHashes": [
@@ -316,57 +337,6 @@
           "540363d1071a002997290cd8f4a2bdf3acd0355ffad3b3f25f52aad6ebad936a"
         ],
         "classification": "complete identifier validation alphabet, verified by character-set and AST context",
-        "disposition": "reviewed_false_positive"
-      },
-      {
-        "path": "python/tests/test_acquisition.py",
-        "category": "presigned_or_oauth_url",
-        "count": 1,
-        "matchHashes": [
-          "248a292fa9c5bd5d15aaca68ed70e9e79fdc14bb841f2b4980e375a9c8dc7114"
-        ],
-        "classification": "synthetic rejected acquisition URL fixture; not a real signed URL or auth code",
-        "disposition": "reviewed_false_positive"
-      },
-      {
-        "path": "python/tests/test_companion.py",
-        "category": "credential_assignment",
-        "count": 1,
-        "matchHashes": [
-          "14b14be69c113e7f52fee480ee4b98055d7d37157bc7f78c9f228539e9f61c0b"
-        ],
-        "classification": "synthetic negative export fixture",
-        "disposition": "reviewed_false_positive"
-      },
-      {
-        "path": "python/tests/test_companion_managed.py",
-        "category": "credential_assignment",
-        "count": 1,
-        "matchHashes": [
-          "638312da22df886aa5540168381dc450733432fd0fd70a0ea746527b14a31dc7"
-        ],
-        "classification": "synthetic loopback customer fixture",
-        "disposition": "reviewed_false_positive"
-      },
-      {
-        "path": "python/tests/test_myriograph.py",
-        "category": "credential_assignment",
-        "count": 2,
-        "matchHashes": [
-          "222e0acb22052796a51f2d8ba705f2ad70adccfb6b20f781e5a0803b4c9812e5",
-          "52551268e6a3e79109f665d77d79d66b584cc8a4aadb7720e61962737c7aad52"
-        ],
-        "classification": "synthetic private-config/permission fixtures",
-        "disposition": "reviewed_false_positive"
-      },
-      {
-        "path": "python/tests/test_myriograph.py",
-        "category": "email",
-        "count": 1,
-        "matchHashes": [
-          "85b5c9aa53b0757610b1d4e6a5127f00c6dadbdd48269a1b0dd79bd6bf039a36"
-        ],
-        "classification": "synthetic reserved-domain credential-in-URL rejection fixture; no real contact address",
         "disposition": "reviewed_false_positive"
       }
     ],
@@ -1295,368 +1265,62 @@
     "include": [
       {
         "path": ".github/workflows/vibeedit-package.yml",
-        "byteLength": 7334,
-        "sha256": "06839320531f8b01aabee80e0f8acd35c0317594bed97828aba4af0b53b8b45a",
-        "format": "text"
-      },
-      {
-        "path": "catalog/assets.json",
-        "byteLength": 45401,
-        "sha256": "7ad258ae311c14c546e415938daeee022431d91d6e9bbd488edbfa6510ebf262",
-        "format": "text"
-      },
-      {
-        "path": "catalog/catalog.json",
-        "byteLength": 1435741,
-        "sha256": "4b410986a9acd0f781e56150ee4cc51b9a62d3ebae9b828cb90f4903ba996700",
-        "format": "text"
-      },
-      {
-        "path": "catalog/previews/dialogue-quote.mp4",
-        "byteLength": 75813,
-        "sha256": "791e4f7db067c3839dca427ecb61a635a2e483e0d97f65182c6182da1857e7db",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/dialogue-quote.mp4.vibeedit.json",
-        "byteLength": 993,
-        "sha256": "2bdac54ace7bd4d384d3b063df2c21182f48846e7911dfa391d3a86625870bb3",
-        "format": "text"
-      },
-      {
-        "path": "catalog/previews/talking-head-captions.mp4",
-        "byteLength": 80336,
-        "sha256": "a9c3c8ef33d41b870db945c4241f1411250ebe2f01dc14ca40514f76841994be",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/talking-head-captions.mp4.vibeedit.json",
-        "byteLength": 1007,
-        "sha256": "ed9870f2cc49b93a9e56c2cbecfdd064dd2df3331bfe37133c5f8b73af1ffd67",
+        "byteLength": 11423,
+        "sha256": "2f6bf5fb2cf483549e4711370fe95f5430554288b93a8794fe5bd8989be0d201",
         "format": "text"
       },
       {
         "path": "docs/LAUNCH_STATUS.md",
-        "byteLength": 3821,
-        "sha256": "8a42ae656236323b03fa028572c8fa2100474637e57213d6338943a06840c9d9",
+        "byteLength": 4103,
+        "sha256": "1aa5c834ee88486317f2cbbb4acc6d08eb11b0b2809ef21eb3abea5a913cbfb7",
         "format": "text"
       },
       {
-        "path": "docs/RELEASE.md",
-        "byteLength": 4454,
-        "sha256": "87509efbfdba805de48d9a5ddb7f2e8365e07c8a203ab09650aee3e2e9bed14f",
-        "format": "text"
-      },
-      {
-        "path": "examples/dialogue-quote/composition.json",
-        "byteLength": 2122,
-        "sha256": "b81f03662978e7e1be8acfe7eb1d8f4412c67dfc1fbd21ca3854599d90416bfc",
-        "format": "text"
-      },
-      {
-        "path": "examples/dialogue-quote/manifest.json",
-        "byteLength": 623,
-        "sha256": "761572d206406bf34db5d0e0bed385e2500dda344707d68d29d4ebf9575f76e7",
-        "format": "text"
-      },
-      {
-        "path": "examples/talking-head-captions/composition.json",
-        "byteLength": 2109,
-        "sha256": "6bc7233abf5e633e01d13ed2e7858cf50696d44209896a621ec19f4ad4de496b",
-        "format": "text"
-      },
-      {
-        "path": "examples/talking-head-captions/manifest.json",
-        "byteLength": 633,
-        "sha256": "0a730e9d10a6d5b4a8e5ea86ba91abbe368b8648f6bd0db0425bfc147ab2f70a",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/acquisition.py",
-        "byteLength": 12455,
-        "sha256": "8f0db7902822ef967ce55110e8404a2d1e307e2887726a565117083c5942bd69",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/browser_media.py",
-        "byteLength": 6842,
-        "sha256": "f94ebdc252ccb3a950ee6175e6e4d6e3b3fcc0d3ff4305c1a01f911d54b118bc",
+        "path": "docs/launch/PUBLIC-LEDGER.json",
+        "byteLength": 30042,
+        "sha256": "b1c3254bb63c349bc383abcbb53d0411bedb32a903e1de2cb3706186c21f4474",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/browser_render.py",
-        "byteLength": 57109,
-        "sha256": "4fa745fda4ec4fd8012fa1be9b8dfdce2e32db6d15c67f161c84a9081e98aaa2",
+        "byteLength": 57147,
+        "sha256": "97adace60400c889cb335b99d76af08686de707c5247070dc98dcc1cda8c2dd1",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/browser_setup.py",
-        "byteLength": 7832,
-        "sha256": "270dff27ea16e749cf43afe187b98376b325c62c33087a2e8f4a7cf0d9002458",
+        "path": "python/src/vibeedit/local_http.py",
+        "byteLength": 727,
+        "sha256": "328065207de9e755d3d895a1c341053e4ec3dcaec187f0edfd11f1f905599d30",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/examples.py",
-        "byteLength": 23303,
-        "sha256": "f32f8b92b36386f30ee54c4c4f30e53f673317078bdda9cb0c7a67c4bf4a2081",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/face_review.py",
-        "byteLength": 36683,
-        "sha256": "4d2f1004bf2ffa783e06c533023746a7c2c11bf3bcea35eab59c0d9108eb2db9",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/goals.py",
-        "byteLength": 36844,
-        "sha256": "e0c746a75a52b659a9fc7868aee2e048cd304047f6695292a8f7a2ce4dc10e5a",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/model_masks.py",
-        "byteLength": 18635,
-        "sha256": "f7dcd1df3bbf211704ef9f8e377b7b95d29715fc3fb7acfe347ed019eedce243",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/model_packs.py",
-        "byteLength": 22764,
-        "sha256": "93812981db603bb98218c8671b17656a1cd38fb06ee0179b2482d9b4f106b283",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/model_runners/segment.py",
-        "byteLength": 13842,
-        "sha256": "50faea21f83b5a84c4f689ebab8ceff8e9c482aff4b883fee88ecf3f3dbe3add",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/model_runners/transnet.py",
-        "byteLength": 14425,
-        "sha256": "4d4e4868b8186469fc7b7cc054b72430df935e16468f68c9b607dc75ae679be2",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/myriograph.py",
-        "byteLength": 38419,
-        "sha256": "92b91821d45dac6224187c7b4db66ff826c68fb9709bed062ef5838cdf3d2075",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/portable.py",
-        "byteLength": 12964,
-        "sha256": "e00f5daf4b386263eb79f8a7c796452ccad1f01b709d8b4fce31687a5c331416",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/project.py",
-        "byteLength": 42521,
-        "sha256": "e46e3028bb3d82671aaf43046b872794f4629ca56e07de2e61222fed7fc42e9a",
+        "path": "python/src/vibeedit/motion.py",
+        "byteLength": 47243,
+        "sha256": "c3fcb05bb8dd1ee64e2c7e5e4dd648e92ea05f3e61d58c1ce2c2573559c02eae",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/review.py",
-        "byteLength": 26521,
-        "sha256": "4a1f967b9f814bd53f9b0990a1f5798bb13187fd1f2d7203994808113a5c8f74",
+        "byteLength": 26550,
+        "sha256": "46a2b5b3d763a498f4b4120738b7248cfb04b2df6596d5d49ccb9c332febe123",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/worker.py",
-        "byteLength": 97392,
-        "sha256": "a1b4634d58bd01120333de212b184697863e46b58b3103617ffd73439588c428",
+        "byteLength": 97430,
+        "sha256": "8837e3f94d0015027e4d2369e5a2ca267bbdef77ada28ff1191dfd7d2bf52478",
         "format": "text"
       },
       {
-        "path": "python/tests/test_acquisition.py",
-        "byteLength": 5821,
-        "sha256": "083c53a5fba7f6093a3d982e16ba2132876bf56fe2f7b28ad2f8691b3bfec916",
+        "path": "python/tests/test_review.py",
+        "byteLength": 3318,
+        "sha256": "c88a8695272d72831aa1eb57320b8862a5330af856ce76deb0b3586f4205abb7",
         "format": "text"
       },
       {
-        "path": "python/tests/test_assets.py",
-        "byteLength": 1449,
-        "sha256": "96260e87778e0d9cf9e8449211609e415ecceda9e3c6cd578f2e9fa3de03f0da",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_browser_package.py",
-        "byteLength": 1049,
-        "sha256": "1e9632e0a07ab1e8a482ef5ecc6700d05b190c6ab9097c7ae56f50460926c967",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_browser_render.py",
-        "byteLength": 12697,
-        "sha256": "a6022d933f26b16aea1b8cc1135865deaa0023de2214a785fd6be9923532e981",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_catalog_examples.py",
-        "byteLength": 541,
-        "sha256": "979a9966e4899e58a89cd242b78939e9c3d7e23c5bd34e332e05f4b14a7aa490",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_catalog_site.py",
-        "byteLength": 1372,
-        "sha256": "2d0e2930497ef7d4f2f32b5ec380b3cb49086c6661df5edf4663ce01eb69b697",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_cli.py",
-        "byteLength": 4494,
-        "sha256": "0da6d52815a2a617983cdfe01da7c671d354615ef0665e4cb1524fb6e83cd3c8",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_companion.py",
-        "byteLength": 25794,
-        "sha256": "01234227ef3b35aaeb1ec7ebab0321b27cd964fa038f80b7921f3fb5db6efec4",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_companion_managed.py",
-        "byteLength": 37679,
-        "sha256": "0767c37b6432f01a06d5808c88d1645f7d774a3d216cf2173bbec4f9e8f8a9e9",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_companion_real_pi.py",
-        "byteLength": 6012,
-        "sha256": "3fd98784e025689fecd76f3e83b18ae13b6f23f4a8c0dd9b12e95488351fe1d8",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_effects.py",
-        "byteLength": 2356,
-        "sha256": "97c9c1b76f274321aa04d9dfb80970e0a5c2854c69cea5778c8440f26440b704",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_examples.py",
-        "byteLength": 2553,
-        "sha256": "98aa7c71f887ea3a2cfa4df30e44fc791a58a13e0202a29ea77a6a7e23d67299",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_face_operation_recovery.py",
-        "byteLength": 9504,
-        "sha256": "90783a060c359ab1f3696269cdac1b77908eb555109d17b8835ed71229f41b58",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_launch_templates.py",
-        "byteLength": 7255,
-        "sha256": "683de193287fdb0446d79040237eab39181efdb1f69218cf0178ca6acb0b15c9",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_mcp.py",
-        "byteLength": 4728,
-        "sha256": "22e1afb68032ad7069a2c869a8435c71b71acac8a6262663a1c33dce1dfc2662",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_model_masks.py",
-        "byteLength": 5733,
-        "sha256": "380c1746742a6558dc807505f31b9a7f8c764c720093362f2e1517e98b68e5ef",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_model_packs.py",
-        "byteLength": 8996,
-        "sha256": "a4fd046175a46c2386ca903aa1c3072d3313ea7a9eed866ff4a6db69e72783ac",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_myriograph.py",
-        "byteLength": 13218,
-        "sha256": "9dd1fe3b3590e3a40e02179932ce01fc726c83624e37583ca2870e63c655f44d",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_portable.py",
-        "byteLength": 5421,
-        "sha256": "301247123985fd128e2c4f8fa6eb5427349357071eeb56289cbecfd7c1de3df9",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_portable_skill_scripts.py",
-        "byteLength": 4707,
-        "sha256": "7a856508f528ac0857118e78e4a1dd387d5d6d4e7541669ba867a8504d5eceea",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_project.py",
-        "byteLength": 13245,
-        "sha256": "7d544b79e82dfa385a40c0108b702dc8728570870906c3543a032e861a2eb120",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_registry_release.py",
-        "byteLength": 2189,
-        "sha256": "4aeb16e3fad4eec4512e19d54190f6045e2993fbb86cf482ad9c9a524919b40d",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_render.py",
-        "byteLength": 24509,
-        "sha256": "76921513436d26dc1d2f6327133a5cb35c4d5f5f3c5c4fb0f6b116fedf491b64",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_revision.py",
-        "byteLength": 33617,
-        "sha256": "371cdb8759a839a6d16316aa1cae05ad82620019c648c1ef38453d0acdfafb36",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_sbom.py",
-        "byteLength": 2015,
-        "sha256": "7b77a349d71968f774291f464e85d0700959cb8c9769313b046794f7702e2c0b",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_setup.py",
-        "byteLength": 3863,
-        "sha256": "2c1f4d9b0f2fe7408caed1561f6a201c80cdcbef7195b4a32d0dc26f95349b1b",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_skill_transactions.py",
-        "byteLength": 9919,
-        "sha256": "bd5f0ef1a4eb8a841878110d5263109277ba65a1d9317abe8a2169a34ad50493",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_skills.py",
-        "byteLength": 2427,
-        "sha256": "9d7de526c117f400509f7650f684fa05acf356eb60578797c54eb4d3a7012cef",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_spec.py",
-        "byteLength": 1463,
-        "sha256": "b5db56c7fdfe13224ab55813eb504de04053591e2ae21b54899e3577c7707d78",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_vision.py",
-        "byteLength": 9858,
-        "sha256": "2c23f6e2197f92e7a962c3fb8d3e43c402176c1eef2d5969a93a2b8ba931ebc3",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_workflows.py",
-        "byteLength": 3352,
-        "sha256": "8413bcaf6af5893e8257f8bfd3548c936e62ac5b7bf4d4b2b2ec0d8bcba83f2f",
-        "format": "text"
-      },
-      {
-        "path": "site/catalog-data.js",
-        "byteLength": 1022520,
-        "sha256": "57c74c1e3ac6d62ebd2f8d0a804ba8f27e553c6c5133aa82e7ffc6494cab8721",
+        "path": "scripts/smoke_release_artifacts.py",
+        "byteLength": 20952,
+        "sha256": "4ba34a70407a869587001906b36102af9e47dc352ec9aaa129d726c844db9fd3",
         "format": "text"
       }
     ],
@@ -1727,8 +1391,8 @@
       },
       {
         "path": "docs/launch/STATE.md",
-        "byteLength": 12278,
-        "sha256": "d9bed7d47fa0a4460526c800509486dedf6b7a1caef369a1214b8850d50108cd",
+        "byteLength": 15251,
+        "sha256": "fcf29d01a6c684127228ab2dc784047c05a10c2b6d3c22d8b593cdac33eef23a",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -2083,6 +1747,15 @@
         "path": "docs/launch/evidence/companion-catalog-activation-candidate.json",
         "byteLength": 15610,
         "sha256": "dc319f96076a3dfd2d7c89f6ff4154b120d8b962bc1fbd3c85133bfcc84dea9e",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-catalog-operating-candidate.json",
+        "byteLength": 17428,
+        "sha256": "4797f5c114df2d8ef7cee1732984097cb42befda1248abbde1ced2a02cce353c",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
@@ -3579,6 +3252,256 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/evidence/models-source-fixture-20261020.json",
+        "byteLength": 12858,
+        "sha256": "506ca7320b6c3a4576be8344f191c9acdd63e664f4e3728ff9d759235fbe7b2e",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "328253280a05e6b14a92f1f43d818d9b7d38ab5d3f6d5d98606198fd3daef2ff",
+            "byteLength": 571346576
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "bb26a4c86a5fada23e395737b8cc301aa649d315ad28088c49ae3f680e5c7bea",
+            "byteLength": 75330529
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e127c8178968f14af437d368fced3bb0bb5d484841674daf3fa0a993fba904d0",
+            "byteLength": 679369
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "b53a437d8a2c77d872f9e0a911b0633f2cc557d6652ef95fe4c8b964e05677f5",
+            "byteLength": 728225
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f3605324584635650a6db9e9c72028b32dacb2344a5de2b05e5a29de43355c4e",
+            "byteLength": 741248
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "94716ed6f426de9126fae0120cdb8a17c20ca4c8c49c939688e72d11fef02e7c",
+            "byteLength": 809442
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f93e2f0facc95512833758a236c2464b45c7ce959d29fb031c34a6885a879a3d",
+            "byteLength": 329
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "86927eab25e4badb4f726119f5b6594765add2a7097ec4a75a9cb0741fbdd0b1",
+            "byteLength": 23410
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "69ba9d900d1ee66cc2af6052f32c534868fb54878c7f7997d57dde8d56ae7bd9",
+            "byteLength": 16347
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4cb5e814f9e4283a23e114e555c14c51b67815e980cedda9279781925f1e60a6",
+            "byteLength": 826
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f1473068c71db0854803384c05abe15541a0557161885c4228212349cb7f50f2",
+            "byteLength": 46991
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "09db1bfaeab240ab1e4cdd063d4068b83b04841982330ba0b0fc63b3ae57f6f3",
+            "byteLength": 1418149
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8adc12166f19440efd77a60bfd123f9d6a43c9b7cbdf5047747f633b7db50b9d",
+            "byteLength": 1464690
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "11a13a7eb086edbd8dbfa1b5d209ee190b8cd6b8812d3c6c53cedf61b15242dd",
+            "byteLength": 1609993
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "583c7809f04224d05354b9fc8148920264d6a0e5fbcc658f7199723013355538",
+            "byteLength": 1397878
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "cf8eb9dabb4406380ba3afb12a26b6e6eeb2ea6b8b826478693a627612b63734",
+            "byteLength": 1369565
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "014e52cbd6b8ed9a805b3607b2712d852bef69b451ce74a5d0bae150a0a2c165",
+            "byteLength": 1472912
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6d60aaa4b06d099e6993d6fc3762bf6dce04d273aa8f8f0ba834b793ac76a4c1",
+            "byteLength": 1552036
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c6e3c19f20032f532d051eab723b853d925a911ce8b0db26efbc812504284536",
+            "byteLength": 1586178
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7efba2a847fbbfb89843b01ced9bad66a92da517a532f712640a30f28b186ff2",
+            "byteLength": 1405289
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c6823dbdf26db1f44f076fea32edba79bf638c44595ebaa1832c1eee643c46f8",
+            "byteLength": 1638422
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7dd544d2742b4876d69e23fd7a91ceddb84268d5c980ceaf3d15bbd721eae279",
+            "byteLength": 1677982
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8ba37774b673db2056a263a72deac68014ea4347523a18f0507bd719ea50f0a6",
+            "byteLength": 84956
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4e978f5c0b512c3cb853cb804b5c29184de70c24be18a5bf37a4ad541e55a153",
+            "byteLength": 23379
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1a9c9125224f4f389fef185de10b35172d095d635fab526db7106e37c90a7ce1",
+            "byteLength": 22824
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "cb45e8d9d1cf17c21158d10fe49caeb90b51a93997bfc6444365765e0beb1c00",
+            "byteLength": 35919
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f4a013b683031299a645cadf128d652b4f984b2303b8cbb7731a7313d980141f",
+            "byteLength": 32227
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e0ea9ec383413353e0d032ce6a647b7e90a7b87a3f98428b60570683fd58f1f8",
+            "byteLength": 33847
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "025cc998dca7a538d041b63799e9ac4654dae047ffb4a3a3026a09c70413428a",
+            "byteLength": 32052
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "505d569bda78bc490c99aec454af7453b9376ba3690248d26b9d8d424337a4a2",
+            "byteLength": 31030
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d0936d551cc90f251ba5db2de5fb4533fd73ba173a3d6d499c42b30c53b75ecf",
+            "byteLength": 27163
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5497108d362340eeb93a6389f876890ac707740f5a7ccb9c5526a9a8e464388c",
+            "byteLength": 36610
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "2ad2c7c70c8034fae0e1d39cef75c7475630149015aed57c278bfaa86471ac2a",
+            "byteLength": 30552
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5957ab439b4315b0097703afea487f75114a841560f7c51a0a884a76d3b2551c",
+            "byteLength": 34894
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "60c838ff930ef27df8eb9f932347a2c927c8b087c0c126c50260d91f90d9a6fc",
+            "byteLength": 36468
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0c5f5369a3b7dda3583ca749820c5e40ee91563b0fc0966ed317b10e59be1857",
+            "byteLength": 31112
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "dd9a05b78c4e96693a36aff1384d924c9cac02dc40801e12f5244e577fb323b9",
+            "byteLength": 37900
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "dded76090461c5161ac0dc5c90b0d582842d2143da81d9bcee1c37a0446971fe",
+            "byteLength": 32745
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "639995bed5c7fe74acdab159109ab6e397063a847497362cc6df356ba75531d5",
+            "byteLength": 34023
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "cc4180bafea60366b7babd512a13f05bc2ee706f3545b0dfc708f898a9756972",
+            "byteLength": 46191
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "01691e19da7d067d6f9ad2169b053448847345398696f59f392d001d3d273ce9",
+            "byteLength": 46133
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7378dc556777ba1a8a61d6be57fbaa24f3bf509291a18ca71d0611b769dc34a1",
+            "byteLength": 46286
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9b3ce9ace70a202dd3e3d31f66e9c43c31d645ef984ad0b020b6a49ff831bd03",
+            "byteLength": 3740
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d6c29a1ea40e03d71b90fb8b22337d8e006d0fa128ba918ba93c80cab2fe41b6",
+            "byteLength": 330
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5533d2c5b4bfb0b1fd5973233c15da8c4222c9758cbdad1e6ea9d13ced71b77c",
+            "byteLength": 3815
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "61fd0d81ef081848e2975b9fb5cd8e292d695008d957ccf10493b2679e49b781",
+            "byteLength": 885
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "dbfd307aa7be5d5f369d34819dc6600b243ec49416979044f925e7bfb8fe1ace",
+            "byteLength": 695354
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1ea4cdba04f26bc4a908c459a1ec1d5c02ba51eb89b5cc402749eb09f9ed1bc0",
+            "byteLength": 1742
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/models-unit-tests.local.json",
         "byteLength": 2212,
         "sha256": "3ca3a973f1b3ad3fdfba0829526dd85114afba2cc96ae626b6d7c4ed5307cfdb",
@@ -3639,6 +3562,87 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/evidence/platform-ci-second-run-20261020.json",
+        "byteLength": 28726,
+        "sha256": "66cd31b63f33fd86952673ce95e188614c04689af3c32fea5246e71be366270c",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "4337852ee3a42e2edc9baae3dfa7fac00acfe7cf6b8904eb3169ed15530257da"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8e7a287ec202186717f1c8b572d46758a444997f7af8e8cc71c6ba48d0fe227a",
+            "byteLength": 17419639
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ba28c2f3f0f4c021d864b87a5504047c4eed335f822ca116d76b27375ad1c6ad",
+            "byteLength": 22261857
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ab912f4cb3e017cd4c8d52c150bcbc96c60f0210d1c3170816f982e3721676a6"
+          },
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "15d474f508737585043db212fe8c935ecc92b2b0efcf04a2464f0b9d66b5570a"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6a348d5a9140d408778dc2a4eff5f5fb7e48190225f2749c00d673b7a3e9df31"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "220e5e232d4e742db3dfdaa4caf7b5f469d917be021ab777e87b131605642d67",
+            "byteLength": 22261311
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "911035be6733029f36094e5a0756a8bd57dd4fdfff6235bfbf6bf390978e3419"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c05035a9b9036798b12f7a6b4aa737fd2e672424e0fc778c4d2170a5c3ce1ce2",
+            "byteLength": 22261338
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "a83fc1ac93fe98c0f8d7120bf8fa676f6f1afd41ffe6fccaa3b870702d07b7b0"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "264d5be29149f7783e3c90dc1a7d3b25cad20ac25cdb6a4ed8cfec37ed78762e",
+            "byteLength": 17419639
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "171d0ad9fd49f14598ff57fb93eb258f653a8cc39f02e94ff3dedb539f8dd358",
+            "byteLength": 22261231
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "2e7be861c452d7b962943eb59e43e6fa84e39f7d69153b51eb96f826ba5426f0"
+          },
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "572ed1bc17908fe3b5f46a1c2afdc5e7c43dfdb15f3ec03f9eb4b0843e2c8983"
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/platform-loopback-canonical-20261020.json",
+        "byteLength": 1149,
+        "sha256": "fcb0979e44c429b0608b465363092087f5a2c641d84fbfad8ce68a84563c6753",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/pypi-publisher-created.png",
         "byteLength": 92861,
         "sha256": "af9b3308d4d85b17ad0a80c9863c19306c41946b364207067fc0bf977b9720c7",
@@ -3656,6 +3660,13 @@
         "path": "docs/launch/evidence/python-source-current.junit.xml",
         "byteLength": 36323,
         "sha256": "3cda248e7ee0a27e9f854e42caf49965a684cc5a359489de6e0673a54f4f3b92",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/evidence/python-source-loopback-fix.junit.xml",
+        "byteLength": 37414,
+        "sha256": "0791424b806288778f4d2fd481563792ffdb283e49e13b0be4316a158d318b20",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -3835,6 +3846,15 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/source-checkpoint-platform-fixes-20261020.json",
+        "byteLength": 1461,
+        "sha256": "31ee6dae9bb11db48b4960e222d2ed70f9b22c800684f090ac6e57111f5a5193",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/talking-head-captions-review-v2/apple-vision.json",
         "byteLength": 3815,
         "sha256": "88914dd3e9559b80c4535ffe22b4c5a34f36b7f9cbf5d7cc962dd41d64f54a29",
@@ -3988,9 +4008,59 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/website-candidate-20261020.json",
+        "byteLength": 3069,
+        "sha256": "fa8cdb644e9351a708bce9fb72770d9e1ceff52befd6f4821ef94d399d71655d",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
+            "byteLength": 61400
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+            "byteLength": 744936
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341",
+            "byteLength": 4337
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+            "byteLength": 4400
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6ba9b3ddfb65420031ad035140461f1c026075b0944ba1053f59c8b7cb2e1ab4",
+            "byteLength": 7576
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7506119a4ee79a067da540e68bd042c67231dd0b818c5b79cd62e9bb16077a64",
+            "byteLength": 5888
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c3508a0070a68829f45a9eca3322ada60913118b0697b7f031c69f4dfeabce05",
+            "byteLength": 2836
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "272d46370219465281e6965307bf7cc8f8be239a226ac407b79582cdc8494ee4",
+            "byteLength": 388
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/ledger.json",
-        "byteLength": 23006,
-        "sha256": "6fb9a90fedbe915b627bd17e8226ee12e2bb295325bbb945dac6d57a92bb0b87",
+        "byteLength": 23482,
+        "sha256": "ed5b8d2d2b8df90998dddbec8adf398f69fa19999109709bf860f2b597ca7f15",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],

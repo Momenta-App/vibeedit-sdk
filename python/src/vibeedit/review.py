@@ -15,11 +15,12 @@ import tempfile
 import threading
 import urllib.error
 import urllib.request
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlencode, urlsplit
 
 from vibeedit.data import data_path
+from vibeedit.local_http import LoopbackHTTPServer
 from vibeedit.ffmpeg import ffmpeg_path
 from vibeedit.myriograph import MyriographError
 from vibeedit.project import Project, RevisionConflict, atomic_json, canonical, file_digest, within
@@ -153,7 +154,7 @@ def face_correction(project, body):
     return {"ok": True, "event": event, "remoteStatus": "local-note"} if action["kind"] == "portrait" else send_face_correction(project, event)
 
 
-class ReviewServer(ThreadingHTTPServer):
+class ReviewServer(LoopbackHTTPServer):
     daemon_threads = True
 
     def __init__(self, project, mode, source_id, baseline_id=None, port=0, token=None):

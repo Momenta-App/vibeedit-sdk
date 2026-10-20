@@ -64,3 +64,10 @@ def test_session_cookie_does_not_expose_token_to_page(server):
     assert status == 200
     assert "HttpOnly" in headers["Set-Cookie"] and "SameSite=Strict" in headers["Set-Cookie"]
     assert server.token.encode() not in request(server, "/")[1]
+
+
+def test_local_server_refuses_public_interface_before_binding():
+    from http.server import BaseHTTPRequestHandler
+    from vibeedit.local_http import LoopbackHTTPServer
+    with pytest.raises(ValueError,match="literal IPv4 loopback"):
+        LoopbackHTTPServer(("0.0.0.0",0),BaseHTTPRequestHandler)

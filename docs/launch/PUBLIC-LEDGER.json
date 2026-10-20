@@ -1,16 +1,17 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-20T19:27:29.187950+00:00",
+  "updatedAt": "2026-10-20T20:31:33.602172+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
-    "kind": "uncommitted-source-candidate",
+    "kind": "source-branch-candidate",
     "baseCommit": "988a3e796afb8b5b985880d5b65354312e56e632",
     "commit": null,
     "finalSourceTreeSha256": null,
     "finalArchive": null,
     "exactPublicPackageVersions": null,
-    "finalAcceptanceEvidence": null
+    "finalAcceptanceEvidence": null,
+    "latestHistoricalCheckpoint": "1cc09b48f2c347803d117dc8366f1d37d57b0c39"
   },
   "sourceOwnership": {
     "implementation": "Existing public VibeEdit SDK foundation and VibeEdit-owned agent integration source; MIT governs owned code.",
@@ -75,7 +76,8 @@
       "status": "open",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "setup-interim"
+        "setup-interim",
+        "platform-loopback-canonical"
       ]
     },
     {
@@ -165,7 +167,8 @@
       "status": "open",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "archive-interim"
+        "archive-interim",
+        "platform-loopback-canonical"
       ]
     },
     {
@@ -461,7 +464,8 @@
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "setup-interim"
+        "setup-interim",
+        "platform-loopback-canonical"
       ]
     },
     {
@@ -473,7 +477,8 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "review-words",
-        "archive-interim"
+        "archive-interim",
+        "platform-loopback-canonical"
       ]
     },
     {
@@ -735,6 +740,20 @@
         "A19"
       ],
       "summary": "Draft archive membership/privacy audit; artifact is interim and must not be published as final.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "platform-loopback-canonical",
+      "receiptSha256": "fcb0979e44c429b0608b465363092087f5a2c641d84fbfad8ce68a84563c6753",
+      "receiptBytes": 1149,
+      "scope": "bounded-local-source-and-workflow",
+      "supportsRequirements": [
+        "P1",
+        "P9",
+        "A17",
+        "A18"
+      ],
+      "summary": "266 source checks passed with six optional skips; reverse-DNS loopback lease defect fixed. Same immutable canonical archive gate implemented for six matrix entries; actual final matrix remains pending.",
       "establishesLaunchAcceptance": false
     }
   ],

@@ -17,6 +17,7 @@ from functools import lru_cache
 from html.parser import HTMLParser
 from pathlib import Path
 
+from vibeedit.local_http import LoopbackHTTPServer
 from vibeedit.cache import cache_key, restore_cached_artifact, store_cached_artifact
 from vibeedit.data import data_path
 from vibeedit.ffmpeg import ffmpeg_path, frame_stream_encoder, overlay_frame_stream_encoder, render_media
@@ -707,7 +708,7 @@ def _motion_asset_server(project_root: str | Path = "."):
         def log_message(self, format, *args):
             return
 
-    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    server = LoopbackHTTPServer(("127.0.0.1", 0), Handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:

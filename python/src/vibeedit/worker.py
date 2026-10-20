@@ -28,6 +28,7 @@ from decimal import Decimal, ROUND_CEILING
 from jsonschema.exceptions import ValidationError
 from pathlib import Path
 
+from vibeedit.local_http import LoopbackHTTPServer
 from vibeedit.goals import SCHEMA, Store, canonical, detach, project_path
 
 PI_VERSION = "1.3.0"
@@ -406,7 +407,7 @@ class FundingProxy:
                     with contextlib.suppress(OSError):
                         self.send_error(409, "Inference admission refused or acknowledgement unknown; inspect original durable operation")
 
-        self.server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        self.server = LoopbackHTTPServer(("127.0.0.1", 0), Handler)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
 

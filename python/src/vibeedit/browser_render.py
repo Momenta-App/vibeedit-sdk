@@ -29,6 +29,7 @@ from contextlib import contextmanager
 from fractions import Fraction
 from pathlib import Path
 
+from vibeedit.local_http import LoopbackHTTPServer
 from vibeedit.data import package_root
 from vibeedit.browser_setup import native_paths
 
@@ -496,7 +497,7 @@ def project_server(
                 outputfile.write(chunk)
                 self.remaining -= len(chunk)
 
-    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    server = LoopbackHTTPServer(("127.0.0.1", 0), Handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:
