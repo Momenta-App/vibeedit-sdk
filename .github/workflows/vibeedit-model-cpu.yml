@@ -1,0 +1,93 @@
+name: VibeEdit supplemental CPU model qualification
+
+on:
+  workflow_dispatch:
+    inputs:
+      canonical_run_id:
+        description: Reviewed completed canonical package workflow run ID
+        type: string
+        required: true
+      canonical_artifact_id:
+        description: Exact immutable canonical package artifact ID
+        type: string
+        required: true
+      canonical_artifact_sha256:
+        description: Exact canonical upload ZIP digest, 64 lowercase hex
+        type: string
+        required: true
+      canonical_manifest_sha256:
+        description: Exact release-manifest.json SHA256, 64 lowercase hex
+        type: string
+        required: true
+      canonical_source_sha:
+        description: Exact package source commit SHA, 40 lowercase hex
+        type: string
+        required: true
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: vibeedit-model-qualification
+  cancel-in-progress: false
+
+jobs:
+  cpu-model:
+    if: ${{ github.repository == 'Momenta-App/vibeedit-sdk' && github.event.repository.private == false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        pack: [transnet, sam21]
+    steps:
+      - name: Read qualification source without retained credentials
+        timeout-minutes: 1
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          lfs: false
+          submodules: false
+      - name: Fail closed on resources before model provisioning or downloads
+        timeout-minutes: 1
+        run: python3 -I scripts/qualify_model_cpu.py preflight --pack "$MODEL_PACK"
+        env:
+          MODEL_PACK: ${{ matrix.pack }}
+      - name: Select Python 3.12
+        timeout-minutes: 2
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+      - name: Select pinned uv without remote cache
+        timeout-minutes: 2
+        uses: astral-sh/setup-uv@61cb8a9741eeb8a550a1b8544337180c0fc8476b # v7.2.0
+        with:
+          version: '0.11.6'
+          enable-cache: false
+      - name: Download only the reviewed canonical artifact
+        timeout-minutes: 3
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          artifact-ids: ${{ inputs.canonical_artifact_id }}
+          run-id: ${{ inputs.canonical_run_id }}
+          repository: Momenta-App/vibeedit-sdk
+          github-token: ${{ github.token }}
+          path: canonical
+          merge-multiple: true
+          digest-mismatch: error
+      - name: Verify exact archives and native source, then run bounded CPU models
+        timeout-minutes: 26
+        run: python -I scripts/qualify_model_cpu.py run --pack "$MODEL_PACK" --canonical "$GITHUB_WORKSPACE/canonical"
+        env:
+          MODEL_PACK: ${{ matrix.pack }}
+          CANONICAL_RUN_ID: ${{ inputs.canonical_run_id }}
+          CANONICAL_ARTIFACT_ID: ${{ inputs.canonical_artifact_id }}
+          CANONICAL_ARTIFACT_SHA256: ${{ inputs.canonical_artifact_sha256 }}
+          CANONICAL_MANIFEST_SHA256: ${{ inputs.canonical_manifest_sha256 }}
+          CANONICAL_SOURCE_SHA: ${{ inputs.canonical_source_sha }}
+          GITHUB_TOKEN: ${{ github.token }}
+# No artifact/cache uploads or model weights are distributed. Small checksummed
+# candidate-mask packets are retained only in the existing public job logs.
