@@ -7,7 +7,7 @@ from vibeedit.data import data_path
 
 def test_catalog_site_exposes_search_compatibility_requirements_and_copyable_code():
     playwright = pytest.importorskip("playwright.sync_api")
-    item = next(item for item in json.loads(data_path("catalog", "catalog.json").read_text())["items"] if item["id"] == "vibeedit://sfx/impact-procedural")
+    item = next(item for item in json.loads(data_path("catalog", "catalog.json").read_text(encoding="utf-8"))["items"] if item["id"] == "vibeedit://sfx/impact-procedural")
     with playwright.sync_playwright() as runtime:
         browser = runtime.chromium.launch(headless=True)
         page = browser.new_page()

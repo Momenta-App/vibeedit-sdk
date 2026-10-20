@@ -1302,6 +1302,48 @@
       "redistribution": "verified",
       "commercialOutputAllowed": true,
       "decodable": true
+    },
+    {
+      "path": "catalog/previews/dialogue-quote.mp4",
+      "sha256": "791e4f7db067c3839dca427ecb61a635a2e483e0d97f65182c6182da1857e7db",
+      "bytes": 75813,
+      "durationSeconds": 3.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "captions",
+        "html",
+        "word-corrections"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation; layout labels and sine audio, no speech",
+      "license": "MIT",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
+    },
+    {
+      "path": "catalog/previews/talking-head-captions.mp4",
+      "sha256": "a9c3c8ef33d41b870db945c4241f1411250ebe2f01dc14ca40514f76841994be",
+      "bytes": 80336,
+      "durationSeconds": 3.0,
+      "category": "preview-video",
+      "tags": [
+        "template",
+        "captions",
+        "html",
+        "word-corrections"
+      ],
+      "intendedUse": "local catalog preview",
+      "recommendedGainDb": null,
+      "loudnessLufs": null,
+      "source": "VibeEdit procedural generation; layout labels and sine audio, no speech",
+      "license": "MIT",
+      "redistribution": "verified",
+      "commercialOutputAllowed": true,
+      "decodable": true
     }
   ]
 }

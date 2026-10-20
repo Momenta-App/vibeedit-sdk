@@ -11,7 +11,7 @@ from vibeedit.skills import _checksum
 def test_skill_lifecycle_preserves_user_changes(tmp_path: Path):
     installed = install_skill("vibeedit-workspace", harness="codex", root=tmp_path)
     assert check_skill("vibeedit-workspace", harness="codex", root=tmp_path)["modified"] is False
-    (Path(installed["destination"]) / "SKILL.md").write_text("user edit\n")
+    (Path(installed["destination"]) / "SKILL.md").write_text("user edit\n", encoding="utf-8")
     assert check_skill("vibeedit-workspace", harness="codex", root=tmp_path)["modified"] is True
     with pytest.raises(RuntimeError, match="user-modified"):
         update_skill("vibeedit-workspace", harness="codex", root=tmp_path)

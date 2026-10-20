@@ -18,7 +18,7 @@ from vibeedit.worker import RpcClient, confined, execute_tool, validate_task, ve
 def project(tmp_path):
     root = tmp_path / "project with spaces ü"
     root.mkdir()
-    (root / "project.vibeedit.json").write_text('{"schemaVersion":"vibeedit.project.v1","id":"proof"}')
+    (root / "project.vibeedit.json").write_text('{"schemaVersion":"vibeedit.project.v1","id":"proof"}', encoding="utf-8")
     return root
 
 
@@ -74,7 +74,7 @@ def test_concurrent_reservations_share_one_cap(project):
 
 def test_killed_sender_retains_intent_and_reservation(project, tmp_path):
     script = tmp_path / "sender.py"
-    script.write_text("from vibeedit.goals import Store\nimport sys,time\ns=Store(sys.argv[1])\ns.create('worker','crash',{})\ns.intent('crash','original-call','inference',{'nativeRequestId':'original'},reserve=500,cap=500)\nprint('durable',flush=True)\ntime.sleep(60)\n")
+    script.write_text("from vibeedit.goals import Store\nimport sys,time\ns=Store(sys.argv[1])\ns.create('worker','crash',{})\ns.intent('crash','original-call','inference',{'nativeRequestId':'original'},reserve=500,cap=500)\nprint('durable',flush=True)\ntime.sleep(60)\n", encoding="utf-8")
     child = subprocess.Popen([sys.executable, str(script), str(project)], stdout=subprocess.PIPE)
     assert child.stdout.readline().strip() == b"durable"
     child.kill()
@@ -127,18 +127,18 @@ def test_scoped_tools_are_immutable_and_retry_returns_original_receipt(project):
         execute_tool(project, "w", "owner", fence, "shell", "bash", {"command": "anything"})
     with pytest.raises(ValueError, match="filename"):
         execute_tool(project, "w", "owner", fence, "escape", "artifact_write", {"name": "../../outside", "value": {}})
-    assert (project / first["path"]).read_text() == '{"source":"synthetic"}\n'
+    assert (project / first["path"]).read_text(encoding="utf-8") == '{"source":"synthetic"}\n'
     store.close()
 
 
 def test_source_digest_and_symlinks_fail_closed(project):
     source = project / "reference.json"
-    source.write_text("before")
+    source.write_text("before", encoding="utf-8")
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     store = Store(project)
     store.create("worker", "w", validate_task(task(references=["reference.json"], referenceDigests={"reference.json": digest})))
     fence = store.claim("w", "owner")
-    source.write_text("after")
+    source.write_text("after", encoding="utf-8")
     with pytest.raises(ValueError, match="digest changed"):
         execute_tool(project, "w", "owner", fence, "read", "project_read", {"path": "reference.json"})
     (project / "escape").symlink_to(project.parent)
@@ -178,7 +178,7 @@ for c in reversed(commands):
 print(json.dumps({'type':'agent_end','willRetry':True}),flush=True)
 print(json.dumps({'type':'agent_settled','aborted':False}),flush=True)
 sys.stdin.buffer.read()
-""")
+""", encoding="utf-8")
     client = RpcClient([sys.executable, str(program)], tmp_path, os.environ.copy())
     try:
         first = client.send({"type": "get_state"}, "first")
@@ -194,13 +194,13 @@ sys.stdin.buffer.read()
 def test_rpc_observation_timeout_does_not_resend(tmp_path):
     program = tmp_path / "slow.py"
     marker = tmp_path / "native-handles.json"
-    program.write_text("import sys,json,time,pathlib\nc=json.loads(sys.stdin.buffer.readline())\npathlib.Path(sys.argv[1]).write_text(json.dumps(c))\ntime.sleep(60)\n")
+    program.write_text("import sys,json,time,pathlib\nc=json.loads(sys.stdin.buffer.readline())\npathlib.Path(sys.argv[1]).write_text(json.dumps(c))\ntime.sleep(60)\n", encoding="utf-8")
     client = RpcClient([sys.executable, str(program), str(marker)], tmp_path, os.environ.copy())
     try:
         handle = client.send({"type": "prompt", "message": "bounded"}, "original")
         with pytest.raises(TimeoutError, match="original command"):
             client.response(handle, .2)
-        assert json.loads(marker.read_text())["id"] == "original"
+        assert json.loads(marker.read_text(encoding="utf-8"))["id"] == "original"
         with pytest.raises(ValueError, match="duplicate"):
             client.send({"type": "prompt", "message": "bounded"}, "original")
     finally:
@@ -322,7 +322,7 @@ def test_bundle_recovery_keeps_native_operations_holds_and_pauses(project, tmp_p
     assert 'Pi chat must not be bundled' not in canonical(snapshot)
     assert 'old-supervisor' not in canonical(snapshot)
     restored = tmp_path / 'restored'; restored.mkdir()
-    (restored/'project.vibeedit.json').write_text((project/'project.vibeedit.json').read_text())
+    (restored/'project.vibeedit.json').write_text((project/'project.vibeedit.json').read_text(encoding="utf-8"), encoding="utf-8")
     result = import_recovery(restored, snapshot)
     assert result['resumeRequired']
     state = Store(restored)
@@ -455,7 +455,7 @@ def test_later_goal_step_pins_earlier_verified_artifact_and_rejects_mutation(pro
     assert bound['references']==[path] and bound['referenceDigests'][path]==receipt['sha256']
     assert bind_step_references(store,'context',1)==bound
     assert store.get('context')['spec']['steps'][1]==second
-    (project/path).write_text('{"changed":true}')
+    (project/path).write_text('{"changed":true}', encoding="utf-8")
     with pytest.raises(ValueError,match='changed before child admission'):
         bind_step_references(store,'context',1)
     assert len(step_worker_id('x'*120,99))<=120

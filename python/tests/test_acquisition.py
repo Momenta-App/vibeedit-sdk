@@ -42,7 +42,7 @@ def test_download_receipt_persists_source_clock_and_never_signed_url(source_proj
     source=Project(root).source(result['receipt']['sourceId'])
     assert source['sha256']==file_digest(audio)
     assert (root/source['clock']).is_file()
-    receipt=json.loads((root/result['receipt']['receiptPath']).read_text())
+    receipt=json.loads((root/result['receipt']['receiptPath']).read_text(encoding="utf-8"))
     assert receipt['download']['transport']['finalUrlStored'] is False
     assert receipt['page']['pageUrl']=='https://commons.wikimedia.org/wiki/File:Example.jpg'
     assert 'do-not-store-this-token' not in json.dumps(receipt)

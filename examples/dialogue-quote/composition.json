@@ -55,10 +55,11 @@
   },
   "metadata": {
     "template": {
-      "description": "Source-bound quote-first edit with correctable word layers and preserved original audio. Clean render uses generated layout stand-ins, not recorded speech.",
+      "description": "Footage-first quote edit with centered inverted word captions, correctable native-time word layers and original audio. Clean render uses generated stand-ins, not recorded speech.",
       "fixture": "Generated color-motion source and sine tone demonstrate layout, not real quote or transcription quality.",
-      "editorialIntent": "Hold the speaker and preserve the sentence; keep captions readable; choose any cutaways only after understanding the supplied quote.",
-      "review": "Word layers bind exact source and immutable baseline IDs at initialization."
+      "editorialIntent": "Keep the full picture; one flat bold uppercase hit at a time in the center, clearing gaps after 750ms. Difference blending inverts the footage beneath the text; no card or headline. Select the caption stream before using simultaneous speakers.",
+      "review": "Word layers bind exact source and immutable baseline IDs at initialization.",
+      "wordInput": "Each input entry is a timed word or intentional short phrase. Original text and word intervals remain immutable; caption display clips to next entry or 750ms. No word-level timing is inferred."
     }
   }
 }

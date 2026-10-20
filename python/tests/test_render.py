@@ -17,7 +17,7 @@ def test_ffmpeg_thread_arguments_honor_render_contract():
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_minimal_fixture_renders_real_media(tmp_path: Path):
-    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     output = render(spec, tmp_path / "minimal.mp4")
     report = verify_output(output, spec["verification"])
     assert output.stat().st_size > 0
@@ -26,7 +26,7 @@ def test_minimal_fixture_renders_real_media(tmp_path: Path):
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_procedural_sfx_renders_audio(tmp_path: Path):
-    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     spec["timeline"]["tracks"] = [
         {
             "id": "A1",
@@ -59,7 +59,7 @@ def test_external_audio_clip_is_trimmed_placed_and_mixed(tmp_path: Path):
     audio = tmp_path / "music.wav"
     subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "color=c=navy:s=160x90:r=30:d=2", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(video)], check=True)
     subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "sine=frequency=220:sample_rate=48000:duration=2", str(audio)], check=True)
-    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     spec["canvas"]["width"] = 160
     spec["canvas"]["height"] = 90
     spec["durationFrames"] = 60
@@ -85,7 +85,7 @@ def test_multi_clip_fan_edit_supports_clean_cuts_and_transitions(tmp_path: Path)
         path = tmp_path / f"source-{index}.mp4"
         subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", f"color=c={color}:s=160x90:r=30:d=1", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(path)], check=True)
         sources.append({"id": f"source-{index}", "kind": "video", "uri": str(path), "identity": {"algorithm": "generated", "value": color}, "durationFrames": 30})
-    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     spec["id"] = "multi-clip-fan-edit"
     spec["canvas"].update({"width": 160, "height": 90})
     spec["durationFrames"] = 102
@@ -119,7 +119,7 @@ def test_multi_clip_fan_edit_rejects_unmaterialized_timeline_gap(tmp_path: Path)
 
     source = tmp_path / "source.mp4"
     subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "color=c=navy:s=160x90:r=30:d=2", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(source)], check=True)
-    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     spec["canvas"].update({"width": 160, "height": 90})
     spec["durationFrames"] = 61
     spec["sources"] = [{"id": "source", "kind": "video", "uri": str(source), "identity": {"algorithm": "generated", "value": "source"}, "durationFrames": 60}]
@@ -133,7 +133,7 @@ def test_multi_clip_fan_edit_rejects_unmaterialized_timeline_gap(tmp_path: Path)
 
 def test_mixed_python_html_fixture_renders(tmp_path: Path):
     pytest.importorskip("playwright")
-    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text(encoding="utf-8"))
     output = render(spec, tmp_path / "mixed.mp4")
     report = verify_output(output, spec["verification"])
     assert report.passed, report.errors
@@ -142,7 +142,7 @@ def test_mixed_python_html_fixture_renders(tmp_path: Path):
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_agent_authored_html_css_javascript_renders(tmp_path: Path):
     pytest.importorskip("playwright")
-    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text(encoding="utf-8"))
     spec["id"] = "agent-authored-web-motion"
     spec["durationFrames"] = 24
     spec["cache"]["enabled"] = False
@@ -177,7 +177,7 @@ def test_agent_authored_html_css_javascript_renders(tmp_path: Path):
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_raw_html_css_atoms_render_end_to_end_without_javascript(tmp_path: Path):
     pytest.importorskip("playwright")
-    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text(encoding="utf-8"))
     spec["id"] = "raw-html-css-motion"
     spec["durationFrames"] = 24
     spec["cache"]["enabled"] = False
@@ -213,7 +213,7 @@ def test_mixed_source_video_and_html_overlay_renders(tmp_path: Path):
     pytest.importorskip("playwright")
     import subprocess
 
-    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text(encoding="utf-8"))
     source = tmp_path / "source.mp4"
     subprocess.run(
         [
@@ -256,7 +256,7 @@ def test_mixed_python_effect_transition_and_html_overlay_render_together(tmp_pat
     import subprocess
 
     monkeypatch.setenv("VIBEEDIT_CACHE_DIR", str(tmp_path / "cache"))
-    spec = json.loads((data_path("examples", "effect-transition", "composition.json")).read_text())
+    spec = json.loads((data_path("examples", "effect-transition", "composition.json")).read_text(encoding="utf-8"))
     sources = []
     for index, color in enumerate(("0x172554", "0x4c0519")):
         source = tmp_path / f"source-{index}.mp4"
@@ -308,11 +308,11 @@ def test_mixed_python_effect_transition_and_html_overlay_render_together(tmp_pat
     output = render(spec, tmp_path / "mixed-effect-transition.mp4")
     report = verify_output(output, spec["verification"])
     assert report.passed, report.errors
-    first_record = json.loads(output.with_suffix(".mp4.vibeedit.json").read_text())
+    first_record = json.loads(output.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
 
     spec["timeline"]["tracks"][-1]["items"][0]["props"]["html"] = "<h1>REVISED WEB LAYER</h1>"
     revised = render(spec, tmp_path / "mixed-effect-transition-revised.mp4")
-    revised_record = json.loads(revised.with_suffix(".mp4.vibeedit.json").read_text())
+    revised_record = json.loads(revised.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
 
     assert first_record["work"]["mediaBaseCacheHit"] is False
     assert first_record["work"]["mediaBaseFramesRendered"] == spec["durationFrames"]
@@ -323,12 +323,12 @@ def test_mixed_python_effect_transition_and_html_overlay_render_together(tmp_pat
 
 def test_render_cache_records_reproducible_provenance(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("VIBEEDIT_CACHE_DIR", str(tmp_path / "cache"))
-    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     spec["cache"] = {"enabled": True, "namespace": "test", "implementationVersion": "0.1.0", "runtimeVersions": {}}
     first = render(spec, tmp_path / "first.mp4")
-    first_record = json.loads(first.with_suffix(".mp4.vibeedit.json").read_text())
+    first_record = json.loads(first.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
     second = render(spec, tmp_path / "second.mp4")
-    second_record = json.loads(second.with_suffix(".mp4.vibeedit.json").read_text())
+    second_record = json.loads(second.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
     assert first_record["cacheHit"] is False
     assert second_record["cacheHit"] is True
     assert first_record["cacheKey"] == second_record["cacheKey"]
@@ -341,20 +341,20 @@ def test_project_render_cache_stays_inside_workspace(tmp_path: Path, monkeypatch
     monkeypatch.delenv("VIBEEDIT_CACHE_DIR", raising=False)
     project = tmp_path / "project"
     (project / "compositions").mkdir(parents=True)
-    (project / "project.vibeedit.json").write_text("{}")
-    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    (project / "project.vibeedit.json").write_text("{}", encoding="utf-8")
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     spec["canvas"].update({"width": 64, "height": 64})
     spec["durationFrames"] = 3
     spec["timeline"]["tracks"] = []
     spec["cache"] = {"enabled": True, "namespace": "workspace-cache"}
     path = project / "compositions" / "main.json"
-    path.write_text(json.dumps(spec))
+    path.write_text(json.dumps(spec), encoding="utf-8")
     first = render(path, project / "first.mp4")
     second = render(path, project / "second.mp4")
     assert cache_root(path.parent) == project / ".vibeedit" / "cache"
     assert cache_root() != cache_root(path.parent)
     assert list((project / ".vibeedit" / "cache" / "renders").glob("*.mp4"))
-    assert json.loads(second.with_suffix(".mp4.vibeedit.json").read_text())["cacheHit"] is True
+    assert json.loads(second.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))["cacheHit"] is True
     assert first.read_bytes() == second.read_bytes()
 
 
@@ -364,7 +364,7 @@ def test_difference_motion_inverts_real_video_only_under_alpha(tmp_path: Path):
     pytest.importorskip("playwright.sync_api")
     source = tmp_path / "red.mp4"
     subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "color=red:s=160x90:r=30:d=0.4", "-f", "lavfi", "-i", "sine=frequency=880:duration=0.4", "-c:v", "libx264", "-c:a", "aac", "-shortest", str(source)], check=True)
-    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text(encoding="utf-8"))
     spec["canvas"].update(width=160, height=90)
     spec["durationFrames"] = 12
     spec["cache"]["enabled"] = False
@@ -402,7 +402,7 @@ def test_changed_source_cannot_reuse_an_old_render_cache(tmp_path: Path, monkeyp
     monkeypatch.setenv("VIBEEDIT_CACHE_DIR", str(tmp_path / "cache"))
     source = tmp_path / "source.mp4"
     subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "color=red:s=64x64:r=30:d=0.1", "-c:v", "libx264", str(source)], check=True)
-    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     spec["canvas"].update(width=64, height=64)
     spec["durationFrames"] = 3
     spec["cache"] = {"enabled": True}

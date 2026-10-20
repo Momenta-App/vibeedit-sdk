@@ -13,6 +13,7 @@ env:
 
 jobs:
   portable-smoke:
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -83,7 +84,7 @@ jobs:
           npm run validate
       - name: Run portable Python checks
         working-directory: python
-        run: uv run pytest tests -q
+        run: uv run pytest tests -q --junitxml=../dist/source-tests.junit.xml
       - name: Smoke install built packages
         run: |
           node -e "require('fs').mkdirSync('dist/smoke', { recursive: true })"
@@ -93,7 +94,18 @@ jobs:
           npx --yes --package ./dist/smoke/vibeedit-${{ env.NPM_PACKAGE_VERSION }}.tgz vibeedit --version
           python scripts/smoke_release_artifacts.py --wheel dist/smoke/vibeedit-${{ env.PYTHON_PACKAGE_VERSION }}-py3-none-any.whl --npm dist/smoke/vibeedit-${{ env.NPM_PACKAGE_VERSION }}.tgz --output dist/smoke-proof.json
 
+      - name: Retain platform qualification evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: qualification-${{ matrix.os }}-py${{ matrix.python }}
+          path: |
+            dist/source-tests.junit.xml
+            dist/smoke-proof.json
+          if-no-files-found: ignore
+
   build-and-attest:
+    timeout-minutes: 30
     needs: portable-smoke
     runs-on: ubuntu-latest
     permissions:

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from vibeedit.myriograph import Myriograph, MyriographError, _database, _origin, observe, read_config, register_commands, submit
+from vibeedit.myriograph import Myriograph, MyriographError, _database, _origin, observe, read_config, register_commands, submit, _save_private
 
 
 def test_portable_recovery_keeps_original_unknown_send_and_drops_signed_observation(tmp_path):
@@ -137,8 +137,7 @@ def test_lost_admission_acknowledgement_never_replaced_after_restart(tmp_path):
 
 def test_credential_permissions_and_private_route_exclusion(tmp_path):
     config = tmp_path/'customer.json'
-    config.write_text(json.dumps({'apiUrl':'https://customer.example','apiKey':'private-customer-key'}))
-    config.chmod(0o600)
+    _save_private(config, {'apiUrl':'https://customer.example','apiKey':'private-customer-key'})
     api = Myriograph(read_config(config))
     assert 'private-customer-key' not in json.dumps(api.identity)
     with pytest.raises(ValueError, match='public Myriograph route'):
@@ -219,26 +218,35 @@ def test_explicit_resume_reconciles_same_original_admission_key_body(tmp_path):
     assert len(api.accepted)==1
 
 
-def test_windows_managed_config_requires_user_protection_and_explicit_import(tmp_path, monkeypatch):
+def test_managed_config_uses_real_platform_protection_and_explicit_windows_import(tmp_path):
+    import os
+    import base64
     import vibeedit.myriograph as module
     path=tmp_path/'customer.json'
-    original=dict(apiUrl='https://customer.example',apiKey='private-customer-key')
-    path.write_text(json.dumps(original))
-    monkeypatch.setattr(module,'_WINDOWS',True)
-    with pytest.raises(ValueError,match='Import the customer config'):
-        module.read_config(path)
-    assert module.read_config(path,allow_unprotected_import=True)==original
-    # Exercise storage/reader policy at the OS boundary; actual Windows DPAPI
-    # qualification still requires the clean Windows customer journey.
-    def protect(value,*,protect):
-        return b'protected-'+value if protect else value.removeprefix(b'protected-')
-    monkeypatch.setattr(module,'_windows_credential',protect)
+    original=dict(apiUrl='https://customer.example',apiKey='private-customer-key',displayName='顧客 — café')
+    path.write_text(json.dumps(original,ensure_ascii=False),encoding='utf-8')
+    path.chmod(0o600)
+    if os.name=='nt':
+        with pytest.raises(ValueError,match='Import the customer config'):
+            module.read_config(path)
+        assert module.read_config(path,allow_unprotected_import=True)==original
     module._save_private(path,original)
-    assert original['apiKey'] not in path.read_text()
     assert module.read_config(path)==original
-    monkeypatch.setattr(module,'_WINDOWS',False)
-    with pytest.raises(ValueError,match='original Windows user'):
-        module.read_config(path)
+    stored=json.loads(path.read_text(encoding='utf-8'))
+    if os.name=='nt':
+        # Runs real current-user CryptProtectData/CryptUnprotectData on Windows;
+        # no monkeypatch, plaintext bypass or fake encryption implementation.
+        assert original['apiKey'] not in path.read_text(encoding='utf-8')
+        assert stored['credentialProtection']=='windows-user-dpapi.v1'
+        assert 'apiKey' not in stored and base64.b64decode(stored['apiKeyDpapi'],validate=True)
+        with pytest.raises(ValueError,match='credential protection failed'):
+            module._windows_credential(b'invalid-native-ciphertext',protect=False)
+    if os.name!='nt':
+        assert stored['apiKey']==original['apiKey']
+        path.write_text(json.dumps({'apiUrl':original['apiUrl'],'credentialProtection':'windows-user-dpapi.v1','apiKeyDpapi':base64.b64encode(b'opaque-foreign-user-ciphertext').decode()}),encoding='utf-8')
+        path.chmod(0o600)
+        with pytest.raises(ValueError,match='original Windows user'):
+            module.read_config(path)
 
 
 def test_source_upload_admission_has_stable_tenant_service_and_source_idempotency(tmp_path):

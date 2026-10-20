@@ -10,7 +10,7 @@ from vibeedit.data import data_path
 
 @pytest.mark.skipif(not shutil.which("ffprobe"), reason="FFprobe is optional on the test host")
 def test_all_distributed_media_assets_match_provenance_and_decode():
-    assets = json.loads(data_path("catalog", "assets.json").read_text())["assets"]
+    assets = json.loads(data_path("catalog", "assets.json").read_text(encoding="utf-8"))["assets"]
     assert assets
     for asset in assets:
         path = data_path(asset["path"])

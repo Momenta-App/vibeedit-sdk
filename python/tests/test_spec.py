@@ -25,11 +25,11 @@ def test_composition_public_api_matches_schema(tmp_path: Path):
     motion = composition.timeline.add_track(Track("M1", "motion", 10))
     motion.add(MotionComponent("title", Placement(0, 90), "vibeedit://text/negative", {"text": "MOVE"}))
     path = composition.write(tmp_path / "composition.json")
-    assert json.loads(path.read_text())["canvas"]["frameRate"] == {"numerator": 30000, "denominator": 1001}
+    assert json.loads(path.read_text(encoding="utf-8"))["canvas"]["frameRate"] == {"numerator": 30000, "denominator": 1001}
 
 
 def test_unknown_fields_are_rejected():
-    value = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    value = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     value["unknown"] = True
     with pytest.raises(CompositionValidationError, match="Additional properties"):
         validate_composition(value)

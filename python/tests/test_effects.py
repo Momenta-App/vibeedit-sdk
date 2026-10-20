@@ -24,7 +24,7 @@ def test_effect_transition_example_renders(tmp_path: Path):
     sources.mkdir()
     for output, source in (("a.mp4", "testsrc2=size=320x180:rate=30:duration=2"), ("b.mp4", "smptebars=size=320x180:rate=30:duration=2")):
         subprocess.run([ffmpeg, "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", source, "-c:v", "libx264", "-pix_fmt", "yuv420p", str(sources / output)], check=True)
-    spec = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    spec = json.loads(data_path("examples", "effect-transition", "composition.json").read_text(encoding="utf-8"))
     spec["sources"][0]["uri"] = str(sources / "a.mp4")
     spec["sources"][1]["uri"] = str(sources / "b.mp4")
     register_video_effect_filter("vibeedit://effect/agent-contrast", lambda params: f"eq=contrast={float(params.get('contrast', 1.08)):.3f}")

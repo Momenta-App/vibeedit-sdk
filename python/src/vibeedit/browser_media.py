@@ -73,7 +73,7 @@ def prepare_cef_media(source: Path, browser_version, processes, canceled):
     cache.mkdir(parents=True, exist_ok=True)
     output = cache / (key + ".mp4")
     metadata = cache / (key + ".json")
-    cached = json.loads(metadata.read_text()) if metadata.is_file() else None
+    cached = json.loads(metadata.read_text(encoding="utf-8")) if metadata.is_file() else None
     if output.is_file() and cached and _sha256(output) == cached["preparedSha256"]:
         return output, {
             **cached,
@@ -146,7 +146,7 @@ def prepare_cef_media(source: Path, browser_version, processes, canceled):
             "preparationSeconds": time.perf_counter() - started,
         }
         os.replace(staged, output)
-        metadata.write_text(json.dumps(record, indent=2) + "\n")
+        metadata.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     return output, record
 
 

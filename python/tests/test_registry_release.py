@@ -31,7 +31,7 @@ def test_registry_release_validator_binds_all_archives_to_prerelease_tag(tmp_pat
     write_tar(archive, "package/package.json", json.dumps({"name": "vibeedit", "version": "0.1.0-beta.1"}).encode())
 
     paths = [wheel, sdist, archive]
-    (tmp_path / "SHA256SUMS.release").write_text("".join(f"{MODULE.digest(path)}  {path.name}\n" for path in paths))
+    (tmp_path / "SHA256SUMS.release").write_text("".join(f"{MODULE.digest(path)}  {path.name}\n" for path in paths), encoding="utf-8")
     (tmp_path / "archive-audit.json").write_text(json.dumps({
         "status": "passed",
         "forbiddenEntries": 0,
@@ -39,7 +39,7 @@ def test_registry_release_validator_binds_all_archives_to_prerelease_tag(tmp_pat
             name: {"name": path.name, "bytes": path.stat().st_size, "sha256": MODULE.digest(path)}
             for name, path in zip(["wheel", "sdist", "npm"], paths)
         },
-    }))
+    }), encoding="utf-8")
 
     result = MODULE.inspect_release(tmp_path, "v0.1.0-beta.1")
     assert result["ok"] is True

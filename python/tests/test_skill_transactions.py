@@ -14,11 +14,11 @@ NAME = "vibeedit-workspace"
 
 
 def child_python(root, code):
-    return subprocess.run([sys.executable, "-c", code, str(root)], cwd=REPO, env={**os.environ, "PYTHONPATH": str(REPO / "python/src")}, capture_output=True, text=True, timeout=20)
+    return subprocess.run([sys.executable, "-c", code, str(root)], cwd=REPO, env={**os.environ, "PYTHONPATH": str(REPO / "python/src")}, capture_output=True, text=True, encoding="utf-8", timeout=20)
 
 
 def child_node(root, code):
-    return subprocess.run(["node", "--input-type=module", "-e", code, str(root)], cwd=REPO, capture_output=True, text=True, timeout=20)
+    return subprocess.run(["node", "--input-type=module", "-e", code, str(root)], cwd=REPO, capture_output=True, text=True, encoding="utf-8", timeout=20)
 
 
 def crash_python(root, action="update"):
@@ -40,10 +40,10 @@ def test_python_update_crash_recovers_in_node(tmp_path):
     installed = install_skill(NAME, harness="codex", root=tmp_path)
     # A prior release has a different version and content, with its own valid receipt.
     previous = Path(installed["destination"])
-    (previous / "SKILL.md").write_text("known prior release content\n")
-    tracker = json.loads((previous / ".vibeedit-install.json").read_text())
+    (previous / "SKILL.md").write_text("known prior release content\n", encoding="utf-8")
+    tracker = json.loads((previous / ".vibeedit-install.json").read_text(encoding="utf-8"))
     tracker.update(version="0.0.0-prior", checksum=_checksum(previous, {".vibeedit-install.json"}))
-    (previous / ".vibeedit-install.json").write_text(json.dumps(tracker))
+    (previous / ".vibeedit-install.json").write_text(json.dumps(tracker), encoding="utf-8")
     assert check_skill(NAME, harness="codex", root=tmp_path)["modified"] is False
     crash_python(tmp_path)
     assert not Path(installed["destination"]).exists()
@@ -54,7 +54,7 @@ console.log(JSON.stringify(checkSkill("vibeedit-workspace", {harness:"codex", cw
     assert result.returncode == 0, result.stderr
     assert json.loads(result.stdout)["modified"] is False
     assert json.loads(result.stdout)["version"] != "0.0.0-prior"
-    assert (previous / "SKILL.md").read_text() != "known prior release content\n"
+    assert (previous / "SKILL.md").read_text(encoding="utf-8") != "known prior release content\n"
     assert check_skill(NAME, harness="codex", root=tmp_path)["modified"] is False
     assert not list(Path(installed["destination"]).parent.glob(".*.vibeedit-*"))
 
@@ -96,7 +96,7 @@ skills.update_skill("vibeedit-workspace", harness="codex", root=sys.argv[1])
     assert check_skill(NAME, harness="codex", root=tmp_path)["modified"] is False
     quarantines = list(Path(installed["destination"]).parent.glob(".*.vibeedit-stage.aborted-*"))
     assert len(quarantines) == 1
-    assert (quarantines[0] / "SKILL.md").read_text() == "interrupted partial copy"
+    assert (quarantines[0] / "SKILL.md").read_text(encoding="utf-8") == "interrupted partial copy"
     assert update_skill(NAME, harness="codex", root=tmp_path)["action"] == "updated"
 
 
@@ -105,7 +105,7 @@ def test_modified_backup_after_crash_is_preserved_and_fails_closed(tmp_path):
     crash_python(tmp_path)
     parent = Path(installed["destination"]).parent
     previous = parent / f".{NAME}.vibeedit-previous"
-    (previous / "SKILL.md").write_text("user rescued changes\n")
+    (previous / "SKILL.md").write_text("user rescued changes\n", encoding="utf-8")
     with pytest.raises(RuntimeError, match="user-modified skill backup"):
         check_skill(NAME, harness="codex", root=tmp_path)
     result = child_node(tmp_path, '''
@@ -113,7 +113,7 @@ import { checkSkill } from "./src/skills.js";
 checkSkill("vibeedit-workspace", {harness:"codex", cwd:process.argv[1]});
 ''')
     assert result.returncode != 0 and "user-modified skill backup" in result.stderr
-    assert (previous / "SKILL.md").read_text() == "user rescued changes\n"
+    assert (previous / "SKILL.md").read_text(encoding="utf-8") == "user rescued changes\n"
     assert (parent / f".{NAME}.vibeedit-stage").is_dir()
     assert (parent / f".{NAME}.vibeedit-operation.json").is_file()
 
@@ -157,10 +157,10 @@ def test_symlink_harness_and_installed_content_fail_closed(tmp_path):
 
 def test_checksum_order_and_nested_tracker_parity(tmp_path):
     (tmp_path / "a").mkdir()
-    (tmp_path / "a/file").write_text("nested")
-    (tmp_path / "a.txt").write_text("sibling")
-    (tmp_path / "a/.vibeedit-install.json").write_text("must count")
-    (tmp_path / ".vibeedit-install.json").write_text("exclude root tracker")
+    (tmp_path / "a/file").write_text("nested", encoding="utf-8")
+    (tmp_path / "a.txt").write_text("sibling", encoding="utf-8")
+    (tmp_path / "a/.vibeedit-install.json").write_text("must count", encoding="utf-8")
+    (tmp_path / ".vibeedit-install.json").write_text("exclude root tracker", encoding="utf-8")
     result = child_node(tmp_path, '''
 import { treeChecksum } from "./src/skills.js";
 console.log(treeChecksum(process.argv[1], new Set([".vibeedit-install.json"])));
@@ -172,8 +172,8 @@ console.log(treeChecksum(process.argv[1], new Set([".vibeedit-install.json"])));
 def test_unknown_lock_format_is_never_reclaimed(tmp_path):
     lock = tmp_path / ".codex/skills" / f".{NAME}.vibeedit-lock"
     lock.mkdir(parents=True)
-    (lock / "owner.json").write_text(json.dumps({"pid": 2147483647}))
-    (lock / "retain.txt").write_text("unknown owner data")
+    (lock / "owner.json").write_text(json.dumps({"pid": 2147483647}), encoding="utf-8")
+    (lock / "retain.txt").write_text("unknown owner data", encoding="utf-8")
     with pytest.raises(RuntimeError, match="unknown owner"):
         check_skill(NAME, harness="codex", root=tmp_path)
     result = child_node(tmp_path, '''
@@ -181,7 +181,7 @@ import { checkSkill } from "./src/skills.js";
 checkSkill("vibeedit-workspace", {harness:"codex", cwd:process.argv[1]});
 ''')
     assert result.returncode != 0 and "unknown owner" in result.stderr
-    assert (lock / "retain.txt").read_text() == "unknown owner data"
+    assert (lock / "retain.txt").read_text(encoding="utf-8") == "unknown owner data"
 
 
 def test_interpreter_bytecode_does_not_break_or_enter_skill_installations(tmp_path):

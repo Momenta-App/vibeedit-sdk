@@ -34209,7 +34209,7 @@
     {
       "id": "vibeedit://text/caption-blend-difference",
       "name": "Blend Difference",
-      "description": "Auto-inverting text using mix-blend-mode: difference \u2014 flips between white and black per-pixel against the background",
+      "description": "Auto-inverting text using mix-blend-mode: difference — flips between white and black per-pixel against the background",
       "category": "text",
       "tags": [
         "text",
@@ -34512,7 +34512,7 @@
         "properties": {
           "text": {
             "type": "string",
-            "default": "BIG MOMENT \u2726"
+            "default": "BIG MOMENT ✦"
           },
           "foreground": {
             "type": "string",
@@ -34545,8 +34545,8 @@
         "note": "Rendered by the portable browser motion runtime and checked for deterministic frame, geometry, network, and decode behavior; no source-identity claim is made."
       },
       "examples": {
-        "python": "MotionComponent('title', Placement(0, 60), 'vibeedit://text/caption-emoji-pop', {'text': 'BIG MOMENT \u2726'})",
-        "javascript": "renderComponent('vibeedit://text/caption-emoji-pop', { text: 'BIG MOMENT \u2726' }, 12, { durationFrames: 60, width: 640, height: 360 })"
+        "python": "MotionComponent('title', Placement(0, 60), 'vibeedit://text/caption-emoji-pop', {'text': 'BIG MOMENT ✦'})",
+        "javascript": "renderComponent('vibeedit://text/caption-emoji-pop', { text: 'BIG MOMENT ✦' }, 12, { durationFrames: 60, width: 640, height: 360 })"
       },
       "prompts": [
         "Use Emoji Pop for this text and keep the motion frame-seekable and transparent.",
@@ -35717,7 +35717,7 @@
     {
       "id": "vibeedit://text/morph-text",
       "name": "Morph Text",
-      "description": "Gooey text morph \u2014 cycles through an editable word list using SVG threshold + GSAP-driven blur for a fluid, satisfying transition effect",
+      "description": "Gooey text morph — cycles through an editable word list using SVG threshold + GSAP-driven blur for a fluid, satisfying transition effect",
       "category": "text",
       "tags": [
         "text",
@@ -35912,7 +35912,7 @@
     {
       "id": "vibeedit://text/shimmer-sweep",
       "name": "Shimmer Sweep",
-      "description": "Animated light sweep across text or elements using a CSS gradient mask \u2014 ideal for AI accents and premium reveals",
+      "description": "Animated light sweep across text or elements using a CSS gradient mask — ideal for AI accents and premium reveals",
       "category": "text",
       "tags": [
         "text",
@@ -42274,6 +42274,162 @@
           "status": "passed",
           "command": "node --test test/skills.test.js && pytest python/tests/test_skills.py",
           "evidence": "1 files passed static integrity checks. Runtime/editorial qualification is separate."
+        }
+      ]
+    },
+    {
+      "id": "vibeedit://template/dialogue-quote",
+      "name": "Dialogue / Quote Edit",
+      "description": "Footage-first quote edit with centered inverted word captions, correctable native-time word layers and original audio. Clean render uses generated stand-ins, not recorded speech.",
+      "category": "template",
+      "tags": [
+        "template",
+        "executable",
+        "captions",
+        "word-corrections",
+        "negative"
+      ],
+      "version": "0.2.0",
+      "inputs": {
+        "media": [
+          "video",
+          "generated"
+        ],
+        "minimumClips": 0,
+        "wordClock": "Supplied normalized video microseconds; no word alignment inferred"
+      },
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "platforms": [
+        "macos",
+        "windows",
+        "linux"
+      ],
+      "backends": [
+        "ffmpeg",
+        "html",
+        "chromium"
+      ],
+      "preview": {
+        "status": "verified",
+        "uri": "previews/dialogue-quote.mp4",
+        "mediaType": "video/mp4",
+        "note": "Generated moving gradient and sine tone; demonstrates captions over picture, not transcription or speech quality."
+      },
+      "examples": {
+        "python": "create_example('dialogue-quote')",
+        "javascript": "createExample(\"dialogue-quote\")"
+      },
+      "prompts": [
+        "Create this caption template with supplied video and source-time word JSON; inspect the actual footage, preserve original audio and use review corrections."
+      ],
+      "requirements": {
+        "assets": [],
+        "models": []
+      },
+      "license": {
+        "owner": "Attention Engine Inc.",
+        "terms": "MIT",
+        "redistribution": "verified"
+      },
+      "provenance": {
+        "kind": "vibeedit-owned",
+        "source": "release-package workflow examples",
+        "implementation": "examples/dialogue-quote/composition.json",
+        "thirdParty": [
+          "FFmpeg",
+          "Playwright",
+          "Chromium",
+          "Poppins (OFL-1.1)"
+        ]
+      },
+      "validation": [
+        {
+          "id": "caption-render-and-correction",
+          "status": "passed",
+          "command": "cd python && uv run pytest tests/test_launch_templates.py -q",
+          "evidence": "Actual source-bound renders and immutable-baseline word correction; negative RGB inversion, stale clearing and collision rejection are checked."
+        }
+      ]
+    },
+    {
+      "id": "vibeedit://template/talking-head-captions",
+      "name": "Talking-head Captions",
+      "description": "Footage-first captions with bold kinetic word hits directly over the video, native-time corrections and original audio. Clean render uses generated stand-ins, not recorded speech.",
+      "category": "template",
+      "tags": [
+        "template",
+        "executable",
+        "captions",
+        "word-corrections",
+        "kinetic-text"
+      ],
+      "version": "0.2.0",
+      "inputs": {
+        "media": [
+          "video",
+          "generated"
+        ],
+        "minimumClips": 0,
+        "wordClock": "Supplied normalized video microseconds; no word alignment inferred"
+      },
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "platforms": [
+        "macos",
+        "windows",
+        "linux"
+      ],
+      "backends": [
+        "ffmpeg",
+        "html",
+        "chromium"
+      ],
+      "preview": {
+        "status": "verified",
+        "uri": "previews/talking-head-captions.mp4",
+        "mediaType": "video/mp4",
+        "note": "Generated moving gradient and sine tone; demonstrates captions over picture, not transcription or speech quality."
+      },
+      "examples": {
+        "python": "create_example('talking-head-captions')",
+        "javascript": "createExample(\"talking-head-captions\")"
+      },
+      "prompts": [
+        "Create this caption template with supplied video and source-time word JSON; inspect the actual footage, preserve original audio and use review corrections."
+      ],
+      "requirements": {
+        "assets": [],
+        "models": []
+      },
+      "license": {
+        "owner": "Attention Engine Inc.",
+        "terms": "MIT",
+        "redistribution": "verified"
+      },
+      "provenance": {
+        "kind": "vibeedit-owned",
+        "source": "release-package workflow examples",
+        "implementation": "examples/talking-head-captions/composition.json",
+        "thirdParty": [
+          "FFmpeg",
+          "Playwright",
+          "Chromium",
+          "Poppins (OFL-1.1)"
+        ]
+      },
+      "validation": [
+        {
+          "id": "caption-render-and-correction",
+          "status": "passed",
+          "command": "cd python && uv run pytest tests/test_launch_templates.py -q",
+          "evidence": "Actual source-bound renders and immutable-baseline word correction; negative RGB inversion, stale clearing and collision rejection are checked."
         }
       ]
     }

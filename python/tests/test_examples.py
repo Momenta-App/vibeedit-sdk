@@ -45,6 +45,6 @@ def test_sam_example_degrades_with_actionable_evidence(tmp_path: Path, monkeypat
     directory = tmp_path / "sam-segmentation"
     shutil.copytree(data_path("examples", "sam-segmentation"), directory)
     assert render_example(directory) is None
-    evidence = (directory / "segmentation-unavailable.json").read_text()
+    evidence = (directory / "segmentation-unavailable.json").read_text(encoding="utf-8")
     assert "vibeedit setup --sam" in evidence
-    assert __import__("json").loads((directory / "composition.json").read_text())["verification"]["hasAudio"] is False
+    assert __import__("json").loads((directory / "composition.json").read_text(encoding="utf-8"))["verification"]["hasAudio"] is False

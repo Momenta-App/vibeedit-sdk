@@ -26,7 +26,7 @@ def test_real_pi_executes_validated_artifact_and_render(tmp_path):
         pytest.skip("install pinned companion npm dependencies and FFmpeg for actual RPC boundary qualification")
     project = tmp_path / "real Pi project ü"
     project.mkdir()
-    (project / "project.vibeedit.json").write_text('{"schemaVersion":"vibeedit.project.v1","id":"pi-proof"}')
+    (project / "project.vibeedit.json").write_text('{"schemaVersion":"vibeedit.project.v1","id":"pi-proof"}', encoding="utf-8")
     composition = Composition("pi-proof", Canvas(320, 180, FrameRate(30)), 30, created_at="2026-10-20T00:00:00Z").to_spec()
     requests = []
     steps = [
@@ -71,7 +71,7 @@ s=Store(project);s.create('worker','pi-proof',spec);s.close()
 profile={"model":"fixture-model","providerRoute":"fixture","contextWindow":4096,"input":["text"],"inputUsdPerToken":"0","outputUsdPerToken":"0","expiresAtUnix":time.time()+60}
 run_worker(project,'pi-proof',runtime=runtime,profile=profile,upstream=upstream)
 s=Store(project);print(json.dumps(s.get('pi-proof')));s.close()
-''')
+''', encoding="utf-8")
     try:
         env = {**os.environ, "VIBEEDIT_CONFIG_HOME": str(tmp_path / "private-config")}
         result = subprocess.run([sys.executable, str(script), str(project), str(runtime), f'http://127.0.0.1:{server.server_port}/v1'], env=env, capture_output=True, text=True, timeout=50)
@@ -85,7 +85,7 @@ s=Store(project);print(json.dumps(s.get('pi-proof')));s.close()
             evidence.mkdir(parents=True, exist_ok=True)
             for name in ('composition.json', 'proof.mp4'):
                 shutil.copyfile(project/'workers/pi-proof/artifacts'/name, evidence/name)
-            (evidence/'receipt.json').write_text(json.dumps({"scope":"local nonbilling protocol fixture using actual Pi and SDK renderer; no real model or editorial quality claim","piVersion":"1.3.0","modelTurns":len(requests),"worker":record},indent=2)+'\n')
+            (evidence/'receipt.json').write_text(json.dumps({"scope":"local nonbilling protocol fixture using actual Pi and SDK renderer; no real model or editorial quality claim","piVersion":"1.3.0","modelTurns":len(requests),"worker":record},indent=2)+'\n', encoding="utf-8")
         for request in requests:
             assert set(t['function']['name'] for t in request['tools']) == {'artifact_write', 'render_ffmpeg', 'submit_result'}
             assert request['provider']['allow_fallbacks'] is False

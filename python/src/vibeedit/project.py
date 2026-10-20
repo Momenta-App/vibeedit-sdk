@@ -64,7 +64,7 @@ class Project:
         self.database.parent.mkdir(parents=True, exist_ok=True)
         if os.name != "nt":
             self.database.parent.chmod(0o700)
-        manifest = json.loads(self.manifest.read_text())
+        manifest = json.loads(self.manifest.read_text(encoding="utf-8"))
         if manifest.get("schemaVersion") != "vibeedit.project.v1":
             raise ValueError("Unsupported project schema")
         with self.connect() as db:
@@ -203,13 +203,13 @@ class Project:
         source = self.source(source_id)
         directory = within(self.root, f"reviews/faces-{archive_sha256}")
         if directory.exists():
-            receipt = json.loads((directory / "import-receipt.json").read_text())
+            receipt = json.loads((directory / "import-receipt.json").read_text(encoding="utf-8"))
             if receipt.get("jobId") != job_id or receipt.get("sourceSha256") != source["sha256"] or receipt.get("archiveSha256") != archive_sha256 or receipt.get("archiveByteLength") != archive_bytes or file_digest(directory / "native.faces.zip") != archive_sha256:
                 raise ValueError("Existing face import differs from original identities")
             page_groups(directory / "review-index.sqlite3", limit=1)
         else:
             import_face_package(archive, directory, job_id=job_id, source_sha256=source["sha256"], source_byte_length=source["byteLength"], archive_sha256=archive_sha256, archive_bytes=archive_bytes)
-        baseline = json.loads((directory / "review-baseline.json").read_text())
+        baseline = json.loads((directory / "review-baseline.json").read_text(encoding="utf-8"))
         baseline["index"] = (directory / "review-index.sqlite3").relative_to(self.root).as_posix()
         baseline["nativeManifest"] = (directory / "native/manifest.json").relative_to(self.root).as_posix()
         digest = hashlib.sha256(canonical(baseline).encode()).hexdigest()
@@ -254,7 +254,7 @@ class Project:
     def use_composition(self, relative, *, expected_revision):
         state = self.read()
         path = within(self.root, relative)
-        spec = json.loads(path.read_text())
+        spec = json.loads(path.read_text(encoding="utf-8"))
         validate_composition(spec)
         for source in spec.get("sources", []):
             uri = source["uri"]
@@ -264,7 +264,7 @@ class Project:
             if source.get("identity", {}).get("value") != actual or not any(item["sha256"] == actual for item in state["sources"]):
                 raise ValueError("Composition source must match registered exact bytes")
         old = within(self.root, state["composition"])
-        previous = json.loads(old.read_text())
+        previous = json.loads(old.read_text(encoding="utf-8"))
         if old.name.startswith("composition-") and len(old.stem) == 76 and old.stem[12:] != hashlib.sha256(canonical(previous).encode()).hexdigest():
             raise RevisionConflict("Restore the exact immutable reviewed composition before adopting a new revision")
         record = {"id": "composition-" + file_digest(old), "kind": "composition-history", "path": state["composition"], "sha256": file_digest(old), "byteLength": old.stat().st_size}
@@ -361,7 +361,7 @@ class Project:
             path = within(self.root, baseline["path"])
             if file_digest(path) != baseline["sha256"]:
                 raise ValueError("Baseline digest mismatch")
-            raw = json.loads(path.read_text())
+            raw = json.loads(path.read_text(encoding="utf-8"))
         coverage = {}
         if raw is not None:
             for key in ("words", "appearances", "faceAppearances", "groups"):
@@ -385,7 +385,7 @@ class Project:
         if review["mappingConflicts"]:
             raise RevisionConflict("Map prior baseline corrections explicitly before applying review")
         composition_file = within(self.root, state["composition"])
-        spec = json.loads(composition_file.read_text())
+        spec = json.loads(composition_file.read_text(encoding="utf-8"))
         if composition_file.name.startswith("composition-") and len(composition_file.stem) == 76 and composition_file.stem[12:] != hashlib.sha256(canonical(spec).encode()).hexdigest():
             raise RevisionConflict("The immutable reviewed composition was edited outside its revision. Save intentional edits as a new composition and use project use-composition before applying review again.")
         rate = Fraction(spec["canvas"]["frameRate"]["numerator"], spec["canvas"]["frameRate"]["denominator"])
@@ -497,7 +497,7 @@ def create_project(path, composition):
     if (root / "project.vibeedit.json").exists():
         return Project(root).snapshot()
     original = Path(composition).resolve()
-    spec = json.loads(original.read_text())
+    spec = json.loads(original.read_text(encoding="utf-8"))
     validate_composition(spec)
     if spec.get("sources"):
         raise ValueError("Import media after creating the project; source copies must be content bound")
@@ -574,7 +574,7 @@ def _command(args):
         elif args.project_command == "correct":
             if not args.command_file:
                 raise ValueError("--command-file is required")
-            result = project.correct(json.loads(Path(args.command_file).read_text()))
+            result = project.correct(json.loads(Path(args.command_file).read_text(encoding="utf-8")))
         elif args.project_command == "register-artifact":
             if not args.artifact or not args.category or args.expected_revision is None:
                 raise ValueError("--artifact, --category and --expected-revision are required")

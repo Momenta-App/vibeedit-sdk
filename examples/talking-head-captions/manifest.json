@@ -1,7 +1,7 @@
 {
   "id": "vibeedit://template/talking-head-captions",
   "name": "Talking-head Captions",
-  "description": "Caption a supplied talking-head clip using source-time words; generated layout stand-in demonstrates editable layers and review persistence.",
+  "description": "Footage-first captions with bold kinetic word hits directly over the video, native-time corrections and original audio. Clean render uses generated stand-ins, not recorded speech.",
   "families": [
     "captions",
     "talking-head",

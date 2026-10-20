@@ -22,7 +22,7 @@ SCHEMA = "vibeedit.acquisition.v1"
 
 
 def providers(query=""):
-    catalog = json.loads(data_path("catalog", "providers.json").read_text())
+    catalog = json.loads(data_path("catalog", "providers.json").read_text(encoding="utf-8"))
     words = query.lower().split()
     pages = [p for p in catalog["pages"] if all(w in canonical(p).lower() for w in words)]
     entries = [{**p, "searchUrl": p["searchUrl"].replace("{query}", urllib.parse.quote(query, safe=""))} for p in catalog["providers"]]
@@ -132,7 +132,7 @@ def finish(project, identity, media, rights, *, expected_revision, expected_sha2
         receipt = {"schemaVersion": SCHEMA, "operationId": identity, "page": json.loads(row["intent"]), "download": download, "startedAtUnix": row["created"]}
         receipt_path = within(project.root, f"acquisition/{identity}.json")
         if receipt_path.is_file():
-            if json.loads(receipt_path.read_text()) != receipt:
+            if json.loads(receipt_path.read_text(encoding="utf-8")) != receipt:
                 raise ValueError("immutable source receipt conflict")
         else:
             atomic_json(receipt_path, receipt)
@@ -193,8 +193,8 @@ def _command(args):
     elif args.acquire_command == "start":
         result = start(args.project, args.id, args.provider, args.page, args.title)
     elif args.acquire_command == "finish":
-        metadata = json.loads(Path(args.transport_metadata).read_text()) if args.transport_metadata else {}
-        result = finish(args.project, args.id, args.file, json.loads(Path(args.rights).read_text()), expected_revision=args.expected_revision, expected_sha256=args.sha256, final_url=metadata.get("finalUrl"), harness=args.harness)
+        metadata = json.loads(Path(args.transport_metadata).read_text(encoding="utf-8")) if args.transport_metadata else {}
+        result = finish(args.project, args.id, args.file, json.loads(Path(args.rights).read_text(encoding="utf-8")), expected_revision=args.expected_revision, expected_sha256=args.sha256, final_url=metadata.get("finalUrl"), harness=args.harness)
     else:
         result = status(args.project, args.id)
     print(json.dumps(result, ensure_ascii=False))

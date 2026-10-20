@@ -78,7 +78,7 @@ def _predictor(name, runtime, prompt):
         from mlx_vlm.models.sam3.generate import Sam3Predictor
         from mlx_vlm.models.sam3_1.processing_sam3_1 import Sam31Processor
         from transformers import CLIPTokenizer
-        config = json.loads((runtime / "artifacts/config.json").read_text())
+        config = json.loads((runtime / "artifacts/config.json").read_text(encoding="utf-8"))
         if config.get("model_type") not in {"sam3.1_video", "sam3_1"}:
             raise ValueError("Expected SAM3.1 model config; no substitution is allowed")
         model = load_model(runtime / "artifacts")
@@ -95,7 +95,7 @@ def _predictor(name, runtime, prompt):
         return predict
     import torch
     from vibeedit.sam_runner import _prompt_box
-    manifest = json.loads((runtime / "models/sam2.1-hiera-tiny/model.json").read_text())
+    manifest = json.loads((runtime / "models/sam2.1-hiera-tiny/model.json").read_text(encoding="utf-8"))
     sys.path.insert(0, manifest["source"])
     from sam2.build_sam import build_sam2
     from sam2.sam2_image_predictor import SAM2ImagePredictor
@@ -120,11 +120,11 @@ def run(name, runtime, source, output, prompt, selected, max_frames):
     import numpy as np
     from PIL import Image
     source_digest = _digest(source)
-    manifest = json.loads((runtime / "installed.json").read_text())
+    manifest = json.loads((runtime / "installed.json").read_text(encoding="utf-8"))
     device = probe(name)
     key = hashlib.sha256(json.dumps({"sourceSha256": source_digest, "byteLength": source.stat().st_size, "model": manifest["definitionSha256"], "runtime": device, "prompt": prompt, "frames": selected, "maxFrames": max_frames}, sort_keys=True, allow_nan=False).encode()).hexdigest()
     if output.is_file():
-        prior = json.loads(output.read_text())
+        prior = json.loads(output.read_text(encoding="utf-8"))
         if prior.get("cacheKey") != key:
             raise ValueError("Output belongs to a different source/model/runtime/prompt/frame selection; choose a new output")
         for frame in prior["frames"]:
@@ -188,9 +188,9 @@ def run(name, runtime, source, output, prompt, selected, max_frames):
         raise ValueError("Source changed during inference; no result index was published")
     result = {"schemaVersion": "vibeedit.masks.v1", "ok": True, "state": "needs-review", "cacheKey": key, "modelPack": name, "runnerVersion": manifest["runnerVersion"], "definitionSha256": manifest["definitionSha256"], "modelFiles": manifest["files"], "runtime": device, "source": {"sha256": source_digest, "byteLength": source.stat().st_size, "width": stream["width"], "height": stream["height"]}, "clock": {"timeBase": {"numerator": time_base.numerator, "denominator": time_base.denominator}, "originPts": origin, "videoStreamIndex": stream["index"], "nativeFrameCount": len(pts), "presentationPts": pts, "nativeFrameDurationPts": [int(f.get("duration", f.get("pkt_duration", 0))) or None for f in native]}, "prompt": prompt, "frameSelection": wanted, "geometry": {"coordinateSpace": "native-source-pixels", "crop": None, "resize": None}, "frames": records, "limitations": ["Independent per-frame candidates, no stable identity claim", "Not reviewed for cuts, occlusions, contacts or edge quality", "Unselected frames have no mask; never fill them with a later-frame mask"]}
     from jsonschema import Draft202012Validator
-    Draft202012Validator(json.loads((Path(__file__).parent / "mask-index.schema.json").read_text())).validate(result)
+    Draft202012Validator(json.loads((Path(__file__).parent / "mask-index.schema.json").read_text(encoding="utf-8"))).validate(result)
     temporary = output.with_suffix(output.suffix + ".tmp")
-    temporary.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
+    temporary.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     temporary.replace(output)
     return {"output": str(output), "frames": len(records), "candidates": sum(len(x["candidates"]) for x in records), "state": "needs-review"}
 

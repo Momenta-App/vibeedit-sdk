@@ -58,7 +58,7 @@ def test_setup_requires_an_explicit_capability(capsys):
 
 
 def test_revision_plan_explains_bounded_work(tmp_path: Path, capsys):
-    previous = json.loads((Path(__file__).parents[2] / "schema" / "fixtures" / "mixed.json").read_text())
+    previous = json.loads((Path(__file__).parents[2] / "schema" / "fixtures" / "mixed.json").read_text(encoding="utf-8"))
     previous["durationFrames"] = 30
     previous["timeline"]["tracks"][1]["items"][0]["placement"] = {"startFrame": 10, "durationFrames": 10}
     previous["verification"]["durationFrames"] = 30
@@ -66,8 +66,8 @@ def test_revision_plan_explains_bounded_work(tmp_path: Path, capsys):
     revised["timeline"]["tracks"][1]["items"][0]["props"]["text"] = "REVISED"
     previous_path = tmp_path / "previous.json"
     revised_path = tmp_path / "revised.json"
-    previous_path.write_text(json.dumps(previous))
-    revised_path.write_text(json.dumps(revised))
+    previous_path.write_text(json.dumps(previous), encoding="utf-8")
+    revised_path.write_text(json.dumps(revised), encoding="utf-8")
 
     assert main(["revision", "plan", str(previous_path), str(revised_path), "--json"]) == 0
     payload = json.loads(capsys.readouterr().out)

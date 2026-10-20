@@ -61,7 +61,7 @@ def read_config(path: Path | None = None, *, allow_unprotected_import: bool = Fa
         raise MyriographError("login_required")
     if not _WINDOWS and stat.S_IMODE(path.stat().st_mode) & 0o077:
         raise ValueError("Myriograph credential file must have owner-only permissions (chmod 600).")
-    value = json.loads(path.read_text())
+    value = json.loads(path.read_text(encoding="utf-8"))
     if isinstance(value, dict) and "apiKeyDpapi" in value:
         if not _WINDOWS or "apiKey" in value or value.get("credentialProtection") != "windows-user-dpapi.v1":
             raise ValueError("Protected Myriograph credential must be opened by its original Windows user.")
@@ -110,7 +110,7 @@ def _save_private(path: Path, value: dict) -> None:
     path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
     fd, name = tempfile.mkstemp(dir=path.parent)
     try:
-        with os.fdopen(fd, "w") as stream:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
             json.dump(value, stream, ensure_ascii=False, allow_nan=False, indent=2)
             stream.flush()
             os.fsync(stream.fileno())
@@ -380,9 +380,10 @@ def observe(api: Myriograph, project: Path, operation: str, action: str = "statu
         if not row["native_id"]:
             if action != "resume" or row["state"] != "admission_unknown" or row["service"] not in SERVICE_PATHS:
                 raise MyriographError("admission_unknown_reconcile_original" if row["state"] == "admission_unknown" else "admission_not_sent")
-            # Faces resolve the durable alias read-only: neither a lost queue
-            # ACK nor a response timeout authorizes another paid admission/send.
-            # Audited video/voice admission replays its exact original key/body.
+            # Faces first read and validate the original alias. Explicit resume
+            # may then continue only a server-proven unsent original admission;
+            # unknown physical queue sends stay fenced. Video/voice admission
+            # replays its exact original key/body.
             result = _recover_face_admission(api, row) if row["service"] == "faces" else api.call(
                 SERVICE_PATHS[row["service"]] + "/jobs", json.loads(row["request"]), key=row["idempotency_key"])
             native_id = result.get("jobId", result.get("id"))
@@ -409,12 +410,26 @@ def observe(api: Myriograph, project: Path, operation: str, action: str = "statu
 
 
 def _recover_face_admission(api: Myriograph, row: sqlite3.Row) -> dict:
+    path = SERVICE_PATHS["faces"] + "/operations/" + _safe_id(row["idempotency_key"])
     try:
-        result = api.call(SERVICE_PATHS["faces"] + "/operations/" + _safe_id(row["idempotency_key"]))
+        result = api.call(path)
     except MyriographError as error:
         if error.status == 404:
             raise MyriographError("original_face_operation_not_found", 404) from None
         raise
+    _validate_face_operation(row, result)
+    if result.get("resumeOriginalAllowed") is True and result.get("admissionState") in ("prepared", "funding_unknown", "funded_unsent"):
+        # Explicit resume may wake only this proven-unsent original intent.
+        # Status/watch never enter this path; indeterminate queue sends stay fenced.
+        continued = api.call(path + "/recover", {"expectedRequestIntentSha256": result["requestIntentSha256"]})
+        _validate_face_operation(row, continued)
+        if continued["jobId"] != result["jobId"]:
+            raise MyriographError("original_face_operation_binding")
+        return continued
+    return result
+
+
+def _validate_face_operation(row: sqlite3.Row, result: dict) -> None:
     original = json.loads(row["request"])
     source = original.get("source")
     intent = result.get("requestIntent")
@@ -432,7 +447,6 @@ def _recover_face_admission(api: Myriograph, row: sqlite3.Row) -> dict:
             or not isinstance(source, dict) or not isinstance(source.get("artifactSha256"), str)
             or result.get("sourceSha256") not in (None, source["artifactSha256"])):
         raise MyriographError("original_face_operation_binding")
-    return result
 
 
 def download(api: Myriograph, project: Path, operation: str, destination: Path, max_bytes: int = 128 * 1024 * 1024) -> dict:
@@ -475,7 +489,7 @@ def download(api: Myriograph, project: Path, operation: str, destination: Path, 
                 raise MyriographError("artifact_integrity")
             with _database(project) as db:
                 intent = json.loads(db.execute("SELECT intent FROM jobs WHERE operation=?", (operation,)).fetchone()[0])
-            value = _verify_face_archive(Path(temporary), descriptor["jobId"], intent["source"]["sha256"], max_bytes) if artifact.get("format") == "zip" else json.loads(Path(temporary).read_text())
+            value = _verify_face_archive(Path(temporary), descriptor["jobId"], intent["source"]["sha256"], max_bytes) if artifact.get("format") == "zip" else json.loads(Path(temporary).read_text(encoding="utf-8"))
             if kind in ("result", "baseline", "faces") and value.get("sourceSha256") != intent["source"]["sha256"]:
                 raise MyriographError("artifact_source_mismatch")
             os.replace(temporary, target)
@@ -583,7 +597,7 @@ def _account_command(args: argparse.Namespace) -> int:
 
 
 def _analyze_command(args: argparse.Namespace) -> int:
-    options = json.loads(args.options.read_text()) if args.options else {}
+    options = json.loads(args.options.read_text(encoding="utf-8")) if args.options else {}
     if not isinstance(options, dict):
         raise ValueError("options must be a JSON object.")
     return _print(submit(Myriograph(read_config(args.config)), args.project, args.service, args.media, options, args.max_retail_usd, args.operation,

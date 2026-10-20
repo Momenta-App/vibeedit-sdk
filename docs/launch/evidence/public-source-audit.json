@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-20T19:33:51.066431+00:00",
+  "recordedAt": "2026-10-20T19:59:37.067585+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "988a3e796afb8b5b985880d5b65354312e56e632",
-    "inventoryPaths": 440,
-    "existingFiles": 424,
-    "bytesRead": 18690689,
-    "sourceInventorySha256": "d9c9217cf41116aa6bbde3eeff55f754383fbe5f4a536e735b88ea1bd2a79072",
+    "gitHead": "98275016df8ced07b5645f97f6116302de7092b2",
+    "inventoryPaths": 195,
+    "existingFiles": 195,
+    "bytesRead": 5754566,
+    "sourceInventorySha256": "697bf250e1604b1a6efb7c696a2999da08810f1ef74d35b0868a53c44bac293c",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -32,6 +32,16 @@
       "high entropy nonhex strings"
     ],
     "findings": [
+      {
+        "path": "docs/launch/CATALOG.md",
+        "category": "local_personal_path",
+        "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
       {
         "path": "docs/launch/COMMERCIAL.md",
         "category": "local_personal_path",
@@ -99,6 +109,16 @@
         "count": 1,
         "matchHashes": [
           "fb8d4279f4da5f3fa1d608c29db9f9315b15801d9cc6134981cf4b9b06e28855"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/companion-catalog.json",
+        "category": "local_personal_path",
+        "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
         ],
         "classification": "raw operator record excluded; candidate is not asserted to be a credential",
         "disposition": "exclude_raw"
@@ -218,6 +238,16 @@
       },
       {
         "path": "docs/launch/evidence/python-source-current.junit.xml",
+        "category": "local_personal_path",
+        "count": 6,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/python-source-platform-fixes.junit.xml",
         "category": "local_personal_path",
         "count": 6,
         "matchHashes": [
@@ -973,6 +1003,20 @@
         "actualHashMatch": true,
         "declaredRedistribution": "verified",
         "declaredCommercialOutputAllowed": true
+      },
+      {
+        "path": "catalog/previews/dialogue-quote.mp4",
+        "sha256": "791e4f7db067c3839dca427ecb61a635a2e483e0d97f65182c6182da1857e7db",
+        "actualHashMatch": true,
+        "declaredRedistribution": "verified",
+        "declaredCommercialOutputAllowed": true
+      },
+      {
+        "path": "catalog/previews/talking-head-captions.mp4",
+        "sha256": "a9c3c8ef33d41b870db945c4241f1411250ebe2f01dc14ca40514f76841994be",
+        "actualHashMatch": true,
+        "declaredRedistribution": "verified",
+        "declaredCommercialOutputAllowed": true
       }
     ],
     "textPreviewHashes": [
@@ -1251,1877 +1295,372 @@
     "include": [
       {
         "path": ".github/workflows/vibeedit-package.yml",
-        "byteLength": 6869,
-        "sha256": "84a4b6624590153a2ef080670bc269dd6932eacdfd4da745262881c6374c8e7e",
-        "format": "text"
-      },
-      {
-        "path": ".npmignore",
-        "byteLength": 593,
-        "sha256": "e97e67ba55cd6ffe594b84b5a3aaca38c0495118403f9932001ee47e3a08ea02",
-        "format": "text"
-      },
-      {
-        "path": "CHANGELOG.md",
-        "byteLength": 6208,
-        "sha256": "e98037d5312acff83237f5698e50a3f8472b46b53bf5b0b9a6c60e7a19f0bb41",
-        "format": "text"
-      },
-      {
-        "path": "LICENSE.md",
-        "byteLength": 1307,
-        "sha256": "bf501fb3bbb6fefce664121871e93d43ce4b7b829d985c6b2d610bd57e28ef53",
-        "format": "text"
-      },
-      {
-        "path": "README.md",
-        "byteLength": 16255,
-        "sha256": "ddd6718b7bcf9dd0d85c7ecbac3cd140141ecc792c3d762ece1175caca5ac162",
-        "format": "text"
-      },
-      {
-        "path": "SBOM.spdx.json",
-        "byteLength": 33041,
-        "sha256": "d160a192c058dd4c4ebadf874330169a0cb7695a4418d3f405ce1172d5dabc25",
-        "format": "text"
-      },
-      {
-        "path": "THIRD_PARTY_NOTICES.md",
-        "byteLength": 4398,
-        "sha256": "26f7ba15dd1d62d67beab6d0f4a826aece026efcb63ccc8999f4db32809546a7",
-        "format": "text"
-      },
-      {
-        "path": "bin/vibeedit.js",
-        "byteLength": 16000,
-        "sha256": "c50061fe06b7e01e488be486e34337417c76423ad65079508eac9945fd0882ad",
+        "byteLength": 7334,
+        "sha256": "06839320531f8b01aabee80e0f8acd35c0317594bed97828aba4af0b53b8b45a",
         "format": "text"
       },
       {
         "path": "catalog/assets.json",
-        "byteLength": 44062,
-        "sha256": "465337b37e7059940a0d1a60bfbf772cfc1150d7a951b7c0833cef8561fe328a",
+        "byteLength": 45401,
+        "sha256": "7ad258ae311c14c546e415938daeee022431d91d6e9bbd488edbfa6510ebf262",
         "format": "text"
       },
       {
         "path": "catalog/catalog.json",
-        "byteLength": 1430701,
-        "sha256": "8ca3f046dc3afe7b353d3b9028b779da6b24f50763eca1033013d918b2f9a179",
-        "format": "text"
-      },
-      {
-        "path": "catalog/catalog.schema.json",
-        "byteLength": 6802,
-        "sha256": "595aa4df0cbf05fc41dbd7d16978eb408b1e1d0c227b3184321457527a426217",
-        "format": "text"
-      },
-      {
-        "path": "catalog/motion-components.json",
-        "byteLength": 52419,
-        "sha256": "0b1c8d39faa9dac84a835a9910561967dbfcae7685f8f9cd047dab7dd482e775",
+        "byteLength": 1435741,
+        "sha256": "4b410986a9acd0f781e56150ee4cc51b9a62d3ebae9b828cb90f4903ba996700",
         "format": "text"
       },
       {
         "path": "catalog/previews/dialogue-quote.mp4",
-        "byteLength": 57615,
-        "sha256": "128a7b2dd6faed93ab89ad30204a49ba71116441ab517a41846ceb4365b3bb25",
+        "byteLength": 75813,
+        "sha256": "791e4f7db067c3839dca427ecb61a635a2e483e0d97f65182c6182da1857e7db",
         "format": "binary"
+      },
+      {
+        "path": "catalog/previews/dialogue-quote.mp4.vibeedit.json",
+        "byteLength": 993,
+        "sha256": "2bdac54ace7bd4d384d3b063df2c21182f48846e7911dfa391d3a86625870bb3",
+        "format": "text"
       },
       {
         "path": "catalog/previews/talking-head-captions.mp4",
-        "byteLength": 59276,
-        "sha256": "5908925470c29abace5c4b6e1ea7dd6b467ff3ef739e9beaa876bf124a24c21c",
+        "byteLength": 80336,
+        "sha256": "a9c3c8ef33d41b870db945c4241f1411250ebe2f01dc14ca40514f76841994be",
         "format": "binary"
       },
       {
-        "path": "catalog/previews/text-effects/mogrt-3d-text.mp4",
-        "byteLength": 20656,
-        "sha256": "ce0987ce3a729812dc9d49a7ffe20744025a04387427342fa8be64ed51951117",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-apple-ladder.mp4",
-        "byteLength": 12118,
-        "sha256": "082ace774e5a13128cb3726458ed4319829285d3ae4769eebeccfb963841db43",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-apple-smooth.mp4",
-        "byteLength": 12614,
-        "sha256": "9e72b1c49634dead7348b186762419707a0c53122ec605cc78119273f4d93204",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-blur-in.mp4",
-        "byteLength": 10777,
-        "sha256": "20e8ea0ce6a4b60a286f0e781a30932e05d11cb25c4560e0d62b4f33c49d9b60",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-bottom-in.mp4",
-        "byteLength": 12834,
-        "sha256": "6d3433ef587d07d503c5e0387d306ca291b41763bdc1c307d74921da0ff6e370",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-clean-blue.mp4",
-        "byteLength": 16425,
-        "sha256": "690710ceb475001af9c74ab272f1b0c3049a4779227885d55b87e0cd169fe002",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-clean-gradient.mp4",
-        "byteLength": 18903,
-        "sha256": "0cacf68a9a785caba806ba5989cf3743d6d7c978b17f61f5f2c079a5b0a7dbd3",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-clean-style.mp4",
-        "byteLength": 18530,
-        "sha256": "18530f7e91709861528803e1c9b371ad348bea796d9654adfc9788ee9512e295",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-elegant.mp4",
-        "byteLength": 18988,
-        "sha256": "749f8b0d800fbdce8e894fbcf8758b2507dcbf4c90d81827782006d33d60481d",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-error-text.mp4",
-        "byteLength": 23655,
-        "sha256": "d67fc7cca978b36a5914700bc2ec8e5430fb11b840e760a22b65f0f5237340ae",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-esmerald.mp4",
-        "byteLength": 14580,
-        "sha256": "8793dc9ce93da0dcb5fe08c1f5c42cc36f8b64a1305b60cf93f68056b672d7ed",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-futurist.mp4",
-        "byteLength": 16179,
-        "sha256": "860e9fae668812464bf1b5e8341e6e2126feda09f0d443aa6f1b16e3b5ea7699",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-gold-text.mp4",
-        "byteLength": 18513,
-        "sha256": "1538846c2c0d37a31e4a2d7612410023af34090a6da14fcc543963c43d7f7815",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-left-in.mp4",
-        "byteLength": 13286,
-        "sha256": "e45ec657f392959a0e02af41d601518e2c601d026dc87c86211f46275c324bac",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-old-money.mp4",
-        "byteLength": 23146,
-        "sha256": "1b13fbb83389221eca70c442c0b8bb8c84083bae454d9c3844afabf9550380b1",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-opacity-in.mp4",
-        "byteLength": 12663,
-        "sha256": "856950a6dff7762901a4a318da20aca79cd9eea211c85dc778b9cda16d37b323",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-rebote.mp4",
-        "byteLength": 17151,
-        "sha256": "1f7cd8cd8fc28b9521dd6bd6465b03a3f13386aa9da85363fb59783e51983a01",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-right-in.mp4",
-        "byteLength": 12653,
-        "sha256": "c23c9f88fffe9efede0e8a36bf5bca99fa5ba50b3006afe27ca2ea62839b1185",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-smooth-bounce.mp4",
-        "byteLength": 20156,
-        "sha256": "983391f7b9e8880509d236c675f9604cec4e4f27b0ac67fc17634427b4a9077d",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-smooth-opacity.mp4",
-        "byteLength": 22821,
-        "sha256": "f986a94c2facfcaa595b76e16b51c526bb17ddaba769980b9c7815d59b848a6b",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-smooth-up.mp4",
-        "byteLength": 18846,
-        "sha256": "e53ec1adf35cd44724f120ec3576a7591fb330a3c8ad12c6fa4d52008de9dac0",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/previews/text-effects/mogrt-triple-elegant-text.mp4",
-        "byteLength": 15856,
-        "sha256": "0a6f6d5ee0ecce691fb2ee9fc16bd82f947fec3690fc44ca9031fc345a11d665",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/providers.json",
-        "byteLength": 4210,
-        "sha256": "4196f1b74f211a7ec5ecb3e90b0564b3054a4e796258dcdc61369e2445fa42bb",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/BebasNeue-Regular.ttf",
-        "byteLength": 61400,
-        "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/GreatVibes-Regular.ttf",
-        "byteLength": 457588,
-        "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/Montserrat-Variable.ttf",
-        "byteLength": 744936,
-        "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/OFL-abrilfatface.txt",
-        "byteLength": 4415,
-        "sha256": "aba8997e16b1e3888c6e855ba883c70d96bd4375bff8cb9c7ce0f097200f74b8",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/OFL-bebasneue.txt",
-        "byteLength": 4337,
-        "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/OFL-greatvibes.txt",
-        "byteLength": 4399,
-        "sha256": "61093a21f5e63dedf54222b3c09997e54c0fe43e3851d21386e02ddcbc246d49",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/OFL-montserrat.txt",
-        "byteLength": 4400,
-        "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/OFL-poppins.txt",
-        "byteLength": 4385,
-        "sha256": "6be04893d770899a015649c7aa3b582f871b272f8747a92b78b17c3e5c8b2573",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/Poppins-Black.ttf",
-        "byteLength": 153440,
-        "sha256": "d82aaaf98a9283f9a8edd24e51173337d8eaf09e25cd3d98831f8ec8461748a1",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/Poppins-BlackItalic.ttf",
-        "byteLength": 174116,
-        "sha256": "f4852ca89c29f69d800e14f097ed4d1f0a0cc454e9f77d73bfd6db1f71c287a0",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/Poppins-Bold.ttf",
-        "byteLength": 155996,
-        "sha256": "983676516167748b74de6f4771fb384c664fd913acb8b471122ecacf5da5ea6c",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/fonts.css",
-        "byteLength": 1431,
-        "sha256": "cc787461f02c168276d71fd28490d3f8ea518b769340f12da1259b351817a388",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/3D_TEXT.json",
-        "byteLength": 640,
-        "sha256": "481d02107441498c1b90edfeda719da2450f72affd170ed095f277acd0ea54c9",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/APPLE_STYLE_ANIMATION.json",
-        "byteLength": 1608,
-        "sha256": "66c2884769dd4ddbd15d9cd9ec1766e7f17e05f974c3b24dcad4188fc2f04af8",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/CLEAN_BLUE.json",
-        "byteLength": 3878,
-        "sha256": "8fb6d0e482a70b0c2418c540926d3675d7fc936e8e8f8fb72cd2bff83006f04e",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/CLEAN_STYLE.json",
-        "byteLength": 3340,
-        "sha256": "07e3fddb84f3d4e9f62558e9d2b603acb94c5475f677b27c72abbb4d281fabb3",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/Clean_gradient.json",
-        "byteLength": 1895,
-        "sha256": "4b4c80ff9004d5d7bb9e21cdde850d73cc2ed00b52cec1e4012b9d11df5512ae",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/FUTURIST.json",
-        "byteLength": 1039,
-        "sha256": "8e9f187bdbcbe7842a308b686423d2dd3ddb63e41e4b857087a1292e02b8fe27",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/GOLD_TEXT.json",
-        "byteLength": 700,
-        "sha256": "a738403a9c78e7af74b42d078bf4df967f266bd6563902abb4f87ac7ec3b4f02",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/OLD_MONEY.json",
-        "byteLength": 1386,
-        "sha256": "a8a2db170e4b726c2f10212747d3c6d7e19031bd61d02c05b812a309b023ad5c",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/RAINBOW_CLEAN_TEXT.json",
-        "byteLength": 1916,
-        "sha256": "630ecba60e5c46aadd99b30f77986cd361434d7c2598dc2d939512f52eedb25b",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/RAINBOW_TEXT.json",
-        "byteLength": 1568,
-        "sha256": "172fee4f836a8124fc3fddeaa572703ff97c3f7b07fe1c758ee7848d0c1856d6",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/TEXTO_DE_ORO.json",
-        "byteLength": 748,
-        "sha256": "e382dea01d2600535cadafe64782d58a3e2ff823568ad298b2ef0afd5991bb85",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/apple_LADDER.json",
-        "byteLength": 1232,
-        "sha256": "fe0b319f78880d323ad86d5a5d86d04b36ac5e50ea09e91a05765f0285fe22a1",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/apple_MIDDLE.json",
-        "byteLength": 1240,
-        "sha256": "4d7ec0de84c6046169fb892b95643bc357f5c30a91dbb1cb0e55067902881887",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/apple_WORD.json",
-        "byteLength": 1325,
-        "sha256": "6631c3af156471dab8b1eace24e1683bc33a9d7c20cc911bb18ffd9145f85422",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/configs/apple_smooth.json",
-        "byteLength": 1238,
-        "sha256": "821ddaa503771cfdc1fb7d665becf46c7001ae03c2c82a82a4fd87f384b53cf4",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/BebasNeue-Regular.ttf",
-        "byteLength": 61400,
-        "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/GreatVibes-Regular.ttf",
-        "byteLength": 457588,
-        "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/Montserrat-Variable.ttf",
-        "byteLength": 744936,
-        "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/Poppins-Black.ttf",
-        "byteLength": 153440,
-        "sha256": "d82aaaf98a9283f9a8edd24e51173337d8eaf09e25cd3d98831f8ec8461748a1",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/Poppins-BlackItalic.ttf",
-        "byteLength": 174116,
-        "sha256": "f4852ca89c29f69d800e14f097ed4d1f0a0cc454e9f77d73bfd6db1f71c287a0",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/BebasNeue-Regular.ttf",
-        "byteLength": 61400,
-        "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/GreatVibes-Regular.ttf",
-        "byteLength": 457588,
-        "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/Montserrat-Variable.ttf",
-        "byteLength": 744936,
-        "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/Poppins-Black.ttf",
-        "byteLength": 153440,
-        "sha256": "d82aaaf98a9283f9a8edd24e51173337d8eaf09e25cd3d98831f8ec8461748a1",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/Poppins-BlackItalic.ttf",
-        "byteLength": 174116,
-        "sha256": "f4852ca89c29f69d800e14f097ed4d1f0a0cc454e9f77d73bfd6db1f71c287a0",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/glow-composition.css",
-        "byteLength": 2877,
-        "sha256": "eb578e16141a19aa18e73073a4a441620e745a2bdb564471fab74e3d90ad7cfe",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/analog-glitch/components/analog-runtime.js",
-        "byteLength": 23078,
-        "sha256": "dde7bc4df2cd6e7cb1a391ba1873ff73c5bd0e95dccb0e17c7b971d5c855224f",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/components/apple-clean.css",
-        "byteLength": 10761,
-        "sha256": "64aa8ab66108d4226b5c04e6f7608f7a0bd4be2e1dcbd27f05616861b0249050",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/outputs/APPLE_STYLE_ANIMATION.html",
-        "byteLength": 2390,
-        "sha256": "de97e7672730bd29873a052b26ea38c9f2b4d338a6a79470c6a56fd685f3e55e",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/outputs/CLEAN_BLUE.html",
-        "byteLength": 4638,
-        "sha256": "77264d26ef53ad6b2e745dbcc18574c7794384c8adbadf752d2cb1919b37dd26",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/outputs/CLEAN_STYLE.html",
-        "byteLength": 4159,
-        "sha256": "cc3f4a8c13aa75560171a3aaf83cb73e5ac2d6c6f166131335a9a7121562524b",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/outputs/Clean_gradient.html",
-        "byteLength": 2665,
-        "sha256": "a9fa8c589047c7e0d159b6cd14bad4946cecc6ee316bf318590cc7e7e42193c0",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/outputs/apple_LADDER.html",
-        "byteLength": 1999,
-        "sha256": "f22c1edee5c379d4756bb8014bd75c2f4ebe5eca7ce4dbe11af81d5e559e0b16",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/outputs/apple_MIDDLE.html",
-        "byteLength": 2007,
-        "sha256": "d34083aff2010dc32e78f259092faf3a22eda2a102d44841cdbc34ca374d8f76",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/outputs/apple_WORD.html",
-        "byteLength": 2088,
-        "sha256": "a1219bfdfe3a517ea75f1d2a831dc8504b17301d606a99d872e9829bf4da4a32",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/apple-clean/outputs/apple_smooth.html",
-        "byteLength": 2004,
-        "sha256": "8fbd4b876d4581a217684ff85b1e29cff5b56912ef7fc55c4699e4d694ca8a91",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/dimensional-metal/assets/fonts/BebasNeue-Regular.ttf",
-        "byteLength": 61400,
-        "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/dimensional-metal/assets/fonts/GreatVibes-Regular.ttf",
-        "byteLength": 457588,
-        "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/dimensional-metal/assets/fonts/Montserrat-Variable.ttf",
-        "byteLength": 744936,
-        "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
-        "format": "binary"
-      },
-      {
-        "path": "catalog/text-runtime/families/dimensional-metal/dimensional-metal.css",
-        "byteLength": 9241,
-        "sha256": "fd4f7383829836ced9b4f9e7148fabe5633eeb69db5a2b5b8f0ece1692aa68c2",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/elegant-misc/components/elegant-misc.js",
-        "byteLength": 21406,
-        "sha256": "b86f392fadf6ce71927d408acd43b7fa988602e5e080909740fae52f783dfbec",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/rainbow-trippy/rainbow-trippy.css",
-        "byteLength": 717,
-        "sha256": "4ded76e8754e8face433786da9fba664db2c05621f9f247c4a3128ebf78463e8",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/families/simple-motion/components/simple-motion.js",
-        "byteLength": 46651,
-        "sha256": "2e65bd4f6dc88383857dce3f499693ce872066dfef3e668a56132aa39932b534",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/font-provenance.json",
-        "byteLength": 8611,
-        "sha256": "08b9eb2bb138183a3467765548e04c3cac1c6af18515d0eeea01ff2c2bdea889",
-        "format": "text"
-      },
-      {
-        "path": "catalog/text-runtime/manifest.json",
-        "byteLength": 27268,
-        "sha256": "21e4bfec06252d0bdabde39e6164529d5e06840b92e685384d5b94ea9e8b46da",
-        "format": "text"
-      },
-      {
-        "path": "companion/README.md",
-        "byteLength": 2902,
-        "sha256": "02959177dde9f86bffad5c86c19ee43789f8849b10f575eabfedf5d48e1bc826",
-        "format": "text"
-      },
-      {
-        "path": "companion/extensions/goals.ts",
-        "byteLength": 2247,
-        "sha256": "dafffeeab467d180b7e85e56dfd0b21c1d6eb4f6a94c715d2dfea242e704b960",
-        "format": "text"
-      },
-      {
-        "path": "companion/extensions/worker.ts",
-        "byteLength": 4435,
-        "sha256": "b770d749345082c13e0af74491d3f719ca62f60d01dd28abccbc9e590c0f0460",
-        "format": "text"
-      },
-      {
-        "path": "companion/package-lock.json",
-        "byteLength": 56577,
-        "sha256": "fd063ebc938036f2edb1e1a193ce5e4c660ff8faf946e56bad37c2959f4f4f5d",
-        "format": "text"
-      },
-      {
-        "path": "companion/package.json",
-        "byteLength": 744,
-        "sha256": "1f99ddbf7c29fe42962a81204c07a0f83a98b196d8a5e36b87831b9abf2681a5",
-        "format": "text"
-      },
-      {
-        "path": "companion/profiles.json",
-        "byteLength": 1900,
-        "sha256": "53ae9461fec02a4dc4f118f3058086316d2b8cfb0816a9275fe07112227b9bf7",
-        "format": "text"
-      },
-      {
-        "path": "docs/ARCHITECTURE.md",
-        "byteLength": 11031,
-        "sha256": "39e4a07bcd45ef0e89b8664b656b7d2a4bb6c791669e94162324d4ddb3000a88",
-        "format": "text"
-      },
-      {
-        "path": "docs/GAPS.md",
-        "byteLength": 4923,
-        "sha256": "e2d3f9e5e4e6be074d397a90ab39ff821bf6cd7402cac5c259f4bb509de3611d",
+        "path": "catalog/previews/talking-head-captions.mp4.vibeedit.json",
+        "byteLength": 1007,
+        "sha256": "ed9870f2cc49b93a9e56c2cbecfdd064dd2df3331bfe37133c5f8b73af1ffd67",
         "format": "text"
       },
       {
         "path": "docs/LAUNCH_STATUS.md",
-        "byteLength": 3179,
-        "sha256": "8d2bc110567387038b887bf57f40ff8649c26de2f5c78fdcc0cd9fcbef1cbeb8",
+        "byteLength": 3821,
+        "sha256": "8a42ae656236323b03fa028572c8fa2100474637e57213d6338943a06840c9d9",
         "format": "text"
       },
       {
-        "path": "docs/PROJECTS.md",
-        "byteLength": 5903,
-        "sha256": "3d633c240297a8bf996dd6b1d66c01b0df500f155c6a23d28018bee7747c66dd",
-        "format": "text"
-      },
-      {
-        "path": "docs/RELEASE_READINESS.md",
-        "byteLength": 23265,
-        "sha256": "1542f147d84acda5c991c7ad3ea6d69f20ee598b445074e511ad0ba4fe748100",
-        "format": "text"
-      },
-      {
-        "path": "docs/SKILLS.md",
-        "byteLength": 2118,
-        "sha256": "41d39e802a9318aa043fb1ccbc313341b0d3a5beb93ec8b606c76aead1da700a",
-        "format": "text"
-      },
-      {
-        "path": "docs/TEXT_EFFECT_CONFORMANCE.md",
-        "byteLength": 6801,
-        "sha256": "68af706b72eb58f7fe94639b93558bd4ee1838967a5dba18dfef6b413e67749e",
-        "format": "text"
-      },
-      {
-        "path": "docs/evidence/text-effects/contact-sheet-early.jpg",
-        "byteLength": 785624,
-        "sha256": "8716490b973f577d32cd0b542ddcd3445e1b4773368a99b4e89d446bc04cac5e",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/contact-sheet-late.jpg",
-        "byteLength": 848025,
-        "sha256": "cfb192902ef3a1d15dce2cc4620f78f01c23949dea222907f4de981fe395632d",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/contact-sheet-mid.jpg",
-        "byteLength": 841809,
-        "sha256": "17177ec99bf68f77d7fed6fe3b63bd7d61a6c803c632850f08a4da2a6e0b4e7d",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/contact-sheet.jpg",
-        "byteLength": 845895,
-        "sha256": "28f3a682f96095ce748c526a314b64c141c4e59f102e29d721befe8d4063e477",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/pilot-conformance.json",
-        "byteLength": 3629,
-        "sha256": "e27972b5e473a0a27d57cf84fef08037c48103b7028b9d7cba0f3130c409882b",
-        "format": "text"
-      },
-      {
-        "path": "docs/evidence/text-effects/pilot-contact-sheet-early.jpg",
-        "byteLength": 35077,
-        "sha256": "c0cd64d7732a8ceff85411f47b418a5b7a7c0bf639a15777d9563c94be75f3f0",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/pilot-contact-sheet-late.jpg",
-        "byteLength": 35575,
-        "sha256": "13c30ebfd6a15260da7c295e030b15162645622fe9d3b66ea339b49570bb79b1",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/pilot-contact-sheet-mid.jpg",
-        "byteLength": 35575,
-        "sha256": "13c30ebfd6a15260da7c295e030b15162645622fe9d3b66ea339b49570bb79b1",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/pilot-contact-sheet.jpg",
-        "byteLength": 35575,
-        "sha256": "13c30ebfd6a15260da7c295e030b15162645622fe9d3b66ea339b49570bb79b1",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/pilot-review-reel.mp4",
-        "byteLength": 14618,
-        "sha256": "6c4e963e8966887d263bad4bc20d7c1f431c12d2f946c01604443c9995303acf",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/review-reel.mp4",
-        "byteLength": 1194743,
-        "sha256": "0399d413d98efa9ce4a970cccb2ad0652ff5356c771eb74f99c6fd0cf1f5c078",
-        "format": "binary"
-      },
-      {
-        "path": "docs/evidence/text-effects/text-effect-conformance.json",
-        "byteLength": 84896,
-        "sha256": "1e8dbb3809c43069e0984ed5426c14d015cdc8b6a15355139a8f4943020ccff7",
-        "format": "text"
-      },
-      {
-        "path": "docs/launch/PUBLIC-LEDGER.json",
-        "byteLength": 29223,
-        "sha256": "c85e5ee2eef5cee6bdcba9d31c47c5140630e64b622ce10ff7070b2e6442ef0c",
-        "format": "text"
-      },
-      {
-        "path": "examples/caption-rail/manifest.json",
-        "byteLength": 355,
-        "sha256": "431bbd667ab41a721d741f9129d77701356bbfcf17032be3bfe0ef4afa3e29b8",
-        "format": "text"
-      },
-      {
-        "path": "examples/dialogue-quote/EDITING.md",
-        "byteLength": 1939,
-        "sha256": "23da415bff80063ae008284743d35da8d05adf417e07961d5ee8f69aa30459bc",
+        "path": "docs/RELEASE.md",
+        "byteLength": 4454,
+        "sha256": "87509efbfdba805de48d9a5ddb7f2e8365e07c8a203ab09650aee3e2e9bed14f",
         "format": "text"
       },
       {
         "path": "examples/dialogue-quote/composition.json",
-        "byteLength": 1773,
-        "sha256": "5146e3a163cb0926b7373774e9bf3ddcc84f5734e6c3091abc58a344c4ce66ec",
+        "byteLength": 2122,
+        "sha256": "b81f03662978e7e1be8acfe7eb1d8f4412c67dfc1fbd21ca3854599d90416bfc",
         "format": "text"
       },
       {
         "path": "examples/dialogue-quote/manifest.json",
-        "byteLength": 600,
-        "sha256": "0e236871a7f99df3176ab757452deaa91b1e4a82ac1b94a9fb3b0a5c09b8d7e3",
-        "format": "text"
-      },
-      {
-        "path": "examples/dialogue-quote/render.py",
-        "byteLength": 621,
-        "sha256": "071391ac44a1d75160fe864f617bfef5e0239bad2eaec5d769e5fabe0f71733b",
-        "format": "text"
-      },
-      {
-        "path": "examples/dialogue-quote/words.json",
-        "byteLength": 519,
-        "sha256": "37b95c09dc8fa7e8e602b54a75203a2da80bccec7ec822031f4d6eecac884929",
-        "format": "text"
-      },
-      {
-        "path": "examples/mask-subject-effect/manifest.json",
-        "byteLength": 493,
-        "sha256": "900d911c68323c54df06e72f91695a2c15b374450ccb5ecf2b415c84e03bde38",
-        "format": "text"
-      },
-      {
-        "path": "examples/sam-segmentation/EDITING.md",
-        "byteLength": 2030,
-        "sha256": "db1182bd0401bbda7380374c949e0a4a45d5e085735d8219d13944bd1461d58e",
-        "format": "text"
-      },
-      {
-        "path": "examples/sam-segmentation/manifest.json",
-        "byteLength": 598,
-        "sha256": "c7b6981bbd3b4d84f9b06155eb15996e340c507e66f922084fa9d7c17907eec8",
-        "format": "text"
-      },
-      {
-        "path": "examples/sam-segmentation/render.py",
-        "byteLength": 296,
-        "sha256": "5ad175d3b75fd9d7754d9b611ca800340c865d0ad268e0a2bce4078695d2793f",
-        "format": "text"
-      },
-      {
-        "path": "examples/talking-head-captions/EDITING.md",
-        "byteLength": 1939,
-        "sha256": "23da415bff80063ae008284743d35da8d05adf417e07961d5ee8f69aa30459bc",
+        "byteLength": 623,
+        "sha256": "761572d206406bf34db5d0e0bed385e2500dda344707d68d29d4ebf9575f76e7",
         "format": "text"
       },
       {
         "path": "examples/talking-head-captions/composition.json",
-        "byteLength": 1772,
-        "sha256": "e520d56163b3318c66ee05b628f7db9e49eb74d9a187b6357f5becb436952be9",
+        "byteLength": 2109,
+        "sha256": "6bc7233abf5e633e01d13ed2e7858cf50696d44209896a621ec19f4ad4de496b",
         "format": "text"
       },
       {
         "path": "examples/talking-head-captions/manifest.json",
-        "byteLength": 594,
-        "sha256": "c359b3c84671cd67d63b0a67b61ed4b30a98042e17627c25562b4f9f36d6c46b",
-        "format": "text"
-      },
-      {
-        "path": "examples/talking-head-captions/render.py",
-        "byteLength": 621,
-        "sha256": "071391ac44a1d75160fe864f617bfef5e0239bad2eaec5d769e5fabe0f71733b",
-        "format": "text"
-      },
-      {
-        "path": "examples/talking-head-captions/words.json",
-        "byteLength": 723,
-        "sha256": "2252384f072c685f072477bbad3e7005ecb250baa9a4850dbecee6c7df6feb9e",
-        "format": "text"
-      },
-      {
-        "path": "index.d.ts",
-        "byteLength": 9156,
-        "sha256": "06b9ae1250bed96f8c000bf9b8ad4b114150a174c8c9b769e98ec2fc0b3a3b68",
-        "format": "text"
-      },
-      {
-        "path": "package-lock.json",
-        "byteLength": 5219,
-        "sha256": "3c912fad7355c42c184cc83e3d97946e04a3bdc0eb5842fb849cd26082f203d8",
-        "format": "text"
-      },
-      {
-        "path": "package.json",
-        "byteLength": 3296,
-        "sha256": "816275d54cb79505ada9b7ba66bb55ea2dd10cdf29d43ef46a39e2bed79de433",
-        "format": "text"
-      },
-      {
-        "path": "pyproject.toml",
-        "byteLength": 4047,
-        "sha256": "786ca0e2fec483c511401cfa578fe5ac110ebe0c3a6d217c2b34d2a9eb703238",
+        "byteLength": 633,
+        "sha256": "0a730e9d10a6d5b4a8e5ea86ba91abbe368b8648f6bd0db0425bfc147ab2f70a",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/acquisition.py",
-        "byteLength": 12391,
-        "sha256": "f0d63d3197b8c8abe01c2a3a48deb3aad6212dac6de791f68f6bcbb2f98a9329",
+        "byteLength": 12455,
+        "sha256": "8f0db7902822ef967ce55110e8404a2d1e307e2887726a565117083c5942bd69",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/analysis.py",
-        "byteLength": 5135,
-        "sha256": "c4e871fdca960f835a7d4b535719f018b63c2ce2abc732e1f8cc68bcbd4eca2a",
+        "path": "python/src/vibeedit/browser_media.py",
+        "byteLength": 6842,
+        "sha256": "f94ebdc252ccb3a950ee6175e6e4d6e3b3fcc0d3ff4305c1a01f911d54b118bc",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/cache.py",
-        "byteLength": 2834,
-        "sha256": "bfc1f218b542c6803e25efc05b7fab12867ec3bb3af6983078e1c8e95dfbea15",
+        "path": "python/src/vibeedit/browser_render.py",
+        "byteLength": 57109,
+        "sha256": "4fa745fda4ec4fd8012fa1be9b8dfdce2e32db6d15c67f161c84a9081e98aaa2",
         "format": "text"
       },
       {
-        "path": "python/src/vibeedit/capabilities.py",
-        "byteLength": 6469,
-        "sha256": "5a3e4d5308ffe1bf4577c452f947d42e5f538ef2db55a674ea38872215e9d020",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/cli.py",
-        "byteLength": 21837,
-        "sha256": "9117b23c9d8074685375305a71040bd991d94d1d69f55df66a7b42c51dffd079",
+        "path": "python/src/vibeedit/browser_setup.py",
+        "byteLength": 7832,
+        "sha256": "270dff27ea16e749cf43afe187b98376b325c62c33087a2e8f4a7cf0d9002458",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/examples.py",
-        "byteLength": 21222,
-        "sha256": "1882361b4ae1cff75157543091b23604412c403414b96c983b49fa1a1d7824d7",
+        "byteLength": 23303,
+        "sha256": "f32f8b92b36386f30ee54c4c4f30e53f673317078bdda9cb0c7a67c4bf4a2081",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/face_review.py",
-        "byteLength": 36647,
-        "sha256": "3c2cac6f82255399292d5304a9db4da786349c36ef9876ab80f8112b01091ace",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/ffmpeg.py",
-        "byteLength": 31632,
-        "sha256": "194374877742b39babede8c37547c4e86d1aeea0eb701de6355fb92719379b4b",
+        "byteLength": 36683,
+        "sha256": "4d2f1004bf2ffa783e06c533023746a7c2c11bf3bcea35eab59c0d9108eb2db9",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/goals.py",
-        "byteLength": 36812,
-        "sha256": "f621e599c086870a61b268aa417b6f0bc3a771a524e60cd525e4d59667a4cccd",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/mcp.py",
-        "byteLength": 10754,
-        "sha256": "786120193dd3f439f1ffe1af64fb431a6080f69acb294375257865dc2d0330be",
+        "byteLength": 36844,
+        "sha256": "e0c746a75a52b659a9fc7868aee2e048cd304047f6695292a8f7a2ce4dc10e5a",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/model_masks.py",
-        "byteLength": 18585,
-        "sha256": "9472e339226efba5462b75ced3f390610de86fe0fdd83113c1f66e13f2fda7b2",
+        "byteLength": 18635,
+        "sha256": "f7dcd1df3bbf211704ef9f8e377b7b95d29715fc3fb7acfe347ed019eedce243",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/model_packs.py",
-        "byteLength": 22682,
-        "sha256": "2a641d7d541fa23ff541624566946cd2746ce49f51e5ecc4e643893298f8bdff",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/model_runners/__init__.py",
-        "byteLength": 0,
-        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/model_runners/mask-index.schema.json",
-        "byteLength": 5506,
-        "sha256": "787ae15e44af4dd302b819447da060abd020606a070b41cad6889398d33aff52",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/model_runners/pins.json",
-        "byteLength": 2876,
-        "sha256": "afee9c2d54d49e76ab44d5312ed57a6b07f7fbe972e695c23cb68281831ec477",
+        "byteLength": 22764,
+        "sha256": "93812981db603bb98218c8671b17656a1cd38fb06ee0179b2482d9b4f106b283",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/model_runners/segment.py",
-        "byteLength": 13744,
-        "sha256": "dc2d1550d5ceace012941f662a6bc8fc01d7e3891bf4d02cb72cd2e6c86531ff",
+        "byteLength": 13842,
+        "sha256": "50faea21f83b5a84c4f689ebab8ceff8e9c482aff4b883fee88ecf3f3dbe3add",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/model_runners/transnet.py",
-        "byteLength": 14393,
-        "sha256": "268f559fd3f7ee390cf3585fbd2f68669494809b7a89eb7065b68dd2e0fb1913",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/motion.py",
-        "byteLength": 47205,
-        "sha256": "1a80d99cf1b0ff447c03a98a77a3b29a5653dc231cc29d5180d18d0f9d15c9ee",
+        "byteLength": 14425,
+        "sha256": "4d4e4868b8186469fc7b7cc054b72430df935e16468f68c9b607dc75ae679be2",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/myriograph.py",
-        "byteLength": 37571,
-        "sha256": "36cfdf8828980a5822c5a27d5c2deaa9fa9bbecf1b67c89f171881ece7ec331a",
+        "byteLength": 38419,
+        "sha256": "92b91821d45dac6224187c7b4db66ff826c68fb9709bed062ef5838cdf3d2075",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/portable.py",
-        "byteLength": 12900,
-        "sha256": "fbb05cf8b3d1363d3f003042ae7d5a12d1999f88eb14e038fc3b728cf0e3235a",
+        "byteLength": 12964,
+        "sha256": "e00f5daf4b386263eb79f8a7c796452ccad1f01b709d8b4fce31687a5c331416",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/project.py",
-        "byteLength": 42377,
-        "sha256": "bdc7fb1eb0489c1cf9355da6f12cedb4488b26876df79d6db485af405dc77b0b",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/render.py",
-        "byteLength": 22460,
-        "sha256": "b8aaf02a304c5651ae2074ca872f0b9e31fbc82e2c2b20c4d92ed10aa2bdd8ec",
+        "byteLength": 42521,
+        "sha256": "e46e3028bb3d82671aaf43046b872794f4629ca56e07de2e61222fed7fc42e9a",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/review.py",
-        "byteLength": 26473,
-        "sha256": "210d51b36eeb4b9beb9edb44eba03b90ba0f95a8d984cb385384a72fcad68f9b",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/revision.py",
-        "byteLength": 26884,
-        "sha256": "e7ad916a4c915742b9b310e3f3325a3de9b6029bda5435620fc708b372b05037",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/skills.py",
-        "byteLength": 15184,
-        "sha256": "bbf70eda4e5d9eb799753bc5e6947d19c4b461f7d3f55557ad54fd1ed73d405b",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/spec.py",
-        "byteLength": 17141,
-        "sha256": "bdaa40760cd8db66a27e8ee8d163a496dd89f9a467891d1874a3034de83f2ac3",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/version.py",
-        "byteLength": 20,
-        "sha256": "e192bec5aa644daedd2c0d58446ee4579fa5d2ebf7ce1abcc21852357db23a3e",
-        "format": "text"
-      },
-      {
-        "path": "python/src/vibeedit/vision.py",
-        "byteLength": 22974,
-        "sha256": "c31add443dc020455bf23005e8088f99f573bf9690bafd6d3130249b4473079c",
+        "byteLength": 26521,
+        "sha256": "4a1f967b9f814bd53f9b0990a1f5798bb13187fd1f2d7203994808113a5c8f74",
         "format": "text"
       },
       {
         "path": "python/src/vibeedit/worker.py",
-        "byteLength": 97145,
-        "sha256": "e8027a93dc0809d09c68cbed3b0ab336d68e3ffd44c479b37eb9e172ff4f5d2c",
+        "byteLength": 97392,
+        "sha256": "a1b4634d58bd01120333de212b184697863e46b58b3103617ffd73439588c428",
         "format": "text"
       },
       {
         "path": "python/tests/test_acquisition.py",
-        "byteLength": 5805,
-        "sha256": "ed25c7487951bd67187a191ea50259f8779d511cfd9f37e6514edafef74feea4",
+        "byteLength": 5821,
+        "sha256": "083c53a5fba7f6093a3d982e16ba2132876bf56fe2f7b28ad2f8691b3bfec916",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_assets.py",
+        "byteLength": 1449,
+        "sha256": "96260e87778e0d9cf9e8449211609e415ecceda9e3c6cd578f2e9fa3de03f0da",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_browser_package.py",
+        "byteLength": 1049,
+        "sha256": "1e9632e0a07ab1e8a482ef5ecc6700d05b190c6ab9097c7ae56f50460926c967",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_browser_render.py",
+        "byteLength": 12697,
+        "sha256": "a6022d933f26b16aea1b8cc1135865deaa0023de2214a785fd6be9923532e981",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_catalog_examples.py",
+        "byteLength": 541,
+        "sha256": "979a9966e4899e58a89cd242b78939e9c3d7e23c5bd34e332e05f4b14a7aa490",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_catalog_site.py",
+        "byteLength": 1372,
+        "sha256": "2d0e2930497ef7d4f2f32b5ec380b3cb49086c6661df5edf4663ce01eb69b697",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_cli.py",
+        "byteLength": 4494,
+        "sha256": "0da6d52815a2a617983cdfe01da7c671d354615ef0665e4cb1524fb6e83cd3c8",
         "format": "text"
       },
       {
         "path": "python/tests/test_companion.py",
-        "byteLength": 25602,
-        "sha256": "c6888ae929ba8863fbaaca220841ba0cd75c73a23dbdf23484059b81d6258788",
+        "byteLength": 25794,
+        "sha256": "01234227ef3b35aaeb1ec7ebab0321b27cd964fa038f80b7921f3fb5db6efec4",
         "format": "text"
       },
       {
         "path": "python/tests/test_companion_managed.py",
-        "byteLength": 37420,
-        "sha256": "50ff094f5fe8d7f30ebc07eba238b23f7868c15f529f59044217cb50816c10d2",
+        "byteLength": 37679,
+        "sha256": "0767c37b6432f01a06d5808c88d1645f7d774a3d216cf2173bbec4f9e8f8a9e9",
         "format": "text"
       },
       {
         "path": "python/tests/test_companion_real_pi.py",
-        "byteLength": 5958,
-        "sha256": "8ef5ac0f69889199558a683ec5836a3ee0701ebde2338badce3418baf82fd682",
+        "byteLength": 6012,
+        "sha256": "3fd98784e025689fecd76f3e83b18ae13b6f23f4a8c0dd9b12e95488351fe1d8",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_effects.py",
+        "byteLength": 2356,
+        "sha256": "97c9c1b76f274321aa04d9dfb80970e0a5c2854c69cea5778c8440f26440b704",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_examples.py",
+        "byteLength": 2553,
+        "sha256": "98aa7c71f887ea3a2cfa4df30e44fc791a58a13e0202a29ea77a6a7e23d67299",
         "format": "text"
       },
       {
         "path": "python/tests/test_face_operation_recovery.py",
-        "byteLength": 5771,
-        "sha256": "e734ce01700edd984d661be9003e7ec8a7fb3f56f7c83ae977fdc8bdf3db1666",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_face_review.py",
-        "byteLength": 13133,
-        "sha256": "71427ad07eba405d339e75a904438ecf671dae0f7440047963d6a3c60c246305",
+        "byteLength": 9504,
+        "sha256": "90783a060c359ab1f3696269cdac1b77908eb555109d17b8835ed71229f41b58",
         "format": "text"
       },
       {
         "path": "python/tests/test_launch_templates.py",
-        "byteLength": 5112,
-        "sha256": "4ea81480f430a9fdfdc242c937a5c4ef8cc2e4d38f8e17b83a704e683834c3c4",
+        "byteLength": 7255,
+        "sha256": "683de193287fdb0446d79040237eab39181efdb1f69218cf0178ca6acb0b15c9",
         "format": "text"
       },
       {
         "path": "python/tests/test_mcp.py",
-        "byteLength": 4664,
-        "sha256": "0e0f3b6fcf6e77bfaa04b828f3af1ef779e266c38a5729bf84f9236eb96ad0e0",
+        "byteLength": 4728,
+        "sha256": "22e1afb68032ad7069a2c869a8435c71b71acac8a6262663a1c33dce1dfc2662",
         "format": "text"
       },
       {
         "path": "python/tests/test_model_masks.py",
-        "byteLength": 5533,
-        "sha256": "f617da5f994c82221b09ae6b291301453bbee54fda88cac368b0ffb5ceaa0640",
+        "byteLength": 5733,
+        "sha256": "380c1746742a6558dc807505f31b9a7f8c764c720093362f2e1517e98b68e5ef",
         "format": "text"
       },
       {
         "path": "python/tests/test_model_packs.py",
-        "byteLength": 8104,
-        "sha256": "35e1b9eb514764e01d1726b69324f7ea4583e1f47b4cf1c940b132d42c16323c",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_motion_catalog.py",
-        "byteLength": 13649,
-        "sha256": "e79cd1e6ea15c0d5976f990219b1a446c40afc3f5ef3841f1256fd82320f90cc",
+        "byteLength": 8996,
+        "sha256": "a4fd046175a46c2386ca903aa1c3072d3313ea7a9eed866ff4a6db69e72783ac",
         "format": "text"
       },
       {
         "path": "python/tests/test_myriograph.py",
-        "byteLength": 12617,
-        "sha256": "c6402b36c1dc9728194fc05153ce29e58180c02a1f99a44c0dbbfe75fb0b6420",
+        "byteLength": 13218,
+        "sha256": "9dd1fe3b3590e3a40e02179932ce01fc726c83624e37583ca2870e63c655f44d",
         "format": "text"
       },
       {
         "path": "python/tests/test_portable.py",
-        "byteLength": 5403,
-        "sha256": "daaaf85d79f72c619488c8245881f1cb410be2f6ec191c23d1459b2c151db479",
+        "byteLength": 5421,
+        "sha256": "301247123985fd128e2c4f8fa6eb5427349357071eeb56289cbecfd7c1de3df9",
         "format": "text"
       },
       {
         "path": "python/tests/test_portable_skill_scripts.py",
-        "byteLength": 4691,
-        "sha256": "929fca091ed661ad596d1e71706a478861ca3b20d98158344f6e7c0327878252",
+        "byteLength": 4707,
+        "sha256": "7a856508f528ac0857118e78e4a1dd387d5d6d4e7541669ba867a8504d5eceea",
         "format": "text"
       },
       {
         "path": "python/tests/test_project.py",
-        "byteLength": 12891,
-        "sha256": "994e38da39d11de4b2a4df670e10aa0381dba779d47e11259db31b5003dedeb1",
+        "byteLength": 13245,
+        "sha256": "7d544b79e82dfa385a40c0108b702dc8728570870906c3543a032e861a2eb120",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_registry_release.py",
+        "byteLength": 2189,
+        "sha256": "4aeb16e3fad4eec4512e19d54190f6045e2993fbb86cf482ad9c9a524919b40d",
         "format": "text"
       },
       {
         "path": "python/tests/test_render.py",
-        "byteLength": 24169,
-        "sha256": "490c3e1a9ba5f4d437c57d4ee03c7c4ddfbde4a1622a956b66a27b7ef2689b57",
+        "byteLength": 24509,
+        "sha256": "76921513436d26dc1d2f6327133a5cb35c4d5f5f3c5c4fb0f6b116fedf491b64",
         "format": "text"
       },
       {
-        "path": "python/tests/test_review.py",
-        "byteLength": 3014,
-        "sha256": "afff56c2d159e24983695faaa6b35d1068d2fef81d17898f2b8d64414044f5bc",
-        "format": "text"
-      },
-      {
-        "path": "python/tests/test_review_faces.py",
-        "byteLength": 3652,
-        "sha256": "94c5afdcbcc773816fdb5f1ab71dfba7d226ecd59159269930303a03df3a1992",
+        "path": "python/tests/test_revision.py",
+        "byteLength": 33617,
+        "sha256": "371cdb8759a839a6d16316aa1cae05ad82620019c648c1ef38453d0acdfafb36",
         "format": "text"
       },
       {
         "path": "python/tests/test_sbom.py",
-        "byteLength": 1935,
-        "sha256": "fa69e24251b7a527ba0cae2d8a2e6288a8c9b95b8c213e3265c1fa44fef7086a",
+        "byteLength": 2015,
+        "sha256": "7b77a349d71968f774291f464e85d0700959cb8c9769313b046794f7702e2c0b",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_setup.py",
+        "byteLength": 3863,
+        "sha256": "2c1f4d9b0f2fe7408caed1561f6a201c80cdcbef7195b4a32d0dc26f95349b1b",
         "format": "text"
       },
       {
         "path": "python/tests/test_skill_transactions.py",
-        "byteLength": 9641,
-        "sha256": "41511b3d68a59061658faf737f14be72f70c1b786b43760507fac16fcaba6d22",
+        "byteLength": 9919,
+        "sha256": "bd5f0ef1a4eb8a841878110d5263109277ba65a1d9317abe8a2169a34ad50493",
         "format": "text"
       },
       {
         "path": "python/tests/test_skills.py",
-        "byteLength": 2409,
-        "sha256": "8a0f6da60e227697cb46d899722fd77bedd4ec1ff4b634631db446f90236ed77",
+        "byteLength": 2427,
+        "sha256": "9d7de526c117f400509f7650f684fa05acf356eb60578797c54eb4d3a7012cef",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_spec.py",
+        "byteLength": 1463,
+        "sha256": "b5db56c7fdfe13224ab55813eb504de04053591e2ae21b54899e3577c7707d78",
         "format": "text"
       },
       {
         "path": "python/tests/test_vision.py",
-        "byteLength": 9646,
-        "sha256": "2c879e994ac15fe6a98c979d48620fff9dc77d378da3882f241fdf376c85b442",
+        "byteLength": 9858,
+        "sha256": "2c23f6e2197f92e7a962c3fb8d3e43c402176c1eef2d5969a93a2b8ba931ebc3",
         "format": "text"
       },
       {
-        "path": "requirements-core.lock",
-        "byteLength": 10874,
-        "sha256": "4a5dd02634ec3114eb11c0deb063b6acd7be41e62e7ea061243c2025884f1f19",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/beats/app.js",
-        "byteLength": 27549,
-        "sha256": "ab792ff5ba051e80f81ae430d10af0cb243e5443e2156806f923e187b01f7e9e",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/beats/beat-review.js",
-        "byteLength": 444,
-        "sha256": "e004386abb58bd5aad0dfff6880989efaaace69cddafb7e6f7dff5cd135a7574",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/beats/beatmap.js",
-        "byteLength": 1110,
-        "sha256": "3a06ef0a503990c1e6e8ae44e59328e94965826f537264483c48ee0b7b015e79",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/beats/index.html",
-        "byteLength": 8641,
-        "sha256": "f4c07e595bc937094a2947aeada8dc3fcd082a6b0f63a2f27cb8d1d827306906",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/beats/session.js",
-        "byteLength": 1081,
-        "sha256": "2b9de435e6eed9601089b587d3bb6feeb61269078621ee7f535fdae30a9fe606",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/beats/style.css",
-        "byteLength": 15731,
-        "sha256": "4dcb2fadb7f90d033190de049d021b30dbc5b565c495e4aba2fcc2cbf4b1ea43",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/beats/waveform-layers.js",
-        "byteLength": 761,
-        "sha256": "d1e294eeca68dd089f88fd0d726f8d88c4c775d1ecc980122f51aee5a74a2da2",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/desk/app.js",
-        "byteLength": 7358,
-        "sha256": "5bc4d135fb2afd8442884494df9067a9066177f5cc457223d73c5e1a74cf1766",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/desk/clock.js",
-        "byteLength": 1820,
-        "sha256": "9147a0bc5030b56202bdceaab7ebcacb4beaac763491ab4917cdde7d70b0847a",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/desk/index.html",
-        "byteLength": 2199,
-        "sha256": "6a0aac06906ab32382a3ee3cc3a94b46d5de7cd057f48a0ed9003562d5ce333b",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/desk/session.js",
-        "byteLength": 1081,
-        "sha256": "2b9de435e6eed9601089b587d3bb6feeb61269078621ee7f535fdae30a9fe606",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/desk/style.css",
-        "byteLength": 1035,
-        "sha256": "1806b0757c2269dbdc09bbeefbb8089c8e34dc73a217a8f851934392fc6a2af2",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/faces/app.js",
-        "byteLength": 12254,
-        "sha256": "808099bb2a6b9e07541bd34442ab4597b7ea76adbd693b5e59d5a8899a2e175a",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/faces/index.html",
-        "byteLength": 2742,
-        "sha256": "38a9b57e45d22295ed6bcf138c02da3883dbec37103ef5245875114e3b49d437",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/faces/session.js",
-        "byteLength": 1081,
-        "sha256": "2b9de435e6eed9601089b587d3bb6feeb61269078621ee7f535fdae30a9fe606",
-        "format": "text"
-      },
-      {
-        "path": "review-assets/faces/style.css",
-        "byteLength": 2631,
-        "sha256": "dc536c9bc706b7d527ef5ac416ee3a267e2b51d309f0c5047a20f7fac5458a7c",
-        "format": "text"
-      },
-      {
-        "path": "runtime-models/SAM-LICENSE",
-        "byteLength": 7353,
-        "sha256": "4dea99bfaa016e21bc860d73f344236bd1e5c4977d1a9a8fd32f822b500ae1be",
-        "format": "text"
-      },
-      {
-        "path": "runtime-models/manifest.json",
-        "byteLength": 8216,
-        "sha256": "02ff892b26e1ce4b006f3563f5ed219a1c3b3a753545bcb4bf3d175a73207d16",
-        "format": "text"
-      },
-      {
-        "path": "schema/composition.schema.json",
-        "byteLength": 19662,
-        "sha256": "9b4886d29a3b128f880a6451ae0ff231ee16d54e83b187b352b2187635e36841",
-        "format": "text"
-      },
-      {
-        "path": "schema/correction.schema.json",
-        "byteLength": 1579,
-        "sha256": "34bdf821ad710c878199742485e3d00a75d9437db3583ddd043ca31ed88b426d",
-        "format": "text"
-      },
-      {
-        "path": "schema/project.schema.json",
-        "byteLength": 3412,
-        "sha256": "d03286c9dbc027b4bd22f7c7df2c61a1a1cc08cbbefb721da7bba57d06dc16de",
-        "format": "text"
-      },
-      {
-        "path": "scripts/apply_font_policy.py",
-        "byteLength": 2782,
-        "sha256": "d38f6371044fae9bbb8286774971104f41599bdd6e2f078faa7191c23c4b6d7b",
-        "format": "text"
-      },
-      {
-        "path": "scripts/audit_release_artifacts.py",
-        "byteLength": 10228,
-        "sha256": "aab93a7c7380f00d8d82aa500d988d87f69f514185c7bca478fcf6a84b32fae6",
-        "format": "text"
-      },
-      {
-        "path": "scripts/build_text_effect_previews.mjs",
-        "byteLength": 20244,
-        "sha256": "cd960cc7b6c5fb5461eb330746ae7cd44b1b346a5ed836d14e101390f0fa5f64",
-        "format": "text"
-      },
-      {
-        "path": "scripts/font-policy.json",
-        "byteLength": 4379,
-        "sha256": "81bb4d11704cc8822e9c37e99d2ea71eb2ec12668248283613cc02e4ffc4e648",
-        "format": "text"
-      },
-      {
-        "path": "scripts/generate_sbom.py",
-        "byteLength": 10401,
-        "sha256": "8a1e229aabb90f18922753c3e01e147fdc2751f2886eb69efc2bb63934d50757",
-        "format": "text"
-      },
-      {
-        "path": "scripts/import_canonical_text_runtime.py",
-        "byteLength": 15746,
-        "sha256": "e4c84629e12c209410c7de55b6cc8f65e746f2b3037cab3cd9a80b493009f8aa",
-        "format": "text"
-      },
-      {
-        "path": "scripts/import_skills.py",
-        "byteLength": 12054,
-        "sha256": "8cffa5a051807d6edb98aa6ddfa9350d3ee0767de9d3ef94b082caaeb1b36032",
-        "format": "text"
-      },
-      {
-        "path": "scripts/import_text_components.py",
-        "byteLength": 22575,
-        "sha256": "61eeab9136d2afcfd697870a0aab4ed350c1ba27719c2b6639f1e8c4cdd456c3",
-        "format": "text"
-      },
-      {
-        "path": "scripts/index_owned_skills.py",
-        "byteLength": 1183,
-        "sha256": "3e0acf950e6ef70c1e30aa2529639108480cdedca3efb6bf40813bf15d0f3b47",
-        "format": "text"
-      },
-      {
-        "path": "scripts/index_portable_skills.py",
-        "byteLength": 1894,
-        "sha256": "a46761c9b7b0906141b637d932a76fa175af0a2f2bd9549ac0e36fe9f019d2be",
-        "format": "text"
-      },
-      {
-        "path": "scripts/prepare_release_manifest.py",
-        "byteLength": 2790,
-        "sha256": "545946c538a93115f2e7294a276b80600d6a7744ebd5023141b21022e5a8e968",
-        "format": "text"
-      },
-      {
-        "path": "scripts/smoke_release_artifacts.py",
-        "byteLength": 13766,
-        "sha256": "10311a2221e798c550836c436627997f376161be66a9d6f28e5114715a4d5c33",
-        "format": "text"
-      },
-      {
-        "path": "scripts/validate-package.js",
-        "byteLength": 6043,
-        "sha256": "592887775f7653908928cba1ccae967523179afca0d9dec1ae14fb2659dd4497",
-        "format": "text"
-      },
-      {
-        "path": "scripts/verify_canonical_text_fidelity.mjs",
-        "byteLength": 6599,
-        "sha256": "7859e18a7c71d28708a5bac7bf151a8059ce4bd23ad969cf9b4bf53bc661c006",
+        "path": "python/tests/test_workflows.py",
+        "byteLength": 3352,
+        "sha256": "8413bcaf6af5893e8257f8bfd3548c936e62ac5b7bf4d4b2b2ec0d8bcba83f2f",
         "format": "text"
       },
       {
         "path": "site/catalog-data.js",
-        "byteLength": 1018858,
-        "sha256": "cafc64619264e1696863019dd6e790b868d2597feacc1bc6a22db679f74e98d5",
-        "format": "text"
-      },
-      {
-        "path": "skills/clean-text-animation/SKILL.md",
-        "byteLength": 4556,
-        "sha256": "cdcb711183a3ee70e0565ca9b75fc066fe1063098f735b6e4866662264621137",
-        "format": "text"
-      },
-      {
-        "path": "skills/clean-text-animation/scripts/render_clean_text.py",
-        "byteLength": 11060,
-        "sha256": "8c4712b3ac9172eefd423d429d150cf733d5ae76a6671f6dfd3ce585645962e2",
-        "format": "text"
-      },
-      {
-        "path": "skills/fanedit-body/SKILL.md",
-        "byteLength": 6741,
-        "sha256": "ebd5fb6948a13029ce6015f019c4e2d30cba0d26b8b55f9b1730a023046659c7",
-        "format": "text"
-      },
-      {
-        "path": "skills/fanedit-hook/SKILL.md",
-        "byteLength": 6271,
-        "sha256": "3d695c9dc9846061b263542b06f8938029ae3de1ff1dcec49a5ecc6e3ebc5512",
-        "format": "text"
-      },
-      {
-        "path": "skills/fanedit-reference-learning/SKILL.md",
-        "byteLength": 6211,
-        "sha256": "5de443623d12aa8f6b52ba8fc98ac1e60f38826b6f6125480d5ee9520f716f0b",
-        "format": "text"
-      },
-      {
-        "path": "skills/fanedit-text/SKILL.md",
-        "byteLength": 6950,
-        "sha256": "61265f7d55e658a778ba1b510744ebc66c026c89af039579ff26f5e2bff68092",
-        "format": "text"
-      },
-      {
-        "path": "skills/index.json",
-        "byteLength": 57394,
-        "sha256": "158cd200b73f010702b08ef32176dc9af3ecfec95b99eb5091c6e72bf2faec11",
-        "format": "text"
-      },
-      {
-        "path": "skills/micro-sfx-choice/SKILL.md",
-        "byteLength": 3956,
-        "sha256": "4ad74046087ff9a634da8cdafec1c5208bc5bb5d8789019870b095ab17e82b21",
-        "format": "text"
-      },
-      {
-        "path": "skills/micro-sfx-complexity-modes/SKILL.md",
-        "byteLength": 2533,
-        "sha256": "8f097df56db660a156f5637ddd18a547d320902597c793fc18eb4875049e3f67",
-        "format": "text"
-      },
-      {
-        "path": "skills/micro-sfx-motion-attachment/SKILL.md",
-        "byteLength": 3478,
-        "sha256": "700d3a1cee74f9000b0b4132071ed76f3b337f3ced96eb82a54325eeaa3b5c5c",
-        "format": "text"
-      },
-      {
-        "path": "skills/micro-sfx-object-adaptation/SKILL.md",
-        "byteLength": 2806,
-        "sha256": "da880d8839e215d5870b5fe66814eafc097dc716d23e35f88f0fae827039160d",
-        "format": "text"
-      },
-      {
-        "path": "skills/micro-sfx-timing-craft/SKILL.md",
-        "byteLength": 4945,
-        "sha256": "b1680e3304d2541d375d7cdd54d566debf938da0b0c913cde425a3fcc9fe057b",
-        "format": "text"
-      },
-      {
-        "path": "skills/migration-report.json",
-        "byteLength": 32298,
-        "sha256": "7e0cb0515d41525f417943bc09616af9f24c2ec76798ca23479c1b2e6f4a431c",
-        "format": "text"
-      },
-      {
-        "path": "skills/negative/SKILL.md",
-        "byteLength": 7093,
-        "sha256": "02f66468d205cdf5422e7c0ba20332df30c74a62241cccc2454e42f1d2ec1071",
-        "format": "text"
-      },
-      {
-        "path": "skills/negative/scripts/negative_text.py",
-        "byteLength": 22694,
-        "sha256": "529f1cacd3526e173e5382b179f8911801cfbdf7d0e2f7382641f9c287084348",
-        "format": "text"
-      },
-      {
-        "path": "skills/negative/scripts/run_negative_gauntlet.py",
-        "byteLength": 8364,
-        "sha256": "b165157582f65241a02369493e6c2162bc707a34bc2b20e1cc5931d97547f37e",
-        "format": "text"
-      },
-      {
-        "path": "skills/owned.json",
-        "byteLength": 2189,
-        "sha256": "7d003d5810cdf4bd2b6913d6de5c2d8c550f08cddef5512e21df288df9f2ec62",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-acquisition/SKILL.md",
-        "byteLength": 3735,
-        "sha256": "bccc2818293bed158ce07aa0a156b122cbbc03c7ffc8099a5da80ad991a652ce",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-beat-first-editing/SKILL.md",
-        "byteLength": 4267,
-        "sha256": "2a568d785c6eb24d8a8b82268bca5174e70c9103255788bacdbd508cd9f6fc4d",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-bs-roformer-voice-isolation/SKILL.md",
-        "byteLength": 4923,
-        "sha256": "adc59174f591cd82f762555cfdad88235a62539505c412574294b353034dbae1",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-bs-roformer-voice-isolation/references/provenance.json",
-        "byteLength": 1068,
-        "sha256": "2d83fccf260e49338fa49523c3b307dad1491e77c714ef58ffbfc5fc2f43e88e",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-bs-roformer-voice-isolation/scripts/isolate_voice_bs_roformer.py",
-        "byteLength": 6211,
-        "sha256": "73fcd0e383a63b373c18a6a849cce38d0e781f0a508545bf6c2c257866a8b57e",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-color-style-recipes/SKILL.md",
-        "byteLength": 3349,
-        "sha256": "8da0bfa7e382a6ba80ba9704f2454917eda1ba8fb0e5c92883996732c7b613ac",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-compact-3d-typography/SKILL.md",
-        "byteLength": 4442,
-        "sha256": "b3e147f3b2be6d03d43186a18d6626be7b75fb992b56f0e67499ce0edbcd3c7d",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-companion/SKILL.md",
-        "byteLength": 7019,
-        "sha256": "cc80975f929d1691fde6850a80c577ce8edbbbd28cfc5dd4315fc47ca60eeb5a",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-companion/references/contracts.md",
-        "byteLength": 7444,
-        "sha256": "31adb000558cf28eaa3cb6055f2b44616ab966c052148fc763a4efc37c5e6969",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-continuity-supervisor/SKILL.md",
-        "byteLength": 2704,
-        "sha256": "1606a787e7954eafad80c785a1761acd7df7ddc47774d8fd00ac44ba99896c31",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-creative-director/SKILL.md",
-        "byteLength": 2808,
-        "sha256": "e4d86a925051a6c5c36b070bc6c8cc9e00e319416948f7ea05b6d91943556662",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-creed-corpus-cross-reference/SKILL.md",
-        "byteLength": 3573,
-        "sha256": "3389dcfc70606d194190c1a875cd4bae3c904ab2e70bfc9323ebfb896b60a11e",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-creed-edit/SKILL.md",
-        "byteLength": 16257,
-        "sha256": "3a66fe7bfb33575e4fcb2e8873cf92209203a50c2395b381e931b9825da36c77",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-creed-viral-edit-analysis/SKILL.md",
-        "byteLength": 6290,
-        "sha256": "6f54da6de995d0e007166a499cc2b1d918bf3c26177a5be1611dd1aaf43aa3fb",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-effects-punctuation/SKILL.md",
-        "byteLength": 4605,
-        "sha256": "3b1c092842198daeaa4a2deb885c68b2e19342243a639b8a9a5637810e7e68ba",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-effects/SKILL.md",
-        "byteLength": 8115,
-        "sha256": "e52cd964d50ca0575cec13b28e2ee31eb8625606e6ad6db7d74f718c5097a877",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-face-tracking-framing/SKILL.md",
-        "byteLength": 3754,
-        "sha256": "3b9042a30541e6d17d1ca03a9a7e63e76b0f81affeb57137cf71ea435e42d9e8",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-fan-edit/SKILL.md",
-        "byteLength": 13254,
-        "sha256": "a05a03beb7e3f3ba68b2a75962a0a2637a203e018ed00dec475cd319e81781a5",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-finishing-producer/SKILL.md",
-        "byteLength": 2747,
-        "sha256": "8a1b151e5b6c86ceefa8babe5598f66d5e512db3738467d472acead18126813c",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-lead-editor/SKILL.md",
-        "byteLength": 3313,
-        "sha256": "a173bc132d4ec4b2015ce5f3eaf5ddd95187e0f2cf0963966af42aed5caacd89",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-look-director/SKILL.md",
-        "byteLength": 2636,
-        "sha256": "db1bc374f4c04d052116645148472fad4e672df6914f950ce32ea0bb7bbb7af6",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-pacing-contrast/SKILL.md",
-        "byteLength": 3398,
-        "sha256": "3984ea42bc2f57473641b38f79e4ff7725ce5da8109eef442594ce0633aaed12",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-producer/SKILL.md",
-        "byteLength": 4385,
-        "sha256": "61125667bd75969c9daa9e04016defba1616500c4eb5e5eb8e7ec09f36f4325a",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-project-json-editor/SKILL.md",
-        "byteLength": 5254,
-        "sha256": "d40827069d42bb0444c0dba9a5cd028df7c47d529ac12e3992173023758995a0",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-python-analysis-rendering/SKILL.md",
-        "byteLength": 3952,
-        "sha256": "b3276577ffa03a4c69b06ec0766be8c0c251cdfa97a815d09931bcdcd02a1176",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-qa-gap-discipline/SKILL.md",
-        "byteLength": 3585,
-        "sha256": "b90f360bdfb4832b0f01d25990b9e9500fecf78f9b7a4f2e84d52f5cee5c73ae",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-quote-audio-structure/SKILL.md",
-        "byteLength": 5509,
-        "sha256": "47d77008592906ab8e57c432b4fc301895c364ebb044725d4ea9822f884071ab",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-reverse-curtain-reveal/SKILL.md",
-        "byteLength": 5254,
-        "sha256": "de592ef164c47da228c65266814ddc048ad0601cdf9f7d5ff63255a669786676",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-reverse-curtain-reveal/scripts/quick_validate.py",
-        "byteLength": 2397,
-        "sha256": "baed0c81d5b524877529283ab220f5d2ea4c0ca8fb3de0ffa51365b88dbc6d91",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-reverse-curtain-reveal/scripts/render_reverse_curtain_reveal_effect.py",
-        "byteLength": 15532,
-        "sha256": "1d4e2ec3037a2288621ff463b8128d2c0b7b9b805af857307bc084040c3c7c5f",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-reverse-curtain-subject-reveal/SKILL.md",
-        "byteLength": 6051,
-        "sha256": "13dbc29d734c9b0c4935509293d2ccd1f6c43e6ff3b9686c5a6bd73c8f33d527",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-reverse-curtain-subject-reveal/scripts/quick_validate.py",
-        "byteLength": 2397,
-        "sha256": "baed0c81d5b524877529283ab220f5d2ea4c0ca8fb3de0ffa51365b88dbc6d91",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-reverse-curtain-subject-reveal/scripts/render_reverse_curtain_subject_reveal_effect.py",
-        "byteLength": 27602,
-        "sha256": "7adb98df9d5d4a4c5e6dabfb265ca3be4d677ebbd0171556bd4043d2f9ac65b9",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-segmentation-cutouts/SKILL.md",
-        "byteLength": 3900,
-        "sha256": "24e229706f2f60dd87272c8f474ddd0714e02043318216062080e74fdf57dcc8",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-setup/SKILL.md",
-        "byteLength": 3986,
-        "sha256": "7843ad85ff546f747ef83ce2b564d983c013b088606d228575535fab84666dab",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-setup/scripts/setup.py",
-        "byteLength": 6080,
-        "sha256": "7100549b6979a8ffe4d5c1fd518606801b24b22a5671a14ac8b2d06b5e123632",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-sound-design/SKILL.md",
-        "byteLength": 9080,
-        "sha256": "9498178a8fc93c7d281737dcf478c8b59d2cd767829676fdd2508262e726b9df",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-story-shot-selection/SKILL.md",
-        "byteLength": 4323,
-        "sha256": "2ff7c26f5861557a175c493ee8934e7d47878fa66a5beea7943e58f79d80cbbf",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-text-layering/SKILL.md",
-        "byteLength": 3220,
-        "sha256": "51e89382410655a5f0ead3439d6ceb5138377b736c8ce41ec5c0a97c6ab62829",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-transition-editor/SKILL.md",
-        "byteLength": 2684,
-        "sha256": "5104a1a208c98ae1722dde897e4da3559041880a42c8d9ac3a432004830b8b36",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-viral-effects-reviewer/SKILL.md",
-        "byteLength": 9105,
-        "sha256": "0bc1b4a8ca74b796a3037185414c1bd727450c1809f288f44829408afb559e5f",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-viral-source-edit-router/SKILL.md",
-        "byteLength": 7712,
-        "sha256": "767d1b70676cdd6a68d707a86a928062f5dc11678cf40f2170e958f59414b56f",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-viral-source-edit-router/references/recipe-index.md",
-        "byteLength": 1379,
-        "sha256": "e25a145c5d4772be7f44e73e2ab3f9180f71fec43e72a2933750acbb8a85248e",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-viral-source-edit-router/scripts/package_viral_source_edit_plans.py",
-        "byteLength": 38604,
-        "sha256": "9f5619ab91f6ba34d6950cf96fe0c059459aee8c4fd074e03eb7efd6e2ccc5ae",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-viral-source-edit-router/scripts/validate_viral_source_edit_router.ts",
-        "byteLength": 1009,
-        "sha256": "6d288a6ef39eddb8af57d4de19ab297c1503baec8ce645fda2ce88c901e1218e",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-viral-source-edit-router/scripts/viral_source_edit_recipes.py",
-        "byteLength": 24551,
-        "sha256": "5bc523d486d118143357eb0fed53e345cf4c8870a2eb9dd3fcd22d63d5b9fa26",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-viral-transition-reviewer/SKILL.md",
-        "byteLength": 8955,
-        "sha256": "69539c45daeb6d31ba0853d1a66cc80084062d8b83484aeed9e36dcf81c9e4e5",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-workspace/SKILL.md",
-        "byteLength": 7734,
-        "sha256": "9dcce3b3644e309514d76e67bc53494ce4c794ab6061f3d9be1c06090f3dff8f",
-        "format": "text"
-      },
-      {
-        "path": "src/motion/components.generated.js",
-        "byteLength": 39598,
-        "sha256": "596a3b5c38be3ff6acb535ecf66b14c5c2eb9de751757fb63dfda81e8a714753",
-        "format": "text"
-      },
-      {
-        "path": "src/skills.js",
-        "byteLength": 13196,
-        "sha256": "d03176405b7c5c065e8376a2357a534f61a2799506adf209a163f2d56394d879",
-        "format": "text"
-      },
-      {
-        "path": "src/version.js",
-        "byteLength": 39,
-        "sha256": "0e13a1c76094e4da360f56e19ee08438e5704b6584f6b00c0c27b73e58b30c0b",
-        "format": "text"
-      },
-      {
-        "path": "test/cli.test.js",
-        "byteLength": 5404,
-        "sha256": "839afab87ba85def988b92ad85e782fc9cd546275bbc88445b6efca14febcf04",
-        "format": "text"
-      },
-      {
-        "path": "test/motion.test.js",
-        "byteLength": 4113,
-        "sha256": "50651f8a4cfd82e484186d76382b206872ae23ecbd141d7b235ec1c3ced60e72",
-        "format": "text"
-      },
-      {
-        "path": "test/review-clock.test.js",
-        "byteLength": 1989,
-        "sha256": "6045a268a8025d25440fec37b3a724ed25aeef05cd601f333a005e451ec6789e",
-        "format": "text"
-      },
-      {
-        "path": "test/skill-transactions.test.js",
-        "byteLength": 3471,
-        "sha256": "4e0693730a01e04f472a573ce5d7032d45b8ee0e727adb612e4c9b2d078c3bf9",
-        "format": "text"
-      },
-      {
-        "path": "test/skills.test.js",
-        "byteLength": 1821,
-        "sha256": "27dd753cfdae904257a453879739725bffe07058f43b30ae243860a980e55685",
-        "format": "text"
-      },
-      {
-        "path": "uv.lock",
-        "byteLength": 244679,
-        "sha256": "5fe7b7735fc3efd0c118c03ec536a094d905fa6c95cc3b56a66454fa6bade28d",
+        "byteLength": 1022520,
+        "sha256": "57c74c1e3ac6d62ebd2f8d0a804ba8f27e553c6c5133aa82e7ffc6494cab8721",
         "format": "text"
       }
     ],
-    "includeDeletions": [
-      {
-        "path": "catalog/text-runtime/assets/fonts/AVANTE.otf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/Bebas-Regular.otf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/Birds-of-Paradise.ttf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/BucklaneScript.otf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/assets/fonts/mytupiBOLD.ttf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/AVANTE.otf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/Bebas-Regular.otf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/Birds of Paradise.ttf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/assets/fonts/mytupiBOLD.ttf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/AVANTE.otf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/Bebas-Regular.otf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/Birds of Paradise.ttf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/aesthetic-glow/components/assets/fonts/mytupiBOLD.ttf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/dimensional-metal/assets/fonts/AVANTE.otf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/dimensional-metal/assets/fonts/Birds of Paradise.ttf",
-        "action": "delete"
-      },
-      {
-        "path": "catalog/text-runtime/families/dimensional-metal/assets/fonts/mytupiBOLD.ttf",
-        "action": "delete"
-      }
-    ],
+    "includeDeletions": [],
     "excludeRawOrHold": [
       {
         "path": "docs/launch/AUTO-TOPUP.md",
@@ -3138,16 +1677,23 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/CATALOG.md",
+        "byteLength": 13802,
+        "sha256": "d984993e80e76b52b9c9c21e1ed1d4f457c12f446a7cd9c0cf6e5a3dbe27e861",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
         "path": "docs/launch/COMMERCIAL.md",
-        "byteLength": 26796,
-        "sha256": "cace0b44d99006500cf90c05909c28da96fed632372847ffcaf03a57b753b6ec",
+        "byteLength": 32198,
+        "sha256": "8cd2edb75ada0b1bfece9efcb375248a43846b78836a8f36ab58cb02cc4a29c8",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
         "path": "docs/launch/COMPANION.md",
-        "byteLength": 28770,
-        "sha256": "3c543b97f9af3126cb231f4abbb02692a2a3004b7ae5894a6acf9fcd5f22e4e2",
+        "byteLength": 29692,
+        "sha256": "c3df6983f15b5ac898e22703c7a01e22aa888c64109ea8c696d8284365dfbff8",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -3181,8 +1727,8 @@
       },
       {
         "path": "docs/launch/STATE.md",
-        "byteLength": 10001,
-        "sha256": "5facd2a1101bdebc21fb8fed5a26fafb77e8b0d30889eccdeb5a8bae93135bed",
+        "byteLength": 12278,
+        "sha256": "d9bed7d47fa0a4460526c800509486dedf6b7a1caef369a1214b8850d50108cd",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -3309,6 +1855,15 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/caption-template-lyric-20261020.json",
+        "byteLength": 1535,
+        "sha256": "7201e6dd590ece1b1318b4054de66be468faa68aed9caf422f71de352e7c6e29",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/caption-template-runs-v2.json",
         "byteLength": 1855,
         "sha256": "7ff0b27d0cad9cf92f82b0acc01c890008512d6e42f17c41cb9052ee69887bb0",
@@ -3380,6 +1935,20 @@
           {
             "digestRole": "sha256",
             "sha256": "610ed0b6f3885901f64313bf7739df25e121fa16d83d9c0bae979928d8285c34"
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/commercial-continuation-20261020-r2.json",
+        "byteLength": 2051,
+        "sha256": "9ff97b8aafd7064701f2d45e400bbae23169dc602403bf64f806169b45378a9c",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "f40019a24308605ad434ddd60594fa252397ac9df14e6365becb162045ef13d4"
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
@@ -3503,12 +2072,93 @@
       },
       {
         "path": "docs/launch/evidence/companion-campaign-proposal.json",
-        "byteLength": 3894,
-        "sha256": "13efd8fc09967f9dbf9974b964c4891ee7c04b71086da4ef886a12fa8189082d",
+        "byteLength": 4197,
+        "sha256": "682781c045c980a6fc1cd413fc5a05c857a2a1944e7021231c1e36a4e27abf47",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-catalog-activation-candidate.json",
+        "byteLength": 15610,
+        "sha256": "dc319f96076a3dfd2d7c89f6ff4154b120d8b962bc1fbd3c85133bfcc84dea9e",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-catalog.json",
+        "byteLength": 6993,
+        "sha256": "fa8d868e8d53771849a423265cf9b5a84cb8a680b66024324b0c24e5d8808a70",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "bfef97e68575cfe5a126c08929508c8e2a55a19e41582c3b572c0db171215ee7",
+            "byteLength": 18818
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7e0236de67c97ade81ac1539099e9954caa287b95186f2109f6d5de151976781",
+            "byteLength": 10547
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7360e4dcbb0bff94df2b94e25da6560650e0adc061a97f094be83a54f96d21b2",
+            "byteLength": 24327
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ace34fea2a792f00268c3b09f8854f658ed6231925eff3430353cc3ee44a0ca6",
+            "byteLength": 2840
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "2deb68a6aa7a0e786661f916c087c510e8eb35365715f0c59e22b64d8f598b81",
+            "byteLength": 845646
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "448504c476a82bee23b8e795754a2b481c41456fc87ccffdb14824e1d6c0a896",
+            "byteLength": 3040
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6cfbb73362b198fccbb60cbeca90d7bb3e8e402235dded816b3ff87b6baeb1cf",
+            "byteLength": 328343
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ba8bd52b7fa55bbfbc6b640971140dd259ee2afe27ea48bc346ca8d43c702c16",
+            "byteLength": 880263
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9b9af06f353eb530e3ef0d5cf06ff0aaebce5d764a6fe9a4255d539670c24489",
+            "byteLength": 258524
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8f4fb38771ae905bc491c415a429421f6e696ecce01cfa8348f0adb13073c301",
+            "byteLength": 51816
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f40019a24308605ad434ddd60594fa252397ac9df14e6365becb162045ef13d4",
+            "byteLength": 1547
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-catalog.junit.xml",
+        "byteLength": 3040,
+        "sha256": "448504c476a82bee23b8e795754a2b481c41456fc87ccffdb14824e1d6c0a896",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
         "path": "docs/launch/evidence/companion-claude-host-proposal.json",
@@ -3830,20 +2480,20 @@
       },
       {
         "path": "docs/launch/evidence/companion-voice-review-funding.json",
-        "byteLength": 7415,
-        "sha256": "432492cd8334e91a70b0bbbb52e363077fad987ce485a5c7c2b8949c3b8d9bbc",
+        "byteLength": 7657,
+        "sha256": "7c44a3e7bc3f62a69cd53f06efa3ff1f3f984d27761efb60870f2312d56a3730",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [
           {
             "digestRole": "sha256",
-            "sha256": "3603e548728e8d87da7a4e12fcc845fede6738c004253c7f657ed940cabfc8e1",
-            "byteLength": 39651
+            "sha256": "4dc41381fd654be26f384f93a6d4171d2765ba37a401567105b399844b5ab172",
+            "byteLength": 39624
           },
           {
             "digestRole": "sha256",
-            "sha256": "ca22aa18c8debf997cde4434c5f3430915433365153c2b297a314a680014507d",
-            "byteLength": 17650
+            "sha256": "7a8cad065fa4eeebcfeb721e1e7745b92bbea93c9900c02a7b0973cf47771cd5",
+            "byteLength": 18419
           },
           {
             "digestRole": "sha256",
@@ -3857,8 +2507,8 @@
           },
           {
             "digestRole": "sha256",
-            "sha256": "bbc3c08f15ceaff2e6aecf1c0d78af4b721fb45a6150871ffd1913aac4977b7d",
-            "byteLength": 9720
+            "sha256": "35a375520031bf44b9917bdda119d2a9660a5887ab2e26f849779b51c7217478",
+            "byteLength": 9754
           },
           {
             "digestRole": "sha256",
@@ -3867,8 +2517,8 @@
           },
           {
             "digestRole": "sha256",
-            "sha256": "4ec57097ef830532afa52168a59b2e2280eaf98bfee6344f4c44765bab898aaf",
-            "byteLength": 1520
+            "sha256": "1d2bd0ceb397d6aeb792678cf17bae85d13f45dd0dedb90d51fb9bac6770e678",
+            "byteLength": 2057
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
@@ -4581,6 +3231,21 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/editorial-dialogue-license-supplement-20261020.json",
+        "byteLength": 669,
+        "sha256": "3f142b6945b2c7be62221d253b954fdb4b9f017f74f405538470238b966056d1",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "f136756c327a6a3e5a0f5378e244e60113599d7093571f4694150eba1a876f9a",
+            "byteLength": 21265208
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/editorial-dialogue-lyric-20261020.json",
         "byteLength": 2677,
         "sha256": "d30699065ed02737ef972982f9af538804699780756ccc0d9943ace476bfa30c",
@@ -4595,6 +3260,60 @@
             "digestRole": "sha256",
             "sha256": "6cd2520da1d66b751efae04949b8a1cf5a73860d92fe27ca9e74bc1720346b60",
             "byteLength": 21260286
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/editorial-dialogue-lyric-restore-20261020.json",
+        "byteLength": 790,
+        "sha256": "1f90903b2495aaaf85f3f53c7f8adde240f584f49f4ba1b1864b5a30f9ffa447",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/face-admission-outbox-recovery-20261020.json",
+        "byteLength": 6650,
+        "sha256": "2b48c32affb459bb0d14896f1e3f68a6713f3d7842f32ea9b93bca412b84e724",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "8ccc93b327ca56352f295f5b2b932962800409fa436cf917bcf6f4dff6bc7cb9",
+            "byteLength": 59090
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6857c7ad02bf645297290a7027c0a797a3816915eae83cef3f399b4e07a242cf",
+            "byteLength": 19781
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "990cb0d183b0569752917f4e36aa33f8e740a0e979ac06e40f655ff6ef2ab59f",
+            "byteLength": 3446
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "543f9e1201271636cc7b4be051e655b4d3f4ce5ef4d7afb6e2bc3e7e135ff66f",
+            "byteLength": 4628
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "92b91821d45dac6224187c7b4db66ff826c68fb9709bed062ef5838cdf3d2075",
+            "byteLength": 38419
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9dd1fe3b3590e3a40e02179932ce01fc726c83624e37583ca2870e63c655f44d",
+            "byteLength": 13218
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "90783a060c359ab1f3696269cdac1b77908eb555109d17b8835ed71229f41b58",
+            "byteLength": 9504
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
@@ -4941,6 +3660,13 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/evidence/python-source-platform-fixes.junit.xml",
+        "byteLength": 36615,
+        "sha256": "c7ab0da8b3e4fed008f54abd0966d7d610a839f8557790cfcf5315b692743fc0",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
         "path": "docs/launch/evidence/python-source-tests.local.xml",
         "byteLength": 27827,
         "sha256": "937b7c21e4bf56c86c044ae4579aef3aca7b5ed9782bcc0c7f060339cee44b8c",
@@ -5097,6 +3823,15 @@
             "sha256": "5adcf1cce0bd0ba64e267e107a8e7f0defc3c87002c2e8fc2d594ae45caa4538"
           }
         ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/source-checkpoint-20261020.json",
+        "byteLength": 537,
+        "sha256": "fc118d759c5c0367eb15da2393814b7b34a6e511db26fe2b96c721bffbcfa214",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {

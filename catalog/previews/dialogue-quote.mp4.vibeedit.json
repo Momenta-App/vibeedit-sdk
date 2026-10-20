@@ -1,0 +1,33 @@
+{
+  "cacheHit": false,
+  "cacheKey": "507c9a5d01ecf750f03adb30f3031e2bfcf4fb985d358bffe27f1dae6dae8fdc",
+  "compositionId": "dialogue-quote",
+  "compositionSha256": "0e5f2e35a2bf91aab37b730ae163d485f5922cc1f677387206ad8e78f089ee87",
+  "implementationVersion": "0.2.0b1",
+  "output": {
+    "bytes": 75813,
+    "path": "dialogue-quote.mp4",
+    "sha256": "791e4f7db067c3839dca427ecb61a635a2e483e0d97f65182c6182da1857e7db"
+  },
+  "runtimeVersions": {
+    "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "playwright": "1.61.0"
+  },
+  "schemaVersion": "1.0.0",
+  "sourceIdentities": [
+    {
+      "algorithm": "sha256",
+      "value": "af68e3dc294d348de149f1e2619c83194401708ca9c97c51e95990e641b3228d"
+    }
+  ],
+  "work": {
+    "framesRendered": 90,
+    "framesReused": 0,
+    "mediaBaseCacheHit": false,
+    "mediaBaseFramesRendered": 90,
+    "motionFramesCaptured": 90,
+    "motionFramesReused": 0,
+    "reuseKind": "none",
+    "videoFramesEncoded": 90
+  }
+}

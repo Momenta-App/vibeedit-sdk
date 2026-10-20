@@ -13,7 +13,7 @@ from vibeedit.spec import Canvas, Composition, FrameRate
 def project(tmp_path):
     composition = Composition(id="fixture", canvas=Canvas(64, 64, FrameRate(30000, 1001)), duration_frames=30)
     spec = tmp_path / "input.json"
-    spec.write_text(json.dumps(composition.to_spec()))
+    spec.write_text(json.dumps(composition.to_spec()), encoding="utf-8")
     create_project(tmp_path / "space ü", spec)
     project = Project(tmp_path / "space ü")
     media = tmp_path / "generated.wav"
@@ -65,7 +65,7 @@ def test_timing_offset_is_preserved_without_confidence_upgrade():
 def test_baseline_refresh_exposes_mapping_conflict(project, tmp_path):
     source = project.read()["sources"][0]
     first = tmp_path / "first.json"
-    first.write_text(json.dumps({"schemaVersion": "myriograph.anonymousWords.v1", "sourceSha256": source["sha256"], "words": [{"ordinal": 1, "text": "old"}]}))
+    first.write_text(json.dumps({"schemaVersion": "myriograph.anonymousWords.v1", "sourceSha256": source["sha256"], "words": [{"ordinal": 1, "text": "old"}]}), encoding="utf-8")
     project.import_analysis(source["id"], first, service="speakers", job_id="native-1", schema_version="myriograph.anonymousWords.v1", expected_revision=1)
     baseline_id = project.read()["analysis"][0]["id"]
     project.correct(correction(project, domain="words", baselineId=baseline_id, targetId="1", payload={"text": "new"}))
@@ -94,16 +94,16 @@ def test_beat_correction_reaches_editable_composition_and_audio_render(project, 
     from vibeedit.render import render
     source = project.read()["sources"][0]
     path = project.root / "composition.json"
-    spec = json.loads(path.read_text())
+    spec = json.loads(path.read_text(encoding="utf-8"))
     spec["sources"] = [{"id":source["id"], "kind":"audio", "uri":source["path"], "identity":{"algorithm":"sha256","value":source["sha256"]}}]
     spec["timeline"]["tracks"] = [{"id":"music", "kind":"audio", "order":0, "items":[{"id":"hit", "kind":"audio", "placement":{"startFrame":0,"durationFrames":4}, "source":{"sourceId":source["id"],"inFrame":0,"durationFrames":4}, "metadata":{"reviewBeat":{"sourceId":source["id"],"index":0}}}]}]
-    path.write_text(json.dumps(spec))
+    path.write_text(json.dumps(spec), encoding="utf-8")
     project.correct(correction(project))
     result = project.apply_review(source["id"], "beats", expected_revision=2)
     revised = project.root / result["composition"]
-    revised_spec = json.loads(revised.read_text())
+    revised_spec = json.loads(revised.read_text(encoding="utf-8"))
     assert revised_spec["timeline"]["tracks"][0]["items"][0]["placement"]["startFrame"] == 3
-    assert json.loads(path.read_text())["timeline"]["tracks"][0]["items"][0]["placement"]["startFrame"] == 0
+    assert json.loads(path.read_text(encoding="utf-8"))["timeline"]["tracks"][0]["items"][0]["placement"]["startFrame"] == 0
     output = tmp_path / "beat-adjusted.mp4"
     render(revised, output)
     raw = subprocess.check_output(["ffmpeg", "-v", "error", "-i", str(output), "-vn", "-ac", "1", "-ar", "8000", "-f", "s16le", "pipe:1"])
@@ -118,7 +118,7 @@ def test_native_census_retains_vfr_nonzero_pts_and_decimal_integers(project, tmp
     subprocess.run(["ffmpeg","-v","error","-f","lavfi","-i","color=s=64x64:r=30000/1001","-vf","setpts=PTS+2/TB+if(gte(N\\,2)\\,1/(30*TB)\\,0)","-frames:v","4","-fps_mode","vfr","-c:v","libx264",str(media)],check=True)
     state = project.register_source(media, expected_revision=project.read()["revision"])
     source = next(s for s in state["sources"] if s["path"].endswith('.mkv'))
-    records = [json.loads(line) for line in (project.root/source["clock"]).read_text().splitlines()]
+    records = [json.loads(line) for line in (project.root/source["clock"]).read_text(encoding="utf-8").splitlines()]
     frames = [record for record in records if record["kind"] == "frame"]
     assert [record["frameOrdinal"] for record in frames] == list(range(4))
     assert all(isinstance(record["pts"], str) for record in frames)
@@ -131,21 +131,21 @@ def test_native_census_retains_vfr_nonzero_pts_and_decimal_integers(project, tmp
 def test_undo_rebuilds_bound_beat_layer_from_its_preserved_original(project):
     source = project.read()["sources"][0]
     path = project.root / "composition.json"
-    spec = json.loads(path.read_text())
+    spec = json.loads(path.read_text(encoding="utf-8"))
     spec["timeline"]["tracks"] = [{"id":"accent","kind":"audio","order":0,"items":[{"id":"impact","kind":"sound_effect","placement":{"startFrame":7,"durationFrames":2},"soundEffectId":"vibeedit://sfx/impact-procedural","params":{},"metadata":{"reviewBeat":{"sourceId":source["id"],"index":0}}}]}]
-    path.write_text(json.dumps(spec))
+    path.write_text(json.dumps(spec), encoding="utf-8")
     event = project.correct(correction(project))
     result = project.apply_review(source["id"],"beats",expected_revision=2)
-    assert json.loads((project.root/result["composition"]).read_text())["timeline"]["tracks"][0]["items"][0]["placement"]["startFrame"] == 3
+    assert json.loads((project.root/result["composition"]).read_text(encoding="utf-8"))["timeline"]["tracks"][0]["items"][0]["placement"]["startFrame"] == 3
     project.correct(correction(project,operationId="undo-edit",action="undo",payload={"operationId":event["operationId"]}))
     result = project.apply_review(source["id"],"beats",expected_revision=4)
     assert result["ok"] is True
-    assert json.loads((project.root/result["composition"]).read_text())["timeline"]["tracks"][0]["items"][0]["placement"]["startFrame"] == 7
+    assert json.loads((project.root/result["composition"]).read_text(encoding="utf-8"))["timeline"]["tracks"][0]["items"][0]["placement"]["startFrame"] == 7
 
 
 def test_disabled_audio_layer_does_not_leak_into_render(project, tmp_path):
     from vibeedit.render import render
-    spec = json.loads((project.root/"composition.json").read_text())
+    spec = json.loads((project.root/"composition.json").read_text(encoding="utf-8"))
     spec["timeline"]["tracks"] = [{"id":"accent","kind":"audio","order":0,"items":[{"id":"impact","kind":"sound_effect","placement":{"startFrame":0,"durationFrames":4,"enabled":False},"soundEffectId":"vibeedit://sfx/impact-procedural","params":{}}]}]
     output = tmp_path/"disabled.mp4"
     render(spec, output)
@@ -156,7 +156,7 @@ def test_disabled_audio_layer_does_not_leak_into_render(project, tmp_path):
 def test_project_database_cannot_alias_another_project(project, tmp_path):
     other = tmp_path/"other-project"
     other.mkdir()
-    (other/"project.vibeedit.json").write_text((project.root/"project.vibeedit.json").read_text())
+    (other/"project.vibeedit.json").write_text((project.root/"project.vibeedit.json").read_text(encoding="utf-8"), encoding="utf-8")
     (other/".vibeedit").symlink_to(project.root/".vibeedit")
     with pytest.raises(ValueError, match="escapes"):
         Project(other)
@@ -165,19 +165,19 @@ def test_project_database_cannot_alias_another_project(project, tmp_path):
 def test_word_restore_human_assignment_and_undo_reach_composition(project, tmp_path):
     source = project.read()["sources"][0]
     baseline = tmp_path / "words.json"
-    baseline.write_text(json.dumps({"schemaVersion": "myriograph.anonymousWords.v1", "sourceSha256": source["sha256"], "words": [{"ordinal": 0, "text": "Hello", "speakerId": "voice-1"}]}))
+    baseline.write_text(json.dumps({"schemaVersion": "myriograph.anonymousWords.v1", "sourceSha256": source["sha256"], "words": [{"ordinal": 0, "text": "Hello", "speakerId": "voice-1"}]}), encoding="utf-8")
     project.import_analysis(source["id"], baseline, service="speakers", job_id="words-original", schema_version="myriograph.anonymousWords.v1", expected_revision=1)
     baseline_id = project.read()["analysis"][0]["id"]
     path = project.root / "composition.json"
-    spec = json.loads(path.read_text())
+    spec = json.loads(path.read_text(encoding="utf-8"))
     spec["timeline"]["tracks"] = [{"id": "captions", "kind": "motion", "order": 0, "items": [{"id": "word", "kind": "motion", "placement": {"startFrame": 0, "durationFrames": 3}, "componentId": "vibeedit://text/caption-rail", "props": {"text": "Hello"}, "renderer": "html", "transparent": True, "metadata": {"reviewWord": {"sourceId": source["id"], "baselineId": baseline_id, "targetId": "0"}}}]}]
-    path.write_text(json.dumps(spec))
+    path.write_text(json.dumps(spec), encoding="utf-8")
     def edit(identity, action, payload):
         return project.correct(correction(project, domain="words", baselineId=baseline_id, targetId="0", operationId=identity, action=action, payload=payload))
     def apply():
         result = project.apply_review(source["id"], "words", baseline_id=baseline_id, expected_revision=project.read()["revision"])
         assert result["ok"]
-        return json.loads((project.root / result["composition"]).read_text())["timeline"]["tracks"][0]["items"][0]
+        return json.loads((project.root / result["composition"]).read_text(encoding="utf-8"))["timeline"]["tracks"][0]["items"][0]
     with pytest.raises(ValueError, match="both"):
         edit("partial-time", "set", {"startUs": 0})
     with pytest.raises(ValueError, match="human-reviewed"):
@@ -199,16 +199,16 @@ def test_reviewed_composition_is_immutable_and_new_edits_are_explicit(project):
     reviewed = project.apply_review(project.read()["sources"][0]["id"], "beats", expected_revision=2)
     path = project.root / reviewed["composition"]
     original = path.read_bytes()
-    revised = json.loads(path.read_text())
+    revised = json.loads(path.read_text(encoding="utf-8"))
     revised["metadata"]["intentionalEdit"] = True
-    path.write_text(json.dumps(revised))
+    path.write_text(json.dumps(revised), encoding="utf-8")
     with pytest.raises(RevisionConflict, match="immutable"):
         project.apply_review(project.read()["sources"][0]["id"], "beats", expected_revision=3)
     with pytest.raises(RevisionConflict, match="immutable"):
         project.use_composition("composition.json", expected_revision=3)
     path.write_bytes(original)
     replacement = project.root / "revision.json"
-    replacement.write_text(json.dumps(revised))
+    replacement.write_text(json.dumps(revised), encoding="utf-8")
     adopted = project.use_composition("revision.json", expected_revision=3)
     assert adopted["composition"] == "revision.json"
     assert project.apply_review(project.read()["sources"][0]["id"], "beats", expected_revision=4)["ok"]

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from vibeedit.model_packs import PACKS, PINS, _definition_digest, _lease, probe_model_pack, register_commands
+from vibeedit.model_packs import PACKS, PINS, _definition_digest, _lease, _supported, probe_model_pack, register_commands
 from vibeedit.model_runners.transnet import build_index, plan
 
 
@@ -37,7 +37,7 @@ def test_commands_do_not_download_on_list_or_probe(tmp_path, capsys):
 
 def test_model_lease_prevents_duplicate_heavy_work_and_retains_unknown_owner(tmp_path):
     with _lease(tmp_path, resource_root=tmp_path):
-        assert json.loads((tmp_path / ".model.lock/owner.json").read_text())["pid"] > 0
+        assert json.loads((tmp_path / ".model.lock/owner.json").read_text(encoding="utf-8"))["pid"] > 0
         with pytest.raises(RuntimeError, match="Inspect owner.json"):
             with _lease(tmp_path, resource_root=tmp_path):
                 pytest.fail("duplicate lease admitted")
@@ -66,6 +66,14 @@ def test_transnet_preserves_nonzero_origin_vfr_and_half_open_ranges():
 
 def test_missing_pack_reports_actionable_retry(tmp_path):
     result = probe_model_pack("transnet", tmp_path)
+    assert result["available"] is False
+    unsupported = _supported("transnet")  # Real host; do not fake a supported runtime.
+    if unsupported:
+        assert result["status"] == "unsupported-platform"
+        assert result["reason"] == unsupported
+        assert "retry" not in result  # No unusable setup instruction on Intel macOS.
+        assert list(tmp_path.iterdir()) == []
+        return
     assert result["status"] == "not-installed"
     assert result["retry"].startswith("vibeedit models setup transnet")
 
@@ -91,13 +99,21 @@ def test_corrupt_cached_weights_are_not_reported_available(tmp_path):
     from vibeedit.model_packs import _python
     runtime = tmp_path / "transnet"
     _python(runtime).parent.mkdir(parents=True)
-    _python(runtime).write_text("not executed")
+    _python(runtime).write_text("not executed", encoding="utf-8")
     (runtime / "model.bin").write_bytes(b"corrupt")
-    (runtime / "installed.json").write_text(json.dumps({"definitionSha256": _definition_digest("transnet"), "files": [{"path": "model.bin", "bytes": 7, "sha256": "a" * 64}]}))
+    (runtime / "installed.json").write_text(json.dumps({"definitionSha256": _definition_digest("transnet"), "files": [{"path": "model.bin", "bytes": 7, "sha256": "a" * 64}]}), encoding="utf-8")
     result = probe_model_pack("transnet", tmp_path)
+    assert result["available"] is False
+    assert (runtime / "model.bin").read_bytes() == b"corrupt"
+    assert _python(runtime).read_text(encoding="utf-8") == "not executed"
+    unsupported = _supported("transnet")  # Platform rejection takes precedence.
+    if unsupported:
+        assert result["status"] == "unsupported-platform"
+        assert result["reason"] == unsupported
+        assert "files" not in result  # No claim that unsupported-host weights were checked.
+        return
     assert result["status"] == "integrity-failed"
     assert result["files"] == ["model.bin"]
-    assert (runtime / "model.bin").read_bytes() == b"corrupt"
 
 
 def test_mask_anchor_preserves_half_open_vfr_and_missing_last_duration():

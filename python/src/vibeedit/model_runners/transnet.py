@@ -107,7 +107,7 @@ def detect(video, output, cache, threshold, max_frames):
     verify_cache(cache)  # Detection never downloads implicitly.
     source = {"sha256": digest(video), "byteLength": video.stat().st_size}
     if output.exists():
-        old = json.loads(output.read_text())
+        old = json.loads(output.read_text(encoding="utf-8"))
         if (old.get("source") == source and old.get("detector", {}).get("threshold") == threshold
                 and old["detector"].get("upstreamCommit") == COMMIT and old["detector"].get("savedModelSha256") == MODEL_SHA
                 and old["clock"].get("originPolicy") == "stream-start-pts.v1"):
@@ -223,7 +223,7 @@ def main():
             p.error("Threshold must be between0and1 and max-frames positive")
         result = detect(args.video.resolve(strict=True), args.output.resolve(), args.cache.resolve(), args.threshold, args.max_frames)
     else:
-        result = plan(json.loads(args.index.read_text()), args.shot, args.context_seconds, args.sample_fps, args.window_seconds, args.max_frame_dimension)
+        result = plan(json.loads(args.index.read_text(encoding="utf-8")), args.shot, args.context_seconds, args.sample_fps, args.window_seconds, args.max_frame_dimension)
         if args.output.exists():
             p.error("Plan output exists; choose a new path")
         write_json(args.output, result)

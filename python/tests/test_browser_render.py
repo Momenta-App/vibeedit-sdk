@@ -35,7 +35,7 @@ def test_byte_ranges_and_symlink_escape(tmp_path):
 
 
 def test_manifest_rational_duration_and_boundary(tmp_path):
-    (tmp_path / "index.html").write_text("<h1>Example</h1>")
+    (tmp_path / "index.html").write_text("<h1>Example</h1>", encoding="utf-8")
     manifest = {
         "entry": "index.html",
         "width": 320,
@@ -44,14 +44,14 @@ def test_manifest_rational_duration_and_boundary(tmp_path):
         "duration": "1.001",
     }
     path = tmp_path / "job.json"
-    path.write_text(json.dumps(manifest))
+    path.write_text(json.dumps(manifest), encoding="utf-8")
     assert load_job(path)[3:] == (Fraction(30000, 1001), 30)
     manifest["duration"] = "1"
-    path.write_text(json.dumps(manifest))
+    path.write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(BrowserRenderError, match="exact integer"):
         load_job(path)
     manifest["entry"] = "../outside.html"
-    path.write_text(json.dumps(manifest))
+    path.write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(BrowserRenderError, match="existing HTML"):
         load_job(path)
 
@@ -68,7 +68,7 @@ def test_built_host_static_async_capture_and_warm_recovery(tmp_path):
     page = tmp_path / "index.html"
     page.write_text(
         """<!doctype html><style>body{margin:0;background:#123456;color:white}h1{font:40px Arial}</style><h1>OFFLINE</h1><canvas width="40" height="40" style="position:absolute;right:0;bottom:0"></canvas><script>window.renderFrame=async(frame)=>{if(frame===2)await new Promise(r=>setTimeout(r,80));document.querySelector('h1').textContent=frame<3?'STATIC':'READY '+frame;const c=document.querySelector('canvas').getContext('2d');c.fillStyle=`rgb(${frame<3?20:50+frame},100,180)`;c.fillRect(0,0,40,40)}</script>"""
-    )
+    , encoding="utf-8")
     job = tmp_path / "job.json"
     job.write_text(
         json.dumps(
@@ -80,7 +80,7 @@ def test_built_host_static_async_capture_and_warm_recovery(tmp_path):
                 "frameRate": {"numerator": 30000, "denominator": 1001},
             }
         )
-    )
+    , encoding="utf-8")
     with CEFService(timeout=10) as service:
         assert service.capabilities["windows"] == 0
         assert not service.capabilities["active"]
@@ -118,11 +118,11 @@ def test_dynamic_waapi_uses_creation_time(tmp_path):
 
     (tmp_path / "index.html").write_text(
         """<style>body{margin:0;background:black}div{width:160px;height:90px;background:black}</style><div></div><script>window.renderFrame=(frame)=>{if(frame===3)document.querySelector('div').animate([{backgroundColor:'#000'},{backgroundColor:'#fff'}],{duration:100,fill:'forwards'})}</script>"""
-    )
+    , encoding="utf-8")
     job = tmp_path / "job.json"
     job.write_text(
         json.dumps({"entry": "index.html", "width": 160, "height": 90, "frames": 9})
-    )
+    , encoding="utf-8")
     with CEFService() as service:
         render_browser_job(
             job,
@@ -159,11 +159,11 @@ def test_gsap_delay_and_repeated_render_are_deterministic(tmp_path):
     )
     (tmp_path / "index.html").write_text(
         """<style>body{margin:0;background:black}div{width:160px;height:90px;background:white}</style><div></div><script src="gsap.js"></script><script>gsap.fromTo('div',{opacity:.2},{opacity:1,duration:1,delay:.2,ease:'none'});window.renderFrame=async(frame)=>{if(frame===0)await new Promise(resolve=>setTimeout(resolve,80))}</script>"""
-    )
+    , encoding="utf-8")
     job = tmp_path / "job.json"
     job.write_text(
         json.dumps({"entry": "index.html", "width": 160, "height": 90, "frames": 12})
-    )
+    , encoding="utf-8")
     captures = []
     with CEFService() as service:
         for repeat in range(2):
@@ -235,11 +235,11 @@ def test_render_frame_introduces_image_and_font(tmp_path):
     Image.new("RGB", (160, 90), (40, 180, 220)).save(tmp_path / "image.png")
     (tmp_path / "index.html").write_text(
         """<style>@font-face{font-family:Late;src:url(font.ttf)}body{margin:0;background:black}img{position:absolute;left:0;top:0;width:160px;height:90px}h1{position:absolute;left:0;top:90px;margin:0;color:white;font:32px Late}</style><script>window.renderFrame=(frame)=>{if(frame===0)document.body.innerHTML='<img src="image.png"><h1>Roboto ready</h1>'}</script>"""
-    )
+    , encoding="utf-8")
     job = tmp_path / "job.json"
     job.write_text(
         json.dumps({"entry": "index.html", "width": 320, "height": 180, "frames": 3})
-    )
+    , encoding="utf-8")
     with CEFService() as service:
         report = render_browser_job(
             job,
@@ -295,9 +295,9 @@ def test_nested_browser_project_modules_fonts_and_capture(tmp_path):
     shutil.copytree(
         ROOT / "browser-renderer/examples/features", tmp_path / "nested/site"
     )
-    job = json.loads((tmp_path / "nested/site/job.json").read_text())
+    job = json.loads((tmp_path / "nested/site/job.json").read_text(encoding="utf-8"))
     job.update(entry="nested/site/index.html", frames=3)
-    (tmp_path / "job.json").write_text(json.dumps(job))
+    (tmp_path / "job.json").write_text(json.dumps(job), encoding="utf-8")
     with CEFService() as service:
         report = render_browser_job(
             tmp_path / "job.json",

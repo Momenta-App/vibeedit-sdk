@@ -51,7 +51,7 @@ def test_portable_fonts_and_optional_voice_probe(tmp_path):
     run(SKILLS / "clean-text-animation/scripts/render_clean_text.py", "--text", "Follow for more", "--output", tmp_path / "clean.mp4", "--contact-sheet", tmp_path / "clean.jpg", "--size", "320x180", "--font-size", 24, "--duration", .4, "--hold", .1, "--shimmer", "last")
     assert (tmp_path / "clean.mp4").stat().st_size > 1000
     run(SKILLS / "negative/scripts/run_negative_gauntlet.py", "--out-dir", tmp_path / "negative", "--no-video")
-    assert json.loads((tmp_path / "negative/gauntlet-report.json").read_text())["pass"]
+    assert json.loads((tmp_path / "negative/gauntlet-report.json").read_text(encoding="utf-8"))["pass"]
     probe = run(SKILLS / "vibeedit-bs-roformer-voice-isolation/scripts/isolate_voice_bs_roformer.py", "--probe")
     receipt = json.loads(probe.stdout)
     assert receipt["requiredVersion"] == "0.47.0" and receipt["inferenceQualified"] is False

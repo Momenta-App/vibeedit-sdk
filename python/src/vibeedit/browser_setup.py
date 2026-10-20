@@ -81,7 +81,7 @@ def setup_cef() -> dict:
         fcntl.flock(lock, fcntl.LOCK_EX)
         manifest_path = runtime / "runtime.json"
         if manifest_path.is_file():
-            manifest = json.loads(manifest_path.read_text())
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if manifest.get("sourceSha256") == source_sha and all(
                 (runtime / relative).is_file() and _sha256(runtime / relative) == manifest.get(key)
                 for relative, key in ((HOST_RELATIVE, "hostSha256"), (BRIDGE_RELATIVE, "bridgeSha256"))
@@ -123,7 +123,7 @@ def setup_cef() -> dict:
             manifest = {"version": VERSION, "cefVersion": CEF_VERSION, "cefArchiveSha256": CEF_SHA256,
                         "sourceSha256": source_sha, "hostSha256": _sha256(stage / HOST_RELATIVE),
                         "bridgeSha256": _sha256(stage / BRIDGE_RELATIVE)}
-            (stage / "runtime.json").write_text(json.dumps(manifest, indent=2) + "\n")
+            (stage / "runtime.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
             # Preserve CEF notices alongside the cached runtime.
             shutil.copy2(cef / "LICENSE.txt", stage / "CEF-LICENSE.txt")
             if runtime.exists():

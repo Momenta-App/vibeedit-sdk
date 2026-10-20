@@ -12,7 +12,7 @@ def test_browser_example_is_an_ordinary_job(tmp_path):
     assert root == example.resolve()
     assert frames == 12
     assert str(fps) == "30000/1001"
-    assert "renderFrame" in entry.read_text()
+    assert "renderFrame" in entry.read_text(encoding="utf-8")
 
 
 def test_native_runtime_uses_versioned_user_cache(tmp_path, monkeypatch):

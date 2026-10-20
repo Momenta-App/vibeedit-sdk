@@ -1,7 +1,7 @@
 {
   "id": "vibeedit://template/dialogue-quote",
   "name": "Dialogue / Quote Edit",
-  "description": "Source-bound quote-first edit with correctable word layers and preserved original audio. Clean render uses generated layout stand-ins, not recorded speech.",
+  "description": "Footage-first quote edit with centered inverted word captions, correctable native-time word layers and original audio. Clean render uses generated stand-ins, not recorded speech.",
   "families": [
     "captions",
     "quote-edit",

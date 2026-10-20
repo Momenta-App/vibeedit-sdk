@@ -13,7 +13,7 @@ from vibeedit.data import data_path
 
 
 def _bounded_text_spec() -> dict:
-    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text(encoding="utf-8"))
     spec["id"] = "bounded-text-revision"
     spec["canvas"].update({"width": 320, "height": 180})
     spec["durationFrames"] = 30
@@ -86,14 +86,14 @@ def test_output_uri_only_revision_is_no_work_and_keeps_output_hash():
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_output_uri_only_revision_copies_verified_artifact(tmp_path: Path):
-    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     previous["cache"] = {"enabled": False}
     previous_output = render(previous, tmp_path / "previous.mp4")
     revised = json.loads(json.dumps(previous))
     revised["render"]["output"]["uri"] = "revised.mp4"
 
     result = render_revision(previous, revised, previous_output, tmp_path / "revised.mp4")
-    record = json.loads(result.with_suffix(".mp4.vibeedit.json").read_text())
+    record = json.loads(result.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
 
     assert result.read_bytes() == previous_output.read_bytes()
     assert record["work"]["framesRendered"] == 0
@@ -102,7 +102,7 @@ def test_output_uri_only_revision_copies_verified_artifact(tmp_path: Path):
 
 
 def test_text_color_revision_reuses_sources_tracking_audio_and_unrelated_layers():
-    previous = json.loads(data_path("examples", "face-follow-text", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "face-follow-text", "composition.json").read_text(encoding="utf-8"))
     revised = json.loads(json.dumps(previous))
     revised["timeline"]["tracks"][1]["items"][0]["props"]["foreground"] = "#FFCC00"
 
@@ -115,7 +115,7 @@ def test_text_color_revision_reuses_sources_tracking_audio_and_unrelated_layers(
 
 
 def test_transition_revision_invalidates_only_overlap_and_handles():
-    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text(encoding="utf-8"))
     revised = json.loads(json.dumps(previous))
     revised["timeline"]["tracks"][0]["items"][2]["transitionId"] = "vibeedit://transition/transitions-core-film-burn"
 
@@ -129,7 +129,7 @@ def test_transition_revision_invalidates_only_overlap_and_handles():
 
 
 def test_scene_removal_reuses_prefix_and_source_artifacts():
-    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text(encoding="utf-8"))
     revised = json.loads(json.dumps(previous))
     revised["durationFrames"] = 60
     revised["timeline"]["tracks"][0]["items"] = [revised["timeline"]["tracks"][0]["items"][0]]
@@ -150,7 +150,7 @@ def test_scene_removal_reuses_prefix_and_source_artifacts():
 def test_scene_tail_removal_stream_copies_exact_prior_prefix(tmp_path: Path):
     for output, source in (("a.mp4", "testsrc2=size=320x180:rate=30:duration=2"), ("b.mp4", "smptebars=size=320x180:rate=30:duration=2")):
         subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", source, "-c:v", "libx264", "-pix_fmt", "yuv420p", str(tmp_path / output)], check=True)
-    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text(encoding="utf-8"))
     previous["cache"] = {"enabled": False}
     previous["sources"][0]["uri"] = str(tmp_path / "a.mp4")
     previous["sources"][1]["uri"] = str(tmp_path / "b.mp4")
@@ -173,7 +173,7 @@ def test_scene_tail_removal_stream_copies_exact_prior_prefix(tmp_path: Path):
     with pytest.raises(ValueError, match="provenance"):
         render_revision(previous, revised, tmp_path / "a.mp4", tmp_path / "untrusted.mp4")
     incremental = render_revision(previous, revised, previous_output, tmp_path / "incremental.mp4")
-    record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text())
+    record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
 
     def prefix_md5(path: Path) -> str:
         result = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", "0:v:0", "-frames:v", "48", "-f", "framemd5", "-"], capture_output=True, text=True, check=True)
@@ -192,7 +192,7 @@ def test_scene_tail_removal_stream_copies_exact_prior_prefix(tmp_path: Path):
 def test_scene_tail_removal_stream_copies_video_and_rebuilds_drift_free_audio(tmp_path: Path):
     for output, source in (("a.mp4", "testsrc2=size=320x180:rate=30:duration=2"), ("b.mp4", "smptebars=size=320x180:rate=30:duration=2")):
         subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", source, "-c:v", "libx264", "-pix_fmt", "yuv420p", str(tmp_path / output)], check=True)
-    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text(encoding="utf-8"))
     previous["cache"] = {"enabled": False}
     previous["sources"][0]["uri"] = str(tmp_path / "a.mp4")
     previous["sources"][1]["uri"] = str(tmp_path / "b.mp4")
@@ -217,7 +217,7 @@ def test_scene_tail_removal_stream_copies_video_and_rebuilds_drift_free_audio(tm
 
     incremental = render_revision(previous, revised, previous_output, tmp_path / "incremental-with-audio.mp4")
     reference = render(revised, tmp_path / "reference-with-audio.mp4")
-    record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text())
+    record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
 
     def decoded_audio(path: Path) -> bytes:
         return subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", "0:a:0", "-f", "f32le", "-c", "pcm_f32le", "-"], capture_output=True, check=True).stdout
@@ -238,7 +238,7 @@ def test_scene_tail_removal_stream_copies_video_and_rebuilds_drift_free_audio(tm
 
 
 def test_final_clip_trim_requires_clean_render_until_b_frame_boundary_is_proven():
-    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text(encoding="utf-8"))
     revised = json.loads(json.dumps(previous))
     revised["durationFrames"] = 102
     revised["timeline"]["tracks"][0]["items"][1]["placement"]["durationFrames"] = 54
@@ -252,7 +252,7 @@ def test_final_clip_trim_requires_clean_render_until_b_frame_boundary_is_proven(
 
 
 def test_audio_gain_revision_reuses_every_video_frame():
-    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "effect-transition", "composition.json").read_text(encoding="utf-8"))
     revised = json.loads(json.dumps(previous))
     revised["timeline"]["tracks"][1]["items"][0]["gainDb"] = -6
 
@@ -274,7 +274,7 @@ def test_audio_gain_revision_reuses_every_video_frame():
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_audio_gain_revision_stream_copies_video_and_matches_clean_audio(tmp_path: Path):
-    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     previous["cache"] = {"enabled": False}
     previous["timeline"]["tracks"] = [{"id": "A1", "kind": "audio", "order": 0, "items": [{"id": "impact", "kind": "sound_effect", "placement": {"startFrame": 5, "durationFrames": 10}, "soundEffectId": "vibeedit://sfx/impact-procedural", "params": {"frequency": 72}, "gainDb": -12, "variationSeed": 1, "avoidImmediateRepeat": True}]}]
     previous["verification"]["hasAudio"] = True
@@ -284,7 +284,7 @@ def test_audio_gain_revision_stream_copies_video_and_matches_clean_audio(tmp_pat
 
     incremental = render_revision(previous, revised, previous_output, tmp_path / "incremental-audio.mp4")
     reference = render(revised, tmp_path / "reference-audio.mp4")
-    record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text())
+    record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
 
     def stream_md5(path: Path, stream: str) -> str:
         result = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", stream, "-f", "framemd5", "-"], capture_output=True, text=True, check=True)
@@ -303,7 +303,7 @@ def test_external_audio_gain_revision_matches_clean_render(tmp_path: Path):
     audio = tmp_path / "music.wav"
     subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "testsrc2=size=160x90:rate=30:duration=2", "-c:v", "libx264", "-pix_fmt", "yuv420p", str(video)], check=True)
     subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "sine=frequency=220:sample_rate=48000:duration=2", str(audio)], check=True)
-    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     previous["cache"] = {"enabled": False}
     previous["canvas"].update({"width": 160, "height": 90})
     previous["durationFrames"] = 60
@@ -329,7 +329,7 @@ def test_external_audio_gain_revision_matches_clean_render(tmp_path: Path):
 
 
 def test_adding_face_follow_text_reuses_tracking_artifact():
-    revised = json.loads(data_path("examples", "face-follow-text", "composition.json").read_text())
+    revised = json.loads(data_path("examples", "face-follow-text", "composition.json").read_text(encoding="utf-8"))
     previous = json.loads(json.dumps(revised))
     previous["timeline"]["tracks"][1]["items"] = []
 
@@ -340,7 +340,7 @@ def test_adding_face_follow_text_reuses_tracking_artifact():
 
 
 def test_sam_prompt_invalidates_mask_and_downstream_composite_only():
-    previous = json.loads(data_path("examples", "sam-segmentation", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "sam-segmentation", "composition.json").read_text(encoding="utf-8"))
     previous["timeline"]["tracks"][0]["items"][0]["maskIds"] = ["sam-mask"]
     previous["artifacts"]["masks"][0]["provenance"]["parameters"] = {"prompt": "person"}
     revised = json.loads(json.dumps(previous))
@@ -357,9 +357,9 @@ def test_sam_prompt_invalidates_mask_and_downstream_composite_only():
 
 
 def test_tracking_change_transitively_invalidates_dependent_mask_and_layer():
-    previous = json.loads(data_path("examples", "sam-segmentation", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "sam-segmentation", "composition.json").read_text(encoding="utf-8"))
     previous["timeline"]["tracks"][0]["items"][0]["maskIds"] = ["sam-mask"]
-    previous["artifacts"]["tracking"] = [json.loads(data_path("examples", "face-follow-text", "composition.json").read_text())["artifacts"]["tracking"][0]]
+    previous["artifacts"]["tracking"] = [json.loads(data_path("examples", "face-follow-text", "composition.json").read_text(encoding="utf-8"))["artifacts"]["tracking"][0]]
     previous["artifacts"]["masks"][0]["trackingArtifactId"] = "face-track"
     revised = json.loads(json.dumps(previous))
     revised["artifacts"]["tracking"][0]["provenance"]["cacheKey"] = "retracked-v2"
@@ -379,7 +379,7 @@ def test_tracking_change_transitively_invalidates_dependent_mask_and_layer():
 
 
 def test_source_change_invalidates_dependent_analysis_graph_node():
-    previous = json.loads(data_path("examples", "beat-synchronized", "composition.json").read_text())
+    previous = json.loads(data_path("examples", "beat-synchronized", "composition.json").read_text(encoding="utf-8"))
     revised = json.loads(json.dumps(previous))
     next(source for source in revised["sources"] if source["id"] == "music")["identity"]["value"] = "replacement-source-v2"
 
@@ -393,7 +393,7 @@ def test_source_change_invalidates_dependent_analysis_graph_node():
 
 
 def test_container_only_revision_plans_stream_copy_remux():
-    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     revised = json.loads(json.dumps(previous))
     revised["render"]["output"]["container"] = "mkv"
     revised["render"]["output"]["uri"] = "output.mkv"
@@ -407,7 +407,7 @@ def test_container_only_revision_plans_stream_copy_remux():
 
 
 def test_cross_family_aac_container_revision_plans_safe_audio_remix():
-    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     previous["sources"] = [{"id": "music", "kind": "audio", "uri": "music.wav", "identity": {"algorithm": "sha256", "value": "music-v1"}, "durationFrames": previous["durationFrames"]}]
     previous["timeline"]["tracks"] = [{"id": "A1", "kind": "audio", "order": 0, "items": [{"id": "music", "kind": "audio", "placement": {"startFrame": 0, "durationFrames": previous["durationFrames"]}, "source": {"sourceId": "music", "inFrame": 0, "durationFrames": previous["durationFrames"]}, "role": "music", "gainDb": -12, "pan": 0, "fadeInFrames": 0, "fadeOutFrames": 0, "effects": []}]}]
     previous["verification"]["hasAudio"] = True
@@ -425,7 +425,7 @@ def test_cross_family_aac_container_revision_plans_safe_audio_remix():
 
 
 def test_incompatible_container_codec_does_not_claim_remux_support():
-    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     revised = json.loads(json.dumps(previous))
     revised["render"]["output"].update({"container": "webm", "uri": "output.webm"})
 
@@ -438,7 +438,7 @@ def test_incompatible_container_codec_does_not_claim_remux_support():
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_container_only_revision_stream_copies_video_and_matches_full_render(tmp_path: Path):
-    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     previous["cache"] = {"enabled": False}
     previous_output = render(previous, tmp_path / "previous.mp4")
     revised = json.loads(json.dumps(previous))
@@ -446,7 +446,7 @@ def test_container_only_revision_stream_copies_video_and_matches_full_render(tmp
 
     incremental = render_revision(previous, revised, previous_output, tmp_path / "incremental.mkv")
     reference = render(revised, tmp_path / "reference.mkv")
-    record = json.loads(incremental.with_suffix(".mkv.vibeedit.json").read_text())
+    record = json.loads(incremental.with_suffix(".mkv.vibeedit.json").read_text(encoding="utf-8"))
 
     def frame_md5(path: Path) -> str:
         result = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", "0:v:0", "-f", "framemd5", "-"], capture_output=True, text=True, check=True)
@@ -460,7 +460,7 @@ def test_container_only_revision_stream_copies_video_and_matches_full_render(tmp
 
 @pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="FFmpeg is optional on the test host")
 def test_cross_family_aac_container_revision_preserves_timing_and_fidelity(tmp_path: Path):
-    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    previous = json.loads(data_path("schema", "fixtures", "minimal.json").read_text(encoding="utf-8"))
     previous["cache"] = {"enabled": False}
     previous["timeline"]["tracks"] = [{"id": "A1", "kind": "audio", "order": 0, "items": [{"id": "impact", "kind": "sound_effect", "placement": {"startFrame": 5, "durationFrames": 10}, "soundEffectId": "vibeedit://sfx/impact-procedural", "params": {"frequency": 72}, "gainDb": -12, "variationSeed": 1, "avoidImmediateRepeat": True}]}]
     previous["verification"]["hasAudio"] = True
@@ -474,7 +474,7 @@ def test_cross_family_aac_container_revision_preserves_timing_and_fidelity(tmp_p
         render_revision(previous, revised, untrusted, tmp_path / "rejected.mkv")
     incremental = render_revision(previous, revised, previous_output, tmp_path / "incremental.mkv")
     reference = render(revised, tmp_path / "reference.mkv")
-    record = json.loads(incremental.with_suffix(".mkv.vibeedit.json").read_text())
+    record = json.loads(incremental.with_suffix(".mkv.vibeedit.json").read_text(encoding="utf-8"))
 
     def decoded_md5(path: Path, stream: str) -> str:
         result = subprocess.run([shutil.which("ffmpeg"), "-hide_banner", "-loglevel", "error", "-i", str(path), "-map", stream, "-f", "md5", "-"], capture_output=True, text=True, check=True)
@@ -511,7 +511,7 @@ def test_bounded_text_revision_reuses_clean_frames_and_matches_full_render(tmp_p
 
     render(previous, tmp_path / "previous.mp4")
     incremental = render(revised, tmp_path / "incremental.mp4")
-    incremental_record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text())
+    incremental_record = json.loads(incremental.with_suffix(".mp4.vibeedit.json").read_text(encoding="utf-8"))
     revised["cache"]["enabled"] = False
     reference = render(revised, tmp_path / "reference.mp4")
 

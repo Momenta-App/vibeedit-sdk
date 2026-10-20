@@ -34,7 +34,7 @@ from vibeedit.browser_setup import native_paths
 
 ROOT = package_root()
 HOST, BRIDGE = native_paths()
-ADAPTER = Path(__file__).with_name("browser_frame.js").read_text()
+ADAPTER = Path(__file__).with_name("browser_frame.js").read_text(encoding="utf-8")
 IMPLEMENTATION_SHA = hashlib.sha256(
     Path(__file__).read_bytes()
     + Path(__file__).with_name("browser_media.py").read_bytes()
@@ -519,7 +519,7 @@ def project_server(
 
 
 def load_job(path: Path):
-    manifest = json.loads(path.read_text())
+    manifest = json.loads(path.read_text(encoding="utf-8"))
     root = (path.parent / manifest.get("root", ".")).resolve()
     entry = (root / manifest["entry"]).resolve()
     if not entry.is_file() or not entry.is_relative_to(root):
@@ -591,7 +591,7 @@ def render_browser_job(
             report["fallback"] = {"requestedBackend": "cef", "reason": str(error)}
             output.with_suffix(output.suffix + ".browser.json").write_text(
                 json.dumps(report, indent=2) + "\n"
-            )
+            , encoding="utf-8")
             return report
     if cache is None:
         if service is None:
@@ -673,7 +673,7 @@ def render_browser_job(
         key = hashlib.sha256(json.dumps(settings, sort_keys=True).encode()).hexdigest()
         artifact = cache / (key + output.suffix.lower())
         provenance = artifact.with_suffix(".json")
-        cached = json.loads(provenance.read_text()) if provenance.is_file() else None
+        cached = json.loads(provenance.read_text(encoding="utf-8")) if provenance.is_file() else None
         if artifact.is_file() and cached and _sha256(artifact) == cached["sha256"]:
             output.parent.mkdir(parents=True, exist_ok=True)
             _publish(artifact, output)
@@ -696,10 +696,10 @@ def render_browser_job(
             cache.mkdir(parents=True, exist_ok=True)
             report.update(cacheHit=False, cacheKey=key)
             _publish(output, artifact)
-            provenance.write_text(json.dumps(report, indent=2) + "\n")
+            provenance.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         output.with_suffix(output.suffix + ".browser.json").write_text(
             json.dumps(report, indent=2) + "\n"
-        )
+        , encoding="utf-8")
         return report
     finally:
         service.job_lock.release()
@@ -1407,7 +1407,7 @@ def _render_browser_job(
     }
     output.with_suffix(output.suffix + ".browser.json").write_text(
         json.dumps(report, indent=2) + "\n"
-    )
+    , encoding="utf-8")
     return report
 
 

@@ -114,3 +114,61 @@ def test_missing_alias_retains_original_send_fence_and_account_scope_required(tm
         with pytest.raises(MyriographError,match='original_customer_credentials_required'):
             observe(api,tmp_path,'original-face','resume')
         assert len(api.calls)==count
+
+
+def test_explicit_resume_continues_only_proven_unsent_original_after_readonly_binding(tmp_path):
+    class Continuation(Faces):
+        def call(self,path,body=None,*,key=None):
+            if path.endswith('/recover') and '/operations/' in path:
+                self.calls.append((path,body,key))
+                original=self.aliases[path.split('/')[-2]]
+                assert body=={'expectedRequestIntentSha256':original['requestIntentSha256']}
+                original.update(state='queued',admissionState='queue_acknowledged',resumeOriginalAllowed=False)
+                return original
+            return super().call(path,body,key=key)
+    api,row=unknown(tmp_path,Continuation())
+    api.aliases[row['idempotency_key']].update(state='admission_unknown',admissionState='funding_unknown',resumeOriginalAllowed=True)
+    result=observe(api,tmp_path,'original-face','resume')
+    path='/v1/faces/operations/'+row['idempotency_key']
+    assert api.calls[-2][0:2]==(path,None)
+    assert api.calls[-1]==(path+'/recover',{'expectedRequestIntentSha256':api.aliases[row['idempotency_key']]['requestIntentSha256']},None)
+    assert result['jobId']==api.job_id and result['state']=='queued'
+    assert len([call for call in api.calls if call[0].endswith('/jobs')])==1
+
+
+def test_continuation_ack_loss_keeps_original_send_fence_then_recovers_without_another_post(tmp_path):
+    class LostContinuation(Faces):
+        def call(self,path,body=None,*,key=None):
+            if path.endswith('/recover') and '/operations/' in path:
+                self.calls.append((path,body,key))
+                self.aliases[path.split('/')[-2]].update(state='queued',admissionState='queue_acknowledged',resumeOriginalAllowed=False)
+                raise MyriographError('transport_unknown')
+            return super().call(path,body,key=key)
+    api,row=unknown(tmp_path,LostContinuation())
+    api.aliases[row['idempotency_key']].update(state='admission_unknown',admissionState='funded_unsent',resumeOriginalAllowed=True)
+    with pytest.raises(MyriographError,match='transport_unknown'):observe(api,tmp_path,'original-face','resume')
+    with _database(tmp_path) as db:assert dict(db.execute('select * from jobs').fetchone())==row
+    result=observe(api,tmp_path,'original-face','resume')
+    assert result['jobId']==api.job_id and result['state']=='queued'
+    assert len([call for call in api.calls if call[0].endswith('/recover')])==1
+    assert len([call for call in api.calls if call[0].endswith('/jobs')])==1
+
+
+def test_unknown_queue_never_continues_even_with_inconsistent_server_advisory(tmp_path):
+    api,row=unknown(tmp_path)
+    api.aliases[row['idempotency_key']].update(state='admission_unknown',admissionState='queue_unknown',resumeOriginalAllowed=True)
+    assert observe(api,tmp_path,'original-face','resume')['jobId']==api.job_id
+    assert not any(path.endswith('/recover') for path,_,_ in api.calls)
+
+
+def test_continuation_cannot_replace_native_handle_after_the_readonly_original_lookup(tmp_path):
+    class Replacement(Faces):
+        def call(self,path,body=None,*,key=None):
+            if path.endswith('/recover') and '/operations/' in path:
+                self.calls.append((path,body,key))
+                return {**self.aliases[path.split('/')[-2]],'jobId':'b'*64}
+            return super().call(path,body,key=key)
+    api,row=unknown(tmp_path,Replacement())
+    api.aliases[row['idempotency_key']].update(state='admission_unknown',admissionState='funding_unknown',resumeOriginalAllowed=True)
+    with pytest.raises(MyriographError,match='original_face_operation_binding'):observe(api,tmp_path,'original-face','resume')
+    with _database(tmp_path) as db:assert dict(db.execute('select * from jobs').fetchone())==row

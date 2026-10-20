@@ -1,0 +1,33 @@
+{
+  "cacheHit": false,
+  "cacheKey": "0fc7e78d0331dd30ccbfa4cfdf8ef1631e4e53e199d239b5c21309c83cce9114",
+  "compositionId": "talking-head-captions",
+  "compositionSha256": "523ab1598b3e2cac8561588bdbf540eb81f61c8a195a24bfb85093d20cad5d0a",
+  "implementationVersion": "0.2.0b1",
+  "output": {
+    "bytes": 80336,
+    "path": "talking-head-captions.mp4",
+    "sha256": "a9c3c8ef33d41b870db945c4241f1411250ebe2f01dc14ca40514f76841994be"
+  },
+  "runtimeVersions": {
+    "ffmpeg": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "playwright": "1.61.0"
+  },
+  "schemaVersion": "1.0.0",
+  "sourceIdentities": [
+    {
+      "algorithm": "sha256",
+      "value": "af68e3dc294d348de149f1e2619c83194401708ca9c97c51e95990e641b3228d"
+    }
+  ],
+  "work": {
+    "framesRendered": 90,
+    "framesReused": 0,
+    "mediaBaseCacheHit": false,
+    "mediaBaseFramesRendered": 90,
+    "motionFramesCaptured": 90,
+    "motionFramesReused": 0,
+    "reuseKind": "none",
+    "videoFramesEncoded": 90
+  }
+}

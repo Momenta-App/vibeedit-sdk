@@ -114,9 +114,9 @@ def import_face_package(archive, destination, *, job_id, source_sha256, archive_
         shutil.copyfile(archive, stage / "native.faces.zip")
         _require(_digest(stage / "native.faces.zip") == archive_sha256, "Native archive changed during import")
         receipt = {"schemaVersion": SCHEMA, "ok": True, "sourceSha256": source_sha256, "sourceByteLength": metadata["sourceByteLength"], "jobId": job_id, "archiveSha256": archive_sha256, "archiveByteLength": archive_bytes, "packageReference": package_reference, "manifestSha256": _digest(native / "manifest.json"), "nativeSchemaVersion": manifest["schemaVersion"], "index": "review-index.sqlite3", "indexSha256": _digest(stage / "review-index.sqlite3"), "members": declarations, "coverage": metadata["coverage"], "library": metadata["library"], "cloudAppearanceSelectorsAvailable": metadata["mappingAvailable"], "state": "unreviewed-native-predictions", "limits": ["Anonymous assignments may fragment or remain null; import integrity is not identity accuracy", "Representative JPEGs are evidence cards, not native source frames", "Cloud commands remain pending until authoritative revision acknowledgement", "Native v1/v2 source clock is upstream CFR-qualified; no VFR timing is invented"]}
-        (stage / "import-receipt.json").write_text(_json(receipt) + "\n")
+        (stage / "import-receipt.json").write_text(_json(receipt) + "\n", encoding="utf-8")
         baseline = {"schemaVersion": SCHEMA, "sourceSha256": source_sha256, "jobId": job_id, "archiveSha256": archive_sha256, "index": "review-index.sqlite3", "indexSha256": receipt["indexSha256"], "nativeManifest": "native/manifest.json", "coverage": metadata["coverage"], "library": metadata["library"], "cloudAppearanceSelectorsAvailable": metadata["mappingAvailable"], "limitations": receipt["limits"]}
-        (stage / "review-baseline.json").write_text(_json(baseline) + "\n")
+        (stage / "review-baseline.json").write_text(_json(baseline) + "\n", encoding="utf-8")
         # An unexpected new destination is never merged or overwritten.
         _require(not destination.exists() and not destination.is_symlink(), "Face import destination appeared during validation")
         destination.mkdir(mode=0o700)  # Exclusive destination claim; never replace another import.

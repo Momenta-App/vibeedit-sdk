@@ -57,7 +57,7 @@ def render_example(directory: str | Path, output: str | Path | None = None) -> P
     result = render(composition_path, destination) if (root/"project.vibeedit.json").is_file() and spec["id"] not in {"dialogue-quote", "talking-head-captions", "beat-synchronized"} else handlers[spec["id"]](root, spec, destination)
     if result is not None:
         if (root / "project.vibeedit.json").is_file():
-            spec = json.loads((root / Project(root).read()["composition"]).read_text())
+            spec = json.loads((root / Project(root).read()["composition"]).read_text(encoding="utf-8"))
         report = verify_output(result, spec["verification"])
         if not report.passed:
             raise RuntimeError("\n".join(report.errors))
@@ -128,7 +128,7 @@ def prepare_caption_example(directory, *, media=None, words=None):
         return root/Project(root).read()["composition"]
     if (media is None) != (words is None):
         raise ValueError("supply both user video and source-time word JSON; do not invent dialogue")
-    spec = json.loads((root/"composition.json").read_text())
+    spec = json.loads((root/"composition.json").read_text(encoding="utf-8"))
     if spec["id"] not in {"dialogue-quote", "talking-head-captions"}:
         raise ValueError("not a caption/quote template")
     fixture = media is None
@@ -136,10 +136,10 @@ def prepare_caption_example(directory, *, media=None, words=None):
         (root/"sources").mkdir(exist_ok=True)
         media = root/"sources"/"generated-standin.mp4"
         _run([_ffmpeg(), "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "gradients=size=640x360:rate=30:duration=3:c0=0x111827:c1=0x314044:x0=0:y0=0:x1=640:y1=360:seed=1", "-f", "lavfi", "-i", "sine=frequency=196:sample_rate=48000:duration=3", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", str(media)])
-        word_data = json.loads((root/"words.json").read_text())
+        word_data = json.loads((root/"words.json").read_text(encoding="utf-8"))
     else:
         media = Path(media)
-        word_data = json.loads(Path(words).read_text())
+        word_data = json.loads(Path(words).read_text(encoding="utf-8"))
     metadata = probe(media)
     if not any(stream.get("codec_type") == "video" for stream in metadata["streams"]):
         raise ValueError("caption template requires a supplied video source")
@@ -154,6 +154,13 @@ def prepare_caption_example(directory, *, media=None, words=None):
     duration_us = round(Fraction(metadata.get("format", {}).get("duration", "0"))*1_000_000)
     if any(word["endUs"] > duration_us for word in word_data["words"]):
         raise ValueError("word anchor falls outside supplied source")
+    rate = Fraction(spec["canvas"]["frameRate"]["numerator"], spec["canvas"]["frameRate"]["denominator"])
+    def frame(value):
+        return math.ceil(Fraction(value,1_000_000)*rate)
+    ordered = sorted(word_data["words"], key=lambda word:word["startUs"])
+    intervals = [(frame(word["startUs"]), min(frame(word["endUs"]), frame(word["startUs"]+750000), frame(ordered[index+1]["startUs"]) if index+1<len(ordered) else frame(duration_us))) for index,word in enumerate(ordered)]
+    if any(end <= start for start,end in intervals):
+        raise ValueError("Caption entries collide on an output frame; select one caption stream or correct its source-time anchors")
     create_project(root, root/"composition.json")
     project = Project(root)
     project.register_source(media, expected_revision=0, receipt={"kind":"generated-fixture" if fixture else "user-supplied", "wordTiming":"user normalized video-time anchors; not independently certified"})
@@ -165,16 +172,28 @@ def prepare_caption_example(directory, *, media=None, words=None):
     atomic_json(baseline_path, baseline)
     project.import_analysis(source["id"], baseline_path, service="local-caption-input", job_id="local-"+file_digest(baseline_path)[:24], schema_version=baseline["schemaVersion"], expected_revision=project.read()["revision"])
     baseline_id = project.read()["analysis"][0]["id"]
-    rate = Fraction(spec["canvas"]["frameRate"]["numerator"], spec["canvas"]["frameRate"]["denominator"])
     frames = max(1, round(Fraction(source["durationUs"],1_000_000)*rate))
-    def frame(value):
-        return round(Fraction(value,1_000_000)*rate)
     spec["durationFrames"] = frames
     spec["sources"] = [{"id":source["id"], "kind":"video", "uri":source["path"], "identity":{"algorithm":"sha256", "value":source["sha256"]}, "durationFrames":frames, "metadata":{"nativeClock":source["clock"]}}]
-    component = "vibeedit://text/caption-rail"
+    negative = spec["id"] == "dialogue-quote"
+    assets = root/"caption-assets"
+    assets.mkdir(exist_ok=True)
+    shutil.copyfile(data_path("catalog", "text-runtime", "assets", "fonts", "Poppins-Black.ttf"), assets/"Poppins-Black.ttf")
+    shutil.copyfile(data_path("catalog", "text-runtime", "assets", "fonts", "OFL-poppins.txt"), assets/"OFL-poppins.txt")
+    # Difference must blend against decoded footage; isolated CSS cannot invert
+    # pixels from the video track. It applies to the entire motion stack.
+    spec["render"]["motionBlendMode"] = "difference" if negative else "normal"
+    css = "@font-face{font-family:Caption;src:url('caption-assets/Poppins-Black.ttf')}html,body{margin:0;overflow:hidden}.stage{position:absolute;inset:0;display:grid;place-items:center}.word{max-width:92%;font:900 clamp(36px,10vw,128px)/.98 Caption,sans-serif;text-align:center;text-transform:uppercase;overflow-wrap:anywhere;color:#fff}"
+    if not negative:
+        css += ".stage{align-items:end;box-sizing:border-box;padding-bottom:15%}.word{color:#ecff4d;-webkit-text-stroke:1px #10151e;paint-order:stroke fill;text-shadow:0 2px 1px #10151e;animation:hit .14s cubic-bezier(.2,.8,.3,1) both}@keyframes hit{from{transform:translateY(8px) scale(.9)}to{transform:translateY(0) scale(1)}}"
+    items = []
+    for index, word in enumerate(ordered):
+        start, end = intervals[index]
+        end = min(end, frames)
+        items.append({"id":"caption-"+str(index),"kind":"motion","placement":{"startFrame":start,"durationFrames":end-start},"componentId":"vibeedit://motion/html-css","props":{"html":'<div class="stage"><div class="word">{{text}}</div></div>',"text":word["text"],"css":css,"atoms":False},"renderer":"html","transparent":True,"metadata":{"reviewWord":{"sourceId":source["id"],"baselineId":baseline_id,"targetId":word["id"]},"sourceStartUs":word["startUs"],"sourceEndUs":word["endUs"],"captionPresentation":"centered-negative-word" if negative else "lower-center-kinetic-word","clearAfterUs":750000}})
     spec["timeline"]["tracks"] = [
       {"id":"V1","kind":"video","order":0,"items":[{"id":"source-clip","kind":"video","placement":{"startFrame":0,"durationFrames":frames},"source":{"sourceId":source["id"],"inFrame":0,"durationFrames":frames},"effects":[]}]},
-      {"id":"M1","kind":"motion","order":10,"items":[{"id":"caption-"+str(index),"kind":"motion","placement":{"startFrame":frame(word["startUs"]),"durationFrames":max(1,frame(word["endUs"])-frame(word["startUs"]))},"componentId":component,"props":{"text":word["text"],"accent":"#ffffff" if spec["id"] == "dialogue-quote" else "#ecff4d","background":"rgba(8,10,14,.88)"},"renderer":"html","transparent":True,"metadata":{"reviewWord":{"sourceId":source["id"],"baselineId":baseline_id,"targetId":word["id"]},"sourceStartUs":word["startUs"],"sourceEndUs":word["endUs"]}} for index,word in enumerate(word_data["words"])]}
+      {"id":"M1","kind":"motion","order":10,"items":items}
     ]
     if has_audio:
         spec["timeline"]["tracks"].append({"id": "A1", "kind": "audio", "order": 0, "items": [{"id": "source-dialogue", "kind": "audio", "placement": {"startFrame": 0, "durationFrames": frames}, "source": {"sourceId": source["id"], "inFrame": 0, "durationFrames": frames}, "gainDb": 0}]})
@@ -183,6 +202,7 @@ def prepare_caption_example(directory, *, media=None, words=None):
     validate_composition(spec)
     atomic_json(root/"composition.json", spec)
     project.snapshot()
+    project.register_artifact("reviews", "caption-assets", expected_revision=project.read()["revision"])
     atomic_json(root/".vibeedit"/"caption-template-ready.json", {"sourceId":source["id"],"sourceSha256":source["sha256"],"baselineId":baseline_id,"initialCompositionSha256":file_digest(root/"composition.json")})
     return root/"composition.json"
 
@@ -272,7 +292,7 @@ def _render_sam_recipe(root: Path, spec, destination: Path) -> Path | None:
         return None
     _generate_declared_sources(root, spec)
     CapabilityRouter().segment(root / "sources" / "subject.mp4", root / "artifacts" / "sam-mask.json", duration_frames=spec["durationFrames"])
-    (root/"segmentation-needs-review.json").write_text(json.dumps({"ok":False,"state":"needs-review","candidate":"artifacts/sam-mask.json","meaning":"Packaged SAM 2.1 candidate generation only; no visible mask effect or SAM 3.1 proof","action":"Inspect source identity/candidates. For an actual subject effect use models run sam21 or explicit sam31-mlx, review source/index-bound candidates, then models effect. See EDITING.md."},indent=2)+"\n")
+    (root/"segmentation-needs-review.json").write_text(json.dumps({"ok":False,"state":"needs-review","candidate":"artifacts/sam-mask.json","meaning":"Packaged SAM 2.1 candidate generation only; no visible mask effect or SAM 3.1 proof","action":"Inspect source identity/candidates. For an actual subject effect use models run sam21 or explicit sam31-mlx, review source/index-bound candidates, then models effect. See EDITING.md."},indent=2)+"\n", encoding="utf-8")
     return None
 
 

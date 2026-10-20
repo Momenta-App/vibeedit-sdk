@@ -12,7 +12,7 @@ from vibeedit.sam_runner import _rle
 
 
 def test_sam_extra_declares_video_decode_runtime():
-    configuration = __import__("tomllib").loads((Path(__file__).parents[2] / "pyproject.toml").read_text())
+    configuration = __import__("tomllib").loads((Path(__file__).parents[2] / "pyproject.toml").read_text(encoding="utf-8"))
     requirements = configuration["project"]["optional-dependencies"]["sam"]
     assert any(requirement.startswith("opencv-python-headless==") for requirement in requirements)
 
@@ -31,7 +31,7 @@ def test_sam_setup_extracts_only_checksum_verified_payloads(tmp_path: Path, monk
     result = vibeedit_setup._setup_sam(tmp_path)
     assert result["available"] is True
     assert (tmp_path / "models" / "sam2.1-hiera-tiny" / "source" / "sam2" / "__init__.py").is_file()
-    manifest = __import__("json").loads(Path(result["manifest"]).read_text())
+    manifest = __import__("json").loads(Path(result["manifest"]).read_text(encoding="utf-8"))
     assert manifest["runnerCommand"][0] == __import__("sys").executable
     assert manifest["runner"].endswith("sam-runner.py")
 

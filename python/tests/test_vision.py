@@ -13,7 +13,7 @@ from vibeedit.vision import _normalized_box
 
 
 def test_optional_models_keep_public_pins_and_sam31_custom_terms():
-    manifest = __import__("json").loads(data_path("runtime-models", "manifest.json").read_text())
+    manifest = __import__("json").loads(data_path("runtime-models", "manifest.json").read_text(encoding="utf-8"))
     models = {item["capability"]: item for item in manifest["models"]}
     assert models["sam.2.1"]["status"] == "optional-download"
     assert all(len(file["sha256"]) == 64 and file["bytes"] > 0 for file in models["sam.2.1"]["files"])
@@ -43,7 +43,7 @@ import json, sys
 if sys.argv[1] == "capabilities": print(json.dumps({"capabilities":["face","body","pose"]}))
 elif sys.argv[1] == "pose": print(json.dumps({"poses":[]}))
 else: print(json.dumps({"detections":[]}))
-""")
+""", encoding="utf-8")
     runner.chmod(0o755)
     image = tmp_path / "image.png"
     image.write_bytes(b"controlled")
@@ -104,7 +104,7 @@ def test_opencv_face_tracker_writes_artifact_and_reuses_cache(tmp_path: Path, mo
         writer.write(numpy.zeros((128, 128, 3), dtype=numpy.uint8))
     writer.release()
     artifact = CapabilityRouter().track_faces(source, tmp_path / "tracks.json", sample_every_frames=2)
-    payload = __import__("json").loads(Path(artifact.artifact_uri).read_text())
+    payload = __import__("json").loads(Path(artifact.artifact_uri).read_text(encoding="utf-8"))
     assert artifact.duration_frames == 10
     assert len(payload["frames"]) == 5
     assert artifact.provenance["cacheKey"]
@@ -119,10 +119,10 @@ def test_checksum_declared_external_sam_provider_executes(tmp_path: Path, monkey
     import json
 
     runner = tmp_path / "sam-runner.py"
-    runner.write_text("#!/usr/bin/env python3\nimport json, pathlib, sys\npathlib.Path(sys.argv[3]).write_text(json.dumps({'format':'rle','counts':[1,2,3]}))\n")
+    runner.write_text("#!/usr/bin/env python3\nimport json, pathlib, sys\npathlib.Path(sys.argv[3]).write_text(json.dumps({'format':'rle','counts':[1,2,3]}))\n", encoding="utf-8")
     runner.chmod(0o755)
     manifest = tmp_path / "model.json"
-    manifest.write_text(json.dumps({"id": "test-sam-2.1", "capability": "sam.2.1", "version": "test-1", "license": "test-only", "weightsSha256": "a" * 64}))
+    manifest.write_text(json.dumps({"id": "test-sam-2.1", "capability": "sam.2.1", "version": "test-1", "license": "test-only", "weightsSha256": "a" * 64}), encoding="utf-8")
     source = tmp_path / "source.mp4"
     source.write_bytes(b"controlled-test-source")
     monkeypatch.setenv("VIBEEDIT_SAM_RUNNER", str(runner))
@@ -137,10 +137,10 @@ def test_checksum_declared_external_sam_provider_executes(tmp_path: Path, monkey
 
 def test_external_sam_runtime_versions_enter_provenance_and_cache_key(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     runner = tmp_path / "sam-runner.py"
-    runner.write_text("#!/usr/bin/env python3\nimport json, pathlib, sys\npathlib.Path(sys.argv[3]).write_text(json.dumps({'runtime':{'device':'mps','torch':'test'},'frames':[{'frame':0,'rle':[1]}]}))\n")
+    runner.write_text("#!/usr/bin/env python3\nimport json, pathlib, sys\npathlib.Path(sys.argv[3]).write_text(json.dumps({'runtime':{'device':'mps','torch':'test'},'frames':[{'frame':0,'rle':[1]}]}))\n", encoding="utf-8")
     runner.chmod(0o755)
     manifest = tmp_path / "model.json"
-    manifest.write_text(__import__("json").dumps({"id": "test-sam-2.1", "capability": "sam.2.1", "version": "test-1", "license": "test-only", "weightsSha256": "a" * 64, "runtimeVersions": {"device": "mps", "torch": "test"}}))
+    manifest.write_text(__import__("json").dumps({"id": "test-sam-2.1", "capability": "sam.2.1", "version": "test-1", "license": "test-only", "weightsSha256": "a" * 64, "runtimeVersions": {"device": "mps", "torch": "test"}}), encoding="utf-8")
     source = tmp_path / "source.mp4"
     source.write_bytes(b"controlled-test-source")
     monkeypatch.setenv("VIBEEDIT_SAM_RUNNER", str(runner))
@@ -149,7 +149,7 @@ def test_external_sam_runtime_versions_enter_provenance_and_cache_key(tmp_path: 
     artifact = CapabilityRouter().segment(source, tmp_path / "mask.json", duration_frames=1)
     assert artifact.provenance["runtimeVersions"] == {"device": "mps", "torch": "test"}
     assert artifact.provenance["cacheHit"] is False
-    runner.write_text("#!/bin/sh\nexit 9\n")
+    runner.write_text("#!/bin/sh\nexit 9\n", encoding="utf-8")
     cached = CapabilityRouter().segment(source, tmp_path / "mask-2.json", duration_frames=1)
     assert cached.provenance["cacheHit"] is True
     assert artifact.provenance["cacheKey"] == cached.provenance["cacheKey"]
@@ -158,10 +158,10 @@ def test_external_sam_runtime_versions_enter_provenance_and_cache_key(tmp_path: 
 
 def test_external_sam_requires_checksum_manifest(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     runner = tmp_path / "sam-runner"
-    runner.write_text("#!/bin/sh\nexit 0\n")
+    runner.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
     runner.chmod(0o755)
     manifest = tmp_path / "model.json"
-    manifest.write_text('{"id":"unsafe","capability":"sam.2.1","version":"1","license":"unknown"}')
+    manifest.write_text('{"id":"unsafe","capability":"sam.2.1","version":"1","license":"unknown"}', encoding="utf-8")
     monkeypatch.setenv("VIBEEDIT_SAM_RUNNER", str(runner))
     monkeypatch.setenv("VIBEEDIT_SAM_MODEL_MANIFEST", str(manifest))
     assert next(item for item in CapabilityRouter().status() if item["id"] == "vision.segmentation")["available"] is False
@@ -169,10 +169,10 @@ def test_external_sam_requires_checksum_manifest(tmp_path: Path, monkeypatch: py
 
 def test_external_sam31_label_cannot_bypass_quarantine(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     runner = tmp_path / "sam31-runner"
-    runner.write_text("#!/bin/sh\nexit 0\n")
+    runner.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
     runner.chmod(0o755)
     manifest = tmp_path / "sam31-model.json"
-    manifest.write_text(__import__("json").dumps({"id": "unverified-sam-3.1", "capability": "sam.3.1", "version": "3.1", "license": "declared-but-unaudited", "weightsSha256": "a" * 64}))
+    manifest.write_text(__import__("json").dumps({"id": "unverified-sam-3.1", "capability": "sam.3.1", "version": "3.1", "license": "declared-but-unaudited", "weightsSha256": "a" * 64}), encoding="utf-8")
     monkeypatch.setenv("VIBEEDIT_SAM_RUNNER", str(runner))
     monkeypatch.setenv("VIBEEDIT_SAM_MODEL_MANIFEST", str(manifest))
 

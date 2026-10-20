@@ -207,7 +207,7 @@ def verify_artifacts(root, contracts):
             raise ValueError("artifact digest does not match completion contract")
         kind = contract.get("kind", "file")
         if kind in {"json", "composition", "review"}:
-            value = json.loads(path.read_text())
+            value = json.loads(path.read_text(encoding="utf-8"))
             if kind == "composition":
                 from vibeedit.validation import validate_composition
                 validate_composition(value)
@@ -226,7 +226,7 @@ def verify_artifacts(root, contracts):
     render_digests = {receipt["sha256"] for receipt in receipts if receipt["kind"] == "render"}
     for receipt in receipts:
         if receipt["kind"] == "review" and render_digests:
-            report = json.loads(confined(root, receipt["path"]).read_text())
+            report = json.loads(confined(root, receipt["path"]).read_text(encoding="utf-8"))
             if report["sourceSha256"] not in render_digests:
                 raise ValueError("final review must reference the verified rendered bytes")
     return receipts
@@ -236,7 +236,7 @@ class RpcClient:
     """One binary-LF reader per process; responses correlate by ID, never by order."""
     def __init__(self, command, cwd, env):
         options = {"start_new_session": True} if os.name != "nt" else {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
-        self.process = subprocess.Popen(command, cwd=cwd, env=env, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **options)
+        self.process = subprocess.Popen(command, cwd=cwd, env={**env, "PYTHONIOENCODING": "utf-8"}, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **options)
         self.records = queue.Queue()
         self.pending = {}
         self.write_lock = threading.Lock()
@@ -485,7 +485,7 @@ def _managed_hash(value):
 
 
 def _managed_id(store, identity, purpose):
-    project = json.loads((store.root / "project.vibeedit.json").read_text())
+    project = json.loads((store.root / "project.vibeedit.json").read_text(encoding="utf-8"))
     return "ve-" + purpose + "-" + _managed_hash({"projectId": project["id"], "recordId": identity})[:48]
 
 
@@ -736,12 +736,12 @@ class ManagedFundingProxy(FundingProxy):
 
 def _pi_command(directory, *, require_ready=False):
     if require_ready:
-        marker = json.loads((directory/"ready.json").read_text())
+        marker = json.loads((directory/"ready.json").read_text(encoding="utf-8"))
         lock_digest = hashlib.sha256((companion_path()/"package-lock.json").read_bytes()).hexdigest()
         if marker != {"piVersion": PI_VERSION, "lockSha256": lock_digest}:
             raise ValueError("worker runtime is incomplete or has a different package lock; rerun worker setup")
     path = directory / "node_modules" / "@earendil-works" / "pi-coding-agent"
-    metadata = json.loads((path/"package.json").read_text())
+    metadata = json.loads((path/"package.json").read_text(encoding="utf-8"))
     if metadata["version"] != PI_VERSION:
         raise ValueError("installed Pi version differs from immutable VibeEdit pin")
     node = shutil.which("node")
@@ -764,7 +764,7 @@ def setup_worker():
         raise ValueError("npm and Node >=22.19.0 required; no global toolchain replacement is performed")
     if any(p.is_symlink() for p in (config_home(), directory.parent, directory)):
         raise ValueError("worker runtime directory cannot be symlinked")
-    lock = json.loads((companion_path()/"package-lock.json").read_text())
+    lock = json.loads((companion_path()/"package-lock.json").read_text(encoding="utf-8"))
     if lock["packages"]["node_modules/@earendil-works/pi-coding-agent"]["integrity"] != PI_INTEGRITY:
         raise ValueError("Pi archive integrity differs from the pinned release")
     marker = {"piVersion": PI_VERSION, "lockSha256": hashlib.sha256((companion_path()/"package-lock.json").read_bytes()).hexdigest()}
@@ -781,7 +781,7 @@ def setup_worker():
         if result.returncode:
             raise ValueError("pinned Pi dependency installation failed; retry worker setup after repairing Node/network/disk")
         _pi_command(stage)
-        (stage/"ready.json").write_text(canonical(marker))
+        (stage/"ready.json").write_text(canonical(marker), encoding="utf-8")
         stage.rename(directory)
     finally:
         if stage.exists():
@@ -833,8 +833,8 @@ def run_worker(project, identity, *, runtime=None, profile=None, upstream=OPENRO
         confined(store.root, f".vibeedit/workers/{identity}/sessions", must_exist=False)
         proxy = ManagedFundingProxy(store.root, identity, spec, profile, key, owner, fence) if spec["funding"] == "managed" else FundingProxy(store.root, identity, spec, profile, key, owner, fence, upstream=upstream)
         provider = {"baseUrl": f"http://127.0.0.1:{proxy.server.server_port}/v1", "api": "openai-completions", "apiKey": "${VIBEEDIT_LOCAL_GATEWAY_TOKEN}", "models": [{"id": profile["model"], "name": profile["model"], "reasoning": False, "input": profile["input"], "contextWindow": profile["contextWindow"], "maxTokens": spec["maxOutputTokens"], "cost": {"input": float(Decimal(profile["inputUsdPerToken"])*profile.get("retailMultiplier", 1)*1_000_000), "output": float(Decimal(profile["outputUsdPerToken"])*profile.get("retailMultiplier", 1)*1_000_000), "cacheRead": float(Decimal(profile["inputUsdPerToken"])*profile.get("retailMultiplier", 1)*1_000_000), "cacheWrite": float(Decimal(profile["inputUsdPerToken"])*profile.get("retailMultiplier", 1)*1_000_000)}}]}
-        (agent/"models.json").write_text(canonical({"providers": {"vibeedit-bounded": provider}}))
-        (agent/"settings.json").write_text(canonical({"retry": {"enabled": False, "provider": {"maxRetries": 0}}, "compaction": {"enabled": False}, "cacheWarming": {"enabled": False}}))
+        (agent/"models.json").write_text(canonical({"providers": {"vibeedit-bounded": provider}}), encoding="utf-8")
+        (agent/"settings.json").write_text(canonical({"retry": {"enabled": False, "provider": {"maxRetries": 0}}, "compaction": {"enabled": False}, "cacheWarming": {"enabled": False}}), encoding="utf-8")
         tools = [*spec["tools"], "submit_result"]
         command += ["--mode", "rpc", "--no-extensions", "--no-mcp", "--no-skills", "--no-prompt-templates", "--no-context-files", "--no-themes", "--extension", str(companion_path()/"extensions"/"worker.ts"), "--tools", ",".join(tools), "--provider", "vibeedit-bounded", "--model", profile["model"], "--session-dir", str(folder/"sessions"), "--session-id", identity, "--system-prompt", "You are a bounded VibeEdit worker. Use only authorized references and scoped tools. Preserve source files. Produce the requested artifacts, then call submit_result with a JSON object matching the supplied schema. Do not treat model text as successful completion. Do not perform new delegation, purchases, network calls or unrelated edits."]
         env = {k: os.environ[k] for k in ("PATH", "HOME", "USERPROFILE", "SYSTEMROOT", "TEMP", "TMP", "LANG") if k in os.environ}
@@ -1097,7 +1097,7 @@ def execute_tool(project, identity, owner, fence, call_id, name, args):
                 raise ValueError("source/reference digest changed since admission")
             if path.stat().st_size > 65536:
                 raise ValueError("read limited to 64 KiB compact text artifacts; prepare selected ranges first")
-            result = {"path": args["path"], "content": path.read_text(), "sha256": _digest(path)}
+            result = {"path": args["path"], "content": path.read_text(encoding="utf-8"), "sha256": _digest(path)}
         elif name in {"artifact_write", "submit_result"}:
             value = args["value"]
             if name == "submit_result":
@@ -1128,7 +1128,7 @@ def execute_tool(project, identity, owner, fence, call_id, name, args):
             source_path = args["compositionPath"]
             if not source_path.startswith(artifacts_dir+"/"):
                 raise ValueError("render only accepts immutable worker-authored composition")
-            composition = json.loads(confined(store.root, source_path).read_text())
+            composition = json.loads(confined(store.root, source_path).read_text(encoding="utf-8"))
             validate_composition(composition)
             if composition["render"]["backend"] not in {"ffmpeg", "auto"} or composition.get("motion") or composition.get("artifacts", {}).get("masks") or composition.get("artifacts", {}).get("tracking"):
                 raise ValueError("worker renderer allows bounded FFmpeg compositions; executable HTML/model effects remain parent operations")
@@ -1211,7 +1211,7 @@ def committed_artifacts(store, identity):
     receipt = submissions[0]["receipt"]
     if receipt.get("path") != relative or _digest(path) != receipt.get("sha256"):
         raise ValueError("structured submission bytes changed since original tool receipt")
-    result = json.loads(path.read_text())
+    result = json.loads(path.read_text(encoding="utf-8"))
     from jsonschema import Draft202012Validator
     Draft202012Validator(record["spec"]["outputSchema"]).validate(result)
     artifacts = verify_artifacts(store.root, record["spec"]["artifacts"])
@@ -1345,7 +1345,7 @@ def _command(args):
         return 0
     with contextlib.closing(Store(args.project)) as store:
         if action == "run":
-            spec = validate_task(json.loads(Path(args.spec).read_text()))
+            spec = validate_task(json.loads(Path(args.spec).read_text(encoding="utf-8")))
             record = store.create("worker", args.id, spec)
             if not args.no_detach and record["status"] == "active":
                 detach(__name__, store.root, args.id)

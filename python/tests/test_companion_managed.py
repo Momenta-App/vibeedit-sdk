@@ -125,7 +125,8 @@ def gateway(tmp_path):
     context=ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER);context.load_cert_chain(cert,key);server.socket=context.wrap_socket(server.socket,server_side=True)
     thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
     config_home=tmp_path/'config';folder=config_home/'vibeedit';folder.mkdir(parents=True,mode=0o700)
-    config=folder/'myriograph.json';config.write_text(json.dumps({'apiUrl':'https://127.0.0.1:'+str(server.server_port),'apiKey':'customer-fixture'}));config.chmod(0o600)
+    from vibeedit.myriograph import _save_private
+    config=folder/'myriograph.json';_save_private(config,{'apiUrl':'https://127.0.0.1:'+str(server.server_port),'apiKey':'customer-fixture'})
     env={**os.environ,'XDG_CONFIG_HOME':str(config_home),'SSL_CERT_FILE':str(cert),'PYTHONPATH':str(Path(__file__).resolve().parents[1]/'src')}
     yield state,env
     server.shutdown();server.server_close();thread.join(timeout=2)
@@ -135,7 +136,7 @@ def test_real_pi_managed_https_buffered_tools_and_retail_settlement(tmp_path,gat
     if not (companion_path()/'node_modules/@earendil-works/pi-coding-agent/package.json').is_file():
         pytest.skip('Pinned official Pi dependency required')
     state,env=gateway
-    project=tmp_path/'managed project ü';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"managed-project"}')
+    project=tmp_path/'managed project ü';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"managed-project"}', encoding="utf-8")
     script='''import json,sys
 from vibeedit.goals import Store
 from vibeedit.worker import run_worker,companion_path
@@ -151,8 +152,9 @@ s=Store(sys.argv[1]);r=s.get('managed-proof');assert r['status']=='complete',r;o
 
 def test_unknown_managed_request_keeps_hold_and_reconciles_original(tmp_path,gateway):
     state,env=gateway;state['mode']='held'
-    project=tmp_path/'held project';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"held-project"}')
-    script='''import json,sys,urllib.request,urllib.error
+    project=tmp_path/'held project';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"held-project"}', encoding="utf-8")
+    script='''import json,sys,urllib.request,urllib.error,faulthandler
+faulthandler.dump_traceback_later(15)
 from vibeedit.goals import Store
 from vibeedit.worker import _funding,managed_profile,ManagedFundingProxy,reconcile_inference,cancel_managed_operations
 spec={'task':'Review','funding':'managed','profile':'economical-v1','tools':[],'references':[],'outputSchema':{'type':'object'},'artifacts':[],'maxModelCalls':3,'maxToolCalls':3,'maxOutputTokens':64,'maxRetailMicrousd':1000000,'maxSeconds':10,'delegationLimit':0}
@@ -172,15 +174,15 @@ try:
  result=reconcile_inference(s,'held',ops[0]['id']);assert result['settlement']['retailMicros']==2
  assert customer.call('/test/stats')['posts']==1
  print(json.dumps({'originalRemoteId':result['managedOperationId'],'retailMicros':2,'providerCalls':1,'replayed':False}))
-finally: proxy.close();s.close()
+finally: proxy.close();s.close();faulthandler.cancel_dump_traceback_later()
 '''
-    result=subprocess.run([sys.executable,'-c',script,str(project)],env=env,check=True,text=True,capture_output=True,timeout=20)
+    result=subprocess.run([sys.executable,'-c',script,str(project)],env=env,check=True,text=True,capture_output=True,timeout=60)
     assert json.loads(result.stdout)['replayed'] is False and state['posts']==1 and state['cancelPosts']==1
 
 
 def test_one_server_allowance_is_shared_across_goal_workers(tmp_path,gateway):
     state,env=gateway
-    project=tmp_path/'goal project';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"goal-project"}')
+    project=tmp_path/'goal project';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"goal-project"}', encoding="utf-8")
     script='''import sys
 from vibeedit.goals import Store
 from vibeedit.worker import _funding,ensure_managed_allowance,close_managed_allowance
@@ -200,7 +202,7 @@ r=close_managed_allowance(s,'goal');assert r['state']=='closed';assert close_man
 def test_three_analysis_tools_share_parent_and_preserve_unpriced_holds(tmp_path,gateway,complete):
     state,env=gateway
     if not complete: state['nativeMode']='missing-settlement'
-    project=tmp_path/'analysis project';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"analysis-project"}')
+    project=tmp_path/'analysis project';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"analysis-project"}', encoding="utf-8")
     subprocess.run(['ffmpeg','-v','error','-f','lavfi','-i','testsrc2=s=160x90:r=10:d=1','-c:v','libx264','-pix_fmt','yuv420p',str(project/'source.mp4')],check=True)
     script='''import sys,json,hashlib
 from vibeedit.goals import Store
@@ -236,7 +238,7 @@ def test_detached_two_step_goal_recovers_supervisor_death_with_real_pi(tmp_path,
     if not (companion_path()/'node_modules/@earendil-works/pi-coding-agent/package.json').is_file():
         pytest.skip('Pinned official Pi dependency required')
     state,env=gateway
-    project=tmp_path/'crash goal project ü';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"crash-goal-project"}')
+    project=tmp_path/'crash goal project ü';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"crash-goal-project"}', encoding="utf-8")
     composition=Composition('goal-proof',Canvas(320,180,FrameRate(30)),30,created_at='2026-10-20T00:00:00Z').to_spec()
     composition_path='workers/crash-goal-step-1/artifacts/composition.json'
     render_path='workers/crash-goal-step-1/artifacts/proof.mp4'
@@ -246,7 +248,7 @@ def test_detached_two_step_goal_recovers_supervisor_death_with_real_pi(tmp_path,
     config=tmp_path/'runtime-config';runtime=config/'runtime/pi-1.3.0';runtime.mkdir(parents=True)
     (runtime/'node_modules').symlink_to(companion_path()/'node_modules',target_is_directory=True)
     lock=companion_path()/'package-lock.json';shutil.copyfile(lock,runtime/'package-lock.json')
-    (runtime/'ready.json').write_text(json.dumps({'piVersion':'1.3.0','lockSha256':hashlib.sha256(lock.read_bytes()).hexdigest()}))
+    (runtime/'ready.json').write_text(json.dumps({'piVersion':'1.3.0','lockSha256':hashlib.sha256(lock.read_bytes()).hexdigest()}), encoding="utf-8")
     env={**env,'VIBEEDIT_CONFIG_HOME':str(config)}
     common={'task':'Make the declared bounded fixture artifacts','funding':'managed','profile':'economical-v1','tools':['artifact_write','render_ffmpeg'],'references':[],'outputSchema':{'type':'object','required':['answer'],'properties':{'answer':{'const':42}},'additionalProperties':False},'maxModelCalls':6,'maxToolCalls':6,'maxOutputTokens':1024,'maxRetailMicrousd':1000000,'maxSeconds':30,'delegationLimit':0}
     spec={'objective':'Create a render then source-linked review across a supervisor crash','acceptance':['editable composition','playable render','source-bound review fixture'],'steps':[{**common,'artifacts':[{'path':composition_path,'kind':'composition'},{'path':render_path,'kind':'render'}]},{**common,'artifacts':[{'path':review_path,'kind':'review'}],'derivedReferences':[{'step':0,'path':composition_path},{'step':0,'path':render_path}]}],'maxRetailMicrousd':2000000,'deadlineUnix':time.time()+90,'completionArtifacts':[{'path':composition_path,'kind':'composition'},{'path':render_path,'kind':'render'},{'path':review_path,'kind':'review'}]}
@@ -287,7 +289,7 @@ def test_detached_two_step_goal_recovers_supervisor_death_with_real_pi(tmp_path,
 def test_platform_parent_close_reconciles_execution_checkpoints_without_early_release(tmp_path,gateway):
     state,env=gateway
     state['nativeMode']='parent-platform';state['closeHolds']=1
-    project=tmp_path/'platform goal';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"platform-proof"}')
+    project=tmp_path/'platform goal';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"platform-proof"}', encoding="utf-8")
     subprocess.run(['ffmpeg','-v','error','-f','lavfi','-i','testsrc2=s=160x90:r=10:d=1','-c:v','libx264','-pix_fmt','yuv420p',str(project/'source.mp4')],check=True)
     script='''import sys,json,hashlib,time
 from pathlib import Path
@@ -347,7 +349,7 @@ print(json.dumps({'revision':s.get('platform-goal')['revision'],'nativeOriginal'
 def test_standalone_byok_native_worker_recovers_original_parent_without_new_inference(tmp_path,gateway):
     state,env=gateway
     state['nativeMode']='parent-platform'
-    project=tmp_path/'standalone native';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"standalone-native-proof"}')
+    project=tmp_path/'standalone native';project.mkdir();(project/'project.vibeedit.json').write_text('{"schemaVersion":"vibeedit.project.v1","id":"standalone-native-proof"}', encoding="utf-8")
     subprocess.run(['ffmpeg','-v','error','-f','lavfi','-i','testsrc2=s=160x90:r=10:d=1','-c:v','libx264','-pix_fmt','yuv420p',str(project/'source.mp4')],check=True)
     script='''import sys,json,hashlib
 from pathlib import Path

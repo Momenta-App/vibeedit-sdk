@@ -31,7 +31,7 @@ def _relative(name):
 
 
 def _validated_project(value):
-    jsonschema.validate(value, json.loads(data_path("schema", "project.schema.json").read_text()))
+    jsonschema.validate(value, json.loads(data_path("schema", "project.schema.json").read_text(encoding="utf-8")))
     return value
 
 
@@ -82,7 +82,7 @@ def bundle_project(project, output, *, include_media=True, max_bytes=MAX_BYTES):
             continue
         seen.add(relative)
         add(relative)
-        spec = json.loads(within(project.root, relative).read_text())
+        spec = json.loads(within(project.root, relative).read_text(encoding="utf-8"))
         validate_composition(spec)
         parent = spec.get("metadata", {}).get("reviewApplication", {})
         if parent.get("parentComposition"):
@@ -188,10 +188,10 @@ def restore_project(archive, destination, *, expected_sha256=None, max_bytes=MAX
                     path = within(staging, source["path"])
                     if file_digest(path) != source["sha256"] or path.stat().st_size != source["byteLength"]:
                         raise ValueError("Source identity mismatch")
-            validate_composition(json.loads(within(staging, state["composition"]).read_text()))
+            validate_composition(json.loads(within(staging, state["composition"]).read_text(encoding="utf-8")))
             atomic_json(staging / "project.vibeedit.json", state)
             project = Project(staging)
-            correction_schema = json.loads(data_path("schema", "correction.schema.json").read_text())
+            correction_schema = json.loads(data_path("schema", "correction.schema.json").read_text(encoding="utf-8"))
             identities = {source["id"]: source["sha256"] for source in state["sources"]}
             seen = set()
             prior = 0

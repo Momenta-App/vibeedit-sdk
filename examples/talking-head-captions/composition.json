@@ -55,10 +55,11 @@
   },
   "metadata": {
     "template": {
-      "description": "Caption a supplied talking-head clip using source-time words; generated layout stand-in demonstrates editable layers and review persistence.",
+      "description": "Footage-first captions with bold kinetic word hits directly over the video, native-time corrections and original audio. Clean render uses generated stand-ins, not recorded speech.",
       "fixture": "Generated color-motion source and sine tone demonstrate layout, not real quote or transcription quality.",
-      "editorialIntent": "Hold the speaker and preserve the sentence; keep captions readable; choose any cutaways only after understanding the supplied quote.",
-      "review": "Word layers bind exact source and immutable baseline IDs at initialization."
+      "editorialIntent": "Preserve the full picture; use large lime words at lower center with a short pop, no panel or headline. Inspect the supplied face framing and move captions when they obscure important action. Clear gaps after 750ms.",
+      "review": "Word layers bind exact source and immutable baseline IDs at initialization.",
+      "wordInput": "Each input entry is a timed word or intentional short phrase. Original text and word intervals remain immutable; caption display clips to next entry or 750ms. No word-level timing is inferred."
     }
   }
 }

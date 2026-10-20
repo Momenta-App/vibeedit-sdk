@@ -32,7 +32,7 @@ def waveform(project, source_id):
         raise ValueError("Source changed; waveform not generated")
     target = within(project.root, f".vibeedit/waveforms/{source['sha256']}.json")
     if target.is_file():
-        return json.loads(target.read_text())
+        return json.loads(target.read_text(encoding="utf-8"))
     # 1 ms peak bins at 8kHz keep the portable review light; these are not stems.
     process = subprocess.Popen([ffmpeg_path(), "-v", "error", "-i", str(path), "-vn", "-ac", "1", "-ar", "8000", "-f", "s16le", "pipe:1"], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     peaks = []
@@ -344,7 +344,7 @@ def _command(args):
     project = Project(args.project)
     config_path = project.root / ".vibeedit" / "review-session.json"
     if args.mode == "status":
-        config = json.loads(config_path.read_text()) if config_path.exists() else None
+        config = json.loads(config_path.read_text(encoding="utf-8")) if config_path.exists() else None
         result = {"schemaVersion": "vibeedit.reviewStatus.v1", "ok": True, "running": False}
         if config:
             try:
@@ -362,7 +362,7 @@ def _command(args):
     if args.mode in {"words", "faces"} and not args.baseline_id:
         args.baseline_id = next((entry["id"] for entry in reversed(project.read()["analysis"]) if entry["sourceId"] == source_id and entry["service"] in ({"speakers", "local-caption-input"} if args.mode == "words" else {"faces"})), None)
     if not args.foreground and config_path.exists():
-        config = json.loads(config_path.read_text())
+        config = json.loads(config_path.read_text(encoding="utf-8"))
         try:
             request = urllib.request.Request(config["origin"] + "/api/status", headers={"Authorization": "Bearer " + config["token"]})
             with urllib.request.urlopen(request, timeout=2) as response:

@@ -21,7 +21,7 @@ from vibeedit.model_runners import transnet
 from vibeedit.setup import SAM_SOURCE, SAM_TINY
 
 RUNNER_VERSION = "vibeedit.models.v1"
-PINS = json.loads((Path(__file__).parent / "model_runners" / "pins.json").read_text())
+PINS = json.loads((Path(__file__).parent / "model_runners" / "pins.json").read_text(encoding="utf-8"))
 PACKS = {
     "transnet": {
         "model": "TransNetV2", "revision": transnet.COMMIT, "license": "MIT",
@@ -132,7 +132,7 @@ def probe_model_pack(name, cache=None, *, candidate=False):
         return {"id": name, "available": False, "status": "unsupported-platform", "reason": unsupported}
     if not manifest.is_file() or not _python(runtime).is_file():
         return {"id": name, "available": False, "status": "not-installed", "retry": f"vibeedit models setup {name} --json"}
-    record = json.loads(manifest.read_text())
+    record = json.loads(manifest.read_text(encoding="utf-8"))
     if record["definitionSha256"] != _definition_digest(name):
         return {"id": name, "available": False, "status": "definition-changed", "retry": f"vibeedit models setup {name} --json"}
     bad = [x["path"] for x in record["files"] if not (runtime / x["path"]).is_file() or (runtime / x["path"]).stat().st_size != x["bytes"] or _digest(runtime / x["path"]) != x["sha256"]]
@@ -210,7 +210,7 @@ def setup_model_pack(name, cache=None):
         if name == "sam21":
             files.extend({"path": str(p.relative_to(runtime)), "bytes": p.stat().st_size, "sha256": _digest(p)} for p in sorted((runtime / "models/sam2.1-hiera-tiny/source").rglob("*")) if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc")
         freeze = _checked([uv, "pip", "freeze", "--python", str(_python(runtime))])
-        (runtime / "requirements.lock").write_text(freeze.stdout)
+        (runtime / "requirements.lock").write_text(freeze.stdout, encoding="utf-8")
         files.append({"path": "requirements.lock", "bytes": (runtime / "requirements.lock").stat().st_size, "sha256": _digest(runtime / "requirements.lock")})
         record = {"schemaVersion": RUNNER_VERSION, "id": name, "definitionSha256": _definition_digest(name), "definition": PACKS[name], "files": files, "runnerVersion": RUNNER_VERSION, "platform": platform.platform(), "qualification": "setup-only; real inference and mask review required"}
         _write(runtime / "candidate.json", record)
@@ -232,7 +232,7 @@ def _resource_snapshot():
             if result.returncode == 0 and match:
                 snapshot["memoryFreePercent"] = int(match.group(1))
         if system == "Linux":
-            values = {line.split(":")[0]: int(line.split()[1]) for line in Path("/proc/meminfo").read_text().splitlines() if line.startswith(("MemTotal:", "MemAvailable:"))}
+            values = {line.split(":")[0]: int(line.split()[1]) for line in Path("/proc/meminfo").read_text(encoding="utf-8").splitlines() if line.startswith(("MemTotal:", "MemAvailable:"))}
             if values.get("MemTotal") and "MemAvailable" in values:
                 snapshot["memoryFreePercent"] = 100 * values["MemAvailable"] / values["MemTotal"]
         if system == "Windows":
@@ -331,7 +331,7 @@ def _handle(args):
         if args.models_command == "export":
             result = export_masks(args.index, args.review, args.output, mask_id=args.id, composition_start_frame=args.composition_start_frame)
         else:
-            result = render_subject_effect(args.index, args.review, args.source, args.output, mapping=json.loads(args.frame_map.read_text()) if args.frame_map else None, color=args.color, max_frames=args.max_frames)
+            result = render_subject_effect(args.index, args.review, args.source, args.output, mapping=json.loads(args.frame_map.read_text(encoding="utf-8")) if args.frame_map else None, color=args.color, max_frames=args.max_frames)
     elif args.models_command == "list":
         result = {"schemaVersion": RUNNER_VERSION, "ok": True, "packs": [{"id": k, **v, **probe_model_pack(k, args.cache)} for k, v in PACKS.items()]}
     elif args.models_command == "probe":

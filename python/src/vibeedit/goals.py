@@ -530,7 +530,7 @@ def _command(args):
     with contextlib.closing(Store(args.project)) as store:
         action = args.goal_command
         if action == "start":
-            record = store.create("goal", args.id, validate_goal(json.loads(Path(args.spec).read_text())))
+            record = store.create("goal", args.id, validate_goal(json.loads(Path(args.spec).read_text(encoding="utf-8"))))
             if not args.no_detach and record["status"] == "active":
                 detach(__name__, store.root, args.id)
         elif action in {"status", "export"}:
@@ -541,7 +541,7 @@ def _command(args):
                 raise ValueError("edit requires current revision and paused goal")
             if store.operations(args.id):
                 raise ValueError("admitted steps are immutable; create a successor goal with explicit original handles")
-            spec = validate_goal(json.loads(Path(args.spec).read_text()))
+            spec = validate_goal(json.loads(Path(args.spec).read_text(encoding="utf-8")))
             with store.transaction():
                 store.db.execute("UPDATE records SET spec=?,digest=?,revision=revision+1 WHERE id=? AND revision=?", (canonical(spec), hashlib.sha256(canonical(spec).encode()).hexdigest(), args.id, args.expected_revision))
                 store.event(args.id, "edited", {"spec": spec})

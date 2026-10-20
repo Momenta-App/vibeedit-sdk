@@ -61,7 +61,7 @@ def test_real_audio_beat_analysis_writes_provenance_and_reuses_cache(tmp_path: P
         audio.setframerate(48_000)
         audio.writeframes(b"".join(value.to_bytes(2, "little", signed=True) for value in samples))
     artifact = analyze_beats(source, tmp_path / "beats.json", frame_rate_numerator=30, sensitivity=1.1, minimum_gap_frames=3)
-    payload = json.loads(Path(artifact.artifact_uri).read_text())
+    payload = json.loads(Path(artifact.artifact_uri).read_text(encoding="utf-8"))
     assert payload["beats"] == [5, 15, 25]
     assert artifact.provenance["cacheKey"]
     assert artifact.provenance["cacheHit"] is False

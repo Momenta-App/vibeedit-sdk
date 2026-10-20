@@ -34,15 +34,15 @@ def _digest(path):
 def _write(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
+    temporary.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     temporary.replace(path)
 
 
 def read_review(index_path, review_path):
     index_path = Path(index_path).resolve(strict=True)
     review_path = Path(review_path).resolve(strict=True)
-    index = json.loads(index_path.read_text())
-    review = json.loads(review_path.read_text())
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    review = json.loads(review_path.read_text(encoding="utf-8"))
     if index.get("schemaVersion") != "vibeedit.masks.v1":
         raise ValueError("Expected a source-bound VibeEdit SAM candidate index")
     if review.get("schemaVersion") != "vibeedit.mask-review.v1" or review.get("reviewed") is not True or not review.get("author"):

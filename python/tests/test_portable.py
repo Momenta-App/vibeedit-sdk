@@ -81,7 +81,7 @@ def test_source_mutation_and_restore_ceiling_reject(project, tmp_path):
 def test_registered_mask_tree_and_render_report_survive_transfer(project, tmp_path):
     directory = project.root/"masks/review ü"
     directory.mkdir(parents=True)
-    (directory/"mask.rle.json").write_text('{"runs":[0,4,1,2]}')
+    (directory/"mask.rle.json").write_text('{"runs":[0,4,1,2]}', encoding="utf-8")
     source = project.read()["sources"][0]
     record = project.register_artifact("masks", "masks/review ü", expected_revision=1, source_id=source["id"])
     archive = tmp_path/"mask-tree.zip"
