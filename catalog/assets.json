@@ -84,8 +84,8 @@
     },
     {
       "path": "catalog/previews/portable-motion-showcase.mp4",
-      "sha256": "be2e62ebca607ec01e1fb3e7d3349702bc70cf1d64fd88b1bdb9d99f25679cc1",
-      "bytes": 296763,
+      "sha256": "01ee502091b8ac95a2e9cdebc6ae88b85a25300bbc42923609ec91104c0a4b89",
+      "bytes": 67554,
       "durationSeconds": 3,
       "category": "preview-video",
       "tags": [
@@ -184,8 +184,8 @@
     },
     {
       "path": "catalog/previews/face-follow-text.mp4",
-      "sha256": "df0832361c8549b19381ebfda4a62e22cd21e652767f51c6266580322d3c0b74",
-      "bytes": 22601,
+      "sha256": "5fa54137bf2afeae84d37799e1ea4da1aca50893faf2194b33923ac09d59a3d9",
+      "bytes": 17672,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [
@@ -244,8 +244,8 @@
     },
     {
       "path": "catalog/previews/transparent-motion-overlay.webm",
-      "sha256": "aa942762b390bf695efc4f78df8f489ddb69ca6b427db718042c499e8051386b",
-      "bytes": 7289,
+      "sha256": "c9a454f102a0eeb289bfc54bcde98bfd6b68ad17aaf6132ac71483c9664e9bd0",
+      "bytes": 19409,
       "durationSeconds": 2,
       "category": "preview-video",
       "tags": [

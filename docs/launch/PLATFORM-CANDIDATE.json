@@ -1,0 +1,486 @@
+{
+  "schemaVersion": "vibeedit.publicPlatformQualification.v1",
+  "status": "candidate-qualified-for-listed-core-checks-only",
+  "runUrl": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39496324164",
+  "sourceRevision": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+  "exactSameArchives": true,
+  "all13JobsPassed": true,
+  "signedProvenance": {
+    "workflow": "Momenta-App/vibeedit-sdk/.github/workflows/vibeedit-package.yml",
+    "repository": "https://github.com/Momenta-App/vibeedit-sdk",
+    "sourceRevision": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+    "githubHosted": true,
+    "allNineDistributedFilesCovered": true
+  },
+  "proofs": [
+    {
+      "name": "canonical-qualification-macos-latest-py3.12",
+      "proofArtifactId": 12299505291,
+      "proofArtifactDigest": "sha256:3b1b7b10b7252fc865a81992c471367d8fa2acc76c174691744558c6971fb3b6",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "pythonVersion": "3.12.10",
+      "machine": "arm64",
+      "sourceRevision": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+      "manifestSha256": "0f24cc4315e1f516396955902a013c6afd82c97e01d4fd4454307cac1aeb3d23",
+      "wheelSha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+      "npmSha256": "b29d93762135a1639e4e93db4c70c465da4be93c3d86643cf57a317e8b04d167",
+      "verifiedBeforeInstall": true,
+      "coreDoctorReady": true,
+      "browser": "HeadlessChrome/149.0.7827.55",
+      "browserFrameRate": "30000/1001",
+      "browserFrames": 12,
+      "sourceReviewTransfer": {
+        "savedCorrectionSurvivesRestart": true,
+        "exactRetrySingleEvent": true,
+        "correctionChangesAudiblePlacement": true,
+        "loopbackCapabilityRequired": true,
+        "portableBundleRestored": true,
+        "sourceSha256": "572ed1bc17908fe3b5f46a1c2afdc5e7c43dfdb15f3ec03f9eb4b0843e2c8983",
+        "corrections": 1
+      },
+      "captionTemplates": [
+        {
+          "example": "dialogue-quote",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "talking-head-captions",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "renders": [
+        {
+          "example": "basic-generated",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 60,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "mixed-python-html",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "node": {
+        "version": "vibeedit 0.2.0-beta.1",
+        "apiImported": true,
+        "compositionConstructed": true,
+        "schemaValidated": true,
+        "productionVulnerabilities": 0
+      }
+    },
+    {
+      "name": "canonical-qualification-macos-15-intel-py3.12",
+      "proofArtifactId": 12298947702,
+      "proofArtifactDigest": "sha256:de14cc9ca911d70bbe9a77c3298dc6cc5ffef006aa152411dd11de15b97d4d34",
+      "platform": "macOS-15.7.9-x86_64-i386-64bit",
+      "pythonVersion": "3.12.10",
+      "machine": "x86_64",
+      "sourceRevision": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+      "manifestSha256": "0f24cc4315e1f516396955902a013c6afd82c97e01d4fd4454307cac1aeb3d23",
+      "wheelSha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+      "npmSha256": "b29d93762135a1639e4e93db4c70c465da4be93c3d86643cf57a317e8b04d167",
+      "verifiedBeforeInstall": true,
+      "coreDoctorReady": true,
+      "browser": "HeadlessChrome/149.0.7827.55",
+      "browserFrameRate": "30000/1001",
+      "browserFrames": 12,
+      "sourceReviewTransfer": {
+        "savedCorrectionSurvivesRestart": true,
+        "exactRetrySingleEvent": true,
+        "correctionChangesAudiblePlacement": true,
+        "loopbackCapabilityRequired": true,
+        "portableBundleRestored": true,
+        "sourceSha256": "ef2867092782dfc199989aa5658b8a6bd7d9f09673ccbf21678ca88c45a5e864",
+        "corrections": 1
+      },
+      "captionTemplates": [
+        {
+          "example": "dialogue-quote",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "talking-head-captions",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "renders": [
+        {
+          "example": "basic-generated",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 60,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "mixed-python-html",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "node": {
+        "version": "vibeedit 0.2.0-beta.1",
+        "apiImported": true,
+        "compositionConstructed": true,
+        "schemaValidated": true,
+        "productionVulnerabilities": 0
+      }
+    },
+    {
+      "name": "canonical-qualification-ubuntu-latest-py3.13",
+      "proofArtifactId": 12298747509,
+      "proofArtifactDigest": "sha256:3a6853d5189e8e0c8024b7522860a12718134c100720d8329588b6e0d2951275",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "pythonVersion": "3.13.16",
+      "machine": "x86_64",
+      "sourceRevision": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+      "manifestSha256": "0f24cc4315e1f516396955902a013c6afd82c97e01d4fd4454307cac1aeb3d23",
+      "wheelSha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+      "npmSha256": "b29d93762135a1639e4e93db4c70c465da4be93c3d86643cf57a317e8b04d167",
+      "verifiedBeforeInstall": true,
+      "coreDoctorReady": true,
+      "browser": "HeadlessChrome/149.0.7827.55",
+      "browserFrameRate": "30000/1001",
+      "browserFrames": 12,
+      "sourceReviewTransfer": {
+        "savedCorrectionSurvivesRestart": true,
+        "exactRetrySingleEvent": true,
+        "correctionChangesAudiblePlacement": true,
+        "loopbackCapabilityRequired": true,
+        "portableBundleRestored": true,
+        "sourceSha256": "15d474f508737585043db212fe8c935ecc92b2b0efcf04a2464f0b9d66b5570a",
+        "corrections": 1
+      },
+      "captionTemplates": [
+        {
+          "example": "dialogue-quote",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "talking-head-captions",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "renders": [
+        {
+          "example": "basic-generated",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 60,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "mixed-python-html",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "node": {
+        "version": "vibeedit 0.2.0-beta.1",
+        "apiImported": true,
+        "compositionConstructed": true,
+        "schemaValidated": true,
+        "productionVulnerabilities": 0
+      }
+    },
+    {
+      "name": "canonical-qualification-ubuntu-latest-py3.12",
+      "proofArtifactId": 12298418829,
+      "proofArtifactDigest": "sha256:ee33dead31eb1da648654eb575a23f65f4c14b32312d22bf7779bdc64708609e",
+      "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+      "pythonVersion": "3.12.15",
+      "machine": "x86_64",
+      "sourceRevision": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+      "manifestSha256": "0f24cc4315e1f516396955902a013c6afd82c97e01d4fd4454307cac1aeb3d23",
+      "wheelSha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+      "npmSha256": "b29d93762135a1639e4e93db4c70c465da4be93c3d86643cf57a317e8b04d167",
+      "verifiedBeforeInstall": true,
+      "coreDoctorReady": true,
+      "browser": "HeadlessChrome/149.0.7827.55",
+      "browserFrameRate": "30000/1001",
+      "browserFrames": 12,
+      "sourceReviewTransfer": {
+        "savedCorrectionSurvivesRestart": true,
+        "exactRetrySingleEvent": true,
+        "correctionChangesAudiblePlacement": true,
+        "loopbackCapabilityRequired": true,
+        "portableBundleRestored": true,
+        "sourceSha256": "15d474f508737585043db212fe8c935ecc92b2b0efcf04a2464f0b9d66b5570a",
+        "corrections": 1
+      },
+      "captionTemplates": [
+        {
+          "example": "dialogue-quote",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "talking-head-captions",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "renders": [
+        {
+          "example": "basic-generated",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 60,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "mixed-python-html",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "node": {
+        "version": "vibeedit 0.2.0-beta.1",
+        "apiImported": true,
+        "compositionConstructed": true,
+        "schemaValidated": true,
+        "productionVulnerabilities": 0
+      }
+    },
+    {
+      "name": "canonical-qualification-ubuntu-latest-py3.11",
+      "proofArtifactId": 12298398707,
+      "proofArtifactDigest": "sha256:d276c3386f26baae28a2f31f83b63a98134edfccf5c6ba2f2baeb1d549b7887a",
+      "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+      "pythonVersion": "3.11.17",
+      "machine": "x86_64",
+      "sourceRevision": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+      "manifestSha256": "0f24cc4315e1f516396955902a013c6afd82c97e01d4fd4454307cac1aeb3d23",
+      "wheelSha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+      "npmSha256": "b29d93762135a1639e4e93db4c70c465da4be93c3d86643cf57a317e8b04d167",
+      "verifiedBeforeInstall": true,
+      "coreDoctorReady": true,
+      "browser": "HeadlessChrome/149.0.7827.55",
+      "browserFrameRate": "30000/1001",
+      "browserFrames": 12,
+      "sourceReviewTransfer": {
+        "savedCorrectionSurvivesRestart": true,
+        "exactRetrySingleEvent": true,
+        "correctionChangesAudiblePlacement": true,
+        "loopbackCapabilityRequired": true,
+        "portableBundleRestored": true,
+        "sourceSha256": "15d474f508737585043db212fe8c935ecc92b2b0efcf04a2464f0b9d66b5570a",
+        "corrections": 1
+      },
+      "captionTemplates": [
+        {
+          "example": "dialogue-quote",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "talking-head-captions",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "renders": [
+        {
+          "example": "basic-generated",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 60,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "mixed-python-html",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "node": {
+        "version": "vibeedit 0.2.0-beta.1",
+        "apiImported": true,
+        "compositionConstructed": true,
+        "schemaValidated": true,
+        "productionVulnerabilities": 0
+      }
+    },
+    {
+      "name": "canonical-qualification-windows-latest-py3.12",
+      "proofArtifactId": 12297369865,
+      "proofArtifactDigest": "sha256:38a1563d880569040a27c3ffd86bd5fdbadeed3b34ddf61065b0c8d8528d6374",
+      "platform": "Windows-2025Server-10.0.26100-SP0",
+      "pythonVersion": "3.12.10",
+      "machine": "AMD64",
+      "sourceRevision": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+      "manifestSha256": "0f24cc4315e1f516396955902a013c6afd82c97e01d4fd4454307cac1aeb3d23",
+      "wheelSha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+      "npmSha256": "b29d93762135a1639e4e93db4c70c465da4be93c3d86643cf57a317e8b04d167",
+      "verifiedBeforeInstall": true,
+      "coreDoctorReady": true,
+      "browser": "HeadlessChrome/149.0.7827.55",
+      "browserFrameRate": "30000/1001",
+      "browserFrames": 12,
+      "sourceReviewTransfer": {
+        "savedCorrectionSurvivesRestart": true,
+        "exactRetrySingleEvent": true,
+        "correctionChangesAudiblePlacement": true,
+        "loopbackCapabilityRequired": true,
+        "portableBundleRestored": true,
+        "sourceSha256": "572ed1bc17908fe3b5f46a1c2afdc5e7c43dfdb15f3ec03f9eb4b0843e2c8983",
+        "corrections": 1
+      },
+      "captionTemplates": [
+        {
+          "example": "dialogue-quote",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "talking-head-captions",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "renders": [
+        {
+          "example": "basic-generated",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 60,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        },
+        {
+          "example": "mixed-python-html",
+          "passed": true,
+          "width": 640,
+          "height": 360,
+          "durationFrames": 90,
+          "durationDriftFrames": 0,
+          "hasVideo": true,
+          "hasAudio": true
+        }
+      ],
+      "node": {
+        "version": "vibeedit 0.2.0-beta.1",
+        "apiImported": true,
+        "compositionConstructed": true,
+        "schemaValidated": true,
+        "productionVulnerabilities": 0
+      }
+    }
+  ],
+  "limits": [
+    "Not registry publication or public setup acceptance",
+    "Does not qualify optional model inference, MLX/Metal/native acceleration, provider outcomes or customer payments",
+    "Does not replace complete Codex and Claude Code journeys or editorial outcomes",
+    "Listed OS versions are tested observations, not inferred minimum OS versions",
+    "Nominal browser frame stepping remains approximate for VFR sources"
+  ]
+}

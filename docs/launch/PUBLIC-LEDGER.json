@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-20T20:56:20.309482+00:00",
+  "updatedAt": "2026-10-20T21:22:17.430827+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
@@ -11,7 +11,7 @@
     "finalArchive": null,
     "exactPublicPackageVersions": null,
     "finalAcceptanceEvidence": null,
-    "latestHistoricalCheckpoint": "f8b3f956bed96c67c520037952cea6f5d3b30384"
+    "latestHistoricalCheckpoint": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894"
   },
   "sourceOwnership": {
     "implementation": "Existing public VibeEdit SDK foundation and VibeEdit-owned agent integration source; MIT governs owned code.",
@@ -48,8 +48,9 @@
     "freshSandboxCheckoutEmailAndSignedSettlementJourneyComplete": false,
     "realFreshModelInferenceQualified": false,
     "managedGoalExecutionQualified": false,
-    "finalFullRegressionRun": "pending final source freeze",
-    "note": "Existing platform capabilities and prior deployed surfaces remain evidence leads, not new launch acceptance."
+    "finalFullRegressionRun": "Canonical workflow39496324164:13jobs passed; complete customer/editorial/model acceptance remains pending",
+    "note": "Existing platform capabilities and prior deployed surfaces remain evidence leads, not new launch acceptance.",
+    "canonicalCoreArchiveMatrixQualified": true
   },
   "policyAmendment": {
     "date": "2026-10-20",
@@ -67,7 +68,9 @@
       "deliveryScope": "Revalidate public SDK, release artifacts, source ownership, licensing, donors and commercial surfaces; pin identities and preserve unrelated work.",
       "status": "open",
       "operatorProgress": "in-progress",
-      "evidenceRefs": []
+      "evidenceRefs": [
+        "platform-canonical-six"
+      ]
     },
     {
       "id": "P1",
@@ -78,7 +81,8 @@
       "evidenceRefs": [
         "setup-interim",
         "platform-loopback-canonical",
-        "platform-six-source"
+        "platform-six-source",
+        "platform-canonical-six"
       ]
     },
     {
@@ -175,7 +179,8 @@
         "archive-interim",
         "platform-loopback-canonical",
         "platform-six-source",
-        "archive-bytecode-fix"
+        "archive-bytecode-fix",
+        "platform-canonical-six"
       ]
     },
     {
@@ -483,7 +488,8 @@
         "setup-interim",
         "platform-loopback-canonical",
         "platform-six-source",
-        "archive-bytecode-fix"
+        "archive-bytecode-fix",
+        "platform-canonical-six"
       ]
     },
     {
@@ -498,7 +504,8 @@
         "archive-interim",
         "platform-loopback-canonical",
         "platform-six-source",
-        "archive-bytecode-fix"
+        "archive-bytecode-fix",
+        "platform-canonical-six"
       ]
     },
     {
@@ -834,6 +841,21 @@
         "J4"
       ],
       "summary": "Actual acquired animation revised to early inverse word hits and unobstructed visual punchline; 252-frame picture checks, dense OCR and bit-identical restore/rerender. Human/audio acceptance remains open.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "platform-canonical-six",
+      "receiptSha256": "b06cf0c8c15ae92ba2e4089c56f5c054fa22bf08059245d76d7e5026babce120",
+      "receiptBytes": 16417,
+      "scope": "exact-canonical-archive-listed-core-checks",
+      "supportsRequirements": [
+        "P0",
+        "P1",
+        "P9",
+        "A17",
+        "A18"
+      ],
+      "summary": "Six hosted entries installed the same attested wheel/npm archives, verifying pinned manifest and all five file identities before install. Portable core/browser/render/review-transfer/template fixture checks passed. No optional model, customer payment or complete agent/editorial acceptance inferred.",
       "establishesLaunchAcceptance": false
     }
   ],

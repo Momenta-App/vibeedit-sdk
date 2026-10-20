@@ -17,7 +17,7 @@ from functools import lru_cache
 from html.parser import HTMLParser
 from pathlib import Path
 
-from vibeedit.local_http import LoopbackHTTPServer
+from vibeedit.local_http import LoopbackHTTPServer, is_local_browser_url
 from vibeedit.cache import cache_key, restore_cached_artifact, store_cached_artifact
 from vibeedit.data import data_path
 from vibeedit.ffmpeg import ffmpeg_path, frame_stream_encoder, overlay_frame_stream_encoder, render_media
@@ -96,6 +96,7 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
     video = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "video"]
     if spec["render"].get("motionBlendMode", "normal") == "difference" and not video:
         raise MotionRenderError("Difference motion blending requires decoded source video")
+    transparent = bool(video) or spec["render"]["output"].get("transparent", False)
     audio = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "audio"]
     transitions = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "transition"]
     if audio and not video:
@@ -137,25 +138,26 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
         with encoder_context as encoder, sync_playwright() as playwright, _motion_asset_server(base) as asset_urls:
             browser = playwright.chromium.launch(headless=True, args=["--enable-unsafe-webgpu"] if _requires_webgpu(spec) else [])
             context = browser.new_context(viewport={"width": spec["canvas"]["width"], "height": spec["canvas"]["height"]}, device_scale_factor=1)
-            context.route("**/*", lambda route: route.continue_() if _is_local_browser_url(route.request.url, asset_urls["origin"]) else route.abort("blockedbyclient"))
+            context.route("**/*", lambda route: route.continue_() if is_local_browser_url(route.request.url, asset_urls["origin"]) else route.abort("blockedbyclient"))
             page = context.new_page()
             errors: list[str] = []
             page.on("pageerror", lambda error: errors.append(str(error)))
             page.on("requestfailed", lambda request: errors.append(f"asset request failed: {request.url} ({request.failure or 'unknown error'})"))
             page.on("response", lambda response: errors.append(f"asset request returned HTTP {response.status}: {response.url}") if response.status >= 400 else None)
-            _load_persistent_page(page, spec, asset_urls, transparent=bool(video))
+            _load_persistent_page(page, spec, asset_urls, transparent=transparent)
             session = context.new_cdp_session(page)
-            if video:
+            if transparent:
                 session.send("Emulation.setDefaultBackgroundColorOverride", {"color": {"r": 0, "g": 0, "b": 0, "a": 0}})
+            motion_identity = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
             rendered_frames = 0
             reused_frames = 0
             for frame in range(spec["durationFrames"]):
                 frame_file = Path(temporary) / f"motion-frame-{frame:08d}.png"
                 key = cache_key(
                     "motion.composite_frame",
-                    _motion_frame_inputs(spec, frame, transparent=bool(video)),
+                    _motion_frame_inputs(spec, frame, transparent=transparent),
                     implementation_version=VERSION,
-                    runtime_versions={"playwright": _package_version("playwright"), "chromium": browser.version},
+                    runtime_versions={"playwright": _package_version("playwright"), "chromium": browser.version, "motionImplementation": motion_identity},
                 )
                 if spec.get("cache", {}).get("enabled", False) and restore_cached_artifact("motion.composite_frame", key, frame_file, base=base):
                     encoder.write(frame_file.read_bytes())
@@ -503,12 +505,6 @@ def _capture_fast_png(session) -> bytes:
     return base64.b64decode(result["data"])
 
 
-def _is_local_browser_url(url: str, origin: str) -> bool:
-    if url.startswith((origin, "about:", "data:", "blob:")):
-        return True
-    return False
-
-
 def document_for_frame(spec: JSONObject, frame: int, asset_base_url: str | None = None) -> str:
     layers = []
     items = sorted(
@@ -653,6 +649,12 @@ def _settle_canonical_frames(page) -> None:
             raise MotionRenderError(f"canonical text frame {index}: {error}")
         frame.evaluate("""async (time) => {
           if (document.fonts && document.fonts.ready) await document.fonts.ready;
+          // Fixed-size donor stages scale within the iframe. Grid's automatic
+          // minimum track size otherwise displaces their center on small canvases.
+          if (getComputedStyle(document.body).display === "grid") {
+            document.body.style.gridTemplateColumns = "minmax(0, 1fr)";
+            document.body.style.gridTemplateRows = "minmax(0, 1fr)";
+          }
           const timeline = Object.values(globalThis.__timelines || {})[0];
           timeline.time(0);
           timeline.time(time);

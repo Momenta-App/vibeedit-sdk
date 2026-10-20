@@ -1,6 +1,6 @@
 # VibeEdit agent package launch status
 
-**Not launched.** This is an implementation candidate. There is no final qualified archive, final public package version or completed clean-release journey from both Codex and Claude Code. No A01–A20 acceptance criterion is passed.
+**Not launched.** This is an implementation candidate. Canonical candidate archives have passed the listed portable-core checks; registry publication and complete clean-release journeys from both Codex and Claude Code remain pending. No A01–A20 acceptance criterion is passed.
 
 The delivery scope remains all P0–P10 phases, J1–J7 customer journeys and A01–A20 acceptance criteria. The [public ledger](launch/PUBLIC-LEDGER.json) preserves every requirement and required passing evidence. Each remains open. Original operator state and receipts remain private and unchanged; this page contains a curated status summary.
 
@@ -14,8 +14,8 @@ Remaining gates include exact final archives and registry installs, both clean p
 
 Owned VibeEdit code uses MIT; optional upstream models/runtimes and OFL fonts retain separate terms. Private research libraries, source movies, model weights, credentials and raw operator screenshots are excluded from the public candidate. Public-source audit and raw receipt identities are hash-bound in the ledger; the final commit identity is intentionally null until release preparation establishes it.
 
-Public source checkpoint `f8b3f956bed96c67c520037952cea6f5d3b30384` is available on `agent-package-launch`. Its [six-platform run](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39492787346) passed all source and per-platform archive checks: each host collected 272 Python cases, with platform-specific optional skips. The loopback reverse-DNS lease defect is resolved in those actual macOS runs.
+Public source candidate `d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894` passed all13 jobs in the [canonical workflow](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39496324164): six source-platform jobs, one build/attestation job, and six installations of the same immutable archives. Independent checks verify the archive/manifest hashes and signed provenance. The [platform candidate report](launch/PLATFORM-CANDIDATE.json) records the bounded actual outcomes. This qualifies the listed portable-core checks; paid services, optional model inference, principal editorial workflows and both clean customer agents remain open.
 
-The build audit then rejected generated Python bytecode included by npm's explicit file allowlist. The candidate now excludes bytecode explicitly; three rebuilt local archive types pass and five deliberately contaminated archives are rejected. The final canonical archive stage remained skipped in that run. It must pass on all six entries using the same immutable build before final archive qualification is claimed.
+The earlier run39492787346 is preserved as failed evidence: all six source-platform jobs passed, then the audit rejected npm-included Python bytecode. Explicit bytecode exclusions fixed the archive; the later same-archive matrix above passed without weakening the pinned membership or privacy checks.
 
 The public entry-page source is maintained in [website/agent-package](../website/agent-package/README.md). Its handoff remains disabled while release identities are null. Account and paid-service guidance is in [Myriograph](MYRIOGRAPH.md); scoped issuance and account/project enforcement are candidates undergoing deployment qualification. Neither a page preview nor a source checkpoint is launch acceptance.

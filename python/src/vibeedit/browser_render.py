@@ -29,7 +29,7 @@ from contextlib import contextmanager
 from fractions import Fraction
 from pathlib import Path
 
-from vibeedit.local_http import LoopbackHTTPServer
+from vibeedit.local_http import LoopbackHTTPServer, is_local_browser_url
 from vibeedit.data import package_root
 from vibeedit.browser_setup import native_paths
 
@@ -307,7 +307,7 @@ class ScreenshotService:
             self.errors.append(message)
 
     async def _route(self, route):
-        if route.request.url.startswith((self.origin, "data:", "blob:")):
+        if is_local_browser_url(route.request.url, self.origin):
             await route.continue_()
             return
         self._error(f"Unbundled resource blocked: {route.request.url}")

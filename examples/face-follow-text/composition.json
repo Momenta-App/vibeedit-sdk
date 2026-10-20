@@ -67,7 +67,7 @@
             },
             "componentId": "vibeedit://text/negative-face-follow",
             "props": {
-              "text": "LOCKED ON",
+              "text": "LOCK",
               "trackingFrames": [
                 {
                   "frame": 0,

@@ -58,10 +58,24 @@ export async function settleCanonicalFrames(page) {
     if (error) throw new Error(`canonical text frame ${index}: ${error}`);
     await frame.evaluate(async (time) => {
       if (document.fonts?.ready) await document.fonts.ready;
+      if (getComputedStyle(document.body).display === "grid") {
+        document.body.style.gridTemplateColumns = "minmax(0, 1fr)";
+        document.body.style.gridTemplateRows = "minmax(0, 1fr)";
+      }
       const timeline = Object.values(globalThis.__timelines ?? {})[0];
       timeline.time(time);
       if (typeof timeline.pause === "function") timeline.pause();
       await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     }, Number(await element.getAttribute("data-vibeedit-time")));
+  }
+}
+
+export function isLocalBrowserUrl(value, origin) {
+  try {
+    const url = new URL(value);
+    return ["about:", "data:", "blob:"].includes(url.protocol) ||
+      (["http:", "https:"].includes(url.protocol) && !url.username && !url.password && !/^[a-z][a-z0-9+.-]*:\/\/[^/?#]*@/i.test(value) && url.origin === new URL(origin).origin);
+  } catch {
+    return false;
   }
 }

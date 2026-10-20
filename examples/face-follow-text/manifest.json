@@ -1,7 +1,7 @@
 {
   "id": "vibeedit://template/face-follow-text",
   "name": "Face-Following Text",
-  "description": "Executable tracked-text overlay using deterministic interpolation from a frame-addressed face TrackingArtifact.",
+  "description": "Executable generated synthetic-face fixture with a single readable label following a known frame-addressed TrackingArtifact. Demonstrates interpolation and compositing; no real face detection, identity or framing accuracy claim.",
   "families": [
     "tracking",
     "face",

@@ -345,17 +345,21 @@ import { createExample } from "vibeedit";
 createExample("portable-motion-showcase");
 ```
 
-Thirteen packaged examples cover generated assembly, effects/transitions,
+Sixteen packaged examples cover generated assembly, effects/transitions,
 talking-head captions, portable kinetic typography, mixed media/HTML, a fan
-edit, beat analysis, layered sound design, a mask-confined subject effect,
+edit, beat analysis, layered sound design, a generated elliptical mask effect,
 tracking-driven face-follow text, multiple transitions, a VP9 alpha overlay,
-and capability-gated SAM segmentation. Every non-SAM recipe renders from a
-clean copy in the test suite; the SAM recipe writes actionable evidence when no
-approved runtime is installed.
+and conditional SAM 2.1 candidate review. Generated examples demonstrate
+rendering and composition; they do not establish real footage segmentation or
+editorial quality. The SAM example stops for candidate review and writes
+actionable evidence when its runtime is unavailable. Actual SAM 2.1 and SAM 3.1
+MLX model runs, persisted mask corrections, and reviewed subject-effect renders
+use the separate `vibeedit models` workflow; their inference qualification
+remains open.
 
 ## Catalog and skills
 
-All 467 shipped capabilities have a stable `vibeedit://` identifier, parameter
+All 445 shipped capabilities have a stable `vibeedit://` identifier, parameter
 schema, platforms/backends, provenance, validation evidence, example code,
 agent prompts, and an explicit preview state.
 
@@ -368,10 +372,11 @@ vibeedit skills install vibeedit-workspace --harness codex
 
 Skill install/update/remove operations track versions and checksums. They refuse
 to overwrite or remove user-modified skill files. The bundle contains 44 public
-skills copied byte-for-byte from pinned canonical Git sources and records 23
+skills adapted for the portable SDK from pinned canonical Git sources and records 23
 rejected source skill packages with quarantine reasons in
 `skills/migration-report.json`. Packaging metadata remains outside the cloned
-skill directories.
+skill directories. Each adaptation records its original source identity and
+the checksum of the adapted package.
 
 ## Local tool server
 

@@ -1,0 +1,109 @@
+name: VibeEdit model resource preflight
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  resources-only:
+    if: ${{ github.repository == 'Momenta-App/vibeedit-sdk' && github.event.repository.private == false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Measure resources without provisioning or importing models
+        shell: bash
+        run: |
+          python3 -I - <<'PY'
+          import datetime
+          import json
+          import math
+          import os
+          import platform
+          import shutil
+          import sys
+          from pathlib import Path
+
+          result = {
+              "schemaVersion": "vibeedit.modelResourcePreflight.v1",
+              "observedAtUtc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "scope": "Resource-only observation on standard public Ubuntu; no model qualification",
+              "modelProvisioned": False,
+              "modelImports": 0,
+              "inferenceStarted": False,
+              "qualified": False,
+          }
+          try:
+              event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
+              if not isinstance(event, dict) or not isinstance(event.get("repository"), dict):
+                  raise ValueError("Public repository event metadata is unavailable")
+              repository = event.get("repository", {})
+              if (os.environ.get("GITHUB_EVENT_NAME") != "workflow_dispatch"
+                      or os.environ.get("GITHUB_REPOSITORY") != "Momenta-App/vibeedit-sdk"
+                      or repository.get("full_name") != "Momenta-App/vibeedit-sdk"
+                      or repository.get("private") is not False):
+                  result.update(status="blocked", reason="Public repository assertion failed before resource probes")
+                  print(json.dumps(result, sort_keys=True, allow_nan=False))
+                  sys.exit(2)
+
+              volumes = {
+                  label: dict(shutil.disk_usage(path)._asdict())
+                  for label, path in {"system": "/", "runnerTemp": os.environ["RUNNER_TEMP"]}.items()
+              }
+              memory = {}
+              for line in Path("/proc/meminfo").read_text(encoding="utf-8").splitlines():
+                  key, value = line.split(":", 1)
+                  if key in {"MemTotal", "MemAvailable"}:
+                      count, unit = value.split()
+                      if unit != "kB":
+                          raise ValueError("Unknown memory unit")
+                      memory[key] = int(count) * 1024
+              if not 0 < memory["MemAvailable"] <= memory["MemTotal"]:
+                  raise ValueError("Available-memory measurement is invalid")
+              available_percent = 100 * memory["MemAvailable"] / memory["MemTotal"]
+              load = list(os.getloadavg()[:2])
+              if len(load) != 2 or any(not math.isfinite(value) or value < 0 for value in load):
+                  raise ValueError("Load measurement is invalid")
+              global_reasons = []
+              if any(volume["free"] < 25 * 1024 ** 3 for volume in volumes.values()):
+                  global_reasons.append("System or runner-temp free disk is below 25 GiB")
+              if available_percent < 15:
+                  global_reasons.append("Available memory is below 15 percent")
+              if any(value > 10 for value in load):
+                  global_reasons.append("One/five-minute load is above 10")
+
+              packs = {}
+              for pack, disk_minimum, memory_minimum in [
+                  ("transnet", 31_991_029_248, 6 * 1024 ** 3),
+                  ("sam21", 53_991_029_248, 8 * 1024 ** 3),
+              ]:
+                  reasons = list(global_reasons)
+                  if any(volume["free"] < disk_minimum for volume in volumes.values()):
+                      reasons.append("Conservative pack setup disk reservation does not fit")
+                  if memory["MemAvailable"] < memory_minimum:
+                      reasons.append("Conservative pack available-memory reservation does not fit")
+                  packs[pack] = {
+                      "status": "blocked" if reasons else "possible",
+                      "diskMinimumBytes": disk_minimum,
+                      "availableMemoryMinimumBytes": memory_minimum,
+                      "reasons": reasons,
+                  }
+              result.update(
+                  status="possible" if any(pack["status"] == "possible" for pack in packs.values()) else "blocked",
+                  sourceRevision=os.environ.get("GITHUB_SHA"),
+                  runner={"label": "ubuntu-24.04", "system": platform.system(), "release": platform.release(),
+                          "architecture": platform.machine(), "cpuCount": os.cpu_count(),
+                          "imageVersion": os.environ.get("ImageVersion"), "python": platform.python_version()},
+                  diskBytes=volumes,
+                  memoryBytes=memory,
+                  availableMemoryPercent=available_percent,
+                  oneFiveMinuteLoad=load,
+                  globalReasons=global_reasons,
+                  packs=packs,
+                  nextStep="Separate reviewed model workflow required; repeat resource gates before any provisioning or inference",
+              )
+          except (OSError, ValueError, KeyError, TypeError) as error:
+              result.update(status="blocked", reason="Resource or event probe unavailable", errorType=type(error).__name__)
+          print(json.dumps(result, sort_keys=True, allow_nan=False))
+          sys.exit(0 if result["status"] == "possible" else 2)
+          PY

@@ -2,6 +2,7 @@ import hashlib
 import json
 import shutil
 import subprocess
+import sys
 import tempfile
 import re
 from pathlib import Path
@@ -49,9 +50,11 @@ with tempfile.TemporaryDirectory(prefix="vibeedit-preview-") as temporary:
     if not verify_output(captions_output, captions["verification"]).passed:
         raise SystemExit("caption rail preview verification failed")
 
-    showcase = json.loads((root / "examples" / "portable-motion-showcase" / "composition.json").read_text())
-    showcase["sources"][0]["uri"] = str(mixed_source)
-    showcase_output = render(showcase, previews / "portable-motion-showcase.mp4")
+    showcase_directory = workspace / "portable-motion-showcase"
+    shutil.copytree(root / "examples" / "portable-motion-showcase", showcase_directory)
+    subprocess.run([sys.executable, str(showcase_directory / "render.py")], cwd=showcase_directory, check=True)
+    showcase = json.loads((showcase_directory / "composition.json").read_text(encoding="utf-8"))
+    showcase_output = Path(shutil.copyfile(showcase_directory / "portable-motion-showcase.mp4", previews / "portable-motion-showcase.mp4"))
     if not verify_output(showcase_output, showcase["verification"]).passed:
         raise SystemExit("portable motion preview verification failed")
 

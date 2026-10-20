@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-20T20:56:53.890598+00:00",
+  "recordedAt": "2026-10-20T21:53:49.141087+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "f8b3f956bed96c67c520037952cea6f5d3b30384",
-    "inventoryPaths": 166,
-    "existingFiles": 166,
-    "bytesRead": 3386899,
-    "sourceInventorySha256": "94bd0662027aec4a956b973147b55e8d68368a51dd0fb27e5e72807f0e9be828",
+    "gitHead": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894",
+    "inventoryPaths": 192,
+    "existingFiles": 192,
+    "bytesRead": 5489353,
+    "sourceInventorySha256": "5aab435b0d894b56f829837b5cfeec0b70ea8df3dab6cf3d40d001f5f0e5ace6",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -46,6 +46,16 @@
         "path": "docs/launch/CLAUDE-BROWSER.md",
         "category": "local_personal_path",
         "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/CLAUDE-HOST-GUARD.md",
+        "category": "local_personal_path",
+        "count": 9,
         "matchHashes": [
           "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
         ],
@@ -134,6 +144,16 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/companion-canonical-ci-39496324164.json",
+        "category": "local_personal_path",
+        "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/companion-catalog.json",
         "category": "local_personal_path",
         "count": 1,
@@ -147,6 +167,16 @@
         "path": "docs/launch/evidence/companion-claude-browser.json",
         "category": "local_personal_path",
         "count": 5,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/companion-claude-host-guard.json",
+        "category": "local_personal_path",
+        "count": 2,
         "matchHashes": [
           "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
         ],
@@ -268,6 +298,26 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/python-alpha-origin-source.junit.xml",
+        "category": "email",
+        "count": 1,
+        "matchHashes": [
+          "ed12ba571e1fd20c0367a7f43343cd3e8a28f0bb4d5757aab16924e3eeb7c091"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/python-alpha-origin-source.junit.xml",
+        "category": "local_personal_path",
+        "count": 6,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/python-source-before-expectation-refresh.junit.xml",
         "category": "local_personal_path",
         "count": 7,
@@ -348,6 +398,27 @@
         ],
         "classification": "raw operator record excluded; candidate is not asserted to be a credential",
         "disposition": "exclude_raw"
+      },
+      {
+        "path": "python/tests/test_local_http.py",
+        "category": "email",
+        "count": 1,
+        "matchHashes": [
+          "ed12ba571e1fd20c0367a7f43343cd3e8a28f0bb4d5757aab16924e3eeb7c091"
+        ],
+        "classification": "synthetic reserved-domain rejected URL fixture; no real recipient",
+        "disposition": "reviewed_false_positive"
+      },
+      {
+        "path": "test/motion-browser.test.js",
+        "category": "email",
+        "count": 2,
+        "matchHashes": [
+          "5f95784a2c328bd3abab6c5c2ca44061d3384889f42b8214f4903dd651d54861",
+          "ed12ba571e1fd20c0367a7f43343cd3e8a28f0bb4d5757aab16924e3eeb7c091"
+        ],
+        "classification": "synthetic rejected URL and image@2x filename fixtures; no real recipient",
+        "disposition": "reviewed_false_positive"
       }
     ],
     "limits": [
@@ -581,7 +652,7 @@
       },
       {
         "path": "catalog/previews/portable-motion-showcase.mp4",
-        "sha256": "be2e62ebca607ec01e1fb3e7d3349702bc70cf1d64fd88b1bdb9d99f25679cc1",
+        "sha256": "01ee502091b8ac95a2e9cdebc6ae88b85a25300bbc42923609ec91104c0a4b89",
         "actualHashMatch": true,
         "declaredRedistribution": "verified",
         "declaredCommercialOutputAllowed": true
@@ -616,7 +687,7 @@
       },
       {
         "path": "catalog/previews/face-follow-text.mp4",
-        "sha256": "df0832361c8549b19381ebfda4a62e22cd21e652767f51c6266580322d3c0b74",
+        "sha256": "5fa54137bf2afeae84d37799e1ea4da1aca50893faf2194b33923ac09d59a3d9",
         "actualHashMatch": true,
         "declaredRedistribution": "verified",
         "declaredCommercialOutputAllowed": true
@@ -637,7 +708,7 @@
       },
       {
         "path": "catalog/previews/transparent-motion-overlay.webm",
-        "sha256": "aa942762b390bf695efc4f78df8f489ddb69ca6b427db718042c499e8051386b",
+        "sha256": "c9a454f102a0eeb289bfc54bcde98bfd6b68ad17aaf6132ac71483c9664e9bd0",
         "actualHashMatch": true,
         "declaredRedistribution": "verified",
         "declaredCommercialOutputAllowed": true
@@ -1293,96 +1364,168 @@
     }
   },
   "commitManifest": {
-    "policy": "Explicit named paths only, pinned to SHA/size; reject drift/new paths; do not git add entire docs or repo. Only curated docs/LAUNCH_STATUS.md, docs/launch/PUBLIC-LEDGER.json and this sanitized audit are exceptions to raw launch-record quarantine. This proposal authorizes no commit.",
+    "policy": "Explicit named paths only, pinned to SHA/size; reject drift/new paths; do not git add entire docs or repo. Only curated docs/LAUNCH_STATUS.md, docs/launch/PUBLIC-LEDGER.json, docs/launch/PLATFORM-CANDIDATE.json, docs/launch/STATE.md and this sanitized audit are exceptions to raw launch-record quarantine. This proposal authorizes no commit.",
     "include": [
       {
+        "path": ".github/workflows/vibeedit-model-preflight.yml",
+        "byteLength": 5663,
+        "sha256": "7faed3611f39ddc378a5585e01174b1e888e1ee38f302d3ba0f3bb10071fdba9",
+        "format": "text"
+      },
+      {
+        "path": "README.md",
+        "byteLength": 16647,
+        "sha256": "ab3d703e3c439a615239dc126bc2763a6cee493dbc78e7e56da0fb18b238e45c",
+        "format": "text"
+      },
+      {
+        "path": "catalog/assets.json",
+        "byteLength": 45401,
+        "sha256": "88f1021af063c2157821bdc48f944bb4a225d294319c4beea83d7608a09d2d50",
+        "format": "text"
+      },
+      {
+        "path": "catalog/catalog.json",
+        "byteLength": 1436223,
+        "sha256": "e033197ba5ca1975497cf966c493bdf9812cfa001e8fd5759c27453490504684",
+        "format": "text"
+      },
+      {
+        "path": "catalog/previews/face-follow-text.mp4",
+        "byteLength": 17672,
+        "sha256": "5fa54137bf2afeae84d37799e1ea4da1aca50893faf2194b33923ac09d59a3d9",
+        "format": "binary"
+      },
+      {
+        "path": "catalog/previews/portable-motion-showcase.mp4",
+        "byteLength": 67554,
+        "sha256": "01ee502091b8ac95a2e9cdebc6ae88b85a25300bbc42923609ec91104c0a4b89",
+        "format": "binary"
+      },
+      {
+        "path": "catalog/previews/transparent-motion-overlay.webm",
+        "byteLength": 19409,
+        "sha256": "c9a454f102a0eeb289bfc54bcde98bfd6b68ad17aaf6132ac71483c9664e9bd0",
+        "format": "binary"
+      },
+      {
+        "path": "docs/GAPS.md",
+        "byteLength": 4937,
+        "sha256": "b6c1cd1764dba2eb5124dea757ca61e5c873087ad978619d44c22d1e017560f3",
+        "format": "text"
+      },
+      {
         "path": "docs/LAUNCH_STATUS.md",
-        "byteLength": 4521,
-        "sha256": "b683d09e231e38708b112b90d17c36ed1c2afa85b9bf3826a09267f4d7e9232b",
+        "byteLength": 4674,
+        "sha256": "6678629b8e1dbceef9304bfef287257cf23f99ba047e61d7c7aedbc5a1e9d0fb",
         "format": "text"
       },
       {
-        "path": "docs/MYRIOGRAPH.md",
-        "byteLength": 4745,
-        "sha256": "6d790dc828fffca5eee35bf7de223151523d88d3aa24e854c9a9a274d68ab58f",
+        "path": "docs/RELEASE_READINESS.md",
+        "byteLength": 23279,
+        "sha256": "2fd7bfa56922678d45c61622431fd5785847bc09898867933f6f2a60c4750645",
         "format": "text"
       },
       {
-        "path": "docs/SECURITY.md",
-        "byteLength": 3327,
-        "sha256": "3d2fc41d382622b9ab69272b7f65b016f0ca40be278bcc6b9aa0e530431a7b4a",
+        "path": "docs/launch/PLATFORM-CANDIDATE.json",
+        "byteLength": 16417,
+        "sha256": "b06cf0c8c15ae92ba2e4089c56f5c054fa22bf08059245d76d7e5026babce120",
         "format": "text"
       },
       {
         "path": "docs/launch/PUBLIC-LEDGER.json",
-        "byteLength": 32910,
-        "sha256": "308bc3d2d59b2184bbaff5e46fc8f32c4a4e453a4c657f05ffba3d08e7cae2cb",
+        "byteLength": 33920,
+        "sha256": "6e049bec43f9fd064cfe90b193c3db33efe33a2960f74f3b093b976eb9f7b642",
         "format": "text"
       },
       {
-        "path": "package.json",
-        "byteLength": 3337,
-        "sha256": "8649f3d8243b9c15d3fba543405f5b6f87826a14ccd2d2f9d367b54f850c7eb8",
+        "path": "docs/launch/STATE.md",
+        "byteLength": 7463,
+        "sha256": "ab84da6c752511a095593f370b738a2c7907a9a73e7f888b7017c8b27b10f07e",
         "format": "text"
       },
       {
-        "path": "scripts/audit_release_artifacts.py",
-        "byteLength": 11121,
-        "sha256": "52a5f98adea72617b7e9c2b9d240f54dc99b8b09f4a9e5fdc57ee66a16c30ed0",
+        "path": "examples/face-follow-text/composition.json",
+        "byteLength": 4316,
+        "sha256": "2a14d09e1db1ff72471d0cc0158fc6c39eadc0a90d8ca34dc3b7650907377c14",
         "format": "text"
       },
       {
-        "path": "website/agent-package/README.md",
-        "byteLength": 1904,
-        "sha256": "8eba409d644f90f6150861250ae818b503b33ac4176cf4eff5391923755b10cd",
+        "path": "examples/face-follow-text/manifest.json",
+        "byteLength": 510,
+        "sha256": "54803b13016b584f30875aa317562c02223953e074209dbe35c36c2c7b4aefe3",
         "format": "text"
       },
       {
-        "path": "website/agent-package/fonts/BebasNeue-Regular.ttf",
-        "byteLength": 61400,
-        "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
-        "format": "binary"
-      },
-      {
-        "path": "website/agent-package/fonts/Montserrat-Variable.ttf",
-        "byteLength": 744936,
-        "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
-        "format": "binary"
-      },
-      {
-        "path": "website/agent-package/fonts/OFL-bebasneue.txt",
-        "byteLength": 4337,
-        "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341",
+        "path": "examples/portable-motion-showcase/render.py",
+        "byteLength": 997,
+        "sha256": "fac75f5c1c8db38e7b8f27629b75fa4477f8e04831e40969fd73104b68cf25f1",
         "format": "text"
       },
       {
-        "path": "website/agent-package/fonts/OFL-montserrat.txt",
-        "byteLength": 4400,
-        "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+        "path": "python/src/vibeedit/browser_render.py",
+        "byteLength": 57160,
+        "sha256": "f693b4449587d41da2844d353423c3eb078e7c68a20007933c4d4b09ecf92a3d",
         "format": "text"
       },
       {
-        "path": "website/agent-package/index.html",
-        "byteLength": 7576,
-        "sha256": "6ba9b3ddfb65420031ad035140461f1c026075b0944ba1053f59c8b7cb2e1ab4",
+        "path": "python/src/vibeedit/local_http.py",
+        "byteLength": 1230,
+        "sha256": "7c6cce73c5f5480d78da3cec3054a6446b2f6a722866d1cfd771dab9eb8909de",
         "format": "text"
       },
       {
-        "path": "website/agent-package/page.css",
-        "byteLength": 5888,
-        "sha256": "7506119a4ee79a067da540e68bd042c67231dd0b818c5b79cd62e9bb16077a64",
+        "path": "python/src/vibeedit/motion.py",
+        "byteLength": 47707,
+        "sha256": "e62a71776f41c3bd544de0998a19f685c78bb39513e03d7255d33d4e1c45db36",
         "format": "text"
       },
       {
-        "path": "website/agent-package/page.js",
-        "byteLength": 2985,
-        "sha256": "6ea7ba895e6804ec8b05b8bb3e04577a822b708786557ae39285888fb26e0cff",
+        "path": "python/src/vibeedit/render.py",
+        "byteLength": 22850,
+        "sha256": "5267e47140b8f27043771188114fb38c5cddbda25583758f8ffcd74cf3684dc3",
         "format": "text"
       },
       {
-        "path": "website/agent-package/release.json",
-        "byteLength": 388,
-        "sha256": "272d46370219465281e6965307bf7cc8f8be239a226ac407b79582cdc8494ee4",
+        "path": "python/tests/test_examples.py",
+        "byteLength": 3935,
+        "sha256": "802dffc836629b5033b9ac76283586ee3ecb30a474f76185f16b82051602f58e",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_local_http.py",
+        "byteLength": 967,
+        "sha256": "b9e98d3dcd77e37f510b826c7d67370617b2a9cc456f323e050ab19883981f20",
+        "format": "text"
+      },
+      {
+        "path": "scripts/build_previews.py",
+        "byteLength": 8256,
+        "sha256": "c8f978b351f76c5cf9298489d498ad7a326dc16f0aa956141991b54b3c6dccfa",
+        "format": "text"
+      },
+      {
+        "path": "site/catalog-data.js",
+        "byteLength": 1023002,
+        "sha256": "ca8a3f45d95126524da8a09241e5a0527cb36eb767b8adcf4477b1ad0dcab82b",
+        "format": "text"
+      },
+      {
+        "path": "src/motion/assets.js",
+        "byteLength": 3535,
+        "sha256": "cfd5ad16ec98fa382e9a2e2ea7546c17d3b3ae1f87924a82514b4aca204d6b63",
+        "format": "text"
+      },
+      {
+        "path": "src/motion/browser.js",
+        "byteLength": 1380,
+        "sha256": "8b0b61e0c058d8e3893b12198837d3740d630d5865c9bfd81d9d6ebb1c721fb0",
+        "format": "text"
+      },
+      {
+        "path": "test/motion-browser.test.js",
+        "byteLength": 2333,
+        "sha256": "67b7b9469d645efb518afdd50a588f12b6f0c9b7ea2f9914c0557426a7bc5fc6",
         "format": "text"
       }
     ],
@@ -1417,9 +1560,16 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/CLAUDE-HOST-GUARD.md",
+        "byteLength": 9149,
+        "sha256": "c9583eadf736614796e46706c2ed632e524b572793c12ca62d6aa17361071161",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
         "path": "docs/launch/COMMERCIAL.md",
-        "byteLength": 35828,
-        "sha256": "7ce0991c820b8c923a9089f6a5cfce16f039505bb3c9e5d71074c77dfc2a6414",
+        "byteLength": 38128,
+        "sha256": "682b546a757ce41fa2d4b7c9f214f546f3d47feb49c0af6a52bfdcb75a556619",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1446,8 +1596,15 @@
       },
       {
         "path": "docs/launch/MODELS.md",
-        "byteLength": 15279,
-        "sha256": "53aa4866ab6fc5b58bee7497898ac39dd737a0dfcda57bdec4ee042ea6c92cf4",
+        "byteLength": 18033,
+        "sha256": "b7af3bdfa8a281bcd4b243ace110e4ea8968b9016e4af75423edf031f413e216",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/OPERATOR_STATE.md",
+        "byteLength": 24244,
+        "sha256": "03176028caabe7648e538d4b43572ea3244d2ce0553a7e29df0ec709a711fe0f",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1455,13 +1612,6 @@
         "path": "docs/launch/REQUIREMENTS.md",
         "byteLength": 55907,
         "sha256": "a254e6e785805ccd9879e8bac7ac5ade71f99a61f445282f448c2d89e51240a5",
-        "format": "text",
-        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
-      },
-      {
-        "path": "docs/launch/STATE.md",
-        "byteLength": 18499,
-        "sha256": "d6c27e6f4a0ec07eb1ffece9b68c2beaef2424c8eca75872e8a227e1214bc18a",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1486,6 +1636,13 @@
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/alpha-template-renderer-regression.junit.xml",
+        "byteLength": 7955,
+        "sha256": "873a919fd5a518653f9384642c76b92e48f01b8b88d482049fbcc2a42a37e991",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
         "path": "docs/launch/evidence/archive-audit.candidate1.json",
@@ -1525,6 +1682,39 @@
         "path": "docs/launch/evidence/backend-r5-root-review-20261020.json",
         "byteLength": 1777,
         "sha256": "baeb4b8268d8d99dd42384e8e16b662d9da7e130b8ddfb5c0410c029b04044c9",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/backend-r7-root-review-20261020.json",
+        "byteLength": 2678,
+        "sha256": "84e5e2dd607ea7cbb6bb2467aff2951df69a7f90aa178c76f2a7ab77aaf8914b",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "60eee1264b0fb8998a3f07a5ae9ad1e878ff4f3a02bd7b2ab73f7e9f834a812d",
+            "byteLength": 23220
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/backend-r8-deployment-review-20261020.json",
+        "byteLength": 2079,
+        "sha256": "ca31fde9dbacbccbd9e8e8ce5a98d95b0fe44128cf19833beb8f743b125d1d20",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/backend-r9-binding-review-20261020.json",
+        "byteLength": 1771,
+        "sha256": "666aac5cb07c041b3d2ae1cc450c107ac8477bd493ffc564ac1435fff8fd0978",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
@@ -1607,8 +1797,17 @@
       },
       {
         "path": "docs/launch/evidence/campaign-authorization-20261020.json",
-        "byteLength": 818,
-        "sha256": "46e3572427a463637eb527d096b2dd9e5429e9098bdaccb14dc3e044f334c8c9",
+        "byteLength": 1147,
+        "sha256": "fef1eaf63b9aab10d332a9de7d795ce424d2c04d03ab3bb9738cbfa7722abd33",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/canonical-editorial-replay-20261020.json",
+        "byteLength": 1621,
+        "sha256": "c26805a96476f90192fade1b5e0ec55cf8d6d5aea57f5b31e9d93ec6514696d4",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
@@ -1726,6 +1925,15 @@
             "byteLength": 19936
           }
         ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/commercial-live-merge-continuation-20261020.json",
+        "byteLength": 1120,
+        "sha256": "a293c86267d59e4167e25aac17f0307231bd3dade2ffcae6cc2deb36721a1605",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
@@ -1895,6 +2103,76 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/companion-canonical-ci-39496324164.json",
+        "byteLength": 16724,
+        "sha256": "fc52824e36c47487e0c7198c8af71a2aae4b8211a3c2d8e26bfcd6462deed7f5",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "ea84dde8f535d12f2a5278b61eaf2ed1615576c77a72d6ea181546f5e16d8bfe",
+            "byteLength": 61265557
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0f24cc4315e1f516396955902a013c6afd82c97e01d4fd4454307cac1aeb3d23",
+            "byteLength": 2247
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c0cb7f905915012031783bfb10ab6233145dae1c50acf081cc498d00ad592103",
+            "byteLength": 17420224
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e0d006d3c037353ae368e133deb2294b1c94598c8dded444273fde643eaf7644",
+            "byteLength": 21640308
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "b29d93762135a1639e4e93db4c70c465da4be93c3d86643cf57a317e8b04d167",
+            "byteLength": 22257224
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4a5dd02634ec3114eb11c0deb063b6acd7be41e62e7ea061243c2025884f1f19",
+            "byteLength": 10874
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7100549b6979a8ffe4d5c1fd518606801b24b22a5671a14ac8b2d06b5e123632",
+            "byteLength": 6080
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6e6eebbc5b1c900481102aef1e73a0136a9e1deda5e59c4db97b8f66992ef34e",
+            "byteLength": 16975
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ddbdb603c669e8ee667cc6226a19e56b1ace2e9acb5e82826e7d7b9e852e08a4",
+            "byteLength": 50389
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c77013a3b752bd4cbc9c92a7d1c8a056447c2a2a6fb83003d43b1a113fdd7dcb",
+            "byteLength": 9525
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "75337eb8a57cfb3069ffb0a544a7e7c39673aab98f9ad1220571eab5af5d0a86",
+            "byteLength": 55690
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6dadb9c7cc261c6795a016e40623bd0ef0423ce28982461dbbf0db22ccd0cbeb",
+            "byteLength": 989
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/companion-catalog-activation-candidate.json",
         "byteLength": 17590,
         "sha256": "eb11105fef9b1ae9a22c3b390371bdde69afc2d20d8d4c8114e95153a431526e",
@@ -1990,6 +2268,15 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/evidence/companion-claude-authorization-review.json",
+        "byteLength": 957,
+        "sha256": "a615f86f26b2c6023bc741eed484fa2f86d7cdc8710aa164171cd09f6e3b27a9",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/companion-claude-browser.json",
         "byteLength": 6701,
         "sha256": "e6e7fcff84c9c05ef7cb980b2df4925795f9482eacc9ee26a6f70dac10ce1bbb",
@@ -2040,6 +2327,69 @@
             "digestRole": "sha256",
             "sha256": "d48e92fa1b09d02f3ff9ef3eca697c82d8f24e7a2f09415128995e6264aa84d2",
             "byteLength": 3239
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-claude-host-guard.json",
+        "byteLength": 8809,
+        "sha256": "adf1633f3ff124424928c7934a22b93fbdd90e3d24dcb05084af25767ef37f2d",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "46e3572427a463637eb527d096b2dd9e5429e9098bdaccb14dc3e044f334c8c9"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "2107d946b5670c28dc29a707a95a1fd39b4b47e66cfb7f0c6292e7b39239c005",
+            "byteLength": 20135
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "423ec60d24d980b56b8c738655c20f13e4854d36bf2cfab15d25a357ebce39b9",
+            "byteLength": 12362
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "82695181af1d61fe24a880c9a7840eb8d6d8714452066d268a96f3f29c938302",
+            "byteLength": 3724
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ac6c100b0a2fe4904a0b1d413d437dbc3442e7a95c7c08924d45d33bd6fc9c1f",
+            "byteLength": 3431
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "40a9588fd51211cf8261abe2429053e071b9d635907fa8f1933b221604537036",
+            "byteLength": 694
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7c09780b90542b172fa8a8a9ee003a210df817ef676b94e0a7e8f8c242008d34",
+            "byteLength": 948
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "58ebf5b2288a4a99caf3d0c465c5172c879867c56157f418bbe546253afec4d3",
+            "byteLength": 2823
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ae9ff173131e533c26aeb7c111b6be311d846a1d1a211c63c70557aa4ae086f5",
+            "byteLength": 3598
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8f7ab70b579c56eb0386aaf1af88ccaf04609b677e4605e52d91225fd262c3bd",
+            "byteLength": 1787
+          },
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "932c1eaf19f32850960d824842eea04433ce55450875cb7b3966a9902b1eb0af"
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
@@ -3210,6 +3560,15 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/editorial-playback-v6-20261020.json",
+        "byteLength": 1419,
+        "sha256": "0abe796c51e101b1f4b4c19469bd01957dbf4f18a8281860a2fd496dc3de8100",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/face-admission-outbox-recovery-20261020.json",
         "byteLength": 6650,
         "sha256": "2b48c32affb459bb0d14896f1e3f68a6713f3d7842f32ea9b93bca412b84e724",
@@ -3448,6 +3807,21 @@
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/models-remote-fallback-20261020.json",
+        "byteLength": 5939,
+        "sha256": "a89143204d7376521d7caf12c694fa3c994252eda64e015459957ff01494b596",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "ddd98d23135c45e52ce88d2bfdec4fac62908e65339d0c46b74996d39d7e24f4",
+            "byteLength": 52964
+          }
+        ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
@@ -3963,6 +4337,13 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/evidence/python-alpha-origin-source.junit.xml",
+        "byteLength": 39787,
+        "sha256": "dc13b1238120826d28b023dd11dac0dc70b093c2a78ca716f9726b316eb83c71",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
         "path": "docs/launch/evidence/python-source-before-expectation-refresh.junit.xml",
         "byteLength": 41053,
         "sha256": "b66122df918fb116b7e83a56051bf481fc914024cdd8b0256193fcb1c14b64db",
@@ -4371,9 +4752,84 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/website-preview-20261020.json",
+        "byteLength": 3384,
+        "sha256": "103700ab7c4c764ee687a559d350eb641837bfb9386b202f61e2e82de1c7bc4c",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "48b94ece06f354f12e4df1fc893d16d6479088b710a772e5ec69adc7828bff3a",
+            "byteLength": 4430
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6ba9b3ddfb65420031ad035140461f1c026075b0944ba1053f59c8b7cb2e1ab4",
+            "byteLength": 7576
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
+            "byteLength": 61400
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+            "byteLength": 744936
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341",
+            "byteLength": 4337
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+            "byteLength": 4400
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7506119a4ee79a067da540e68bd042c67231dd0b818c5b79cd62e9bb16077a64",
+            "byteLength": 5888
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6ea7ba895e6804ec8b05b8bb3e04577a822b708786557ae39285888fb26e0cff",
+            "byteLength": 2985
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "272d46370219465281e6965307bf7cc8f8be239a226ac407b79582cdc8494ee4",
+            "byteLength": 388
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "b9d35aeda05fd5502db45203d2e2ea225750c58e4220b6a252b8351b1e538e0f",
+            "byteLength": 4800
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8deba0575112afaa9388fcbeb164095a84ed6571ac71f425f8e41898d28ca0fa",
+            "byteLength": 5772
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c9bc23f9daad0098b357f310a99c54a4b5734e18104828157d11fb173445f6cc",
+            "byteLength": 36348
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0312fe080cb951c754a89941490d84381f9dbcfd17b7dcd9b4bdf957d70c053f",
+            "byteLength": 8191
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/ledger.json",
-        "byteLength": 24674,
-        "sha256": "3ba0c87cc476b7552db1107237863a687938cdc789e272f2dc52794c45e4bd22",
+        "byteLength": 28946,
+        "sha256": "b5643a46e0e50458e61255ee6576b8d1369b95ea532074045841f219d9bbf62b",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],

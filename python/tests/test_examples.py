@@ -1,4 +1,5 @@
 import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -37,6 +38,25 @@ def test_browser_workflow_example_renders_from_clean_copy(tmp_path: Path, identi
         video = next(stream for stream in probe(output)["streams"] if stream["codec_type"] == "video")
         assert video["codec_name"] == "vp9"
         assert video.get("tags", {}).get("alpha_mode") == "1"
+        # Metadata alone can advertise alpha even when all pixels are opaque.
+        alpha = subprocess.check_output(["ffmpeg", "-v", "error", "-c:v", "libvpx-vp9", "-i", str(output), "-vf", "alphaextract", "-f", "rawvideo", "-pix_fmt", "gray", "pipe:1"])
+        assert len(alpha) == 320 * 180 * 60
+        assert min(alpha) == 0 and max(alpha) > 200
+        middle = alpha[30 * 320 * 180:31 * 320 * 180]
+        visible = [index for index, value in enumerate(middle) if value > 8]
+        assert visible
+        assert min(index % 320 for index in visible) > 4
+        assert max(index % 320 for index in visible) < 315
+        assert min(index // 320 for index in visible) > 4
+        assert max(index // 320 for index in visible) < 175
+        composites = []
+        for color in ["red", "blue"]:
+            pixels = subprocess.check_output(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", f"color=c={color}:s=320x180:r=30:d=2", "-c:v", "libvpx-vp9", "-i", str(output), "-filter_complex", "[0:v][1:v]overlay=shortest=1,select='eq(n,30)',format=rgb24", "-frames:v", "1", "-f", "rawvideo", "pipe:1"])
+            assert len(pixels) == 320 * 180 * 3
+            composites.append(pixels)
+        assert composites[0][0] > 240 and composites[0][2] < 10
+        assert composites[1][0] < 10 and composites[1][2] > 240
+        assert composites[0] != composites[1]
 
 
 def test_sam_example_degrades_with_actionable_evidence(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):

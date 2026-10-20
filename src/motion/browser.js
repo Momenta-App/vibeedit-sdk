@@ -1,6 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import { dirname } from "node:path";
-import { settleCanonicalFrames, startMotionAssetServer } from "./assets.js";
+import { isLocalBrowserUrl, settleCanonicalFrames, startMotionAssetServer } from "./assets.js";
 import { documentForFrame } from "./runtime.js";
 
 export async function renderMotionFrame(spec, frame, output, options = {}) {
@@ -11,6 +11,7 @@ export async function renderMotionFrame(spec, frame, output, options = {}) {
   const assets = await startMotionAssetServer();
   try {
     const page = await browser.newPage({ viewport: { width: spec.canvas.width, height: spec.canvas.height }, deviceScaleFactor: 1 });
+    await page.route("**/*", (route) => isLocalBrowserUrl(route.request().url(), assets.baseUrl) ? route.continue() : route.abort("blockedbyclient"));
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.setContent(documentForFrame(spec, frame, { assetBaseUrl: assets.baseUrl }), { waitUntil: "load" });
     await settleCanonicalFrames(page);

@@ -309,6 +309,10 @@ def _runtime_versions(backend: str) -> dict[str, str]:
     versions = {"ffmpeg": (result.stdout or result.stderr).splitlines()[0] if result and result.returncode == 0 else "unavailable"}
     if backend not in {"html", "mixed"}:
         return versions
+    # A pre-release renderer repair must not reuse an older opaque/cropped
+    # final output merely because the package version and browser match.
+    versions["motionImplementation"] = hashlib.sha256(Path(__file__).with_name("motion.py").read_bytes()).hexdigest()
+    versions["frameEncoderImplementation"] = hashlib.sha256(Path(__file__).with_name("ffmpeg.py").read_bytes()).hexdigest()
     try:
         versions["playwright"] = version("playwright")
     except PackageNotFoundError:
