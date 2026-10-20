@@ -979,12 +979,78 @@ def analysis_status(store, identity, operation, *, download=False):
         from vibeedit import myriograph
         destination = confined(store.root, f"workers/{identity}/analysis/{operation}", must_exist=False)
         downloaded = myriograph.download(customer, store.root, operation, destination, max_bytes=permission.get("maxDownloadBytes", 128 * 1024 * 1024))
-        result["artifacts"] = [{**{key: value for key, value in row.items() if key != "path"}, "path": str(Path(row["path"]).relative_to(store.root))} for row in downloaded["native"]["artifacts"]]
+        if downloaded.get("operation") != operation or downloaded.get("service") != permission["service"] or downloaded.get("jobId") != result["jobId"]:
+            raise ValueError("download does not identify the original native job")
+        artifacts = []
+        for artifact in downloaded["native"]["artifacts"]:
+            relative = Path(artifact["path"]).relative_to(store.root).as_posix()
+            path = confined(store.root, relative)
+            if not relative.startswith(f"workers/{identity}/analysis/{operation}/") or not path.is_file() or _digest(path) != artifact.get("sha256"):
+                raise ValueError("downloaded analysis artifact binding mismatch")
+            artifacts.append({"path": relative, "sha256": artifact["sha256"], "kind": artifact["kind"], "byteLength": path.stat().st_size})
+        result["artifacts"] = sorted(artifacts, key=lambda artifact: artifact["path"])
+        # Separate immutable read authority from the original financial receipt.
+        # A read never releases a hold or rewrites an acknowledged settlement.
+        grant = {"operationId": operation, "service": permission["service"], "source": permission["source"], "sourceSha256": permission["sourceSha256"], "jobId": result["jobId"], "fundingAllowanceId": original["intent"]["fundingAllowanceId"], "artifacts": result["artifacts"]}
+        download_id = local_id + ":artifacts"
+        store.intent(identity, download_id, "analysis_artifacts", grant)
+        store.settle(download_id, "settled", grant, 0)
     # Adopt a crashed analyze tool only after this exact original job has been observed.
     for op in store.operations(identity):
         if op["kind"] == "tool" and op["state"] != "settled" and op["intent"].get("name") == "analyze" and op["intent"].get("analysisOperationId") == operation:
             store.settle(op["id"], "settled", {key: value for key, value in result.items() if key != "artifacts"}, 0)
     return result
+
+
+def read_project_text(store, identity, spec, relative):
+    """Read declared text or bytes proven by this worker's original native download."""
+    artifacts_dir = f"workers/{identity}/artifacts/"
+    expected = spec.get("referenceDigests", {}).get(relative)
+    binding = None
+    if relative not in spec["references"] and not relative.startswith(artifacts_dir):
+        operations = store.operations(identity)
+        for operation in operations:
+            grant = operation["receipt"] or {}
+            artifact = next((item for item in grant.get("artifacts", []) if item.get("path") == relative), None)
+            if operation["kind"] != "analysis_artifacts" or operation["state"] != "settled" or not artifact:
+                continue
+            native_id = identity + ":analysis:" + str(grant.get("operationId"))
+            original = next((item for item in operations if item["id"] == native_id and item["kind"] == "analysis"), None)
+            permission = analysis_permission(spec, grant.get("operationId"))
+            if (operation["id"] != native_id + ":artifacts" or operation["intent"] != grant or not original
+                    or any(original["intent"].get(key) != grant.get(key) or permission.get(key) != grant.get(key) for key in ("operationId", "service", "source", "sourceSha256"))
+                    or not (original["receipt"] or {}).get("jobId") or original["receipt"]["jobId"] != grant.get("jobId")
+                    or original["intent"].get("fundingAllowanceId") != grant.get("fundingAllowanceId")
+                    or not relative.startswith(f"workers/{identity}/analysis/{grant['operationId']}/")):
+                raise ValueError("original analysis artifact authority mismatch")
+            from vibeedit import myriograph
+            with myriograph._database(store.root) as database:
+                job = database.execute("SELECT * FROM jobs WHERE operation=?", (grant["operationId"],)).fetchone()
+            if not job:
+                raise ValueError("original native job journal required for analysis read")
+            intent = json.loads(job["intent"])
+            if (job["native_id"] != grant["jobId"] or job["service"] != grant["service"]
+                    or intent["source"]["sha256"] != grant["sourceSha256"] or intent.get("fundingAllowanceId") != grant["fundingAllowanceId"]
+                    or not _managed_same_scope(json.loads(job["identity"]), original["intent"].get("customerIdentity"))
+                    or _digest(confined(store.root, grant["source"])) != grant["sourceSha256"]):
+                raise ValueError("original native job/source binding changed")
+            expected, binding = artifact["sha256"], grant
+            break
+        if binding is None:
+            raise ValueError("file outside parent references or original verified analysis download")
+    path = confined(store.root, relative)
+    if not path.is_file() or path.stat().st_size > 65536:
+        raise ValueError("read limited to 64 KiB compact text artifacts; prepare selected ranges first")
+    content = path.read_bytes()
+    digest = hashlib.sha256(content).hexdigest()
+    if expected is not None and digest != expected:
+        raise ValueError("source/reference digest changed since admission or verified download")
+    text = content.decode("utf-8")
+    if binding:
+        value = json.loads(text)
+        if not isinstance(value, dict) or value.get("sourceSha256", binding["sourceSha256"]) != binding["sourceSha256"] or value.get("jobId", binding["jobId"]) != binding["jobId"]:
+            raise ValueError("analysis content identifies a foreign native job/source")
+    return {"path": relative, "content": text, "sha256": digest, **({"analysisOperationId": binding["operationId"], "jobId": binding["jobId"], "sourceSha256": binding["sourceSha256"]} if binding else {})}
 
 
 def submit_analysis(store, identity, owner, fence, args):
@@ -1065,6 +1131,10 @@ def execute_tool(project, identity, owner, fence, call_id, name, args):
                 if hashlib.sha256(content).hexdigest() != receipt["sha256"]:
                     raise ValueError("image changed since original tool receipt")
                 return {**receipt, "imageData": base64.b64encode(content).decode()}
+            if name == "project_read":
+                current = read_project_text(store, identity, spec, args["path"])
+                if current != receipt:
+                    raise ValueError("text changed since original tool receipt")
             return receipt
         if len(operations) >= spec["maxToolCalls"]:
             raise ValueError("tool allowance exhausted")
@@ -1091,14 +1161,7 @@ def execute_tool(project, identity, owner, fence, call_id, name, args):
                 raise ValueError("bounded image tool supports PNG/JPEG source-linked frames")
             result = {"path": args["path"], "sha256": digest, "mimeType": mime, "imageData": base64.b64encode(content).decode()}
         elif name == "project_read":
-            if args["path"] not in spec["references"] and not args["path"].startswith(artifacts_dir+"/"):
-                raise ValueError("file outside parent references")
-            path = confined(store.root, args["path"])
-            if args["path"] in spec["references"] and _digest(path) != spec["referenceDigests"][args["path"]]:
-                raise ValueError("source/reference digest changed since admission")
-            if path.stat().st_size > 65536:
-                raise ValueError("read limited to 64 KiB compact text artifacts; prepare selected ranges first")
-            result = {"path": args["path"], "content": path.read_text(encoding="utf-8"), "sha256": _digest(path)}
+            result = read_project_text(store, identity, spec, args["path"])
         elif name in {"artifact_write", "submit_result"}:
             value = args["value"]
             if name == "submit_result":

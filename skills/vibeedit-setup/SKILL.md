@@ -10,9 +10,15 @@ Inspect the project, operating system, Python (3.11+), Node (20+; Pi needs
 what this task needs, in project-local isolated environments. Ordinary editing
 requires no account, API key or Pi companion.
 
-1. Read the published release manifest linked from the SDK launch page. If you
-   received only this skill URL, fetch its relative `scripts/setup.py` and the
-   release manifest from that same official release. Verify the setup script
+1. This skill belongs to Python `0.2.0b1` / npm `0.2.0-beta.1`. Fetch its exact
+   [release manifest](https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.1/release-manifest.json).
+   The [launch page](https://vibeedit.com/agent-package/) publishes the verified
+   handoff and manifest SHA256. If you received only this skill URL, fetch its
+   relative `scripts/setup.py` and that exact manifest. Require the manifest's
+   setup-skill URL/SHA256 to match this downloaded skill and the source revision
+   in its URL. If the manifest is unavailable or identities differ, preserve
+   progress and report the exact unavailable release; do not substitute another
+   version or claim installation. Verify the setup script
    SHA256 against the manifest before running it. Use
    `scripts/setup.py --manifest URL --project PROJECT --harness codex` (or
    `claude`). It downloads the exact hash-bound wheel, verifies its version,

@@ -12,11 +12,11 @@
         "claude",
         "opencode"
       ],
-      "checksum": "e4bb9b4d3126e41cacf87d2b3c739d06ad613a4752c62831eeb5c4100ac37cbc",
+      "checksum": "65fc74d20a724899fc0d4469c75ec62d91b46268666a328cd4bb49f6dfc382a4",
       "source": {
         "kind": "sdk-owned",
         "path": "skills/vibeedit-setup",
-        "sha256": "e4bb9b4d3126e41cacf87d2b3c739d06ad613a4752c62831eeb5c4100ac37cbc"
+        "sha256": "65fc74d20a724899fc0d4469c75ec62d91b46268666a328cd4bb49f6dfc382a4"
       },
       "validation": {
         "status": "integrity-only",
