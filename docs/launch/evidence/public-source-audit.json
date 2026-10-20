@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-20T23:16:20.511905+00:00",
+  "recordedAt": "2026-10-20T23:22:51.094463+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "5546ee33294c60da9262b91cb7cde510e04781e9",
-    "inventoryPaths": 194,
-    "existingFiles": 194,
-    "bytesRead": 2995902,
-    "sourceInventorySha256": "5d39911a7f5a8005a57dc3891b21cba637d5e730e48639902861bed10544abcc",
+    "gitHead": "21ef3a377874291f58dec28154871e14a9c58655",
+    "inventoryPaths": 196,
+    "existingFiles": 196,
+    "bytesRead": 3003769,
+    "sourceInventorySha256": "093e57dcc0ea4733552ac5cf5c87f1361efcfed45ddbbbb975becbbe4efa6310",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -1496,21 +1496,27 @@
     "policy": "Explicit named paths only, pinned to SHA/size; reject drift/new paths; do not git add entire docs or repo. Only curated docs/LAUNCH_STATUS.md, docs/launch/PUBLIC-LEDGER.json, docs/launch/PLATFORM-CANDIDATE.json, docs/launch/STATE.md and this sanitized audit are exceptions to raw launch-record quarantine. This proposal authorizes no commit.",
     "include": [
       {
-        "path": "docs/MODELS.md",
-        "byteLength": 7859,
-        "sha256": "7401edd73d60e6495a222ccd07fd55a1b9383fa6eb0cdd07ed5743a962fa6f67",
-        "format": "text"
-      },
-      {
         "path": "docs/launch/PUBLIC-LEDGER.json",
-        "byteLength": 41667,
-        "sha256": "d429a28ebdcc7f7bccbf964a8214e441aac96d85aca2eadc51da380f9e428c3a",
+        "byteLength": 44359,
+        "sha256": "3790a615c3a11416855de50c2561fd66ad77ab3a4873ef71daf3ce068470ed7f",
         "format": "text"
       },
       {
         "path": "docs/launch/STATE.md",
-        "byteLength": 10150,
-        "sha256": "728e2282240bbb013e6a0127408ae5bbb1a7007521a428521e8bf57e2966ce16",
+        "byteLength": 11062,
+        "sha256": "8bc03fe74f65c69e363fd70a8f58008dd22ea6a434c8b993f46cb122db19fc1b",
+        "format": "text"
+      },
+      {
+        "path": "skills/owned.json",
+        "byteLength": 2189,
+        "sha256": "e8edb4f9fb3d72a85f7a80dedd99f24dac3e8c5be4a92f16842d14c8f91b57cb",
+        "format": "text"
+      },
+      {
+        "path": "skills/vibeedit-companion/SKILL.md",
+        "byteLength": 7078,
+        "sha256": "fb94d733d2c00ef7788f7dc0972a8199f6d1b5378d62a66e8582235527a76f07",
         "format": "text"
       }
     ],
@@ -1609,8 +1615,8 @@
       },
       {
         "path": "docs/launch/OPERATOR_STATE.md",
-        "byteLength": 38819,
-        "sha256": "92baf1775dcc3e5772999a5995bbf1100f94c6f8b0d132d519d5c1f212628c4d",
+        "byteLength": 40859,
+        "sha256": "f2379eb2c04eea24430df9ef64022acb3d98e041c59b1c8b43358474f51e0a97",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -3940,6 +3946,15 @@
             "byteLength": 15873
           }
         ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/customer-email-delivery-observation-20261020.json",
+        "byteLength": 815,
+        "sha256": "bdc69de9fbe283292cf43eff6d34eadc514238a25d50c43eb6dc6acd2ee4c916",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-20T23:16:10.782105+00:00",
+  "updatedAt": "2026-10-20T23:22:50.171350+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
@@ -17,7 +17,8 @@
     "implementation": "Existing public VibeEdit SDK foundation and VibeEdit-owned agent integration source; MIT governs owned code.",
     "upstream": "Optional public runtimes/models, fonts and dependencies keep their own terms. No private research library, source movie or model weights are intended for distribution.",
     "commercialAuthority": "Existing Myriograph account, API, payment and credit infrastructure; candidate native adapters do not constitute deployment proof.",
-    "operatorEvidence": "Original private state, task ledger, source receipts and screenshots are retained separately and unchanged."
+    "operatorEvidence": "Original private state, task ledger, source receipts and screenshots are retained separately and unchanged.",
+    "commercialRelease": "The user assigned shared Myriograph gateway/native face/billing/public-domain release ownership to a separate authorized release owner. VibeEdit package work continues here; shared mutations are frozen here pending that owner's reconciled contract/deployment evidence."
   },
   "sourceReceipts": [
     {
@@ -100,7 +101,8 @@
       "evidenceRefs": [
         "face-original-operation",
         "commercial-local",
-        "customer-scoped-keys"
+        "customer-scoped-keys",
+        "customer-email-delivery-metadata"
       ]
     },
     {
@@ -242,7 +244,8 @@
         "face-original-operation",
         "auto-topup-local",
         "commercial-local",
-        "customer-scoped-keys"
+        "customer-scoped-keys",
+        "customer-email-delivery-metadata"
       ]
     },
     {
@@ -368,7 +371,8 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "commercial-local",
-        "customer-scoped-keys"
+        "customer-scoped-keys",
+        "customer-email-delivery-metadata"
       ]
     },
     {
@@ -932,6 +936,19 @@
       ],
       "summary": "Actual fresh Codex installed exact anonymous public wheel and npm archives. Installed472wheel and571npm file identities matched. Editorial encode stopped before writing when system-volume free space fell below the500MiB reserve; review, revision and restore remain incomplete. Claude Code complete journey remains pending.",
       "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "customer-email-delivery-metadata",
+      "receiptSha256": "bdc69de9fbe283292cf43eff6d34eadc514238a25d50c43eb6dc6acd2ee4c916",
+      "receiptBytes": 815,
+      "scope": "actual-provider-delivery-metadata-only",
+      "supportsRequirements": [
+        "P2",
+        "A06",
+        "J3"
+      ],
+      "summary": "Resend metadata reports delivered for the single recent message matching the approved recipient and request time window. No email body/code read or persisted. Browser-request API did not expose provider email handle; user authentication and complete signup/payment remain unverified.",
+      "establishesLaunchAcceptance": false
     }
   ],
   "openGates": [
@@ -964,9 +981,10 @@
     "registryPublished": false,
     "publicBilling": "https://myrograph.com/billing",
     "modelCpuCurrentRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39510473292",
-    "documentationSupplementSource": "5546ee33294c60da9262b91cb7cde510e04781e9",
+    "documentationSupplementSource": "21ef3a377874291f58dec28154871e14a9c58655",
     "codexPublicBootstrap": "Passed exact public archive installation; editorial/acquisition journey preserved with resource and browser continuation.",
-    "byok": "Four bounded tasks validate withinUSD4.499; actual customer-owned credential authority remains pending. Server provider keys are excluded."
+    "byok": "Four bounded tasks validate withinUSD4.499; actual customer-owned credential authority remains pending. Server provider keys are excluded.",
+    "sharedCommercialReleaseOwnership": "Handoff saved and source/artifact/deployment/campaign identities pinned. Existing funding remains disabled; no paid native handles have been admitted. Full commercial requirements remain mandatory."
   },
   "completionDependencies": [
     {
@@ -1010,6 +1028,37 @@
       ],
       "state": "waiting-financial-approval",
       "needed": "Approval for dedicated encrypted-alert key ongoing cost, followed by exact reviewed deployment and verified real destination delivery."
+    },
+    {
+      "id": "shared-commercial-release-integration",
+      "requirements": [
+        "P2",
+        "P7",
+        "A04",
+        "A05",
+        "A06",
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A18",
+        "A20"
+      ],
+      "state": "waiting-reconciled-owner-evidence",
+      "needed": "Designated shared Myriograph release owner preserves current project/service/operation/wallet/funding/catalog/recovery contracts, reconciles deployment and campaign authority, and returns actual customer/service/settlement evidence. No commercial requirement is dropped."
+    }
+  ],
+  "unreleasedSourceChanges": [
+    {
+      "kind": "companion-skill-reference-correction",
+      "paths": [
+        "skills/vibeedit-companion/SKILL.md",
+        "skills/owned.json"
+      ],
+      "summary": "Replace excluded operator-document reference with the already bundled references/contracts.md; refresh owned skill tree digest.",
+      "verification": "Existing skill lifecycle, all release-safe harness installations and donor identity checks:3passed.",
+      "publicationState": "Source correction awaits a new immutable archive and exact-release requalification. Published beta1 remains unchanged.",
+      "existingBeta1Workaround": "Read the packaged companion references/contracts.md; it already contains the recovery contract."
     }
   ]
 }
