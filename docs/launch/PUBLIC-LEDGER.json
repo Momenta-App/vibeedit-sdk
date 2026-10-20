@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-20T22:26:35.292834+00:00",
+  "updatedAt": "2026-10-20T23:16:10.782105+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
@@ -49,8 +49,13 @@
     "realFreshModelInferenceQualified": false,
     "managedGoalExecutionQualified": false,
     "finalFullRegressionRun": "Final core7ff canonical workflow39507366659: all13jobs passed; full customer/editorial/model acceptance remains pending",
-    "note": "Existing platform capabilities and prior deployed surfaces remain evidence leads, not new launch acceptance.",
-    "canonicalCoreArchiveMatrixQualified": true
+    "note": "Core matrix and fresh public Codex bootstrap passed within their stated scope. Complete customer, editorial, both-harness and model qualification remain mandatory.",
+    "canonicalCoreArchiveMatrixQualified": true,
+    "publicCodexBootstrapQualified": true,
+    "actualCpuInferencePerformed": [
+      "transnet",
+      "sam21"
+    ]
   },
   "policyAmendment": {
     "date": "2026-10-20",
@@ -66,7 +71,7 @@
       "id": "P0",
       "requirement": "Baseline and release contract",
       "deliveryScope": "Revalidate public SDK, release artifacts, source ownership, licensing, donors and commercial surfaces; pin identities and preserve unrelated work.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "platform-canonical-six"
@@ -76,20 +81,21 @@
       "id": "P1",
       "requirement": "Portable core and setup",
       "deliveryScope": "Portable existing-SDK core, isolated setup, capability probes, project/source clocks, editable CompositionSpec, offline useful render and safe install/update recovery.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "setup-interim",
         "platform-loopback-canonical",
         "platform-six-source",
-        "platform-canonical-six"
+        "platform-canonical-six",
+        "public-codex-bootstrap-7ff"
       ]
     },
     {
       "id": "P2",
       "requirement": "Unified Myriograph customer access",
       "deliveryScope": "One scoped Myriograph customer account/key for all three paid visual, speaker and face services; signup, email, funding, billing, settlement and original-job recovery.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "face-original-operation",
@@ -101,7 +107,7 @@
       "id": "P3",
       "requirement": "Review and corrections",
       "deliveryScope": "Native source-bound face, word, beat and final-video review with durable corrections, human/model separation, stale-write protection and composition/render application.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "review-words",
@@ -115,18 +121,19 @@
       "id": "P4",
       "requirement": "Model packs",
       "deliveryScope": "Distributable optional TransNet, SAM 2.1, SAM 3.1 and Apple Silicon MLX model packs with pinned public sources/terms, cache/probes, real inference and cut/occlusion/contact review.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "models-pins",
-        "models-gate"
+        "models-gate",
+        "cpu-transnet-sam21-39510473292"
       ]
     },
     {
       "id": "P5",
       "requirement": "Pi worker",
       "deliveryScope": "Pi companion controlled by existing Codex and Claude Code agents; BYOK and Myriograph-funded inference, profile selection, structured tools, streaming, steering and cancellation.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "companion-local",
@@ -137,7 +144,7 @@
       "id": "P6",
       "requirement": "Goals",
       "deliveryScope": "Durable multistep edit goals across parent disconnect and supervisor/Pi crashes; original operations, bounded reservations, stop/resume and verified completion artifacts.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "companion-recovery"
@@ -147,7 +154,7 @@
       "id": "P7",
       "requirement": "Metered managed inference and optional auto top-up",
       "deliveryScope": "Metered prepaid Myriograph-managed inference and optional explicitly consented auto top-up with safety limits, failure/disable handling and signed exactly-once funding events.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "companion-managed",
@@ -160,7 +167,7 @@
       "id": "P8",
       "requirement": "Creative package and acquisition",
       "deliveryScope": "Portable creative skills, templates, tools, previews and authorized browser acquisition; materially different edits, kinetic captions, meaningful editorial review and user revision.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "editorial-social-revision",
@@ -173,7 +180,7 @@
       "id": "P9",
       "requirement": "Release hardening",
       "deliveryScope": "Privacy, rights, platform/install/update/rollback, exact artifacts, operational alerts and real clean-environment customer qualification.",
-      "status": "open",
+      "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "archive-interim",
@@ -187,9 +194,12 @@
       "id": "P10",
       "requirement": "Publish and launch",
       "deliveryScope": "Public source and exact versioned archives/registries, agent setup entry, working customer links, complete acceptance evidence and operating/rollback instructions.",
-      "status": "open",
-      "operatorProgress": "not-started",
-      "evidenceRefs": []
+      "status": "in-progress",
+      "operatorProgress": "in-progress",
+      "evidenceRefs": [
+        "public-codex-bootstrap-7ff",
+        "public-qualification-prerelease"
+      ]
     }
   ],
   "journeys": [
@@ -197,21 +207,22 @@
       "id": "J1",
       "requirement": "First free edit",
       "deliveryScope": "Clean agent setup, exact packages, doctor, generated-media edit, render and review without a customer account or provider key.",
-      "status": "open",
+      "status": "in-progress",
       "journeyPassed": false,
-      "operatorProgress": "not-started",
+      "operatorProgress": "in-progress",
       "evidenceRefs": [
         "setup-interim",
-        "creative-portability"
+        "creative-portability",
+        "public-codex-bootstrap-7ff"
       ]
     },
     {
       "id": "J2",
       "requirement": "Fan edit",
       "deliveryScope": "Source/song/reference acquisition, source manifest, shots, beats, typography/effects/SFX, render and user revision with editable deliverables.",
-      "status": "open",
+      "status": "in-progress",
       "journeyPassed": false,
-      "operatorProgress": "not-started",
+      "operatorProgress": "in-progress",
       "evidenceRefs": [
         "review-beats",
         "editorial-social-revision",
@@ -224,9 +235,9 @@
       "id": "J3",
       "requirement": "Paid intelligence",
       "deliveryScope": "Existing Myriograph signup/email/login, account/project/key selection, authorized sandbox funding, one-key three-service quotes/jobs/downloads and uncertainty.",
-      "status": "open",
+      "status": "in-progress",
       "journeyPassed": false,
-      "operatorProgress": "not-started",
+      "operatorProgress": "in-progress",
       "evidenceRefs": [
         "face-original-operation",
         "auto-topup-local",
@@ -238,9 +249,9 @@
       "id": "J4",
       "requirement": "Review and correction",
       "deliveryScope": "Saved face/word/beat/render evidence, human corrections and unresolved identities survive restart/refresh/export and affect the next render.",
-      "status": "open",
+      "status": "in-progress",
       "journeyPassed": false,
-      "operatorProgress": "not-started",
+      "operatorProgress": "in-progress",
       "evidenceRefs": [
         "review-words",
         "review-beats",
@@ -253,9 +264,9 @@
       "id": "J5",
       "requirement": "Delegated work",
       "deliveryScope": "Both parent harnesses run bounded Pi tasks through BYOK and Myriograph-managed inference with tools, artifact validation, steer and cancel.",
-      "status": "open",
+      "status": "in-progress",
       "journeyPassed": false,
-      "operatorProgress": "not-started",
+      "operatorProgress": "in-progress",
       "evidenceRefs": [
         "companion-local",
         "companion-managed"
@@ -265,9 +276,9 @@
       "id": "J6",
       "requirement": "Long goal",
       "deliveryScope": "Original goal continues or visibly waits across parent disconnect, supervisor/Pi crash and stop/resume without duplicate paid operations.",
-      "status": "open",
+      "status": "in-progress",
       "journeyPassed": false,
-      "operatorProgress": "not-started",
+      "operatorProgress": "in-progress",
       "evidenceRefs": [
         "companion-recovery"
       ]
@@ -276,9 +287,9 @@
       "id": "J7",
       "requirement": "Returning user",
       "deliveryScope": "Reuse project/model cache; update skills without user-edit loss; source relink, correction render and scoped credential rotation/re-authentication.",
-      "status": "open",
+      "status": "in-progress",
       "journeyPassed": false,
-      "operatorProgress": "not-started",
+      "operatorProgress": "in-progress",
       "evidenceRefs": [
         "face-original-operation",
         "customer-scoped-keys"
@@ -290,18 +301,20 @@
       "id": "A01",
       "requirement": "Agent installs package from public setup URL",
       "requiredPassingEvidence": "Fresh Codex and fresh Claude Code runs using published artifacts; exact package versions/hashes, commands and doctor receipts. No prior VibeEdit installation or local checkout access.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "setup-interim"
+        "setup-interim",
+        "public-codex-bootstrap-7ff",
+        "public-qualification-prerelease"
       ]
     },
     {
       "id": "A02",
       "requirement": "Free useful workflow",
       "requiredPassingEvidence": "Generated/user-owned media -> editable project -> mixed audio/video/text render -> review -> revision, with network/account access disabled after installing required local dependencies.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -312,19 +325,20 @@
       "id": "A03",
       "requirement": "Source and timing fidelity",
       "requiredPassingEvidence": "CFR/VFR, 23.976/29.97 rational clocks, audio/video offset, source relink, portrait/landscape and crop/mask alignment fixtures; frame/PTS assertions plus inspected render samples.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "review-words",
-        "review-clock"
+        "review-clock",
+        "cpu-transnet-sam21-39510473292"
       ]
     },
     {
       "id": "A04",
       "requirement": "Three paid services",
       "requiredPassingEvidence": "One new Myriograph customer key submits all three supported jobs, polls, downloads and verifies source/schema/digests; revoke/rotate and tenant/project scope tests pass.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -337,7 +351,7 @@
       "id": "A05",
       "requirement": "Payment is real and unified",
       "requiredPassingEvidence": "Actual sandbox browser card entry, signed exact-endpoint webhook, single credit grant, three service reservations/debits, replay, cancellation/refund and final available/held balance reconciliation. Production configuration checked separately.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -349,7 +363,7 @@
       "id": "A06",
       "requirement": "Signup and repeat funding",
       "requiredPassingEvidence": "Delivered email/login, correct account selection, top-up, return-to-agent and expired/revoked-key reauthentication work. No internal key fallback or duplicate commercial account.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -361,7 +375,7 @@
       "id": "A07",
       "requirement": "Face/word correction integrity",
       "requiredPassingEvidence": "Merge/split/null identity, revised portrait, word addition/deletion/timing and human-vs-model refresh survive restart/export; stale revision conflicts; confirmed speaker links remain separate from proposals.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -373,7 +387,7 @@
       "id": "A08",
       "requirement": "Beat tool",
       "requiredPassingEvidence": "Arbitrary song load, waveform and M/drag/delete/undo, scrub/loop/color review; project save/reopen; exact beat adjustment reaches composition and render.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -384,19 +398,20 @@
       "id": "A09",
       "requirement": "Model library",
       "requiredPassingEvidence": "Fresh TransNet/SAM 2.1/SAM 3.1 setup and real outputs; Apple Silicon MLX case; cut/occlusion/contact masks reviewed; hashes/devices/provenance and unsupported-platform states accurate.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "models-pins",
-        "models-gate"
+        "models-gate",
+        "cpu-transnet-sam21-39510473292"
       ]
     },
     {
       "id": "A10",
       "requirement": "Pi BYOK and managed",
       "requiredPassingEvidence": "Each named parent harness completes a structured worker task through both funding paths; profile/model selection and streaming/cancellation verified; credentials remain private.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -408,7 +423,7 @@
       "id": "A11",
       "requirement": "Long-horizon execution",
       "requiredPassingEvidence": "A real multistep edit goal spans multiple model turns and a parent disconnect; injected supervisor and Pi restarts preserve the same goal/jobs. Completion artifacts verified; repeated status polling is not counted as progress.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -419,7 +434,7 @@
       "id": "A12",
       "requirement": "Goal cost/recovery",
       "requiredPassingEvidence": "Concurrent child reservations, retail ceiling, insufficient balance, expired provider pricing, uncertain paid acknowledgement, stop/resume and completed replay preserve financial invariants and original handles.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -433,7 +448,7 @@
       "id": "A13",
       "requirement": "Metered managed access and optional auto top-up lifecycle",
       "requiredPassingEvidence": "Explicit auto-top-up consent, threshold/amount/safety ceiling, initial funding, failure, disable/cancel, duplicate and out-of-order webhook grant invariants.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -445,7 +460,7 @@
       "id": "A14",
       "requirement": "Creative quality",
       "requiredPassingEvidence": "At least three materially different fan edits and one captioned/kinetic production. Inspect opening, story/shot logic, beat placement, text readability, face framing, repeated shots, masks, audio balance and end. At least one user revision round per principal workflow; retain accepted fixes and honest limitations.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -457,7 +472,7 @@
       "id": "A15",
       "requirement": "Source acquisition",
       "requiredPassingEvidence": "Supported browser path finds an intended provider page and completes an authorized download with receipt/source digest; login/missing-browser failures retain progress and show a usable next action.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -468,7 +483,7 @@
       "id": "A16",
       "requirement": "Reproducible templates",
       "requiredPassingEvidence": "Every advertised template initializes, validates and renders on its declared capability set; catalog preview matches its implementation and declared rights.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -481,7 +496,7 @@
       "id": "A17",
       "requirement": "Platform/install/update",
       "requiredPassingEvidence": "Core clean-artifact CI on declared platforms, Apple-native hardware proof, paths with spaces/Unicode, no-Python/Node bootstrap as advertised, install interruption, package update/rollback and modified-skill preservation.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -489,14 +504,15 @@
         "platform-loopback-canonical",
         "platform-six-source",
         "archive-bytecode-fix",
-        "platform-canonical-six"
+        "platform-canonical-six",
+        "public-codex-bootstrap-7ff"
       ]
     },
     {
       "id": "A18",
       "requirement": "Privacy and local service",
       "requiredPassingEvidence": "No secrets/private media/provider-analysis details in archives/logs; project access/path/origin tests; customer deletion/retention and correction export documented and exercised.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -514,16 +530,18 @@
       "requiredPassingEvidence": "Public unauthenticated source/archive access, npm/PyPI exact version install, Pi package install, stable setup URL, checksums/attestation, working Myriograph signup/docs/billing links and a fresh public-endpoint end-to-end run.",
       "status": "in-progress",
       "acceptancePassed": false,
-      "operatorProgress": "not-started",
+      "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "archive-interim"
+        "archive-interim",
+        "public-codex-bootstrap-7ff",
+        "public-qualification-prerelease"
       ]
     },
     {
       "id": "A20",
       "requirement": "Operations",
       "requiredPassingEvidence": "Metering/queue/error/credit/worker-health alerts delivered to a real configured destination; rate limits, support/incident/reconciliation and rollback procedures exercised.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
@@ -884,6 +902,36 @@
       ],
       "summary": "Exact source7ff prerelease published; original11assets immutable and anonymous manifest, wheel, sdist, npm and pinned setup skill hashes verified. Registry and complete clean-agent/customer/model acceptance remain open.",
       "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "cpu-transnet-sam21-39510473292",
+      "receiptSha256": "ed005425e947a8d6157a1a629aaeef5574e56aefcab86fbbfcbed27346a93ab8",
+      "receiptBytes": 3126,
+      "scope": "actual-final-wheel-linux-cpu-native-frame-fixture",
+      "supportsRequirements": [
+        "P4",
+        "A03",
+        "A09"
+      ],
+      "publicRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39510473292",
+      "summary": "Actual final-wheel TransNet and SAM2.1 CPU inference succeeded. All144 native-frame pixels and PTS matched the source fixture. TransNet incoming cuts8,37,123 match the bounded manual reference; raw peaks7,36,122 are outgoing frames. SAM produced18 candidates across6 native frames; all were visually reviewed. Onlyframe25/candidate2 andframe61/candidate2 are suitable for sparse flashes. Other candidates had holes, contact defects, blur or background leakage. No general accuracy, dense propagation, completed effect or SAM3.1 MLX claim.",
+      "visualReviewReceiptSha256": "196375c2e7210f5bb1b9cfe6f52a895442906a4b42e0803989d9b9cf33287cda",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "public-codex-bootstrap-7ff",
+      "receiptSha256": "cb874fa5acd7af91a56bc6cd51305e7cf8866259df60e83be0760779c60bbe36",
+      "scope": "fresh-public-codex-install-only",
+      "supportsRequirements": [
+        "P1",
+        "P10",
+        "A01",
+        "A17",
+        "A19",
+        "J1"
+      ],
+      "summary": "Actual fresh Codex installed exact anonymous public wheel and npm archives. Installed472wheel and571npm file identities matched. Editorial encode stopped before writing when system-volume free space fell below the500MiB reserve; review, revision and restore remain incomplete. Claude Code complete journey remains pending.",
+      "establishesLaunchAcceptance": false
     }
   ],
   "openGates": [
@@ -905,15 +953,63 @@
     "customerAuthBilling": "sandbox-only active; actual browser login-code request acknowledged, user verification pending",
     "paidNativeManagedAuto": "disabled; actual journeys pending",
     "modelResourceObservations": {
-      "standardLinux": "Original CPU attempt stopped before inference on missing runner tool prerequisite; correction under review",
-      "standardApple": "disk and native Metal available; memory/load block actual SAM3.1 requirement"
+      "standardLinux": "Actual run39510473292 succeeded for TransNet and SAM2.1 CPU inference with final wheel; all18 mask candidates visually reviewed, two accepted only for sparse flashes. Prior terminal prerequisite failures are retained.",
+      "standardApple": "disk and native Metal available; memory/load block actual SAM3.1 requirement",
+      "localApple": "System-volume free space remains below25GiB despite reported cleanup; heavy model gate is closed. No gate waived."
     },
     "acceptancePassed": false,
-    "operatorAlert": "Actual bounded diagnostic failed before delivery because CloudWatch cannot use existing topic encryption key; alarm recovered. Encryption-preserving fix and real destination delivery remain required.",
+    "operatorAlert": "Original diagnostic failed before delivery on existing topic encryption key. Exact encrypted-topic dedicated-key change set is prepared but not executed; approval for ongoing cost and actual operator delivery are pending.",
     "manifestSha256": "16f5ac1aff3b364e4bf479b30c593fc97e8d8ef84add023518a9c10f7800b341",
     "publicQualificationPrerelease": "https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1",
     "registryPublished": false,
     "publicBilling": "https://myrograph.com/billing",
-    "modelCpuCurrentRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39510473292"
-  }
+    "modelCpuCurrentRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39510473292",
+    "documentationSupplementSource": "5546ee33294c60da9262b91cb7cde510e04781e9",
+    "codexPublicBootstrap": "Passed exact public archive installation; editorial/acquisition journey preserved with resource and browser continuation.",
+    "byok": "Four bounded tasks validate withinUSD4.499; actual customer-owned credential authority remains pending. Server provider keys are excluded."
+  },
+  "completionDependencies": [
+    {
+      "id": "system-resource-headroom",
+      "requirements": [
+        "A02",
+        "A09",
+        "A14",
+        "A17"
+      ],
+      "state": "blocked",
+      "needed": "Fresh measured system-volume25GiB minimum plus model memory/load gates for local SAM; stable bounded-render reserve for editorial work. User cleanup report and current OS availability disagree."
+    },
+    {
+      "id": "customer-auth-and-checkout",
+      "requirements": [
+        "A04",
+        "A05",
+        "A06",
+        "A10",
+        "A11",
+        "A12",
+        "A13"
+      ],
+      "state": "waiting-user-authentication",
+      "needed": "User completes existing browser login-code entry; then original project-scoped customer key and real Stripe TEST checkout/signed settlement. No real card charge authorized."
+    },
+    {
+      "id": "customer-byok-authority",
+      "requirements": [
+        "A10",
+        "A11"
+      ],
+      "state": "waiting-user-authentication",
+      "needed": "Customer-owned OpenRouter access for bounded BYOK key; Myriograph server/provider authority is not a substitute."
+    },
+    {
+      "id": "operator-alert-key-cost",
+      "requirements": [
+        "A20"
+      ],
+      "state": "waiting-financial-approval",
+      "needed": "Approval for dedicated encrypted-alert key ongoing cost, followed by exact reviewed deployment and verified real destination delivery."
+    }
+  ]
 }
