@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-20T23:22:50.171350+00:00",
+  "updatedAt": "2026-10-20T23:39:03.620162+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
@@ -89,7 +89,8 @@
         "platform-loopback-canonical",
         "platform-six-source",
         "platform-canonical-six",
-        "public-codex-bootstrap-7ff"
+        "public-codex-bootstrap-7ff",
+        "public-codex-free-edit-7ff"
       ]
     },
     {
@@ -116,7 +117,9 @@
         "review-beats",
         "review-final-video",
         "review-clock",
-        "editorial-negative-animation"
+        "editorial-negative-animation",
+        "public-codex-free-edit-7ff",
+        "sparse-real-mask-export"
       ]
     },
     {
@@ -128,7 +131,8 @@
       "evidenceRefs": [
         "models-pins",
         "models-gate",
-        "cpu-transnet-sam21-39510473292"
+        "cpu-transnet-sam21-39510473292",
+        "sparse-real-mask-export"
       ]
     },
     {
@@ -175,7 +179,8 @@
         "editorial-social-revision",
         "acquisition-interim",
         "creative-portability",
-        "editorial-negative-animation"
+        "editorial-negative-animation",
+        "public-codex-free-edit-7ff"
       ]
     },
     {
@@ -215,7 +220,8 @@
       "evidenceRefs": [
         "setup-interim",
         "creative-portability",
-        "public-codex-bootstrap-7ff"
+        "public-codex-bootstrap-7ff",
+        "public-codex-free-edit-7ff"
       ]
     },
     {
@@ -260,7 +266,9 @@
         "review-beats",
         "review-final-video",
         "review-clock",
-        "editorial-negative-animation"
+        "editorial-negative-animation",
+        "public-codex-free-edit-7ff",
+        "sparse-real-mask-export"
       ]
     },
     {
@@ -321,7 +329,8 @@
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "creative-portability"
+        "creative-portability",
+        "public-codex-free-edit-7ff"
       ]
     },
     {
@@ -334,7 +343,8 @@
       "evidenceRefs": [
         "review-words",
         "review-clock",
-        "cpu-transnet-sam21-39510473292"
+        "cpu-transnet-sam21-39510473292",
+        "sparse-real-mask-export"
       ]
     },
     {
@@ -408,7 +418,8 @@
       "evidenceRefs": [
         "models-pins",
         "models-gate",
-        "cpu-transnet-sam21-39510473292"
+        "cpu-transnet-sam21-39510473292",
+        "sparse-real-mask-export"
       ]
     },
     {
@@ -469,7 +480,8 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "editorial-social-revision",
-        "editorial-negative-animation"
+        "editorial-negative-animation",
+        "public-codex-free-edit-7ff"
       ]
     },
     {
@@ -509,7 +521,8 @@
         "platform-six-source",
         "archive-bytecode-fix",
         "platform-canonical-six",
-        "public-codex-bootstrap-7ff"
+        "public-codex-bootstrap-7ff",
+        "public-codex-free-edit-7ff"
       ]
     },
     {
@@ -949,6 +962,38 @@
       ],
       "summary": "Resend metadata reports delivered for the single recent message matching the approved recipient and request time window. No email body/code read or persisted. Browser-request API did not expose provider email handle; user authentication and complete signup/payment remain unverified.",
       "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "public-codex-free-edit-7ff",
+      "receiptSha256": "90bb16571cba68c5b24d03164fdd79278ea08088b5665d6c290b083a39ac6324",
+      "scope": "actual-public-codex-generated-edit-and-image-revision",
+      "supportsRequirements": [
+        "P1",
+        "P3",
+        "P8",
+        "A02",
+        "A14",
+        "A17",
+        "J1",
+        "J4"
+      ],
+      "summary": "Actual isolated public7ff Codex created6s960x540/30fps mixed video/stereo audio/in-picture words. Actual image review and saved CHASE-to-FOLLOW correction applied. Bundle history reference repaired to preserved original composition. Restored render matches all180 decodedRGB frames and stereoPCM. SDK renderer children deny nonlocal network and private auth/checkout reads; native generator child allowed a DNS-port connection with zero application bytes, so strict full offline-source proof remains pending. Source/review-page opening and acquisition are incomplete. No listening/human signoff or complete clean Claude journey claimed.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "sparse-real-mask-export",
+      "receiptSha256": "b0dc64e6a18d1df78eb6c1d98c6d38263e3d6bd8c9bd462f4c109f43e1efd632",
+      "scope": "actual-native-pixel-equivalence-derived-six-frame-export",
+      "supportsRequirements": [
+        "P3",
+        "P4",
+        "A03",
+        "A09",
+        "J4"
+      ],
+      "summary": "Original18SAM2.1 candidates/indices preserved. A separately identified6-frame lossless source retains exact native pixels/PTS and explicit parent mapping; no inference on the derivative. SHA-bound unreviewed proposal rejected; reviewed selection persisted, exported and reopened at revision6. All6RLE frames verified against original PNGs: selected2 exact, rejected4 empty. Actual effect did not start because disk space fell below its650MB safety floor before watcher creation. No dense propagation or finished-action-edit claim.",
+      "exportSha256": "5b9be52f5c0b4898c6beb30b12dfed36834ec0981e5d6adba8b9c095a02b0a4f",
+      "establishesLaunchAcceptance": false
     }
   ],
   "openGates": [
@@ -982,9 +1027,11 @@
     "publicBilling": "https://myrograph.com/billing",
     "modelCpuCurrentRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39510473292",
     "documentationSupplementSource": "21ef3a377874291f58dec28154871e14a9c58655",
-    "codexPublicBootstrap": "Passed exact public archive installation; editorial/acquisition journey preserved with resource and browser continuation.",
+    "codexPublicBootstrap": "Exact public7ff install plus bounded generated edit, actual image correction and decoded-identical bundle/restore passed. Review-page opening, strict offline-source regeneration, acquisition, clean Claude and future corrected-release archive remain pending.",
     "byok": "Four bounded tasks validate withinUSD4.499; actual customer-owned credential authority remains pending. Server provider keys are excluded.",
-    "sharedCommercialReleaseOwnership": "Handoff saved and source/artifact/deployment/campaign identities pinned. Existing funding remains disabled; no paid native handles have been admitted. Full commercial requirements remain mandatory."
+    "sharedCommercialReleaseOwnership": "Handoff saved and source/artifact/deployment/campaign identities pinned. Existing funding remains disabled; no paid native handles have been admitted. Full commercial requirements remain mandatory.",
+    "localResourceHold": "Actual system free space oscillated from about700MB to121MB/ENOSPC. All local media/browser processes stopped; effect, offline-source proof and acquisition bridge remain not executed. Heavy models still require25GiB measured system headroom.",
+    "registryReadiness": "Exact npm0.2.0-beta.1 and PyPI0.2.0b1 still404; protected registry-beta reviewer policy remains configured. No registry dispatch/publication occurred."
   },
   "completionDependencies": [
     {

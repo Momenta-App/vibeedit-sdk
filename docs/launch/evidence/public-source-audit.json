@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-20T23:22:51.094463+00:00",
+  "recordedAt": "2026-10-20T23:39:04.492077+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "21ef3a377874291f58dec28154871e14a9c58655",
-    "inventoryPaths": 196,
-    "existingFiles": 196,
-    "bytesRead": 3003769,
-    "sourceInventorySha256": "093e57dcc0ea4733552ac5cf5c87f1361efcfed45ddbbbb975becbbe4efa6310",
+    "gitHead": "f6dee356b69cc55a9347a2f84f42ea7f1230277b",
+    "inventoryPaths": 195,
+    "existingFiles": 195,
+    "bytesRead": 3018783,
+    "sourceInventorySha256": "5b9d3d5e2c3a747b8b4af545386b813878c5a99da459dad57a41c14906b4d525",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -317,6 +317,16 @@
         "path": "docs/launch/evidence/companion-interim-archive.json",
         "category": "local_personal_path",
         "count": 7,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-free-edit.json",
+        "category": "local_personal_path",
+        "count": 39,
         "matchHashes": [
           "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
         ],
@@ -1497,26 +1507,14 @@
     "include": [
       {
         "path": "docs/launch/PUBLIC-LEDGER.json",
-        "byteLength": 44359,
-        "sha256": "3790a615c3a11416855de50c2561fd66ad77ab3a4873ef71daf3ce068470ed7f",
+        "byteLength": 47510,
+        "sha256": "714a15501dfd9fa8e86457cd607b6008f17e08562a6a1713e6006d8f3119c01a",
         "format": "text"
       },
       {
         "path": "docs/launch/STATE.md",
-        "byteLength": 11062,
-        "sha256": "8bc03fe74f65c69e363fd70a8f58008dd22ea6a434c8b993f46cb122db19fc1b",
-        "format": "text"
-      },
-      {
-        "path": "skills/owned.json",
-        "byteLength": 2189,
-        "sha256": "e8edb4f9fb3d72a85f7a80dedd99f24dac3e8c5be4a92f16842d14c8f91b57cb",
-        "format": "text"
-      },
-      {
-        "path": "skills/vibeedit-companion/SKILL.md",
-        "byteLength": 7078,
-        "sha256": "fb94d733d2c00ef7788f7dc0972a8199f6d1b5378d62a66e8582235527a76f07",
+        "byteLength": 12163,
+        "sha256": "cdcbfd11a030b65e6c01a447f75812aa0b23f197be3a3662646248530040936f",
         "format": "text"
       }
     ],
@@ -1573,8 +1571,8 @@
       },
       {
         "path": "docs/launch/CODEX-PUBLIC-JOURNEY.md",
-        "byteLength": 2944,
-        "sha256": "8891e057897a89fffda854e89a598c957d6f67c5af97a7a4e5f82ebf2f902c2f",
+        "byteLength": 4084,
+        "sha256": "0a4a6fc3e0f616403283311c7ee87778c6e3187295ea2fb49935dd625ebedb8a",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1615,8 +1613,8 @@
       },
       {
         "path": "docs/launch/OPERATOR_STATE.md",
-        "byteLength": 40859,
-        "sha256": "f2379eb2c04eea24430df9ef64022acb3d98e041c59b1c8b43358474f51e0a97",
+        "byteLength": 47210,
+        "sha256": "d7d5372ecf86bb1cb7b4f31a952416c96a0d9143ce9c3827de035e39391d55c0",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -3343,6 +3341,116 @@
         "sha256": "98f70667450531854f15dd5031b3be43a206860779326cce0c00fb70b1bab0a6",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-free-edit.json",
+        "byteLength": 12538,
+        "sha256": "90bb16571cba68c5b24d03164fdd79278ea08088b5665d6c290b083a39ac6324",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "9cccb2f0d36d7cc792f034e5722f90bed761403fe2cde9bbf83f8ffcdf03b928",
+            "byteLength": 36391
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9baa09c9a6d92207b4d6600a8d1b4d2ab2e35dd4a6cbaf99166750c48e17f1bb",
+            "byteLength": 44490
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "42a2be1c2b9300e71184e4ac3f7ba17c1c3554caa9e5b3ad9688e8363228f333",
+            "byteLength": 6136
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4121945b7ec725b31a02fa41d265767ac1cde08978828511f5c41e5ec61ae2e6",
+            "byteLength": 12332
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7214686b81b3d62d82c5ab814bd2ab6466f817d91523b34bd15eb18c65f20a45",
+            "byteLength": 476270
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ff4da9e8ffeeedb47dc75ece9f77bb8d39a1898037af06343aee6f17f2163807",
+            "byteLength": 478075
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e56fbdb33ef36c4272d2d51480f14f495d7e2881c0789bdf56cdcd975f7d21e0",
+            "byteLength": 85803
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ebee018ba3f1154c9f23121e69304c6371d1175ea82871a5bcd079c86a493b07",
+            "byteLength": 1585261
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "69dac634f300d5d52649044ce787814122942c2ccbd8f99b220e4972f85a482c",
+            "byteLength": 7326
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "3df04b1542a89d4f14e5495eab5b8c9cc951550e5f2a0a65fad8cc6f32b155f8",
+            "byteLength": 20378
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4cfd3a06dbf85da831e91a8488be3042ef9447655cc5f33646414afad3d1f5eb",
+            "byteLength": 65
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "06faa65833f853bb0288bee81b86282dd63fe6cebe8378773b16923cf54f8bc4",
+            "byteLength": 1025
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "03a22838fedd2a5d40c10a819135e50c2d936ac4d7ebd1c952ed06ba3354cdfe",
+            "byteLength": 3398
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ebc2685b67078cd571d08ca7aa74177b0b327d1177c8d1cdc460126f434813ea",
+            "byteLength": 3169
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "80dfc1531930c8fdc923b50e88f9fb9445ad6aad57e239fd187951447b8ac80f",
+            "byteLength": 6481
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "3a39823bc443173ea924d2cba2bed9467c3427ef53258d68ade606a3eeec5123",
+            "byteLength": 2623
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5516fe0b97ed1eeb1a37690d998cdf37c35563c4cac005ab97af759aea283d5b",
+            "byteLength": 223598
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5fc63e980a2bfe42c4f161a609f4434978d8047309d0652de8496c77c38de056",
+            "byteLength": 166608
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d4b1b096ee33779a193ac7ce896c4583b5d58ec62bed5b63af59167a4e11d95d",
+            "byteLength": 424112
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "315cfe62f3b10e24655e5fc79fd246583ad5e33916853095af0f44d19a84ab97",
+            "byteLength": 30658
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
         "path": "docs/launch/evidence/companion-public-codex-7ff.json",
