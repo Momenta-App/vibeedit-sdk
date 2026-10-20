@@ -5,13 +5,14 @@ It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
 motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
-The current source candidate is Python **0.2.0b1** / npm **0.2.0-beta.1**.
+The qualification candidate is Python **0.2.0b1** / npm **0.2.0-beta.1**.
 It adds portable projects and corrections, focused local review tools, explicit
 model packs, source-acquisition receipts and an optional Pi companion. It is
-**not yet launched or qualified as a complete release**. The existing public
-GitHub prerelease is [0.1.0-beta.4](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.1.0-beta.4);
-its archives do not contain the new agent package features. Registry artifacts,
-source and deployed Myriograph capabilities have separate identities.
+**not yet qualified as the complete launch**. Its exact archives are public in
+[v0.2.0-beta.1](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1).
+Registry publication and complete customer journeys remain pending. Archive
+source is pinned to `7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1`; these updated
+guides are a documentation supplement and do not rebuild those archives.
 
 VibeEdit-owned code is MIT licensed. Optional models and fonts have their own
 terms in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Myriograph owns the
@@ -20,25 +21,32 @@ editing requires no account or Pi companion.
 
 ## Install
 
-The registry commands below are the intended registry experience. Until a
-registry beta is published, install the attested GitHub prerelease artifacts or
-the public source checkout instead.
+Give your agent the [pinned setup skill](https://raw.githubusercontent.com/Momenta-App/vibeedit-sdk/v0.2.0-beta.1/skills/vibeedit-setup/SKILL.md):
+"Read this VibeEdit setup skill, install it for this project, verify it, and help
+me make a video."
+
+The agent verifies the release manifest, checksums and matching skill before
+installing exact archives into isolated environments. Registry versions are not
+published yet. For manual installation, first download and verify the files from
+that same prerelease; the commands below use those verified local files.
 
 Lightweight Python CLI and media orchestration:
 
 ```bash
-uv tool install vibeedit
+uv tool install ./vibeedit-0.2.0b1-py3-none-any.whl
 vibeedit doctor
 ```
 
-Optional local runtimes:
+For a manual installation inside a Python virtual environment, choose only the
+needed extras below. These pip commands do not modify an existing `uv tool`
+environment; the setup skill handles isolated optional-runtime installation.
 
 ```bash
-pip install "vibeedit[effects]"
-pip install "vibeedit[browser]"
-pip install "vibeedit[vision]"
-pip install "vibeedit[sam]"
-pip install "vibeedit[all]"
+pip install "./vibeedit-0.2.0b1-py3-none-any.whl[effects]"
+pip install "./vibeedit-0.2.0b1-py3-none-any.whl[browser]"
+pip install "./vibeedit-0.2.0b1-py3-none-any.whl[vision]"
+pip install "./vibeedit-0.2.0b1-py3-none-any.whl[sam]"
+pip install "./vibeedit-0.2.0b1-py3-none-any.whl[all]"
 vibeedit setup --effects
 vibeedit setup --browser
 vibeedit setup --sam
@@ -91,13 +99,19 @@ No model weight is part of the base wheel or npm archive.
 Node SDK, HTML motion runtime, and Node-facing CLI:
 
 ```bash
-npm install vibeedit
+npm install ./vibeedit-0.2.0-beta.1.tgz
 npx vibeedit doctor --json
 ```
 
 The Node package owns CompositionSpec, catalog, skills, and HTML motion APIs.
 Media rendering commands bridge to an installed Python VibeEdit package. Run
 `npx vibeedit doctor --json` to see both capabilities and exact next actions.
+
+Agent-package guides: [projects/review](docs/PROJECTS.md),
+[models and reviewed effects](docs/MODELS.md), [Pi workers/goals](docs/COMPANION.md),
+[Myriograph funding/services](docs/MYRIOGRAPH.md), and
+[operations/rollback](docs/OPERATIONS.md). [Launch state](docs/launch/STATE.md)
+keeps actual qualification separate from supported command contracts.
 
 ## Agent quick start
 

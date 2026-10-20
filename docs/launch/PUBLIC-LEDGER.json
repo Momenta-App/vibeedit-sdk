@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-20T21:22:17.430827+00:00",
+  "updatedAt": "2026-10-20T22:26:35.292834+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
@@ -11,7 +11,7 @@
     "finalArchive": null,
     "exactPublicPackageVersions": null,
     "finalAcceptanceEvidence": null,
-    "latestHistoricalCheckpoint": "d966c864caa5b6bf4c3aeebfa5c6e81cf14ff894"
+    "latestHistoricalCheckpoint": "7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1"
   },
   "sourceOwnership": {
     "implementation": "Existing public VibeEdit SDK foundation and VibeEdit-owned agent integration source; MIT governs owned code.",
@@ -44,11 +44,11 @@
     "cleanFinalArchiveCodexJourney": false,
     "cleanFinalArchiveClaudeCodeJourney": false,
     "newPaidProviderCallsEstablishedByLaunchWork": false,
-    "newBackendDeploymentEstablishedByLaunchWork": false,
+    "newBackendDeploymentEstablishedByLaunchWork": true,
     "freshSandboxCheckoutEmailAndSignedSettlementJourneyComplete": false,
     "realFreshModelInferenceQualified": false,
     "managedGoalExecutionQualified": false,
-    "finalFullRegressionRun": "Canonical workflow39496324164:13jobs passed; complete customer/editorial/model acceptance remains pending",
+    "finalFullRegressionRun": "Final core7ff canonical workflow39507366659: all13jobs passed; full customer/editorial/model acceptance remains pending",
     "note": "Existing platform capabilities and prior deployed surfaces remain evidence leads, not new launch acceptance.",
     "canonicalCoreArchiveMatrixQualified": true
   },
@@ -512,7 +512,7 @@
       "id": "A19",
       "requirement": "Public release",
       "requiredPassingEvidence": "Public unauthenticated source/archive access, npm/PyPI exact version install, Pi package install, stable setup URL, checksums/attestation, working Myriograph signup/docs/billing links and a fresh public-endpoint end-to-end run.",
-      "status": "open",
+      "status": "in-progress",
       "acceptancePassed": false,
       "operatorProgress": "not-started",
       "evidenceRefs": [
@@ -857,6 +857,33 @@
       ],
       "summary": "Six hosted entries installed the same attested wheel/npm archives, verifying pinned manifest and all five file identities before install. Portable core/browser/render/review-transfer/template fixture checks passed. No optional model, customer payment or complete agent/editorial acceptance inferred.",
       "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "final-canonical-core-39507366659",
+      "receiptSha256": "9d95a9fb1d171ad9a228c258ab6562723d3911c23506e97ba1ff8dee6962ee01",
+      "receiptBytes": 71831,
+      "scope": "exact-canonical-core-archives-six-platforms",
+      "supportsRequirements": [
+        "P0",
+        "P1",
+        "P9",
+        "A17",
+        "A18"
+      ],
+      "summary": "All13 source/build/exact-archive jobs passed at7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1. All5 manifest artifact hashes/lengths, both checksum files and signed9subject hosted provenance independently verified. Six platform proof artifacts retained. Full model, customer/payment, creative and agent acceptance remains open.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "public-qualification-prerelease",
+      "receiptSha256": "096ada0e7672d8906950b9049af9b5bd4a565407e2f337a62acc7441bc28b59a",
+      "scope": "anonymous-github-qualification-archives-only",
+      "supportsRequirements": [
+        "P10",
+        "A01",
+        "A19"
+      ],
+      "summary": "Exact source7ff prerelease published; original11assets immutable and anonymous manifest, wheel, sdist, npm and pinned setup skill hashes verified. Registry and complete clean-agent/customer/model acceptance remain open.",
+      "establishesLaunchAcceptance": false
     }
   ],
   "openGates": [
@@ -868,5 +895,25 @@
     "Operational alert delivery, platform/update/privacy/retention and rollback qualification.",
     "Public release, exact registry installs, stable setup entry and working customer links."
   ],
-  "privacyPolicy": "Only explicitly curated public summaries, receipt hashes and artifact identities belong here. No operator screenshots, raw filesystem paths, private URLs, account IDs, emails or credential values are included."
+  "privacyPolicy": "Only explicitly curated public summaries, receipt hashes and artifact identities belong here. No operator screenshots, raw filesystem paths, private URLs, account IDs, emails or credential values are included.",
+  "currentQualification": {
+    "sourceRevision": "7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1",
+    "canonicalRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39507366659",
+    "status": "all13 canonical core jobs passed; full acceptance open",
+    "historicalRepairedCanonicalRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39504114006",
+    "historicalRepairedCanonicalStatus": "all13jobs passed, older source",
+    "customerAuthBilling": "sandbox-only active; actual browser login-code request acknowledged, user verification pending",
+    "paidNativeManagedAuto": "disabled; actual journeys pending",
+    "modelResourceObservations": {
+      "standardLinux": "Original CPU attempt stopped before inference on missing runner tool prerequisite; correction under review",
+      "standardApple": "disk and native Metal available; memory/load block actual SAM3.1 requirement"
+    },
+    "acceptancePassed": false,
+    "operatorAlert": "Actual bounded diagnostic failed before delivery because CloudWatch cannot use existing topic encryption key; alarm recovered. Encryption-preserving fix and real destination delivery remain required.",
+    "manifestSha256": "16f5ac1aff3b364e4bf479b30c593fc97e8d8ef84add023518a9c10f7800b341",
+    "publicQualificationPrerelease": "https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1",
+    "registryPublished": false,
+    "publicBilling": "https://myrograph.com/billing",
+    "modelCpuCurrentRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39510473292"
+  }
 }
