@@ -5,12 +5,18 @@ It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
 motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
-This public repository contains the unreleased VibeEdit 0.1.0 beta 3 source
-candidate. The latest downloadable GitHub prerelease is the immutable beta 1.
-Both have been validated locally and on GitHub-hosted Linux, Windows, and macOS
-runners. These betas are for evaluation, testing, and community review; they are
-not production-stability or commercial-use claims. Source, GitHub release assets,
-and registry publication are separate channels with separate version identities.
+The current source candidate is Python **0.2.0b1** / npm **0.2.0-beta.1**.
+It adds portable projects and corrections, focused local review tools, explicit
+model packs, source-acquisition receipts and an optional Pi companion. It is
+**not yet launched or qualified as a complete release**. The existing public
+GitHub prerelease is [0.1.0-beta.4](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.1.0-beta.4);
+its archives do not contain the new agent package features. Registry artifacts,
+source and deployed Myriograph capabilities have separate identities.
+
+VibeEdit-owned code is MIT licensed. Optional models and fonts have their own
+terms in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Myriograph owns the
+three paid intelligence services and metered companion access. Ordinary local
+editing requires no account or Pi companion.
 
 ## Install
 
@@ -79,7 +85,7 @@ VibeEdit cache; the source and weights are Apache-2.0. The runner uses
 Torch/CUDA, Torch/MPS, or CPU in that order and records the model version,
 checkpoint digest, prompt, source identity, actual device/runtime versions, and
 cache key. A clean-wheel Torch/MPS proof with controlled and natural masks is
-recorded in `docs/evidence/sam21-public-proof.json`. SAM 3.1 remains quarantined.
+recorded in `docs/evidence/sam21-public-proof.json` for an earlier release. The new model-pack command supports pinned TransNet, SAM 2.1 and SAM 3.1 MLX setup. Fresh inference qualification for this candidate is pending; setup availability is not model accuracy evidence.
 No model weight is part of the base wheel or npm archive.
 
 Node SDK, HTML motion runtime, and Node-facing CLI:
@@ -158,11 +164,10 @@ Install the Node beta tarball in a project:
 npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.4/vibeedit-0.1.0-beta.4.tgz
 ```
 
-When downloading all three beta-1 release archives manually, place them beside
-`SHA256SUMS.release` and verify before installing:
+When downloading an existing release, use the checksum manifest distributed with that exact release:
 
 ```bash
-shasum -a 256 -c SHA256SUMS.release
+shasum -a 256 -c SHA256SUMS
 ```
 
 The build workflow emits future flat release manifests as `SHA256SUMS`.
@@ -185,9 +190,9 @@ Or build and install the exact local artifacts:
 
 ```bash
 uv build --out-dir dist/python
-uv tool install dist/python/vibeedit-0.1.0b4-py3-none-any.whl
+uv tool install dist/python/vibeedit-0.2.0b1-py3-none-any.whl
 npm pack --pack-destination dist/npm
-npm install ./dist/npm/vibeedit-0.1.0-beta.4.tgz
+npm install ./dist/npm/vibeedit-0.2.0-beta.1.tgz
 ```
 
 `setup` performs only explicitly requested work. It installs pinned browser and
@@ -204,7 +209,7 @@ model is included in the base wheel or npm archive.
 
 The Python package accepts normal bundled HTML/CSS/JS with local media. Chromium owns fonts, layout, graphics and composition. No CompositionSpec is needed for this workflow. On macOS 15+ ARM64, the CEF backend captures GPU surfaces, converts on Metal, and encodes opaque H.264 with VideoToolbox.
 
-Install the exact beta.4 release wheel with the browser extra. Native setup requires FFmpeg, Xcode command-line tools, CMake, Ninja and Rust; it explicitly downloads the checksum-pinned CEF runtime and builds the bundled sources into the user cache:
+Install an exact qualified release wheel with the browser extra. Native setup requires FFmpeg, Xcode command-line tools, CMake, Ninja and Rust; it explicitly downloads the checksum-pinned CEF runtime and builds the bundled sources into the user cache:
 
 ```bash
 vibeedit setup --cef --json
@@ -387,8 +392,8 @@ See `docs/SECURITY.md`, `docs/ARCHITECTURE.md`, `SBOM.spdx.json`, and
 
 ## License
 
-`LICENSE.md` defines the terms for this publicly inspectable and downloadable
-beta. Commercial use requires a separate license from Attention Engine Inc.
-Third-party components remain under their own licenses and are not claimed as
-VibeEdit property. The release-owner provenance determination and evidence are
-recorded in `docs/LEGAL_REVIEW_HANDOFF.md`.
+VibeEdit's owned package code, skills and templates use the MIT license in
+`LICENSE.md`. Fonts, optional model weights and third-party runtimes retain their
+own terms, recorded in `THIRD_PARTY_NOTICES.md` and `SBOM.spdx.json`.
+Myriograph is a separately metered service; package installation includes no paid
+inference credit. Earlier release legal records are historical evidence.

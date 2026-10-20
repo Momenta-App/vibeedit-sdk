@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from PIL import Image, ImageChops, ImageDraw, ImageFont
+from vibeedit.data import data_path
 
 
 DEFAULT_WIDTH = 1280
@@ -20,11 +21,8 @@ DEFAULT_CLEAR_AFTER = 0.75
 DEFAULT_WORD_GAP = 0.24
 MIN_FONT_SIZE = 40
 MIN_RENDER_HEIGHT = 30
-FONT_CANDIDATES = [
-    "/System/Library/Fonts/Supplemental/Impact.ttf",
-    "/System/Library/Fonts/Supplemental/DIN Condensed Bold.ttf",
-    "/Library/Fonts/Arial Bold.ttf",
-]
+FONT_CANDIDATES = [str(data_path("catalog", "text-runtime", "assets", "fonts", "BebasNeue-Regular.ttf"))]
+
 MODES = {"ultra", "max", "medium", "small", "extra-small"}
 PLACEMENTS = {"center"}
 BLEND_MODES = {"difference", "normal"}
@@ -61,6 +59,8 @@ class WordLayout:
 def main() -> None:
     args = parse_args()
     out_dir = Path(args.out_dir)
+    if out_dir.exists() and any(out_dir.iterdir()):
+        raise ValueError("Use a new output directory; existing artifacts are preserved")
     out_dir.mkdir(parents=True, exist_ok=True)
     words = load_words(args)
     duration = args.duration if args.duration is not None else infer_duration(words, args.clear_after)
@@ -493,7 +493,7 @@ def mux_background_audio(silent_video: Path, source: Path, out_path: Path, clip_
         capture_output=True,
     )
     if result.returncode != 0:
-        silent_video.replace(out_path)
+        raise RuntimeError("Source audio mux failed; preserve the silent candidate and inspect the source audio")
 
 
 def load_background_frame(background_dir: Path | None, index: int) -> Image.Image | None:

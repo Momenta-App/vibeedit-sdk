@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "vibeedit.captionInput.v1",
+  "meaning": "Synthetic layout labels, not spoken or transcribed dialogue. User production requires user-supplied source-time words.",
+  "words": [
+    {
+      "id": "word-0",
+      "text": "Keep",
+      "startUs": 0,
+      "endUs": 1000000
+    },
+    {
+      "id": "word-1",
+      "text": "going.",
+      "startUs": 1000000,
+      "endUs": 2000000
+    },
+    {
+      "id": "word-2",
+      "text": "Gently.",
+      "startUs": 2000000,
+      "endUs": 3000000
+    }
+  ]
+}

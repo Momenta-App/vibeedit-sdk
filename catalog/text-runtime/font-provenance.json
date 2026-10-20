@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "vibeedit.fontPolicy.v1",
+  "sourceRevision": "47d54ca1ebb14fd864695f1d39dc734f39017c33",
+  "fonts": [
+    {
+      "filename": "Poppins-Black.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/poppins/Poppins-Black.ttf",
+      "byteLength": 153440,
+      "sha256": "d82aaaf98a9283f9a8edd24e51173337d8eaf09e25cd3d98831f8ec8461748a1",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "OFL-poppins.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/poppins/OFL.txt",
+      "byteLength": 4385,
+      "sha256": "6be04893d770899a015649c7aa3b582f871b272f8747a92b78b17c3e5c8b2573",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "Poppins-Bold.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/poppins/Poppins-Bold.ttf",
+      "byteLength": 155996,
+      "sha256": "983676516167748b74de6f4771fb384c664fd913acb8b471122ecacf5da5ea6c",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "Poppins-BlackItalic.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/poppins/Poppins-BlackItalic.ttf",
+      "byteLength": 174116,
+      "sha256": "f4852ca89c29f69d800e14f097ed4d1f0a0cc454e9f77d73bfd6db1f71c287a0",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "AbrilFatface-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/abrilfatface/AbrilFatface-Regular.ttf",
+      "byteLength": 67364,
+      "sha256": "5971d4a3758a922a9fedc7f6fb825a96341a2e718c45a4b2c9a6b417c8c4dbe9",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "OFL-abrilfatface.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/abrilfatface/OFL.txt",
+      "byteLength": 4415,
+      "sha256": "aba8997e16b1e3888c6e855ba883c70d96bd4375bff8cb9c7ce0f097200f74b8",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "BebasNeue-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/bebasneue/BebasNeue-Regular.ttf",
+      "byteLength": 61400,
+      "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "OFL-bebasneue.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/bebasneue/OFL.txt",
+      "byteLength": 4337,
+      "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "GreatVibes-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/greatvibes/GreatVibes-Regular.ttf",
+      "byteLength": 457588,
+      "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "OFL-greatvibes.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/greatvibes/OFL.txt",
+      "byteLength": 4399,
+      "sha256": "61093a21f5e63dedf54222b3c09997e54c0fe43e3851d21386e02ddcbc246d49",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "Montserrat-Variable.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
+      "byteLength": 744936,
+      "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+      "license": "OFL-1.1"
+    },
+    {
+      "filename": "OFL-montserrat.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/montserrat/OFL.txt",
+      "byteLength": 4400,
+      "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+      "license": "OFL-1.1"
+    }
+  ],
+  "replacements": {
+    "AVANTE.otf": "Montserrat-Variable.ttf",
+    "Bebas-Regular.otf": "BebasNeue-Regular.ttf",
+    "Birds of Paradise.ttf": "GreatVibes-Regular.ttf",
+    "Birds-of-Paradise.ttf": "GreatVibes-Regular.ttf",
+    "BucklaneScript.otf": "GreatVibes-Regular.ttf",
+    "mytupiBOLD.ttf": "BebasNeue-Regular.ttf"
+  },
+  "adaptation": "Legacy unqualified fonts replaced for unrestricted commercial editing; font appearance intentionally changes. OFL terms govern fonts, MIT governs VibeEdit code.",
+  "replaced": [
+    {
+      "original": "families/aesthetic-glow/assets/fonts/mytupiBOLD.ttf",
+      "parentSha256": "e1c886beb2526c386bef45e6703ff6a2fd3fb46b58581c1c18a5591318f6ec5c",
+      "replacement": "families/aesthetic-glow/assets/fonts/BebasNeue-Regular.ttf"
+    },
+    {
+      "original": "families/aesthetic-glow/assets/fonts/AVANTE.otf",
+      "parentSha256": "03ac66cc7c92dc3ff8e289f7338ea88e8a5846e5a5cf45a0529a6f179e598a95",
+      "replacement": "families/aesthetic-glow/assets/fonts/Montserrat-Variable.ttf"
+    },
+    {
+      "original": "families/aesthetic-glow/assets/fonts/Bebas-Regular.otf",
+      "parentSha256": "391cc0fa0763e520081d7d5f6c8a6b1c4ac1cc485d471bea4b8bed9d1d5313c8",
+      "replacement": "families/aesthetic-glow/assets/fonts/BebasNeue-Regular.ttf"
+    },
+    {
+      "original": "families/aesthetic-glow/assets/fonts/Birds of Paradise.ttf",
+      "parentSha256": "902cc1990befe518edb6e5ef6e4252bea3852da662ea2cf6af2249f8cba173cb",
+      "replacement": "families/aesthetic-glow/assets/fonts/GreatVibes-Regular.ttf"
+    },
+    {
+      "original": "families/aesthetic-glow/components/assets/fonts/mytupiBOLD.ttf",
+      "parentSha256": "e1c886beb2526c386bef45e6703ff6a2fd3fb46b58581c1c18a5591318f6ec5c",
+      "replacement": "families/aesthetic-glow/components/assets/fonts/BebasNeue-Regular.ttf"
+    },
+    {
+      "original": "families/aesthetic-glow/components/assets/fonts/AVANTE.otf",
+      "parentSha256": "03ac66cc7c92dc3ff8e289f7338ea88e8a5846e5a5cf45a0529a6f179e598a95",
+      "replacement": "families/aesthetic-glow/components/assets/fonts/Montserrat-Variable.ttf"
+    },
+    {
+      "original": "families/aesthetic-glow/components/assets/fonts/Bebas-Regular.otf",
+      "parentSha256": "391cc0fa0763e520081d7d5f6c8a6b1c4ac1cc485d471bea4b8bed9d1d5313c8",
+      "replacement": "families/aesthetic-glow/components/assets/fonts/BebasNeue-Regular.ttf"
+    },
+    {
+      "original": "families/aesthetic-glow/components/assets/fonts/Birds of Paradise.ttf",
+      "parentSha256": "902cc1990befe518edb6e5ef6e4252bea3852da662ea2cf6af2249f8cba173cb",
+      "replacement": "families/aesthetic-glow/components/assets/fonts/GreatVibes-Regular.ttf"
+    },
+    {
+      "original": "families/dimensional-metal/assets/fonts/mytupiBOLD.ttf",
+      "parentSha256": "e1c886beb2526c386bef45e6703ff6a2fd3fb46b58581c1c18a5591318f6ec5c",
+      "replacement": "families/dimensional-metal/assets/fonts/BebasNeue-Regular.ttf"
+    },
+    {
+      "original": "families/dimensional-metal/assets/fonts/AVANTE.otf",
+      "parentSha256": "03ac66cc7c92dc3ff8e289f7338ea88e8a5846e5a5cf45a0529a6f179e598a95",
+      "replacement": "families/dimensional-metal/assets/fonts/Montserrat-Variable.ttf"
+    },
+    {
+      "original": "families/dimensional-metal/assets/fonts/Birds of Paradise.ttf",
+      "parentSha256": "902cc1990befe518edb6e5ef6e4252bea3852da662ea2cf6af2249f8cba173cb",
+      "replacement": "families/dimensional-metal/assets/fonts/GreatVibes-Regular.ttf"
+    },
+    {
+      "original": "assets/fonts/Birds-of-Paradise.ttf",
+      "parentSha256": "902cc1990befe518edb6e5ef6e4252bea3852da662ea2cf6af2249f8cba173cb",
+      "replacement": "assets/fonts/GreatVibes-Regular.ttf"
+    },
+    {
+      "original": "assets/fonts/mytupiBOLD.ttf",
+      "parentSha256": "e1c886beb2526c386bef45e6703ff6a2fd3fb46b58581c1c18a5591318f6ec5c",
+      "replacement": "assets/fonts/BebasNeue-Regular.ttf"
+    },
+    {
+      "original": "assets/fonts/AVANTE.otf",
+      "parentSha256": "03ac66cc7c92dc3ff8e289f7338ea88e8a5846e5a5cf45a0529a6f179e598a95",
+      "replacement": "assets/fonts/Montserrat-Variable.ttf"
+    },
+    {
+      "original": "assets/fonts/Bebas-Regular.otf",
+      "parentSha256": "391cc0fa0763e520081d7d5f6c8a6b1c4ac1cc485d471bea4b8bed9d1d5313c8",
+      "replacement": "assets/fonts/BebasNeue-Regular.ttf"
+    },
+    {
+      "original": "assets/fonts/BucklaneScript.otf",
+      "parentSha256": "86af1557aa1fa760172947131bcb66f3aecda8f5fba06b0fdd65ac5caed9316e",
+      "replacement": "assets/fonts/GreatVibes-Regular.ttf"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "vibeedit.text-effect-conformance.v1",
+  "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725",
+  "totalRegistered": 52,
+  "tested": 1,
+  "portableImported": 50,
+  "baselineComponents": [
+    "vibeedit://text/caption-rail",
+    "vibeedit://text/negative"
+  ],
+  "passed": 1,
+  "failed": 0,
+  "failures": [],
+  "renderContract": {
+    "width": 640,
+    "height": 360,
+    "fps": 24,
+    "durationFrames": 48,
+    "background": "split-gradient-conformance-field",
+    "network": "blocked-by-contract"
+  },
+  "fidelityContract": {
+    "portableSourceAdaptations": 1,
+    "portableRuntimeEffects": 0,
+    "meaning": "Render checks prove deterministic browser output. Portable-source-adaptation identifies donor HTML/CSS/JS adapted with qualified OFL fonts; no pixel-equivalence claim is made. Portable-runtime identifies the SDK motion runtime."
+  },
+  "aggregatePreviewSha256": "f7f07bf1856bfcda656c8837c4a33653cea4c7c6d89bbf78ad25e909dc85b5c8",
+  "contactSheet": "docs/evidence/text-effects/pilot-contact-sheet.jpg",
+  "contactSheets": [
+    {
+      "frame": 2,
+      "path": "docs/evidence/text-effects/pilot-contact-sheet-early.jpg",
+      "sha256": "c0cd64d7732a8ceff85411f47b418a5b7a7c0bf639a15777d9563c94be75f3f0",
+      "bytes": 35077
+    },
+    {
+      "frame": 24,
+      "path": "docs/evidence/text-effects/pilot-contact-sheet-mid.jpg",
+      "sha256": "13c30ebfd6a15260da7c295e030b15162645622fe9d3b66ea339b49570bb79b1",
+      "bytes": 35575
+    },
+    {
+      "frame": 32,
+      "path": "docs/evidence/text-effects/pilot-contact-sheet.jpg",
+      "sha256": "13c30ebfd6a15260da7c295e030b15162645622fe9d3b66ea339b49570bb79b1",
+      "bytes": 35575
+    },
+    {
+      "frame": 43,
+      "path": "docs/evidence/text-effects/pilot-contact-sheet-late.jpg",
+      "sha256": "13c30ebfd6a15260da7c295e030b15162645622fe9d3b66ea339b49570bb79b1",
+      "bytes": 35575
+    }
+  ],
+  "reviewReel": "docs/evidence/text-effects/pilot-review-reel.mp4",
+  "results": [
+    {
+      "id": "vibeedit://text/mogrt-esmerald",
+      "name": "Esmerald",
+      "family": "aesthetic-glow",
+      "motion": "glow",
+      "fidelity": {
+        "mode": "portable-source-adaptation",
+        "sourceEntry": "families/aesthetic-glow/outputs/ESMERALD.html",
+        "sourceRevision": "2403e3f94cfabf7236d5401bd4beeadefde1d725",
+        "fontPolicy": "catalog/text-runtime/font-provenance.json",
+        "pixelEquivalent": false
+      },
+      "preview": "catalog/previews/text-effects/mogrt-esmerald.mp4",
+      "sha256": "8793dc9ce93da0dcb5fe08c1f5c42cc36f8b64a1305b60cf93f68056b672d7ed",
+      "bytes": 14580,
+      "durationSeconds": 2,
+      "frames": 48,
+      "width": 640,
+      "height": 360,
+      "frameRate": "24/1",
+      "representativeFrame": 32,
+      "visualSsimAgainstBackground": 0.984044,
+      "ocr": {
+        "advisory": true,
+        "available": true,
+        "text": "yi"
+      },
+      "dom": {
+        "component": "mogrt-esmerald",
+        "text": "Emerald",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "checks": {
+        "deterministicFrame": true,
+        "visiblePixels": true,
+        "domTextPresent": true,
+        "primaryBoxPresent": true,
+        "primaryBoxWithinFrame": true,
+        "temporalChange": true,
+        "temporalChangeRequired": true,
+        "noNetworkRequests": true,
+        "noConsoleErrors": true,
+        "decoded": true
+      },
+      "errors": {
+        "console": [],
+        "page": []
+      },
+      "passed": true
+    }
+  ]
+}

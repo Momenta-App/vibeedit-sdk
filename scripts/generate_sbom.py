@@ -1,8 +1,12 @@
 import json
+import sys
 from pathlib import Path
 
 
 root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(root / "python" / "src"))
+from vibeedit.model_packs import PACKS
+
 version = json.loads((root / "package.json").read_text(encoding="utf-8"))["version"]
 document = {
     "spdxVersion": "SPDX-2.3",
@@ -10,9 +14,9 @@ document = {
     "SPDXID": "SPDXRef-DOCUMENT",
     "name": f"vibeedit-{version}",
     "documentNamespace": f"https://vibeedit.com/sbom/vibeedit-{version}",
-    "creationInfo": {"created": "2026-07-14T00:00:00Z", "creators": [f"Tool: VibeEdit SBOM generator {version}"]},
+    "creationInfo": {"created": "2026-10-20T00:00:00Z", "creators": [f"Tool: VibeEdit SBOM generator {version}"]},
     "packages": [
-        {"name": "vibeedit", "SPDXID": "SPDXRef-Package-VibeEdit", "versionInfo": version, "downloadLocation": "NOASSERTION", "licenseConcluded": "LicenseRef-VibeEdit", "licenseDeclared": "LicenseRef-VibeEdit", "copyrightText": "Copyright Attention Engine Inc."},
+        {"name": "vibeedit", "SPDXID": "SPDXRef-Package-VibeEdit", "versionInfo": version, "downloadLocation": "NOASSERTION", "licenseConcluded": "MIT", "licenseDeclared": "MIT", "copyrightText": "Copyright Attention Engine Inc."},
         {"name": "ajv", "SPDXID": "SPDXRef-Package-Ajv", "versionInfo": "8.20.0", "downloadLocation": "https://www.npmjs.com/package/ajv", "licenseConcluded": "MIT", "licenseDeclared": "MIT", "copyrightText": "NOASSERTION"},
         {"name": "ajv-formats", "SPDXID": "SPDXRef-Package-AjvFormats", "versionInfo": "3.0.1", "downloadLocation": "https://www.npmjs.com/package/ajv-formats", "licenseConcluded": "MIT", "licenseDeclared": "MIT", "copyrightText": "NOASSERTION"},
         {"name": "jsonschema", "SPDXID": "SPDXRef-Package-Jsonschema", "versionInfo": "4.23-or-later-less-than-5", "downloadLocation": "https://pypi.org/project/jsonschema/", "licenseConcluded": "MIT", "licenseDeclared": "MIT", "copyrightText": "NOASSERTION"},
@@ -39,6 +43,21 @@ document = {
         {"spdxElementId": "SPDXRef-Package-VibeEdit", "relationshipType": "HAS_PREREQUISITE", "relatedSpdxElement": "SPDXRef-Package-FFmpeg"},
         {"spdxElementId": "SPDXRef-Package-Chromium", "relationshipType": "RUNTIME_DEPENDENCY_OF", "relatedSpdxElement": "SPDXRef-Package-Playwright"}
     ],
-    "hasExtractedLicensingInfos": [{"licenseId": "LicenseRef-VibeEdit", "extractedText": (root / "LICENSE.md").read_text(encoding="utf-8")}],
+    "hasExtractedLicensingInfos": [{"licenseId": "LicenseRef-SAM", "extractedText": (root / "runtime-models" / "SAM-LICENSE").read_text(encoding="utf-8"), "seeAlsos": [PACKS["sam31-mlx"]["termsUrl"]]}],
 }
+optional = [
+    {"name": "@earendil-works/pi-coding-agent", "versionInfo": "1.3.0", "downloadLocation": "https://www.npmjs.com/package/@earendil-works/pi-coding-agent", "licenseDeclared": "MIT", "comment": "Explicit optional companion runtime; dependencies are resolved using companion/package-lock.json. No provider account or inference credit is included."},
+    {"name": "tensorflow", "versionInfo": "2.21.0", "downloadLocation": "https://pypi.org/project/tensorflow/2.21.0/", "licenseDeclared": "Apache-2.0"},
+    {"name": "mlx-vlm", "versionInfo": "0.7.6", "downloadLocation": PACKS["sam31-mlx"]["runtimeArtifact"]["url"], "licenseDeclared": "MIT", "checksums": [{"algorithm": "SHA256", "checksumValue": PACKS["sam31-mlx"]["runtimeArtifact"]["sha256"]}]},
+]
+for name, pack in PACKS.items():
+    optional.append({"name": name, "versionInfo": pack["revision"], "downloadLocation": pack["termsUrl"], "licenseDeclared": "LicenseRef-SAM AND MIT" if name == "sam31-mlx" else pack["license"], "comment": "Optional model pack; downloaded artifacts are not included in release archives. Exact independent artifact hashes: " + json.dumps(pack["artifacts"], sort_keys=True) + " Limits: " + pack["limits"]})
+for font in json.loads((root / "scripts" / "font-policy.json").read_text())["fonts"]:
+    if not font["filename"].endswith(".ttf"):
+        continue
+    optional.append({"name": font["filename"], "versionInfo": "google-fonts-47d54ca1ebb14fd864695f1d39dc734f39017c33", "downloadLocation": font["url"], "licenseDeclared": "OFL-1.1", "checksums": [{"algorithm": "SHA256", "checksumValue": font["sha256"]}], "comment": "Bundled unmodified font; corresponding OFL notice is under catalog/text-runtime/assets/fonts/."})
+for index, package in enumerate(optional):
+    package.update(SPDXID=f"SPDXRef-Optional-{index}", licenseConcluded="NOASSERTION", copyrightText="NOASSERTION")
+    document["packages"].append(package)
+    document["relationships"].append({"spdxElementId": package["SPDXID"], "relationshipType": "OPTIONAL_DEPENDENCY_OF", "relatedSpdxElement": "SPDXRef-Package-VibeEdit"})
 (root / "SBOM.spdx.json").write_text(json.dumps(document, indent=2) + "\n")

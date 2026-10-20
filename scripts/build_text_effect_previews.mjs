@@ -164,7 +164,7 @@ try {
       family: metadata.family,
       motion: metadata.motion,
       fidelity: metadata.canonical
-        ? { mode: "canonical-source-clone", sourceEntry: metadata.canonical.entry, sourceRevision: JSON.parse(await readFile(join(rootPath, "catalog/motion-components.json"), "utf8")).revision }
+        ? { mode: "portable-source-adaptation", sourceEntry: metadata.canonical.entry, sourceRevision: JSON.parse(await readFile(join(rootPath, "catalog/motion-components.json"), "utf8")).revision, fontPolicy: "catalog/text-runtime/font-provenance.json", pixelEquivalent: false }
         : { mode: "portable-runtime", sourceEntry: null, sourceRevision: null },
       preview: relative(rootPath, previewPath),
       sha256: sha256(bytes),
@@ -179,6 +179,7 @@ try {
       ocr: { advisory: true, available: ocrOutput !== undefined, text: ocr },
       dom,
       checks,
+      errors: { console: consoleErrors.slice(consoleStart), page: pageErrors.slice(pageErrorStart) },
       passed,
     });
   }
@@ -214,9 +215,9 @@ try {
     failures,
     renderContract: { width, height, fps, durationFrames, background: "split-gradient-conformance-field", network: "blocked-by-contract" },
     fidelityContract: {
-      canonicalSourceClones: results.filter((result) => result.fidelity.mode === "canonical-source-clone").length,
+      portableSourceAdaptations: results.filter((result) => result.fidelity.mode === "portable-source-adaptation").length,
       portableRuntimeEffects: results.filter((result) => result.fidelity.mode === "portable-runtime").length,
-      meaning: "Render checks prove deterministic browser output. Canonical-source-clone identifies effects rendered by the packaged original VibeEdit HTML/CSS/JS implementation; portable-runtime does not claim source visual identity.",
+      meaning: "Render checks prove deterministic browser output. Portable-source-adaptation identifies donor HTML/CSS/JS adapted with qualified OFL fonts; no pixel-equivalence claim is made. Portable-runtime identifies the SDK motion runtime.",
     },
     aggregatePreviewSha256: sha256(results.map((result) => `${result.id}:${result.sha256}`).join("\n")),
     contactSheet: relative(rootPath, contactSheet),
@@ -235,8 +236,8 @@ try {
         status: "verified",
         uri: `previews/text-effects/${item.id.replace("vibeedit://text/", "")}.mp4`,
         mediaType: "video/mp4",
-        note: result.fidelity.mode === "canonical-source-clone"
-          ? "Rendered from the packaged original VibeEdit HTML/CSS/JS implementation and checked for deterministic frame, geometry, network, and decode behavior."
+        note: result.fidelity.mode === "portable-source-adaptation"
+          ? "Rendered from adapted VibeEdit HTML/CSS/JS with qualified OFL fonts and checked for deterministic frame, geometry, network, and decode behavior; no pixel-equivalence claim is made."
           : "Rendered by the portable browser motion runtime and checked for deterministic frame, geometry, network, and decode behavior; no source-identity claim is made.",
       };
       item.validation = [

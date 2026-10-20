@@ -1,0 +1,23 @@
+{
+  "verifiedAt": "2026-10-20",
+  "runtime": {
+    "name": "audio-separator",
+    "version": "0.47.0",
+    "license": "MIT",
+    "source": "https://github.com/nomadkaraoke/python-audio-separator/tree/v0.47.0",
+    "pypi": "https://pypi.org/project/audio-separator/0.47.0/",
+    "wheelSha256": "756f3b620d78e581a117c6b6d96fe4f0eafc3432ab2824cb11532b4868bfd9a8",
+    "status": "optional-not-installed-or-inference-qualified-by-package"
+  },
+  "model": {
+    "filename": "model_bs_roformer_ep_317_sdr_12.9755.ckpt",
+    "upstreamRelease": "https://github.com/TRvlvr/model_repo/releases/tag/all_public_uvr_models",
+    "upstreamConfigRelease": "https://github.com/nomadkaraoke/python-audio-separator/releases/tag/model-configs",
+    "upstreamBytes": 639331213,
+    "upstreamApiDigest": null,
+    "weightLicense": "unverified; runtime MIT does not establish model rights",
+    "bundled": false,
+    "automaticDownload": false,
+    "requirement": "customer supplies exact local model/config SHA256 and verified rights receipt; public model qualification remains open"
+  }
+}

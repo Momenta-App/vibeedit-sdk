@@ -5,6 +5,15 @@ description: Review a completed VibeEdit viral source edit structure before effe
 
 # VibeEdit Viral Transition Reviewer
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill after the main edit structure is planned or assembled, but before the effects pass. This role reviews every cut from one source clip to the next and decides whether the cut should stay clean or become a transition moment.
 
 The transition reviewer may change timeline structure and clip selection when the transition is a centerpiece. This is especially true for subject-masking transitions: a weak clip-B first frame makes the transition worse, so replace or shift clip B when needed to land on a stronger segmentable subject.
@@ -28,16 +37,18 @@ Run before:
 Load downstream skills only when the chosen transition needs them:
 
 - `vibeedit-transition-editor`: default transition logic, cut flow, beat cuts, motion cuts, speed ramps, slides, wipes, zooms, and transition-paired sound notes.
-- `vibeedit-flash-subject-transition`: favorite/default hero transition when clip B has a strong first-frame subject and a mask-driven reveal would focus story attention.
-- `vibeedit-sam31-mlx-flash-subject-transition`: default execution path for subject-flash transitions in local tests when SAM3.1 MLX is available. Use it for sparse-frame local SAM3.1 MLX masks for 4, 6, 8, or 20 frame reveals.
-- `vibeedit-masking-router`: use only when SAM3.1 MLX is unavailable or the request clearly needs a different segmentation backend. Do not use router/planning as a reason to avoid a real SAM run.
+- `vibeedit-segmentation-cutouts`: favorite/default hero transition when clip B has a strong first-frame subject and a mask-driven reveal would focus story attention.
+- `vibeedit models run sam31-mlx`: default execution path for subject-flash transitions in local tests when SAM3.1 MLX is available. Use it for sparse-frame local SAM3.1 MLX masks for 4, 6, 8, or 20 frame reveals.
+- `vibeedit models describe sam31-mlx` / `sam21`: inspect exact runtime, device, disk, terms and qualified state before choosing a backend. Do not silently substitute another model. Use the selected real model and persist its output, or record the precise blocker.
 - `vibeedit-segmentation-cutouts`: use for frame-accurate clip-B-over-clip-A cutout placement and no-jump landing contracts.
-- `vibeedit-sam21-video-segmentation`: use only after the masking route selects SAM2.1 video segmentation.
+- `vibeedit models run sam21`: use only after the masking route selects SAM2.1 video segmentation.
 - `vibeedit-reverse-curtain-reveal`: use for black-bar center reveals, optionally with subject cutouts or stuttered backgrounds.
 - `vibeedit-reverse-curtain-subject-reveal`: use after reverse curtain selects a masked subject reveal variant.
-- `vibeedit-tile-object-reveal`: use when a grid/tile transition should reveal the incoming clip through tracked people or objects.
-- `vibeedit-random-frame-stutter`: use for rapid screenshot or mini-video stutter transition beats, especially as a bridge into a hit.
+- `effects`: design grid/tile transitions using concrete supported layers or derived visual assets; no dedicated tracked tile/object renderer is bundled. Model detection alone is not a rendered transition.
+- `vibeedit-reverse-curtain-subject-reveal`: provides the combined curtain/randomized-frame background variant. For standalone stutter, specify exact non-repeating source frames/ranges in a CompositionSpec and render/review the result.
 - `vibeedit-effects`: use only for constructed transition recipes that are not better owned by a specific transition skill.
+
+The packaged `models effect` path materializes reviewed subject-color fills. Full subject-cutout flash transitions, shimmer and split-band pulses require a concrete supported CompositionSpec or derived asset and frame review; invoking SAM alone does not implement them. Direct `maskIds` are not a rendering proof. Preserve these creative recipes as explicit plans until their materialized effect is verified.
 
 Do not edit those downstream skills from this role. Route to them, cite them, and return the exact transition contract they need.
 
@@ -114,6 +125,6 @@ next_actions: []
 
 - Every cut has a decision, including clean cuts.
 - Subject-flash transitions must prove or request a strong clip-B subject in the first active frames.
-- Mask-dependent transitions must run `vibeedit-sam31-mlx-flash-subject-transition` or `vibeedit-sam21-video-segmentation` and cite the resulting SAM artifact path. Proxy masks, geometric masks, boxes, and decorative flashes are not valid test outputs.
+- Mask-dependent transitions must run `vibeedit models run sam31-mlx` or `vibeedit models run sam21` and cite the resulting SAM artifact path. Proxy masks, geometric masks, boxes, and decorative flashes are not valid test outputs.
 - Timeline changes are allowed only for transition quality, story focus, or no-jump landing needs.
 - Do not promote any transition beyond `planned` without concrete preview/render/review evidence.

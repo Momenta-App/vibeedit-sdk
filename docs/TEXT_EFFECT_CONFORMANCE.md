@@ -1,3 +1,5 @@
+> Historical checkpoint. The October 2026 agent-package candidate changes licensing, skill adaptations, model setup and review/companion capabilities. This document does not qualify that candidate. Current source status is in `docs/launch/STATE.md`; exact release qualification must be recorded before publication.
+
 # Text effect conformance
 
 Date: 2026-07-16

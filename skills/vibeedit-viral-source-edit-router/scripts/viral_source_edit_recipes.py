@@ -10,11 +10,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 
-DEFAULT_DATASET_ROOT = Path(
-    "fan_Edit_Data/workspace/reference-corpora/creed-analysis-dataset"
-)
-
-
 INDEX_PATHS = {
     "moments": "crosswalks/fanedit_general_source_moment_index.json",
     "recurring_moments": "crosswalks/recurring_source_moments.json",
@@ -43,8 +38,8 @@ def main() -> None:
     parser.add_argument(
         "--dataset-root",
         type=Path,
-        default=DEFAULT_DATASET_ROOT,
-        help="Dataset root. Defaults to the local Creed analysis dataset.",
+        required=True,
+        help="Explicit user-supplied permitted dataset root; no corpus is bundled.",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VibeEdit · Face review</title><link rel="stylesheet" href="./style.css"></head>
+<body>
+<header><a href="/faces/">VibeEdit</a><span>Face review</span><output id="status" role="status" aria-live="polite">Opening saved source…</output></header>
+<main>
+<section class="viewer" aria-label="Source and native face preview">
+  <video id="media" controls preload="metadata" playsinline></video>
+  <p id="coverage"></p>
+  <div class="preview" id="preview-panel" hidden><img id="preview" alt="Exact source frame selected from saved face evidence"><svg viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"><rect id="face-box" x="0" y="0" width="0" height="0"></rect></svg></div>
+  <p id="frame-note">Select an appearance to inspect its exact source frame and original box.</p>
+  <nav><button id="portrait" disabled>Use selected frame as local portrait</button><button id="export">Export review changes</button></nav>
+  <p>Portraits are local review choices. Identity predictions can remain unresolved or fragmented. Library changes remain pending until the cloud authority acknowledges them.</p>
+  <h2>Saved local portraits</h2><div id="saved-portraits"></div>
+  <h2>Saved changes</h2><p id="conflicts" role="alert"></p><div id="pending"></div><pre id="history"></pre>
+</section>
+<aside>
+  <section aria-label="Appearance groups"><h1>Appearance groups</h1><p>Choose whole groups for identity changes. A group may cover many source frames.</p><div id="groups"></div><nav><button id="groups-previous">Previous groups</button><output id="groups-page"></output><button id="groups-next">Next groups</button></nav></section>
+  <section aria-label="Native appearances"><h2 id="appearances-title">Native appearances</h2><div id="appearances"></div><nav><button id="appearances-previous">Previous appearances</button><output id="appearances-page"></output><button id="appearances-next">Next appearances</button></nav></section>
+  <section aria-label="Identity corrections"><h2>Identity corrections</h2><p id="selection">No groups selected.</p><label>Target person<select id="target"><option value="">Choose a person</option></select></label><nav><button id="merge">Apply merge into target</button><button id="split">Apply split to selected groups</button><button id="unresolved">Mark selected groups unresolved</button></nav><p id="library-state">Cloud library has not been read.</p><button id="refresh-library">Read current library revision</button><button id="rebase" hidden>Compare using current project revision</button></section>
+</aside>
+</main><script type="module" src="./app.js"></script>
+</body></html>

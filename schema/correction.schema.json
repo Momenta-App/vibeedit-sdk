@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibeedit.com/schema/correction.v1.json",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "operationId",
+    "expectedRevision",
+    "revision",
+    "author",
+    "sourceId",
+    "sourceSha256",
+    "domain",
+    "action",
+    "targetId",
+    "payload"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "vibeedit.correction.v1"
+    },
+    "operationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expectedRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "baselineId": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "domain": {
+      "enum": [
+        "beats",
+        "words",
+        "faces",
+        "video"
+      ]
+    },
+    "action": {
+      "enum": [
+        "set",
+        "delete",
+        "undo",
+        "merge",
+        "split",
+        "assign",
+        "portrait",
+        "restore",
+        "note",
+        "acknowledge"
+      ]
+    },
+    "targetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object"
+    },
+    "remoteStatus": {
+      "enum": [
+        "pending",
+        "local-note",
+        "acknowledged"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

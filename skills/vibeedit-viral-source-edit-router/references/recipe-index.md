@@ -3,9 +3,7 @@
 This folder documents the read-only Python recipes in
 `scripts/viral_source_edit_recipes.py`.
 
-Default dataset root:
-
-`fan_Edit_Data/workspace/reference-corpora/creed-analysis-dataset`
+Required dataset input: explicit `--dataset-root` pointing to a user-supplied permitted corpus. No corpus ships with this package. Output paths must be inside the active project.
 
 Supported commands:
 

@@ -166,7 +166,9 @@ class CapabilityRouter:
         key = cache_key("vision.segmentation", {"sourceSha256": source_hash, "model": model, "parameters": parameters, "durationFrames": duration_frames}, implementation_version=VERSION, runtime_versions={"provider": manifest["id"], "model": manifest["version"], **declared_runtime})
         cache_hit = bool(declared_runtime) and destination.suffix == ".json" and restore_cached_artifact("vision.segmentation", key, destination)
         if not cache_hit:
-            result = subprocess.run([*command, "segment", str(source), str(destination), json.dumps(parameters, sort_keys=True, separators=(",", ":"))], capture_output=True, text=True, check=False)
+            from vibeedit.model_packs import _lease
+            with _lease(cache_root() / "model-packs"):
+                result = subprocess.run([*command, "segment", str(source), str(destination), json.dumps(parameters, sort_keys=True, separators=(",", ":"))], capture_output=True, text=True, check=False)
             if result.returncode:
                 raise RuntimeError(result.stderr.strip() or "SAM segmentation runner failed")
         if not destination.is_file() or destination.stat().st_size == 0:
@@ -274,7 +276,10 @@ def _apple_provider() -> tuple[Path, set[str]] | None:
     runner = Path(configured) if configured else cache_root() / "runtimes" / "apple-vision" / "vibeedit-apple-vision"
     if not runner.is_file() or (os.name != "nt" and not os.access(runner, os.X_OK)):
         return None
-    result = subprocess.run([*_runner_command(runner), "capabilities"], capture_output=True, text=True, check=False)
+    try:
+        result = subprocess.run([*_runner_command(runner), "capabilities"], capture_output=True, text=True, check=False, timeout=10)
+    except subprocess.TimeoutExpired:
+        return None
     if result.returncode:
         return None
     try:

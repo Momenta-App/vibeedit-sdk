@@ -1,0 +1,21 @@
+{
+  "id": "vibeedit://template/talking-head-captions",
+  "name": "Talking-head Captions",
+  "description": "Caption a supplied talking-head clip using source-time words; generated layout stand-in demonstrates editable layers and review persistence.",
+  "families": [
+    "captions",
+    "talking-head",
+    "review-corrections"
+  ],
+  "requirements": {
+    "extras": [
+      "browser"
+    ],
+    "models": []
+  },
+  "conditional": false,
+  "rights": {
+    "bundledMedia": "none; generated stand-in script only",
+    "userMedia": "supplied source and words remain the user responsibility"
+  }
+}

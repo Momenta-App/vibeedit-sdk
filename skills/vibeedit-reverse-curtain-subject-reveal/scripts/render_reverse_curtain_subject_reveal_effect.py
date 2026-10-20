@@ -1,28 +1,17 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 import tempfile
 from pathlib import Path
+from fractions import Fraction
 
 import cv2
 import numpy as np
 
 
-def find_root() -> Path:
-    for parent in Path(__file__).resolve().parents:
-        if (parent / "fan_Edit_Data").exists():
-            return parent
-    return Path(__file__).resolve().parents[1]
-
-
-ROOT = find_root()
-OUT_DIR = ROOT / "fan_Edit_Data/agent-artifacts/effect-building-pool/production-set-flat"
-WORK_DIR = ROOT / "fan_Edit_Data/agent-artifacts/effect-building-pool/reverse-curtain-subject-reveal"
-CONTACT_DIR = ROOT / "tmp/effect-building-pool-contact"
-DEFAULT_SOURCE = ROOT / "fan_Edit_Data/workspace/media/20068a78-dc1d-446c-9154-f32b17a66766/Creed 2.mp4"
-RECIPE_PATH = OUT_DIR / "effect-reverse-curtain-subject-reveal.recipe.json"
 DEFAULT_OUTPUT_NAME = "008__effect-reverse-curtain-subject-reveal-over.mp4"
 
 DEFAULT_RECIPE = {
@@ -33,11 +22,11 @@ DEFAULT_RECIPE = {
         "height": 360,
         "fps": 30,
         "durationSeconds": 3.2,
-        "sourceStartSeconds": 3900.0,
-        "sourceEndSeconds": 3901.939708333333,
-        "backgroundStartSeconds": 4500.0,
-        "backgroundEndSeconds": 4501.3,
-        "backgroundMode": "random_frame_stutter",
+        "sourceStartSeconds": 0.0,
+        "sourceEndSeconds": 0.0,
+        "backgroundStartSeconds": 0.0,
+        "backgroundEndSeconds": 0.0,
+        "backgroundMode": "source",
         "layerMode": "subject_over_curtain",
         "orientation": "vertical",
         "speed": 1.0,
@@ -50,7 +39,7 @@ DEFAULT_RECIPE = {
         "maskBlur": 0,
         "maskOpen": 0,
         "maskKeepLargest": True,
-        "maskSource": "apple_vision",
+        "maskSource": "external_alpha",
         "externalAlpha": None,
         "subjectScale": 1.0,
         "subjectYOffset": 0,
@@ -62,52 +51,78 @@ DEFAULT_RECIPE = {
         "stutterFrames": 28,
         "stutterHoldFrames": 1,
         "stutterUniqueEveryFrame": True,
-        "stutterRangesSeconds": [[4963.0, 4971.0], [5013.8, 5029.5], [4494.8, 4508.9]],
+        "stutterRangesSeconds": [],
     },
     "agentUsage": {
-        "summary": "A real moving hard-edge subject alpha from a long-enough Creed character moment is combined with a center-opening black curtain reveal.",
+        "summary": "A reviewed moving alpha from a sufficiently long source window is combined with a center-opening black curtain reveal.",
         "layerRule": "subject_over_curtain keeps the cutout visible above black bars; subject_under_curtain places the cutout behind the bars and reveals it only where the curtain has opened.",
-        "backgroundRule": "Use backgroundMode=source for a normal moving background or backgroundMode=random_frame_stutter after reading the vibeedit-random-frame-stutter skill contract: one unique random source still per output frame behind the subject.",
-        "maskRule": "Preferred production route is maskSource=external_alpha with a reviewed hard-edge SAM2.1 alpha. Apple Vision person segmentation is only the local fallback when no reviewed external alpha exists.",
+        "backgroundRule": "Use backgroundMode=source for a normal moving background or backgroundMode=random_frame_stutter one unique random source still per output frame behind the subject.",
+        "maskRule": "Requires a source-aligned reviewed external hard-edge alpha. No segmentation fallback.",
     },
 }
 
 
 def main() -> None:
     args = parse_args()
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    WORK_DIR.mkdir(parents=True, exist_ok=True)
-    CONTACT_DIR.mkdir(parents=True, exist_ok=True)
+    project = Path(args.project).expanduser().resolve(strict=True)
+    if not project.is_dir():
+        raise ValueError("--project must be a directory")
+    source = within(project, args.input, exists=True)
+    if args.recipe:
+        args.recipe = within(project, str(args.recipe), exists=True)
     recipe, config = load_config(args)
-    source = Path(args.input).expanduser().resolve() if args.input else DEFAULT_SOURCE
+    if not (0 < config["fps"] <= 120 and 0 < config["width"] <= 3840 and 0 < config["height"] <= 2160 and 0 < config["durationSeconds"] <= 120):
+        raise ValueError("Render bounds: <=3840x2160, <=120fps, <=120 seconds")
+    if Path(args.output_name).name != args.output_name or not args.output_name.endswith(".mp4"):
+        raise ValueError("--output-name must be a plain .mp4 filename")
+    run = within(project, "artifacts/curtain/" + Path(args.output_name).stem)
+    run.mkdir(parents=True, exist_ok=False)
+    config["workDir"] = str(run)
     metadata = probe_video(source)
+    if config["sourceStartSeconds"] < 0 or config["sourceEndSeconds"] > metadata["durationSeconds"]:
+        raise ValueError("Source window must cover the render without a final-frame hold")
+    source_sha = hashlib.file_digest(source.open("rb"), "sha256").hexdigest()
+    alpha = within(project, config["externalAlpha"], exists=True)
+    config["externalAlpha"] = str(alpha)
+    config["alphaSha256"] = hashlib.file_digest(alpha.open("rb"), "sha256").hexdigest()
+    config["sourceFps"] = metadata["fps"]
     subject_frames = read_source_window(source, metadata, config["sourceStartSeconds"], config["sourceEndSeconds"], config)
     masks = load_or_build_masks(subject_frames, config)
     background_frames = build_background_frames(source, metadata, config)
-    output_frames, trace = compose_frames(subject_frames, masks, background_frames, config, metadata)
-    output = OUT_DIR / args.output_name
-    write_mp4(output, output_frames, config)
-    contact = write_contact_sheet(output, output_frames, trace, config)
-    matte_contact = write_matte_contact_sheet(subject_frames, masks, config)
-    validation = validate_render(output_frames, masks, trace, config)
-    if not args.no_library_update:
-        write_recipe(recipe, config, source, metadata, output, contact, matte_contact, validation)
-        update_manifest(output, source, config, contact, matte_contact, validation)
-        update_readme()
-    print(json.dumps({
-        "output": str(output),
-        "recipe": str(RECIPE_PATH),
-        "contactSheet": str(contact),
-        "matteContactSheet": str(matte_contact),
-        "layerMode": config["layerMode"],
-        "backgroundMode": config["backgroundMode"],
-        "validation": validation,
-    }, indent=2))
+    frames, trace = compose_frames(subject_frames, masks, background_frames, config, metadata)
+    validation = validate_render(frames, masks, trace, config)
+    matte = write_matte_contact_sheet(subject_frames, masks, config)
+    output = run / args.output_name
+    write_mp4(output, frames, config)
+    contact = write_contact_sheet(output, frames, trace, config)
+    receipt = {"schemaVersion": "1", "status": "needs-editorial-review", "source": str(source.relative_to(project)), "sourceSha256": source_sha,
+               "sourceMetadata": metadata, "clock": "original-source-seconds", "config": {key: value for key, value in config.items() if key != "workDir"},
+               "output": str(output.relative_to(project)), "outputSha256": hashlib.file_digest(output.open("rb"), "sha256").hexdigest(),
+               "contactSheet": str(contact.relative_to(project)), "validation": validation, "trace": trace, "audio": "silent; mix approved source audio through the SDK"}
+    receipt["config"]["externalAlpha"] = str(alpha.relative_to(project))
+    receipt["matteContactSheet"] = str(matte.relative_to(project))
+    (run / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    print(json.dumps(receipt, indent=2))
+
+
+def within(project: Path, value: str, exists: bool = False) -> Path:
+    path = Path(value)
+    if path.is_absolute() or ".." in path.parts:
+        raise ValueError("Use project-relative paths")
+    cursor = project
+    for part in path.parts:
+        cursor = cursor / part
+        if cursor.is_symlink():
+            raise ValueError("Symlinks are not allowed in project paths")
+    path = (project / path).resolve(strict=exists)
+    path.relative_to(project)
+    return path
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Render a reverse curtain reveal with a masked character cutout.")
-    parser.add_argument("--input")
+    parser.add_argument("--project", required=True)
+    parser.add_argument("--input", required=True, help="Project-relative original source")
     parser.add_argument("--recipe", type=Path)
     parser.add_argument("--output-name", default=DEFAULT_OUTPUT_NAME)
     parser.add_argument("--layer-mode", choices=["subject_over_curtain", "subject_under_curtain"])
@@ -116,10 +131,10 @@ def parse_args():
     parser.add_argument("--speed", type=float)
     parser.add_argument("--open-start", type=float)
     parser.add_argument("--open-duration", type=float)
-    parser.add_argument("--source-start", type=float)
-    parser.add_argument("--source-end", type=float)
-    parser.add_argument("--background-start", type=float)
-    parser.add_argument("--background-end", type=float)
+    parser.add_argument("--source-start", type=float, required=True)
+    parser.add_argument("--source-end", type=float, required=True)
+    parser.add_argument("--background-start", type=float, required=True)
+    parser.add_argument("--background-end", type=float, required=True)
     parser.add_argument("--duration", type=float)
     parser.add_argument("--fps", type=int)
     parser.add_argument("--width", type=int)
@@ -133,9 +148,8 @@ def parse_args():
     parser.add_argument("--mask-open", type=int)
     parser.add_argument("--mask-keep-largest", action="store_true")
     parser.add_argument("--mask-allow-components", action="store_true")
-    parser.add_argument("--mask-source", choices=["apple_vision", "external_alpha"])
-    parser.add_argument("--external-alpha")
-    parser.add_argument("--no-library-update", action="store_true")
+    parser.add_argument("--mask-source", choices=["external_alpha"])
+    parser.add_argument("--external-alpha", required=True)
     return parser.parse_args()
 
 
@@ -181,10 +195,17 @@ def load_config(args):
         raise ValueError("speed must be greater than 0")
     if config["subjectMinPlaybackSpeed"] < 0:
         raise ValueError("subject min playback speed cannot be negative")
+    if not (0 <= config["backgroundStartSeconds"] < config["backgroundEndSeconds"]):
+        raise ValueError("Choose an explicit increasing background window")
+    if config["openDurationSeconds"] <= 0 or config["subjectScale"] <= 0:
+        raise ValueError("Open duration and subject scale must be positive")
     return recipe, config
 
 
 def probe_video(path: Path):
+    streams = json.loads(subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=r_frame_rate,avg_frame_rate", "-of", "json", str(path)], check=True, capture_output=True, text=True).stdout)["streams"]
+    if not streams or streams[0]["r_frame_rate"] == "0/0" or streams[0]["avg_frame_rate"] == "0/0" or Fraction(streams[0]["r_frame_rate"]) != Fraction(streams[0]["avg_frame_rate"]):
+        raise ValueError("This OpenCV recipe requires CFR source metadata; prepare a source-clock-mapped proxy for VFR first")
     capture = cv2.VideoCapture(str(path))
     if not capture.isOpened():
         raise RuntimeError(f"Could not open {path}")
@@ -193,16 +214,18 @@ def probe_video(path: Path):
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
     capture.release()
-    return {"fps": fps, "frames": frames, "width": width, "height": height, "durationSeconds": frames / fps}
+    return {"fps": fps, "fpsRational": streams[0]["r_frame_rate"], "timingLimit": "CFR metadata gate; source ordinal mapping; VFR requires explicitly clock-mapped proxy", "frames": frames, "width": width, "height": height, "durationSeconds": frames / fps}
 
 
 def read_source_window(path: Path, metadata: dict, start: float, end: float, config: dict):
     capture = cv2.VideoCapture(str(path))
+    if start < 0 or end > metadata["durationSeconds"] or end <= start:
+        raise ValueError("Source/background window is outside original source duration")
     start_frame = round(start * metadata["fps"])
     end_frame = max(start_frame + 1, round(end * metadata["fps"]))
     capture.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
     frames = []
-    for frame_number in range(start_frame, min(end_frame + 1, metadata["frames"])):
+    for frame_number in range(start_frame, min(end_frame, metadata["frames"])):
         ok, frame = capture.read()
         if not ok:
             break
@@ -218,38 +241,16 @@ def load_or_build_masks(frames, config: dict):
         if not config.get("externalAlpha"):
             raise ValueError("externalAlpha is required when maskSource=external_alpha")
         return load_external_alpha_masks(Path(config["externalAlpha"]).expanduser(), len(frames), config)
-    mask_dir = WORK_DIR / "apple_vision_masks"
-    mask_dir.mkdir(parents=True, exist_ok=True)
-    cache_manifest = mask_dir / "cache_manifest.json"
-    cache_key = {
-        "frameCount": len(frames),
-        "width": config["width"],
-        "height": config["height"],
-        "sourceStartSeconds": config["sourceStartSeconds"],
-        "sourceEndSeconds": config["sourceEndSeconds"],
-        "maskThreshold": config["maskThreshold"],
-        "maskDilate": config["maskDilate"],
-        "maskBlur": config["maskBlur"],
-    }
-    masks = []
-    existing = sorted(mask_dir.glob("mask_*.png"))
-    if cache_manifest.exists() and json.loads(cache_manifest.read_text()).get("cacheKey") == cache_key and len(existing) >= len(frames):
-        for path in existing[: len(frames)]:
-            masks.append(cv2.imread(str(path), cv2.IMREAD_GRAYSCALE))
-        return masks
-    for path in existing:
-        path.unlink()
-    masks = build_apple_vision_person_masks(frames, config)
-    for index, mask in enumerate(masks):
-        cv2.imwrite(str(mask_dir / f"mask_{index:04d}.png"), mask)
-    cache_manifest.write_text(json.dumps({"cacheKey": cache_key}, indent=2) + "\n")
-    return masks
+    raise ValueError("A reviewed external alpha is required; select the model explicitly using vibeedit models run")
 
 
 def load_external_alpha_masks(path: Path, expected_count: int, config: dict):
     capture = cv2.VideoCapture(str(path))
     if not capture.isOpened():
         raise RuntimeError(f"Could not open external alpha {path}")
+    if abs(capture.get(cv2.CAP_PROP_FPS) - config["sourceFps"]) > 0.001:
+        capture.release()
+        raise ValueError("Alpha FPS must match the original source FPS and start at the selected source window")
     masks = []
     while len(masks) < expected_count:
         ok, frame = capture.read()
@@ -261,14 +262,14 @@ def load_external_alpha_masks(path: Path, expected_count: int, config: dict):
             mask = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         else:
             mask = frame
-        mask = cv2.resize(mask, (config["width"], config["height"]), interpolation=cv2.INTER_LINEAR)
+        mask = center_crop_resize(mask, config["width"], config["height"])
         masks.append(clean_mask(mask, config))
     capture.release()
     if not masks:
         raise RuntimeError(f"External alpha had no readable frames: {path}")
-    while len(masks) < expected_count:
-        masks.append(masks[-1].copy())
-    return masks[:expected_count]
+    if len(masks) != expected_count:
+        raise ValueError("External alpha has too few frames; refusing to hold the final mask")
+    return masks
 
 
 def clean_mask(mask, config: dict):
@@ -289,56 +290,6 @@ def clean_mask(mask, config: dict):
         blur = config["maskBlur"] | 1
         cleaned = cv2.GaussianBlur(cleaned, (blur, blur), 0)
     return cleaned
-
-
-def build_apple_vision_person_masks(frames, config: dict):
-    import Foundation
-    import Quartz
-    import Vision
-    from Quartz import CVPixelBufferGetBaseAddress
-    from Quartz import CVPixelBufferGetBytesPerRow
-    from Quartz import CVPixelBufferGetHeight
-    from Quartz import CVPixelBufferGetWidth
-    from Quartz import CVPixelBufferLockBaseAddress
-    from Quartz import CVPixelBufferUnlockBaseAddress
-    from Quartz import kCVPixelBufferLock_ReadOnly
-
-    masks = []
-    with tempfile.TemporaryDirectory(prefix="reverse-curtain-subject-vision-") as tmp:
-        tmp_dir = Path(tmp)
-        for index, frame in enumerate(frames):
-            frame_path = tmp_dir / f"frame_{index:04d}.jpg"
-            cv2.imwrite(str(frame_path), frame)
-            request = Vision.VNGeneratePersonSegmentationRequest.alloc().initWithCompletionHandler_(None)
-            request.setQualityLevel_(getattr(Vision, "VNGeneratePersonSegmentationRequestQualityLevelAccurate", 2))
-            request.setOutputPixelFormat_(getattr(Quartz, "kCVPixelFormatType_OneComponent8", 1278226488))
-            handler = Vision.VNImageRequestHandler.alloc().initWithURL_options_(Foundation.NSURL.fileURLWithPath_(str(frame_path)), {})
-            ok, error = handler.performRequests_error_([request], None)
-            if not ok:
-                raise RuntimeError(f"Apple Vision person segmentation failed on frame {index}: {error}")
-            results = request.results() or []
-            if not results:
-                masks.append(np.zeros(frame.shape[:2], dtype=np.uint8))
-                continue
-            pixel_buffer = results[0].pixelBuffer()
-            width = CVPixelBufferGetWidth(pixel_buffer)
-            height = CVPixelBufferGetHeight(pixel_buffer)
-            bytes_per_row = CVPixelBufferGetBytesPerRow(pixel_buffer)
-            CVPixelBufferLockBaseAddress(pixel_buffer, kCVPixelBufferLock_ReadOnly)
-            base_address = CVPixelBufferGetBaseAddress(pixel_buffer)
-            buffer = base_address.as_buffer(bytes_per_row * height)
-            mask = np.frombuffer(buffer, dtype=np.uint8).reshape(height, bytes_per_row)[:, :width].copy()
-            CVPixelBufferUnlockBaseAddress(pixel_buffer, kCVPixelBufferLock_ReadOnly)
-            mask = cv2.resize(mask, (frame.shape[1], frame.shape[0]), interpolation=cv2.INTER_LINEAR)
-            _, mask = cv2.threshold(mask, config["maskThreshold"], 255, cv2.THRESH_BINARY)
-            if config["maskDilate"]:
-                kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (config["maskDilate"], config["maskDilate"]))
-                mask = cv2.dilate(mask, kernel, iterations=1)
-            if config["maskBlur"]:
-                blur = config["maskBlur"] | 1
-                mask = cv2.GaussianBlur(mask, (blur, blur), 0)
-            masks.append(mask)
-    return masks
 
 
 def build_background_frames(path: Path, metadata: dict, config: dict):
@@ -363,10 +314,9 @@ def build_stutter_background(path: Path, metadata: dict, total: int, config: dic
         end_frame = max(start_frame + 1, round(end * metadata["fps"]))
         candidates.extend(range(max(0, start_frame), min(metadata["frames"] - 1, end_frame)))
     if not candidates:
-        candidates.extend(range(max(1, metadata["frames"])))
+        raise ValueError("No frames in the explicit background window")
     sample_count = total if config.get("stutterUniqueEveryFrame", True) and config["stutterHoldFrames"] == 1 else max(config["stutterFrames"], 1)
-    if len(candidates) < sample_count:
-        candidates = list(range(max(1, metadata["frames"])))
+
     if len(candidates) < sample_count:
         raise RuntimeError(f"Random frame stutter needs {sample_count} unique source frames, but only {len(candidates)} are available")
     chosen = rng.choice(candidates, size=sample_count, replace=False)
@@ -414,6 +364,8 @@ def subject_source_index(frame_index: int, frame_count: int, config: dict, metad
     if frame_count <= 1:
         return 0
     min_speed = float(config.get("subjectMinPlaybackSpeed") or 0.0)
+    if frame_count <= round((round(config["durationSeconds"] * config["fps"]) - 1) / config["fps"] * metadata["fps"] * min_speed):
+        raise ValueError("Subject source window is too short at the minimum playback speed; no final-frame hold allowed")
     if min_speed <= 0:
         return round(frame_index * (frame_count - 1) / max(1, round(config["durationSeconds"] * config["fps"]) - 1))
     elapsed_seconds = frame_index / config["fps"]
@@ -567,7 +519,7 @@ def write_contact_sheet(output: Path, frames, trace, config: dict):
         thumbs.append(thumb)
     sheet = np.vstack([np.hstack(thumbs[:3]), np.hstack(thumbs[3:6])])
     cv2.putText(sheet, f"{output.name} {config['layerMode']} bg={config['backgroundMode']}", (8, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 255), 1, cv2.LINE_AA)
-    path = CONTACT_DIR / f"{output.stem}_contact_sheet.jpg"
+    path = Path(config["workDir"]) / f"{output.stem}_contact_sheet.jpg"
     cv2.imwrite(str(path), sheet)
     return path
 
@@ -582,8 +534,8 @@ def write_matte_contact_sheet(subject_frames, masks, config: dict):
     while len(thumbs) < 6:
         thumbs.append(np.zeros((90, 160, 3), dtype=np.uint8))
     sheet = np.vstack([np.hstack(thumbs[:3]), np.hstack(thumbs[3:6])])
-    label = "external_alpha" if config.get("maskSource") == "external_alpha" else "apple_vision"
-    path = WORK_DIR / f"{label}_subject_matte_contact_sheet.jpg"
+    label = "external_alpha"
+    path = Path(config["workDir"]) / f"{label}_subject_matte_contact_sheet.jpg"
     cv2.imwrite(str(path), sheet)
     return path
 
@@ -611,104 +563,6 @@ def validate_render(frames, masks, trace, config: dict):
         "sourceMaskFrames": len(masks),
     }
 
-
-def write_recipe(recipe: dict, config: dict, source: Path, metadata: dict, output: Path, contact: Path, matte_contact: Path, validation: dict):
-    payload = {
-        **recipe,
-        "defaults": config,
-        "rendered": {
-            "sourceClip": str(source),
-            "sourceMetadata": metadata,
-            "output": str(output),
-            "contactSheet": str(contact),
-            "matteContactSheet": str(matte_contact),
-            "durationSeconds": config["durationSeconds"],
-            "validation": validation,
-            "selectedMoment": {
-        "source": "Creed 2",
-        "shotId": "manual_3900s_long_subject_window",
-        "character": "Adonis Creed",
-        "reason": "long-enough stable character window with enough source and mask frames to avoid holding the final subject frame",
-            },
-        },
-    }
-    RECIPE_PATH.write_text(json.dumps(payload, indent=2) + "\n")
-
-
-def update_manifest(output: Path, source: Path, config: dict, contact: Path, matte_contact: Path, validation: dict):
-    manifest_path = OUT_DIR / "manifest.json"
-    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {"purpose": "Production effect building pool: accepted reusable effects.", "items": []}
-    item = {
-        "group": "reveal",
-        "id": "effect-reverse-curtain-subject-reveal",
-        "title": "Reverse Curtain Subject Reveal",
-        "file": output.name,
-        "recipeFile": RECIPE_PATH.name,
-        "sourceClip": str(source),
-        "sourceStartSeconds": config["sourceStartSeconds"],
-        "durationSeconds": config["durationSeconds"],
-        "width": config["width"],
-        "height": config["height"],
-        "fps": config["fps"],
-        "contactSheet": str(contact),
-        "matteContactSheet": str(matte_contact),
-        "libraryStatus": "production",
-        "skillName": "vibeedit-reverse-curtain-subject-reveal",
-        "skillFile": str(ROOT / ".agents/skills/vibeedit-reverse-curtain-subject-reveal/SKILL.md"),
-        "recipe": {
-            "layerMode": config["layerMode"],
-            "backgroundMode": config["backgroundMode"],
-            "orientation": config["orientation"],
-            "speed": config["speed"],
-            "subjectMinPlaybackSpeed": config["subjectMinPlaybackSpeed"],
-            "maskRoute": mask_route_label(config),
-            "maskSource": config["maskSource"],
-            "externalAlpha": config.get("externalAlpha"),
-            "maskSource": config["maskSource"],
-            "externalAlpha": config.get("externalAlpha"),
-            "validation": validation,
-            "agentUsage": DEFAULT_RECIPE["agentUsage"],
-        },
-    }
-    manifest["items"] = [existing for existing in manifest.get("items", []) if existing.get("id") != item["id"]] + [item]
-    manifest["count"] = len(manifest["items"])
-    manifest["contactSheets"] = sorted(set([*(value for value in manifest.get("contactSheets", []) if "reverse-curtain-subject-reveal" not in value), str(contact), str(matte_contact)]))
-    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
-
-
-def update_readme():
-    readme = OUT_DIR / "README.md"
-    existing = readme.read_text() if readme.exists() else "# Effect Building Pool - Production Set\n"
-    marker = "## Reverse Curtain Subject Reveal\n"
-    section = (
-        "## Reverse Curtain Subject Reveal\n\n"
-        "Recipe file: `effect-reverse-curtain-subject-reveal.recipe.json`\n\n"
-        "Default render: `021__sam21-creed-random-stutter-vertical-curtain-subject-over.mp4`\n\n"
-        "This variant uses a reviewed SAM alpha matte from a long-enough Creed character video moment, slows that moving cutout by no more than the configured minimum playback speed, and combines it with a random-frame-stutter background plus a center-opening reverse curtain reveal.\n\n"
-        "Layer modes:\n"
-        "- `subject_over_curtain`: cutout stays above the black curtain bars.\n"
-        "- `subject_under_curtain`: cutout sits behind the curtain bars and is revealed only through the opening.\n\n"
-        "Background modes:\n"
-        "- `source`: normal moving background video.\n"
-        "- `random_frame_stutter`: one unique random source still per output frame, sampled without replacement when enough source frames exist.\n"
-        "- `stutter`: compatibility alias for random-frame stutter.\n\n"
-        "Mask modes:\n"
-        "- `external_alpha`: preferred production route; use a reviewed hard-edge SAM2.1/SAM3 alpha video via `--external-alpha`.\n"
-        "- `apple_vision`: local fallback person matte when no reviewed external alpha exists.\n\n"
-        "Render defaults:\n\n"
-        "```bash\npython3 .agents/skills/vibeedit-reverse-curtain-subject-reveal/scripts/render_reverse_curtain_subject_reveal_effect.py\n```\n"
-    )
-    if marker in existing:
-        existing = existing[: existing.index(marker)].rstrip() + "\n\n" + section
-    else:
-        existing = existing.rstrip() + "\n\n" + section
-    readme.write_text(existing.rstrip() + "\n")
-
-
-def mask_route_label(config: dict):
-    if config.get("maskSource") == "external_alpha":
-        return f"External reviewed alpha: {config.get('externalAlpha')}"
-    return "Apple Vision VNGeneratePersonSegmentationRequest accurate person matte"
 
 
 if __name__ == "__main__":

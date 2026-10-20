@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "vibeedit.ownedSkills.v1",
+  "skills": [
+    {
+      "id": "vibeedit://skill/vibeedit-setup",
+      "name": "vibeedit-setup",
+      "version": "0.2.0",
+      "path": "vibeedit-setup",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "e4bb9b4d3126e41cacf87d2b3c739d06ad613a4752c62831eeb5c4100ac37cbc",
+      "source": {
+        "kind": "sdk-owned",
+        "path": "skills/vibeedit-setup",
+        "sha256": "e4bb9b4d3126e41cacf87d2b3c739d06ad613a4752c62831eeb5c4100ac37cbc"
+      },
+      "validation": {
+        "status": "integrity-only",
+        "files": 2,
+        "note": "Tree digest pins content; customer journey qualification is separate."
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-acquisition",
+      "name": "vibeedit-acquisition",
+      "version": "0.2.0",
+      "path": "vibeedit-acquisition",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "eb53841fb68e6c1a80494faf23b9eb3706c1be62a378c3ceef8cdf81a2189be7",
+      "source": {
+        "kind": "sdk-owned",
+        "path": "skills/vibeedit-acquisition",
+        "sha256": "eb53841fb68e6c1a80494faf23b9eb3706c1be62a378c3ceef8cdf81a2189be7"
+      },
+      "validation": {
+        "status": "integrity-only",
+        "files": 1,
+        "note": "Tree digest pins content; customer journey qualification is separate."
+      }
+    },
+    {
+      "id": "vibeedit://skill/vibeedit-companion",
+      "name": "vibeedit-companion",
+      "version": "0.2.0",
+      "path": "vibeedit-companion",
+      "harnesses": [
+        "agents",
+        "codex",
+        "claude",
+        "opencode"
+      ],
+      "checksum": "40dde519ad9ecb70bea18faf834a94a773e40acc8ee25b4cb029cecc41018bef",
+      "source": {
+        "kind": "sdk-owned",
+        "path": "skills/vibeedit-companion",
+        "sha256": "40dde519ad9ecb70bea18faf834a94a773e40acc8ee25b4cb029cecc41018bef"
+      },
+      "validation": {
+        "status": "integrity-only",
+        "files": 2,
+        "note": "Tree digest pins content; customer journey qualification is separate."
+      }
+    }
+  ]
+}

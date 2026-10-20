@@ -43,7 +43,7 @@ async function route(name, values) {
   if (name === "catalog") return catalogCommand(values);
   if (name === "examples") return examplesCommand(values);
   if (name === "skills") return skillsCommand(values);
-  if (["setup", "preview", "render", "render-browser", "browser-worker", "revision", "verify", "clean", "mcp"].includes(name)) return python(name, values);
+  if (["acquire", "project", "review", "models", "worker", "goal", "myriograph", "analyze", "jobs", "setup", "preview", "render", "render-browser", "browser-worker", "revision", "verify", "clean", "mcp"].includes(name)) return python(name, values);
   throw new Error(`unknown command: ${name}. Run \`vibeedit --help\` to see supported commands.`);
 }
 
@@ -69,12 +69,13 @@ async function doctor(values) {
   const commands = Object.fromEntries(["ffmpeg", "ffprobe", "python3", "python"].map((name) => [name, commandVersion(name)]));
   const bridge = pythonBridge();
   const htmlMotion = { available: false, packageInstalled: false, browserInstalled: false, setup: "npm install playwright@1.61.0 && npx playwright install chromium" };
-  try {
-    const { chromium } = await import("playwright");
-    htmlMotion.packageInstalled = true;
-    htmlMotion.browserInstalled = existsSync(chromium.executablePath());
+  const browserProbe = spawnSync(process.execPath, ["--input-type=module", "-e", 'import {chromium} from "playwright"; import {existsSync} from "node:fs"; console.log(JSON.stringify({packageInstalled:true,browserInstalled:existsSync(chromium.executablePath())}));'], {encoding:"utf8", timeout:10000});
+  if (browserProbe.status === 0) {
+    Object.assign(htmlMotion, JSON.parse(browserProbe.stdout));
     htmlMotion.available = htmlMotion.browserInstalled;
-  } catch {}
+  }
+  if (browserProbe.error?.code === "ETIMEDOUT") htmlMotion.detail = "Browser runtime probe timed out; retry after checking native runtime health.";
+
   const ready = commands.ffmpeg.available && commands.ffprobe.available;
   const result = {
     version: 1,
@@ -180,15 +181,15 @@ function python(name, values) {
 }
 
 function commandVersion(name) {
-  const result = spawnSync(name, name.startsWith("python") ? ["--version"] : ["-version"], { encoding: "utf8" });
+  const result = spawnSync(name, name.startsWith("python") ? ["--version"] : ["-version"], { encoding: "utf8", timeout: 5000 });
   if (result.error?.code === "ENOENT") return { available: false, version: null };
   return { available: result.status === 0, version: (result.stdout || result.stderr).split("\n")[0] };
 }
 
 function pythonBridge() {
-  for (const executable of ["python3", "python", "py"]) {
+  for (const executable of [...new Set([process.env.VIBEEDIT_PYTHON, "python3", "python", "py"].filter(Boolean))]) {
     const prefix = executable === "py" ? ["-3"] : [];
-    const result = spawnSync(executable, [...prefix, "-c", "import vibeedit; print(vibeedit.__version__)"], { encoding: "utf8" });
+    const result = spawnSync(executable, [...prefix, "-c", "import vibeedit; print(vibeedit.__version__)"], { encoding: "utf8", timeout: 10000 });
     if (result.status === 0) return { available: true, executable, prefix, version: result.stdout.trim() };
   }
   return { available: false, executable: null, prefix: [], version: null };
@@ -234,6 +235,12 @@ Commands:
   catalog list|search|open
   examples list|create
   skills list|install|check|update|remove
+  project create|inspect|import|relink|export|correct|review|apply-review
+  review beats|faces|words|video|status
+  models list|setup|probe|run|export|effect
+  myriograph login|status|logout|account|billing
+  analyze|jobs             Customer intelligence and original-job recovery
+  worker|goal              Optional bounded Pi tasks and durable goals
   validate                Validate a CompositionSpec
   preview|render|verify   Run through the installed Python VibeEdit package
   render-browser          Render an ordinary HTML/CSS/JS project through Python

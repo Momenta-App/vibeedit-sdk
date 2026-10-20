@@ -95,7 +95,7 @@ def smoke_python(python: Path, root: Path) -> dict[str, object]:
     mcp = run([str(python), "-m", "vibeedit.cli", "mcp"], input_value=requests).stdout.splitlines()
     responses = [json.loads(line) for line in mcp]
     tools = responses[1]["result"]["tools"]
-    if len(tools) != 11 or not responses[2]["result"]["structuredContent"]:
+    if "agent_command" not in {tool["name"] for tool in tools} or not responses[2]["result"]["structuredContent"]:
         raise RuntimeError("clean wheel MCP smoke failed")
 
     catalog = run_json([str(python), "-m", "vibeedit.cli", "catalog", "open", "--no-browser", "--json"])
@@ -111,6 +111,15 @@ def smoke_python(python: Path, root: Path) -> dict[str, object]:
     )
     if catalog.get("opened") or installed.get("action") != "installed" or not checked.get("installed") or checked.get("modified"):
         raise RuntimeError("clean wheel catalog or skill lifecycle smoke failed")
+    project_proof = smoke_project_review(python, root)
+    caption_proofs = []
+    for name in ("dialogue-quote", "talking-head-captions"):
+        directory = Path(run_json([str(python), "-m", "vibeedit.cli", "examples", "create", name, str(examples), "--json"])["path"])
+        run([str(python), str(directory / "render.py")], cwd=directory)
+        report = run_json([str(python), "-m", "vibeedit.cli", "verify", str(directory / (name + ".mp4")), "--spec", str(directory / "composition.json"), "--json"])
+        if not report.get("passed"):
+            raise RuntimeError("clean caption/quote template omitted expected picture or original audio")
+        caption_proofs.append(render_record(name, report))
 
     return {
         "browserComposition": browser_report,
@@ -121,8 +130,54 @@ def smoke_python(python: Path, root: Path) -> dict[str, object]:
         "skillInstalledUnmodified": True,
         "mcpTools": len(tools),
         "mcpCatalogCallPassed": True,
+        "projectReviewAndTransfer": project_proof,
+        "captionTemplates": caption_proofs,
         "renders": [render_record("basic-generated", basic_report), render_record("mixed-python-html", mixed_report)],
     }
+
+
+def smoke_project_review(python: Path, root: Path) -> dict[str, object]:
+    """Exercise the installed wheel's saved state and real render, not source imports."""
+    code = r'''
+import json, pathlib, subprocess, sys, threading, urllib.error, urllib.request
+from vibeedit.data import data_path
+from vibeedit.project import Project, create_project, file_digest
+from vibeedit.portable import bundle_project, restore_project
+from vibeedit.render import render
+from vibeedit.review import ReviewServer
+from vibeedit.verify import verify_output
+root=pathlib.Path(sys.argv[1]);root.mkdir()
+spec=json.loads(data_path('schema','fixtures','minimal.json').read_text())
+spec['durationFrames']=30;spec['verification'].update(durationFrames=30,hasAudio=True)
+spec['timeline']['tracks']=[]
+(root/'seed.json').write_text(json.dumps(spec))
+create_project(root/'project',root/'seed.json');project=Project(root/'project')
+subprocess.run(['ffmpeg','-v','error','-f','lavfi','-i','sine=frequency=440:duration=0.2',str(root/'source.wav')],check=True)
+project.register_source(root/'source.wav',expected_revision=0);source=project.read()['sources'][0]
+spec['sources']=[{'id':source['id'],'kind':'audio','uri':source['path'],'identity':{'algorithm':'sha256','value':source['sha256']}}]
+spec['timeline']['tracks']=[{'id':'audio','kind':'audio','order':0,'items':[{'id':'hit','kind':'audio','placement':{'startFrame':0,'durationFrames':4},'source':{'sourceId':source['id'],'inFrame':0,'durationFrames':4},'metadata':{'reviewBeat':{'sourceId':source['id'],'index':0}}}]}]
+(project.root/'revision.json').write_text(json.dumps(spec));project.use_composition('revision.json',expected_revision=1)
+server=ReviewServer(project,'beats',source['id']);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+try:
+ try:urllib.request.urlopen(server.origin+'/api/state',timeout=3);raise RuntimeError('review exposed unauthenticated state')
+ except urllib.error.HTTPError as error:assert error.code==401
+ command={'operationId':'archive-beat-choice','expectedRevision':2,'author':'human:artifact-fixture','sourceId':source['id'],'sourceSha256':source['sha256'],'domain':'beats','action':'set','targetId':'beatmap','payload':{'beats':[{'timeSec':0.1,'strength':1}]}}
+ request=urllib.request.Request(server.origin+'/api/corrections',data=json.dumps(command).encode(),headers={'Authorization':'Bearer '+server.token,'Origin':server.origin,'Content-Type':'application/json'})
+ with urllib.request.urlopen(request,timeout=3) as response:assert json.load(response)['event']['revision']==3
+ assert Project(project.root).correct(command)['revision']==3
+finally:server.shutdown();server.server_close();thread.join()
+revised=project.apply_review(source['id'],'beats',expected_revision=3);assert revised['ok']
+output=render(project.root/revised['composition'],root/'reviewed.mp4');assert verify_output(output,spec['verification']).passed
+raw=subprocess.check_output(['ffmpeg','-v','error','-i',str(output),'-vn','-ac','1','-ar','8000','-f','s16le','pipe:1'])
+import array
+samples=array.array('h',raw)
+if sys.byteorder!='little':samples.byteswap()
+assert max(abs(n) for n in samples[:400])<100 and max(abs(n) for n in samples[900:1200])>500
+bundle=bundle_project(project.root,root/'edit.zip');restore_project(root/'edit.zip',root/'restored',expected_sha256=bundle['sha256'])
+restored=Project(root/'restored');assert restored.corrections()==project.corrections();assert file_digest(restored.root/source['path'])==source['sha256']
+print(json.dumps({'savedCorrectionSurvivesRestart':True,'exactRetrySingleEvent':True,'correctionChangesAudiblePlacement':True,'loopbackCapabilityRequired':True,'portableBundleRestored':True,'sourceSha256':source['sha256'],'corrections':len(restored.corrections())}))
+'''
+    return run_json([str(python), "-c", code, str(root / "project-review")])
 
 
 def smoke_node(npm: str, node: str, archive: Path, root: Path) -> dict[str, object]:

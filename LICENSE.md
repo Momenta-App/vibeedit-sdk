@@ -1,20 +1,25 @@
-# VibeEdit License Terms
+MIT License
 
-Copyright (c) Attention Engine Inc. All rights reserved.
+Copyright (c) 2026 Attention Engine Inc.
 
-VibeEdit is publicly inspectable and downloadable. Personal evaluation and any
-other uses specifically granted in writing by Attention Engine Inc. are
-permitted only under these terms. Commercial use requires a separate commercial
-license from Attention Engine Inc. Contact Attention Engine through its official
-channels for commercial licensing.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Except for permissions expressly granted in writing, no license to VibeEdit
-owned code, assets, trademarks, or other intellectual property is granted.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Third-party components are not relicensed by these terms. They remain subject
-to their respective licenses, notices, usage restrictions, and attribution
-requirements. See `THIRD_PARTY_NOTICES.md` and the generated dependency and
-asset inventories included with a release artifact.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-These terms apply to public beta releases made available for evaluation and
-community testing. A beta label does not expand the permissions granted above.
+Third-party components, fonts, optional model code/weights and hosted Myriograph
+services retain their own licenses and terms. See THIRD_PARTY_NOTICES.md and
+the model/runtime manifests. This license grants no trademark rights.

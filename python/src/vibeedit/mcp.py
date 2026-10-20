@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -15,6 +16,7 @@ from vibeedit.version import VERSION
 
 
 TOOLS = [
+    {"name": "agent_command", "description": "Run the shared VibeEdit CLI contract without a shell: project/review/acquisition, durable worker/goal handles and customer jobs. Requires explicit caps for paid admission just like CLI. Foreground execution and credential entry are excluded from stdio MCP; detached starts return original durable handles. Model inference/setup use the parent agent's local CLI.", "inputSchema": {"type": "object", "required": ["argv"], "properties": {"argv": {"type": "array", "minItems": 1, "maxItems": 64, "items": {"type": "string", "maxLength": 4096}}}, "additionalProperties": False}},
     {"name": "search_catalog", "description": "Return up to five compact ranked VibeEdit capabilities; inspect one stable ID for full details", "inputSchema": {"type": "object", "required": ["query"], "properties": {"query": {"type": "string"}, "limit": {"type": "integer", "minimum": 1, "maximum": 20, "default": 5}, "category": {"type": "string"}, "capability": {"type": "string"}, "platform": {"enum": ["macos", "windows", "linux"]}}}},
     {"name": "inspect_catalog_item", "description": "Inspect one stable catalog item", "inputSchema": {"type": "object", "required": ["id"], "properties": {"id": {"type": "string"}}}},
     {"name": "plan_revision", "description": "Compare previous and revised CompositionSpecs and explain dirty ranges, reusable artifacts, jobs, and execution support", "inputSchema": {"type": "object", "required": ["previous", "revised"], "properties": {"previous": {"type": "object"}, "revised": {"type": "object"}}}},
@@ -45,11 +47,35 @@ def handle_request(request: JSONObject) -> JSONObject | None:
         params = request.get("params", {})
         result = call_tool(params.get("name"), params.get("arguments", {}))
         return {"jsonrpc": "2.0", "id": identifier, "result": {"content": [{"type": "text", "text": json.dumps(result)}], "structuredContent": result}}
-    except (OSError, ValueError, RuntimeError, NotImplementedError) as error:
+    except (OSError, ValueError, RuntimeError, NotImplementedError, KeyError, TypeError) as error:
         return {"jsonrpc": "2.0", "id": identifier, "error": {"code": -32000, "message": str(error)}}
 
 
 def call_tool(name: str, arguments: JSONObject) -> JSONObject | list[JSONObject]:
+    if name == "agent_command":
+        argv = arguments.get("argv")
+        if not isinstance(argv, list) or not 1 <= len(argv) <= 64 or any(not isinstance(v, str) or not v or len(v) > 4096 or "\x00" in v for v in argv):
+            raise ValueError("Expected 1–64 bounded command arguments")
+        if argv[0] not in {"project", "review", "acquire", "worker", "goal", "myriograph", "analyze", "jobs", "doctor"} or any(v in {"--foreground", "--no-detach"} for v in argv) or argv[:2] in (["worker", "configure"], ["worker", "setup"]):
+            raise ValueError("Use parent-agent local CLI for this foreground/setup/credential command")
+        try:
+            result = subprocess.run([sys.executable, "-m", "vibeedit.cli", *argv, *([] if "--json" in argv else ["--json"])], stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=75)
+        except subprocess.TimeoutExpired:
+            return {"ok": False, "status": "observation-timeout", "action": "Inspect the original project operation/job/worker/goal handle. A timeout does not authorize repeating a paid admission or replacing its handle."}
+        if len(result.stdout.encode()) > 8 * 1024**2:
+            raise ValueError("Command output exceeds MCP context limit; use paginated local CLI")
+        if "--help" in argv:
+            return {"ok": result.returncode == 0, "exitCode": result.returncode, "help": result.stdout}
+        values = []
+        remaining = result.stdout.lstrip()
+        decoder = json.JSONDecoder()
+        while remaining:
+            value, end = decoder.raw_decode(remaining)
+            values.append(value)
+            if len(values) > 64:
+                raise ValueError("Command emits too many JSON records for one MCP call")
+            remaining = remaining[end:].lstrip()
+        return {"ok": result.returncode == 0, "exitCode": result.returncode, "results": values, **({"action": "Use local CLI help to inspect the rejected command; remote stderr is not exposed"} if result.returncode and not values else {})}
     if name == "search_catalog":
         limit = int(arguments.get("limit", 5))
         if limit > 20:
@@ -89,8 +115,8 @@ def call_tool(name: str, arguments: JSONObject) -> JSONObject | list[JSONObject]
 
 def _edit(name: str, arguments: JSONObject) -> JSONObject:
     spec = json.loads(json.dumps(arguments["spec"]))
-    track = next((track for track in spec["timeline"]["tracks"] if track["id"] == arguments["trackId"]), None)
-    if not track:
+    track = next((track for track in spec["timeline"]["tracks"] if track["id"] == arguments.get("trackId")), None)
+    if name != "apply_effect" and not track:
         raise ValueError(f"unknown track: {arguments['trackId']}")
     if name == "apply_effect":
         clip = next((item for candidate in spec["timeline"]["tracks"] for item in candidate["items"] if item["id"] == arguments["clipId"]), None)
@@ -111,7 +137,13 @@ def main() -> int:
     for line in sys.stdin:
         if not line.strip():
             continue
-        response = handle_request(json.loads(line))
+        try:
+            request = json.loads(line)
+            if not isinstance(request, dict):
+                raise ValueError("Expected a JSON-RPC object")
+            response = handle_request(request)
+        except (ValueError, TypeError):
+            response = {"jsonrpc": "2.0", "id": None, "error": {"code": -32700, "message": "Invalid JSON-RPC input"}}
         if response is not None:
             print(json.dumps(response), flush=True)
     return 0

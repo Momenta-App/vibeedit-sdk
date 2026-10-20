@@ -5,6 +5,15 @@ description: Build fan edits from beat maps, waveform energy, lyric timing, and 
 
 # VibeEdit Beat-First Editing
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill when making or reviewing a fan edit where the song, beat, lyric cadence, or audio energy should drive the timeline.
 
 ## Required Inputs
@@ -12,7 +21,7 @@ Use this skill when making or reviewing a fan edit where the song, beat, lyric c
 - Source video or shot library.
 - Song, reference audio, or synthetic beat target.
 - Beat map from `librosa`, `madmom`, `aubio`, `essentia`, or local waveform/onset analysis.
-- Transcript or lyric timing from AssemblyAI when dialogue or lyrics are present.
+- Transcript or lyric timing from the Myriograph public `analyze speakers` service (with an explicitly authorized retail ceiling) when dialogue or lyrics are present.
 - Shot boundaries, motion scores, face/person tracks, and existing clip metadata when available.
 
 Never guess beat precision if analysis is available. Build the edit from measured onsets, beat strength, section changes, and waveform peaks.

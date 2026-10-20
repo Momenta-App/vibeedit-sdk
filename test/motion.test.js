@@ -63,7 +63,8 @@ test("packaged canonical text runtime matches its immutable manifest", async () 
   const root = new URL("../catalog/text-runtime/", import.meta.url);
   const manifest = JSON.parse(await readFile(new URL("manifest.json", root), "utf8"));
   assert.equal(manifest.schemaVersion, "vibeedit.canonical-text-runtime.v1");
-  assert.equal(manifest.files.length, 151);
+  assert.equal(manifest.files.length, 153);
+  assert.match(manifest.fontPolicy.fidelity, /OFL replacements/);
   for (const record of manifest.files) {
     const bytes = await readFile(new URL(record.path.split("/").map(encodeURIComponent).join("/"), root));
     assert.equal(bytes.length, record.bytes, record.path);

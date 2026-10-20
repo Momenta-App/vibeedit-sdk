@@ -132,7 +132,7 @@ def build_render_graph(spec: JSONObject) -> JSONObject:
         {"from": "composite:video", "to": "output:final", "reason": "video enters final assembly"},
         {"from": "mix:audio", "to": "output:final", "reason": "audio enters final assembly"},
     ])
-    composite_hash = _hash({"canvas": spec["canvas"], "durationFrames": spec["durationFrames"], "layers": [layer_hashes[item["id"]] for item in items if item["kind"] not in {"audio", "sound_effect"}]})
+    composite_hash = _hash({"canvas": spec["canvas"], "durationFrames": spec["durationFrames"], "motionBlendMode": spec["render"].get("motionBlendMode", "normal"), "layers": [layer_hashes[item["id"]] for item in items if item["kind"] not in {"audio", "sound_effect"}]})
     audio_mix_hash = _hash({"audio": spec.get("audio", {}), "layers": [layer_hashes[item["id"]] for item in items if item["kind"] in {"audio", "sound_effect"}]})
     output_hash = _hash({"settings": {key: value for key, value in spec["render"]["output"].items() if key != "uri"}, "video": composite_hash, "audio": audio_mix_hash})
     return {
@@ -229,6 +229,8 @@ def _tail_truncation_eligible(previous: JSONObject, revised: JSONObject, previou
     if any(previous.get(key) != revised.get(key) for key in ("canvas", "sources", "artifacts")):
         return False
     if previous["render"]["backend"] != revised["render"]["backend"]:
+        return False
+    if previous["render"].get("motionBlendMode", "normal") != revised["render"].get("motionBlendMode", "normal"):
         return False
     if {key: value for key, value in previous["render"]["output"].items() if key != "uri"} != {key: value for key, value in revised["render"]["output"].items() if key != "uri"}:
         return False

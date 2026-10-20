@@ -5,11 +5,20 @@ description: Generalized VibeEdit router for viral source-native edits from movi
 
 # VibeEdit Viral Source Edit Router
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill as the standalone production router for source-driven viral edits. It can compare against prior Creed or fan-edit workflows, but its core route must not load or depend on `vibeedit-creed-edit`, `fan-edit`, `fanedit-polish-router`, `fanedit-body`, `sound-design`, or `lead-editor`.
 
 ## Defaults
 
-- Orchestrate many focused subagents by default; keep the main agent responsible for integration, proof boundaries, and final handoff.
+- Use focused role passes, performed by the parent agent or useful authorized subagents; keep integration, proof boundaries and final handoff with one parent agent.
 - Preserve source-native aspect ratio unless the user or platform target explicitly requires a crop. Record any crop as a creative or delivery decision.
 - Use no on-screen text overlays by default. Add captions, quote cards, lyrics, labels, or typography only when the user asks or the source artifact requires it.
 - Treat inspected source files, transcripts, beat maps, renders, reviews, and workspace artifacts as truth. Do not invent timestamps, quotes, assets, render states, or prior approvals.

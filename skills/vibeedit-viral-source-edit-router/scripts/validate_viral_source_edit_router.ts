@@ -1,20 +1,14 @@
-import { spawn } from "node:child_process"
-import { dirname, resolve } from "node:path"
+import { resolve } from "node:path"
 
-const scriptDir = dirname(new URL(import.meta.url).pathname)
-const repoDir = resolve(scriptDir, "../../../..")
-const harness = resolve(repoDir, ".opencode", "evals", "viral-source-edit-router", "run-viral-source-router-harness.ts")
-const args = [harness, ...process.argv.slice(2)]
-const child = spawn("bun", args, {
-  cwd: repoDir,
-  stdio: "inherit",
-  env: process.env,
-})
-
-child.on("exit", (code, signal) => {
-  if (signal) {
-    console.error(`viral-source-edit-router validation stopped by ${signal}`)
-    process.exit(1)
-  }
-  process.exit(code ?? 1)
-})
+// Validate an explicit portable dry-run plan; no private desktop harness is loaded.
+const path = process.argv[2]
+if (!path) throw new Error("Usage: bun validate_viral_source_edit_router.ts /project/path/edit-plan.json")
+const plan = await Bun.file(resolve(path)).json()
+for (const key of ["package_id", "source_profile", "song_profile", "clip_plan", "transition_plan", "effects_plan", "proof_ledger", "renderability"]) {
+  if (plan[key] === undefined) throw new Error(`Missing plan field: ${key}`)
+}
+if (!Array.isArray(plan.clip_plan)) throw new Error("clip_plan must be an array")
+if (plan.renderability.state !== "planned" && plan.renderability.state !== "blocked") {
+  throw new Error("This validator qualifies dry-run packages only; rendered/reviewed acceptance needs source-bound video proof")
+}
+console.log(JSON.stringify({ ok: true, packageId: plan.package_id, state: plan.renderability.state, proof: "plan structure only; no rendered or editorial acceptance" }))

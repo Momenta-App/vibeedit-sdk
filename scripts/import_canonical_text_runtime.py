@@ -71,7 +71,11 @@ def main() -> int:
         "files": sorted(records, key=lambda item: item["path"]),
     }
     (DESTINATION / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"ok": True, "revision": revision, "files": len(records)}))
+    import subprocess
+    import sys
+
+    subprocess.run([sys.executable, str(Path(__file__).with_name("apply_font_policy.py"))], check=True)
+    print(json.dumps({"ok": True, "revision": revision, "files": len(records), "fontPolicyApplied": True}))
     return 0
 
 

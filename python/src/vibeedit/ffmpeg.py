@@ -353,8 +353,20 @@ def _overlay_encoder_command(spec: JSONObject, overlay_input_arguments: list[str
     chains = [
         f"[0:v]{','.join(video_filters)}[base]",
         f"[1:v]fps={frame_rate},format=rgba,setpts=PTS-STARTPTS,settb=AVTB[overlay]",
-        "[base][overlay]overlay=0:0:shortest=1:format=auto[video]",
     ]
+    if spec["render"].get("motionBlendMode", "normal") == "difference":
+        # Difference must see the decoded footage; CSS on an isolated transparent
+        # browser surface cannot invert pixels belonging to the video beneath it.
+        chains.extend([
+            "[base]format=gbrp,split=2[original][differencebase]",
+            "[overlay]split=2[overlaycolor][overlayalpha]",
+            "[overlayalpha]alphaextract[mask]",
+            "[overlaycolor]format=gbrp[color]",
+            "[differencebase][color]blend=all_mode=difference:shortest=1[difference]",
+            "[original][difference][mask]maskedmerge[video]",
+        ])
+    else:
+        chains.append("[base][overlay]overlay=0:0:shortest=1:format=auto[video]")
     has_source_audio = any(stream.get("codec_type") == "audio" for stream in probe(source_path).get("streams", []))
     audio_labels = []
     if has_source_audio:

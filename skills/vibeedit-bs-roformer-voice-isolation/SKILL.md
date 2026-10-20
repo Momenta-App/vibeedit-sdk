@@ -1,122 +1,38 @@
 ---
 name: vibeedit-bs-roformer-voice-isolation
-description: Use when a VibeEdit task needs high-quality vocal isolation, instrumental/no-vocals extraction, or both stems from a song, music video, movie quote, edit, or timestamped source clip. Prefer BS-Roformer 1297 for consistent vocal/instrumental stems when quality matters more than speed.
+description: Optional local BS-Roformer 1297 vocal and instrumental stem workflow with a pinned public audio-separator runtime, explicit customer-supplied permitted weights/config and listening review. Runtime/model inference qualification remains open.
 ---
 
 # VibeEdit BS-Roformer Voice And Instrumental Isolation
 
-Use this skill when the user asks to isolate, extract, separate, or clean up vocals/voice, remove vocals, create an instrumental, or produce both vocal and instrumental stems from audio or video.
+## Portable SDK execution
 
-## Model Choice
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
 
-Use **BS-Roformer 1297**:
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
 
-- Model filename: `model_bs_roformer_ep_317_sdr_12.9755.ckpt`
-- App tool: `packages/desktop/scripts/vocal-isolation/isolate-voice-bs-roformer.py`
-- Skill-local wrapper: `scripts/isolate_voice_bs_roformer.py`
-- Best for: high-quality vocal stems, instrumental/no-vocals stems, fan edits, lyric/voice analysis, quote isolation, and removing backing track or vocals from a music video/song.
-- Tradeoff: slower than Demucs/Kim Vocal/UVR-MDX, but the user selected it as the good and consistent model.
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
 
-For clips under 2 seconds, this tool pads the extracted audio to a model-safe duration before separation and trims the resulting stems back to the requested duration. Earlier raw BS-Roformer runs failed on ~0.7s and ~1.1s clips without padding.
 
-## Quick Tool Use
+Use for optional local vocal/instrumental stems when the task calls for clean dialogue, karaoke, lyric analysis or music removal. Preserve source audio and compare separation artifacts by listening before adoption. Model choice is explicit; do not silently replace BS-Roformer 1297 with another architecture.
 
-Run:
+## Availability and provenance
 
-```bash
-python packages/desktop/scripts/vocal-isolation/isolate-voice-bs-roformer.py \
-  --input /absolute/path/to/song-or-video.mp4
-```
+The owned runner is `scripts/isolate_voice_bs_roformer.py`. It uses public **audio-separator==0.47.0** (MIT) through its local Python API. Runtime wheel identity and upstream model/config release links are pinned in `references/provenance.json`. Install the optional runtime into a separate customer environment after checking disk/device requirements; it is not installed by the base SDK. `python scripts/isolate_voice_bs_roformer.py --probe` reports availability without downloading models or importing Torch.
 
-By default, the tool writes both stems:
+BS-Roformer 1297 filename: `model_bs_roformer_ep_317_sdr_12.9755.ckpt`. The upstream release exposes no API SHA digest and the weight license has not been verified. The package bundles no weights and performs no automatic model download. Runtime MIT does not grant weight rights. Public model/runtime qualification remains open. A customer who already holds permitted local weights/config must supply a project-relative receipt with `model`, `modelSha256`, `config`, `configSha256`, `license`, `licenseUrl`, and `verifiedBy`. Do not invent that receipt or represent availability as commercial permission.
 
-- `vocals.wav`
-- `instrumental.wav`
-- `manifest.json`
-
-The default output location is deterministic:
-
-```text
-<source-dir>/.vibeedit/derived-assets/
-  <source-filename-slug>__sha256-<source-hash-prefix>/
-    bs-roformer-1297/
-      s<start-ms>-e<end-ms>/
-        vocals.wav
-        instrumental.wav
-        manifest.json
-```
-
-Use `--output-root` only when the project has a known derived-asset root. The final path remains deterministic below that root.
-
-## Timestamp And Frame Ranges
-
-For full songs, omit range arguments.
-
-For a section of a song, video, or movie:
+## Run from this installed skill directory
 
 ```bash
-python packages/desktop/scripts/vocal-isolation/isolate-voice-bs-roformer.py \
-  --input /absolute/path/to/movie.mp4 \
-  --start 01:12:03.500 \
-  --end 01:12:11.250
+python scripts/isolate_voice_bs_roformer.py \
+  --project "$PROJECT" --input media/source.mp4 \
+  --model-receipt models/bs-roformer-permission.json \
+  --start 42.25 --duration 8.5
 ```
 
-Or use duration:
+`--start` / `--duration` are original-source seconds. Omit duration for the remaining source; frame requests must first be converted using the original probed rational frame rate. The runner extracts local PCM, pads sections shorter than two seconds for model safety, separates both stems and trims them back to the requested duration. It overrides the upstream download resolver to use only the exact local model/config. It never uses a private desktop script, local gauntlet cache or paid remote API.
 
-```bash
-python packages/desktop/scripts/vocal-isolation/isolate-voice-bs-roformer.py \
-  --input /absolute/path/to/video.mp4 \
-  --start 42.25 \
-  --duration 8.5
-```
+Outputs live under project `artifacts/voice-isolation/<identity>/`: source/model/config/runtime/window-bound manifest, `vocals.wav` and `instrumental.wav`, with SHA256. Interrupted runs stay `running` and are not silently overwritten/retried. Preserve the original operation directory for inspection before explicitly choosing a new attempt. Successful separation remains `needs-listening-review`, with `inferenceQualified=false` until the pinned runtime/model pair is actually qualified.
 
-For frame-specific requests:
-
-```bash
-python packages/desktop/scripts/vocal-isolation/isolate-voice-bs-roformer.py \
-  --input /absolute/path/to/video.mp4 \
-  --start-frame 1800 \
-  --end-frame 2040
-```
-
-The tool uses the source video frame rate from `ffprobe`; pass `--frame-rate 24000/1001` if the source metadata is missing or the user gives a timeline-specific frame rate.
-
-## Stem Selection
-
-Default to `--stems both`. This creates both stems every time so downstream agents can reuse either output without rerunning the model.
-
-Use `--stems vocals` or `--stems instrumental` only when disk/runtime constraints matter or the user explicitly asks for one stem.
-
-## Runtime Expectations
-
-The wrapper expects:
-
-- `ffmpeg` and `ffprobe` on `PATH`
-- `audio-separator` installed in a Python 3.11 environment
-- The BS-Roformer model available in `AUDIO_SEPARATOR_MODEL_DIR`, or downloaded by `audio-separator` into the configured model cache.
-
-If available, the wrapper automatically reuses the local gauntlet environment:
-
-`fan_Edit_Data/agent-artifacts/vocal-isolation-eval/.venv/bin/audio-separator`
-
-To force a runtime or model cache:
-
-```bash
-AUDIO_SEPARATOR_BIN=/path/to/audio-separator \
-AUDIO_SEPARATOR_MODEL_DIR=/path/to/models \
-python packages/desktop/scripts/vocal-isolation/isolate-voice-bs-roformer.py \
-  --input /path/in.mp3 \
-  --output-root /path/derived-assets
-```
-
-## Agent Guidance
-
-When a user asks for “best”, “clean”, “consistent”, “voice only”, “highest quality”, “remove voice”, “instrumental”, “karaoke”, or “no vocals”, use this skill first.
-
-When a user asks for a fast preview, mention that BS-Roformer is slower and ask only if latency matters. Otherwise run it.
-
-Preserve the original media. Do not overwrite source files.
-
-Prefer the deterministic derived-asset output path. The `manifest.json` is part of the asset contract: it ties the stems to the exact source hash, source path, model, start/end timestamps, optional frame range, and output files. When using the stems later, reference the manifest and the specific stem path (`vocals.wav` or `instrumental.wav`).
-
-If a source file is imported into another project, keep or recreate its `.vibeedit/derived-assets/...` directory so the vocal/instrumental stems travel with the media identity and timestamp range.
+Listen to speech clarity, music leakage, transients and artifacts at the exact trimmed boundaries. Register the selected stem in the project, retain its source-clock/manifest lineage, and mix through the SDK. If this optional route is unavailable, continue other editing work and report the precise missing runtime/model/rights or qualification step; do not claim isolated voice.

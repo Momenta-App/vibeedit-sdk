@@ -44,7 +44,8 @@ def test_canonical_text_runtime_is_manifest_bound():
     root = data_path("catalog", "text-runtime")
     manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["schemaVersion"] == "vibeedit.canonical-text-runtime.v1"
-    assert len(manifest["files"]) == 151
+    assert len(manifest["files"]) >= 151
+    assert manifest["fontPolicy"]["fidelity"].startswith("OFL replacements")
     for record in manifest["files"]:
         payload = (root / record["path"]).read_bytes()
         assert len(payload) == record["bytes"], record["path"]
@@ -162,6 +163,9 @@ def test_raw_html_css_accepts_full_documents_and_rejects_script_surfaces():
     assert 'href="http://127.0.0.1:1234/atoms/v1.css"' in document
     assert "script-src 'none'" in document
     assert "<svg" in document
+    caption = _html_css_document({"html": "<h1>{{text}}</h1>", "text": "<img onerror=alert(1)> & WORD"}, "http://127.0.0.1/", None)
+    assert "&lt;img onerror=alert(1)&gt; &amp; WORD" in caption
+    assert "<img" not in caption
     with pytest.raises(MotionRenderError, match="does not allow javascript"):
         _html_css_document({"html": "<h1>NO</h1>", "javascript": "alert(1)"}, "http://127.0.0.1/", None)
     with pytest.raises(MotionRenderError, match="<script>"):

@@ -5,7 +5,7 @@
     {
       "id": "vibeedit://skill/clean-text-animation",
       "name": "clean-text-animation",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "clean-text-animation",
       "harnesses": [
         "agents",
@@ -13,7 +13,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "dd52caecaed8f96996d03ae2a8f8e2e1f9d3763a8a8a33b0ed8bd676788281f4",
+      "checksum": "c0ce1400f87d96cdb54ffdf1dadac3699a2c740f8b4622ff29fa6566e7b3a423",
       "source": {
         "path": ".codex/skills/clean-text-animation",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -31,12 +31,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "dd52caecaed8f96996d03ae2a8f8e2e1f9d3763a8a8a33b0ed8bd676788281f4",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/fanedit-body",
       "name": "fanedit-body",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "fanedit-body",
       "harnesses": [
         "agents",
@@ -44,7 +49,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "ab6005c2d572fd4bdb0eb2e478935cc79928a97f99375c7671dbc3908d49dbee",
+      "checksum": "456b448a3dbd9f5c44d9c9ab81eae3fc45145fe33b88d70506761a53b6c32545",
       "source": {
         "path": ".codex/skills/fanedit-body",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -62,12 +67,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "ab6005c2d572fd4bdb0eb2e478935cc79928a97f99375c7671dbc3908d49dbee",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/fanedit-hook",
       "name": "fanedit-hook",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "fanedit-hook",
       "harnesses": [
         "agents",
@@ -75,7 +85,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "0af0333ec5fe13c8eccaa1099920853e324ee85329429acf8fd32630a50f42d4",
+      "checksum": "7a62ff8a4a27f390bf7958c79a5dd937ff38a9f25f565fef3a5cb6a45c5e884e",
       "source": {
         "path": ".codex/skills/fanedit-hook",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -93,12 +103,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "0af0333ec5fe13c8eccaa1099920853e324ee85329429acf8fd32630a50f42d4",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/fanedit-reference-learning",
       "name": "fanedit-reference-learning",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "fanedit-reference-learning",
       "harnesses": [
         "agents",
@@ -106,7 +121,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "c3472be005f1aff21880927c566e5f27427eeeae9b9207132aa04a296f2a0afe",
+      "checksum": "4b2abc51f21262efba1a9685804657a6b89d3886d7df36aba037cd0234ccbcce",
       "source": {
         "path": ".codex/skills/fanedit-reference-learning",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -124,12 +139,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "c3472be005f1aff21880927c566e5f27427eeeae9b9207132aa04a296f2a0afe",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/fanedit-text",
       "name": "fanedit-text",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "fanedit-text",
       "harnesses": [
         "agents",
@@ -137,7 +157,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "5131ac08ec9f08c62a6fecd22777f46374f73575a0ca1557b015449a448a8a48",
+      "checksum": "45b3cc95cf191a7cfec7e58ef4fe13caa9900da750eb7313a8633ff6dd4f2575",
       "source": {
         "path": ".codex/skills/fanedit-text",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -155,12 +175,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "5131ac08ec9f08c62a6fecd22777f46374f73575a0ca1557b015449a448a8a48",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/micro-sfx-choice",
       "name": "micro-sfx-choice",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "micro-sfx-choice",
       "harnesses": [
         "agents",
@@ -168,7 +193,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "09c04ca9411920a76d0ffccada0a7fd270216cb59444ad06b58a9fe8c6c8f2f6",
+      "checksum": "1e03bdc7e30231313985b0e18603913965d95748f0efe708e408d3d44990c693",
       "source": {
         "path": ".codex/skills/micro-sfx-choice",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -186,12 +211,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "09c04ca9411920a76d0ffccada0a7fd270216cb59444ad06b58a9fe8c6c8f2f6",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/micro-sfx-complexity-modes",
       "name": "micro-sfx-complexity-modes",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "micro-sfx-complexity-modes",
       "harnesses": [
         "agents",
@@ -199,7 +229,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "7350714ed749aa01612fe8f9216534a399db1d0a5ba7e0e9b6887fb9982b7c24",
+      "checksum": "27e34f9e65d6f857a85702fdd76babb212f717c0516b849f5ee350bac3941f97",
       "source": {
         "path": ".codex/skills/micro-sfx-complexity-modes",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -217,12 +247,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "7350714ed749aa01612fe8f9216534a399db1d0a5ba7e0e9b6887fb9982b7c24",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/micro-sfx-motion-attachment",
       "name": "micro-sfx-motion-attachment",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "micro-sfx-motion-attachment",
       "harnesses": [
         "agents",
@@ -230,7 +265,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "a1ea7047e6f39655223c73e0e0a42e3fa277f159146f4f852530fa0fdc8ec705",
+      "checksum": "9fcd5fd74ef90a6ff1f781b2f1c71b62deda54837c77df7605a398278bf41cd0",
       "source": {
         "path": ".codex/skills/micro-sfx-motion-attachment",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -248,12 +283,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "a1ea7047e6f39655223c73e0e0a42e3fa277f159146f4f852530fa0fdc8ec705",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/micro-sfx-object-adaptation",
       "name": "micro-sfx-object-adaptation",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "micro-sfx-object-adaptation",
       "harnesses": [
         "agents",
@@ -261,7 +301,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "a423cbf0cc7b90548b91da5dde51ef7018e366e424c54ee341b71ee98972f596",
+      "checksum": "d63f60ebfdeedcabc252b6f7e74deef11776aebad0d4f663a5934d85058a316e",
       "source": {
         "path": ".codex/skills/micro-sfx-object-adaptation",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -279,12 +319,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "a423cbf0cc7b90548b91da5dde51ef7018e366e424c54ee341b71ee98972f596",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/micro-sfx-timing-craft",
       "name": "micro-sfx-timing-craft",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "micro-sfx-timing-craft",
       "harnesses": [
         "agents",
@@ -292,7 +337,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "6eecd63f60287ebfc86b70f80ef54150e01f720b1deb583b1208ccd14b79955c",
+      "checksum": "a220703d518a8b21ee32c3277feaf917c5014363b70ec073e85232b37169a91a",
       "source": {
         "path": ".codex/skills/micro-sfx-timing-craft",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -310,12 +355,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "6eecd63f60287ebfc86b70f80ef54150e01f720b1deb583b1208ccd14b79955c",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/negative",
       "name": "negative",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "negative",
       "harnesses": [
         "agents",
@@ -323,7 +373,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "ce545ed35f151b970e29dde62a0eff07524cc24c197818ab57f4842537ffe350",
+      "checksum": "d13b27d52724eeb23a8969b95dae5a7203780117315f501d6e034d18eaa207fd",
       "source": {
         "path": ".codex/skills/negative",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -341,12 +391,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "ce545ed35f151b970e29dde62a0eff07524cc24c197818ab57f4842537ffe350",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-beat-first-editing",
       "name": "vibeedit-beat-first-editing",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-beat-first-editing",
       "harnesses": [
         "agents",
@@ -354,7 +409,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "40d90a301b143a4b9eb63352acde9fe4be9bd8e95bb06fcd9f6b3ca6f62e16c2",
+      "checksum": "184dc66d11432535ddbd6827565b51349fb5c48b9cee416694f3b700f7a147e1",
       "source": {
         "path": ".codex/skills/vibeedit-beat-first-editing",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -372,12 +427,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "40d90a301b143a4b9eb63352acde9fe4be9bd8e95bb06fcd9f6b3ca6f62e16c2",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-bs-roformer-voice-isolation",
       "name": "vibeedit-bs-roformer-voice-isolation",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-bs-roformer-voice-isolation",
       "harnesses": [
         "agents",
@@ -385,7 +445,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "29b94947854cb43029a0b405160b79e7c53c8978260f49688a058f6317ddca37",
+      "checksum": "67c9c9132442c2f71a8590631c0f29d360f3d3e23c7cc2c8a88ddbefc64777da",
       "source": {
         "path": ".codex/skills/vibeedit-bs-roformer-voice-isolation",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -393,9 +453,9 @@
       },
       "validation": {
         "status": "passed",
-        "files": 3,
+        "files": 4,
         "pythonFiles": 1,
-        "jsonFiles": 0,
+        "jsonFiles": 1,
         "checks": [
           "entrypoint",
           "forbidden-path scan",
@@ -403,12 +463,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "29b94947854cb43029a0b405160b79e7c53c8978260f49688a058f6317ddca37",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-color-style-recipes",
       "name": "vibeedit-color-style-recipes",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-color-style-recipes",
       "harnesses": [
         "agents",
@@ -416,7 +481,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "2bebc91f5c22f2bef9ae02120002713e2b1aa855f3a7ec50ee644b74aff25d63",
+      "checksum": "ff8d073a42a45a309ab50e09d7f6f051a0e792db16997d76b8a4e7f729205a79",
       "source": {
         "path": ".codex/skills/vibeedit-color-style-recipes",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -434,12 +499,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "2bebc91f5c22f2bef9ae02120002713e2b1aa855f3a7ec50ee644b74aff25d63",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-compact-3d-typography",
       "name": "vibeedit-compact-3d-typography",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-compact-3d-typography",
       "harnesses": [
         "agents",
@@ -447,7 +517,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "fdad0e79fe99c41711e8d2cb75a85600388dc83fe2b8b45191c180561a4f997a",
+      "checksum": "ef942b34da1682d8eb99784e525660432dc29cd8bb2c9d9c643ca79fe740a40d",
       "source": {
         "path": ".codex/skills/vibeedit-compact-3d-typography",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -465,12 +535,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "fdad0e79fe99c41711e8d2cb75a85600388dc83fe2b8b45191c180561a4f997a",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-continuity-supervisor",
       "name": "vibeedit-continuity-supervisor",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-continuity-supervisor",
       "harnesses": [
         "agents",
@@ -478,7 +553,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "b65735f80cf94c4119cfbc7a830b455618da9f7e78b9e52475185e81c00a12d5",
+      "checksum": "ee94f681b01113c924a69701a4bf96dd3a06639b48a58aeb4a15414294834688",
       "source": {
         "path": ".codex/skills/vibeedit-continuity-supervisor",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -496,12 +571,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "b65735f80cf94c4119cfbc7a830b455618da9f7e78b9e52475185e81c00a12d5",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-creative-director",
       "name": "vibeedit-creative-director",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-creative-director",
       "harnesses": [
         "agents",
@@ -509,7 +589,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "b2fdab34a06f414133986187c54e3e194137e9d83b8473f1ac7b855038be1cdc",
+      "checksum": "71db74708896afbdc0124f7201bf06b68368b46724d354aeb448a26273e7cdae",
       "source": {
         "path": ".codex/skills/vibeedit-creative-director",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -527,12 +607,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "b2fdab34a06f414133986187c54e3e194137e9d83b8473f1ac7b855038be1cdc",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-creed-corpus-cross-reference",
       "name": "vibeedit-creed-corpus-cross-reference",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-creed-corpus-cross-reference",
       "harnesses": [
         "agents",
@@ -540,7 +625,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "e637afd908928e5d8c96d4ace273b92bc2964af28da1f22d14debceac9f24941",
+      "checksum": "88d37fbef14bdee57d4d64eb97d3c71277df8b78cc5071167c4633f610d296a0",
       "source": {
         "path": ".codex/skills/vibeedit-creed-corpus-cross-reference",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -558,12 +643,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "e637afd908928e5d8c96d4ace273b92bc2964af28da1f22d14debceac9f24941",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-creed-edit",
       "name": "vibeedit-creed-edit",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-creed-edit",
       "harnesses": [
         "agents",
@@ -571,7 +661,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "8d9faadd23607b0fbc405ed8e2092a935672d198d191855459d237fd2a64c6c5",
+      "checksum": "9d60f0322cab4f2e877722a3eacc56b290bae06bd026bc1dcdcabaec44593359",
       "source": {
         "path": ".codex/skills/vibeedit-creed-edit",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -589,12 +679,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "8d9faadd23607b0fbc405ed8e2092a935672d198d191855459d237fd2a64c6c5",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-creed-viral-edit-analysis",
       "name": "vibeedit-creed-viral-edit-analysis",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-creed-viral-edit-analysis",
       "harnesses": [
         "agents",
@@ -602,7 +697,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "cc4851f6cb51e720dfd93071f9f4ce02898238e1fc9c402b61428223a3c31eb3",
+      "checksum": "cb1ce477ac188221b3476565e68669f62310c1c88066776cdc37524f6c578dec",
       "source": {
         "path": ".codex/skills/vibeedit-creed-viral-edit-analysis",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -620,12 +715,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "cc4851f6cb51e720dfd93071f9f4ce02898238e1fc9c402b61428223a3c31eb3",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-effects",
       "name": "vibeedit-effects",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-effects",
       "harnesses": [
         "agents",
@@ -633,7 +733,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "b3c91d31ab71f0b6b0ad0fd256ef77d5b31fd5569be302a889266ff73e406389",
+      "checksum": "37557881914902e57091aa3f1c3573b0d644f66ef6d499889f534a13263b66fc",
       "source": {
         "path": ".codex/skills/vibeedit-effects",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -651,12 +751,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "b3c91d31ab71f0b6b0ad0fd256ef77d5b31fd5569be302a889266ff73e406389",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-effects-punctuation",
       "name": "vibeedit-effects-punctuation",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-effects-punctuation",
       "harnesses": [
         "agents",
@@ -664,7 +769,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "e2e33e69f894d0eb844491252f6cd8fef54d40167ed4595a242c0180d153398c",
+      "checksum": "79b13c6ad48828a216b105997e70dfd56f91371fa04fe71fa6f098b83209f45c",
       "source": {
         "path": ".codex/skills/vibeedit-effects-punctuation",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -682,12 +787,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "e2e33e69f894d0eb844491252f6cd8fef54d40167ed4595a242c0180d153398c",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-face-tracking-framing",
       "name": "vibeedit-face-tracking-framing",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-face-tracking-framing",
       "harnesses": [
         "agents",
@@ -695,7 +805,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "b5b0e8b34db68fb4f11d01ac5741e763f2b53c77f294d4e63d785763d9dd7a70",
+      "checksum": "8a0bfff8ca1d246f728d9366da0abdaeddd3d4e614a8e680065e9a5cafe1ed50",
       "source": {
         "path": ".codex/skills/vibeedit-face-tracking-framing",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -713,12 +823,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "b5b0e8b34db68fb4f11d01ac5741e763f2b53c77f294d4e63d785763d9dd7a70",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-fan-edit",
       "name": "vibeedit-fan-edit",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-fan-edit",
       "harnesses": [
         "agents",
@@ -726,7 +841,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "6aa73221537744329599eb5ac8f745dabf0f403556f41224053d3e895306eef0",
+      "checksum": "409dce69c0bdbabb992cc4fe08d9082db7742f02f6205bed560c0110b94dd7b6",
       "source": {
         "path": ".codex/skills/vibeedit-fan-edit",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -744,12 +859,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "6aa73221537744329599eb5ac8f745dabf0f403556f41224053d3e895306eef0",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-finishing-producer",
       "name": "vibeedit-finishing-producer",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-finishing-producer",
       "harnesses": [
         "agents",
@@ -757,7 +877,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "340ac68192cf03dab4484cea4875e6a4c861806749a749012a59e7c7976d6425",
+      "checksum": "1228a1ac64c848ef2cfd291185e361ad1fb5754a9e21bb43d7ad2b7ebbd59dc4",
       "source": {
         "path": ".codex/skills/vibeedit-finishing-producer",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -775,12 +895,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "340ac68192cf03dab4484cea4875e6a4c861806749a749012a59e7c7976d6425",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-lead-editor",
       "name": "vibeedit-lead-editor",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-lead-editor",
       "harnesses": [
         "agents",
@@ -788,7 +913,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "22954197dc9251de8ab6fdf2ec1a39d4de7ee3cf92d81e1219968180e52bf808",
+      "checksum": "efde3f1537a370c600d0f9bd1dab81c8ca20bb4163d6e9863e46453a8a4eb8d2",
       "source": {
         "path": ".codex/skills/vibeedit-lead-editor",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -806,12 +931,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "22954197dc9251de8ab6fdf2ec1a39d4de7ee3cf92d81e1219968180e52bf808",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-look-director",
       "name": "vibeedit-look-director",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-look-director",
       "harnesses": [
         "agents",
@@ -819,7 +949,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "9ecd221aab621dda2c44ea7b81346dec8417d7091dc26bd9226cfb76574b241e",
+      "checksum": "78408e09bea6ec570f9cb26f94e31076406228149e46303c29cd4527f3ba24ec",
       "source": {
         "path": ".codex/skills/vibeedit-look-director",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -837,12 +967,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "9ecd221aab621dda2c44ea7b81346dec8417d7091dc26bd9226cfb76574b241e",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-pacing-contrast",
       "name": "vibeedit-pacing-contrast",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-pacing-contrast",
       "harnesses": [
         "agents",
@@ -850,7 +985,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "f9d81da182d4a0bc49b563fcfe4c0c5042baddeda106405912347ac82d2ff34d",
+      "checksum": "5d4ac26ea5c727dc298c5c48572ff134d71149b633f13dd0af90a3e49240d2e1",
       "source": {
         "path": ".codex/skills/vibeedit-pacing-contrast",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -868,12 +1003,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "f9d81da182d4a0bc49b563fcfe4c0c5042baddeda106405912347ac82d2ff34d",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-producer",
       "name": "vibeedit-producer",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-producer",
       "harnesses": [
         "agents",
@@ -881,7 +1021,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "13afcf36104fd22faf7da5536d08f21e0b989d1ab1b081f2025fe8b9bb9179df",
+      "checksum": "697025afe2fe5a3f5f800b59d2a360533c38f183d8c6aec7264d0e30860cfa7b",
       "source": {
         "path": ".codex/skills/vibeedit-producer",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -899,12 +1039,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "13afcf36104fd22faf7da5536d08f21e0b989d1ab1b081f2025fe8b9bb9179df",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-project-json-editor",
       "name": "vibeedit-project-json-editor",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-project-json-editor",
       "harnesses": [
         "agents",
@@ -912,7 +1057,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "edc7004eeea17fa224445efd297d4faff028552251f74de87ccc693e6e65bbbf",
+      "checksum": "77e9fffdd75098c0c34feab5da62205ef6257040c97c3d9597a5b22171b61a9a",
       "source": {
         "path": ".codex/skills/vibeedit-project-json-editor",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -930,12 +1075,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "edc7004eeea17fa224445efd297d4faff028552251f74de87ccc693e6e65bbbf",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-python-analysis-rendering",
       "name": "vibeedit-python-analysis-rendering",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-python-analysis-rendering",
       "harnesses": [
         "agents",
@@ -943,7 +1093,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "2bb955f4ebc6079bae0b63963a085ad52a7aa2f13f314fab0c5dd254373b8fdc",
+      "checksum": "79c98f6e03cc0dddc30f95ae33f3e5f61a2789d517365fe874e2d81f6017144d",
       "source": {
         "path": ".codex/skills/vibeedit-python-analysis-rendering",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -961,12 +1111,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "2bb955f4ebc6079bae0b63963a085ad52a7aa2f13f314fab0c5dd254373b8fdc",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-qa-gap-discipline",
       "name": "vibeedit-qa-gap-discipline",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-qa-gap-discipline",
       "harnesses": [
         "agents",
@@ -974,7 +1129,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "73482ac760491691d4406bc6ec6a9c1966fa2746e3a9ada0e120f91e6889f83a",
+      "checksum": "5311ffcfd1c42e6b7cd090dfe0acbae2a7f54c1e390a6494bef755e1bf09fb36",
       "source": {
         "path": ".codex/skills/vibeedit-qa-gap-discipline",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -992,12 +1147,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "73482ac760491691d4406bc6ec6a9c1966fa2746e3a9ada0e120f91e6889f83a",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-quote-audio-structure",
       "name": "vibeedit-quote-audio-structure",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-quote-audio-structure",
       "harnesses": [
         "agents",
@@ -1005,7 +1165,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "f8e5eb3a356779fd252bf370e6fae83bd29658c90e74263e7ff3e6d4c7dbab29",
+      "checksum": "f6c5c35c0e75eeca1d812ea2f601575a138893a3dd3aa7cab1a2b3966040162e",
       "source": {
         "path": ".codex/skills/vibeedit-quote-audio-structure",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1023,12 +1183,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "f8e5eb3a356779fd252bf370e6fae83bd29658c90e74263e7ff3e6d4c7dbab29",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-reverse-curtain-reveal",
       "name": "vibeedit-reverse-curtain-reveal",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-reverse-curtain-reveal",
       "harnesses": [
         "agents",
@@ -1036,7 +1201,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "42e9601c72a3a69a386f74a26efce21c7101bfa2f23ffbddacddaad97ce75d9a",
+      "checksum": "e8ce74b8c39a381c3ad23dbcacd9c95d3645b8e7c8577d7d932d91ebd903bb67",
       "source": {
         "path": ".codex/skills/vibeedit-reverse-curtain-reveal",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1054,12 +1219,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "42e9601c72a3a69a386f74a26efce21c7101bfa2f23ffbddacddaad97ce75d9a",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-reverse-curtain-subject-reveal",
       "name": "vibeedit-reverse-curtain-subject-reveal",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-reverse-curtain-subject-reveal",
       "harnesses": [
         "agents",
@@ -1067,7 +1237,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "626d777e0af82cb1a14d77d2316ee434baea03d27ed955cb999971ff393d3b67",
+      "checksum": "3a16e0b4fc7182c7884164b4244ca98489c52d8515e730172ecb4bbe22032664",
       "source": {
         "path": ".codex/skills/vibeedit-reverse-curtain-subject-reveal",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1085,12 +1255,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "626d777e0af82cb1a14d77d2316ee434baea03d27ed955cb999971ff393d3b67",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-segmentation-cutouts",
       "name": "vibeedit-segmentation-cutouts",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-segmentation-cutouts",
       "harnesses": [
         "agents",
@@ -1098,7 +1273,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "cd4773ce0bed8883d98bcc1eab1fefc3f5f6d177e794a46aa329478084261a07",
+      "checksum": "6910aed0da42b8b919d70ed779b1b13f906647225bc0606069c02204f976e370",
       "source": {
         "path": ".codex/skills/vibeedit-segmentation-cutouts",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1116,12 +1291,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "cd4773ce0bed8883d98bcc1eab1fefc3f5f6d177e794a46aa329478084261a07",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-sound-design",
       "name": "vibeedit-sound-design",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-sound-design",
       "harnesses": [
         "agents",
@@ -1129,7 +1309,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "64456bd51aa108c45129fed9b5bdfd524218f512595551054d32273e703729ac",
+      "checksum": "14a44dc2f76a1daa870ea55b9037a5c2e1d88ea2548a97106d30ca593a7c3975",
       "source": {
         "path": ".codex/skills/vibeedit-sound-design",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1147,12 +1327,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "64456bd51aa108c45129fed9b5bdfd524218f512595551054d32273e703729ac",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-story-shot-selection",
       "name": "vibeedit-story-shot-selection",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-story-shot-selection",
       "harnesses": [
         "agents",
@@ -1160,7 +1345,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "8075058ba4db2d4e416283d6357db73ae15e2fd09d6915129ff2e211c6789bb9",
+      "checksum": "7d8c00a40cc25ddc303c6bc0e6b9d23ef14cf0d2e3c1c448bdca8da7ee66d6b1",
       "source": {
         "path": ".codex/skills/vibeedit-story-shot-selection",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1178,12 +1363,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "8075058ba4db2d4e416283d6357db73ae15e2fd09d6915129ff2e211c6789bb9",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-text-layering",
       "name": "vibeedit-text-layering",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-text-layering",
       "harnesses": [
         "agents",
@@ -1191,7 +1381,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "566e0fc2c1aba173decd03ef29599fd97f04858293bb4f55b3b3f93df7b28402",
+      "checksum": "907fdedc1d70fb4c7ba953a1ff26595be269555b20ed99f3e1a86c2ba33cd576",
       "source": {
         "path": ".codex/skills/vibeedit-text-layering",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1209,12 +1399,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "566e0fc2c1aba173decd03ef29599fd97f04858293bb4f55b3b3f93df7b28402",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-transition-editor",
       "name": "vibeedit-transition-editor",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-transition-editor",
       "harnesses": [
         "agents",
@@ -1222,7 +1417,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "ea88d596fbd13a244c03cd718865711876cf6c090a4519f7601fceefba81bef9",
+      "checksum": "1998ff9a2b226ad22bfa5f19dd1568369a6b675a86be925e7946caf5cda25dcb",
       "source": {
         "path": ".codex/skills/vibeedit-transition-editor",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1240,12 +1435,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "ea88d596fbd13a244c03cd718865711876cf6c090a4519f7601fceefba81bef9",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-viral-effects-reviewer",
       "name": "vibeedit-viral-effects-reviewer",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-viral-effects-reviewer",
       "harnesses": [
         "agents",
@@ -1253,7 +1453,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "23c80d27a9b47bb5286361b5ed78c6f821f67db38e2c535c3c614e6a18df0398",
+      "checksum": "a66586d7a533851b39395562e5e196c90f02087cd1b6501f04006a58715d4e73",
       "source": {
         "path": ".codex/skills/vibeedit-viral-effects-reviewer",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1271,12 +1471,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "23c80d27a9b47bb5286361b5ed78c6f821f67db38e2c535c3c614e6a18df0398",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-viral-source-edit-router",
       "name": "vibeedit-viral-source-edit-router",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-viral-source-edit-router",
       "harnesses": [
         "agents",
@@ -1284,7 +1489,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "a44c5d9821ab76de8818849e5a0913b13b16dd461f2bb164e6bee54442924405",
+      "checksum": "985ab421a597301c583aa5a8ba9d61265aaaa63e9eb851d083fe909016125b04",
       "source": {
         "path": ".codex/skills/vibeedit-viral-source-edit-router",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1302,12 +1507,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "a44c5d9821ab76de8818849e5a0913b13b16dd461f2bb164e6bee54442924405",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-viral-transition-reviewer",
       "name": "vibeedit-viral-transition-reviewer",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-viral-transition-reviewer",
       "harnesses": [
         "agents",
@@ -1315,7 +1525,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "bc406b149cc283affd269e24b16dfdf91e295e731c31a6f3454d2d50197847e9",
+      "checksum": "c6ad59c1fd81a6a8a295fc7b67bd1a6b95b6c3867c12550cf40a933c02267bb0",
       "source": {
         "path": ".codex/skills/vibeedit-viral-transition-reviewer",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1333,12 +1543,17 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "bc406b149cc283affd269e24b16dfdf91e295e731c31a6f3454d2d50197847e9",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     },
     {
       "id": "vibeedit://skill/vibeedit-workspace",
       "name": "vibeedit-workspace",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "path": "vibeedit-workspace",
       "harnesses": [
         "agents",
@@ -1346,7 +1561,7 @@
         "claude",
         "opencode"
       ],
-      "checksum": "2a34f16e0f08bb882fe8e3ce42c209f25c7e55dcba69b0a3e8987fa429f15dd0",
+      "checksum": "f6eded822c9dedf3aafb1b78dd25040b0bb8bffb9dcd3d20b83a8e5593e37a6d",
       "source": {
         "path": ".codex/skills/vibeedit-workspace",
         "revision": "57b5f4cb3381f72b5ba153bb90d171ba42945e3a",
@@ -1364,6 +1579,11 @@
           "JSON decode",
           "relative Markdown links"
         ]
+      },
+      "adaptation": {
+        "kind": "portable-sdk",
+        "parentSha256": "2a34f16e0f08bb882fe8e3ce42c209f25c7e55dcba69b0a3e8987fa429f15dd0",
+        "reason": "Remove desktop/private-library dependencies; use project-relative inputs, owned public runtime adapters and pinned OFL fonts. Creative workflow and skill identity retained. Runtime qualification is tracked separately."
       }
     }
   ]

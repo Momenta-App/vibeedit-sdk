@@ -9,7 +9,7 @@ import { treeChecksum, validateComposition, VERSION } from "../src/index.js";
 const root = new URL("..", import.meta.url);
 const read = (path) => readFileSync(new URL(path, root), "utf8");
 const packageJson = JSON.parse(read("package.json"));
-assert.equal(packageJson.license, "SEE LICENSE IN LICENSE.md");
+assert.equal(packageJson.license, "MIT");
 assert.equal(packageJson.version, VERSION);
 const prerelease = VERSION.match(/^(\d+\.\d+\.\d+)-beta\.(\d+)$/);
 assert.ok(prerelease, "package version must use the supported beta version format");
@@ -19,7 +19,8 @@ assert.ok(read("pyproject.toml").includes(`version = "${pythonVersion}"`));
 assert.ok(read("python/src/vibeedit/version.py").includes(`VERSION = "${pythonVersion}"`));
 assert.ok(read(".github/workflows/vibeedit-package.yml").includes(`NPM_PACKAGE_VERSION: ${VERSION}`));
 assert.ok(read(".github/workflows/vibeedit-package.yml").includes(`PYTHON_PACKAGE_VERSION: ${pythonVersion}`));
-assert.match(read("LICENSE.md"), /Commercial use requires a separate\s+commercial\s+license/);
+assert.match(read("LICENSE.md"), /MIT License/);
+assert.match(read("LICENSE.md"), /Permission is hereby granted/);
 const sbom = JSON.parse(read("SBOM.spdx.json"));
 assert.equal(sbom.name, `vibeedit-${VERSION}`);
 assert.equal(sbom.packages.find((item) => item.SPDXID === "SPDXRef-Package-VibeEdit")?.versionInfo, VERSION);
@@ -52,7 +53,11 @@ assert.deepEqual(
 );
 const skills = JSON.parse(read("skills/index.json"));
 for (const skill of skills.skills) {
-  assert.equal(skill.source?.sha256, skill.checksum, `canonical source differs from packaged skill ${skill.id}`);
+  if (skill.adaptation) {
+    assert.equal(skill.adaptation.parentSha256, skill.source?.sha256, `adaptation lost its donor identity ${skill.id}`);
+    assert.equal(skill.adaptation.kind, "portable-sdk");
+    assert.ok(skill.adaptation.reason.length > 20);
+  } else assert.equal(skill.source?.sha256, skill.checksum, `canonical source differs from packaged skill ${skill.id}`);
   assert.equal(skill.checksum, treeChecksum(fileURLToPath(new URL(`skills/${skill.path}`, root))), `stale checksum for ${skill.id}`);
 }
 assert.ok(!skills.skills.some((skill) => skill.name === "production-basics"), "package-only replacement skill must not return");
@@ -74,6 +79,7 @@ console.log(JSON.stringify({ ok: true, version: packageJson.version, catalogItem
 function scan(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
     if (["node_modules", ".venv", "__pycache__", ".pytest_cache"].includes(entry.name)) continue;
+    if (relative(fileURLToPath(root), fileURLToPath(directory)) === "docs" && entry.name === "launch") continue; // Private operator records are excluded from every archive and independently audited there.
     const path = new URL(`${entry.name}${entry.isDirectory() ? "/" : ""}`, directory);
     if (entry.isDirectory()) { scan(path); continue; }
     if (!/\.(js|ts|py|json|md|css|html|toml)$/.test(entry.name)) continue;

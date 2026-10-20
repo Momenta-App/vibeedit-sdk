@@ -2,6 +2,7 @@ import json
 
 from vibeedit.data import data_path
 from vibeedit.mcp import TOOLS, handle_request
+from test_project import project
 
 
 def test_mcp_lists_documented_tools():
@@ -38,3 +39,30 @@ def test_mcp_revision_plan_reports_execution_truth():
     payload = response["result"]["structuredContent"]
     assert payload["revisionKind"] == "container"
     assert payload["executionStatus"] == "verified-stream-copy-remux"
+
+
+def test_mcp_shared_project_contract_and_foreground_boundary(project):
+    response = handle_request({"id": 5, "method": "tools/call", "params": {"name": "agent_command", "arguments": {"argv": ["project", "inspect", str(project.root)]}}})
+    payload = response["result"]["structuredContent"]
+    assert payload["ok"] is True
+    assert payload["results"][0]["result"]["id"] == project.read()["id"]
+    rejected = handle_request({"id": 6, "method": "tools/call", "params": {"name": "agent_command", "arguments": {"argv": ["mcp"]}}})
+    assert "error" in rejected
+    rejected = handle_request({"id": 7, "method": "tools/call", "params": {"name": "agent_command", "arguments": {"argv": ["worker", "run", "--no-detach"]}}})
+    assert "error" in rejected
+
+
+def test_mcp_clip_effect_does_not_require_unrelated_track_id():
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    clip = next(item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "motion")
+    response = handle_request({"id": 8, "method": "tools/call", "params": {"name": "apply_effect", "arguments": {"spec": spec, "clipId": clip["id"], "effect": {"id":"brighten", "effectId":"vibeedit://effect/brightness", "params":{"value":0.1}}}}})
+    assert "error" not in response
+    assert spec == json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+
+
+def test_mcp_command_preserves_pretty_json_and_help():
+    response = handle_request({"id": 9, "method": "tools/call", "params": {"name": "agent_command", "arguments": {"argv": ["doctor", "--json"]}}})
+    assert "error" not in response
+    assert response["result"]["structuredContent"]["results"]
+    help_response = handle_request({"id": 10, "method": "tools/call", "params": {"name": "agent_command", "arguments": {"argv": ["project", "--help"]}}})
+    assert "error" not in help_response

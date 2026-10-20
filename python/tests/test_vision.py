@@ -12,12 +12,17 @@ from vibeedit.vision import _coco_label
 from vibeedit.vision import _normalized_box
 
 
-def test_sam21_is_checksum_pinned_and_sam31_remains_quarantined():
+def test_optional_models_keep_public_pins_and_sam31_custom_terms():
     manifest = __import__("json").loads(data_path("runtime-models", "manifest.json").read_text())
     models = {item["capability"]: item for item in manifest["models"]}
     assert models["sam.2.1"]["status"] == "optional-download"
     assert all(len(file["sha256"]) == 64 and file["bytes"] > 0 for file in models["sam.2.1"]["files"])
-    assert models["sam.3.1"]["status"] == "quarantined"
+    assert models["sam.3.1"]["status"] == "optional-download-inference-unqualified"
+    assert models["sam.3.1"]["packId"] == "sam31-mlx"
+    assert "SAM License (weights)" in models["sam.3.1"]["license"]
+    assert models["sam.3.1"]["device"] == "mlx-metal"
+    assert all(len(file["sha256"]) == 64 and file["bytes"] > 0 and file["url"].startswith("https://") for file in models["sam.3.1"]["files"])
+    assert models["vision.shots"]["packId"] == "transnet"
 
 
 def test_router_does_not_infer_capabilities_from_platform(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):

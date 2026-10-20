@@ -20,20 +20,30 @@ def render(spec: JSONObject | str | Path, output: str | Path | None = None) -> P
     base = Path(spec).parent if isinstance(spec, (str, Path)) else Path.cwd()
     composition = json.loads(Path(spec).read_text(encoding="utf-8")) if isinstance(spec, (str, Path)) else spec
     validate_composition(composition)
+    composition = json.loads(json.dumps(composition))
+    composition["timeline"]["tracks"] = [{**track, "items": [item for item in track["items"] if item.get("placement", {}).get("enabled", True) and not (track.get("muted", False) and item["kind"] in {"audio", "sound_effect"})]} for track in composition["timeline"]["tracks"] if track.get("enabled", True)]
+    _verify_source_identities(composition, base)
+    if any(item.get("maskIds") or any(effect.get("maskId") for effect in item.get("effects", [])) for track in composition["timeline"]["tracks"] for item in track["items"]):
+        raise ValueError("This renderer does not consume source mask bindings directly. Render a reviewed mask-derived source with the model effect adapter and retain its parent/mask provenance; refusing an unmasked global treatment.")
     backend = composition["render"]["backend"]
+    if composition["render"].get("motionBlendMode", "normal") != "normal" and backend not in {"html", "mixed"}:
+        raise ValueError("Difference motion blending requires the html or mixed renderer with source video")
     destination = Path(output or composition["render"]["output"]["uri"])
     normalized = json.loads(json.dumps(composition))
     normalized["render"]["output"]["uri"] = "<output>"
     versions = _runtime_versions(backend)
     key = cache_key("render", normalized, implementation_version=VERSION, runtime_versions=versions)
-    cached = cache_root() / "renders" / f"{key}{destination.suffix}"
+    cached = cache_root(base) / "renders" / f"{key}{destination.suffix}"
     if composition.get("cache", {}).get("enabled", False) and cached.is_file():
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(cached, destination)
         _write_render_provenance(destination, composition, key, versions, cache_hit=True, work={"framesRendered": 0, "framesReused": composition["durationFrames"], "reuseKind": "final-render"})
         return destination
     work = {"framesRendered": composition["durationFrames"], "framesReused": 0, "reuseKind": "none"}
-    if backend in {"auto", "ffmpeg", "python"}:
+    audio_without_video = any(item["kind"] == "audio" for track in composition["timeline"]["tracks"] for item in track["items"]) and not any(item["kind"] == "video" for track in composition["timeline"]["tracks"] for item in track["items"])
+    if audio_without_video:
+        result = _render_audio_canvas(composition, destination, base, metrics=work)
+    elif backend in {"auto", "ffmpeg", "python"}:
         if any(item["kind"] == "video" for track in composition["timeline"]["tracks"] for item in track["items"]):
             result = render_media(composition, destination, base)
         else:
@@ -51,9 +61,50 @@ def render(spec: JSONObject | str | Path, output: str | Path | None = None) -> P
     return result
 
 
+def _verify_source_identities(spec, base):
+    used = {item.get("source", {}).get("sourceId", item.get("sourceId")) for track in spec["timeline"]["tracks"] for item in track["items"] if track.get("enabled", True) and item.get("placement", {}).get("enabled", True) and not (track.get("muted", False) and item["kind"] in {"audio", "sound_effect"})}
+    for source in spec.get("sources", []):
+        if source["id"] not in used or source.get("identity", {}).get("algorithm") != "sha256":
+            continue
+        path = Path(source["uri"])
+        with (path if path.is_absolute() else Path(base) / path).open("rb") as stream:
+            actual = hashlib.file_digest(stream, "sha256").hexdigest()
+        if actual != source["identity"]["value"]:
+            raise ValueError(f"Source content changed for {source['id']}; preserve the original or register the changed bytes as a new source before rendering")
+
+
+def _render_audio_canvas(spec, destination, base, *, metrics):
+    # Reuse the video/audio mixer with the composition's own generated canvas.
+    # The temporary base is derived; source media and editable tracks stay intact.
+    with tempfile.TemporaryDirectory(prefix="vibeedit-audio-canvas-") as temporary:
+        background = Path(temporary) / "canvas.mkv"
+        canvas_spec = json.loads(json.dumps(spec))
+        canvas_spec["timeline"] = {"tracks": []}
+        canvas_spec["render"]["output"].update(container="mkv", videoCodec="ffv1")
+        render_generated(canvas_spec, background)
+        prepared = json.loads(json.dumps(spec))
+        source_id = "generated-canvas-" + hashlib.sha256(background.read_bytes()).hexdigest()
+        prepared["sources"].append({"id": source_id, "kind": "video", "uri": str(background), "identity": {"algorithm": "sha256", "value": source_id.removeprefix("generated-canvas-")}})
+        prepared["timeline"]["tracks"].insert(0, {"id": source_id, "kind": "video", "order": -1, "items": [{"id": source_id, "kind": "video", "placement": {"startFrame": 0, "durationFrames": spec["durationFrames"]}, "source": {"sourceId": source_id, "inFrame": 0, "durationFrames": spec["durationFrames"]}}]})
+        if spec["render"]["backend"] in {"html", "mixed"}:
+            from vibeedit.motion import render_mixed
+
+            return render_mixed(prepared, destination, base, metrics=metrics)
+        return render_media(prepared, destination, base)
+
+
 def render_revision(previous: JSONObject | str | Path, revised: JSONObject | str | Path, previous_output: str | Path, output: str | Path | None = None) -> Path:
     previous_spec = json.loads(Path(previous).read_text(encoding="utf-8")) if isinstance(previous, (str, Path)) else previous
     revised_spec = json.loads(Path(revised).read_text(encoding="utf-8")) if isinstance(revised, (str, Path)) else revised
+    _verify_source_identities(revised_spec, Path(revised).parent if isinstance(revised, (str, Path)) else Path.cwd())
+    if previous_spec["render"].get("motionBlendMode", "normal") != revised_spec["render"].get("motionBlendMode", "normal"):
+        return render(revised, output)
+    if any(item.get("maskIds") or any(effect.get("maskId") for effect in item.get("effects", [])) for track in revised_spec["timeline"]["tracks"] if track.get("enabled", True) for item in track["items"] if item.get("placement", {}).get("enabled", True)):
+        raise ValueError("Incremental rendering cannot consume direct mask bindings; use a reviewed mask-derived source")
+    if any(not track.get("enabled", True) or track.get("muted", False) or any(not item.get("placement", {}).get("enabled", True) for item in track["items"]) for spec in (previous_spec, revised_spec) for track in spec["timeline"]["tracks"]):
+        # Fast stream-reuse paths predate visibility controls; use the canonical
+        # filtered renderer rather than resurrecting muted/deleted media.
+        return render(revised, output)
     plan = plan_revision(previous_spec, revised_spec)
     if plan["revisionKind"] == "none":
         return _reuse_previous_output(revised_spec, Path(previous_output), Path(output or revised_spec["render"]["output"]["uri"]), plan)

@@ -3,92 +3,58 @@ name: vibeedit-reverse-curtain-subject-reveal
 description: "Advanced companion for vibeedit-reverse-curtain-reveal. Use after the main reverse-curtain skill selects a masked subject cutout: subject-over/under-curtain layer modes, external hard-edge SAM2.1 alpha, slowed bottom-anchored moving subjects, optional random-frame-stutter backgrounds, and production-library review artifacts."
 ---
 
-# VibeEdit Reverse Curtain Subject Reveal Companion
+# VibeEdit Reverse Curtain Subject Reveal
 
-Use this as the advanced renderer for `vibeedit-reverse-curtain-reveal` when the effect needs a segmented character video cutout from a strong source moment.
+## Portable SDK execution
 
-Do not treat this as a separate top-level family. The main reverse-curtain skill chooses whether to use plain curtain, masked subject, random-frame background, SAM alpha, or a combination.
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
 
-## Linked Skill Contracts
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
 
-- Main route: `.agents/skills/vibeedit-reverse-curtain-reveal/SKILL.md`.
-- Random-frame background: before using `--background-mode random_frame_stutter`, follow `.agents/skills/vibeedit-random-frame-stutter/SKILL.md` for no-pause, no-replacement, broad candidate-pool behavior.
-- SAM2.1 alpha: when a reviewed alpha does not already exist, use `.agents/skills/vibeedit-sam21-video-segmentation/SKILL.md` first, then pass the accepted alpha with `--mask-source external_alpha --external-alpha /path/to/alpha.mp4`.
-- Hard-edge rule: SAM alpha for this effect should be hard-edged by default. Do not feather, blur, dilate, soften, add glow, or hide edge quality unless the user explicitly asks for a stylized edge.
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
 
-## Render
 
-Default production example, subject above the curtain:
+Use after the sibling `vibeedit-reverse-curtain-reveal` skill selects a moving cutout. Preserve a strong source moment, readable motion and a clean landing; source exhaustion must never hide as a final-frame freeze.
 
-```bash
-python3 .agents/skills/vibeedit-reverse-curtain-subject-reveal/scripts/render_reverse_curtain_subject_reveal_effect.py
-```
+## Explicit inputs
 
-Subject over a vertical-opening curtain with a random-frame-stutter background:
+Run from this installed skill directory in the SDK Python environment. Supply a user-owned project, relative source and reviewed alpha-video paths, and explicit original-source subject/background windows. The alpha starts at the selected subject-window start, matches the original source FPS and covers every selected frame. Its full-frame coordinate geometry must match the original source before the identical center crop. A detached model index or candidate PNG is not a ready alpha video.
 
 ```bash
-python3 .agents/skills/vibeedit-reverse-curtain-subject-reveal/scripts/render_reverse_curtain_subject_reveal_effect.py \
-  --layer-mode subject_over_curtain \
-  --background-mode random_frame_stutter \
-  --orientation vertical \
-  --output-name 021__sam21-creed-random-stutter-vertical-curtain-subject-over.mp4 \
-  --no-library-update
+python scripts/render_reverse_curtain_subject_reveal_effect.py \
+  --project "$PROJECT" --input media/source.mp4 \
+  --source-start 0 --source-end 2 --background-start 2 --background-end 6 \
+  --external-alpha masks/reviewed-alpha.mp4 --mask-source external_alpha \
+  --duration 3.2 --layer-mode subject_over_curtain \
+  --orientation vertical --background-mode random_frame_stutter \
+  --output-name subject-reveal-v1.mp4
 ```
 
-## Controls
+Actual SAM2.1 or SAM3.1 mask creation is explicit: inspect `vibeedit models describe sam21` / `sam31-mlx`, run the selected model, review its native source/frame/candidate output and persist accepted selections. Use `models effect` for SDK-supported subject fills. For this companion's full subject cutout, materialize a reviewed source-aligned alpha video separately. There is no implicit Apple Vision or other model fallback. A geometric alpha is useful only as a labeled compositing fixture, never proof of SAM quality.
 
-- `--layer-mode subject_over_curtain`: subject cutout is visible over black bars while the background opens.
-- `--layer-mode subject_under_curtain`: subject cutout is under the bars and appears only inside the opening.
-- `--background-mode source`: normal moving background.
-- `--background-mode random_frame_stutter`: imports the `vibeedit-random-frame-stutter` behavior contract: one random source still per output frame, no repeated source frame when enough source frames exist. `stutter` is kept as a compatibility alias.
-- `--orientation horizontal|vertical`: `vertical` uses horizontal bars that reveal the background by opening up/down from the center.
-- `--speed`, `--open-start`, `--open-duration`: adjust reveal timing. The default curtain open duration is 3.0 seconds; higher speed shortens the effective open time for fast fan-edit hits.
-- `--source-start`, `--source-end`: choose the character video moment used for the slowed subject cutout.
-- `--background-start`, `--background-end`: choose the normal background window.
-- `--subject-min-playback-speed`: minimum subject-layer playback speed. Default `0.5` means the subject is never slowed down past 0.5x; choose enough source and mask frames so the final source frame does not hold before the render ends.
-- `--mask-source apple_vision`: default local person matte.
-- `--mask-source external_alpha --external-alpha /path/to/alpha.mp4`: use a reviewed SAM2.1/SAM3 alpha video for the cutout.
-- Mask edge defaults are hard: `maskBlur=0`, `maskDilate=0`, and `maskOpen=0`. Do not add smoothing, feathering, dilation, shadow, or rim lift unless the user explicitly asks for a stylized softened edge.
-- `--mask-allow-components`: disable the default external-alpha connected-component cleanup. By default, SAM mattes keep the largest component to remove stray background blobs.
-- `--subject-shadow-strength`, `--subject-rim-strength`: add subtle subject separation for subject-over-curtain variants.
+## Layer and timing rules
 
-## Mask Route
+- `subject_over_curtain`: cutout remains visible above the black bars.
+- `subject_under_curtain`: cutout appears only through the opening.
+- `--background-mode source`: normal moving source background.
+- `random_frame_stutter` (`stutter` alias): one random source still per output frame sampled without replacement inside the explicit window; insufficient diversity fails. Keep the pool broad enough to avoid accidental repeated frames.
+- `--orientation horizontal|vertical`: left/right or up/down opening as in the parent skill.
+- `--speed`, `--open-start`, `--open-duration`: reveal timing; higher speed shortens effective opening duration.
+- `--subject-min-playback-speed` defaults to 0.5. Provide at least half the render's real duration in continuous source/mask frames. Too short fails; never accept final-frame hold.
+- `--subject-scale`, `--subject-y-offset`: bottom-anchored subject placement; inspect faces/hands/feet for crop damage.
+- Mask defaults are hard (`maskBlur=0`, `maskDilate=0`, `maskOpen=0`). Do not soften or stylize edges unless requested.
+- `--mask-allow-components`: preserve disconnected subject parts; default largest-component cleanup can discard objects, limbs or secondary people and needs review.
+- Shadow/rim strength defaults to zero. Add only for an explicit style reason, never to hide a poor matte.
 
-Default fallback mask route is Apple Vision `VNGeneratePersonSegmentationRequest` with accurate quality because this is a person cutout. For production fan-edit subject reveals, prefer a reviewed hard-edge SAM2.1 alpha when available or when the user asks for SAM quality. Use `vibeedit-sam21-video-segmentation` to create that alpha and `vibeedit-masking-router` before changing to any other model route.
+This OpenCV recipe is limited to CFR sources and ordinal frame mapping. A VFR source needs an explicit normalized proxy with retained original-clock mapping; a matching average rate alone is not a guarantee of every native timestamp. Use the SDK native-clock workflow for that preparation.
 
-The default selected moment is a longer Creed 2 Adonis window around `3900.0s`, chosen because it has enough continuous source frames for the 3.2s render at the default `0.5x` subject playback floor. Prefer source windows like this over short iconic shots that force a final-frame hold.
+## Output and review
 
-Hard source-length rule: do not accept or promote a render where the masked subject layer exhausts its source/mask frames and holds the final frame before the render ends. Pick a longer source window or rerun SAM with more frames. For the default `subject-min-playback-speed=0.5`, a 3.2s render needs enough mask frames to cover at least 1.6s of real source time; more is better. Treat validation `subjectHasNoEndHold=false` as a failed review render.
-
-Combined stutter-curtain rule: for the production combined effect, the main reverse-curtain skill should select this companion renderer with `background-mode=random_frame_stutter`, `orientation=vertical`, and `layer-mode=subject_over_curtain`. This produces a different random background image every output frame, horizontal curtain bars opening up/down, and the hard-edge masked subject composited on top.
-
-For SAM2.1 comparison, first run the prepared contract under:
-
-`fan_Edit_Data/agent-artifacts/effect-building-pool/reverse-curtain-subject-reveal/sam21-small-test/prompt_contract.json`
-
-After the SAM2.1 run writes a reviewed `alpha.mp4`, render with:
+Every new output name creates project-relative `artifacts/curtain/<name>/` with a silent video, contact/matte sheets and source/alpha/output SHA-bound receipt. Source clock, windows, geometry, frame trace and mechanical limits remain inspectable. No output is automatically promoted into a production library.
 
 ```bash
-python3 .agents/skills/vibeedit-reverse-curtain-subject-reveal/scripts/render_reverse_curtain_subject_reveal_effect.py \
-  --mask-source external_alpha \
-  --external-alpha /path/to/sam21/alpha.mp4 \
-  --output-name 008__effect-reverse-curtain-subject-reveal-sam21-small-over.mp4
+python scripts/quick_validate.py --project "$PROJECT" \
+  --receipt artifacts/curtain/subject-reveal-v1/receipt.json
 ```
 
-## Production Output
-
-Default render:
-
-`fan_Edit_Data/agent-artifacts/effect-building-pool/production-set-flat/021__sam21-creed-random-stutter-vertical-curtain-subject-over.mp4`
-
-Recipe:
-
-`fan_Edit_Data/agent-artifacts/effect-building-pool/production-set-flat/effect-reverse-curtain-subject-reveal.recipe.json`
-
-## QA
-
-```bash
-python3 .agents/skills/vibeedit-reverse-curtain-subject-reveal/scripts/quick_validate.py
-```
-
-Validation renders both layer modes, probes the MP4s, checks monotonic curtain progress, confirms non-empty masks, verifies the cutout uses many source frames, and writes contact sheets.
+Inspect full speed and sampled edges, both layer modes, full reveal landing, unique source-frame counts, no end hold, nonempty masks, subject framing and downstream audio sync. A successful fixture validates compositing only. Real model quality and editorial acceptance require actual footage and a recorded review.

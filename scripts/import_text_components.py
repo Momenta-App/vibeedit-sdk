@@ -171,7 +171,7 @@ def _mogrt_components(root: Path, revision: str) -> list[dict]:
             {
                 "id": f"vibeedit://text/mogrt-{_slug(slug)}",
                 "name": config.get("name", slug.replace("_", " ").title()),
-                "description": f"Source-preserved {family.replace('-', ' ')} text effect rendered by the tracked VibeEdit {slug} HTML/CSS/JS implementation.",
+                "description": f"Source-adapted {family.replace('-', ' ')} text effect adapted from the tracked VibeEdit {slug} HTML/CSS/JS implementation.",
                 "kind": "text",
                 "family": family,
                 "motion": _family_motion(family, slug),
@@ -183,7 +183,7 @@ def _mogrt_components(root: Path, revision: str) -> list[dict]:
                     "durationSeconds": config.get("duration", config.get("canvas", {}).get("duration", 7.6)),
                     "approvedRefinement": slug in REFINED_MOGRT_SLUGS,
                 },
-                "tags": ["text", "motion-title", "canonical-source-clone", family, "portable", "deterministic"],
+                "tags": ["text", "motion-title", "portable-source-adaptation", family, "portable", "deterministic"],
                 "source": {"path": path, "revision": revision, "sha256": hashlib.sha256(source).hexdigest()},
             }
         )
@@ -282,7 +282,7 @@ def _catalog_item(component: dict) -> dict:
             "python": f"MotionComponent('title', Placement(0, 60), {identifier!r}, {{'text': {component['defaultText']!r}}})",
             "javascript": f"renderComponent({identifier!r}, {{ text: {component['defaultText']!r} }}, 12, {{ durationFrames: 60, width: 640, height: 360 }})",
         },
-        "prompts": [f"Use {component['name']} for this text and keep the motion frame-seekable and transparent.", f"Adapt the wording and palette while preserving the {component['motion']} motion grammar."],
+        "prompts": [f"Use {component['name']} for this text and keep the motion frame-seekable and transparent.", f"Adapt the wording and palette while preserving the {component['motion']} motion grammar."] + (["For inversion against video, use white-on-transparent motion and render.motionBlendMode=difference with the html/mixed renderer. This blends the entire motion stack; an isolated CSS difference surface alone cannot invert source video."] if component['motion'] in {'difference', 'face-follow'} else []),
         "requirements": {"assets": ["packaged canonical text runtime"] if canonical else [], "models": []},
         "license": {
             "owner": "Attention Engine Inc.",
@@ -291,7 +291,8 @@ def _catalog_item(component: dict) -> dict:
             "notes": "The tracked VibeEdit HTML/CSS/JS runtime and its approved local design assets are packaged; the original MOGRT binary and remote media are not bundled." if canonical else "Portable VibeEdit-owned adaptation only; source fonts, textures, CDNs, MOGRT binaries, and remote previews are not bundled.",
         },
         "provenance": {
-            "kind": "cloned" if canonical else "adapted",
+            "kind": "adapted",
+            **({"adaptation": {"fontPolicy": "catalog/text-runtime/font-provenance.json", "pixelEquivalent": False}} if canonical else {}),
             "source": f"main-repository:{component['source']['path']}#revision={component['source']['revision']}&sha256={component['source']['sha256']}",
             "implementation": f"catalog/text-runtime/{canonical['entry'].split('?')[0]}" if canonical else "src/motion/runtime.js",
             "thirdParty": ["Original MOGRT design reference (not bundled)"] if mogrt else [],

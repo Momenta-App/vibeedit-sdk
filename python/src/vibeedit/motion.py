@@ -93,6 +93,8 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
         kinds = ", ".join(sorted({item["kind"] for item in unsupported}))
         raise MotionRenderError(f"mixed dispatcher cannot compose {kinds} inputs yet")
     video = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "video"]
+    if spec["render"].get("motionBlendMode", "normal") == "difference" and not video:
+        raise MotionRenderError("Difference motion blending requires decoded source video")
     audio = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "audio"]
     transitions = [item for track in spec["timeline"]["tracks"] for item in track["items"] if item["kind"] == "transition"]
     if audio and not video:
@@ -122,11 +124,11 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
                 implementation_version=VERSION,
                 runtime_versions={"ffmpeg": _ffmpeg_version()},
             )
-            media_cache_hit = spec.get("cache", {}).get("enabled", False) and restore_cached_artifact("motion.media_base", media_key, intermediate)
+            media_cache_hit = spec.get("cache", {}).get("enabled", False) and restore_cached_artifact("motion.media_base", media_key, intermediate, base=base)
             if not media_cache_hit:
                 render_media(media_spec, intermediate, base)
                 if spec.get("cache", {}).get("enabled", False):
-                    store_cached_artifact("motion.media_base", media_key, intermediate)
+                    store_cached_artifact("motion.media_base", media_key, intermediate, base=base)
             if metrics is not None:
                 metrics.update({"mediaBaseCacheHit": media_cache_hit, "mediaBaseFramesRendered": 0 if media_cache_hit else spec["durationFrames"]})
             overlay_spec = _single_video_overlay_spec(spec, intermediate)
@@ -154,7 +156,7 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
                     implementation_version=VERSION,
                     runtime_versions={"playwright": _package_version("playwright"), "chromium": browser.version},
                 )
-                if spec.get("cache", {}).get("enabled", False) and restore_cached_artifact("motion.composite_frame", key, frame_file):
+                if spec.get("cache", {}).get("enabled", False) and restore_cached_artifact("motion.composite_frame", key, frame_file, base=base):
                     encoder.write(frame_file.read_bytes())
                     reused_frames += 1
                     continue
@@ -168,7 +170,7 @@ def render_mixed(spec: JSONObject, output: str | Path | None = None, base: str |
                 rendered_frames += 1
                 if spec.get("cache", {}).get("enabled", False):
                     frame_file.write_bytes(payload)
-                    store_cached_artifact("motion.composite_frame", key, frame_file)
+                    store_cached_artifact("motion.composite_frame", key, frame_file, base=base)
             context.close()
             browser.close()
             if metrics is not None:
@@ -397,6 +399,8 @@ def _html_css_document(props: JSONObject, project_url: str, atoms_url: str | Non
     if forbidden:
         raise MotionRenderError(f"{HTML_CSS_MOTION_COMPONENT_ID} does not allow {', '.join(forbidden)}; use raw HTML, CSS, and local stylesheets only")
     markup = str(props.get("html", ""))
+    if "text" in props:
+        markup = markup.replace("{{text}}", html.escape(str(props["text"])))
     css = str(props.get("css", ""))
     validator = _HTMLCSSValidator()
     validator.feed(markup)

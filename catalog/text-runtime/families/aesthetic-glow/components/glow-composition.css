@@ -10,22 +10,22 @@
 
 @font-face {
   font-family: "Mytupi-Bold";
-  src: url("assets/fonts/mytupiBOLD.ttf") format("truetype");
+  src: url("assets/fonts/BebasNeue-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "BirdsofParadise-PersonaluseOnly";
-  src: url("assets/fonts/Birds%20of%20Paradise.ttf") format("truetype");
+  src: url("assets/fonts/GreatVibes-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Bebas-Regular";
-  src: url("assets/fonts/Bebas-Regular.otf") format("opentype");
+  src: url("assets/fonts/BebasNeue-Regular.ttf") format("opentype");
 }
 
 @font-face {
   font-family: "AVANTERegular";
-  src: url("assets/fonts/AVANTE.otf") format("opentype");
+  src: url("assets/fonts/Montserrat-Variable.ttf") format("opentype");
 }
 
 html,

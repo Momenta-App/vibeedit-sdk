@@ -12,3 +12,7 @@ experiments/render-concurrency/output/**/*.mp4
 experiments/render-concurrency/output/source-*.mp4
 experiments/interleaved-layers/output/sequential/**
 experiments/interleaved-layers/output/concurrent/**
+
+companion/node_modules/
+companion/node_modules/**
+docs/launch/

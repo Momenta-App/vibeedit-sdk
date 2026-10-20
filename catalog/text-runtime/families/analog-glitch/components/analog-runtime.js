@@ -2,10 +2,10 @@
   "use strict";
 
   const FONT_URLS = {
-    "Mytupi-Bold": "../../assets/fonts/mytupiBOLD.ttf",
+    "Mytupi-Bold": "../../assets/fonts/BebasNeue-Regular.ttf",
     "Poppins-Black": "../../assets/fonts/Poppins-Black.ttf",
     "Poppins-Bold": "../../assets/fonts/Poppins-Bold.ttf",
-    "AVANTE": "../../assets/fonts/AVANTE.otf"
+    "AVANTE": "../../assets/fonts/Montserrat-Variable.ttf"
   };
 
   const clamp = (value, lo = 0, hi = 1) => Math.max(lo, Math.min(hi, value));

@@ -132,7 +132,7 @@
     "lines": [
       {
         "text": "Clean",
-        "font": "mytupiBOLD.ttf",
+        "font": "BebasNeue-Regular.ttf",
         "gradient": [
           [
             255,
@@ -155,7 +155,7 @@
       },
       {
         "text": "style",
-        "font": "BucklaneScript.otf",
+        "font": "GreatVibes-Regular.ttf",
         "color": [
           255,
           255,

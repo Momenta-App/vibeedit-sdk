@@ -22,59 +22,74 @@
   ],
   "files": [
     {
-      "path": "assets/fonts/AVANTE.otf",
-      "bytes": 47592,
-      "sha256": "03ac66cc7c92dc3ff8e289f7338ea88e8a5846e5a5cf45a0529a6f179e598a95"
-    },
-    {
       "path": "assets/fonts/AbrilFatface-Regular.ttf",
       "bytes": 67364,
       "sha256": "5971d4a3758a922a9fedc7f6fb825a96341a2e718c45a4b2c9a6b417c8c4dbe9"
     },
     {
-      "path": "assets/fonts/Bebas-Regular.otf",
-      "bytes": 8760,
-      "sha256": "391cc0fa0763e520081d7d5f6c8a6b1c4ac1cc485d471bea4b8bed9d1d5313c8"
+      "path": "assets/fonts/BebasNeue-Regular.ttf",
+      "bytes": 61400,
+      "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73"
     },
     {
-      "path": "assets/fonts/Birds-of-Paradise.ttf",
-      "bytes": 153228,
-      "sha256": "902cc1990befe518edb6e5ef6e4252bea3852da662ea2cf6af2249f8cba173cb"
+      "path": "assets/fonts/GreatVibes-Regular.ttf",
+      "bytes": 457588,
+      "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15"
     },
     {
-      "path": "assets/fonts/BucklaneScript.otf",
-      "bytes": 189988,
-      "sha256": "86af1557aa1fa760172947131bcb66f3aecda8f5fba06b0fdd65ac5caed9316e"
+      "path": "assets/fonts/Montserrat-Variable.ttf",
+      "bytes": 744936,
+      "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7"
+    },
+    {
+      "path": "assets/fonts/OFL-abrilfatface.txt",
+      "bytes": 4415,
+      "sha256": "aba8997e16b1e3888c6e855ba883c70d96bd4375bff8cb9c7ce0f097200f74b8"
+    },
+    {
+      "path": "assets/fonts/OFL-bebasneue.txt",
+      "bytes": 4337,
+      "sha256": "72082f6cb4d04be2ecf7cc7d9e1e7d73787f0af8a5a278a47cade70c16b78341"
+    },
+    {
+      "path": "assets/fonts/OFL-greatvibes.txt",
+      "bytes": 4399,
+      "sha256": "61093a21f5e63dedf54222b3c09997e54c0fe43e3851d21386e02ddcbc246d49"
+    },
+    {
+      "path": "assets/fonts/OFL-montserrat.txt",
+      "bytes": 4400,
+      "sha256": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e"
+    },
+    {
+      "path": "assets/fonts/OFL-poppins.txt",
+      "bytes": 4385,
+      "sha256": "6be04893d770899a015649c7aa3b582f871b272f8747a92b78b17c3e5c8b2573"
     },
     {
       "path": "assets/fonts/Poppins-Black.ttf",
-      "bytes": 151396,
-      "sha256": "291e4388a436cf0c0d532ce4735a4ca36bd2286912b051ea423d5c383be06cd7"
+      "bytes": 153440,
+      "sha256": "d82aaaf98a9283f9a8edd24e51173337d8eaf09e25cd3d98831f8ec8461748a1"
     },
     {
       "path": "assets/fonts/Poppins-BlackItalic.ttf",
-      "bytes": 171604,
-      "sha256": "a5e3e31e9dc6878269fdda8a968f8c0212beef9f7ef6028b6d1e02293316db7d"
+      "bytes": 174116,
+      "sha256": "f4852ca89c29f69d800e14f097ed4d1f0a0cc454e9f77d73bfd6db1f71c287a0"
     },
     {
       "path": "assets/fonts/Poppins-Bold.ttf",
-      "bytes": 153944,
-      "sha256": "7219547ee25334cbac0fe4b3acf0bf631e48ebb622c71af038edaaa652c60875"
+      "bytes": 155996,
+      "sha256": "983676516167748b74de6f4771fb384c664fd913acb8b471122ecacf5da5ea6c"
     },
     {
       "path": "assets/fonts/fonts.css",
-      "bytes": 1402,
-      "sha256": "ea860dd618a0973834d6abc97b2367ced09c449f66f87feec991e7164d0ac91f"
-    },
-    {
-      "path": "assets/fonts/mytupiBOLD.ttf",
-      "bytes": 62004,
-      "sha256": "e1c886beb2526c386bef45e6703ff6a2fd3fb46b58581c1c18a5591318f6ec5c"
+      "bytes": 1431,
+      "sha256": "cc787461f02c168276d71fd28490d3f8ea518b769340f12da1259b351817a388"
     },
     {
       "path": "configs/3D_TEXT.json",
-      "bytes": 633,
-      "sha256": "5bda10c31f3dce8bc101fccd54a594428b4dfe1c384c999be6ed9e5276d24315"
+      "bytes": 640,
+      "sha256": "481d02107441498c1b90edfeda719da2450f72affd170ed095f277acd0ea54c9"
     },
     {
       "path": "configs/ABOVE_IN.json",
@@ -93,8 +108,8 @@
     },
     {
       "path": "configs/APPLE_STYLE_ANIMATION.json",
-      "bytes": 1601,
-      "sha256": "99ca5ca71ae1947586fbfe48d7e87eadba09690e217b12fef75b1fefb064cd94"
+      "bytes": 1608,
+      "sha256": "66c2884769dd4ddbd15d9cd9ec1766e7f17e05f974c3b24dcad4188fc2f04af8"
     },
     {
       "path": "configs/BLUE_AND_ORANGE.json",
@@ -118,18 +133,18 @@
     },
     {
       "path": "configs/CLEAN_BLUE.json",
-      "bytes": 3864,
-      "sha256": "627df217f608649e5edcbbf53431d23e840bf20ce987ab8450a268f66f359285"
+      "bytes": 3878,
+      "sha256": "8fb6d0e482a70b0c2418c540926d3675d7fc936e8e8f8fb72cd2bff83006f04e"
     },
     {
       "path": "configs/CLEAN_STYLE.json",
-      "bytes": 3329,
-      "sha256": "db8d892413fa3fb9e1694ff9d8231cc2a8708b3ae4c17724fff4c0ea7e1bccfc"
+      "bytes": 3340,
+      "sha256": "07e3fddb84f3d4e9f62558e9d2b603acb94c5475f677b27c72abbb4d281fabb3"
     },
     {
       "path": "configs/Clean_gradient.json",
-      "bytes": 1888,
-      "sha256": "a3d20c92180a73704dbb55c3e221f09ffb3b3501a205d9c1e5bde09f6fa0b6b3"
+      "bytes": 1895,
+      "sha256": "4b4c80ff9004d5d7bb9e21cdde850d73cc2ed00b52cec1e4012b9d11df5512ae"
     },
     {
       "path": "configs/ELEGANT.json",
@@ -163,13 +178,13 @@
     },
     {
       "path": "configs/FUTURIST.json",
-      "bytes": 1032,
-      "sha256": "d729b35a564bc629eda003e75f5123b540b064c9a9169bffd7bd831a4b2b12fe"
+      "bytes": 1039,
+      "sha256": "8e9f187bdbcbe7842a308b686423d2dd3ddb63e41e4b857087a1292e02b8fe27"
     },
     {
       "path": "configs/GOLD_TEXT.json",
-      "bytes": 693,
-      "sha256": "100a98dc12a2dbfe2b2f1f2119cf99a3f77947c662164e37f620061d12e67aa9"
+      "bytes": 700,
+      "sha256": "a738403a9c78e7af74b42d078bf4df967f266bd6563902abb4f87ac7ec3b4f02"
     },
     {
       "path": "configs/GREEN_AND_GREY.json",
@@ -188,8 +203,8 @@
     },
     {
       "path": "configs/OLD_MONEY.json",
-      "bytes": 1372,
-      "sha256": "7c14849dab0ddc786520f8ea1794ad21ef5f8a80c055f01e23b1eeff0476aca7"
+      "bytes": 1386,
+      "sha256": "a8a2db170e4b726c2f10212747d3c6d7e19031bd61d02c05b812a309b023ad5c"
     },
     {
       "path": "configs/OLD_TV.json",
@@ -213,13 +228,13 @@
     },
     {
       "path": "configs/RAINBOW_CLEAN_TEXT.json",
-      "bytes": 1909,
-      "sha256": "9c04d6faa487ea455d267c56af740e84f727da16a14d77bca9c571d9028b180a"
+      "bytes": 1916,
+      "sha256": "630ecba60e5c46aadd99b30f77986cd361434d7c2598dc2d939512f52eedb25b"
     },
     {
       "path": "configs/RAINBOW_TEXT.json",
-      "bytes": 1561,
-      "sha256": "ceae63f116eb2e3e3a61e34b22a3d9df39b4642f6b5331a4e685ac5e7ffaacba"
+      "bytes": 1568,
+      "sha256": "172fee4f836a8124fc3fddeaa572703ff97c3f7b07fe1c758ee7848d0c1856d6"
     },
     {
       "path": "configs/REBOUND.json",
@@ -258,8 +273,8 @@
     },
     {
       "path": "configs/TEXTO_DE_ORO.json",
-      "bytes": 741,
-      "sha256": "772d308a746828064cb24e364c2fa057f789a0d03b8459ce7509668e378d4379"
+      "bytes": 748,
+      "sha256": "e382dea01d2600535cadafe64782d58a3e2ff823568ad298b2ef0afd5991bb85"
     },
     {
       "path": "configs/TRIPLE_ELEGANT_TEXT.json",
@@ -303,23 +318,23 @@
     },
     {
       "path": "configs/apple_LADDER.json",
-      "bytes": 1225,
-      "sha256": "5756ef6024a4a523d11a10b185acaebdf323415a0b081f0339895588a1632c3d"
+      "bytes": 1232,
+      "sha256": "fe0b319f78880d323ad86d5a5d86d04b36ac5e50ea09e91a05765f0285fe22a1"
     },
     {
       "path": "configs/apple_MIDDLE.json",
-      "bytes": 1233,
-      "sha256": "aab7b8fe1d02767c0aba1bd994c88cbbc89f02e1ecc12f3d83a5afeb72600a21"
+      "bytes": 1240,
+      "sha256": "4d7ec0de84c6046169fb892b95643bc357f5c30a91dbb1cb0e55067902881887"
     },
     {
       "path": "configs/apple_WORD.json",
-      "bytes": 1318,
-      "sha256": "112d0effaa4b611f24eecf2ad6f1a1a3d435b26d2788e91ce199d6a79d47f622"
+      "bytes": 1325,
+      "sha256": "6631c3af156471dab8b1eace24e1683bc33a9d7c20cc911bb18ffd9145f85422"
     },
     {
       "path": "configs/apple_smooth.json",
-      "bytes": 1231,
-      "sha256": "362666223e6b8d67316ce665868e0ac176296fe341e1ffcaecf97e9e4e213f3b"
+      "bytes": 1238,
+      "sha256": "821ddaa503771cfdc1fb7d665becf46c7001ae03c2c82a82a4fd87f384b53cf4"
     },
     {
       "path": "configs/clean_aesthetic_light.json",
@@ -337,69 +352,59 @@
       "sha256": "e2a40e486b1e43752470c3d123449ff627696f73a450f2752e0acdb4a62808bc"
     },
     {
-      "path": "families/aesthetic-glow/assets/fonts/AVANTE.otf",
-      "bytes": 47592,
-      "sha256": "03ac66cc7c92dc3ff8e289f7338ea88e8a5846e5a5cf45a0529a6f179e598a95"
+      "path": "families/aesthetic-glow/assets/fonts/BebasNeue-Regular.ttf",
+      "bytes": 61400,
+      "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73"
     },
     {
-      "path": "families/aesthetic-glow/assets/fonts/Bebas-Regular.otf",
-      "bytes": 8760,
-      "sha256": "391cc0fa0763e520081d7d5f6c8a6b1c4ac1cc485d471bea4b8bed9d1d5313c8"
+      "path": "families/aesthetic-glow/assets/fonts/GreatVibes-Regular.ttf",
+      "bytes": 457588,
+      "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15"
     },
     {
-      "path": "families/aesthetic-glow/assets/fonts/Birds of Paradise.ttf",
-      "bytes": 153228,
-      "sha256": "902cc1990befe518edb6e5ef6e4252bea3852da662ea2cf6af2249f8cba173cb"
+      "path": "families/aesthetic-glow/assets/fonts/Montserrat-Variable.ttf",
+      "bytes": 744936,
+      "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7"
     },
     {
       "path": "families/aesthetic-glow/assets/fonts/Poppins-Black.ttf",
-      "bytes": 151396,
-      "sha256": "291e4388a436cf0c0d532ce4735a4ca36bd2286912b051ea423d5c383be06cd7"
+      "bytes": 153440,
+      "sha256": "d82aaaf98a9283f9a8edd24e51173337d8eaf09e25cd3d98831f8ec8461748a1"
     },
     {
       "path": "families/aesthetic-glow/assets/fonts/Poppins-BlackItalic.ttf",
-      "bytes": 171604,
-      "sha256": "a5e3e31e9dc6878269fdda8a968f8c0212beef9f7ef6028b6d1e02293316db7d"
+      "bytes": 174116,
+      "sha256": "f4852ca89c29f69d800e14f097ed4d1f0a0cc454e9f77d73bfd6db1f71c287a0"
     },
     {
-      "path": "families/aesthetic-glow/assets/fonts/mytupiBOLD.ttf",
-      "bytes": 62004,
-      "sha256": "e1c886beb2526c386bef45e6703ff6a2fd3fb46b58581c1c18a5591318f6ec5c"
+      "path": "families/aesthetic-glow/components/assets/fonts/BebasNeue-Regular.ttf",
+      "bytes": 61400,
+      "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73"
     },
     {
-      "path": "families/aesthetic-glow/components/assets/fonts/AVANTE.otf",
-      "bytes": 47592,
-      "sha256": "03ac66cc7c92dc3ff8e289f7338ea88e8a5846e5a5cf45a0529a6f179e598a95"
+      "path": "families/aesthetic-glow/components/assets/fonts/GreatVibes-Regular.ttf",
+      "bytes": 457588,
+      "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15"
     },
     {
-      "path": "families/aesthetic-glow/components/assets/fonts/Bebas-Regular.otf",
-      "bytes": 8760,
-      "sha256": "391cc0fa0763e520081d7d5f6c8a6b1c4ac1cc485d471bea4b8bed9d1d5313c8"
-    },
-    {
-      "path": "families/aesthetic-glow/components/assets/fonts/Birds of Paradise.ttf",
-      "bytes": 153228,
-      "sha256": "902cc1990befe518edb6e5ef6e4252bea3852da662ea2cf6af2249f8cba173cb"
+      "path": "families/aesthetic-glow/components/assets/fonts/Montserrat-Variable.ttf",
+      "bytes": 744936,
+      "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7"
     },
     {
       "path": "families/aesthetic-glow/components/assets/fonts/Poppins-Black.ttf",
-      "bytes": 151396,
-      "sha256": "291e4388a436cf0c0d532ce4735a4ca36bd2286912b051ea423d5c383be06cd7"
+      "bytes": 153440,
+      "sha256": "d82aaaf98a9283f9a8edd24e51173337d8eaf09e25cd3d98831f8ec8461748a1"
     },
     {
       "path": "families/aesthetic-glow/components/assets/fonts/Poppins-BlackItalic.ttf",
-      "bytes": 171604,
-      "sha256": "a5e3e31e9dc6878269fdda8a968f8c0212beef9f7ef6028b6d1e02293316db7d"
-    },
-    {
-      "path": "families/aesthetic-glow/components/assets/fonts/mytupiBOLD.ttf",
-      "bytes": 62004,
-      "sha256": "e1c886beb2526c386bef45e6703ff6a2fd3fb46b58581c1c18a5591318f6ec5c"
+      "bytes": 174116,
+      "sha256": "f4852ca89c29f69d800e14f097ed4d1f0a0cc454e9f77d73bfd6db1f71c287a0"
     },
     {
       "path": "families/aesthetic-glow/components/glow-composition.css",
-      "bytes": 2856,
-      "sha256": "b6e76579b49f906e84167b56e478fcba4eac0163b294f6613c9215885c68d018"
+      "bytes": 2877,
+      "sha256": "eb578e16141a19aa18e73073a4a441620e745a2bdb564471fab74e3d90ad7cfe"
     },
     {
       "path": "families/aesthetic-glow/components/glow-composition.js",
@@ -463,8 +468,8 @@
     },
     {
       "path": "families/analog-glitch/components/analog-runtime.js",
-      "bytes": 23058,
-      "sha256": "3cee9fccee09865e02732b4ad3cbbb2a8e0e15a53cc9f01fca601ca0323b18e3"
+      "bytes": 23078,
+      "sha256": "dde7bc4df2cd6e7cb1a391ba1873ff73c5bd0e95dccb0e17c7b971d5c855224f"
     },
     {
       "path": "families/analog-glitch/index.html",
@@ -478,8 +483,8 @@
     },
     {
       "path": "families/apple-clean/components/apple-clean.css",
-      "bytes": 10750,
-      "sha256": "2dba973de128b8ad20525e9c9996fe6cd0496c348e88a8ae39f33d6043ce78e3"
+      "bytes": 10761,
+      "sha256": "64aa8ab66108d4226b5c04e6f7608f7a0bd4be2e1dcbd27f05616861b0249050"
     },
     {
       "path": "families/apple-clean/components/apple-clean.js",
@@ -493,43 +498,43 @@
     },
     {
       "path": "families/apple-clean/outputs/APPLE_STYLE_ANIMATION.html",
-      "bytes": 2383,
-      "sha256": "fe169b5b032e3be5c74bfa54f38e134afce09cd42f2ce9649f3242597820b86a"
+      "bytes": 2390,
+      "sha256": "de97e7672730bd29873a052b26ea38c9f2b4d338a6a79470c6a56fd685f3e55e"
     },
     {
       "path": "families/apple-clean/outputs/CLEAN_BLUE.html",
-      "bytes": 4624,
-      "sha256": "0c142958ac3cec9a91a25ffd9479edd90c629287a6411113023065ecb98f49f5"
+      "bytes": 4638,
+      "sha256": "77264d26ef53ad6b2e745dbcc18574c7794384c8adbadf752d2cb1919b37dd26"
     },
     {
       "path": "families/apple-clean/outputs/CLEAN_STYLE.html",
-      "bytes": 4148,
-      "sha256": "9afe4eb8f7a2cab876740f52fc99bf9b142c7c7a1806482970c7f7b056b49e7f"
+      "bytes": 4159,
+      "sha256": "cc3f4a8c13aa75560171a3aaf83cb73e5ac2d6c6f166131335a9a7121562524b"
     },
     {
       "path": "families/apple-clean/outputs/Clean_gradient.html",
-      "bytes": 2658,
-      "sha256": "00305295c879d25b16fb216ba6cf6c8a68a02876269dc52d9f4d444e485c0342"
+      "bytes": 2665,
+      "sha256": "a9fa8c589047c7e0d159b6cd14bad4946cecc6ee316bf318590cc7e7e42193c0"
     },
     {
       "path": "families/apple-clean/outputs/apple_LADDER.html",
-      "bytes": 1992,
-      "sha256": "fdd6a29ea9a922e4e83d1ab476e6c770731c8e32c1ecc941ef7af9bbe32d21d2"
+      "bytes": 1999,
+      "sha256": "f22c1edee5c379d4756bb8014bd75c2f4ebe5eca7ce4dbe11af81d5e559e0b16"
     },
     {
       "path": "families/apple-clean/outputs/apple_MIDDLE.html",
-      "bytes": 2000,
-      "sha256": "ade1de3bbdee8b2132e5b7fa3ff0b963950aa34ada985c7f553cd485950cbd37"
+      "bytes": 2007,
+      "sha256": "d34083aff2010dc32e78f259092faf3a22eda2a102d44841cdbc34ca374d8f76"
     },
     {
       "path": "families/apple-clean/outputs/apple_WORD.html",
-      "bytes": 2081,
-      "sha256": "cde323b568f090ac9a01e370c6ca1ba5f76282a5423cf82a859e94d54c8804e5"
+      "bytes": 2088,
+      "sha256": "a1219bfdfe3a517ea75f1d2a831dc8504b17301d606a99d872e9829bf4da4a32"
     },
     {
       "path": "families/apple-clean/outputs/apple_smooth.html",
-      "bytes": 1997,
-      "sha256": "bcd2914a485db8483b46a1f62ad31595c8a2584baba9b636f5872da57e833bb9"
+      "bytes": 2004,
+      "sha256": "8fbd4b876d4581a217684ff85b1e29cff5b56912ef7fc55c4699e4d694ca8a91"
     },
     {
       "path": "families/apple-clean/outputs/clean_aesthetic_light.html",
@@ -542,19 +547,19 @@
       "sha256": "3a39b5aa2253ce4608cb352922bf58a1ede1f90a1623d30dce043a58f505d9d8"
     },
     {
-      "path": "families/dimensional-metal/assets/fonts/AVANTE.otf",
-      "bytes": 47592,
-      "sha256": "03ac66cc7c92dc3ff8e289f7338ea88e8a5846e5a5cf45a0529a6f179e598a95"
+      "path": "families/dimensional-metal/assets/fonts/BebasNeue-Regular.ttf",
+      "bytes": 61400,
+      "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73"
     },
     {
-      "path": "families/dimensional-metal/assets/fonts/Birds of Paradise.ttf",
-      "bytes": 153228,
-      "sha256": "902cc1990befe518edb6e5ef6e4252bea3852da662ea2cf6af2249f8cba173cb"
+      "path": "families/dimensional-metal/assets/fonts/GreatVibes-Regular.ttf",
+      "bytes": 457588,
+      "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15"
     },
     {
-      "path": "families/dimensional-metal/assets/fonts/mytupiBOLD.ttf",
-      "bytes": 62004,
-      "sha256": "e1c886beb2526c386bef45e6703ff6a2fd3fb46b58581c1c18a5591318f6ec5c"
+      "path": "families/dimensional-metal/assets/fonts/Montserrat-Variable.ttf",
+      "bytes": 744936,
+      "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7"
     },
     {
       "path": "families/dimensional-metal/assets/gsap.min.js",
@@ -568,8 +573,8 @@
     },
     {
       "path": "families/dimensional-metal/dimensional-metal.css",
-      "bytes": 9220,
-      "sha256": "529e710c97d4c04ea2fca64cd6c73f6ee669fdb8e4ec37cfcb5b051909c5b588"
+      "bytes": 9241,
+      "sha256": "fd4f7383829836ced9b4f9e7148fabe5633eeb69db5a2b5b8f0ece1692aa68c2"
     },
     {
       "path": "families/dimensional-metal/metal-depth.js",
@@ -588,8 +593,8 @@
     },
     {
       "path": "families/elegant-misc/components/elegant-misc.js",
-      "bytes": 21369,
-      "sha256": "1170d4a1282e479325f6e464dd6fc35c268872b9fe88377caa3230952bb737f1"
+      "bytes": 21406,
+      "sha256": "b86f392fadf6ce71927d408acd43b7fa988602e5e080909740fae52f783dfbec"
     },
     {
       "path": "families/elegant-misc/index.html",
@@ -638,8 +643,8 @@
     },
     {
       "path": "families/rainbow-trippy/rainbow-trippy.css",
-      "bytes": 697,
-      "sha256": "5ae4d1d214ef35c5c0ef65d36789255bd2fedd19eebabe633803305bcbf7dbd9"
+      "bytes": 717,
+      "sha256": "4ded76e8754e8face433786da9fba664db2c05621f9f247c4a3128ebf78463e8"
     },
     {
       "path": "families/rainbow-trippy/rainbow-trippy.js",
@@ -658,8 +663,8 @@
     },
     {
       "path": "families/simple-motion/components/simple-motion.js",
-      "bytes": 46626,
-      "sha256": "f984daa6c4d4c805b7d5b951635776ac55ef0ca2e7ad243c6a00c427ac810a38"
+      "bytes": 46651,
+      "sha256": "2e65bd4f6dc88383857dce3f499693ce872066dfef3e668a56132aa39932b534"
     },
     {
       "path": "families/simple-motion/index.html",
@@ -767,6 +772,11 @@
       "sha256": "b3c7c562486edf9d35fe2d777c4f5f0adaa4957534b9926cbd4bb556adb50ea7"
     },
     {
+      "path": "font-provenance.json",
+      "bytes": 8611,
+      "sha256": "08b9eb2bb138183a3467765548e04c3cac1c6af18515d0eeea01ff2c2bdea889"
+    },
+    {
       "path": "registry-item.json",
       "bytes": 935,
       "sha256": "672f0063f13a7a37b9bdc60017e2451aa7840c529c68b0b06ede76286daef661"
@@ -776,5 +786,10 @@
       "bytes": 1761,
       "sha256": "25f8bff614539bb6136eac59e59cb565be5a45a4c43cb5be7a7d1c7e5c9c2721"
     }
-  ]
+  ],
+  "fontPolicy": {
+    "path": "font-provenance.json",
+    "sourceRevision": "47d54ca1ebb14fd864695f1d39dc734f39017c33",
+    "fidelity": "OFL replacements; no pixel-equivalence claim for affected font faces"
+  }
 }

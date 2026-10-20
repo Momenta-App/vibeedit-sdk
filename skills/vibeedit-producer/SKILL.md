@@ -5,6 +5,15 @@ description: Orchestrate a creative video production through reusable role skill
 
 # Producer
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Turn a creative video request into a coordinated production. Producer owns the `production_intent`, staffing, budget, artifact merge, and single-writer handoff.
 
 ## Workflow
@@ -20,19 +29,19 @@ Turn a creative video request into a coordinated production. Producer owns the `
 
 ## Role Skill Map
 
-- Director: `director`
+- Director: `creative-director`
 - Creative Director: `creative-director`
-- Head of Footage: `head-of-footage`
-- Story Editor: `story-editor`
+- Head of Footage: `vibeedit-story-shot-selection`
+- Story Editor: `vibeedit-story-shot-selection`
 - Lead Editor: `lead-editor`
 - Finishing Producer: `finishing-producer`
 - Look Director: `look-director`
 - Transition Editor: `transition-editor`
-- Music Supervisor: `music-supervisor`
-- Sound Effects Supervisor: `sound-effects-supervisor`
+- Music Supervisor: `vibeedit-beat-first-editing`
+- Sound Effects Supervisor: `sound-design`
 - Sound Designer: `sound-design`
-- VFX Supervisor: `vfx-supervisor`
-- Head of Captions: `caption-editor`
+- VFX Supervisor: `effects`
+- Head of Captions: `fanedit-text`
 - Continuity Supervisor: `continuity-supervisor`
 
 ## Output

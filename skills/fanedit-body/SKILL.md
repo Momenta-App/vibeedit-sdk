@@ -5,6 +5,15 @@ description: Build the high-entertainment visual body of a VibeEdit fan edit usi
 
 # Fanedit Body
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill for the body section of a fan edit: the main visual run while the song plays.
 
 ## Core Rule
@@ -32,16 +41,9 @@ Never repeat a frame in normal body construction. Repeated source frames, recycl
 - Align cuts, speed ramps, and color changes to beat-map onsets when available.
 - Reserve the strongest visual impact for the drop or final escalation.
 
-## CreedEditSong Body Sync
+## Reviewed song body sync
 
-For Creed edits using `CreedEditSong`, use the human-reviewed beat labels, not the historical folder name, as song truth:
-
-- Song file: `fan_Edit_Data/workspace/media/8cc86491-f6ca-46f3-b1cc-924ba0fd07f8/CreedEditSong.MP3`.
-- Beat labels: `fan_Edit_Data/workspace/outputs/untitled-05-beat-labeling/labels.json`.
-- Main beat map: `fan_Edit_Data/workspace/outputs/untitled-05-beat-labeling/main_beat_map.json`.
-- Intro loop notes: `fan_Edit_Data/workspace/media/8cc86491-f6ca-46f3-b1cc-924ba0fd07f8/analysis/audio/intro_loop_editing_notes.json`.
-
-The first body hit should target the first human-labeled heavy beat around `21.961s`, after the protected final intro lead-in `16.8577-21.8964s`. The beat-label output folder still says `untitled-05`; treat that as stale path history while preserving the current `CreedEditSong` identity inside the artifacts.
+Use the user's selected permitted song, content-SHA-bound beat map, human review events and optional intro-loop notes from the active project. No song or reviewed beat map is bundled. For a historical CreedEditSong recipe, the body entry was 21.961s after a protected 16.8577–21.8964s lead-in; those numbers are examples only and must never be applied to a different song identity. Derive the actual body entry from this project's reviewed beats and frame/sample mapping.
 
 Use the beat labels as selection pressure:
 

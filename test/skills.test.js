@@ -20,7 +20,8 @@ test("skill install tracks versions and protects user edits", async () => {
 test("all release-safe skills install into every supported harness", async () => {
   const { mkdtemp } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
-  assert.equal(listSkills().length, 44);
+  assert.equal(listSkills().filter(skill => skill.source.kind !== "sdk-owned").length, 44);
+  assert.ok(listSkills().some(skill => skill.name === "vibeedit-setup"));
   for (const [index, skill] of listSkills().entries()) {
     const harness = ["agents", "codex", "claude", "opencode"][index % 4];
     const cwd = await mkdtemp(join(tmpdir(), "vibeedit-skill-matrix-"));

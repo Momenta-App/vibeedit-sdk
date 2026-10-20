@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "vibeedit.workerProfiles.v1",
+  "piVersion": "1.3.0",
+  "piIntegrity": "sha512-V/WoCjA2hQSe3QLWIUB24cTRdtEdeLiIzkDqU5RMXV6VWuD+KGZnzVBMhglwdnQTySkehZsjt8a3g6Jd2g4nnw==",
+  "profiles": {
+    "economical-v1": {
+      "model": "z-ai/glm-5.3-flash",
+      "contextWindow": 1048576,
+      "providerRoute": "open-inference/fp4",
+      "providerModelName": "OpenInference | z-ai/glm-5.3-flash-20260826",
+      "input": [
+        "text",
+        "image"
+      ],
+      "inputUsdPerToken": "4.8E-8",
+      "outputUsdPerToken": "1.6E-7",
+      "checkedAtUnix": 1792514917.3903072,
+      "expiresAtUnix": 1792601317.3903072,
+      "inferenceQualified": false,
+      "provider": "OpenRouter"
+    },
+    "visual-v1": {
+      "model": "z-ai/glm-5.3-flashx",
+      "contextWindow": 1048576,
+      "providerRoute": "z-ai/fp8",
+      "providerModelName": "Z.AI | z-ai/glm-5.3-flashx-20260918",
+      "input": [
+        "text",
+        "image"
+      ],
+      "inputUsdPerToken": "3.7E-7",
+      "outputUsdPerToken": "0.00000125",
+      "checkedAtUnix": 1792514917.45906,
+      "expiresAtUnix": 1792601317.45906,
+      "inferenceQualified": false,
+      "provider": "OpenRouter"
+    },
+    "reviewer-v1": {
+      "model": "z-ai/glm-5.3-prime",
+      "contextWindow": 1000000,
+      "providerRoute": "alibaba",
+      "providerModelName": "Alibaba | z-ai/glm-5.3-prime-20260921",
+      "input": [
+        "text"
+      ],
+      "inputUsdPerToken": "0.0000028",
+      "outputUsdPerToken": "0.0000088",
+      "checkedAtUnix": 1792514917.533136,
+      "expiresAtUnix": 1792601317.533136,
+      "inferenceQualified": false,
+      "provider": "OpenRouter"
+    }
+  },
+  "qualification": "Catalog metadata only; live inference is not yet qualified. Prices are refreshed on admission; expired/unknown prices block. No automatic model/provider fallback. Video transport is not enabled in the bounded tools."
+}

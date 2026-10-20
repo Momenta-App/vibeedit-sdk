@@ -300,6 +300,7 @@ class SoundEffect:
     gain_db: float = 0
     variation_seed: int = 0
     avoid_immediate_repeat: bool = True
+    metadata: JSONObject = field(default_factory=dict)
 
     def to_spec(self) -> JSONObject:
         return {
@@ -311,6 +312,7 @@ class SoundEffect:
             "gainDb": self.gain_db,
             "variationSeed": self.variation_seed,
             "avoidImmediateRepeat": self.avoid_immediate_repeat,
+            "metadata": self.metadata,
         }
 
 

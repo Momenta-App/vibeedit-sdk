@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4f0">
+  <title>VibeEdit Beat Review</title>
+  <meta name="description" content="Review and save source-bound beats in your project.">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="VibeEdit Beat Marker"><span class="brand-icon">v<span>e</span></span>VibeEdit <span class="divider"></span><span class="product">Beat Marker</span></a>
+    <span id="save-status" class="save-status"><i></i> Loading project…</span>
+    <button id="import-top" class="text-button">Import beats</button>
+    <button id="review-toggle" class="button secondary" aria-pressed="false">Review beats</button>
+    <button id="export" class="button secondary">Save beats <span aria-hidden="true">↓</span></button>
+  </header>
+  <main>
+    <section class="track-header">
+      <div class="cover" aria-hidden="true"><span>BEATS</span><i></i><b>VE</b></div>
+      <div class="track-info"><div class="eyebrow">YOUR MUSIC, YOUR TIMING</div><h1 id="track-name">Project music</h1><p>Source audio <span>·</span> <span id="track-duration">3:43</span> <span>·</span> <span id="source-name"></span></p></div>
+      <div class="intro"><span class="tiny-label">LISTEN. FEEL IT. MARK IT.</span><p>Press <kbd>M</kbd> when the beat hits.<br>Fine-tune it on the waveform.</p></div>
+    </section>
+    <div id="error" class="error" role="alert" hidden></div>
+    <section id="review-screen" class="review-screen" aria-label="Beat color review" hidden>
+      <div class="review-top"><span>VIBEEDIT · BEAT REVIEW</span><button id="review-back" class="review-button">← Waveforms</button></div>
+      <div class="review-center"><span id="review-caption" class="review-caption">READY TO REVIEW</span><div id="review-number" class="review-number">—</div><p id="review-detail">Press Space to play your saved beats</p><output id="review-time">00:00.000</output></div>
+      <div class="review-bottom"><div class="review-navigation"><button id="review-previous" class="review-button">← Previous beat</button><button id="review-start" class="review-button">Play from first beat</button><button id="review-next" class="review-button">Next beat →</button></div><p>Drag the play bar to scrub · Scroll over it to move through time · Space to play / pause</p><div class="review-scrubber"><input id="review-seek" type="range" min="0" max="0" step="0.001" value="0" aria-label="Review playback position" aria-valuetext="00:00.000" title="Drag to scrub. Scroll to step 250 ms; Shift-scroll to step 10 ms."><div class="review-scrub-times"><output id="review-position">00:00.000</output><span>SCRUB THROUGH THE SONG</span><output id="review-duration">00:00.000</output></div></div></div>
+    </section>
+    <div id="editor-workspace" class="workspace">
+      <section class="editor" aria-label="Waveform editor">
+        <div class="editor-toolbar"><div class="section-title"><span class="status-light"></span> Waveform <span class="tag">MANUAL</span></div><div class="zoom-controls"><button id="zoom-out" title="Zoom out" aria-label="Zoom out">−</button><input id="zoom" type="range" min="0" max="8" value="0" step="1" aria-label="Waveform zoom"><button id="zoom-in" title="Zoom in" aria-label="Zoom in">+</button><output id="zoom-label">1×</output><button id="fit" class="text-button">Fit song</button><button id="toggle-beats" class="button subtle" aria-expanded="false" aria-controls="beats-panel">Beats <span id="drawer-count">0</span></button></div></div>
+        <div class="waveform-options"><div id="layer-options" class="layer-options" role="group" aria-label="Waveform layers"></div><div class="view-options"><button id="all-layers" class="text-button">All</button><button id="volume-only" class="text-button">Volume only</button><label>View <select id="wave-layout" aria-label="Waveform layout"><option value="stacked">Stacked</option><option value="overlay">Overlay</option></select></label><label>Height <input id="gain" type="range" min="0.5" max="4" step="0.25" value="1" aria-label="Waveform amplitude"><output id="gain-label">1×</output></label></div></div>
+        <div class="overview-wrap"><div class="tiny-label">SONG OVERVIEW <span>Click to jump</span></div><canvas id="overview" aria-label="Full song overview. Click to seek."></canvas></div>
+        <div id="wave-scroll" class="wave-scroll" tabindex="0" aria-label="Zoomable waveform. Click to seek, double-click to mark, drag a marker to adjust."><div id="wave-content" class="wave-content"><canvas id="wave" aria-label="Selected frequency waveforms"></canvas></div></div>
+        <div class="wave-legend"><output id="visible-range">Full song</output><output id="pixel-resolution"></output><span class="hint">Scroll to pan · Pinch / Ctrl+wheel to zoom · Click to seek · Double-click to mark</span></div>
+        <div class="edit-toolbar"><div><button id="undo" class="icon-button" title="Undo (⌘Z)" aria-label="Undo">↶</button><button id="redo" class="icon-button" title="Redo (⇧⌘Z)" aria-label="Redo">↷</button><span class="toolbar-separator"></span><button id="step-back" class="text-button" title="Step playhead backward 1 ms">−1 ms</button><button id="step-forward" class="text-button" title="Step playhead forward 1 ms">+1 ms</button><button id="previous" class="text-button" title="Previous beat ([)">← Previous beat</button><button id="next" class="text-button" title="Next beat (])">Next beat →</button></div><label class="follow"><input id="follow" type="checkbox" checked> Follow playback</label></div>
+        <div id="selected-panel" class="selected-panel" hidden><span id="selected-label">Selected beat</span><button id="nudge-back" class="button subtle">−1 ms</button><button id="nudge-forward" class="button subtle">+1 ms</button><button id="delete-selected" class="text-button danger">Delete beat</button></div>
+        <div class="help-strip"><span class="help-symbol">↳</span><div><strong>Find your rhythm.</strong><p>Start the song and tap <kbd>M</kbd> to place a beat at the playhead. Your marks save as you go.</p></div><button id="import-button" class="text-button">Import beats</button><input id="import-file" type="file" accept=".json,application/json" hidden></div>
+      </section>
+      <aside id="beats-panel" class="beats-panel" aria-label="Beat list" hidden><div class="beats-heading"><h2>Your beats <span id="beat-count">0</span></h2><button id="clear" class="text-button">Clear all</button><button id="close-beats" class="icon-button" aria-label="Close beat list">×</button></div><div class="list-labels"><span>BEAT</span><span>TIME</span><span></span></div><div id="beat-list" class="beat-list"></div><div id="empty" class="empty"><div class="empty-mark">Ⅲ</div><h3>A clean slate.</h3><p>Your beats will appear here.<br>Play the track and press <kbd>M</kbd><br>to drop your first mark.</p></div><div class="beats-footer"><i></i><span id="list-status">Ready when you are</span></div></aside>
+    </div>
+  </main>
+  <footer class="transport"><div class="transport-track"><div class="mini-cover" aria-hidden="true">L</div><div><strong>Project music</strong><span>Source audio</span></div></div><div class="playback"><button id="restart" class="icon-button" title="Return to start" aria-label="Return to start">↤</button><button id="play" class="play-button" aria-label="Play"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button><div class="time-display"><span id="current-time">00:00.000</span><span class="time-total"> / <span id="total-time">00:00.000</span></span></div><label class="speed-label"><select id="speed" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label></div><div class="mark-actions"><span class="keyboard-hint"><kbd>Space</kbd> play / pause</span><button id="mark" class="button primary">＋ Add beat <kbd>M</kbd></button></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div class="loop-settings"><label><input id="loop" type="checkbox"> Loop</label><label>From <input id="loop-start" type="number" min="0" step="0.001" value="0"></label><label>To <input id="loop-end" type="number" min="0" step="0.001" value="0"></label></div>
+  <audio id="audio"  preload="auto"></audio>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibeedit.com/schema/project.v1.json",
+  "title": "VibeEdit portable project (CompositionSpec sidecar)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "revision",
+    "composition",
+    "sources",
+    "analysis",
+    "beats",
+    "masks",
+    "reviews",
+    "workers",
+    "goals",
+    "renders"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "vibeedit.project.v1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "composition": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "path",
+          "sha256",
+          "byteLength",
+          "streams",
+          "clock",
+          "clockSha256",
+          "durationUs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "byteLength": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "durationUs": {
+            "type": "integer"
+          },
+          "streams": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "index",
+                "codec_type"
+              ],
+              "properties": {
+                "index": {
+                  "type": "integer"
+                },
+                "codec_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "time_base": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "clock": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"
+          },
+          "clockSha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "acquisition": {
+            "type": "object"
+          },
+          "clockSchemaVersion": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "analysis": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "masks": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "workers": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "renders": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,27 +1,16 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 from pathlib import Path
+from fractions import Fraction
 
 import cv2
 import numpy as np
 
 
-def find_root() -> Path:
-    for parent in Path(__file__).resolve().parents:
-        if (parent / "fan_Edit_Data").exists():
-            return parent
-    return Path(__file__).resolve().parents[1]
-
-
-ROOT = find_root()
-OUT_DIR = ROOT / "fan_Edit_Data/agent-artifacts/effect-building-pool/production-set-flat"
-ANALYSIS_DIR = ROOT / "fan_Edit_Data/agent-artifacts/effect-building-pool/reverse-curtain-reveal"
-CONTACT_DIR = ROOT / "tmp/effect-building-pool-contact"
-DEFAULT_INPUT = ROOT / "fan_Edit_Data/workspace/media/d590e8b0-fa30-4e69-b19b-563874ff531f/Creed 1.mp4"
-RECIPE_PATH = OUT_DIR / "effect-reverse-curtain-reveal.recipe.json"
 DEFAULT_OUTPUT_NAME = "007__effect-reverse-curtain-reveal-horizontal.mp4"
 
 DEFAULT_RECIPE = {
@@ -32,7 +21,7 @@ DEFAULT_RECIPE = {
         "height": 360,
         "fps": 30,
         "durationSeconds": 3.2,
-        "sourceStartSeconds": 28.08,
+        "sourceStartSeconds": 0.0,
         "orientation": "horizontal",
         "speed": 1.0,
         "openStartSeconds": 0.0,
@@ -53,35 +42,55 @@ DEFAULT_RECIPE = {
 
 def main() -> None:
     args = parse_args()
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    ANALYSIS_DIR.mkdir(parents=True, exist_ok=True)
-    CONTACT_DIR.mkdir(parents=True, exist_ok=True)
+    project = Path(args.project).expanduser().resolve(strict=True)
+    if not project.is_dir():
+        raise ValueError("--project must be a directory")
+    source = within(project, args.input, exists=True)
+    if args.recipe:
+        args.recipe = within(project, str(args.recipe), exists=True)
     recipe, config = load_config(args)
-    input_path = Path(args.input).expanduser().resolve() if args.input else DEFAULT_INPUT
-    metadata = probe_video(input_path)
-    frames, trace = render_frames(input_path, metadata, config)
-    output = OUT_DIR / args.output_name
+    if not (0 < config["fps"] <= 120 and 0 < config["width"] <= 3840 and 0 < config["height"] <= 2160 and 0 < config["durationSeconds"] <= 120):
+        raise ValueError("Render bounds: <=3840x2160, <=120fps, <=120 seconds")
+    if Path(args.output_name).name != args.output_name or not args.output_name.endswith(".mp4"):
+        raise ValueError("--output-name must be a plain .mp4 filename")
+    run = within(project, "artifacts/curtain/" + Path(args.output_name).stem)
+    run.mkdir(parents=True, exist_ok=False)
+    config["workDir"] = str(run)
+    metadata = probe_video(source)
+    if config["sourceStartSeconds"] < 0 or config["sourceStartSeconds"] + config["durationSeconds"] > metadata["durationSeconds"]:
+        raise ValueError("Source window must cover the render without a final-frame hold")
+    source_sha = hashlib.file_digest(source.open("rb"), "sha256").hexdigest()
+    frames, trace = render_frames(source, metadata, config)
+    validation = validate_render(frames, trace, config)
+    output = run / args.output_name
     write_mp4(output, frames, config)
     contact = write_contact_sheet(output, frames, trace, config)
-    validation = validate_render(frames, trace, config)
-    if not args.no_manifest:
-        write_recipe(recipe, config, input_path, metadata, output, contact, validation)
-        update_manifest(output, input_path, config, contact, validation)
-        update_readme()
-    print(json.dumps({
-        "output": str(output),
-        "recipe": str(RECIPE_PATH),
-        "contactSheet": str(contact),
-        "orientation": config["orientation"],
-        "durationSeconds": config["durationSeconds"],
-        "openDurationSecondsEffective": effective_open_duration(config),
-        "validation": validation,
-    }, indent=2))
+    receipt = {"schemaVersion": "1", "status": "needs-editorial-review", "source": str(source.relative_to(project)), "sourceSha256": source_sha,
+               "sourceMetadata": metadata, "clock": "original-source-seconds", "config": {key: value for key, value in config.items() if key != "workDir"},
+               "output": str(output.relative_to(project)), "outputSha256": hashlib.file_digest(output.open("rb"), "sha256").hexdigest(),
+               "contactSheet": str(contact.relative_to(project)), "validation": validation, "trace": trace, "audio": "silent; mix approved source audio through the SDK"}
+    (run / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    print(json.dumps(receipt, indent=2))
+
+
+def within(project: Path, value: str, exists: bool = False) -> Path:
+    path = Path(value)
+    if path.is_absolute() or ".." in path.parts:
+        raise ValueError("Use project-relative paths")
+    cursor = project
+    for part in path.parts:
+        cursor = cursor / part
+        if cursor.is_symlink():
+            raise ValueError("Symlinks are not allowed in project paths")
+    path = (project / path).resolve(strict=exists)
+    path.relative_to(project)
+    return path
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Render a reverse crush / curtain reveal effect.")
-    parser.add_argument("--input")
+    parser.add_argument("--project", required=True)
+    parser.add_argument("--input", required=True, help="Project-relative original source")
     parser.add_argument("--recipe", type=Path)
     parser.add_argument("--output-name", default=DEFAULT_OUTPUT_NAME)
     parser.add_argument("--orientation", choices=["horizontal", "vertical"])
@@ -94,11 +103,10 @@ def parse_args():
     parser.add_argument("--fps", type=int)
     parser.add_argument("--width", type=int)
     parser.add_argument("--height", type=int)
-    parser.add_argument("--source-start", type=float)
+    parser.add_argument("--source-start", type=float, required=True)
     parser.add_argument("--easing", choices=["linear", "smoothstep", "ease-out-cubic"])
     parser.add_argument("--feather-pixels", type=int)
     parser.add_argument("--bar-color", help="Comma-separated RGB, for example 0,0,0")
-    parser.add_argument("--no-manifest", action="store_true")
     return parser.parse_args()
 
 
@@ -147,6 +155,9 @@ def load_config(args):
 
 
 def probe_video(path: Path):
+    streams = json.loads(subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=r_frame_rate,avg_frame_rate", "-of", "json", str(path)], check=True, capture_output=True, text=True).stdout)["streams"]
+    if not streams or streams[0]["r_frame_rate"] == "0/0" or streams[0]["avg_frame_rate"] == "0/0" or Fraction(streams[0]["r_frame_rate"]) != Fraction(streams[0]["avg_frame_rate"]):
+        raise ValueError("This OpenCV recipe requires CFR source metadata; prepare a source-clock-mapped proxy for VFR first")
     capture = cv2.VideoCapture(str(path))
     if not capture.isOpened():
         raise RuntimeError(f"Could not open {path}")
@@ -155,7 +166,7 @@ def probe_video(path: Path):
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
     capture.release()
-    return {"fps": fps, "frames": frames, "width": width, "height": height, "durationSeconds": frames / fps}
+    return {"fps": fps, "fpsRational": streams[0]["r_frame_rate"], "timingLimit": "CFR metadata gate; source ordinal mapping; VFR requires explicitly clock-mapped proxy", "frames": frames, "width": width, "height": height, "durationSeconds": frames / fps}
 
 
 def render_frames(path: Path, metadata: dict, config: dict):
@@ -281,7 +292,7 @@ def write_contact_sheet(output: Path, frames, trace: list[dict], config: dict):
         thumbs.append(np.zeros((90, 160, 3), dtype=np.uint8))
     sheet = np.vstack([np.hstack(thumbs[:3]), np.hstack(thumbs[3:6])])
     cv2.putText(sheet, f"{output.name} {config['orientation']} speed={config['speed']}", (8, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 255, 255), 1, cv2.LINE_AA)
-    path = CONTACT_DIR / f"{output.stem}_contact_sheet.jpg"
+    path = Path(config["workDir"]) / f"{output.stem}_contact_sheet.jpg"
     cv2.imwrite(str(path), sheet)
     return path
 
@@ -289,13 +300,14 @@ def write_contact_sheet(output: Path, frames, trace: list[dict], config: dict):
 def validate_render(frames, trace: list[dict], config: dict):
     first_mean = float(np.mean(frames[0]))
     final_mean = float(np.mean(frames[-1]))
-    mid_index = len(frames) // 2
+    mid_index = min(range(len(trace)), key=lambda index: abs(trace[index]["progress"] - .5))
     center_mean, edge_mean = center_edge_means(frames[mid_index], config)
     progress_values = [entry["progress"] for entry in trace]
     return {
-        "startsBlack": first_mean < 2.0,
-        "endsRevealed": progress_values[-1] >= 0.99 and final_mean > 5.0,
-        "middleCenterBrighterThanBars": center_mean > edge_mean + 3.0,
+        "startsRequestedBarColor": bool(np.max(np.abs(frames[0].astype(float) - solid_frame(config).astype(float))) < 2),
+        "endsRevealed": progress_values[-1] >= 0.99,
+        "partialOpeningHasBars": bool(edge_mean <= float(np.mean(config["barColor"])) + 2),
+        "frames": len(frames),
         "progressMonotonic": all(progress_values[index] <= progress_values[index + 1] for index in range(len(progress_values) - 1)),
         "firstFrameMean": round(first_mean, 4),
         "middleCenterMean": round(center_mean, 4),
@@ -314,90 +326,6 @@ def center_edge_means(frame, config: dict):
     edge = np.vstack([frame[:20, :], frame[-20:, :]])
     return float(np.mean(center)), float(np.mean(edge))
 
-
-def write_recipe(recipe: dict, config: dict, input_path: Path, metadata: dict, output: Path, contact: Path, validation: dict):
-    payload = {
-        **recipe,
-        "defaults": config,
-        "rendered": {
-            "sourceClip": str(input_path),
-            "sourceMetadata": metadata,
-            "output": str(output),
-            "contactSheet": str(contact),
-            "durationSeconds": config["durationSeconds"],
-            "effectiveOpenDurationSeconds": round(effective_open_duration(config), 4),
-            "validation": validation,
-        },
-    }
-    RECIPE_PATH.write_text(json.dumps(payload, indent=2) + "\n")
-    (ANALYSIS_DIR / "validation.json").write_text(json.dumps(validation, indent=2) + "\n")
-
-
-def update_manifest(output: Path, input_path: Path, config: dict, contact: Path, validation: dict):
-    manifest_path = OUT_DIR / "manifest.json"
-    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {"purpose": "Production effect building pool: accepted reusable effects.", "items": []}
-    item = {
-        "group": "reveal",
-        "id": "effect-reverse-curtain-reveal",
-        "title": "Reverse Curtain Reveal",
-        "file": output.name,
-        "recipeFile": RECIPE_PATH.name,
-        "sourceClip": str(input_path),
-        "sourceStartSeconds": config["sourceStartSeconds"],
-        "durationSeconds": config["durationSeconds"],
-        "width": config["width"],
-        "height": config["height"],
-        "fps": config["fps"],
-        "contactSheet": str(contact),
-        "libraryStatus": "production",
-        "skillName": "vibeedit-reverse-curtain-reveal",
-        "skillFile": str(ROOT / ".agents/skills/vibeedit-reverse-curtain-reveal/SKILL.md"),
-        "recipe": {
-            "orientation": config["orientation"],
-            "speed": config["speed"],
-            "openStartSeconds": config["openStartSeconds"],
-            "openDurationSeconds": config["openDurationSeconds"],
-            "effectiveOpenDurationSeconds": round(effective_open_duration(config), 4),
-            "easing": config["easing"],
-            "barColor": config["barColor"],
-            "featherPixels": config["featherPixels"],
-            "agentUsage": DEFAULT_RECIPE["agentUsage"],
-            "validation": validation,
-        },
-    }
-    manifest["items"] = [existing for existing in manifest.get("items", []) if existing.get("id") != item["id"]] + [item]
-    manifest["count"] = len(manifest["items"])
-    manifest["contactSheets"] = sorted(set([
-        *(value for value in manifest.get("contactSheets", []) if "reverse-curtain-reveal" not in value),
-        str(contact),
-    ]))
-    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
-
-
-def update_readme():
-    readme = OUT_DIR / "README.md"
-    existing = readme.read_text() if readme.exists() else "# Effect Building Pool - Production Set\n"
-    marker = "## Reverse Curtain Reveal\n"
-    section = (
-        "## Reverse Curtain Reveal\n\n"
-        "Recipe file: `effect-reverse-curtain-reveal.recipe.json`\n\n"
-        "Default render: `007__effect-reverse-curtain-reveal-horizontal.mp4`\n\n"
-        "Use this when the screen should start black and the source video should be revealed from the center by two opening bars.\n\n"
-        "Reusable controls:\n"
-        "- `orientation`: `horizontal` opens left/right from the center; `vertical` opens up/down from the center.\n"
-        "- `speed`: higher values open faster while preserving the same total render duration.\n"
-        "- `openStartSeconds`, `openDurationSeconds`, and `holdFinalSeconds`: tune timing for beats or slower cinematic reveals.\n"
-        "- `easing`: `smoothstep`, `linear`, or `ease-out-cubic`.\n\n"
-        "Render with defaults:\n\n"
-        "```bash\npython3 .agents/skills/vibeedit-reverse-curtain-reveal/scripts/render_reverse_curtain_reveal_effect.py\n```\n\n"
-        "Render the vertical option:\n\n"
-        "```bash\npython3 .agents/skills/vibeedit-reverse-curtain-reveal/scripts/render_reverse_curtain_reveal_effect.py --orientation vertical --output-name 007__effect-reverse-curtain-reveal-vertical.mp4 --no-manifest\n```\n"
-    )
-    if marker in existing:
-        existing = existing[: existing.index(marker)].rstrip() + "\n\n" + section
-    else:
-        existing = existing.rstrip() + "\n\n" + section
-    readme.write_text(existing.rstrip() + "\n")
 
 
 if __name__ == "__main__":

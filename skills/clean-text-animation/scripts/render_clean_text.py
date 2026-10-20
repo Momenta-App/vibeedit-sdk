@@ -6,6 +6,7 @@ import subprocess
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from vibeedit.data import data_path
 
 
 def main():
@@ -18,8 +19,8 @@ def main():
 
     output = Path(args.output)
     frames_dir = Path(args.frames_dir) if args.frames_dir else output.with_suffix("").parent / f"{output.stem}-frames"
-    if frames_dir.exists():
-        shutil.rmtree(frames_dir)
+    if frames_dir.exists() or output.exists():
+        raise SystemExit("Use new output/frames paths; existing artifacts are preserved")
     frames_dir.mkdir(parents=True, exist_ok=True)
     output.parent.mkdir(parents=True, exist_ok=True)
 
@@ -81,7 +82,7 @@ def parse_args():
     parser.add_argument("--fps", type=int, default=30)
     parser.add_argument("--duration", type=float, default=1.0)
     parser.add_argument("--hold", type=float, default=0.4)
-    parser.add_argument("--font", default="/System/Library/Fonts/Avenir.ttc")
+    parser.add_argument("--font", default=str(data_path("catalog", "text-runtime", "assets", "fonts", "Montserrat-Variable.ttf")))
     parser.add_argument("--font-size", type=int, default=47)
     parser.add_argument("--margin", type=int, default=44)
     parser.add_argument("--tracking", type=int, default=4)
@@ -125,10 +126,7 @@ def fit_font(words, font_path, font_size, width, margin):
 
 
 def load_font(font_path, size):
-    try:
-        return ImageFont.truetype(font_path, size, index=2)
-    except TypeError:
-        return ImageFont.truetype(font_path, size)
+    return ImageFont.truetype(font_path, size)
 
 
 def measure_words(words, font, tracking):
@@ -278,7 +276,7 @@ def write_preview(video, preview, timestamp):
 
 def write_contact_sheet(frames_dir, output, width, height, fps):
     frames = sorted(frames_dir.glob("frame_*.png"))
-    label_font = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Bold.ttf", 18)
+    label_font = ImageFont.truetype(str(data_path("catalog", "text-runtime", "assets", "fonts", "Poppins-Bold.ttf")), 18)
     cell_width, cell_height = 360, 190
     columns = 5
     rows = math.ceil(len(frames) / columns)

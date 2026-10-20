@@ -6,7 +6,7 @@
   "text_lines": [
     {
       "text": "OLD",
-      "font": "assets/fonts/AVANTE.otf",
+      "font": "assets/fonts/Montserrat-Variable.ttf",
       "font_size": 220,
       "top_color": [
         255,
@@ -28,7 +28,7 @@
     },
     {
       "text": "Money",
-      "font": "assets/fonts/Birds of Paradise.ttf",
+      "font": "assets/fonts/GreatVibes-Regular.ttf",
       "font_size": 205,
       "top_color": [
         238,

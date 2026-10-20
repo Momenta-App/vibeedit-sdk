@@ -56,12 +56,13 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("canonical source revision changed without updating the release audit")
 
     migration_records = {item["name"]: item for item in migration["selected"]}
-    for skill in skill_index["skills"]:
-        if skill.get("source", {}).get("sha256") != skill.get("checksum"):
-            raise RuntimeError(f"skill source/package checksum differs: {skill['name']}")
-        record = migration_records.get(skill["name"])
-        if not record or record["sourceSha256"] != skill["checksum"] or record["packageSha256"] != skill["checksum"]:
+    owned = json.loads(wheel["vibeedit/data/skills/owned.json"])["skills"]
+    for skill in [*skill_index["skills"], *owned]:
+        record = migration_records.get(skill["name"]) if skill.get("source", {}).get("kind") != "sdk-owned" else {"sourceSha256": skill["checksum"], "packageSha256": skill["checksum"]}
+        if not record or record["sourceSha256"] != skill["source"]["sha256"] or record["packageSha256"] != skill["checksum"]:
             raise RuntimeError(f"skill migration record differs: {skill['name']}")
+        if record["sourceSha256"] != record["packageSha256"] and (skill.get("adaptation", {}).get("parentSha256") != record["sourceSha256"] or record.get("adaptation") != skill["adaptation"]):
+            raise RuntimeError(f"skill adaptation is not explicitly parent-bound: {skill['name']}")
         prefixes = {
             "wheel": (wheel, f"vibeedit/data/skills/{skill['name']}"),
             "sdist": (sdist, _sdist_directory(sdist, f"skills/{skill['name']}")),
@@ -91,7 +92,9 @@ def main(argv: list[str] | None = None) -> int:
             "pinnedDigests": True,
             "canonicalGitSourceCompared": args.source_root is not None,
         },
-        "skillClonesVerified": 44,
+        "donorSkillTreesVerified": 44,
+        "portableSkillAdaptations": sum(bool(skill.get("adaptation")) for skill in skill_index["skills"]),
+        "sdkOwnedSkillTreesVerified": len(owned),
         "presetSourceFilesVerified": 16,
         "forbiddenEntries": 0,
         "archives": {
@@ -164,12 +167,18 @@ def _compare_canonical_sources(
     for skill in skill_index["skills"]:
         prefix = skill["source"]["path"]
         paths = _git(source_root, "ls-tree", "-r", "--name-only", skill["source"]["revision"], prefix).decode().splitlines()
+        digest = hashlib.sha256()
         for path in paths:
             relative = Path(path).relative_to(prefix).as_posix()
             canonical = _git(source_root, "show", f"{skill['source']['revision']}:{path}")
+            digest.update(relative.encode() + b"\0" + canonical + b"\0")
+            if skill.get("adaptation"):
+                continue
             _equal(wheel, f"vibeedit/data/skills/{skill['name']}/{relative}", canonical)
             _equal(npm, f"package/skills/{skill['name']}/{relative}", canonical)
             _equal(sdist, _sdist_name(sdist, f"skills/{skill['name']}/{relative}"), canonical)
+        if digest.hexdigest() != skill["source"]["sha256"]:
+            raise RuntimeError(f"canonical donor source digest differs: {skill['name']}")
 
     preset_root = preset_report["source"]["path"]
     preset_revision = preset_report["source"]["revision"]

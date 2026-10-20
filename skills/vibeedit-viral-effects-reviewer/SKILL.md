@@ -5,6 +5,15 @@ description: Review a completed VibeEdit viral source edit after transition deci
 
 # VibeEdit Viral Effects Reviewer
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill after the main structure and transition pass are complete. This role makes the edit less boring by adding tasteful visual punctuation, but it must not change the story structure, clip selection, cut order, or transition choices.
 
 Effects are additive. They should give the song another way to be seen when a beat, transient, lyric, or interesting audio moment is not already expressed by a cut, transition, or source action.
@@ -28,15 +37,17 @@ Load downstream skills only when the chosen effect needs them:
 
 - `vibeedit-effects`: default recipe designer for deterministic timeline effects, semantic controls, subject protection, and constructed effect plans.
 - `vibeedit-effects-punctuation`: beat flashes, object-only flashes, shakes, zooms, glitches, masks, curtain reveals, color switches, and transition punctuation.
-- `vibeedit-subject-effects`: default mask-driven subject-only flashes, double flashes, additive glows, split-band pulses, shimmer sweeps, and screen/multiply hits.
-- `vibeedit-sam31-mlx-subject-effects`: default execution path for local subject-flash and shimmer tests when SAM3.1 MLX is available. Use it for sparse-frame local SAM3.1 MLX masks on selected active frames.
-- `vibeedit-masking-router`: use only when SAM3.1 MLX is unavailable or the request clearly needs a different segmentation backend. Do not use router/planning as a reason to avoid a real SAM run.
+- `vibeedit-segmentation-cutouts`: default mask-driven subject-only flashes, double flashes, additive glows, split-band pulses, shimmer sweeps, and screen/multiply hits.
+- `vibeedit models run sam31-mlx`: default execution path for local subject-flash and shimmer tests when SAM3.1 MLX is available. Use it for sparse-frame local SAM3.1 MLX masks on selected active frames.
+- `vibeedit models describe sam31-mlx` / `sam21`: inspect exact runtime, device, disk, terms and qualified state before choosing a backend. Do not silently substitute another model. Use the selected real model and persist its output, or record the precise blocker.
 - `vibeedit-segmentation-cutouts`: use when the effect needs cutouts, text-behind-subject, foreground/background layering, or object layers.
-- `vibeedit-sam21-video-segmentation`: use only after the masking route selects SAM2.1 video segmentation.
+- `vibeedit models run sam21`: use only after the masking route selects SAM2.1 video segmentation.
 - `vibeedit-color-style-recipes`: use for repeatable color switches, grayscale/color intensity changes, red emphasis, contrast grades, grain, or vignette.
-- `vibeedit-random-frame-stutter`: use for fast screenshot or mini-video stutter effects that punctuate an audio cluster.
+- `vibeedit-reverse-curtain-subject-reveal`: includes a no-replacement randomized background within explicit source windows for the combined curtain effect. Standalone mini-video stutter needs a concrete source-range CompositionSpec; this is not an automatic general stutter tool.
 - `vibeedit-reverse-curtain-reveal`: use only when an additive reveal effect is intentionally selected and does not restructure the edit.
-- `vibeedit-tile-object-reveal`: use when a tile/object reveal is an additive effect layer rather than a structural transition.
+- `effects`: plan tile/object reveal geometry and implement it with supported SDK layers or an explicit derived visual asset. No dedicated tile/object renderer is bundled; keep it planned until materialized and reviewed.
+
+The packaged `models effect` path materializes reviewed subject-color fills. Full subject-cutout flash transitions, shimmer and split-band pulses require a concrete supported CompositionSpec or derived asset and frame review; invoking SAM alone does not implement them. Direct `maskIds` are not a rendering proof. Preserve these creative recipes as explicit plans until their materialized effect is verified.
 
 Do not edit those downstream skills from this role. Route to them, cite them, and return the exact effect contract they need.
 
@@ -116,5 +127,5 @@ next_actions: []
 - The effect pass does not change the structure, clips, cut timing, or transition decisions.
 - Every selected effect is tied to a song anchor, source motion, or story attention reason.
 - Beat-cluster flashes are one flash per selected beat unless a downstream effect skill gives a concrete reason otherwise.
-- Mask-dependent effects must run `vibeedit-sam31-mlx-subject-effects` or `vibeedit-sam21-video-segmentation` and cite the resulting SAM artifact path. Proxy masks, geometric masks, boxes, and decorative flashes are not valid test outputs.
+- Mask-dependent effects must run `vibeedit models run sam31-mlx` or `vibeedit models run sam21` and cite the resulting SAM artifact path. Proxy masks, geometric masks, boxes, and decorative flashes are not valid test outputs.
 - Do not promote any effect beyond `planned` without concrete preview/render/review evidence.

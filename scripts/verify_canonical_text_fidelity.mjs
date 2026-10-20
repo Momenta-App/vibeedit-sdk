@@ -15,6 +15,8 @@ const requestedIds = onlyIndex === -1 ? undefined : new Set(process.argv[onlyInd
 const keepWork = process.argv.includes("--keep-work");
 const rootPath = decodeURIComponent(new URL("..", import.meta.url).pathname.replace(/\/$/, ""));
 const work = await mkdtemp(join(tmpdir(), "vibeedit-source-fidelity-"));
+const manifestForPolicy = JSON.parse(await readFile(join(rootPath, "catalog/text-runtime/manifest.json"), "utf8"));
+if (manifestForPolicy.fontPolicy) throw new Error("This candidate adapts donor fonts. Pixel-equivalent source fidelity is not claimed; run npm run text:previews for the adapted package conformance proof.");
 const assets = await startMotionAssetServer();
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 640, height: 360 }, deviceScaleFactor: 1 });

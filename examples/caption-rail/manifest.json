@@ -1,0 +1,16 @@
+{
+  "id": "vibeedit://template/caption-rail",
+  "name": "Caption Rail",
+  "description": "Existing generated audiovisual caption-rail layout; not a transcription or speaker-identity demonstration.",
+  "families": [
+    "captions",
+    "motion"
+  ],
+  "requirements": {
+    "extras": [
+      "browser"
+    ],
+    "models": []
+  },
+  "conditional": false
+}

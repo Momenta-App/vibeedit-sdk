@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "vibeedit"
-version = "0.1.0b4"
+version = "0.2.0b1"
 description = "VibeEdit-owned video composition, motion, rendering, and verification library."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { file = "LICENSE.md" }
+license = "MIT"
 authors = [{ name = "Attention Engine Inc." }]
 dependencies = ["jsonschema>=4.23,<5"]
 keywords = ["video", "editing", "motion-graphics", "ffmpeg", "ai-agents"]
@@ -57,7 +57,7 @@ packages = ["python/src/vibeedit", "python/src/vibeedit_media"]
 
 [tool.hatch.build]
 ignore-vcs = true
-exclude = ["**/__pycache__", "**/*.pyc", "/browser-renderer/build", "/browser-renderer/surface-bridge/target", "/browser-renderer/evidence", "/browser-renderer/examples/corpus/media"]
+exclude = ["**/node_modules/**", "**/__pycache__", "**/*.pyc", "/browser-renderer/build", "/browser-renderer/surface-bridge/target", "/browser-renderer/evidence", "/browser-renderer/examples/corpus/media"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "browser-renderer/host" = "vibeedit/data/browser-renderer/host"
@@ -65,6 +65,8 @@ exclude = ["**/__pycache__", "**/*.pyc", "/browser-renderer/build", "/browser-re
 "browser-renderer/surface-bridge/Cargo.toml" = "vibeedit/data/browser-renderer/surface-bridge/Cargo.toml"
 "browser-renderer/surface-bridge/Cargo.lock" = "vibeedit/data/browser-renderer/surface-bridge/Cargo.lock"
 "browser-renderer/surface-bridge/build.rs" = "vibeedit/data/browser-renderer/surface-bridge/build.rs"
+"review-assets" = "vibeedit/data/review-assets"
+"companion" = "vibeedit/data/companion"
 "schema" = "vibeedit/data/schema"
 "catalog" = "vibeedit/data/catalog"
 "skills" = "vibeedit/data/skills"
@@ -74,6 +76,7 @@ exclude = ["**/__pycache__", "**/*.pyc", "/browser-renderer/build", "/browser-re
 "apple-vision-runner" = "vibeedit/data/apple-vision-runner"
 "SBOM.spdx.json" = "vibeedit/data/SBOM.spdx.json"
 "THIRD_PARTY_NOTICES.md" = "vibeedit/data/THIRD_PARTY_NOTICES.md"
+"requirements-core.lock" = "vibeedit/data/requirements-core.lock"
 
 [tool.hatch.build.targets.sdist]
 include = [
@@ -86,14 +89,19 @@ include = [
   "/site",
   "/examples",
   "/runtime-models",
+  "/review-assets",
+  "/companion",
   "/apple-vision-runner",
   "/docs",
   "/LICENSE.md",
   "/SBOM.spdx.json",
   "/THIRD_PARTY_NOTICES.md",
   "/README.md",
+  "/requirements-core.lock",
   "/package.json",
 ]
+
+exclude = ["/docs/launch", "/companion/node_modules", "**/__pycache__", "**/*.pyc"]
 
 [tool.pytest.ini_options]
 testpaths = ["python/tests"]

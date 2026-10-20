@@ -5,96 +5,52 @@ description: "Create VibeEdit reverse crush / curtain reveal effects where the s
 
 # VibeEdit Reverse Curtain Reveal
 
-Use this skill when a clip should start fully black and reveal the background video from the center as two black bars open outward.
+## Portable SDK execution
 
-This is the entry skill for the whole reverse-curtain family. Keep the base curtain simple unless the user asks for a subject cutout, a stuttered background, or a fan-edit impact variant.
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
 
-## Render
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
 
-Default horizontal reveal:
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
 
-```bash
-python3 .agents/skills/vibeedit-reverse-curtain-reveal/scripts/render_reverse_curtain_reveal_effect.py
-```
 
-Vertical reveal:
+A screen starts black and two bars open outward from the center. Keep the base reveal simple; select a masked subject or randomized background only when it improves the source moment.
 
-```bash
-python3 .agents/skills/vibeedit-reverse-curtain-reveal/scripts/render_reverse_curtain_reveal_effect.py \
-  --orientation vertical \
-  --output-name 007__effect-reverse-curtain-reveal-vertical.mp4 \
-  --no-manifest
-```
+## Portable render
 
-Faster fan-edit reveal:
+Run from this installed skill directory, using the Python environment containing the SDK, OpenCV and NumPy. `PROJECT` is the user's project directory. Source paths are relative to it; the source must cover the complete requested duration.
 
 ```bash
-python3 .agents/skills/vibeedit-reverse-curtain-reveal/scripts/render_reverse_curtain_reveal_effect.py \
-  --speed 2.0 \
-  --open-duration 1.2 \
-  --easing ease-out-cubic
+python scripts/render_reverse_curtain_reveal_effect.py \
+  --project "$PROJECT" --input media/source.mp4 --source-start 0 \
+  --duration 3.2 --orientation horizontal --output-name reveal-v1.mp4
 ```
 
-Masked subject reveal with the preferred fan-edit options:
+The script never discovers a movie library. Each new output name creates `artifacts/curtain/<name>/` with the silent MP4, contact sheet and SHA-bound source/clock/trace/validation receipt. Existing runs are preserved; use a new name for revisions. Mix approved audio separately using the SDK CompositionSpec.
+
+## Controls and creative contract
+
+- `--orientation horizontal`: a center vertical strip widens left/right.
+- `--orientation vertical`: a center horizontal strip widens up/down.
+- `--speed` divides `--open-duration`; 1.5–3 can suit fast fan-edit punctuation.
+- `--open-start` delays opening. `--duration` sets total output length; allow a readable revealed hold.
+- `--easing smoothstep|linear|ease-out-cubic` controls acceleration.
+- `--feather-pixels` softens bar edges only when intended; default crisp.
+- `--bar-color R,G,B` defaults to black.
+
+For a masked subject, read the sibling `vibeedit-reverse-curtain-subject-reveal` skill. Obtain actual masks using the explicitly selected SDK `models run sam21` or `models run sam31-mlx`, review source/frame/candidate identities, then materialize a source-aligned alpha. Never substitute a geometric mask as segmentation evidence. The SDK model-index export is not itself an alpha-video transport; producing a full aligned reviewed alpha is a separate explicit step.
+
+The subject companion implements randomized-frame background selection internally: sample without replacement only from the explicit background window, one unique source frame per output frame. A short candidate pool fails instead of extending into unrelated source footage. Do not pause/freeze unless the creative brief explicitly asks for a repeat motif.
+
+Hard-edge alpha is the default: do not blur, dilate, feather, glow or shadow the subject unless the brief asks for stylized edges. Prefer the plain source background for cinematic reveals and randomized background plus hard-edge alpha for intentionally busy iconic hits.
+
+This OpenCV recipe is limited to CFR sources and ordinal frame mapping. VFR needs an explicit normalized proxy retaining original-clock mapping; a matching average rate alone is not a guarantee of every native timestamp.
+
+## Verification
 
 ```bash
-python3 .agents/skills/vibeedit-reverse-curtain-subject-reveal/scripts/render_reverse_curtain_subject_reveal_effect.py \
-  --layer-mode subject_over_curtain \
-  --background-mode random_frame_stutter \
-  --orientation vertical \
-  --mask-source external_alpha \
-  --external-alpha /path/to/hard-edge-alpha.mp4 \
-  --output-name 021__sam21-creed-random-stutter-vertical-curtain-subject-over.mp4
+python scripts/quick_validate.py --project "$PROJECT" \
+  --receipt artifacts/curtain/reveal-v1/receipt.json
 ```
 
-## Controls
-
-- `--orientation horizontal`: reveals a center vertical strip that widens left/right.
-- `--orientation vertical`: reveals a center horizontal strip that widens up/down.
-- `--speed`: multiplies reveal speed by dividing `openDurationSeconds`.
-- `--open-start`: delays the opening.
-- `--open-duration`: base opening duration before speed is applied.
-- `--duration`: total render duration.
-- `--easing`: `smoothstep`, `linear`, or `ease-out-cubic`.
-- `--feather-pixels`: softens bar edges when needed; default is crisp.
-- `--bar-color`: RGB color for the bars; default is black.
-
-## Composition Options
-
-- Plain curtain: use this skill's renderer only.
-- Masked subject curtain: route to `vibeedit-reverse-curtain-subject-reveal` for the advanced renderer and subject layer controls.
-- Random-frame background: use `vibeedit-random-frame-stutter` as the behavior contract. Prefer one unique random source still per output frame for fast fan-edit versions. In the subject renderer this is exposed as `--background-mode random_frame_stutter`.
-- SAM2.1 subject mask: use `vibeedit-sam21-video-segmentation` to create or review the alpha first, then pass it into the subject renderer with `--mask-source external_alpha --external-alpha /path/to/alpha.mp4`.
-- Hard-edge mask rule: for this family, SAM alpha should be hard-edged by default. Do not add feathering, blur, dilation, softening, glow, rim, or shadow unless the user explicitly asks for a stylized edge.
-- Preferred fan-edit route: slightly prefer `random_frame_stutter` plus hard-edge SAM2.1 alpha when the user wants the more complex/iconic subject reveal; use normal `source` background for cleaner cinematic reveals.
-
-## Linked Skills
-
-- `.agents/skills/vibeedit-reverse-curtain-subject-reveal/SKILL.md`: advanced masked-subject renderer, subject-over/under-curtain layer modes, external alpha wiring, source-length/no-hold validation.
-- `.agents/skills/vibeedit-random-frame-stutter/SKILL.md`: random still/mini-burst selection rules, no-pause behavior, no-replacement diversity, optional rapid-frame SFX.
-- `.agents/skills/vibeedit-sam21-video-segmentation/SKILL.md`: SAM2.1 prompt planning, local Torch/MPS segmentation, alpha review, hard-alpha QA.
-
-When a task uses one of those options, read and follow the linked skill before rendering. The reverse curtain skill chooses the composition; the linked skills own their specialized behavior.
-
-## Production Output
-
-The default renderer writes:
-
-`fan_Edit_Data/agent-artifacts/effect-building-pool/production-set-flat/007__effect-reverse-curtain-reveal-horizontal.mp4`
-
-It also updates:
-
-- `effect-reverse-curtain-reveal.recipe.json`
-- `manifest.json`
-- `README.md`
-- `tmp/effect-building-pool-contact/*reverse-curtain*contact_sheet.jpg`
-
-## QA
-
-Run the validator after script edits or parameter changes:
-
-```bash
-python3 .agents/skills/vibeedit-reverse-curtain-reveal/scripts/quick_validate.py
-```
-
-The validator checks that both orientations render, probe as valid MP4 files, start black, end revealed, and keep monotonic reveal progress.
+The validator rechecks exact source/output hashes, dimensions/frame count and start-black/end-revealed/monotonic progress tests. Review the actual video/contact sheet for the source moment, framing, edge quality, timing and audio mix before acceptance. Passing mechanical checks leaves `needs-editorial-review` visible.

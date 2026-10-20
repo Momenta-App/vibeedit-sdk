@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -38,7 +39,7 @@ def main() -> None:
         case_dir = out_dir / case_id
         case_dir.mkdir(parents=True, exist_ok=True)
         command = [
-            "python3",
+            sys.executable,
             str(SCRIPT),
             "--words-json",
             str(words_path),
@@ -125,7 +126,7 @@ def validate_caption_ingest(out_dir: Path, no_video: bool) -> dict[str, object]:
     )
     case_dir = out_dir / "caption_ingest"
     command = [
-        "python3",
+        sys.executable,
         str(SCRIPT),
         "--captions-json",
         str(caption_path),
@@ -157,7 +158,7 @@ def validate_srt_ingest(out_dir: Path, no_video: bool) -> dict[str, object]:
     srt_path.write_text("1\n00:00:00,000 --> 00:00:00,900\nstay centered\n\n")
     case_dir = out_dir / "srt_ingest"
     command = [
-        "python3",
+        sys.executable,
         str(SCRIPT),
         "--captions-file",
         str(srt_path),
@@ -185,7 +186,7 @@ def validate_srt_ingest(out_dir: Path, no_video: bool) -> dict[str, object]:
 def validate_ultra_vertical_rejection(out_dir: Path) -> dict[str, object]:
     result = subprocess.run(
         [
-            "python3",
+            sys.executable,
             str(SCRIPT),
             "--text",
             "VERTICAL",

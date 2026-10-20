@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "vibeedit.sourceProviders.v1",
+  "checkedOn": "2026-10-20",
+  "purpose": "Provider page discovery only. No final media URLs, hosted copies, credentials or movie catalogs.",
+  "providers": [
+    {
+      "id": "wikimedia-commons",
+      "name": "Wikimedia Commons",
+      "pageHosts": ["commons.wikimedia.org"],
+      "homeUrl": "https://commons.wikimedia.org/wiki/Main_Page",
+      "searchUrl": "https://commons.wikimedia.org/w/index.php?search={query}&title=Special:MediaSearch&type=video",
+      "termsUrl": "https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia",
+      "media": ["video", "image", "audio"],
+      "workflow": "Open a file description page, inspect its own license/author, then download Original file through the available browser. Confirm attribution and any ShareAlike terms for that particular file.",
+      "qualification": "Public pages and documented per-file reuse/download workflow revalidated; full automated Codex/Claude download journeys remain unqualified.",
+      "login": "Usually not required for public original files; retain progress if challenged.",
+      "rights": "Per-file license or public-domain status; Commons does not own most files and gives no blanket rights guarantee."
+    },
+    {
+      "id": "pexels",
+      "name": "Pexels",
+      "pageHosts": ["www.pexels.com", "pexels.com"],
+      "homeUrl": "https://www.pexels.com/videos/",
+      "searchUrl": "https://www.pexels.com/search/videos/{query}/",
+      "termsUrl": "https://www.pexels.com/terms-of-service/",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "media": ["video", "image"],
+      "workflow": "Use a selected item page through the user's ordinary authorized provider workflow; save the chosen download and its item attribution. Automated collection must have applicable provider authorization.",
+      "qualification": "Page/license/terms inspected only; automated downloads are not advertised as qualified.",
+      "login": "Some features may require user browser login.",
+      "rights": "Pexels license has restrictions on standalone redistribution, misleading endorsement and other uses; item and depicted-person/brand rights still matter. No stock media is bundled."
+    },
+    {
+      "id": "pixabay",
+      "name": "Pixabay",
+      "pageHosts": ["pixabay.com", "www.pixabay.com"],
+      "homeUrl": "https://pixabay.com/videos/",
+      "searchUrl": "https://pixabay.com/videos/search/{query}/",
+      "termsUrl": "https://pixabay.com/service/terms/",
+      "licenseUrl": "https://pixabay.com/service/license-summary/",
+      "media": ["video", "image", "audio"],
+      "workflow": "Use the user's authorized item page/browser download, inspect its license and save authorship/attribution. Preserve pending work if login or verification is requested.",
+      "qualification": "Page/license/terms inspected only; automated downloads are not advertised as qualified.",
+      "login": "The selected item/download may require login or verification in the browser.",
+      "rights": "Content license permits adaptations subject to restrictions including standalone distribution, deceptive use and third-party rights. No provider files are redistributed by this package."
+    }
+  ],
+  "pages": [
+    {
+      "id": "commons-example-image",
+      "providerId": "wikimedia-commons",
+      "title": "Public-domain Example.jpg browser/download fixture",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Example.jpg",
+      "media": "image",
+      "tags": ["download", "small", "public-domain", "fixture"],
+      "rights": "File page currently labels the simple example text image public domain. Verify the selected revision and downloaded bytes; the moving page is not an immutable media identity."
+    },
+    {
+      "id": "commons-video-pages",
+      "providerId": "wikimedia-commons",
+      "title": "Wikimedia Commons video file discovery",
+      "pageUrl": "https://commons.wikimedia.org/wiki/Category:Videos",
+      "media": "video",
+      "tags": ["video", "animation", "nature", "documentary"],
+      "rights": "Category discovery does not grant a license. Select and inspect an individual file page before download."
+    }
+  ]
+}

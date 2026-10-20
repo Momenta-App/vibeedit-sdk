@@ -73,7 +73,7 @@ def analyze_beats(
     runtime_versions = {"ffmpeg": (version_result.stdout or version_result.stderr).splitlines()[0] if version_result.returncode == 0 else "unavailable"}
     key = cache_key("analysis.beats", {"sourceSha256": source_hash, **parameters}, implementation_version=VERSION, runtime_versions=runtime_versions)
     destination = Path(output)
-    cache_hit = restore_cached_artifact("analysis.beats", key, destination)
+    cache_hit = restore_cached_artifact("analysis.beats", key, destination, base=destination.parent)
     if not cache_hit:
         result = subprocess.run(
             [ffmpeg, "-hide_banner", "-loglevel", "error", "-i", str(path), "-vn", "-ac", "1", "-ar", str(sample_rate), "-f", "s16le", "-"],
@@ -98,7 +98,7 @@ def analyze_beats(
             beats.append(frame)
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text(json.dumps({"schemaVersion": "1.0.0", "kind": "beats", "frameRate": parameters["frameRate"], "beats": beats, "energy": [round(value, 6) for value in energies]}, indent=2) + "\n", encoding="utf-8")
-        store_cached_artifact("analysis.beats", key, destination)
+        store_cached_artifact("analysis.beats", key, destination, base=destination.parent)
     return AnalysisArtifact(
         id=destination.stem,
         kind="beats",

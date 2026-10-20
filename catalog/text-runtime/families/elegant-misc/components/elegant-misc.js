@@ -4,10 +4,10 @@ const FPS = 30;
 
 const FONT_FILES = {
   "AbrilFatface-Regular": "AbrilFatface-Regular.ttf",
-  "AVANTERegular": "AVANTE.otf",
-  "AVANTE": "AVANTE.otf",
-  "Bebas-Regular": "Bebas-Regular.otf",
-  "Mytupi-Bold": "mytupiBOLD.ttf",
+  "AVANTERegular": "Montserrat-Variable.ttf",
+  "AVANTE": "Montserrat-Variable.ttf",
+  "Bebas-Regular": "BebasNeue-Regular.ttf",
+  "Mytupi-Bold": "BebasNeue-Regular.ttf",
   "Poppins-Black": "Poppins-Black.ttf"
 };
 

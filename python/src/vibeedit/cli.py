@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
+import sqlite3
 import sys
 import webbrowser
 from pathlib import Path
@@ -33,7 +34,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return args.handler(args)
-    except (OSError, ValueError, RuntimeError, NotImplementedError) as error:
+    except (OSError, ValueError, RuntimeError, NotImplementedError, sqlite3.Error) as error:
         hint = error.hint if isinstance(error, CLIUsageError) else None
         if getattr(args, "json", False):
             print(json.dumps({"ok": False, "error": str(error), "type": type(error).__name__, "command": getattr(args, "command", None), **({"hint": hint} if hint else {})}))
@@ -70,6 +71,9 @@ def _parser() -> argparse.ArgumentParser:
     setup.add_argument("--effects", action="store_true", help="install NumPy/Pillow/OpenCV dependencies for media presets; no model download")
     setup.add_argument("--vision", action="store_true", help="prepare face/body/pose/object providers; may download the pinned 29.5 MB object model")
     setup.add_argument("--sam", action="store_true", help="prepare SAM 2.1 segmentation; downloads about 211.7 MB of pinned source and weights")
+    setup.add_argument("--transnet", action="store_true", help="prepare isolated local TransNet model pack")
+    setup.add_argument("--sam31-mlx", action="store_true", help="prepare isolated SAM 3.1 MLX pack on Apple Silicon")
+    setup.add_argument("--model-cache", type=Path, help="model-pack cache on a disk with adequate free space")
     setup.add_argument("--json", action="store_true", help="emit machine-readable setup results")
     setup.set_defaults(handler=_setup)
 
@@ -190,6 +194,10 @@ def _parser() -> argparse.ArgumentParser:
     clean.set_defaults(handler=_clean)
     mcp = sub.add_parser("mcp", help="run the local JSON-RPC typed tool adapter")
     mcp.set_defaults(handler=_mcp)
+    from vibeedit import project, review, model_packs, worker, goals, myriograph, acquisition
+
+    for module in (project, review, model_packs, worker, goals, myriograph, acquisition):
+        module.register_commands(sub)
     return parser
 
 
@@ -230,15 +238,26 @@ def _init(args) -> int:
 
 def _setup(args) -> int:
     from vibeedit.setup import install_setup_dependencies, setup_capabilities
+    from vibeedit.model_packs import _supported
 
-    if not any((args.all, args.browser, args.effects, args.vision, args.sam, args.cef)):
+    if not any((args.all, args.browser, args.effects, args.vision, args.sam, args.cef, args.transnet, args.sam31_mlx)):
         raise CLIUsageError("No optional capability selected", "Choose --cef, --browser, --effects, --vision, --sam, or --all. Run `vibeedit setup --help` for download details.")
-    dependencies = install_setup_dependencies(browser=args.all or args.browser, effects=args.all or args.effects, vision=args.all or args.vision, sam=args.all or args.sam)
-    result = setup_capabilities(browser=args.all or args.browser, effects=args.all or args.effects, vision=args.all or args.vision, sam=args.all or args.sam)
+    sam_requested = args.all or args.sam
+    sam_unavailable = _supported("sam21") if sam_requested else None
+    dependencies = install_setup_dependencies(browser=args.all or args.browser, effects=args.all or args.effects, vision=args.all or args.vision, sam=sam_requested and not sam_unavailable)
+    result = setup_capabilities(browser=args.all or args.browser, effects=args.all or args.effects, vision=args.all or args.vision, sam=sam_requested and not sam_unavailable)
+    if sam_unavailable:
+        result["results"].append({"id": "sam21", "available": False, "required": True, "status": "unsupported-platform", "reason": sam_unavailable})
     if args.cef:
         from vibeedit.browser_setup import setup_cef
 
         result["results"].append(setup_cef())
+    if args.transnet or args.sam31_mlx:
+        from vibeedit.model_packs import setup_model_pack
+
+        for name, selected in (("transnet", args.transnet), ("sam31-mlx", args.sam31_mlx)):
+            if selected:
+                result["results"].append(setup_model_pack(name, cache=args.model_cache))
     result["dependencies"] = dependencies
     result["ok"] = True
     result["complete"] = all(item.get("available", False) for item in result["results"] if item.get("required", False))

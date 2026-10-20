@@ -1,6 +1,6 @@
 {
   "name": "vibeedit",
-  "version": "0.1.0-beta.4",
+  "version": "0.2.0-beta.1",
   "description": "VibeEdit-owned CompositionSpec, deterministic HTML motion runtime, catalog, and Node CLI.",
   "type": "module",
   "main": "./src/index.js",
@@ -25,6 +25,9 @@
   "bin": {
     "vibeedit": "bin/vibeedit.js"
   },
+  "pi": {
+    "extensions": ["./companion/extensions/goals.ts"]
+  },
   "files": [
     "bin/",
     "catalog/",
@@ -45,6 +48,7 @@
     "runtime-models/",
     "apple-vision-runner/",
     "README.md",
+    "requirements-core.lock",
     "SBOM.spdx.json",
     "schema/",
     "site/",
@@ -57,7 +61,12 @@
     "!browser-renderer/evidence/",
     "!browser-renderer/**/__pycache__/",
     "!browser-renderer/**/*.pyc",
-    "!browser-renderer/examples/corpus/media/"
+    "!browser-renderer/examples/corpus/media/",
+    "review-assets/",
+    "companion/",
+    "!docs/launch/",
+    "!companion/node_modules/",
+    "!companion/node_modules/**"
   ],
   "scripts": {
     "test": "node --test",
@@ -69,7 +78,8 @@
     "text:fidelity": "node scripts/verify_canonical_text_fidelity.mjs",
     "sbom:build": "python3 scripts/generate_sbom.py",
     "pack:check": "npm pack --dry-run",
-    "types:check": "tsc --noEmit -p tsconfig.types.json"
+    "types:check": "tsc --noEmit -p tsconfig.types.json",
+    "typecheck": "bun node_modules/typescript/bin/tsc --noEmit -p tsconfig.types.json"
   },
   "engines": {
     "node": ">=20"
@@ -106,7 +116,7 @@
     "type": "git",
     "url": "git+https://github.com/Momenta-App/vibeedit-sdk.git"
   },
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   }

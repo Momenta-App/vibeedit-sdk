@@ -1,7 +1,7 @@
 {
   "id": "vibeedit://template/mask-subject-effect",
   "name": "Mask-Driven Subject Effect",
-  "description": "Executable moving subject matte that confines a catalog color treatment to the subject on every frame.",
+  "description": "Executable generated elliptical matte confines a color treatment to a moving synthetic subject. This fixture demonstrates mask compositing; it is not SAM inference or real-subject segmentation evidence.",
   "families": [
     "masks",
     "subject-effects",

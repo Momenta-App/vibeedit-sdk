@@ -573,7 +573,7 @@
     {
       "id": "vibeedit://text/mogrt-3d-text",
       "name": "3D Text",
-      "description": "Source-preserved dimensional metal text effect rendered by the tracked VibeEdit 3D_TEXT HTML/CSS/JS implementation.",
+      "description": "Source-adapted dimensional metal text effect adapted from the tracked VibeEdit 3D_TEXT HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "dimensional-metal",
       "motion": "creed",
@@ -591,7 +591,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "dimensional-metal",
         "portable",
         "deterministic"
@@ -605,7 +605,7 @@
     {
       "id": "vibeedit://text/mogrt-above-in",
       "name": "ABOVE IN",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit ABOVE_IN HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit ABOVE_IN HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "wipe",
@@ -623,7 +623,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -637,7 +637,7 @@
     {
       "id": "vibeedit://text/mogrt-aesthetic-purple",
       "name": "Aesthetic Purple",
-      "description": "Source-preserved aesthetic glow text effect rendered by the tracked VibeEdit AESTHETIC_PURPLE HTML/CSS/JS implementation.",
+      "description": "Source-adapted aesthetic glow text effect adapted from the tracked VibeEdit AESTHETIC_PURPLE HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "aesthetic-glow",
       "motion": "glow",
@@ -655,7 +655,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "aesthetic-glow",
         "portable",
         "deterministic"
@@ -669,7 +669,7 @@
     {
       "id": "vibeedit://text/mogrt-aesthetic-strinking",
       "name": "Aesthetic Strinking",
-      "description": "Source-preserved aesthetic glow text effect rendered by the tracked VibeEdit AESTHETIC_STRINKING HTML/CSS/JS implementation.",
+      "description": "Source-adapted aesthetic glow text effect adapted from the tracked VibeEdit AESTHETIC_STRINKING HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "aesthetic-glow",
       "motion": "glow",
@@ -687,7 +687,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "aesthetic-glow",
         "portable",
         "deterministic"
@@ -701,7 +701,7 @@
     {
       "id": "vibeedit://text/mogrt-blur-in",
       "name": "BLUR IN",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit BLUR_IN HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit BLUR_IN HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "rise",
@@ -719,7 +719,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -733,7 +733,7 @@
     {
       "id": "vibeedit://text/mogrt-bottom-in",
       "name": "BOTTOM IN",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit BOTTOM_IN HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit BOTTOM_IN HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "wipe",
@@ -751,7 +751,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -765,7 +765,7 @@
     {
       "id": "vibeedit://text/mogrt-clean-blue",
       "name": "CLEAN BLUE",
-      "description": "Source-preserved apple clean text effect rendered by the tracked VibeEdit CLEAN_BLUE HTML/CSS/JS implementation.",
+      "description": "Source-adapted apple clean text effect adapted from the tracked VibeEdit CLEAN_BLUE HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "apple-clean",
       "motion": "rise",
@@ -783,7 +783,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "apple-clean",
         "portable",
         "deterministic"
@@ -797,7 +797,7 @@
     {
       "id": "vibeedit://text/mogrt-clean-style",
       "name": "CLEAN STYLE",
-      "description": "Source-preserved apple clean text effect rendered by the tracked VibeEdit CLEAN_STYLE HTML/CSS/JS implementation.",
+      "description": "Source-adapted apple clean text effect adapted from the tracked VibeEdit CLEAN_STYLE HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "apple-clean",
       "motion": "rise",
@@ -815,7 +815,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "apple-clean",
         "portable",
         "deterministic"
@@ -829,7 +829,7 @@
     {
       "id": "vibeedit://text/mogrt-clean-gradient",
       "name": "Clean gradient",
-      "description": "Source-preserved apple clean text effect rendered by the tracked VibeEdit Clean_gradient HTML/CSS/JS implementation.",
+      "description": "Source-adapted apple clean text effect adapted from the tracked VibeEdit Clean_gradient HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "apple-clean",
       "motion": "rise",
@@ -847,7 +847,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "apple-clean",
         "portable",
         "deterministic"
@@ -861,7 +861,7 @@
     {
       "id": "vibeedit://text/mogrt-elegant",
       "name": "ELEGANT",
-      "description": "Source-preserved elegant misc text effect rendered by the tracked VibeEdit ELEGANT HTML/CSS/JS implementation.",
+      "description": "Source-adapted elegant misc text effect adapted from the tracked VibeEdit ELEGANT HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "elegant-misc",
       "motion": "rise",
@@ -879,7 +879,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "elegant-misc",
         "portable",
         "deterministic"
@@ -893,7 +893,7 @@
     {
       "id": "vibeedit://text/mogrt-error-text",
       "name": "ERROR TEXT",
-      "description": "Source-preserved analog glitch text effect rendered by the tracked VibeEdit ERROR_TEXT HTML/CSS/JS implementation.",
+      "description": "Source-adapted analog glitch text effect adapted from the tracked VibeEdit ERROR_TEXT HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "analog-glitch",
       "motion": "glitch",
@@ -911,7 +911,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "analog-glitch",
         "portable",
         "deterministic"
@@ -925,7 +925,7 @@
     {
       "id": "vibeedit://text/mogrt-esmerald",
       "name": "Esmerald",
-      "description": "Source-preserved aesthetic glow text effect rendered by the tracked VibeEdit ESMERALD HTML/CSS/JS implementation.",
+      "description": "Source-adapted aesthetic glow text effect adapted from the tracked VibeEdit ESMERALD HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "aesthetic-glow",
       "motion": "glow",
@@ -943,7 +943,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "aesthetic-glow",
         "portable",
         "deterministic"
@@ -957,7 +957,7 @@
     {
       "id": "vibeedit://text/mogrt-fast",
       "name": "FAST",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit FAST HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit FAST HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "rise",
@@ -975,7 +975,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -989,7 +989,7 @@
     {
       "id": "vibeedit://text/mogrt-fire",
       "name": "Fire",
-      "description": "Source-preserved aesthetic glow text effect rendered by the tracked VibeEdit FIRE HTML/CSS/JS implementation.",
+      "description": "Source-adapted aesthetic glow text effect adapted from the tracked VibeEdit FIRE HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "aesthetic-glow",
       "motion": "glow",
@@ -1007,7 +1007,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "aesthetic-glow",
         "portable",
         "deterministic"
@@ -1021,7 +1021,7 @@
     {
       "id": "vibeedit://text/mogrt-futurist",
       "name": "FUTURIST",
-      "description": "Source-preserved rainbow trippy text effect rendered by the tracked VibeEdit FUTURIST HTML/CSS/JS implementation.",
+      "description": "Source-adapted rainbow trippy text effect adapted from the tracked VibeEdit FUTURIST HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "rainbow-trippy",
       "motion": "gradient",
@@ -1039,7 +1039,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "rainbow-trippy",
         "portable",
         "deterministic"
@@ -1053,7 +1053,7 @@
     {
       "id": "vibeedit://text/mogrt-gold-text",
       "name": "Gold Text",
-      "description": "Source-preserved dimensional metal text effect rendered by the tracked VibeEdit GOLD_TEXT HTML/CSS/JS implementation.",
+      "description": "Source-adapted dimensional metal text effect adapted from the tracked VibeEdit GOLD_TEXT HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "dimensional-metal",
       "motion": "creed",
@@ -1071,7 +1071,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "dimensional-metal",
         "portable",
         "deterministic"
@@ -1085,7 +1085,7 @@
     {
       "id": "vibeedit://text/mogrt-left-in",
       "name": "LEFT IN",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit LEFT_IN HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit LEFT_IN HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "wipe",
@@ -1103,7 +1103,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -1117,7 +1117,7 @@
     {
       "id": "vibeedit://text/mogrt-old-money",
       "name": "Old Money",
-      "description": "Source-preserved dimensional metal text effect rendered by the tracked VibeEdit OLD_MONEY HTML/CSS/JS implementation.",
+      "description": "Source-adapted dimensional metal text effect adapted from the tracked VibeEdit OLD_MONEY HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "dimensional-metal",
       "motion": "creed",
@@ -1135,7 +1135,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "dimensional-metal",
         "portable",
         "deterministic"
@@ -1149,7 +1149,7 @@
     {
       "id": "vibeedit://text/mogrt-opacity-in",
       "name": "OPACITY IN",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit OPACITY_IN HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit OPACITY_IN HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "rise",
@@ -1167,7 +1167,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -1181,7 +1181,7 @@
     {
       "id": "vibeedit://text/mogrt-right-in",
       "name": "RIGHT IN",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit RIGHT_IN HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit RIGHT_IN HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "wipe",
@@ -1199,7 +1199,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -1213,7 +1213,7 @@
     {
       "id": "vibeedit://text/mogrt-rebote",
       "name": "Reboot",
-      "description": "Source-preserved elegant misc text effect rendered by the tracked VibeEdit Rebote HTML/CSS/JS implementation.",
+      "description": "Source-adapted elegant misc text effect adapted from the tracked VibeEdit Rebote HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "elegant-misc",
       "motion": "rise",
@@ -1231,7 +1231,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "elegant-misc",
         "portable",
         "deterministic"
@@ -1245,7 +1245,7 @@
     {
       "id": "vibeedit://text/mogrt-smooth-bounce",
       "name": "SMOOTH BOUNCE",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit SMOOTH_BOUNCE HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit SMOOTH_BOUNCE HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "pop",
@@ -1263,7 +1263,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -1277,7 +1277,7 @@
     {
       "id": "vibeedit://text/mogrt-smooth-opacity",
       "name": "SMOOTH OPACITY",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit SMOOTH_OPACITY HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit SMOOTH_OPACITY HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "rise",
@@ -1295,7 +1295,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -1309,7 +1309,7 @@
     {
       "id": "vibeedit://text/mogrt-smooth-up",
       "name": "SMOOTH UP",
-      "description": "Source-preserved simple motion text effect rendered by the tracked VibeEdit SMOOTH_UP HTML/CSS/JS implementation.",
+      "description": "Source-adapted simple motion text effect adapted from the tracked VibeEdit SMOOTH_UP HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "simple-motion",
       "motion": "rise",
@@ -1327,7 +1327,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "simple-motion",
         "portable",
         "deterministic"
@@ -1341,7 +1341,7 @@
     {
       "id": "vibeedit://text/mogrt-triple-elegant-text",
       "name": "TRIPLE ELEGANT TEXT",
-      "description": "Source-preserved elegant misc text effect rendered by the tracked VibeEdit TRIPLE_ELEGANT_TEXT HTML/CSS/JS implementation.",
+      "description": "Source-adapted elegant misc text effect adapted from the tracked VibeEdit TRIPLE_ELEGANT_TEXT HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "elegant-misc",
       "motion": "rise",
@@ -1359,7 +1359,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "elegant-misc",
         "portable",
         "deterministic"
@@ -1373,7 +1373,7 @@
     {
       "id": "vibeedit://text/mogrt-warp",
       "name": "WARP",
-      "description": "Source-preserved water warp text effect rendered by the tracked VibeEdit WARP HTML/CSS/JS implementation.",
+      "description": "Source-adapted water warp text effect adapted from the tracked VibeEdit WARP HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "water-warp",
       "motion": "morph",
@@ -1391,7 +1391,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "water-warp",
         "portable",
         "deterministic"
@@ -1405,7 +1405,7 @@
     {
       "id": "vibeedit://text/mogrt-apple-ladder",
       "name": "apple LADDER",
-      "description": "Source-preserved apple clean text effect rendered by the tracked VibeEdit apple_LADDER HTML/CSS/JS implementation.",
+      "description": "Source-adapted apple clean text effect adapted from the tracked VibeEdit apple_LADDER HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "apple-clean",
       "motion": "rise",
@@ -1423,7 +1423,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "apple-clean",
         "portable",
         "deterministic"
@@ -1437,7 +1437,7 @@
     {
       "id": "vibeedit://text/mogrt-apple-smooth",
       "name": "apple smooth",
-      "description": "Source-preserved apple clean text effect rendered by the tracked VibeEdit apple_smooth HTML/CSS/JS implementation.",
+      "description": "Source-adapted apple clean text effect adapted from the tracked VibeEdit apple_smooth HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "apple-clean",
       "motion": "rise",
@@ -1455,7 +1455,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "apple-clean",
         "portable",
         "deterministic"
@@ -1469,7 +1469,7 @@
     {
       "id": "vibeedit://text/mogrt-dark-water",
       "name": "dark water",
-      "description": "Source-preserved water warp text effect rendered by the tracked VibeEdit dark_water HTML/CSS/JS implementation.",
+      "description": "Source-adapted water warp text effect adapted from the tracked VibeEdit dark_water HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "water-warp",
       "motion": "morph",
@@ -1487,7 +1487,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "water-warp",
         "portable",
         "deterministic"
@@ -1501,7 +1501,7 @@
     {
       "id": "vibeedit://text/mogrt-fluorscent",
       "name": "Fluorscent",
-      "description": "Source-preserved aesthetic glow text effect rendered by the tracked VibeEdit fluorscent HTML/CSS/JS implementation.",
+      "description": "Source-adapted aesthetic glow text effect adapted from the tracked VibeEdit fluorscent HTML/CSS/JS implementation.",
       "kind": "text",
       "family": "aesthetic-glow",
       "motion": "glow",
@@ -1519,7 +1519,7 @@
       "tags": [
         "text",
         "motion-title",
-        "canonical-source-clone",
+        "portable-source-adaptation",
         "aesthetic-glow",
         "portable",
         "deterministic"

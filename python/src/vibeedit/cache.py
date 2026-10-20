@@ -10,10 +10,15 @@ from vibeedit.spec import JSONObject
 from vibeedit.validation import canonical_json
 
 
-def cache_root() -> Path:
+def cache_root(base: str | Path | None = None) -> Path:
     configured = os.environ.get("VIBEEDIT_CACHE_DIR")
     if configured:
         return Path(configured).expanduser()
+    if base is not None:
+        directory = Path(base).resolve()
+        for project in (directory, *directory.parents):
+            if (project / "project.vibeedit.json").is_file() or (project / ".vibeedit" / "tools").is_dir():
+                return project / ".vibeedit" / "cache"
     if os.name == "nt":
         return Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local")) / "VibeEdit" / "Cache"
     if sys_platform() == "darwin":
@@ -45,9 +50,9 @@ def write_artifact_provenance(path: str | Path, provenance: JSONObject) -> Path:
     return output
 
 
-def restore_cached_artifact(operation: str, key: str, destination: str | Path) -> bool:
+def restore_cached_artifact(operation: str, key: str, destination: str | Path, *, base: str | Path | None = None) -> bool:
     target = Path(destination)
-    cached = cache_root() / "artifacts" / Path(*operation.split(".")) / f"{key}{target.suffix}"
+    cached = cache_root(base) / "artifacts" / Path(*operation.split(".")) / f"{key}{target.suffix}"
     checksum = cached.with_suffix(cached.suffix + ".sha256")
     if not cached.is_file() or not checksum.is_file() or checksum.read_text(encoding="utf-8").strip() != hashlib.sha256(cached.read_bytes()).hexdigest():
         return False
@@ -56,9 +61,9 @@ def restore_cached_artifact(operation: str, key: str, destination: str | Path) -
     return True
 
 
-def store_cached_artifact(operation: str, key: str, source: str | Path) -> Path:
+def store_cached_artifact(operation: str, key: str, source: str | Path, *, base: str | Path | None = None) -> Path:
     artifact = Path(source)
-    cached = cache_root() / "artifacts" / Path(*operation.split(".")) / f"{key}{artifact.suffix}"
+    cached = cache_root(base) / "artifacts" / Path(*operation.split(".")) / f"{key}{artifact.suffix}"
     cached.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(artifact, cached)
     cached.with_suffix(cached.suffix + ".sha256").write_text(hashlib.sha256(cached.read_bytes()).hexdigest() + "\n", encoding="utf-8")

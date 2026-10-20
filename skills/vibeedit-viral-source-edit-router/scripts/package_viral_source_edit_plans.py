@@ -17,8 +17,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-DEFAULT_CORPUS = Path("fan_Edit_Data/workspace/reference-corpora/creed-analysis-dataset")
-DEFAULT_OUT = DEFAULT_CORPUS / "derived/viral-source-edit-gauntlet"
 PROOF_STATES = [
     "learned",
     "inferred",
@@ -96,8 +94,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Generate dry-run viral source edit planning packages.")
     parser.add_argument("--source", help="Optional source/movie manifest JSON.")
     parser.add_argument("--song", help="Optional song manifest JSON.")
-    parser.add_argument("--creed-corpus", default=str(DEFAULT_CORPUS), help="Optional Creed corpus root.")
-    parser.add_argument("--out-dir", default=str(DEFAULT_OUT), help="Output directory for generated packages.")
+    parser.add_argument("--creed-corpus", default=None, help="Optional Creed corpus root.")
+    parser.add_argument("--out-dir", required=True, help="Output directory for generated packages.")
     parser.add_argument("--package-id", help="Optional package id for input mode.")
     parser.add_argument("--sample-creed", action="store_true", help="Generate several dry-run sample packages from Creed learned evidence.")
     parser.add_argument("--limit", type=int, default=4, help="Sample package count.")
@@ -105,6 +103,8 @@ def parse_args():
 
 
 def generate_sample_packages(args, out_dir: Path):
+    if not args.creed_corpus:
+        raise ValueError("--sample-creed requires an explicit permitted --creed-corpus")
     corpus = load_creed_corpus(Path(args.creed_corpus))
     selected = LANE_PRESETS[: max(1, args.limit)]
     return [write_package(out_dir, build_sample_plan(corpus, lane, index)) for index, lane in enumerate(selected)]
@@ -706,7 +706,7 @@ def candidate_id(item):
 
 def write_package(out_dir: Path, plan):
     package_dir = out_dir / slugify(plan["package_id"])
-    package_dir.mkdir(parents=True, exist_ok=True)
+    package_dir.mkdir(parents=True, exist_ok=False)
     file_map = {
         "index": "index.json",
         "memory": "memory.json",

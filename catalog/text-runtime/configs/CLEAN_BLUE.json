@@ -167,7 +167,7 @@
     "lines": [
       {
         "text": "Clean",
-        "font": "mytupiBOLD.ttf",
+        "font": "BebasNeue-Regular.ttf",
         "color": [
           255,
           255,
@@ -182,7 +182,7 @@
       },
       {
         "text": "blue",
-        "font": "mytupiBOLD.ttf",
+        "font": "BebasNeue-Regular.ttf",
         "color": [
           30,
           150,

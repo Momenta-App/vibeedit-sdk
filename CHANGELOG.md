@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0-beta.1 (unreleased candidate)
+
+- Add content-bound portable projects, native source clocks, revisioned corrections, indexed face-package import and focused local review tools.
+- Add explicit TransNet/SAM model packs, reviewed mask artifacts and source-acquisition receipts.
+- Add thin Myriograph customer clients and optional Pi workers/durable goals with BYOK and managed prepaid access. Customer backend deployment and full launch qualification remain pending.
+- Adapt 44 creative skills for portable use, add caption/dialogue templates and recoverable skill installation.
+- License owned code under MIT and replace unqualified legacy fonts with pinned OFL fonts; font appearance changes are explicit adaptations.
+
+
 ## 0.1.0-beta.4
 
 - Package the accelerated CEF browser renderer, Rust/Metal/VideoToolbox bridge sources, exact browser timing adapter, and warm worker.

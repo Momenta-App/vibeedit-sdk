@@ -5,6 +5,15 @@ description: Structure fan edits around source quotes, song starts and stops, ly
 
 # VibeEdit Quote Audio Structure
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill when a fan edit should include iconic source dialogue, song interruptions, quote hooks, or lyric-driven storytelling.
 
 ## Core Rule
@@ -22,9 +31,7 @@ Do not let the song run mindlessly. Strong edits often start with a quote, enter
 
 ## Creed Supporting Quote Library
 
-For Creed short edits, the current curated supporting quote library is:
-
-`fan_Edit_Data/workspace/projects/f7216bfb-3bfd-4182-bc23-0607fcac97ae/renders/creed-supporting-quotes/quote-audio-manifest.json`
+For Creed or other short edits, the user must supply a permitted project-local supporting-quote manifest with exact source hashes, original-clock ranges and allowed use. The package does not contain a quote library.
 
 Use only active `quotes[]` from that manifest. Do not use entries in `removed_quotes[]`.
 
@@ -36,7 +43,7 @@ Use only active `quotes[]` from that manifest. Do not use entries in `removed_qu
 
 ## Audio Rules
 
-- Use AssemblyAI transcript for quote words and timing.
+- Use the Myriograph public `analyze speakers` service (with an explicitly authorized retail ceiling) transcript for quote words and timing.
 - Use source audio only when it is iconic enough to justify interrupting the music.
 - Duck or cut the song under quotes; do not make speech compete with vocals.
 - For supporting quote interruptions, record whether the music is muted, paused, or ducked, and include the ramp-back duration.

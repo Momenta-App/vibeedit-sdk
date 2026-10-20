@@ -5,6 +5,15 @@ description: Route natural Creed fan-edit requests like "make me a Creed edit" i
 
 # VibeEdit Creed Edit
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill for natural Creed edit requests, especially broad asks such as "make me a Creed edit", "Creed action edit", "Creed music edit", "viral Creed edit", or "use the Creed movies with a song".
 
 This is a thin production-visible router. It does not replace the fan-edit, Creed analysis, sound, effects, render, or review skills. It selects the workflow, sets defaults, and keeps proof boundaries honest.
@@ -32,28 +41,27 @@ Unless the user asks otherwise, build a hook + body Creed edit using `CreedEditS
 - Prioritize boxing, training, entrances, stare-downs, impacts, knockdowns, exhausted recovery, comeback pressure, and quiet aftershock.
 - Target sub-60-second social delivery unless the project or user specifies another runtime or aspect ratio.
 
-If the user explicitly asks for Creed kinetic text, captions, lyrics, or quote typography, route to `vibeedit-creed-kinetic-text` after source and audio timing are selected. Do not load or use the text skill for the default no-text edit.
+If the user explicitly asks for Creed kinetic text, captions, lyrics, or quote typography, route to `fanedit-text` after source and audio timing are selected. Do not load or use the text skill for the default no-text edit.
 
 ## Discovery First
 
 Discover current paths before planning. Do not rely on memory or hard-coded ids unless current files confirm them.
 
-Check likely roots:
+Inspect the active project first:
 
 ```bash
-find fan_Edit_Data/workspace -maxdepth 5 \( -iname '*Creed*.mp4' -o -iname '*creed*.mp4' \) -print
-find fan_Edit_Data/workspace -maxdepth 5 \( -iname '*beatmap*.json' -o -iname '*layer1*.json' -o -iname '*transcript*.json' -o -iname '*story_moments*.json' \) -print
-find fan_Edit_Data/workspace/reference-corpora/creed-viral -maxdepth 3 -type f | sed -n '1,120p'
-find fan_Edit_Data/workspace -maxdepth 5 \( -iname 'status.json' -o -iname 'run_summary.json' -o -iname 'source_meta.json' -o -iname 'provider_media.json' \) -print
+vibeedit project inspect "$PROJECT" --json
 ```
+
+Resolve registered source IDs and analysis receipts inside that project. A user-supplied permitted corpus may supplement it; never search a private desktop corpus or invent missing source files.
 
 Use confirmed paths for:
 
 - Source movies: `Creed 1.mp4`, `Creed 2.mp4`, `Creed 3.mp4`, or whichever Creed files are actually present.
 - Production-analysis artifacts: transcripts, shot boundaries, scene/semantic summaries, VEV1/person/face data, motion or audio markers, thumbnails/contact sheets.
-- Reference corpus: `fan_Edit_Data/workspace/reference-corpora/creed-viral` when present.
+- Reference corpus: the user-supplied project-local reference corpus, when present.
 - Song inputs and analysis: selected music file, beatmap, Layer 1, waveform/onset data, and crop candidates.
-- Curated supporting quotes: `fan_Edit_Data/workspace/projects/f7216bfb-3bfd-4182-bc23-0607fcac97ae/renders/creed-supporting-quotes/quote-audio-manifest.json` when present. Use active `quotes[]` only; ignore `removed_quotes[]`.
+- Curated supporting quotes: the user-supplied permitted project-local quote manifest when present. Use active `quotes[]` only; ignore `removed_quotes[]`.
 - Existing workspace/project outputs, render history, and accepted prior manifests.
 
 If a required source, song, transcript, beatmap, or renderer is missing, report the missing item and keep the state `planned` or `blocked`. Do not invent timestamps, clips, audio assets, or renders.
@@ -65,7 +73,7 @@ If a required source, song, transcript, beatmap, or renderer is missing, report 
 3. Load `vibeedit-creed-viral-edit-analysis` to choose movie-local source moments from current media and analysis artifacts.
 4. Load `fanedit-body` for the no-text music/action body.
 5. Load `vibeedit-quote-audio-structure` when adding optional supporting quote interruptions from the curated Creed quote manifest.
-6. Load `vibeedit-punch-sfx-library` for every boxing punch, bag hit, block, and heavy-face impact SFX selection.
+6. Load `sound-design` and select user-provided approved punch assets or SDK procedural impact SFX. Retain categories, gain and sync records; procedural audio must be labeled generated, not a library sample.
 7. Load `sound-design` for song crop, silence, non-punch SFX, whooshes, hits, ducking, ramp-backs, and mix hierarchy.
 8. Load `vibeedit-effects-punctuation`, transition, masking, or subject-effect skills only for effects that will be materially implemented.
 9. Load `vibeedit-python-analysis-rendering` or the current render implementation only after concrete clips, audio ranges, and effects exist.
@@ -90,10 +98,8 @@ Default theme lane: `prove_yourself` or `legacy_pressure`, selected from the str
 
 Treat the song as an editable source, not a full-track obligation.
 
-- For the current Creed hook/body workflow, discover and use `CreedEditSong` at `fan_Edit_Data/workspace/media/8cc86491-f6ca-46f3-b1cc-924ba0fd07f8/CreedEditSong.MP3`.
-- Use `fan_Edit_Data/workspace/outputs/untitled-05-beat-labeling/main_beat_map.json` and `labels.json` as the human-reviewed `CreedEditSong` heavy/light body map, despite the historical folder name.
-- Use `fan_Edit_Data/workspace/media/8cc86491-f6ca-46f3-b1cc-924ba0fd07f8/analysis/audio/intro_loop_editing_notes.json` to preserve the final intro lead-in `16.8577-21.8964s` inside the portion that plays under the hook.
-- Aim the body entry at the first labeled heavy beat around `21.961s` in the song source, mapped to the hook-end timeline.
+- Use the user's selected permitted song and its current content-bound reviewed beat labels. No CreedEditSong file, corpus or beat map is bundled.
+- Choose the first strong reviewed body-entry beat and protect the preceding lead-in. Historical numbers below (21.961s body entry; 16.8577–21.8964s protected lead-in) describe one old recipe, not universal timestamps; substitute this song's reviewed values.
 - During the hook quote, play the intro-loop portion of `CreedEditSong` under the dialogue at half volume or lower; lower it when ASR or listening review says the quote is competing with the song.
 - Fit hook length by trimming only from the beginning of the song audio. If the hook is `H` seconds long and the target body beat is `21.961s`, the intro song source range should end at `21.961s` and start near `21.961 - H`. Do not wait on the timeline with a music-only bridge just to reach `21.961s`.
 - The hook/body timeline handoff is the hook end. The song body starts there with source time `21.961s`, and the package must record the hook duration, source trim start, song body-entry time, and frame/sample delta.
@@ -111,7 +117,7 @@ Do not call schedule math proof. A punch-sync or beat-sync claim is only proven 
 
 Supporting quotes are optional flavor for short videos, not required structure. Use them sometimes when they deepen the current theme lane and the edit can return to the body cleanly.
 
-- Source them from `fan_Edit_Data/workspace/projects/f7216bfb-3bfd-4182-bc23-0607fcac97ae/renders/creed-supporting-quotes/quote-audio-manifest.json`.
+- Source them from the user-supplied permitted project-local quote manifest.
 - Use active manifest `quotes[]` only. Do not use removed entries.
 - Short/high-energy quotes can punctuate the body: pause or heavily duck the song, slow the matching source video for the quote, then ramp the music back up into a beat, punch, or action shot.
 - Medium quotes should be audio-first: begin the quote over a slowed bridge, reaction, or darkened action shot with the song muted/ducked; reveal the matching quote video only for the final few words.
@@ -124,7 +130,7 @@ Supporting quotes are optional flavor for short videos, not required structure. 
 SFX are expected for this router unless the user asks for a clean music-only edit, but they must be concrete:
 
 - Do not use flashing, white flash frames, flash transitions, or flash-subject-transition skills in the current CreedEditSong mode.
-- Punch hits must use `vibeedit-punch-sfx-library` and the approved manifest at `fan_Edit_Data/workspace/outputs/punch-hit-impact-sfx-flat/approved/Punches-individual-flat/approved-punch-sfx-manifest.json`.
+- Punch hits use `sound-design` and the user-supplied approved punch manifest, or explicit SDK procedural impact SFX. Never imply a private punch library ships with the package.
 - Use `bag_block` assets for bag hits and blocks, `heavyface` assets for `heavy_face_punch`, and `normal` assets for normal/lighter punch contact.
 - Use `whoosh_miss` assets only as supplementary air/miss support when an already selected clip needs that sound to make a rapid punch sequence work. Do not choose a clip because it is a miss/whoosh.
 - Cycle category-locally so the same approved punch asset is not used twice in a row inside its category.

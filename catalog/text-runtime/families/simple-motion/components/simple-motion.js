@@ -3,10 +3,10 @@ const H = 360;
 const FPS = 30;
 
 const fontFiles = {
-  "Mytupi-Bold": "mytupiBOLD.ttf",
-  "AVANTE": "AVANTE.otf",
-  "Bebas-Regular": "Bebas-Regular.otf",
-  "BirdsofParadise-PersonaluseOnly": "Birds-of-Paradise.ttf",
+  "Mytupi-Bold": "BebasNeue-Regular.ttf",
+  "AVANTE": "Montserrat-Variable.ttf",
+  "Bebas-Regular": "BebasNeue-Regular.ttf",
+  "BirdsofParadise-PersonaluseOnly": "GreatVibes-Regular.ttf",
   "Poppins-Black": "Poppins-Black.ttf",
   "Poppins-BlackItalic": "Poppins-BlackItalic.ttf"
 };

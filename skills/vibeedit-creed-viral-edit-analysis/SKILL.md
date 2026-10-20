@@ -5,9 +5,18 @@ description: Analyze Creed movie source media and production-analysis artifacts 
 
 # VibeEdit Creed Viral Edit Analysis
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill when planning, auditing, or learning from Creed-focused viral fan edits. It owns source-moment analysis, quote/source matching, narrative structure, recurring Creed motifs, and recommendations for which movie timestamps should be used for a story-driven edit.
 
-This is not a typography or render skill. Use `vibeedit-creed-kinetic-text` only after source moments and quotes are selected and the task is specifically about Creed-style kinetic text rendering.
+This is not a typography or render skill. Use `fanedit-text` only after source moments and quotes are selected and the task is specifically about Creed-style kinetic text rendering.
 
 ## Scope
 

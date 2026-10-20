@@ -1,0 +1,66 @@
+{
+  "mlx-community/sam3.1-bf16": {
+    "revision": "a992e302ea9b0f03f41dfd93414a4fd0e818f65b",
+    "files": [
+      {
+        "path": "README.md",
+        "url": "https://huggingface.co/mlx-community/sam3.1-bf16/resolve/a992e302ea9b0f03f41dfd93414a4fd0e818f65b/README.md",
+        "bytes": 4746,
+        "sha256": "87a23319470faac70681387b3bf17ca33bd6c7501d3104fb3dd9a4df00e9c309"
+      },
+      {
+        "path": "config.json",
+        "url": "https://huggingface.co/mlx-community/sam3.1-bf16/resolve/a992e302ea9b0f03f41dfd93414a4fd0e818f65b/config.json",
+        "bytes": 25818,
+        "sha256": "898d892490cdbaefc9a7a6ba2ae5ce5b7f93915a2aa8d6d0d5601417ca0b4b03"
+      },
+      {
+        "path": "model.safetensors",
+        "url": "https://huggingface.co/mlx-community/sam3.1-bf16/resolve/a992e302ea9b0f03f41dfd93414a4fd0e818f65b/model.safetensors",
+        "bytes": 3493016552,
+        "sha256": "a1b1c19dcc9bdd68438bcd74433fadc90740e73c37a1f386872672d134879c42"
+      }
+    ]
+  },
+  "openai/clip-vit-base-patch32": {
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "files": [
+      {
+        "path": "merges.txt",
+        "url": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/merges.txt",
+        "bytes": 524657,
+        "sha256": "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85"
+      },
+      {
+        "path": "special_tokens_map.json",
+        "url": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/special_tokens_map.json",
+        "bytes": 389,
+        "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "url": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/tokenizer_config.json",
+        "bytes": 592,
+        "sha256": "34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad"
+      },
+      {
+        "path": "vocab.json",
+        "url": "https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/vocab.json",
+        "bytes": 862328,
+        "sha256": "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363"
+      }
+    ]
+  },
+  "sam-license": {
+    "path": "SAM-LICENSE",
+    "url": "https://raw.githubusercontent.com/facebookresearch/sam3/7f473cfd983d5eb43040ff608f66bff0d7bdcb53/LICENSE",
+    "bytes": 7353,
+    "sha256": "4dea99bfaa016e21bc860d73f344236bd1e5c4977d1a9a8fd32f822b500ae1be"
+  },
+  "mlx-vlm-runtime": {
+    "version": "0.7.6",
+    "url": "https://files.pythonhosted.org/packages/8c/77/407c016eebabb69d64b608e86149453986d72bf313006116cc5f92d48bcc/mlx_vlm-0.7.6-py3-none-any.whl",
+    "sha256": "17fad1745e6c43dc0fd4d3b8593967b29928a1da5dbf6f781ca783922f68115d",
+    "bytes": 3159230
+  }
+}

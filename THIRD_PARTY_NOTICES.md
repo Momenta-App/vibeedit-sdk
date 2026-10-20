@@ -58,3 +58,15 @@ optional integrations under their own terms rather than VibeEdit-owned assets.
 `vibeedit setup --cef` explicitly downloads CEF 144.0.30+g9e70dde with Chromium 144.0.7559.257 from https://cef-builds.spotifycdn.com/. SHA-256: `74a0b4495ff0985105e64a584efbb1ac1375bb97a3c6e92050dd4ac7277c9960`. CEF uses its BSD license; Chromium includes additional third-party licenses. The upstream CEF LICENSE.txt is retained beside the built runtime, and the upstream framework resources retain Chromium credits. CEF and its binaries are not bundled in the Python wheel or npm package.
 
 GSAP 3.13.0 is included in the renderer source qualification fixture. Copyright 2025 GreenSock; standard license: https://gsap.com/standard-license. The original source header is retained.
+
+
+## Agent package font policy
+
+Poppins, Abril Fatface, Bebas Neue, Great Vibes and Montserrat are distributed
+under SIL Open Font License 1.1. Original OFL notices accompany the files in
+`catalog/text-runtime/assets/fonts/`. `font-provenance.json` pins exact Google
+Fonts source revision, bytes, digests, notices and legacy replacements. Former
+AVANTE, Bebas-Regular, Birds of Paradise, BucklaneScript and Mytupi binaries are
+removed from this package candidate. Affected designs intentionally use these
+OFL replacements; historical pixel-fidelity evidence does not qualify the new
+font appearance. VibeEdit's MIT license does not relicense fonts or model weights.

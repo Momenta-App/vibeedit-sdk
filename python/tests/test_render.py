@@ -240,7 +240,9 @@ def test_mixed_source_video_and_html_overlay_renders(tmp_path: Path):
         ],
         check=True,
     )
-    spec["sources"] = [{"id": "source", "kind": "video", "uri": str(source), "identity": {"algorithm": "sha256", "value": "generated-test-source"}, "durationFrames": 90, "license": {"status": "generated", "commercialOutputAllowed": True, "redistributionAllowed": True}}]
+    import hashlib
+
+    spec["sources"] = [{"id": "source", "kind": "video", "uri": str(source), "identity": {"algorithm": "sha256", "value": hashlib.sha256(source.read_bytes()).hexdigest()}, "durationFrames": 90, "license": {"status": "generated", "commercialOutputAllowed": True, "redistributionAllowed": True}}]
     next(track for track in spec["timeline"]["tracks"] if track["kind"] == "video")["items"] = [{"id": "clip", "kind": "video", "placement": {"startFrame": 0, "durationFrames": 90}, "source": {"sourceId": "source", "inFrame": 0, "durationFrames": 90}, "effects": []}]
     next(track for track in spec["timeline"]["tracks"] if track["kind"] == "motion")["items"][0]["props"]["background"] = "transparent"
     output = render(spec, tmp_path / "mixed-source.mp4")
@@ -331,3 +333,85 @@ def test_render_cache_records_reproducible_provenance(tmp_path: Path, monkeypatc
     assert second_record["cacheHit"] is True
     assert first_record["cacheKey"] == second_record["cacheKey"]
     assert first_record["output"]["sha256"] == second_record["output"]["sha256"]
+
+
+def test_project_render_cache_stays_inside_workspace(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    from vibeedit.cache import cache_root
+
+    monkeypatch.delenv("VIBEEDIT_CACHE_DIR", raising=False)
+    project = tmp_path / "project"
+    (project / "compositions").mkdir(parents=True)
+    (project / "project.vibeedit.json").write_text("{}")
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec["canvas"].update({"width": 64, "height": 64})
+    spec["durationFrames"] = 3
+    spec["timeline"]["tracks"] = []
+    spec["cache"] = {"enabled": True, "namespace": "workspace-cache"}
+    path = project / "compositions" / "main.json"
+    path.write_text(json.dumps(spec))
+    first = render(path, project / "first.mp4")
+    second = render(path, project / "second.mp4")
+    assert cache_root(path.parent) == project / ".vibeedit" / "cache"
+    assert cache_root() != cache_root(path.parent)
+    assert list((project / ".vibeedit" / "cache" / "renders").glob("*.mp4"))
+    assert json.loads(second.with_suffix(".mp4.vibeedit.json").read_text())["cacheHit"] is True
+    assert first.read_bytes() == second.read_bytes()
+
+
+def test_difference_motion_inverts_real_video_only_under_alpha(tmp_path: Path):
+    import subprocess
+
+    pytest.importorskip("playwright.sync_api")
+    source = tmp_path / "red.mp4"
+    subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "color=red:s=160x90:r=30:d=0.4", "-f", "lavfi", "-i", "sine=frequency=880:duration=0.4", "-c:v", "libx264", "-c:a", "aac", "-shortest", str(source)], check=True)
+    spec = json.loads(data_path("schema", "fixtures", "mixed.json").read_text())
+    spec["canvas"].update(width=160, height=90)
+    spec["durationFrames"] = 12
+    spec["cache"]["enabled"] = False
+    spec["sources"] = [{"id": "source", "kind": "video", "uri": str(source), "identity": {"algorithm": "generated", "value": "red"}, "durationFrames": 12}]
+    spec["render"]["motionBlendMode"] = "difference"
+    spec["timeline"]["tracks"] = [
+        {"id": "picture", "kind": "video", "order": 0, "items": [{"id": "picture", "kind": "video", "placement": {"startFrame": 0, "durationFrames": 12}, "source": {"sourceId": "source", "inFrame": 0, "durationFrames": 12}, "effects": []}]},
+        {"id": "invert", "kind": "motion", "order": 1, "items": [{"id": "mask", "kind": "motion", "placement": {"startFrame": 0, "durationFrames": 12}, "componentId": "vibeedit://motion/html-css", "renderer": "html", "transparent": True, "props": {"html": '<div class="solid"></div><div class="half"></div>', "css": '.solid,.half{position:absolute;top:0;width:40px;height:90px;background:white}.solid{left:40px}.half{left:80px;opacity:.5}'}}]},
+    ]
+    from vibeedit import plan_revision, render_revision
+
+    previous = json.loads(json.dumps(spec))
+    previous["render"]["motionBlendMode"] = "normal"
+    plain = render(previous, tmp_path / "plain.mp4")
+    plan = plan_revision(previous, spec)
+    assert plan["revisionKind"] == "full"
+    graph = {node["id"]: node["hash"] for node in plan["dependencyGraph"]["nodes"]}
+    old_graph = {node["id"]: node["hash"] for node in plan_revision(previous, previous)["dependencyGraph"]["nodes"]}
+    assert graph["composite:video"] != old_graph["composite:video"]
+    output = render_revision(previous, spec, plain, tmp_path / "inverted.mp4")
+    raw = subprocess.check_output(["ffmpeg", "-v", "error", "-i", str(output), "-frames:v", "1", "-f", "rawvideo", "-pix_fmt", "rgb24", "pipe:1"])
+    def pixel(x):
+        offset = (45*160+x)*3
+        return tuple(raw[offset:offset+3])
+    assert pixel(20)[0] > 240 and max(pixel(20)[1:]) < 10
+    assert pixel(60)[0] < 10 and min(pixel(60)[1:]) > 240
+    assert all(115 < channel < 140 for channel in pixel(100))
+    assert verify_output(output, {"hasVideo": True, "hasAudio": True, "width": 160, "height": 90}).passed
+
+
+def test_changed_source_cannot_reuse_an_old_render_cache(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    import hashlib
+    import subprocess
+
+    monkeypatch.setenv("VIBEEDIT_CACHE_DIR", str(tmp_path / "cache"))
+    source = tmp_path / "source.mp4"
+    subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "color=red:s=64x64:r=30:d=0.1", "-c:v", "libx264", str(source)], check=True)
+    spec = json.loads(data_path("schema", "fixtures", "minimal.json").read_text())
+    spec["canvas"].update(width=64, height=64)
+    spec["durationFrames"] = 3
+    spec["cache"] = {"enabled": True}
+    spec["sources"] = [{"id": "source", "kind": "video", "uri": str(source), "identity": {"algorithm": "sha256", "value": hashlib.sha256(source.read_bytes()).hexdigest()}, "durationFrames": 3}]
+    spec["timeline"]["tracks"] = [{"id": "picture", "kind": "video", "order": 0, "items": [{"id": "clip", "kind": "video", "placement": {"startFrame": 0, "durationFrames": 3}, "source": {"sourceId": "source", "inFrame": 0, "durationFrames": 3}, "effects": []}]}]
+    original = render(spec, tmp_path / "original.mp4")
+    digest = hashlib.sha256(original.read_bytes()).hexdigest()
+    source.write_bytes(source.read_bytes() + b"changed source identity")
+    with pytest.raises(ValueError, match="Source content changed"):
+        render(spec, tmp_path / "stale-cache.mp4")
+    assert not (tmp_path / "stale-cache.mp4").exists()
+    assert hashlib.sha256(original.read_bytes()).hexdigest() == digest

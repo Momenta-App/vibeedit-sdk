@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "vibeedit.captionInput.v1",
+  "meaning": "Synthetic layout labels, not spoken or transcribed dialogue. User production requires user-supplied source-time words.",
+  "words": [
+    {
+      "id": "word-0",
+      "text": "Make",
+      "startUs": 0,
+      "endUs": 600000
+    },
+    {
+      "id": "word-1",
+      "text": "room",
+      "startUs": 600000,
+      "endUs": 1200000
+    },
+    {
+      "id": "word-2",
+      "text": "for",
+      "startUs": 1200000,
+      "endUs": 1800000
+    },
+    {
+      "id": "word-3",
+      "text": "the",
+      "startUs": 1800000,
+      "endUs": 2400000
+    },
+    {
+      "id": "word-4",
+      "text": "work.",
+      "startUs": 2400000,
+      "endUs": 3000000
+    }
+  ]
+}

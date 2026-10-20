@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibeedit.com/schema/mask-index-v1.json",
+  "title": "Native source-bound SAM mask candidate index",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "ok",
+    "state",
+    "cacheKey",
+    "modelPack",
+    "runnerVersion",
+    "definitionSha256",
+    "modelFiles",
+    "runtime",
+    "source",
+    "clock",
+    "prompt",
+    "frameSelection",
+    "geometry",
+    "frames",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "vibeedit.masks.v1"
+    },
+    "ok": {
+      "const": true
+    },
+    "state": {
+      "const": "needs-review"
+    },
+    "cacheKey": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "modelPack": {
+      "enum": [
+        "sam21",
+        "sam31-mlx"
+      ]
+    },
+    "runnerVersion": {
+      "type": "string"
+    },
+    "definitionSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "modelFiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "bytes",
+          "sha256"
+        ]
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": [
+        "device"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "sha256",
+        "byteLength",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "clock": {
+      "type": "object",
+      "required": [
+        "timeBase",
+        "originPts",
+        "videoStreamIndex",
+        "nativeFrameCount"
+      ],
+      "properties": {
+        "timeBase": {
+          "type": "object",
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "properties": {
+            "numerator": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "denominator": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "originPts": {
+          "type": "integer"
+        },
+        "videoStreamIndex": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nativeFrameCount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "prompt": {
+      "type": "object"
+    },
+    "frameSelection": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "required": [
+        "coordinateSpace",
+        "crop",
+        "resize"
+      ],
+      "properties": {
+        "coordinateSpace": {
+          "const": "native-source-pixels"
+        },
+        "crop": {
+          "type": "null"
+        },
+        "resize": {
+          "type": "null"
+        }
+      }
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "frameOrdinal",
+          "pts",
+          "startUs",
+          "candidates",
+          "status",
+          "endUs",
+          "endPtsExclusive",
+          "nativeDurationPts",
+          "timingQuality"
+        ],
+        "properties": {
+          "frameOrdinal": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "pts": {
+            "type": "integer"
+          },
+          "startUs": {
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "needs-review",
+              "no-detection"
+            ]
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "candidate",
+                "score",
+                "file",
+                "sha256",
+                "areaPixels"
+              ],
+              "properties": {
+                "candidate": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "score": {
+                  "type": "number"
+                },
+                "file": {
+                  "type": "string"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "areaPixels": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "endUs": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "endPtsExclusive": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "nativeDurationPts": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "timingQuality": {
+            "enum": [
+              "native-presentation-range",
+              "final-duration-unavailable"
+            ]
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

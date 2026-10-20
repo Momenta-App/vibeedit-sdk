@@ -275,7 +275,8 @@
         "params": { "$ref": "#/$defs/jsonObject" },
         "gainDb": { "type": "number", "minimum": -120, "maximum": 48, "default": 0 },
         "variationSeed": { "type": "integer" },
-        "avoidImmediateRepeat": { "type": "boolean", "default": true }
+        "avoidImmediateRepeat": { "type": "boolean", "default": true },
+        "metadata": { "$ref": "#/$defs/jsonObject" }
       }
     },
     "mask": {
@@ -377,6 +378,7 @@
       "properties": {
         "backend": { "enum": ["auto", "ffmpeg", "python", "html", "mixed"] },
         "htmlBackend": { "enum": ["auto", "chromium", "webkit", "firefox"] },
+        "motionBlendMode": { "enum": ["normal", "difference"], "default": "normal" },
         "output": {
           "type": "object",
           "additionalProperties": false,

@@ -2,7 +2,7 @@ export type JSONValue = null | boolean | number | string | JSONValue[] | { [key:
 export type JSONObject = { [key: string]: JSONValue };
 export declare const portableMotionComponents: readonly JSONObject[];
 export declare const HTML_CSS_MOTION_COMPONENT_ID: "vibeedit://motion/html-css";
-export type HTMLCSSMotionProps = { html: string; css?: string; stylesheets?: string[]; atoms?: boolean };
+export type HTMLCSSMotionProps = { html: string; text?: string; css?: string; stylesheets?: string[]; atoms?: boolean };
 export type CatalogCategory = "effect" | "transition" | "text" | "motion" | "template" | "sfx" | "skill";
 
 export declare class FrameRate {
@@ -65,7 +65,7 @@ export type MotionRenderer = "auto" | "html" | "svg" | "canvas" | "webgl" | "web
 export declare class MotionComponent { constructor(options: TimelineItemOptions & { componentId: string; props?: JSONObject; renderer?: MotionRenderer; transparent?: boolean }); id: string; kind: "motion"; toJSON(): JSONObject }
 export { MotionComponent as Text };
 export declare class Transition { constructor(options: TimelineItemOptions & { transitionId: string; fromItemId: string; toItemId: string; params?: JSONObject }); id: string; kind: "transition"; toJSON(): JSONObject }
-export declare class SoundEffect { constructor(options: TimelineItemOptions & { soundEffectId: string; params?: JSONObject; gainDb?: number; variationSeed?: number; avoidImmediateRepeat?: boolean }); id: string; kind: "sound_effect"; toJSON(): JSONObject }
+export declare class SoundEffect { constructor(options: TimelineItemOptions & { soundEffectId: string; params?: JSONObject; gainDb?: number; variationSeed?: number; avoidImmediateRepeat?: boolean; metadata?: JSONObject }); id: string; kind: "sound_effect"; toJSON(): JSONObject }
 export type TimelineItem = VideoClip | AudioClip | ImageClip | MotionComponent | Transition | SoundEffect;
 
 export declare class Track {

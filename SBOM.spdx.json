@@ -2,22 +2,22 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "vibeedit-0.1.0-beta.4",
-  "documentNamespace": "https://vibeedit.com/sbom/vibeedit-0.1.0-beta.4",
+  "name": "vibeedit-0.2.0-beta.1",
+  "documentNamespace": "https://vibeedit.com/sbom/vibeedit-0.2.0-beta.1",
   "creationInfo": {
-    "created": "2026-07-14T00:00:00Z",
+    "created": "2026-10-20T00:00:00Z",
     "creators": [
-      "Tool: VibeEdit SBOM generator 0.1.0-beta.4"
+      "Tool: VibeEdit SBOM generator 0.2.0-beta.1"
     ]
   },
   "packages": [
     {
       "name": "vibeedit",
       "SPDXID": "SPDXRef-Package-VibeEdit",
-      "versionInfo": "0.1.0-beta.4",
+      "versionInfo": "0.2.0-beta.1",
       "downloadLocation": "NOASSERTION",
-      "licenseConcluded": "LicenseRef-VibeEdit",
-      "licenseDeclared": "LicenseRef-VibeEdit",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
       "copyrightText": "Copyright Attention Engine Inc."
     },
     {
@@ -204,6 +204,182 @@
       "licenseDeclared": "NOASSERTION",
       "copyrightText": "Copyright FFmpeg contributors",
       "comment": "External binary; actual LGPL/GPL configuration is determined by the user's build."
+    },
+    {
+      "name": "@earendil-works/pi-coding-agent",
+      "versionInfo": "1.3.0",
+      "downloadLocation": "https://www.npmjs.com/package/@earendil-works/pi-coding-agent",
+      "licenseDeclared": "MIT",
+      "comment": "Explicit optional companion runtime; dependencies are resolved using companion/package-lock.json. No provider account or inference credit is included.",
+      "SPDXID": "SPDXRef-Optional-0",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "tensorflow",
+      "versionInfo": "2.21.0",
+      "downloadLocation": "https://pypi.org/project/tensorflow/2.21.0/",
+      "licenseDeclared": "Apache-2.0",
+      "SPDXID": "SPDXRef-Optional-1",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "mlx-vlm",
+      "versionInfo": "0.7.6",
+      "downloadLocation": "https://files.pythonhosted.org/packages/8c/77/407c016eebabb69d64b608e86149453986d72bf313006116cc5f92d48bcc/mlx_vlm-0.7.6-py3-none-any.whl",
+      "licenseDeclared": "MIT",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "17fad1745e6c43dc0fd4d3b8593967b29928a1da5dbf6f781ca783922f68115d"
+        }
+      ],
+      "SPDXID": "SPDXRef-Optional-2",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "transnet",
+      "versionInfo": "85cef72af9a916bdfd7cc94a670c9cdfbf12d1ed",
+      "downloadLocation": "https://github.com/soCzech/TransNetV2/blob/85cef72af9a916bdfd7cc94a670c9cdfbf12d1ed/LICENSE",
+      "licenseDeclared": "MIT",
+      "comment": "Optional model pack; downloaded artifacts are not included in release archives. Exact independent artifact hashes: [{\"bytes\": 8045, \"path\": \"upstream.py\", \"sha256\": \"f55b3a75727d1502438707ac15e8f6257a736817e713e2113e4b84176500ca65\", \"sourceRevision\": \"85cef72af9a916bdfd7cc94a670c9cdfbf12d1ed\"}, {\"bytes\": 1072, \"path\": \"LICENSE\", \"sha256\": \"a8d7a056688ccedebe89f18fd60f1a47128df94cb82669cd02459934919cbb6f\", \"sourceRevision\": \"85cef72af9a916bdfd7cc94a670c9cdfbf12d1ed\"}, {\"bytes\": 5933260, \"path\": \"weights/saved_model.pb\", \"sha256\": \"8ac2a52c5719690d512805b6eaf5ce12097c1d8860b3d9de245dcbbc3100f554\", \"sourceRevision\": \"85cef72af9a916bdfd7cc94a670c9cdfbf12d1ed\"}, {\"bytes\": 30516656, \"path\": \"weights/variables/variables.data-00000-of-00001\", \"sha256\": \"b8c9dc3eb807583e6215cabee9ca61737b3eb1bceff68418b43bf71459669367\", \"sourceRevision\": \"85cef72af9a916bdfd7cc94a670c9cdfbf12d1ed\"}, {\"bytes\": 5526, \"path\": \"weights/variables/variables.index\", \"sha256\": \"8b99e28b4ad11372d9a1ad9703298c2e370df14859da4245fdbe818e92dd403f\", \"sourceRevision\": \"85cef72af9a916bdfd7cc94a670c9cdfbf12d1ed\"}] Limits: Visual cut candidates, not semantic scenes. Native-density decode is bounded, not constant-memory streaming.",
+      "SPDXID": "SPDXRef-Optional-3",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "sam21",
+      "versionInfo": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+      "downloadLocation": "https://github.com/facebookresearch/sam2/blob/2b90b9f5ceec907a1c18123530e92e794ad901a4/LICENSE",
+      "licenseDeclared": "Apache-2.0",
+      "comment": "Optional model pack; downloaded artifacts are not included in release archives. Exact independent artifact hashes: [{\"bytes\": 55645345, \"revision\": \"2b90b9f5ceec907a1c18123530e92e794ad901a4\", \"sha256\": \"1f2fbfad3ffa38110368abac76c6ef9df9c282a66d5c2807bc94abf4d2fb30f8\", \"url\": \"https://github.com/facebookresearch/sam2/archive/2b90b9f5ceec907a1c18123530e92e794ad901a4.tar.gz\"}, {\"bytes\": 156008466, \"id\": \"sam2.1-hiera-tiny\", \"sha256\": \"7402e0d864fa82708a20fbd15bc84245c2f26dff0eb43a4b5b93452deb34be69\", \"url\": \"https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_tiny.pt\", \"version\": \"2024-09-29\"}] Limits: Tiny is a preview-oriented model. Box-prompted independent image inference; no implicit identity tracking across hard cuts or automatic final-quality claim.",
+      "SPDXID": "SPDXRef-Optional-4",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "sam31-mlx",
+      "versionInfo": "a992e302ea9b0f03f41dfd93414a4fd0e818f65b",
+      "downloadLocation": "https://raw.githubusercontent.com/facebookresearch/sam3/7f473cfd983d5eb43040ff608f66bff0d7bdcb53/LICENSE",
+      "licenseDeclared": "LicenseRef-SAM AND MIT",
+      "comment": "Optional model pack; downloaded artifacts are not included in release archives. Exact independent artifact hashes: [{\"bytes\": 4746, \"path\": \"README.md\", \"sha256\": \"87a23319470faac70681387b3bf17ca33bd6c7501d3104fb3dd9a4df00e9c309\", \"url\": \"https://huggingface.co/mlx-community/sam3.1-bf16/resolve/a992e302ea9b0f03f41dfd93414a4fd0e818f65b/README.md\"}, {\"bytes\": 25818, \"path\": \"config.json\", \"sha256\": \"898d892490cdbaefc9a7a6ba2ae5ce5b7f93915a2aa8d6d0d5601417ca0b4b03\", \"url\": \"https://huggingface.co/mlx-community/sam3.1-bf16/resolve/a992e302ea9b0f03f41dfd93414a4fd0e818f65b/config.json\"}, {\"bytes\": 3493016552, \"path\": \"model.safetensors\", \"sha256\": \"a1b1c19dcc9bdd68438bcd74433fadc90740e73c37a1f386872672d134879c42\", \"url\": \"https://huggingface.co/mlx-community/sam3.1-bf16/resolve/a992e302ea9b0f03f41dfd93414a4fd0e818f65b/model.safetensors\"}, {\"bytes\": 524657, \"path\": \"merges.txt\", \"sha256\": \"f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85\", \"url\": \"https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/merges.txt\"}, {\"bytes\": 389, \"path\": \"special_tokens_map.json\", \"sha256\": \"f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf\", \"url\": \"https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/special_tokens_map.json\"}, {\"bytes\": 592, \"path\": \"tokenizer_config.json\", \"sha256\": \"34b7336e4bee12e0a9730eaf5189f582ef3c3eea5027f65730e5717256755aad\", \"url\": \"https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/tokenizer_config.json\"}, {\"bytes\": 862328, \"path\": \"vocab.json\", \"sha256\": \"5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363\", \"url\": \"https://huggingface.co/openai/clip-vit-base-patch32/resolve/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268/vocab.json\"}, {\"bytes\": 7353, \"path\": \"SAM-LICENSE\", \"sha256\": \"4dea99bfaa016e21bc860d73f344236bd1e5c4977d1a9a8fd32f822b500ae1be\", \"url\": \"https://raw.githubusercontent.com/facebookresearch/sam3/7f473cfd983d5eb43040ff608f66bff0d7bdcb53/LICENSE\"}] Limits: Apple Silicon only. Sparse per-frame text/box detection, not temporal propagation or certified identity. Review cuts, occlusions and contacts. Custom SAM terms apply; VibeEdit MIT terms do not relicense weights.",
+      "SPDXID": "SPDXRef-Optional-5",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "Poppins-Black.ttf",
+      "versionInfo": "google-fonts-47d54ca1ebb14fd864695f1d39dc734f39017c33",
+      "downloadLocation": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/poppins/Poppins-Black.ttf",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d82aaaf98a9283f9a8edd24e51173337d8eaf09e25cd3d98831f8ec8461748a1"
+        }
+      ],
+      "comment": "Bundled unmodified font; corresponding OFL notice is under catalog/text-runtime/assets/fonts/.",
+      "SPDXID": "SPDXRef-Optional-6",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "Poppins-Bold.ttf",
+      "versionInfo": "google-fonts-47d54ca1ebb14fd864695f1d39dc734f39017c33",
+      "downloadLocation": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/poppins/Poppins-Bold.ttf",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "983676516167748b74de6f4771fb384c664fd913acb8b471122ecacf5da5ea6c"
+        }
+      ],
+      "comment": "Bundled unmodified font; corresponding OFL notice is under catalog/text-runtime/assets/fonts/.",
+      "SPDXID": "SPDXRef-Optional-7",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "Poppins-BlackItalic.ttf",
+      "versionInfo": "google-fonts-47d54ca1ebb14fd864695f1d39dc734f39017c33",
+      "downloadLocation": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/poppins/Poppins-BlackItalic.ttf",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f4852ca89c29f69d800e14f097ed4d1f0a0cc454e9f77d73bfd6db1f71c287a0"
+        }
+      ],
+      "comment": "Bundled unmodified font; corresponding OFL notice is under catalog/text-runtime/assets/fonts/.",
+      "SPDXID": "SPDXRef-Optional-8",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "AbrilFatface-Regular.ttf",
+      "versionInfo": "google-fonts-47d54ca1ebb14fd864695f1d39dc734f39017c33",
+      "downloadLocation": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/abrilfatface/AbrilFatface-Regular.ttf",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5971d4a3758a922a9fedc7f6fb825a96341a2e718c45a4b2c9a6b417c8c4dbe9"
+        }
+      ],
+      "comment": "Bundled unmodified font; corresponding OFL notice is under catalog/text-runtime/assets/fonts/.",
+      "SPDXID": "SPDXRef-Optional-9",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "BebasNeue-Regular.ttf",
+      "versionInfo": "google-fonts-47d54ca1ebb14fd864695f1d39dc734f39017c33",
+      "downloadLocation": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/bebasneue/BebasNeue-Regular.ttf",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73"
+        }
+      ],
+      "comment": "Bundled unmodified font; corresponding OFL notice is under catalog/text-runtime/assets/fonts/.",
+      "SPDXID": "SPDXRef-Optional-10",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "GreatVibes-Regular.ttf",
+      "versionInfo": "google-fonts-47d54ca1ebb14fd864695f1d39dc734f39017c33",
+      "downloadLocation": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/greatvibes/GreatVibes-Regular.ttf",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15"
+        }
+      ],
+      "comment": "Bundled unmodified font; corresponding OFL notice is under catalog/text-runtime/assets/fonts/.",
+      "SPDXID": "SPDXRef-Optional-11",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "Montserrat-Variable.ttf",
+      "versionInfo": "google-fonts-47d54ca1ebb14fd864695f1d39dc734f39017c33",
+      "downloadLocation": "https://raw.githubusercontent.com/google/fonts/47d54ca1ebb14fd864695f1d39dc734f39017c33/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
+      "licenseDeclared": "OFL-1.1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7"
+        }
+      ],
+      "comment": "Bundled unmodified font; corresponding OFL notice is under catalog/text-runtime/assets/fonts/.",
+      "SPDXID": "SPDXRef-Optional-12",
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
     }
   ],
   "relationships": [
@@ -306,12 +482,80 @@
       "spdxElementId": "SPDXRef-Package-Chromium",
       "relationshipType": "RUNTIME_DEPENDENCY_OF",
       "relatedSpdxElement": "SPDXRef-Package-Playwright"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-0",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-1",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-2",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-3",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-4",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-5",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-6",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-7",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-8",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-9",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-10",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-11",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-12",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Package-VibeEdit"
     }
   ],
   "hasExtractedLicensingInfos": [
     {
-      "licenseId": "LicenseRef-VibeEdit",
-      "extractedText": "# VibeEdit License Terms\n\nCopyright (c) Attention Engine Inc. All rights reserved.\n\nVibeEdit is publicly inspectable and downloadable. Personal evaluation and any\nother uses specifically granted in writing by Attention Engine Inc. are\npermitted only under these terms. Commercial use requires a separate commercial\nlicense from Attention Engine Inc. Contact Attention Engine through its official\nchannels for commercial licensing.\n\nExcept for permissions expressly granted in writing, no license to VibeEdit\nowned code, assets, trademarks, or other intellectual property is granted.\n\nThird-party components are not relicensed by these terms. They remain subject\nto their respective licenses, notices, usage restrictions, and attribution\nrequirements. See `THIRD_PARTY_NOTICES.md` and the generated dependency and\nasset inventories included with a release artifact.\n\nThese terms apply to public beta releases made available for evaluation and\ncommunity testing. A beta label does not expand the permissions granted above.\n"
+      "licenseId": "LicenseRef-SAM",
+      "extractedText": "SAM License\nLast Updated: November 19, 2025\n\n\u201cAgreement\u201d means the terms and conditions for use, reproduction, distribution and modification of the SAM Materials set forth herein.\n\n\n\u201cSAM Materials\u201d means, collectively, Documentation and the models, software and algorithms, including machine-learning model code, trained model weights, inference-enabling code, training-enabling code, fine-tuning enabling code, and other elements of the foregoing distributed by Meta and made available under this Agreement.\n\n\u201cDocumentation\u201d means the specifications, manuals and documentation accompanying\nSAM Materials distributed by Meta.\n\n\n\u201cLicensee\u201d or \u201cyou\u201d means you, or your employer or any other person or entity (if you are entering into this Agreement on such person or entity\u2019s behalf), of the age required under applicable laws, rules or regulations to provide legal consent and that has legal authority to bind your employer or such other person or entity if you are entering in this Agreement on their behalf.\n\n\n\u201cMeta\u201d or \u201cwe\u201d means Meta Platforms Ireland Limited (if you are located in or, if you are an entity, your principal place of business is in the EEA or Switzerland) or Meta Platforms, Inc. (if you are located outside of the EEA or Switzerland).\n\n\n\u201cSanctions\u201d means any economic or trade sanctions or restrictions administered or enforced by the United States (including the Office of Foreign Assets Control of the U.S. Department of the Treasury (\u201cOFAC\u201d), the U.S. Department of State and the U.S. Department of Commerce), the United Nations, the European Union, or the United Kingdom.\n\n\n\u201cTrade Controls\u201d means any of the following: Sanctions and applicable export and import controls.\n\nBy using or distributing any portion or element of the SAM Materials, you agree to be bound by this Agreement.\n\n\n1. License Rights and Redistribution.\n\n\na. Grant of Rights. You are granted a non-exclusive, worldwide, non-transferable and royalty-free limited license under Meta\u2019s intellectual property or other rights owned by Meta embodied in the SAM Materials to use, reproduce, distribute, copy, create derivative works of, and make modifications to the SAM Materials.\n\nb. Redistribution and Use.\ni. Distribution of SAM Materials, and any derivative works thereof, are subject to the terms of this Agreement. If you distribute or make the SAM Materials, or any derivative works thereof, available to a third party, you may only do so under the terms of this Agreement and you shall provide a copy of this Agreement with any such SAM Materials.\n\n\nii.  If you submit for publication the results of research you perform on, using, or otherwise in connection with SAM Materials, you must acknowledge the use of SAM Materials in your publication.\n\n\niii. Your use of the SAM Materials must comply with applicable laws and regulations, including Trade Control Laws and applicable privacy and data protection laws.\niv. Your use of the SAM Materials will not involve or encourage others to reverse engineer, decompile or discover the underlying components of the SAM Materials.\nv. You are not the target of Trade Controls and your use of SAM Materials must comply with Trade Controls. You agree not to use, or permit others to use, SAM Materials for any activities subject to the International Traffic in Arms Regulations (ITAR) or end uses prohibited by Trade Controls, including those related to military or warfare purposes, nuclear industries or applications, espionage, or the development or use of guns or illegal weapons.\n2. User Support. Your use of the SAM Materials is done at your own discretion; Meta does not process any information nor provide any service in relation to such use.  Meta is under no obligation to provide any support services for the SAM Materials. Any support provided is \u201cas is\u201d, \u201cwith all faults\u201d, and without warranty of any kind.\n\n\n3. Disclaimer of Warranty. UNLESS REQUIRED BY APPLICABLE LAW, THE SAM MATERIALS AND ANY OUTPUT AND RESULTS THEREFROM ARE PROVIDED ON AN \u201cAS IS\u201d BASIS, WITHOUT WARRANTIES OF ANY KIND, AND META DISCLAIMS ALL WARRANTIES OF ANY KIND, BOTH EXPRESS AND IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE. YOU ARE SOLELY RESPONSIBLE FOR DETERMINING THE APPROPRIATENESS OF USING OR REDISTRIBUTING THE SAM MATERIALS AND ASSUME ANY RISKS ASSOCIATED WITH YOUR USE OF THE SAM MATERIALS AND ANY OUTPUT AND RESULTS.\n\n4. Limitation of Liability. IN NO EVENT WILL META OR ITS AFFILIATES BE LIABLE UNDER ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, TORT, NEGLIGENCE, PRODUCTS LIABILITY, OR OTHERWISE, ARISING OUT OF THIS AGREEMENT, FOR ANY LOST PROFITS OR ANY DIRECT OR INDIRECT, SPECIAL, CONSEQUENTIAL, INCIDENTAL, EXEMPLARY OR PUNITIVE DAMAGES, EVEN IF META OR ITS AFFILIATES HAVE BEEN ADVISED OF THE POSSIBILITY OF ANY OF THE FOREGOING.\n\n5. Intellectual Property.\n\n\na. Subject to Meta\u2019s ownership of SAM Materials and derivatives made by or for Meta, with respect to any derivative works and modifications of the SAM Materials that are made by you, as between you and Meta, you are and will be the owner of such derivative works and modifications.\n\nb. If you institute litigation or other proceedings against Meta or any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the SAM Materials, outputs or results, or any portion of any of the foregoing, constitutes infringement of intellectual property or other rights owned or licensable by you, then any licenses granted to you under this Agreement shall terminate as of the date such litigation or claim is filed or instituted. You will indemnify and hold harmless Meta from and against any claim by any third party arising out of or related to your use or distribution of the SAM Materials.\n\n6. Term and Termination. The term of this Agreement will commence upon your acceptance of this Agreement or access to the SAM Materials and will continue in full force and effect until terminated in accordance with the terms and conditions herein. Meta may terminate this Agreement if you are in breach of any term or condition of this Agreement. Upon termination of this Agreement, you shall delete and cease use of the SAM Materials. Sections 3, 4 and 7 shall survive the termination of this Agreement.\n\n7. Governing Law and Jurisdiction. This Agreement will be governed and construed under the laws of the State of California without regard to choice of law principles, and the UN Convention on Contracts for the International Sale of Goods does not apply to this Agreement. The courts of California shall have exclusive jurisdiction of any dispute arising out of this Agreement.\n\n\n8. Modifications and Amendments. Meta may modify this Agreement from time to time; provided that they are similar in spirit to the current version of the Agreement, but may differ in detail to address new problems or concerns. All such changes will be effective immediately. Your continued use of the SAM Materials after any modification to this Agreement constitutes your agreement to such modification. Except as provided in this Agreement, no modification or addition to any provision of this Agreement will be binding unless it is in writing and signed by an authorized representative of both you and Meta.\n",
+      "seeAlsos": [
+        "https://raw.githubusercontent.com/facebookresearch/sam3/7f473cfd983d5eb43040ff608f66bff0d7bdcb53/LICENSE"
+      ]
     }
   ]
 }

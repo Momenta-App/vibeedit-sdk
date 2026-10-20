@@ -30,6 +30,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--revision", default="HEAD")
     args = parser.parse_args(argv)
+    existing_index = json.loads((TARGET_ROOT / "index.json").read_text())
+    adapted = [item["name"] for item in existing_index["skills"] if item.get("adaptation")]
+    if adapted:
+        raise RuntimeError("Portable adaptations are authoritative and must not be overwritten by a donor clone import. Review upstream changes against source.revision/source.sha256, edit the installed skill, then run scripts/index_portable_skills.py. Adapted skills: " + ", ".join(adapted))
     root = args.source_root.resolve()
     revision = _git(root, "rev-parse", args.revision).decode().strip()
     inventory = _inventory(root, revision)
@@ -131,7 +135,7 @@ def _rejection_reason(name: str, files: list[dict]) -> str | None:
 
 
 def _validate_skill(root: Path) -> dict:
-    files = sorted(path for path in root.rglob("*") if path.is_file())
+    files = sorted(path for path in root.rglob("*") if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc")
     if not (root / "SKILL.md").is_file():
         raise RuntimeError(f"missing skill entrypoint: {root.name}")
     for path in files:
@@ -179,7 +183,7 @@ def _catalog_item(record: dict) -> dict:
         "description": description,
         "category": "skill",
         "tags": ["agents", "codex", "claude", "opencode", "workflow", *record["name"].removeprefix("vibeedit-").split("-")],
-        "version": "0.1.0",
+        "version": record["version"],
         "inputs": {"productionBrief": True},
         "parameters": {"type": "object", "properties": {}, "additionalProperties": False},
         "platforms": ["macos", "windows", "linux"],
@@ -188,9 +192,9 @@ def _catalog_item(record: dict) -> dict:
         "examples": {"python": f"install_skill({record['name']!r}, harness='codex')", "javascript": f"installSkill({json.dumps(record['name'])}, {{ harness: 'codex' }})"},
         "prompts": [f"Use the {record['name']} workflow for this VibeEdit production task and verify every claimed output."],
         "requirements": {"assets": [], "models": []},
-        "license": {"owner": "Attention Engine Inc.", "terms": "SEE LICENSE IN LICENSE.md", "redistribution": "verified"},
-        "provenance": {"kind": "vibeedit-owned", "source": f"main-repository:{record['source']['path']}#revision={record['source']['revision']}&sha256={record['source']['sha256']}", "implementation": f"skills/{record['name']}/SKILL.md", "thirdParty": [], "fidelity": "byte-identical-clone"},
-        "validation": [{"id": "package-integrity", "status": "passed", "command": "node --test test/skills.test.js && pytest python/tests/test_skills.py", "evidence": f"{record['validation']['files']} files passed entrypoint, path, syntax, JSON, link, checksum, and safe lifecycle validation."}],
+        "license": {"owner": "Attention Engine Inc.", "terms": "MIT; optional dependencies and external assets retain their own terms", "redistribution": "verified"},
+        "provenance": {"kind": "vibeedit-owned", "source": f"main-repository:{record['source']['path']}#revision={record['source']['revision']}&sha256={record['source']['sha256']}", "implementation": f"skills/{record['name']}/SKILL.md", "thirdParty": [], "fidelity": "portable-adaptation" if record.get("adaptation") else "byte-identical-clone", "packageSha256": record["checksum"]},
+        "validation": [{"id": "package-integrity", "status": "passed", "command": "node --test test/skills.test.js && pytest python/tests/test_skills.py", "evidence": f"{record['validation']['files']} files passed static integrity checks. Runtime/editorial qualification is separate."}],
     }
 
 
@@ -205,7 +209,7 @@ def _frontmatter_description(path: Path) -> str:
 
 def _tree_checksum(root: Path) -> str:
     digest = hashlib.sha256()
-    for path in sorted(path for path in root.rglob("*") if path.is_file()):
+    for path in sorted(path for path in root.rglob("*") if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc"):
         digest.update(path.relative_to(root).as_posix().encode())
         digest.update(b"\0")
         digest.update(path.read_bytes())

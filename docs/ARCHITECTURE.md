@@ -102,7 +102,12 @@ the VibeEdit cache, verifies exact size/SHA-256, safely extracts source, and
 creates a local runner manifest. The runner chooses CUDA, MPS, then CPU and
 emits frame-indexed lossless RLE masks. An external provider may be registered
 only with an executable and a manifest declaring capability, version, license,
-and a 64-character weight digest. SAM 3.1 remains quarantined.
+and a 64-character weight digest. The public model-pack library also provides
+pinned TransNetV2 and SAM 3.1 MLX adapters through `vibeedit models`. SAM 3.1
+uses a public MLX model conversion with its upstream custom SAM license and
+pinned MIT runtime/tokenizer artifacts; it is Apple Silicon only. Weights remain
+optional downloads. Public artifact integrity does not qualify model inference
+or mask accuracy; fresh candidate hardware qualification is still pending.
 
 ## Cache and provenance
 
@@ -110,6 +115,12 @@ Cache keys hash canonical JSON containing source identity, operation parameters,
 VibeEdit implementation version, backend/runtime version, model version, and
 schema version. Artifacts store the same inputs plus creation time and output
 hash. Users can inspect or invalidate any cached item.
+
+Project renders, motion intermediates and beat artifacts use `.vibeedit/cache`
+inside their owning project so workspace-restricted agents can render normally.
+`VIBEEDIT_CACHE_DIR` remains an explicit override. Optional model/runtime downloads
+and calls without a project keep the per-user cache; model weights are not copied
+into every project.
 
 Output URIs are destinations rather than pixel or sample inputs. Render and
 revision hashes therefore exclude the URI while retaining container and codec

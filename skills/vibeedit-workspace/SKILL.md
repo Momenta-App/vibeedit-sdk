@@ -5,6 +5,15 @@ description: Flexible operating guidance for media/editing workspaces, including
 
 # Workspace Skill
 
+## Portable SDK execution
+
+This packaged skill runs in the user's existing agent; no desktop application or open editor tab is required. Resolve local `scripts/` and `references/` from this installed skill directory. The parent agent may perform every role; “Lead Editor” means the one revision-checked writer, not a required external process.
+
+Start with `vibeedit project inspect "$PROJECT" --json`. Use the current CompositionSpec and content-bound source IDs; create a new composition revision and run `vibeedit validate` / `vibeedit render` for concrete output. Persistent review uses `vibeedit review beats|faces|words|video --project "$PROJECT"`, then `vibeedit project apply-review "$PROJECT" --source-id SOURCE --domain DOMAIN --expected-revision REV`. Retain immutable machine baselines and user corrections across rerenders.
+
+Paid intelligence goes through public `vibeedit analyze video|faces|speakers` with a stable operation ID and an existing authorized `--max-retail-usd` ceiling. Observe/recover that original job; timeout never licenses a replacement paid submission. Words, anonymous voice labels and visible face identities remain distinct. Optional masks use explicit `vibeedit models describe` / `models run sam21|sam31-mlx`, reviewed candidate selections and supported `models effect`; never label geometric fixtures as SAM proof. Use user-provided permitted sources and approved SFX manifests; the package carries no movie, quote or private sound library.
+
+
 Use this skill when the user is working inside a media/editing workspace and wants to inspect or modify project data directly.
 
 ## Core Behavior
@@ -58,9 +67,9 @@ Preserve the native timing units used by the target editor. If converting betwee
 
 - Reuse existing cached analysis outputs before requesting new analysis.
 - If new analysis is needed, use approved or available editor/workspace flows when available.
-- Do not install/download external services or models, and do not run standalone media analysis unless explicitly requested by the user.
+- The agent package supports local analysis and optional model setup within the editing task scope. Inspect `vibeedit models describe` first; disclose download sizes/device limits and use only permitted pinned artifacts. Paid Myriograph analysis requires a valid existing allowance and explicit retail ceiling; ordinary editing permission is not a new spending allowance.
 - In orchestrated production flows, Lead Editor is the only production writer; workspace guidance supports discovery, scope, and safe file/tool handling.
-- Directly edit project data only when the user explicitly asks for filesystem/project-file edits or safer editor tools are unavailable and the user accepts that path.
+- Use SDK revision-checked project mutations for agent-package work. The user’s editing request authorizes these reversible edits. Read `project inspect`, preserve revisions, and use `correct` / `apply-review` instead of rewriting journal or immutable baselines.
 - Prefer narrow, reversible edits over broad rewrites.
 - Update related files consistently (for example, project metadata plus media links).
 - If a referenced file is missing, report it clearly and continue with recoverable steps.
