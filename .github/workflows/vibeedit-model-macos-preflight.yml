@@ -1,0 +1,128 @@
+name: VibeEdit Apple Silicon model resource preflight
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  resources-only:
+    if: ${{ github.repository == 'Momenta-App/vibeedit-sdk' && github.event.repository.private == false }}
+    runs-on: macos-latest
+    timeout-minutes: 3
+    steps:
+      - name: Measure Apple Silicon resources and native Metal without MLX
+        shell: bash
+        run: |
+          python3 -I - <<'PY'
+          import datetime
+          import json
+          import math
+          import os
+          import platform
+          import re
+          import shutil
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          result = {
+              "schemaVersion": "vibeedit.appleModelResourcePreflight.v1",
+              "observedAtUtc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "scope": "Standard public macos-latest resource/native-Metal query only",
+              "pack": "sam31-mlx",
+              "modelMemoryEstimateBytes": 16_000_000_000,
+              "modelSetupDiskEstimateBytes": 8_000_000_000,
+              "sharedMinimumFreeDiskBytes": 25 * 1024 ** 3,
+              "extraFixtureMarginBytes": 2 * 1024 ** 3,
+              "modelProvisioned": False,
+              "modelImports": 0,
+              "inferenceStarted": False,
+              "qualified": False,
+          }
+          try:
+              event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
+              repository = event.get("repository", {}) if isinstance(event, dict) else {}
+              if (not isinstance(repository, dict)
+                      or os.environ.get("GITHUB_EVENT_NAME") != "workflow_dispatch"
+                      or os.environ.get("GITHUB_REPOSITORY") != "Momenta-App/vibeedit-sdk"
+                      or repository.get("full_name") != "Momenta-App/vibeedit-sdk"
+                      or repository.get("private") is not False):
+                  raise ValueError("Public repository assertion failed before probes")
+              reasons = []
+              result["runner"] = {"label": "macos-latest", "system": platform.system(),
+                  "release": platform.release(), "architecture": platform.machine(),
+                  "imageVersion": os.environ.get("ImageVersion"), "python": platform.python_version(),
+                  "cpuCount": os.cpu_count()}
+              if platform.system() != "Darwin" or platform.machine() not in {"arm64", "aarch64"}:
+                  reasons.append("SAM3.1 MLX requires actual Apple Silicon macOS")
+              result["diskBytes"] = {
+                  label: dict(shutil.disk_usage(path)._asdict())
+                  for label, path in {"system": "/", "systemData": "/System/Volumes/Data",
+                                      "runnerTemp": os.environ["RUNNER_TEMP"]}.items()
+              }
+              disk_minimum = result["sharedMinimumFreeDiskBytes"] + result["modelSetupDiskEstimateBytes"] + result["extraFixtureMarginBytes"]
+              result["conservativeBeforeSetupFreeDiskMinimumBytes"] = disk_minimum
+              if any(volume["free"] < disk_minimum for volume in result["diskBytes"].values()):
+                  reasons.append("Writable disk cannot preserve25GiB plus actual8GB pack estimate and2GiB fixture margin")
+              load = list(os.getloadavg()[:2])
+              result["oneFiveMinuteLoad"] = load
+              if len(load) != 2 or any(not math.isfinite(value) or value < 0 or value > 10 for value in load):
+                  reasons.append("One/five-minute load is unknown or above10")
+              physical = int(subprocess.run(["sysctl", "-n", "hw.memsize"], check=True,
+                  capture_output=True, text=True, timeout=10).stdout.strip())
+              result["physicalMemoryBytes"] = physical
+              if physical < result["modelMemoryEstimateBytes"]:
+                  reasons.append("Physical RAM is below the actual16GB SAM3.1 pack memory estimate")
+              try:
+                  pressure = subprocess.run(["memory_pressure", "-Q"], check=True,
+                      capture_output=True, text=True, timeout=10).stdout
+                  match = re.search(r"System-wide memory free percentage:\s*(\d+)%", pressure)
+                  if not match or not 0 <= int(match[1]) <= 100:
+                      raise ValueError("Unknown memory-pressure percentage")
+                  percent = int(match[1])
+                  result["memoryPressureFreePercent"] = percent
+                  available_estimate = physical * percent // 100
+                  result["pressureDerivedAvailableBytesEstimate"] = available_estimate
+                  result["availableMemoryEstimateLimit"] = "Pressure-derived estimate, not a native MemAvailable byte counter"
+                  if percent < 15:
+                      reasons.append("System-wide free-memory percentage is below15")
+                  if available_estimate < result["modelMemoryEstimateBytes"]:
+                      reasons.append("Conservative pressure-derived availability is below actual16GB model requirement")
+              except (OSError, ValueError, subprocess.SubprocessError) as error:
+                  result["memoryPressureProbe"] = {"status": "unavailable", "errorType": type(error).__name__}
+                  reasons.append("Available-memory probe is unknown")
+              # Native OS framework query only: no MLX/Torch/model imports,
+              # command buffers, GPU inference or downloads. Cache is ephemeral.
+              swift = '''import Foundation
+          import Metal
+          var result: [String: Any] = ["available": false]
+          if let device = MTLCreateSystemDefaultDevice() {
+              result["available"] = true
+              result["name"] = device.name
+              result["hasUnifiedMemory"] = device.hasUnifiedMemory
+              result["recommendedMaxWorkingSetSize"] = device.recommendedMaxWorkingSetSize
+          }
+          let data = try JSONSerialization.data(withJSONObject: result, options: [.sortedKeys])
+          print(String(data: data, encoding: .utf8)!)'''
+              try:
+                  metal = subprocess.run(["xcrun", "swift", "-module-cache-path",
+                      str(Path(os.environ["RUNNER_TEMP"]) / "vibeedit-metal-probe-cache"), "-e", swift],
+                      check=True, capture_output=True, text=True, timeout=45)
+                  result["metal"] = json.loads(metal.stdout)
+                  if result["metal"].get("available") is not True:
+                      reasons.append("Native Metal device is unavailable")
+              except (OSError, ValueError, subprocess.SubprocessError) as error:
+                  result["metal"] = {"status": "unavailable", "errorType": type(error).__name__}
+                  reasons.append("Native Metal device query failed; availability remains unknown")
+              result.update(status="blocked" if reasons else "possible", reasons=reasons,
+                  sourceRevision=os.environ.get("GITHUB_SHA"),
+                  limits=["Native Metal device presence does not qualify MLX kernels/runtime or model inference",
+                          "All local Apple Silicon and actual SAM3.1 review/effect requirements remain",
+                          "No model-memory requirement is reduced to fit the standard runner",
+                          "New execution must repeat resource gates before provisioning/import/inference"])
+          except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:
+              result.update(status="blocked", reason="Public event or resource probe unavailable", errorType=type(error).__name__)
+          print(json.dumps(result, sort_keys=True, allow_nan=False))
+          sys.exit(0 if result["status"] == "possible" else 2)
+          PY
