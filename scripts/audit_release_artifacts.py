@@ -20,6 +20,7 @@ FORBIDDEN_TEXT = (
     re.compile(rb"BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY"),
 )
 CANONICAL_REVISION = "57b5f4cb3381f72b5ba153bb90d171ba42945e3a"
+CUSTOMER_GUIDES = ("PROJECTS.md", "MODELS.md", "COMPANION.md", "MYRIOGRAPH.md", "OPERATIONS.md", "SECURITY.md", "SKILLS.md", "HTML_MOTION_RUNTIME.md", "PYTHON_EFFECTS_TRANSITIONS.md")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -44,6 +45,15 @@ def main(argv: list[str] | None = None) -> int:
         sdist = _tar_files(archive)
     with tarfile.open(args.npm) as archive:
         npm = _tar_files(archive)
+
+    source = Path(__file__).resolve().parent.parent
+    for relative in ("README.md", *(f"docs/{name}" for name in CUSTOMER_GUIDES)):
+        expected = (source / relative).read_bytes()
+        _equal(wheel, f"vibeedit/data/{relative}", expected)
+        _equal(sdist, _sdist_name(sdist, relative), expected)
+        _equal(npm, f"package/{relative}", expected)
+    if {name for name in wheel if name.startswith("vibeedit/data/docs/")} != {f"vibeedit/data/docs/{name}" for name in CUSTOMER_GUIDES}:
+        raise RuntimeError("wheel customer docs differ from the explicit public allowlist")
 
     migration = json.loads(wheel["vibeedit/data/skills/migration-report.json"])
     skill_index = json.loads(wheel["vibeedit/data/skills/index.json"])
@@ -106,6 +116,8 @@ def main(argv: list[str] | None = None) -> int:
         "donorSkillTreesVerified": 44,
         "portableSkillAdaptations": sum(bool(skill.get("adaptation")) for skill in skill_index["skills"]),
         "sdkOwnedSkillTreesVerified": len(owned),
+        "customerGuidesVerified": len(CUSTOMER_GUIDES),
+        "rootReadmeVerified": True,
         "presetSourceFilesVerified": 16,
         "forbiddenEntries": 0,
         "archives": {
@@ -212,6 +224,8 @@ def _equal(files: dict[str, bytes], name: str, expected: bytes) -> None:
 
 def _scan(label: str, files: dict[str, bytes]) -> None:
     for name, value in files.items():
+        if "/docs/launch/" in name:
+            raise RuntimeError(f"{label} contains excluded operator launch records: {name}")
         if any(part in name for part in FORBIDDEN_NAMES) or name.endswith(FORBIDDEN_SUFFIXES):
             raise RuntimeError(f"{label} contains forbidden entry: {name}")
         if Path(name).suffix.casefold() not in TEXT_SUFFIXES:

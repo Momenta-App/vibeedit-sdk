@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "vibeedit"
-version = "0.2.0b1"
+version = "0.2.0b2"
 description = "VibeEdit-owned video composition, motion, rendering, and verification library."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -77,6 +77,16 @@ exclude = ["**/node_modules/**", "**/__pycache__", "**/*.pyc", "/browser-rendere
 "SBOM.spdx.json" = "vibeedit/data/SBOM.spdx.json"
 "THIRD_PARTY_NOTICES.md" = "vibeedit/data/THIRD_PARTY_NOTICES.md"
 "requirements-core.lock" = "vibeedit/data/requirements-core.lock"
+"README.md" = "vibeedit/data/README.md"
+"docs/PROJECTS.md" = "vibeedit/data/docs/PROJECTS.md"
+"docs/MODELS.md" = "vibeedit/data/docs/MODELS.md"
+"docs/COMPANION.md" = "vibeedit/data/docs/COMPANION.md"
+"docs/MYRIOGRAPH.md" = "vibeedit/data/docs/MYRIOGRAPH.md"
+"docs/OPERATIONS.md" = "vibeedit/data/docs/OPERATIONS.md"
+"docs/SECURITY.md" = "vibeedit/data/docs/SECURITY.md"
+"docs/SKILLS.md" = "vibeedit/data/docs/SKILLS.md"
+"docs/HTML_MOTION_RUNTIME.md" = "vibeedit/data/docs/HTML_MOTION_RUNTIME.md"
+"docs/PYTHON_EFFECTS_TRANSITIONS.md" = "vibeedit/data/docs/PYTHON_EFFECTS_TRANSITIONS.md"
 
 [tool.hatch.build.targets.sdist]
 include = [

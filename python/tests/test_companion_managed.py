@@ -15,7 +15,7 @@ import threading
 import time
 
 import pytest
-from vibeedit.worker import PROFILES, PROVIDERS, PROVIDER_MODELS, _managed_hash, companion_path
+from vibeedit.worker import PROFILES, PROVIDERS, PROVIDER_MODELS, _managed_hash, companion_path, worker_runtime
 from vibeedit.spec import Composition, Canvas, FrameRate
 
 
@@ -246,7 +246,7 @@ def test_detached_two_step_goal_recovers_supervisor_death_with_real_pi(tmp_path,
     review_path='workers/crash-goal-step-2/artifacts/review.json'
     state['stepsOverride']=[('artifact_write',{'name':'composition.json','value':composition}),('render_ffmpeg',{'compositionPath':composition_path,'outputName':'proof.mp4'}),('submit_result',{'value':{'answer':42}}),None,('artifact_write',{'name':'review.json','value':{'sourceSha256':'__render_sha__','findings':['Protocol fixture proves source binding only; not editorial review']}}),('submit_result',{'value':{'answer':42}}),None]
     state['renderPath']=str(project/render_path);state['pauseFirst']=True
-    config=tmp_path/'runtime-config';runtime=config/'runtime/pi-1.3.0';runtime.mkdir(parents=True)
+    config=tmp_path/'runtime-config';runtime=config/'runtime'/worker_runtime().name;runtime.mkdir(parents=True)
     (runtime/'node_modules').symlink_to(companion_path()/'node_modules',target_is_directory=True)
     lock=companion_path()/'package-lock.json';shutil.copyfile(lock,runtime/'package-lock.json')
     (runtime/'ready.json').write_text(json.dumps({'piVersion':'1.3.0','lockSha256':hashlib.sha256(lock.read_bytes()).hexdigest()}), encoding="utf-8")

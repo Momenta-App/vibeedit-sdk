@@ -1,15 +1,58 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { createExample } from "../src/index.js";
+import { VERSION } from "../src/version.js";
+
+function pythonInterpreter() {
+  const probe = ["python3", "python"].map((command) => spawnSync(command, ["-c", "import sys; print(sys.executable)"], { encoding: "utf8", timeout: 5000 })).find((result) => result.status === 0);
+  assert.ok(probe, "A Python interpreter is required for the cross-language CLI boundary test");
+  return probe.stdout.trim();
+}
 
 test("Node CLI reports the package version", () => {
   const result = spawnSync(process.execPath, ["bin/vibeedit.js", "--version"], { encoding: "utf8" });
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.stdout.trim(), "vibeedit 0.2.0-beta.1");
+  assert.equal(result.stdout.trim(), `vibeedit ${VERSION}`);
+});
+
+test("Node CLI refuses an explicitly selected older Python SDK before executing media work", () => {
+  const root = mkdtempSync(join(tmpdir(), "vibeedit bridge Unicode é "));
+  try {
+    mkdirSync(join(root, "vibeedit"));
+    writeFileSync(join(root, "vibeedit", "__init__.py"), '__version__ = "0.1.0b4"\n');
+    writeFileSync(join(root, "vibeedit", "__main__.py"), 'raise RuntimeError("INCOMPATIBLE_MEDIA_EXECUTED")\n');
+    const result = spawnSync(process.execPath, ["bin/vibeedit.js", "project", "inspect", "--json"], {
+      encoding: "utf8", env: { ...process.env, VIBEEDIT_PYTHON: pythonInterpreter(), PYTHONPATH: root },
+    });
+    assert.equal(result.status, 1, result.stderr);
+    const payload = JSON.parse(result.stdout);
+    assert.match(payload.error, /requires Python VibeEdit/);
+    assert.match(payload.error, /no fallback interpreter was used/);
+    assert.doesNotMatch(result.stdout + result.stderr, /INCOMPATIBLE_MEDIA_EXECUTED/);
+  } finally {
+    rmSync(root, { recursive: true });
+  }
+});
+
+test("Node CLI delegates to an explicitly selected matching Python SDK", () => {
+  const root = mkdtempSync(join(tmpdir(), "vibeedit matching bridge "));
+  try {
+    mkdirSync(join(root, "vibeedit"));
+    const version = VERSION.replace("-beta.", "b");
+    writeFileSync(join(root, "vibeedit", "__init__.py"), `__version__ = "${version}"\n`);
+    writeFileSync(join(root, "vibeedit", "__main__.py"), 'import json,sys\nprint(json.dumps({"args":sys.argv[1:]}))\n');
+    const result = spawnSync(process.execPath, ["bin/vibeedit.js", "project", "inspect", "--json"], {
+      encoding: "utf8", env: { ...process.env, VIBEEDIT_PYTHON: pythonInterpreter(), PYTHONPATH: root },
+    });
+    assert.equal(result.status, 0, result.stderr);
+    assert.deepEqual(JSON.parse(result.stdout).args, ["project", "inspect", "--json"]);
+  } finally {
+    rmSync(root, { recursive: true });
+  }
 });
 
 test("Node CLI doctor probes Python with its supported version flag", () => {

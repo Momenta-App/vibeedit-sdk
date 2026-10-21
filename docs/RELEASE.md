@@ -16,11 +16,14 @@ imports the Node API, validates CompositionSpec, and requires a zero-vulnerabili
 production dependency audit. Source-tree tests cannot substitute for this gate.
 
 The workflow builds reviewable artifacts and does not publish packages or deploy a
-backend. The agent-package candidate uses npm `0.2.0-beta.1` and Python `0.2.0b1`;
+backend. The current source candidate uses npm `0.2.0-beta.2` and Python `0.2.0b2`;
 [LAUNCH_STATUS.md](LAUNCH_STATUS.md) records its open acceptance gates. A source
 checkpoint or successful workflow is not launch approval. Publish only the exact
 qualified artifacts after their downloaded checksums, archive audit, attestations
-and complete customer journeys verify.
+and the qualification required for the claimed release verifies. A qualification
+beta may be published to exercise registry/customer installation; it must retain
+its incomplete launch status. Full launch still requires every acceptance gate,
+including the public-registry and customer journeys.
 
 `dist/SHA256SUMS` uses flat filenames so it verifies files downloaded from a
 GitHub release into one directory. `dist/SHA256SUMS.tree` retains `npm/` and
@@ -59,10 +62,12 @@ registry availability; a final protected-workflow dispatch and clean public
 install remain required.
 
 1. Verify the environment's reviewer policy and the exact final release manifest.
-2. Complete all launch acceptance gates and publish its qualified GitHub
-   prerelease archives, checksums, archive audit and attestations.
+2. Complete the exact-artifact build, safety, license, archive audit and
+   attestation checks; publish the immutable GitHub qualification prerelease.
+   Record remaining launch gates explicitly. Registry availability is itself a
+   launch prerequisite and does not certify the other customer journeys.
 3. Dispatch the registry workflow separately for `pypi` and `npm`, with
-   `publish:<registry>:v0.2.0-beta.1` and the same exact release tag.
+   `publish:<registry>:v0.2.0-beta.2` and the same exact release tag.
 4. Retain each workflow's clean public-install proof and independently verify
    installation of those exact versions in fresh environments. Keep npm's stable
    `latest` tag unchanged during beta review.

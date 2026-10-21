@@ -1,6 +1,6 @@
 # Operations and recovery
 
-Updated 2026-10-20. These are customer recovery instructions and an operating contract for the qualification prerelease. They do not mark launch acceptance complete. All P0–P10, J1–J7 and A01–A20 remain required and open in the [public ledger](launch/PUBLIC-LEDGER.json).
+Updated 2026-10-20. These are customer recovery instructions and an operating contract for the qualification prerelease. They do not mark launch acceptance complete. All P0–P10, J1–J7 and A01–A20 remain required and open in the [public ledger](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/PUBLIC-LEDGER.json).
 
 ## Release identity and qualification
 
@@ -13,9 +13,9 @@ The public [v0.2.0-beta.1 prerelease](https://github.com/Momenta-App/vibeedit-sd
 | `vibeedit-0.2.0b1.tar.gz` | `e4226498ef6aa77883485376bf1004127cb57b52a67e219d1b12c2dcd7b5adc8` |
 | `vibeedit-0.2.0-beta.1.tgz` | `67991e0a828977b3205bec5379a9fd05249168ae877ed1dd08e8533ec4b6113e` |
 
-Download checksums, archive audit and signed provenance from that same release. Verify the exact files before installation; follow the [artifact workflow](RELEASE.md). Registry publication and clean public registry installation remain separate gates. These documents may receive a later source commit as a documentation supplement; that does not replace the tag, rebuild archives or change their hashes.
+Download checksums, archive audit and signed provenance from that same release. Verify the exact files before installation; follow the [artifact workflow](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/RELEASE.md). Registry publication and clean public registry installation remain separate gates. These documents may receive a later source commit as a documentation supplement; that does not replace the tag, rebuild archives or change their hashes.
 
-The [Myriograph billing page](https://myrograph.com/billing) is public and production billing is live. Qualification authentication uses a restricted, separate test wallet; it does not make production charges safe to test. New native/managed paid admission and optional automatic top-up remain disabled while the complete signed sandbox-payment and funded customer journeys are unqualified. Neither deployed code nor a successful local fixture establishes those journeys. [Current state](launch/STATE.md) records subsequent changes.
+The [Myriograph billing page](https://myrograph.com/billing) is public and production billing is live. Qualification authentication uses a restricted, separate test wallet; it does not make production charges safe to test. New native/managed paid admission and optional automatic top-up remain disabled while the complete signed sandbox-payment and funded customer journeys are unqualified. Neither deployed code nor a successful local fixture establishes those journeys. [Current state](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/STATE.md) records subsequent changes.
 
 ## Preserve a recoverable project
 

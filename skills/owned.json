@@ -4,7 +4,7 @@
     {
       "id": "vibeedit://skill/vibeedit-setup",
       "name": "vibeedit-setup",
-      "version": "0.2.0",
+      "version": "0.2.0-beta.2",
       "path": "vibeedit-setup",
       "harnesses": [
         "agents",
@@ -12,11 +12,11 @@
         "claude",
         "opencode"
       ],
-      "checksum": "65fc74d20a724899fc0d4469c75ec62d91b46268666a328cd4bb49f6dfc382a4",
+      "checksum": "f0a40e808d77c0f49d2956ce8784ebfa08c0cc5499dae1c481a7dada8e35789e",
       "source": {
         "kind": "sdk-owned",
         "path": "skills/vibeedit-setup",
-        "sha256": "65fc74d20a724899fc0d4469c75ec62d91b46268666a328cd4bb49f6dfc382a4"
+        "sha256": "f0a40e808d77c0f49d2956ce8784ebfa08c0cc5499dae1c481a7dada8e35789e"
       },
       "validation": {
         "status": "integrity-only",
@@ -27,7 +27,7 @@
     {
       "id": "vibeedit://skill/vibeedit-acquisition",
       "name": "vibeedit-acquisition",
-      "version": "0.2.0",
+      "version": "0.2.0-beta.2",
       "path": "vibeedit-acquisition",
       "harnesses": [
         "agents",
@@ -50,7 +50,7 @@
     {
       "id": "vibeedit://skill/vibeedit-companion",
       "name": "vibeedit-companion",
-      "version": "0.2.0",
+      "version": "0.2.0-beta.2",
       "path": "vibeedit-companion",
       "harnesses": [
         "agents",

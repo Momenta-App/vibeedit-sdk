@@ -5,14 +5,16 @@ It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
 motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
-The qualification candidate is Python **0.2.0b1** / npm **0.2.0-beta.1**.
+The published qualification candidate is Python **0.2.0b1** / npm **0.2.0-beta.1**.
 It adds portable projects and corrections, focused local review tools, explicit
 model packs, source-acquisition receipts and an optional Pi companion. It is
 **not yet qualified as the complete launch**. Its exact archives are public in
 [v0.2.0-beta.1](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1).
 Registry publication and complete customer journeys remain pending. Archive
-source is pinned to `7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1`; these updated
-guides are a documentation supplement and do not rebuild those archives.
+source is pinned to `7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1`.
+The current source prepares Python **0.2.0b2** / npm **0.2.0-beta.2** with
+update fixes; those new archives are not published or qualified yet. Use the
+pinned beta.1 setup below until a new immutable manifest is available.
 
 VibeEdit-owned code is MIT licensed. Optional models and fonts have their own
 terms in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Myriograph owns the
@@ -93,7 +95,7 @@ VibeEdit cache; the source and weights are Apache-2.0. The runner uses
 Torch/CUDA, Torch/MPS, or CPU in that order and records the model version,
 checkpoint digest, prompt, source identity, actual device/runtime versions, and
 cache key. A clean-wheel Torch/MPS proof with controlled and natural masks is
-recorded in `docs/evidence/sam21-public-proof.json` for an earlier release. The new model-pack command supports pinned TransNet, SAM 2.1 and SAM 3.1 MLX setup. Fresh inference qualification for this candidate is pending; setup availability is not model accuracy evidence.
+recorded in the [historical SAM2.1 proof](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.1/docs/evidence/sam21-public-proof.json) for an earlier release. The new model-pack command supports pinned TransNet, SAM 2.1 and SAM 3.1 MLX setup. Fresh inference qualification for this candidate is pending; setup availability is not model accuracy evidence.
 No model weight is part of the base wheel or npm archive.
 
 Node SDK, HTML motion runtime, and Node-facing CLI:
@@ -110,7 +112,7 @@ Media rendering commands bridge to an installed Python VibeEdit package. Run
 Agent-package guides: [projects/review](docs/PROJECTS.md),
 [models and reviewed effects](docs/MODELS.md), [Pi workers/goals](docs/COMPANION.md),
 [Myriograph funding/services](docs/MYRIOGRAPH.md), and
-[operations/rollback](docs/OPERATIONS.md). [Launch state](docs/launch/STATE.md)
+[operations/rollback](docs/OPERATIONS.md). [Launch state](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/STATE.md)
 keeps actual qualification separate from supported command contracts.
 
 ## Agent quick start
@@ -169,13 +171,13 @@ frame count and prior artifact provenance. Mid-scene removal remains planned.
 Install the Python beta directly from its GitHub release asset:
 
 ```bash
-uv tool install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.4/vibeedit-0.1.0b4-py3-none-any.whl
+uv tool install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.1/vibeedit-0.2.0b1-py3-none-any.whl
 ```
 
 Install the Node beta tarball in a project:
 
 ```bash
-npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.1.0-beta.4/vibeedit-0.1.0-beta.4.tgz
+npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.1/vibeedit-0.2.0-beta.1.tgz
 ```
 
 When downloading an existing release, use the checksum manifest distributed with that exact release:
@@ -204,9 +206,9 @@ Or build and install the exact local artifacts:
 
 ```bash
 uv build --out-dir dist/python
-uv tool install dist/python/vibeedit-0.2.0b1-py3-none-any.whl
+uv tool install dist/python/vibeedit-0.2.0b2-py3-none-any.whl
 npm pack --pack-destination dist/npm
-npm install ./dist/npm/vibeedit-0.2.0-beta.1.tgz
+npm install ./dist/npm/vibeedit-0.2.0-beta.2.tgz
 ```
 
 `setup` performs only explicitly requested work. It installs pinned browser and
@@ -238,7 +240,7 @@ vibeedit setup --browser --json
 vibeedit render-browser ./projects/browser-composition/job.json --output ./movie.mp4 --backend screenshot --json
 ```
 
-`vibeedit browser-worker --backend cef` accepts JSON lines containing `id`, `job`, and `output` to reuse a warm background browser. Python callers can import `CEFService` and `render_browser_job` from `vibeedit.browser_render`. The Node CLI delegates these commands to an installed Python package. Rendering does not download dependencies. Alpha exports use the screenshot fallback; native acceleration is currently macOS ARM64 only. See [the renderer guide](browser-renderer/README.md) for media preparation, timing adapters and performance evidence.
+`vibeedit browser-worker --backend cef` accepts JSON lines containing `id`, `job`, and `output` to reuse a warm background browser. Python callers can import `CEFService` and `render_browser_job` from `vibeedit.browser_render`. The Node CLI delegates these commands to an installed Python package. Rendering does not download dependencies. Alpha exports use the screenshot fallback; native acceleration is currently macOS ARM64 only. See [the renderer guide](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/browser-renderer/README.md) for media preparation, timing adapters and performance evidence.
 
 ## One composition contract
 

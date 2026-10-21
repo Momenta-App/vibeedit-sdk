@@ -10,8 +10,8 @@ Inspect the project, operating system, Python (3.11+), Node (20+; Pi needs
 what this task needs, in project-local isolated environments. Ordinary editing
 requires no account, API key or Pi companion.
 
-1. This skill belongs to Python `0.2.0b1` / npm `0.2.0-beta.1`. Fetch its exact
-   [release manifest](https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.1/release-manifest.json).
+1. This skill belongs to Python `0.2.0b2` / npm `0.2.0-beta.2`. Fetch its exact
+   [release manifest](https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.2/release-manifest.json).
    The [launch page](https://vibeedit.com/agent-package/) publishes the verified
    handoff and manifest SHA256. If you received only this skill URL, fetch its
    relative `scripts/setup.py` and that exact manifest. Require the manifest's

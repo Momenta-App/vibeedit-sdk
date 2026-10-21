@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-20T23:39:04.492077+00:00",
+  "recordedAt": "2026-10-21T00:08:10.954522+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "f6dee356b69cc55a9347a2f84f42ea7f1230277b",
-    "inventoryPaths": 195,
-    "existingFiles": 195,
-    "bytesRead": 3018783,
-    "sourceInventorySha256": "5b9d3d5e2c3a747b8b4af545386b813878c5a99da459dad57a41c14906b4d525",
+    "gitHead": "eb03dd06da584040ba16fee35da920a87c207c74",
+    "inventoryPaths": 228,
+    "existingFiles": 228,
+    "bytesRead": 3677289,
+    "sourceInventorySha256": "702958e4b6d35c676762e58143cd91376ff09cf874526d411f4732863e6e31c0",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -32,6 +32,26 @@
       "high entropy nonhex strings"
     ],
     "findings": [
+      {
+        "path": "docs/MYRIOGRAPH.md",
+        "category": "email",
+        "count": 1,
+        "matchHashes": [
+          "f36a93de678aa1bf00ff6daf8502a1f11a39a1bf7ca02d1cf3d48b28df34d62e"
+        ],
+        "classification": "public business support address independently matched deployed site-config.json SHA256 3a2fcb9663e81c8934b3e03c09ae4e84881fe4b69e711c82d8ef7b702547378e; no private recipient metadata",
+        "disposition": "reviewed_false_positive"
+      },
+      {
+        "path": "docs/OPERATIONS.md",
+        "category": "email",
+        "count": 1,
+        "matchHashes": [
+          "f36a93de678aa1bf00ff6daf8502a1f11a39a1bf7ca02d1cf3d48b28df34d62e"
+        ],
+        "classification": "public business support address independently matched deployed site-config.json SHA256 3a2fcb9663e81c8934b3e03c09ae4e84881fe4b69e711c82d8ef7b702547378e; no private recipient metadata",
+        "disposition": "reviewed_false_positive"
+      },
       {
         "path": "docs/launch/CATALOG.md",
         "category": "local_personal_path",
@@ -324,9 +344,39 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-acquisition-browser-r1.json",
+        "category": "local_personal_path",
+        "count": 6,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/companion-public-codex-7ff-free-edit.json",
         "category": "local_personal_path",
         "count": 39,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-offline-hosted.json",
+        "category": "local_personal_path",
+        "count": 19,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-offline-source-attempt.json",
+        "category": "local_personal_path",
+        "count": 7,
         "matchHashes": [
           "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
         ],
@@ -558,6 +608,36 @@
         ],
         "classification": "raw operator record excluded; candidate is not asserted to be a credential",
         "disposition": "exclude_raw"
+      },
+      {
+        "path": "python/src/vibeedit/worker.py",
+        "category": "credential_assignment",
+        "count": 1,
+        "matchHashes": [
+          "56791aaf323dc29ae7ce12ffa86a05170d65d2f62de92f528c89796f01f5d4bb"
+        ],
+        "classification": "literal environment-variable interpolation; no embedded credential",
+        "disposition": "reviewed_false_positive"
+      },
+      {
+        "path": "python/src/vibeedit/worker.py",
+        "category": "high_entropy_alphanumeric_candidate",
+        "count": 1,
+        "matchHashes": [
+          "540363d1071a002997290cd8f4a2bdf3acd0355ffad3b3f25f52aad6ebad936a"
+        ],
+        "classification": "complete identifier validation alphabet, verified by character-set and AST context",
+        "disposition": "reviewed_false_positive"
+      },
+      {
+        "path": "python/tests/test_companion_managed.py",
+        "category": "credential_assignment",
+        "count": 1,
+        "matchHashes": [
+          "638312da22df886aa5540168381dc450733432fd0fd70a0ea746527b14a31dc7"
+        ],
+        "classification": "synthetic loopback customer fixture",
+        "disposition": "reviewed_false_positive"
       }
     ],
     "limits": [
@@ -1506,15 +1586,195 @@
     "policy": "Explicit named paths only, pinned to SHA/size; reject drift/new paths; do not git add entire docs or repo. Only curated docs/LAUNCH_STATUS.md, docs/launch/PUBLIC-LEDGER.json, docs/launch/PLATFORM-CANDIDATE.json, docs/launch/STATE.md and this sanitized audit are exceptions to raw launch-record quarantine. This proposal authorizes no commit.",
     "include": [
       {
+        "path": ".github/workflows/vibeedit-package.yml",
+        "byteLength": 11423,
+        "sha256": "9fff9a4b3ddd9021f4f65f975e7e2e1b3d2f52916ee9c6352540a5f60b62db03",
+        "format": "text"
+      },
+      {
+        "path": ".github/workflows/vibeedit-registry-beta.yml",
+        "byteLength": 5600,
+        "sha256": "7b325fbef94c882b78f17ebd6f9d58ca3b2a6b5546d2836eb431bb443c83c312",
+        "format": "text"
+      },
+      {
+        "path": "CHANGELOG.md",
+        "byteLength": 6622,
+        "sha256": "c7906a5b67379f7adcc37faa444464699db46ce19abafa2fa6e31675206e0273",
+        "format": "text"
+      },
+      {
+        "path": "README.md",
+        "byteLength": 18177,
+        "sha256": "5d7d2fd59fa074bd8fc213914e8cde8104231d5120380e62af90886845ec94f3",
+        "format": "text"
+      },
+      {
+        "path": "SBOM.spdx.json",
+        "byteLength": 33041,
+        "sha256": "14b183308d6b518bc473675da024f3006ba9e99055c7310661ac2b7b09221882",
+        "format": "text"
+      },
+      {
+        "path": "bin/vibeedit.js",
+        "byteLength": 16582,
+        "sha256": "ac0d147522d5822e3f670d413894bd25ea18cf4b28448164c578ecbfa82c00ef",
+        "format": "text"
+      },
+      {
+        "path": "companion/README.md",
+        "byteLength": 3059,
+        "sha256": "0fdd00410829bceb7a50af684348ff26d65a81a5f4bb5a8b69506057c96af45f",
+        "format": "text"
+      },
+      {
+        "path": "companion/package-lock.json",
+        "byteLength": 56577,
+        "sha256": "fbd12ffce97cdf2ec0a89d6e5fb3fabda3545b6a9b02a4227a1443dcd4dbb9af",
+        "format": "text"
+      },
+      {
+        "path": "companion/package.json",
+        "byteLength": 744,
+        "sha256": "d3151421b510dc7c7a62f73ddf3d288a5b1b6d32c963f5e8a9c229d313e7a7a5",
+        "format": "text"
+      },
+      {
+        "path": "docs/COMPANION.md",
+        "byteLength": 7200,
+        "sha256": "8c6c1f0c34a5bcaea961bddb86775a9b092ed684452b2773acbea105191f50e4",
+        "format": "text"
+      },
+      {
+        "path": "docs/MODELS.md",
+        "byteLength": 8016,
+        "sha256": "088b0e64d875c35a0475b6a6ed2be225c2b4be70dde0a4679233da408c42cbbb",
+        "format": "text"
+      },
+      {
+        "path": "docs/MYRIOGRAPH.md",
+        "byteLength": 9854,
+        "sha256": "17820a2f9610be5fcff145bcf976860e10f814ef04c904a1f8abb72628b34d86",
+        "format": "text"
+      },
+      {
+        "path": "docs/OPERATIONS.md",
+        "byteLength": 10003,
+        "sha256": "b6f798b121cee4ce5752295b6fd09aa34ff77bf723b1b53766b51b0668c51cd1",
+        "format": "text"
+      },
+      {
+        "path": "docs/RELEASE.md",
+        "byteLength": 4874,
+        "sha256": "c6a2dfd1d345877709a7c5f2570d8ada1c85964b54e2045acda3ef65908dbd14",
+        "format": "text"
+      },
+      {
         "path": "docs/launch/PUBLIC-LEDGER.json",
-        "byteLength": 47510,
-        "sha256": "714a15501dfd9fa8e86457cd607b6008f17e08562a6a1713e6006d8f3119c01a",
+        "byteLength": 50719,
+        "sha256": "24dc3e59fc9b2a4a448f2e05268eea247deb4de3497176589c58439d52f0e3a6",
         "format": "text"
       },
       {
         "path": "docs/launch/STATE.md",
-        "byteLength": 12163,
-        "sha256": "cdcbfd11a030b65e6c01a447f75812aa0b23f197be3a3662646248530040936f",
+        "byteLength": 12852,
+        "sha256": "48c7c277630fc4ecdd5ebc15e3c34cb6c5a8a6bbb6b1c86371cc94cfc2cf1afe",
+        "format": "text"
+      },
+      {
+        "path": "index.d.ts",
+        "byteLength": 9156,
+        "sha256": "7cb6615c230daccee9b4e8d25e6b5bcca160438c0893769721ff3957353eec4a",
+        "format": "text"
+      },
+      {
+        "path": "package-lock.json",
+        "byteLength": 5219,
+        "sha256": "1efb794c588c59b7df0c171ee84243de57ad2ac51f7511d3a7f0da3ebf930574",
+        "format": "text"
+      },
+      {
+        "path": "package.json",
+        "byteLength": 3337,
+        "sha256": "d5082cd601b7791463185ba20c232cfe3d26f8a9ba14c6cb0735530c91ac0611",
+        "format": "text"
+      },
+      {
+        "path": "pyproject.toml",
+        "byteLength": 4633,
+        "sha256": "00cad4868f561391ff2c21195f070dff35f1f5a3b95bb6f46c294c74bca574e1",
+        "format": "text"
+      },
+      {
+        "path": "python/src/vibeedit/version.py",
+        "byteLength": 20,
+        "sha256": "bf26733f59dfedafc8c5d859b065d1f0d95c9f609778e8d1b5125ba5f113ef50",
+        "format": "text"
+      },
+      {
+        "path": "python/src/vibeedit/worker.py",
+        "byteLength": 102321,
+        "sha256": "58ea588b162ad56bbb5cfa02084f0e759bb65ffa3f663c7d478878e32e438de5",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_companion_managed.py",
+        "byteLength": 37760,
+        "sha256": "852463f9c85c1eb6d529db8857087b3f5e27ca525857fe402b349f3aec551200",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_customer_docs.py",
+        "byteLength": 3842,
+        "sha256": "eeb76891a7b8718da0901e289e9932f513d73877b2194e322a0f6b4e5406bac1",
+        "format": "text"
+      },
+      {
+        "path": "python/tests/test_worker_setup.py",
+        "byteLength": 5641,
+        "sha256": "32345cbe9c7f65cdd485092995dfd3a08b4553986947722fb4e5f8e48546e4c6",
+        "format": "text"
+      },
+      {
+        "path": "scripts/audit_release_artifacts.py",
+        "byteLength": 12118,
+        "sha256": "df8b7b2e8db3b2bdf4c8fa19256da5ed0c506ec1c0d04d61a404711471a613ed",
+        "format": "text"
+      },
+      {
+        "path": "scripts/index_owned_skills.py",
+        "byteLength": 1252,
+        "sha256": "e3e15a00a925ccb8c035ac60b3a8b82204266d80a3441b0f9f5ac5655159f8ab",
+        "format": "text"
+      },
+      {
+        "path": "skills/owned.json",
+        "byteLength": 2210,
+        "sha256": "89f10778e747512078258d725dd567ec132a713d7d33b17ca59952254ce4d144",
+        "format": "text"
+      },
+      {
+        "path": "skills/vibeedit-setup/SKILL.md",
+        "byteLength": 4488,
+        "sha256": "a8f61c45763be30e9a4bb61c74a0b3c09691306df315ec4686d5c0914881c411",
+        "format": "text"
+      },
+      {
+        "path": "src/version.js",
+        "byteLength": 39,
+        "sha256": "1daf24a0237f3f13d23d72c3e5e53bf5437685d3cc0ec0341b6a8e7a340b1672",
+        "format": "text"
+      },
+      {
+        "path": "test/cli.test.js",
+        "byteLength": 7725,
+        "sha256": "0fc6e133bdb65386fe0dbb032d061a04f0b02e57e2a26c564cff4c898b9def47",
+        "format": "text"
+      },
+      {
+        "path": "uv.lock",
+        "byteLength": 244679,
+        "sha256": "0084a1791b4fd33fb1372645e7c82ba82dda807f9db0f9d86c1c0075bc070424",
         "format": "text"
       }
     ],
@@ -1571,8 +1831,8 @@
       },
       {
         "path": "docs/launch/CODEX-PUBLIC-JOURNEY.md",
-        "byteLength": 4084,
-        "sha256": "0a4a6fc3e0f616403283311c7ee87778c6e3187295ea2fb49935dd625ebedb8a",
+        "byteLength": 5117,
+        "sha256": "f2e3357371407aa21c388d6ca30839be2ffe0c2299801f8424903f017c803785",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1613,8 +1873,8 @@
       },
       {
         "path": "docs/launch/OPERATOR_STATE.md",
-        "byteLength": 47210,
-        "sha256": "d7d5372ecf86bb1cb7b4f31a952416c96a0d9143ce9c3827de035e39391d55c0",
+        "byteLength": 49674,
+        "sha256": "4e689cb24430f46897a1aa1ff5eeef603b1ddce4b31a24bc31714b6cd0bd91d1",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -3343,6 +3603,50 @@
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
       {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-acquisition-browser-r1.json",
+        "byteLength": 5270,
+        "sha256": "05ca33288c5cba901445cbac3800dfbe644c43309de561edbe070f3f38dd6f72",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "49db648bdd0464fef38c6ded23a0b832693ea113b90f1b4fbafe08e3ce5dd3d8",
+            "byteLength": 17088
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7cea5ee0e3b17a098d6701d66f04cc0b41192a858c1d68105c1a150801f3e5bf",
+            "byteLength": 1101
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c912669b8e4b89d5c5ab6952383e1703cfdbce1f301dcee9d92593d1cd939ff5",
+            "byteLength": 8705
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "940c957ff2ceee2af70c76970d61c377964336f76158875edba75ca42792564b",
+            "byteLength": 704
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "3ed4b20e8d9e54d91dcb828f93a927d1761f01aeaa9c8fbfe34faa7e4da2329d"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8cfbe1cf7d2a0020f49ffd919b9322f1218bfc42901b77f26c1fee84a1cb1cec",
+            "byteLength": 736
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1bb4fb3a05b5f6c285805bb78ca4773b5935444a8945a8fa806803325fdd39ad",
+            "byteLength": 688
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/companion-public-codex-7ff-free-edit.json",
         "byteLength": 12538,
         "sha256": "90bb16571cba68c5b24d03164fdd79278ea08088b5665d6c290b083a39ac6324",
@@ -3448,6 +3752,126 @@
             "digestRole": "sha256",
             "sha256": "315cfe62f3b10e24655e5fc79fd246583ad5e33916853095af0f44d19a84ab97",
             "byteLength": 30658
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-offline-hosted.json",
+        "byteLength": 6886,
+        "sha256": "c7623119bb498471c20c4bb48f26d1fc396ef684aa61272b9715c980479edeb6",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "05919b3d141c3ba56ab62663441543f1898809015673518cedd0eaa1a3ddba58",
+            "byteLength": 2052
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "582656f8bbc4d596fa1686d27c4757266349a9779b4bfd2f66ba79ea1f686014",
+            "byteLength": 18459
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "06faa65833f853bb0288bee81b86282dd63fe6cebe8378773b16923cf54f8bc4",
+            "byteLength": 1025
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c0315dc2b028701958c83ffd7a0ebf035db295750d31fbc3378b0460d82f83b5",
+            "byteLength": 960
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "bbbe68542db48f179dd03135c6eb2d54456c49ba1c742bfb3b12a1db01af56bd",
+            "byteLength": 7306
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1670644ed51297013a640c5a30c6251354793e9e6b3fd54de5c3c97969f0a918",
+            "byteLength": 3310
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9ff56425297b21d52cbe4f459a8c8c889fd2a6c509cef5f32378e79ecdf4ef56",
+            "byteLength": 6617
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "b039d710e5da1cf8611b6dc00665fa6771501cbb1ff9a8531a83510fe6a59100",
+            "byteLength": 998
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8e88a1cd643f174de1068aee41af86da9152dfe38fc10296546976f5abb48978",
+            "byteLength": 526
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "93a711956cda8a2d99b759cc798a6c7ecb16ea1124ae3d2f02e0704a25da43a2",
+            "byteLength": 2009
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4f969c0c83233db953a647c96ec4f74963481b1da28b0e09121e3b077153fe38",
+            "byteLength": 1521
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1c5383b40787be5fce04605fe460611cead73478623a41288789f1bc0beb35dd",
+            "byteLength": 1430
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ad526fdf6440c56367a861e5801297aac7854194acdee0804107bcdab0f286fd",
+            "byteLength": 290
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "258d46c685f83545c8a0a8889775222951debd6c1bb8b568be699bd3cef46298",
+            "byteLength": 3970
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5bfe2cda4621142c0ef32922ff90178830ac2e6b8afc6bbe242defa65bc818d5",
+            "byteLength": 48634
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-offline-source-attempt.json",
+        "byteLength": 2743,
+        "sha256": "18b9bc6ad5cddfa8d028da30f12988f9ae0aa66d4744cd16e22b6e9d03633de6",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "501346c8651f4958e1f005b34bad34d370c075c53dd1d48efb827016e1198db9",
+            "byteLength": 2054
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c7dd93289d7c2341ca73c0d2c914bba519f43772157cb80725963ef0e3fb3ba7",
+            "byteLength": 8677
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c9a51bfaa81522b7fe648f828fad752a52f284535bd141b031ee6dac6407006d",
+            "byteLength": 5905
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1563ad06e403b773d1540caabd25767b22d4a2cf8e6739da925555812788a82d",
+            "byteLength": 1087
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1ac1e5caa20e659923bf53bb67640e9db53598bd4c57e572e63f94c5ee7dd11f",
+            "byteLength": 171
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"

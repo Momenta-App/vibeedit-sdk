@@ -1,6 +1,12 @@
 # Changelog
 
-## 0.2.0-beta.1 (unreleased candidate)
+## 0.2.0-beta.2 (unreleased candidate)
+
+- Require the Node bridge to select the matching Python SDK release; an explicitly configured incompatible interpreter fails without fallback.
+- Correct package-version declarations and bind SDK-owned skill versions to the package identity.
+- Repair the companion skill's bundled contract reference. New archives and clean customer qualification remain pending.
+
+## 0.2.0-beta.1 (GitHub qualification prerelease)
 
 - Add content-bound portable projects, native source clocks, revisioned corrections, indexed face-package import and focused local review tools.
 - Add explicit TransNet/SAM model packs, reviewed mask artifacts and source-acquisition receipts.

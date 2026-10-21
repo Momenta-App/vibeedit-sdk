@@ -84,7 +84,7 @@ async function doctor(values) {
     readiness: {
       level: ready ? "core-ready" : "core-unavailable",
       meaning: ready ? "Core FFmpeg rendering is ready; HTML motion and Python media commands may still require setup." : "Core rendering requires FFmpeg and FFprobe.",
-      nextActions: [!htmlMotion.available ? htmlMotion.setup : null, !bridge.available ? 'Install the Python package for media commands: pip install "vibeedit[all]"' : null].filter(Boolean),
+      nextActions: [!htmlMotion.available ? htmlMotion.setup : null, !bridge.available ? bridge.detail : null].filter(Boolean),
     },
     capabilities: { commands, htmlMotion, pythonBridge: bridge },
   };
@@ -93,7 +93,7 @@ async function doctor(values) {
     `VibeEdit doctor: ${result.readiness.level}`,
     result.readiness.meaning,
     `HTML motion: ${htmlMotion.available ? "ready" : "setup required"}`,
-    `Python media bridge: ${bridge.available ? `ready (${bridge.executable}, VibeEdit ${bridge.version})` : "not installed"}`,
+    `Python media bridge: ${bridge.available ? `ready (${bridge.executable}, VibeEdit ${bridge.version})` : "setup required"}`,
     ...result.readiness.nextActions.map((action) => `  - ${action}`),
     "Use `vibeedit doctor --json` for command, provider, and version details.",
   ].join("\n");
@@ -166,7 +166,7 @@ function skillsCommand(values) {
 
 function python(name, values) {
   const bridge = pythonBridge();
-  if (!bridge.available) throw new Error('media commands require the Python distribution. Install it with: pip install "vibeedit[all]"');
+  if (!bridge.available) throw new Error(bridge.detail);
   if (name === "browser-worker") {
     const worker = spawnSync(bridge.executable, [...bridge.prefix, "-m", "vibeedit", name, ...values], { stdio: "inherit" });
     if (worker.error) throw worker.error;
@@ -187,12 +187,21 @@ function commandVersion(name) {
 }
 
 function pythonBridge() {
-  for (const executable of [...new Set([process.env.VIBEEDIT_PYTHON, "python3", "python", "py"].filter(Boolean))]) {
+  const expectedVersion = VERSION.replace(/-alpha\.(\d+)$/, "a$1").replace(/-beta\.(\d+)$/, "b$1").replace(/-rc\.(\d+)$/, "rc$1");
+  const executables = process.env.VIBEEDIT_PYTHON ? [process.env.VIBEEDIT_PYTHON] : ["python3", "python", "py"];
+  const mismatches = [];
+  for (const executable of executables) {
     const prefix = executable === "py" ? ["-3"] : [];
     const result = spawnSync(executable, [...prefix, "-c", "import vibeedit; print(vibeedit.__version__)"], { encoding: "utf8", timeout: 10000 });
-    if (result.status === 0) return { available: true, executable, prefix, version: result.stdout.trim() };
+    if (result.status !== 0) continue;
+    const version = result.stdout.trim();
+    if (version === expectedVersion) return { available: true, executable, prefix, version, expectedVersion };
+    mismatches.push({ executable, version });
   }
-  return { available: false, executable: null, prefix: [], version: null };
+  return {
+    available: false, executable: null, prefix: [], version: null, expectedVersion, mismatches,
+    detail: `Node VibeEdit ${VERSION} requires Python VibeEdit ${expectedVersion}. Install the matching Python release archive into the project environment and set VIBEEDIT_PYTHON to that environment's interpreter.${process.env.VIBEEDIT_PYTHON ? " The explicit VIBEEDIT_PYTHON interpreter was unavailable or incompatible; no fallback interpreter was used." : ""}`,
+  };
 }
 
 function open(path) {

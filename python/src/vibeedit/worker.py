@@ -755,7 +755,8 @@ def _pi_command(directory, *, require_ready=False):
 
 
 def worker_runtime():
-    return config_home() / "runtime" / f"pi-{PI_VERSION}"
+    lock_digest = hashlib.sha256((companion_path()/"package-lock.json").read_bytes()).hexdigest()
+    return config_home() / "runtime" / f"pi-{PI_VERSION}-{lock_digest}"
 
 
 def setup_worker():

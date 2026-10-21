@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-20T23:39:03.620162+00:00",
+  "updatedAt": "2026-10-21T00:05:45.329421+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
@@ -90,7 +90,8 @@
         "platform-six-source",
         "platform-canonical-six",
         "public-codex-bootstrap-7ff",
-        "public-codex-free-edit-7ff"
+        "public-codex-free-edit-7ff",
+        "public-codex-offline-source-7ff"
       ]
     },
     {
@@ -119,7 +120,8 @@
         "review-clock",
         "editorial-negative-animation",
         "public-codex-free-edit-7ff",
-        "sparse-real-mask-export"
+        "sparse-real-mask-export",
+        "sparse-real-mask-effect"
       ]
     },
     {
@@ -132,7 +134,8 @@
         "models-pins",
         "models-gate",
         "cpu-transnet-sam21-39510473292",
-        "sparse-real-mask-export"
+        "sparse-real-mask-export",
+        "sparse-real-mask-effect"
       ]
     },
     {
@@ -180,7 +183,8 @@
         "acquisition-interim",
         "creative-portability",
         "editorial-negative-animation",
-        "public-codex-free-edit-7ff"
+        "public-codex-free-edit-7ff",
+        "sparse-real-mask-effect"
       ]
     },
     {
@@ -221,7 +225,8 @@
         "setup-interim",
         "creative-portability",
         "public-codex-bootstrap-7ff",
-        "public-codex-free-edit-7ff"
+        "public-codex-free-edit-7ff",
+        "public-codex-offline-source-7ff"
       ]
     },
     {
@@ -236,7 +241,8 @@
         "editorial-social-revision",
         "acquisition-interim",
         "creative-portability",
-        "editorial-negative-animation"
+        "editorial-negative-animation",
+        "sparse-real-mask-effect"
       ]
     },
     {
@@ -268,7 +274,8 @@
         "review-clock",
         "editorial-negative-animation",
         "public-codex-free-edit-7ff",
-        "sparse-real-mask-export"
+        "sparse-real-mask-export",
+        "sparse-real-mask-effect"
       ]
     },
     {
@@ -330,7 +337,8 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "creative-portability",
-        "public-codex-free-edit-7ff"
+        "public-codex-free-edit-7ff",
+        "public-codex-offline-source-7ff"
       ]
     },
     {
@@ -344,7 +352,8 @@
         "review-words",
         "review-clock",
         "cpu-transnet-sam21-39510473292",
-        "sparse-real-mask-export"
+        "sparse-real-mask-export",
+        "sparse-real-mask-effect"
       ]
     },
     {
@@ -419,7 +428,8 @@
         "models-pins",
         "models-gate",
         "cpu-transnet-sam21-39510473292",
-        "sparse-real-mask-export"
+        "sparse-real-mask-export",
+        "sparse-real-mask-effect"
       ]
     },
     {
@@ -481,7 +491,8 @@
       "evidenceRefs": [
         "editorial-social-revision",
         "editorial-negative-animation",
-        "public-codex-free-edit-7ff"
+        "public-codex-free-edit-7ff",
+        "sparse-real-mask-effect"
       ]
     },
     {
@@ -994,6 +1005,54 @@
       "summary": "Original18SAM2.1 candidates/indices preserved. A separately identified6-frame lossless source retains exact native pixels/PTS and explicit parent mapping; no inference on the derivative. SHA-bound unreviewed proposal rejected; reviewed selection persisted, exported and reopened at revision6. All6RLE frames verified against original PNGs: selected2 exact, rejected4 empty. Actual effect did not start because disk space fell below its650MB safety floor before watcher creation. No dense propagation or finished-action-edit claim.",
       "exportSha256": "5b9be52f5c0b4898c6beb30b12dfed36834ec0981e5d6adba8b9c095a02b0a4f",
       "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "public-codex-offline-source-7ff",
+      "receiptSha256": "c7623119bb498471c20c4bb48f26d1fc396ef684aa61272b9715c980479edeb6",
+      "receiptBytes": 6886,
+      "scope": "actual-clean-public-Codex-bounded-local",
+      "supportsRequirements": [
+        "P1",
+        "A02",
+        "J1"
+      ],
+      "summary": "Same clean Codex controlled a fixed hosted source-generation operation under the renderer OS profile. External TCP/DNS connection probes denied; generated audio/video bytes exactly match original renderer inputs. Native child DNS exception and first terminal nested-sandbox failure remain recorded; actual review page and full Claude journey remain open.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "sparse-real-mask-effect",
+      "receiptSha256": "0ce594cd10266b3125935402102fb13806fb20966d92e9d19b4406a8705200d9",
+      "receiptBytes": 1593,
+      "scope": "actual-public-wheel-bounded-local-effect",
+      "supportsRequirements": [
+        "P3",
+        "P4",
+        "P8",
+        "A03",
+        "A09",
+        "A14",
+        "J2",
+        "J4"
+      ],
+      "summary": "Actual public wheel renders six-frame native-pixel-equivalence derivative with two accepted real SAM2.1 masks. Four inactive pre-encode frames exact RGB; active changes confined to alpha. Decoded effect inspected with lossy encoding errors retained; project reopened revision10 and all registered hashes match. Sparse flash only, visible edge defects, no fresh inference on derivative or clean matte/dense/SAM3.1/full production claim.",
+      "establishesLaunchAcceptance": false,
+      "artifacts": [
+        {
+          "role": "render",
+          "sha256": "d2de1737fe38ffb252422e79d1cb1b503145bafdc051fe82a58bb01e496a6f70",
+          "byteLength": 517163
+        },
+        {
+          "role": "registration-reopen-receipt",
+          "sha256": "a6a1f61c7acaa972ccffd8ce3352958c23d1fd36e15c59e769c2ca118e37e825",
+          "byteLength": 1347
+        },
+        {
+          "role": "decoded-contact",
+          "sha256": "72fa26bcf69c85fc5d32b7ee47c0faebdad8899464beafc027ff15652798640d",
+          "byteLength": 589709
+        }
+      ]
     }
   ],
   "openGates": [
@@ -1106,6 +1165,17 @@
       "verification": "Existing skill lifecycle, all release-safe harness installations and donor identity checks:3passed.",
       "publicationState": "Source correction awaits a new immutable archive and exact-release requalification. Published beta1 remains unchanged.",
       "existingBeta1Workaround": "Read the packaged companion references/contracts.md; it already contains the recovery contract."
+    },
+    {
+      "kind": "coherent-beta2-update-contract",
+      "paths": [
+        "bin/vibeedit.js",
+        "python/src/vibeedit/worker.py",
+        "index.d.ts",
+        "scripts/index_owned_skills.py"
+      ],
+      "summary": "Prepare Python0.2.0b2/npm0.2.0-beta.2, require matching Python at Node bridge, select optional Pi1.3.0 runtime by exact lock digest without deleting old runtimes/journals, derive SDK-owned skill versions from package identity.",
+      "publicationState": "Unreleased source; focused local checks do not substitute for new canonical archive/platform/upgrade/customer qualification."
     }
   ]
 }
