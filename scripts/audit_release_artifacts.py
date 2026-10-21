@@ -146,7 +146,10 @@ def _tar_files(archive: tarfile.TarFile) -> dict[str, bytes]:
 
 
 def _sdist_name(files: dict[str, bytes], relative: str) -> str:
-    matches = [name for name in files if name.endswith(f"/{relative}")]
+    roots = {name.split("/", 1)[0] for name in files}
+    if len(roots) != 1:
+        raise RuntimeError("sdist must contain one top-level package directory")
+    matches = [name for name in files if name.partition("/")[2] == relative]
     if len(matches) != 1:
         raise RuntimeError(f"sdist entry is missing or ambiguous: {relative}")
     return matches[0]
