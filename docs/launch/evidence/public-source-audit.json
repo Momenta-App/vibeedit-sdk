@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-21T00:18:12.959932+00:00",
+  "recordedAt": "2026-10-21T00:51:06.778977+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "46f2b3b630c8bda9a3fa373a7183307a98f056e3",
-    "inventoryPaths": 208,
-    "existingFiles": 208,
-    "bytesRead": 3052781,
-    "sourceInventorySha256": "ad16de537dcd7d9ac2aae56ff2f01f27de0bac99a6bc1051a04e5e984c2719f5",
+    "gitHead": "bf5905c4c4ec0783634d36a0f4c308f2f53e18cf",
+    "inventoryPaths": 222,
+    "existingFiles": 222,
+    "bytesRead": 3166695,
+    "sourceInventorySha256": "edab7b4f3d37154e01bcbf67b1c6310ab5b5845e95892847c1aea7459f50bda3",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -32,26 +32,6 @@
       "high entropy nonhex strings"
     ],
     "findings": [
-      {
-        "path": "docs/MYRIOGRAPH.md",
-        "category": "email",
-        "count": 1,
-        "matchHashes": [
-          "f36a93de678aa1bf00ff6daf8502a1f11a39a1bf7ca02d1cf3d48b28df34d62e"
-        ],
-        "classification": "public business support address independently matched deployed site-config.json SHA256 3a2fcb9663e81c8934b3e03c09ae4e84881fe4b69e711c82d8ef7b702547378e; no private recipient metadata",
-        "disposition": "reviewed_false_positive"
-      },
-      {
-        "path": "docs/OPERATIONS.md",
-        "category": "email",
-        "count": 1,
-        "matchHashes": [
-          "f36a93de678aa1bf00ff6daf8502a1f11a39a1bf7ca02d1cf3d48b28df34d62e"
-        ],
-        "classification": "public business support address independently matched deployed site-config.json SHA256 3a2fcb9663e81c8934b3e03c09ae4e84881fe4b69e711c82d8ef7b702547378e; no private recipient metadata",
-        "disposition": "reviewed_false_positive"
-      },
       {
         "path": "docs/launch/CATALOG.md",
         "category": "local_personal_path",
@@ -244,6 +224,16 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/companion-canonical-ci-39520692681.json",
+        "category": "local_personal_path",
+        "count": 14,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/companion-catalog.json",
         "category": "local_personal_path",
         "count": 1,
@@ -364,6 +354,16 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-acquisition-browser-r4.json",
+        "category": "local_personal_path",
+        "count": 6,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/companion-public-codex-7ff-free-edit.json",
         "category": "local_personal_path",
         "count": 39,
@@ -446,6 +446,16 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/editorial-action-sam21-beat-20261020.json",
+        "category": "local_personal_path",
+        "count": 19,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/models-internal-base-startup.local.json",
         "category": "local_personal_path",
         "count": 2,
@@ -491,6 +501,26 @@
         "path": "docs/launch/evidence/prerelease-v0.2.0-beta.1-packet.json",
         "category": "local_personal_path",
         "count": 5,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/prerelease-v0.2.0-beta.2-packet.json",
+        "category": "local_personal_path",
+        "count": 13,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/prerelease-v0.2.0-beta.2-publication.json",
+        "category": "local_personal_path",
+        "count": 1,
         "matchHashes": [
           "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
         ],
@@ -1566,45 +1596,9 @@
     "policy": "Explicit named paths only, pinned to SHA/size; reject drift/new paths; do not git add entire docs or repo. Only curated docs/LAUNCH_STATUS.md, docs/launch/PUBLIC-LEDGER.json, docs/launch/PLATFORM-CANDIDATE.json, docs/launch/STATE.md and this sanitized audit are exceptions to raw launch-record quarantine. This proposal authorizes no commit.",
     "include": [
       {
-        "path": "CHANGELOG.md",
-        "byteLength": 6897,
-        "sha256": "d05be85d6b63178852872f58f519fbcb25d90ed489a116bf31015b692f7dad07",
-        "format": "text"
-      },
-      {
-        "path": "README.md",
-        "byteLength": 18481,
-        "sha256": "d527858d169ab2ccd130ade5b4593d931d0057f640c063e2226f95f80339cfa3",
-        "format": "text"
-      },
-      {
-        "path": "companion/README.md",
-        "byteLength": 3225,
-        "sha256": "ff19abb08619a9c404960483e7d4bf4e40a4b2831645ff3c29a45efb35b6d094",
-        "format": "text"
-      },
-      {
-        "path": "docs/COMPANION.md",
-        "byteLength": 7242,
-        "sha256": "c506562568a0b859c474b3d04600d8d0b5cca51d63f900916cf31bc34e631ddc",
-        "format": "text"
-      },
-      {
-        "path": "docs/MODELS.md",
-        "byteLength": 8068,
-        "sha256": "7e28f901a8f76b6c054aeb6142e2c2e1f3508612b3fefe6a3697bf86a38c6508",
-        "format": "text"
-      },
-      {
-        "path": "docs/MYRIOGRAPH.md",
-        "byteLength": 9844,
-        "sha256": "7e5e74876a9136b7dc85edf7f05a5dd7b19e1a6a0175783768c5ebdb1da86e17",
-        "format": "text"
-      },
-      {
-        "path": "docs/OPERATIONS.md",
-        "byteLength": 10439,
-        "sha256": "a5dd6a071a7e2f159f7e6a33b8d6e45610bc8322fd3cd62fb82dc00cdcecd255",
+        "path": ".github/workflows/vibeedit-registry-beta.yml",
+        "byteLength": 5636,
+        "sha256": "bcf4ebf423903f3284b40209bba20f13b2eaf54353cf0a10d9e8682006c0dd99",
         "format": "text"
       }
     ],
@@ -1661,8 +1655,8 @@
       },
       {
         "path": "docs/launch/CODEX-PUBLIC-JOURNEY.md",
-        "byteLength": 5117,
-        "sha256": "f2e3357371407aa21c388d6ca30839be2ffe0c2299801f8424903f017c803785",
+        "byteLength": 7540,
+        "sha256": "35973c64a5d996431eba2f5c9bdd053c3c0bff865cb6527294e9719b3dbe72cd",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1703,8 +1697,8 @@
       },
       {
         "path": "docs/launch/OPERATOR_STATE.md",
-        "byteLength": 52320,
-        "sha256": "3322afa24cf7bb693df34ea4568b56fe101f07b820cd1dd37e8d15469f4e3a04",
+        "byteLength": 58804,
+        "sha256": "e540316cb070a49a8cab37a2f9862ac32f9c429551138653e28a18c22f36f99b",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1929,6 +1923,15 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/beta2-canonical-39519862564-terminal.json",
+        "byteLength": 358,
+        "sha256": "e3f5abcc95484c94f0423e46d81d5a1ea297101ab0450ec2ea33fc9d20adcde6",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/beta2-canonical-dispatch-intent.json",
         "byteLength": 818,
         "sha256": "e23318e2c589456a3cadf1c9647808806920846c95f3e24ad30b1e20726da1a6",
@@ -1950,6 +1953,96 @@
         "path": "docs/launch/evidence/beta2-canonical-r2-dispatch-intent.json",
         "byteLength": 1008,
         "sha256": "d6d1ab7e536cc7a4c062f0f8793c07442526234faa012222942a6baa999d24c6",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-canonical-r3-dispatch-ack.json",
+        "byteLength": 523,
+        "sha256": "0bc52b941c31b2816381c2565890708a74ed239f8b73c86b9450378fe36011e4",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-canonical-r3-dispatch-intent.json",
+        "byteLength": 1056,
+        "sha256": "8f4637149170a4b3ed564c74882d1c937b60a5ba92bed24ec19d6f25bb457b83",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-npm-dispatch-ack.json",
+        "byteLength": 232,
+        "sha256": "87587f4e260df94f8ee94e2413f554f983fc8612ce408a2286d519309fd4f0cf",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-npm-dispatch-intent.json",
+        "byteLength": 625,
+        "sha256": "954e3f6b640ed1f28892887249482aed776543e18c14379390f5f8dd4da38a10",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-npm-environment-review-ack.json",
+        "byteLength": 5351,
+        "sha256": "5fcab41bfca949c60921fdb95883e85097288708fd17c5031e034efc13b8fbcf",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-npm-environment-review-intent.json",
+        "byteLength": 635,
+        "sha256": "4722a9b1601d20e27a9ddb3e3979535e83f121161a12a5eec4e949acf4f38d00",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-pypi-dispatch-ack.json",
+        "byteLength": 232,
+        "sha256": "6bf40380552c1cb59f16051cbf52cc53f14d20b4db407956d2d13947ba92edb7",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-pypi-dispatch-intent.json",
+        "byteLength": 628,
+        "sha256": "aec3f508defa6f95a1f9df34dc0f063895cffd478a635701ebb8f9bd9fcaf96c",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-pypi-environment-review-ack.json",
+        "byteLength": 5352,
+        "sha256": "8a2c45e8d2534dd025e9203265c59e10dcb9057697776694ce2c065371199046",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-pypi-environment-review-intent.json",
+        "byteLength": 636,
+        "sha256": "479863c4f28c2ff6a3a6fe0114a2e6e77a18ceb183e067816c74c50d23d9b767",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
@@ -2598,6 +2691,193 @@
           {
             "digestRole": "sha256",
             "sha256": "3565f60923b29e2dc24b512b9b2126ad1b848bb81762a27745a3b1ee464b28f3"
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-canonical-ci-39520692681.json",
+        "byteLength": 85411,
+        "sha256": "c33d9e516a536abc1dc19bea0a82b07b01f65c3377296c75b4bc836ee80f1c5e",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "16eaa3468c7eb8f26ae12308e9c6412436af59911da1ef68d95977d1e225c37a",
+            "byteLength": 60665714
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e3801cd386728f6053c8dea63e36fd26a17b9e26f8d3b260b368bcffee07b48a",
+            "byteLength": 282
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6e6a62be9cbf993acb8e5a2e09d361feb0931a152c95c1b041f0e02bcc3ebf83",
+            "byteLength": 300
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5475e3800a38f017f31bcb98b22b7897d6ce51e13df366683f8dcef52c1f27e7",
+            "byteLength": 1051
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9b5b0182be68db00a10abdec41e6a43521ae9947a7434db63b2474f734892707",
+            "byteLength": 22047982
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f4fba7e44eaefe55e953642a33b70fd836a11d5ffe0a2eb3468fc33500937d70",
+            "byteLength": 17235672
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "bf536d2ac2601fe9771a41ea8c7757c06097ef18f9e11cf758f1f7aa6aac8a68",
+            "byteLength": 21436300
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d97e060bf0b8cac57252b71825ac1d0f24e771a5851a9845f8a9cf058848761b",
+            "byteLength": 2247
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4a5dd02634ec3114eb11c0deb063b6acd7be41e62e7ea061243c2025884f1f19",
+            "byteLength": 10874
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7100549b6979a8ffe4d5c1fd518606801b24b22a5671a14ac8b2d06b5e123632",
+            "byteLength": 6080
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "16eaa3468c7eb8f26ae12308e9c6412436af59911da1ef68d95977d1e225c37a"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d527858d169ab2ccd130ade5b4593d931d0057f640c063e2226f95f80339cfa3",
+            "byteLength": 18481
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "3d633c240297a8bf996dd6b1d66c01b0df500f155c6a23d28018bee7747c66dd",
+            "byteLength": 5903
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7e28f901a8f76b6c054aeb6142e2c2e1f3508612b3fefe6a3697bf86a38c6508",
+            "byteLength": 8068
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c506562568a0b859c474b3d04600d8d0b5cca51d63f900916cf31bc34e631ddc",
+            "byteLength": 7242
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7e5e74876a9136b7dc85edf7f05a5dd7b19e1a6a0175783768c5ebdb1da86e17",
+            "byteLength": 9844
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "a5dd6a071a7e2f159f7e6a33b8d6e45610bc8322fd3cd62fb82dc00cdcecd255",
+            "byteLength": 10439
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "3d2fc41d382622b9ab69272b7f65b016f0ca40be278bcc6b9aa0e530431a7b4a",
+            "byteLength": 3327
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "41d39e802a9318aa043fb1ccbc313341b0d3a5beb93ec8b606c76aead1da700a",
+            "byteLength": 2118
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d997d6e91583a328864eb04d79d965dee8209144408064679dfc402fd2302a38",
+            "byteLength": 8313
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6bfcc87040fc3cdd7a876ea404a0af42edc958b0fd26d39e4cd97bfc87c81882",
+            "byteLength": 1376
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "cc48a07128e79f72456ca6d9d444b91922832edaa5075cb1b9792a9ded9bfb1b",
+            "byteLength": 12711
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e3801cd386728f6053c8dea63e36fd26a17b9e26f8d3b260b368bcffee07b48a"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6e6a62be9cbf993acb8e5a2e09d361feb0931a152c95c1b041f0e02bcc3ebf83"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5475e3800a38f017f31bcb98b22b7897d6ce51e13df366683f8dcef52c1f27e7"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9b5b0182be68db00a10abdec41e6a43521ae9947a7434db63b2474f734892707"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f4fba7e44eaefe55e953642a33b70fd836a11d5ffe0a2eb3468fc33500937d70"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "bf536d2ac2601fe9771a41ea8c7757c06097ef18f9e11cf758f1f7aa6aac8a68"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d97e060bf0b8cac57252b71825ac1d0f24e771a5851a9845f8a9cf058848761b"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4a5dd02634ec3114eb11c0deb063b6acd7be41e62e7ea061243c2025884f1f19"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7100549b6979a8ffe4d5c1fd518606801b24b22a5671a14ac8b2d06b5e123632"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ab912f4cb3e017cd4c8d52c150bcbc96c60f0210d1c3170816f982e3721676a6"
+          },
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "15d474f508737585043db212fe8c935ecc92b2b0efcf04a2464f0b9d66b5570a"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "2e7be861c452d7b962943eb59e43e6fa84e39f7d69153b51eb96f826ba5426f0"
+          },
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "572ed1bc17908fe3b5f46a1c2afdc5e7c43dfdb15f3ec03f9eb4b0843e2c8983"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "3565f60923b29e2dc24b512b9b2126ad1b848bb81762a27745a3b1ee464b28f3"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "87a57bdff8ed5baa012a1c36f3047b6fb72789125af2e88c4eee48f38f0ab2a2"
+          },
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "ef2867092782dfc199989aa5658b8a6bd7d9f09673ccbf21678ca88c45a5e864"
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
@@ -3553,6 +3833,39 @@
             "digestRole": "sha256",
             "sha256": "4ccc6c379142af8850faefac15e62120b1e0b8c67c4ebea66d330b3e1315f4c4",
             "byteLength": 5136
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-acquisition-browser-r3.json",
+        "byteLength": 3043,
+        "sha256": "932386c04668ff857cf45d976ec0da58ec3fb7b85a31a2be0209030c07d24583",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-acquisition-browser-r4.json",
+        "byteLength": 9258,
+        "sha256": "3661b9fdd9839b15ae924558fef6045597e4a926882e5022e8d68ce0c85dbd5a",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "99bd915a3819b1fee3722328ae904dde5459e9b15d56abd98b903c770a2f582c",
+            "byteLength": 9022
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "de11c3e9be54903d2b8011e1bf41fbef3e6d732ecd1cccfd6bf0246faa0f5fb2"
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "bbdbdda07c4b594a80a2e57c404a1f8fbb076e3a1533e3cb38cd0933c47b9432",
+            "byteLength": 9022
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
@@ -4581,6 +4894,226 @@
         "sha256": "9cf331539042642161e41734f8060e4406e399e1e51a7feebeab5d70ac11eb2c",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/evidence/editorial-action-public-entry.proposed.json",
+        "byteLength": 5408,
+        "sha256": "eb5e9df0f0141d760142f3444b4a818a5391e75fcfd930001646a45dbd3344e9",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "eee7614b65569a9f1a3eeb35707f787c7874370e1e17a7d450e1b14941069411",
+            "byteLength": 5829445
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0f4e2c6d58c8234347556a1431abf4eb3a9472af02a2d9e8838dafa4079d8939",
+            "byteLength": 5818357
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e70db0e028a2fcf8e044ee70c6900910b63bf7f2c79bda9b745449a541fbd825",
+            "byteLength": 15394905
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/editorial-action-sam21-beat-20261020.json",
+        "byteLength": 22732,
+        "sha256": "36c52bd29ef027b8c8106844eafba34119f01b5ac103ea5fabd009a1c2b0ab81",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "488e9e53cc09576cbc5f1706ac9b560060a0028bddbe5f9340b4a42e5a0a9d44"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f5cdda5bf3d788505a62d5d8f0a70c25bb7b309893f0a71ca0a2d5c6fc5bd01d"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6e8593706a5ed6cae34f31da8cf6c5ac6e013d5e330e42edd54cae12b57381a9"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f1314ae5b41c89d5b11c1ee98ecccbf88f8ac8147b220040baec27ecf186309d"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c2da886b194b13719af91e9c45a6b2d07473ff8bcf99d48552781e1c8f345935"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4b4e22b4050f6fc05f8617126a158328b0859a21d8a6933df3f113b36b013f75"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "132690fd6da046507697aad6c39bc3c1849d5806c3396afd5321a00911537db1"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "df778e757b96463a76aae917e645f4efdfefed96fd192cc69835d041fcefea83"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "db379d49710f8ea1adb6c79d136ebf7eab0959b264f69446ee5da5dd6a02b41e"
+          },
+          {
+            "digestRole": "sourceSha256",
+            "sha256": "328253280a05e6b14a92f1f43d818d9b7d38ab5d3f6d5d98606198fd3daef2ff"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "eee7614b65569a9f1a3eeb35707f787c7874370e1e17a7d450e1b14941069411",
+            "byteLength": 5829445
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0f4e2c6d58c8234347556a1431abf4eb3a9472af02a2d9e8838dafa4079d8939",
+            "byteLength": 5818357
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9cb3824cee45bfda6d0d325c5c9dd62a2f3dfad9c480b8a8a9d8250a3ba93a3e",
+            "byteLength": 12012
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e70db0e028a2fcf8e044ee70c6900910b63bf7f2c79bda9b745449a541fbd825",
+            "byteLength": 15394905
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "970b71688e688b6f43d55c6dd4a09a26d073fdb67d02dc71e3b7fc8b999b2e38",
+            "byteLength": 8333
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "69a64a19b6ea492204cd2a1321d24791a4f542c2984cd8df79bc7a4ae62f1e52",
+            "byteLength": 3606
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "a5fb4536a0d61d0510bee917c666c44e99243960c145b259bb95ac0f6f37443c",
+            "byteLength": 4014
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "43b1575a0bad25b1f19de93fd166bd81bfc51f2a8b685efef05fe4322a20db34",
+            "byteLength": 4597
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "57b7595c0a9774965f3fb5e7398f2513d4c0effecec23db4a7e86c96f76d452f",
+            "byteLength": 1273
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "bb26a4c86a5fada23e395737b8cc301aa649d315ad28088c49ae3f680e5c7bea",
+            "byteLength": 75330529
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "3e6809628fafc7ab0579409228dc3cb47455e47481ef97192107bb6ef6a3501e",
+            "byteLength": 9831675
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "eb9191564c45b006041fee7d77f789e400d3da11c6aa2a643e2a06a133ff3d6a",
+            "byteLength": 576044
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "97f7b746f84d0dd65f8b045bda4f1dfc7a619ba57f33ec402b3a1f0974425346",
+            "byteLength": 8044
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e7d296b0dbb6ac22c55b6c5a88380e593c262bef0e3a53b926ff91342bd1cfc2",
+            "byteLength": 12044
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "917ebb87bcfdb26d295b01d9dd1f75f773331a7bcb6a3a10f8ae190974a2531e",
+            "byteLength": 16044
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c6dd6325d42a90fd4a3716cabe1aae6b4ad17cce0f71d4e1c41c7edc183939a6",
+            "byteLength": 24044
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "99e1f93992922d5bfe4003ab193cfedfbefdcffc0ad6aee8d26e60f6242a2d74",
+            "byteLength": 40044
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "e4cc300ac22122950e0a89f2d9764b3f57a9899f2d8a6c693847f690914c3322",
+            "byteLength": 75330529
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "53837c37c09cae8e29fbd41107aaea489f15e443a026b422a96ffa6d74d73a69",
+            "byteLength": 9831675
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "77d31c00086c289730136b3402abf79e2b8beda6e1a7d417af2c62154af405f3",
+            "byteLength": 576044
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "4522d16bc3cbf7dbc9efbbd19324e9519e0e2decf03256a27e4831ac1069f533",
+            "byteLength": 8044
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "0be19b4c49e10a13913d474bd7bef974e3439e6977743e6a8b662d8341676134",
+            "byteLength": 12044
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "b591ff5485abf70a0d6039a3c75e0c02d30367c37bc8fbc7a0d13a21ac90f707",
+            "byteLength": 16044
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "d0f876439c25a78c1cd1117ac9a8851d1075f72047c5fac6cac52e418a3e481d",
+            "byteLength": 24044
+          },
+          {
+            "digestRole": "clockSha256",
+            "sha256": "bbf54ce62972e1978b493c1d95830aaeafa08388a406cff7f0db8bfb7667ec98",
+            "byteLength": 40044
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "399e4f24935221abae3d712356d5efb9eea950ef6097562ada019243e5138e9e",
+            "byteLength": 295124
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "65507139c947311fb31c07434cbc489ee62d3b6a0d8ac480d3d12f64ffc7adc2",
+            "byteLength": 307490
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8d465d528e3004498b62c41a463964bc323c1f56faebbbc58e6b7d38fcfcf812",
+            "byteLength": 333599
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "1bf95e16b870bca1f68053662046ce207caadc11af5fd1b24e83bfb6fcfdcb11",
+            "byteLength": 409294
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
         "path": "docs/launch/evidence/editorial-animation-20261020.json",
@@ -5718,6 +6251,159 @@
           {
             "digestRole": "sha256",
             "sha256": "b56d0dde6523c20fcc45b803942b624ad3d74b800ee3d27c92269254839093b7",
+            "byteLength": 4488
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/prerelease-v0.2.0-beta.2-notes-PREPARED.md",
+        "byteLength": 2195,
+        "sha256": "488e1e2eae99d79f15ca03eb358f5426885fa87ca3535008c59a2d83f3255bd9",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/evidence/prerelease-v0.2.0-beta.2-notes.md",
+        "byteLength": 3245,
+        "sha256": "60775eca4b839d47258bb357628cd8f354f329a78e4251c450cc87e22217be39",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/evidence/prerelease-v0.2.0-beta.2-packet.json",
+        "byteLength": 4579,
+        "sha256": "9f2472c1684a60375db97c7e262ab69f4577cf604b04543169b2fcbaddcc521a",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "c33d9e516a536abc1dc19bea0a82b07b01f65c3377296c75b4bc836ee80f1c5e",
+            "byteLength": 85411
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "16eaa3468c7eb8f26ae12308e9c6412436af59911da1ef68d95977d1e225c37a",
+            "byteLength": 60665714
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e3801cd386728f6053c8dea63e36fd26a17b9e26f8d3b260b368bcffee07b48a",
+            "byteLength": 282
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6e6a62be9cbf993acb8e5a2e09d361feb0931a152c95c1b041f0e02bcc3ebf83",
+            "byteLength": 300
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5475e3800a38f017f31bcb98b22b7897d6ce51e13df366683f8dcef52c1f27e7",
+            "byteLength": 1051
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9b5b0182be68db00a10abdec41e6a43521ae9947a7434db63b2474f734892707",
+            "byteLength": 22047982
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f4fba7e44eaefe55e953642a33b70fd836a11d5ffe0a2eb3468fc33500937d70",
+            "byteLength": 17235672
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "bf536d2ac2601fe9771a41ea8c7757c06097ef18f9e11cf758f1f7aa6aac8a68",
+            "byteLength": 21436300
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d97e060bf0b8cac57252b71825ac1d0f24e771a5851a9845f8a9cf058848761b",
+            "byteLength": 2247
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4a5dd02634ec3114eb11c0deb063b6acd7be41e62e7ea061243c2025884f1f19",
+            "byteLength": 10874
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7100549b6979a8ffe4d5c1fd518606801b24b22a5671a14ac8b2d06b5e123632",
+            "byteLength": 6080
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "cc48a07128e79f72456ca6d9d444b91922832edaa5075cb1b9792a9ded9bfb1b",
+            "byteLength": 12711
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/prerelease-v0.2.0-beta.2-publication.json",
+        "byteLength": 12068,
+        "sha256": "9f9ea243a3649e8237e0efc1d468de720f272a83780c5aa7573b9a0137c6116b",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "0b69d14184cacf265b0bfdf53c96d42510fa9f2190003a3e7f947210b52efdda"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "e3801cd386728f6053c8dea63e36fd26a17b9e26f8d3b260b368bcffee07b48a",
+            "byteLength": 282
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "6e6a62be9cbf993acb8e5a2e09d361feb0931a152c95c1b041f0e02bcc3ebf83",
+            "byteLength": 300
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "5475e3800a38f017f31bcb98b22b7897d6ce51e13df366683f8dcef52c1f27e7",
+            "byteLength": 1051
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9b5b0182be68db00a10abdec41e6a43521ae9947a7434db63b2474f734892707",
+            "byteLength": 22047982
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f4fba7e44eaefe55e953642a33b70fd836a11d5ffe0a2eb3468fc33500937d70",
+            "byteLength": 17235672
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "bf536d2ac2601fe9771a41ea8c7757c06097ef18f9e11cf758f1f7aa6aac8a68",
+            "byteLength": 21436300
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "d97e060bf0b8cac57252b71825ac1d0f24e771a5851a9845f8a9cf058848761b",
+            "byteLength": 2247
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "4a5dd02634ec3114eb11c0deb063b6acd7be41e62e7ea061243c2025884f1f19",
+            "byteLength": 10874
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "7100549b6979a8ffe4d5c1fd518606801b24b22a5671a14ac8b2d06b5e123632",
+            "byteLength": 6080
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "cc48a07128e79f72456ca6d9d444b91922832edaa5075cb1b9792a9ded9bfb1b",
+            "byteLength": 12711
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "a8f61c45763be30e9a4bb61c74a0b3c09691306df315ec4686d5c0914881c411",
             "byteLength": 4488
           }
         ],
