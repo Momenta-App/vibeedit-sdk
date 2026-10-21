@@ -1,13 +1,13 @@
 {
   "schemaVersion": "vibeedit.publicSourceAudit.v1",
-  "recordedAt": "2026-10-21T00:51:06.778977+00:00",
+  "recordedAt": "2026-10-21T01:08:40.338584+00:00",
   "status": "scoped_source_review_complete_with_private_evidence_quarantined; not final release acceptance",
   "scope": {
-    "gitHead": "bf5905c4c4ec0783634d36a0f4c308f2f53e18cf",
-    "inventoryPaths": 222,
-    "existingFiles": 222,
-    "bytesRead": 3166695,
-    "sourceInventorySha256": "edab7b4f3d37154e01bcbf67b1c6310ab5b5845e95892847c1aea7459f50bda3",
+    "gitHead": "35dbd6f54342546bef204f53f8a7ec5d110863d4",
+    "inventoryPaths": 231,
+    "existingFiles": 231,
+    "bytesRead": 3284164,
+    "sourceInventorySha256": "7c19d4b75641b90c82f82bc691ebbea6b4fbfa7ef1bd67eab16102f7c8ac4464",
     "onlyChangedAndUntracked": true,
     "operatorRawProofsUnmodified": true,
     "noStageCommitPush": true,
@@ -85,7 +85,7 @@
       {
         "path": "docs/launch/CODEX-PUBLIC-JOURNEY.md",
         "category": "local_personal_path",
-        "count": 1,
+        "count": 2,
         "matchHashes": [
           "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
         ],
@@ -105,8 +105,9 @@
       {
         "path": "docs/launch/OPERATOR_STATE.md",
         "category": "local_personal_path",
-        "count": 1,
+        "count": 2,
         "matchHashes": [
+          "4be13d1bef5461c94346a446c29e9dd89bfa360e268da5a9eac5882056190fbf",
           "f3392d4cb7d6eae001eb4a3d187e4411a073805edf1e5e164e589221760b7c75"
         ],
         "classification": "raw operator record excluded; candidate is not asserted to be a credential",
@@ -364,6 +365,16 @@
         "disposition": "exclude_raw"
       },
       {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-final-review-page.json",
+        "category": "local_personal_path",
+        "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
         "path": "docs/launch/evidence/companion-public-codex-7ff-free-edit.json",
         "category": "local_personal_path",
         "count": 39,
@@ -519,6 +530,16 @@
       },
       {
         "path": "docs/launch/evidence/prerelease-v0.2.0-beta.2-publication.json",
+        "category": "local_personal_path",
+        "count": 1,
+        "matchHashes": [
+          "bddc8b66c6646b435db6f3aaf9b253ede0fb590dc242003a126fe4d3d8fb8714"
+        ],
+        "classification": "raw operator record excluded; candidate is not asserted to be a credential",
+        "disposition": "exclude_raw"
+      },
+      {
+        "path": "docs/launch/evidence/private-capability-exposure-20261020.json",
         "category": "local_personal_path",
         "count": 1,
         "matchHashes": [
@@ -1596,9 +1617,21 @@
     "policy": "Explicit named paths only, pinned to SHA/size; reject drift/new paths; do not git add entire docs or repo. Only curated docs/LAUNCH_STATUS.md, docs/launch/PUBLIC-LEDGER.json, docs/launch/PLATFORM-CANDIDATE.json, docs/launch/STATE.md and this sanitized audit are exceptions to raw launch-record quarantine. This proposal authorizes no commit.",
     "include": [
       {
-        "path": ".github/workflows/vibeedit-registry-beta.yml",
-        "byteLength": 5636,
-        "sha256": "bcf4ebf423903f3284b40209bba20f13b2eaf54353cf0a10d9e8682006c0dd99",
+        "path": "docs/LAUNCH_STATUS.md",
+        "byteLength": 6354,
+        "sha256": "2c70e85f951cc379d33e77f21b34e964ec1a0b02a0f69505074bc5c2f4996583",
+        "format": "text"
+      },
+      {
+        "path": "docs/launch/PUBLIC-LEDGER.json",
+        "byteLength": 70210,
+        "sha256": "9bd8f06fc296a773cf72c6e1d5e4c17cf1c5a87f6b0f6f604b087e293644d16b",
+        "format": "text"
+      },
+      {
+        "path": "docs/launch/STATE.md",
+        "byteLength": 15714,
+        "sha256": "94274c9599defdb0075b4303ff65c79cf72dae738adb5c864d018228140e800f",
         "format": "text"
       }
     ],
@@ -1655,8 +1688,8 @@
       },
       {
         "path": "docs/launch/CODEX-PUBLIC-JOURNEY.md",
-        "byteLength": 7540,
-        "sha256": "35973c64a5d996431eba2f5c9bdd053c3c0bff865cb6527294e9719b3dbe72cd",
+        "byteLength": 10208,
+        "sha256": "bfa328614623b54515cc891f9bd0d64eb5116e12d1ed032a3ecba7515966c260",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -1697,8 +1730,8 @@
       },
       {
         "path": "docs/launch/OPERATOR_STATE.md",
-        "byteLength": 58804,
-        "sha256": "e540316cb070a49a8cab37a2f9862ac32f9c429551138653e28a18c22f36f99b",
+        "byteLength": 61390,
+        "sha256": "337495196f8167cc61688691f67a5a765ef7fa9daac88c7d3c0fa06a0ee18611",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
       },
@@ -2043,6 +2076,42 @@
         "path": "docs/launch/evidence/beta2-registry-pypi-environment-review-intent.json",
         "byteLength": 636,
         "sha256": "479863c4f28c2ff6a3a6fe0114a2e6e77a18ceb183e067816c74c50d23d9b767",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-pypi-r2-dispatch-ack.json",
+        "byteLength": 232,
+        "sha256": "8722fd8a2ffa14a38237ce877fef1cc34a5247d8dbe82994975316366c787ba3",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-pypi-r2-dispatch-intent.json",
+        "byteLength": 1084,
+        "sha256": "e36a9a3733a2e5dd5b221e20ab4036b31fef325208c44d2ab1ace1f6781ca720",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-pypi-r2-environment-review-ack.json",
+        "byteLength": 5330,
+        "sha256": "b6a114b721e3f9fd334f0d91ff76dcdd8d2ee988831a6515a28ca6d075e6e215",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/beta2-registry-pypi-r2-environment-review-intent.json",
+        "byteLength": 584,
+        "sha256": "5ff84c44137933778202501ba2872e57bb971722151708f735066774cf8cc064",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
         "curatedArtifactIdentities": [],
@@ -3866,6 +3935,47 @@
             "digestRole": "clockSha256",
             "sha256": "bbdbdda07c4b594a80a2e57c404a1f8fbb076e3a1533e3cb38cd0933c47b9432",
             "byteLength": 9022
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
+        "path": "docs/launch/evidence/companion-public-codex-7ff-final-review-page.json",
+        "byteLength": 9310,
+        "sha256": "58e59452ef07284e0d6f972961f09b066607d7e7a79e5848c82d8023a58d633b",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "clockSha256",
+            "sha256": "beb7fd1642239dc72e62610230f7b23fe5e50c5f8fa9b6276f3a82f589fe8bea",
+            "byteLength": 478075
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "ff4da9e8ffeeedb47dc75ece9f77bb8d39a1898037af06343aee6f17f2163807",
+            "byteLength": 478075
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "a132867f18a3e85e7645c4e9b229979e53800b68ea68ebdf00af858c6b073d7f",
+            "byteLength": 135038
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "8a63d0dea7c0c91a57cc7a2711056ab7e97015b7d58a4b25595beccb1b151b64"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "0d1ed8fa8a8d3fa673531d59acc48cdcba63f6fc8bad401a430781f971d0ba03"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "c8176b1d6c1fc1250ecad2e24b842dfcd0e6d98f81249d01f71f736a1df888fd"
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "556344b88d5d0573d8774d490ddc74d8ff963ecfca3ce8385efcd303b79ed947"
           }
         ],
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
@@ -6410,6 +6520,15 @@
         "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
+        "path": "docs/launch/evidence/private-capability-exposure-20261020.json",
+        "byteLength": 978,
+        "sha256": "ae84881484436680fa05102dcb3c64ef530eb4fcca032a16c69ce812f5ba2065",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
+      },
+      {
         "path": "docs/launch/evidence/pypi-publisher-created.png",
         "byteLength": 92861,
         "sha256": "af9b3308d4d85b17ad0a80c9863c19306c41946b364207067fc0bf977b9720c7",
@@ -6464,6 +6583,41 @@
         "sha256": "937b7c21e4bf56c86c044ae4579aef3aca7b5ed9782bcc0c7f060339cee44b8c",
         "format": "text",
         "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries"
+      },
+      {
+        "path": "docs/launch/evidence/registry-beta2-public-verification-20261020.json",
+        "byteLength": 8055,
+        "sha256": "90c73defc359448937d768b33de80a5147eaf0e9e58c023a7dbcee88fd5ac82b",
+        "format": "text",
+        "reason": "raw operator launch records/evidence are private by default; publish only curated allowlisted summaries",
+        "curatedArtifactIdentities": [
+          {
+            "digestRole": "sha256",
+            "sha256": "761782625061cd89d4d24d77433bdbdc6d6aa6850a1585cabd36d24c39f619d5",
+            "byteLength": 132765
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "86c749bf64c3708464d2a75dbbd39f615e49ac3c613c97d615bda5ed42382fc1",
+            "byteLength": 109182
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "9b5b0182be68db00a10abdec41e6a43521ae9947a7434db63b2474f734892707",
+            "byteLength": 22047982
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "f4fba7e44eaefe55e953642a33b70fd836a11d5ffe0a2eb3468fc33500937d70",
+            "byteLength": 17235672
+          },
+          {
+            "digestRole": "sha256",
+            "sha256": "bf536d2ac2601fe9771a41ea8c7757c06097ef18f9e11cf758f1f7aa6aac8a68",
+            "byteLength": 21436300
+          }
+        ],
+        "curatedSummaryPolicy": "Only raw receipt SHA and these digest/size roles; do not copy other raw fields automatically"
       },
       {
         "path": "docs/launch/evidence/registry-publishers.json",

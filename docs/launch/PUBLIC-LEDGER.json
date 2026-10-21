@@ -1,6 +1,6 @@
 {
   "schemaVersion": "vibeedit.publicLaunchLedger.v1",
-  "updatedAt": "2026-10-21T00:05:45.329421+00:00",
+  "updatedAt": "2026-10-21T01:08:30.857720+00:00",
   "launchStatus": "not-launched",
   "scopePolicy": "P0-P10, J1-J7 and A01-A20 are mandatory delivery scope. Local implementation and bounded test receipts do not waive or pass full acceptance.",
   "publicCommitCandidate": {
@@ -11,7 +11,12 @@
     "finalArchive": null,
     "exactPublicPackageVersions": null,
     "finalAcceptanceEvidence": null,
-    "latestHistoricalCheckpoint": "7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1"
+    "latestHistoricalCheckpoint": "bf5905c4c4ec0783634d36a0f4c308f2f53e18cf",
+    "qualificationVersions": {
+      "python": "0.2.0b2",
+      "npm": "0.2.0-beta.2",
+      "pi": "1.3.0"
+    }
   },
   "sourceOwnership": {
     "implementation": "Existing public VibeEdit SDK foundation and VibeEdit-owned agent integration source; MIT governs owned code.",
@@ -49,14 +54,16 @@
     "freshSandboxCheckoutEmailAndSignedSettlementJourneyComplete": false,
     "realFreshModelInferenceQualified": false,
     "managedGoalExecutionQualified": false,
-    "finalFullRegressionRun": "Final core7ff canonical workflow39507366659: all13jobs passed; full customer/editorial/model acceptance remains pending",
-    "note": "Core matrix and fresh public Codex bootstrap passed within their stated scope. Complete customer, editorial, both-harness and model qualification remain mandatory.",
+    "finalFullRegressionRun": "Beta2 bf590 canonical39520692681: all13core jobs passed; complete customer/editorial/model acceptance remains open",
+    "note": "Core archives, public GitHub assets and registry publication/CI clean installs pass their stated scope. Both complete parent-agent journeys and every full acceptance criterion remain required.",
     "canonicalCoreArchiveMatrixQualified": true,
     "publicCodexBootstrapQualified": true,
     "actualCpuInferencePerformed": [
       "transnet",
       "sam21"
-    ]
+    ],
+    "registryPublishAndCiCleanInstalls": true,
+    "registryAnonymousBytesVerified": true
   },
   "policyAmendment": {
     "date": "2026-10-20",
@@ -75,7 +82,15 @@
       "status": "in-progress",
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "platform-canonical-six"
+        "platform-canonical-six",
+        "canonical-core-beta2-39520692681"
+      ],
+      "implementationOwners": [
+        "root"
+      ],
+      "implementationRefs": [
+        "docs/launch/STATE.md",
+        "LICENSE.md"
       ]
     },
     {
@@ -91,7 +106,18 @@
         "platform-canonical-six",
         "public-codex-bootstrap-7ff",
         "public-codex-free-edit-7ff",
-        "public-codex-offline-source-7ff"
+        "public-codex-offline-source-7ff",
+        "canonical-core-beta2-39520692681",
+        "public-beta2-registry-install",
+        "public-codex-final-review-page-7ff"
+      ],
+      "implementationOwners": [
+        "root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/setup.py",
+        "python/src/vibeedit/project.py",
+        "skills/vibeedit-setup/SKILL.md"
       ]
     },
     {
@@ -105,6 +131,13 @@
         "commercial-local",
         "customer-scoped-keys",
         "customer-email-delivery-metadata"
+      ],
+      "implementationOwners": [
+        "shared-commercial-release-owner-and-root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/analysis.py"
       ]
     },
     {
@@ -121,7 +154,17 @@
         "editorial-negative-animation",
         "public-codex-free-edit-7ff",
         "sparse-real-mask-export",
-        "sparse-real-mask-effect"
+        "sparse-real-mask-effect",
+        "action-beat-real-sam21-sparse-native-144",
+        "public-codex-final-review-page-7ff"
+      ],
+      "implementationOwners": [
+        "root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py"
       ]
     },
     {
@@ -135,7 +178,16 @@
         "models-gate",
         "cpu-transnet-sam21-39510473292",
         "sparse-real-mask-export",
-        "sparse-real-mask-effect"
+        "sparse-real-mask-effect",
+        "action-beat-real-sam21-sparse-native-144"
+      ],
+      "implementationOwners": [
+        "models"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/model_packs.py",
+        "python/src/vibeedit/model_runners/segment.py",
+        "runtime-models/manifest.json"
       ]
     },
     {
@@ -147,6 +199,13 @@
       "evidenceRefs": [
         "companion-local",
         "companion-managed"
+      ],
+      "implementationOwners": [
+        "companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/worker.py",
+        "companion/extensions/worker.ts"
       ]
     },
     {
@@ -157,6 +216,13 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "companion-recovery"
+      ],
+      "implementationOwners": [
+        "companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/goals.py",
+        "companion/extensions/goals.ts"
       ]
     },
     {
@@ -170,6 +236,13 @@
         "auto-topup-local",
         "commercial-local",
         "customer-scoped-keys"
+      ],
+      "implementationOwners": [
+        "shared-commercial-release-owner-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/worker.py"
       ]
     },
     {
@@ -184,7 +257,17 @@
         "creative-portability",
         "editorial-negative-animation",
         "public-codex-free-edit-7ff",
-        "sparse-real-mask-effect"
+        "sparse-real-mask-effect",
+        "public-codex-acquisition-7ff",
+        "action-beat-real-sam21-sparse-native-144"
+      ],
+      "implementationOwners": [
+        "models-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/examples.py",
+        "python/src/vibeedit/acquisition.py",
+        "skills/index.json"
       ]
     },
     {
@@ -198,7 +281,17 @@
         "platform-loopback-canonical",
         "platform-six-source",
         "archive-bytecode-fix",
-        "platform-canonical-six"
+        "platform-canonical-six",
+        "canonical-core-beta2-39520692681",
+        "public-beta2-registry-install"
+      ],
+      "implementationOwners": [
+        "root-and-qualification-owners"
+      ],
+      "implementationRefs": [
+        "scripts/audit_release_artifacts.py",
+        ".github/workflows/vibeedit-package.yml",
+        "docs/SECURITY.md"
       ]
     },
     {
@@ -209,7 +302,16 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "public-codex-bootstrap-7ff",
-        "public-qualification-prerelease"
+        "public-qualification-prerelease",
+        "public-qualification-beta2",
+        "public-beta2-registry-install"
+      ],
+      "implementationOwners": [
+        "root-and-shared-commercial-release-owner"
+      ],
+      "implementationRefs": [
+        ".github/workflows/vibeedit-registry-beta.yml",
+        "docs/OPERATIONS.md"
       ]
     }
   ],
@@ -226,7 +328,19 @@
         "creative-portability",
         "public-codex-bootstrap-7ff",
         "public-codex-free-edit-7ff",
-        "public-codex-offline-source-7ff"
+        "public-codex-offline-source-7ff",
+        "public-codex-final-review-page-7ff"
+      ],
+      "implementationOwners": [
+        "root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/setup.py",
+        "python/src/vibeedit/project.py",
+        "skills/vibeedit-setup/SKILL.md",
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py"
       ]
     },
     {
@@ -242,7 +356,25 @@
         "acquisition-interim",
         "creative-portability",
         "editorial-negative-animation",
-        "sparse-real-mask-effect"
+        "sparse-real-mask-effect",
+        "public-codex-acquisition-7ff",
+        "action-beat-real-sam21-sparse-native-144"
+      ],
+      "implementationOwners": [
+        "root",
+        "models",
+        "models-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py",
+        "python/src/vibeedit/model_packs.py",
+        "python/src/vibeedit/model_runners/segment.py",
+        "runtime-models/manifest.json",
+        "python/src/vibeedit/examples.py",
+        "python/src/vibeedit/acquisition.py",
+        "skills/index.json"
       ]
     },
     {
@@ -258,6 +390,15 @@
         "commercial-local",
         "customer-scoped-keys",
         "customer-email-delivery-metadata"
+      ],
+      "implementationOwners": [
+        "shared-commercial-release-owner-and-root",
+        "shared-commercial-release-owner-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/analysis.py",
+        "python/src/vibeedit/worker.py"
       ]
     },
     {
@@ -275,7 +416,16 @@
         "editorial-negative-animation",
         "public-codex-free-edit-7ff",
         "sparse-real-mask-export",
-        "sparse-real-mask-effect"
+        "sparse-real-mask-effect",
+        "action-beat-real-sam21-sparse-native-144"
+      ],
+      "implementationOwners": [
+        "root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py"
       ]
     },
     {
@@ -288,6 +438,15 @@
       "evidenceRefs": [
         "companion-local",
         "companion-managed"
+      ],
+      "implementationOwners": [
+        "companion",
+        "shared-commercial-release-owner-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/worker.py",
+        "companion/extensions/worker.ts",
+        "python/src/vibeedit/myriograph.py"
       ]
     },
     {
@@ -299,6 +458,16 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "companion-recovery"
+      ],
+      "implementationOwners": [
+        "companion",
+        "shared-commercial-release-owner-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/goals.py",
+        "companion/extensions/goals.ts",
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/worker.py"
       ]
     },
     {
@@ -310,7 +479,22 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "face-original-operation",
-        "customer-scoped-keys"
+        "customer-scoped-keys",
+        "action-beat-real-sam21-sparse-native-144"
+      ],
+      "implementationOwners": [
+        "root",
+        "shared-commercial-release-owner-and-root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/setup.py",
+        "python/src/vibeedit/project.py",
+        "skills/vibeedit-setup/SKILL.md",
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/analysis.py",
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py"
       ]
     }
   ],
@@ -325,7 +509,20 @@
       "evidenceRefs": [
         "setup-interim",
         "public-codex-bootstrap-7ff",
-        "public-qualification-prerelease"
+        "public-qualification-prerelease",
+        "public-qualification-beta2",
+        "public-beta2-registry-install"
+      ],
+      "implementationOwners": [
+        "root",
+        "root-and-shared-commercial-release-owner"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/setup.py",
+        "python/src/vibeedit/project.py",
+        "skills/vibeedit-setup/SKILL.md",
+        ".github/workflows/vibeedit-registry-beta.yml",
+        "docs/OPERATIONS.md"
       ]
     },
     {
@@ -338,7 +535,23 @@
       "evidenceRefs": [
         "creative-portability",
         "public-codex-free-edit-7ff",
-        "public-codex-offline-source-7ff"
+        "public-codex-offline-source-7ff",
+        "public-codex-final-review-page-7ff"
+      ],
+      "implementationOwners": [
+        "root",
+        "models-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/setup.py",
+        "python/src/vibeedit/project.py",
+        "skills/vibeedit-setup/SKILL.md",
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py",
+        "python/src/vibeedit/examples.py",
+        "python/src/vibeedit/acquisition.py",
+        "skills/index.json"
       ]
     },
     {
@@ -353,7 +566,23 @@
         "review-clock",
         "cpu-transnet-sam21-39510473292",
         "sparse-real-mask-export",
-        "sparse-real-mask-effect"
+        "sparse-real-mask-effect",
+        "action-beat-real-sam21-sparse-native-144"
+      ],
+      "implementationOwners": [
+        "root",
+        "models"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/setup.py",
+        "python/src/vibeedit/project.py",
+        "skills/vibeedit-setup/SKILL.md",
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py",
+        "python/src/vibeedit/model_packs.py",
+        "python/src/vibeedit/model_runners/segment.py",
+        "runtime-models/manifest.json"
       ]
     },
     {
@@ -367,6 +596,13 @@
         "face-original-operation",
         "commercial-local",
         "customer-scoped-keys"
+      ],
+      "implementationOwners": [
+        "shared-commercial-release-owner-and-root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/analysis.py"
       ]
     },
     {
@@ -379,6 +615,15 @@
       "evidenceRefs": [
         "auto-topup-local",
         "commercial-local"
+      ],
+      "implementationOwners": [
+        "shared-commercial-release-owner-and-root",
+        "shared-commercial-release-owner-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/analysis.py",
+        "python/src/vibeedit/worker.py"
       ]
     },
     {
@@ -392,6 +637,13 @@
         "commercial-local",
         "customer-scoped-keys",
         "customer-email-delivery-metadata"
+      ],
+      "implementationOwners": [
+        "shared-commercial-release-owner-and-root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/analysis.py"
       ]
     },
     {
@@ -404,6 +656,14 @@
       "evidenceRefs": [
         "review-words",
         "review-final-video"
+      ],
+      "implementationOwners": [
+        "root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py"
       ]
     },
     {
@@ -415,6 +675,14 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "review-beats"
+      ],
+      "implementationOwners": [
+        "root"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py"
       ]
     },
     {
@@ -429,7 +697,16 @@
         "models-gate",
         "cpu-transnet-sam21-39510473292",
         "sparse-real-mask-export",
-        "sparse-real-mask-effect"
+        "sparse-real-mask-effect",
+        "action-beat-real-sam21-sparse-native-144"
+      ],
+      "implementationOwners": [
+        "models"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/model_packs.py",
+        "python/src/vibeedit/model_runners/segment.py",
+        "runtime-models/manifest.json"
       ]
     },
     {
@@ -442,6 +719,15 @@
       "evidenceRefs": [
         "companion-local",
         "companion-managed"
+      ],
+      "implementationOwners": [
+        "companion",
+        "shared-commercial-release-owner-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/worker.py",
+        "companion/extensions/worker.ts",
+        "python/src/vibeedit/myriograph.py"
       ]
     },
     {
@@ -453,6 +739,13 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "companion-recovery"
+      ],
+      "implementationOwners": [
+        "companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/goals.py",
+        "companion/extensions/goals.ts"
       ]
     },
     {
@@ -467,6 +760,16 @@
         "companion-recovery",
         "companion-managed",
         "commercial-local"
+      ],
+      "implementationOwners": [
+        "companion",
+        "shared-commercial-release-owner-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/goals.py",
+        "companion/extensions/goals.ts",
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/worker.py"
       ]
     },
     {
@@ -479,6 +782,13 @@
       "evidenceRefs": [
         "auto-topup-local",
         "customer-scoped-keys"
+      ],
+      "implementationOwners": [
+        "shared-commercial-release-owner-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/worker.py"
       ]
     },
     {
@@ -492,7 +802,20 @@
         "editorial-social-revision",
         "editorial-negative-animation",
         "public-codex-free-edit-7ff",
-        "sparse-real-mask-effect"
+        "sparse-real-mask-effect",
+        "action-beat-real-sam21-sparse-native-144"
+      ],
+      "implementationOwners": [
+        "models-and-companion",
+        "models"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/examples.py",
+        "python/src/vibeedit/acquisition.py",
+        "skills/index.json",
+        "python/src/vibeedit/model_packs.py",
+        "python/src/vibeedit/model_runners/segment.py",
+        "runtime-models/manifest.json"
       ]
     },
     {
@@ -503,7 +826,16 @@
       "acceptancePassed": false,
       "operatorProgress": "in-progress",
       "evidenceRefs": [
-        "acquisition-interim"
+        "acquisition-interim",
+        "public-codex-acquisition-7ff"
+      ],
+      "implementationOwners": [
+        "models-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/examples.py",
+        "python/src/vibeedit/acquisition.py",
+        "skills/index.json"
       ]
     },
     {
@@ -517,6 +849,14 @@
         "editorial-social-revision",
         "creative-portability",
         "editorial-negative-animation"
+      ],
+      "implementationOwners": [
+        "models-and-companion"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/examples.py",
+        "python/src/vibeedit/acquisition.py",
+        "skills/index.json"
       ]
     },
     {
@@ -533,7 +873,21 @@
         "archive-bytecode-fix",
         "platform-canonical-six",
         "public-codex-bootstrap-7ff",
-        "public-codex-free-edit-7ff"
+        "public-codex-free-edit-7ff",
+        "canonical-core-beta2-39520692681",
+        "public-beta2-registry-install"
+      ],
+      "implementationOwners": [
+        "root",
+        "root-and-qualification-owners"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/setup.py",
+        "python/src/vibeedit/project.py",
+        "skills/vibeedit-setup/SKILL.md",
+        "scripts/audit_release_artifacts.py",
+        ".github/workflows/vibeedit-package.yml",
+        "docs/SECURITY.md"
       ]
     },
     {
@@ -549,7 +903,23 @@
         "platform-loopback-canonical",
         "platform-six-source",
         "archive-bytecode-fix",
-        "platform-canonical-six"
+        "platform-canonical-six",
+        "canonical-core-beta2-39520692681"
+      ],
+      "implementationOwners": [
+        "shared-commercial-release-owner-and-root",
+        "root",
+        "root-and-qualification-owners"
+      ],
+      "implementationRefs": [
+        "python/src/vibeedit/myriograph.py",
+        "python/src/vibeedit/analysis.py",
+        "python/src/vibeedit/review.py",
+        "python/src/vibeedit/face_review.py",
+        "python/src/vibeedit/revision.py",
+        "scripts/audit_release_artifacts.py",
+        ".github/workflows/vibeedit-package.yml",
+        "docs/SECURITY.md"
       ]
     },
     {
@@ -562,7 +932,16 @@
       "evidenceRefs": [
         "archive-interim",
         "public-codex-bootstrap-7ff",
-        "public-qualification-prerelease"
+        "public-qualification-prerelease",
+        "public-qualification-beta2",
+        "public-beta2-registry-install"
+      ],
+      "implementationOwners": [
+        "root-and-shared-commercial-release-owner"
+      ],
+      "implementationRefs": [
+        ".github/workflows/vibeedit-registry-beta.yml",
+        "docs/OPERATIONS.md"
       ]
     },
     {
@@ -574,6 +953,17 @@
       "operatorProgress": "in-progress",
       "evidenceRefs": [
         "commercial-local"
+      ],
+      "implementationOwners": [
+        "root-and-qualification-owners",
+        "root-and-shared-commercial-release-owner"
+      ],
+      "implementationRefs": [
+        "scripts/audit_release_artifacts.py",
+        ".github/workflows/vibeedit-package.yml",
+        "docs/SECURITY.md",
+        ".github/workflows/vibeedit-registry-beta.yml",
+        "docs/OPERATIONS.md"
       ]
     }
   ],
@@ -928,7 +1318,7 @@
         "A01",
         "A19"
       ],
-      "summary": "Exact source7ff prerelease published; original11assets immutable and anonymous manifest, wheel, sdist, npm and pinned setup skill hashes verified. Registry and complete clean-agent/customer/model acceptance remain open.",
+      "summary": "Exact source7ff prerelease published; original11assets preserved by operating policy (GitHub immutable setting disabled) and anonymous manifest, wheel, sdist, npm and pinned setup skill hashes verified. Registry and complete clean-agent/customer/model acceptance remain open.",
       "establishesLaunchAcceptance": false
     },
     {
@@ -1053,6 +1443,107 @@
           "byteLength": 589709
         }
       ]
+    },
+    {
+      "id": "canonical-core-beta2-39520692681",
+      "receiptSha256": "c33d9e516a536abc1dc19bea0a82b07b01f65c3377296c75b4bc836ee80f1c5e",
+      "receiptBytes": 85411,
+      "supportsRequirements": [
+        "P0",
+        "P1",
+        "P9",
+        "A17",
+        "A18"
+      ],
+      "scope": "exact-beta2-archives-six-platform-core-checks",
+      "summary": "All13jobs passed at bf5905c4. Six platform proofs bind the same archives, manifest/checksums and source; nine uploaded subjects have independently verified signed hosted provenance. README/nine guides and owned skills match source across archives; no operator launch directory bundled. No complete agent/model/customer/editorial acceptance inferred.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "public-qualification-beta2",
+      "receiptSha256": "9f9ea243a3649e8237e0efc1d468de720f272a83780c5aa7573b9a0137c6116b",
+      "receiptBytes": 12068,
+      "supportsRequirements": [
+        "P10",
+        "A01",
+        "A19"
+      ],
+      "scope": "anonymous-github-beta2-assets-source-and-setup",
+      "summary": "Original11asset IDs/digests/lengths and all11anonymous downloads match canonical bytes. Tag/source, notes and commit/tag setup skills match. Prerelease/nonlatest. GitHub immutable=false; preservation is operating policy. Full launch remains open.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "public-codex-acquisition-7ff",
+      "receiptSha256": "3661b9fdd9839b15ae924558fef6045597e4a926882e5022e8d68ce0c85dbd5a",
+      "receiptBytes": 9258,
+      "supportsRequirements": [
+        "P8",
+        "A15",
+        "J2"
+      ],
+      "scope": "actual-public-beta1-Codex-browser-acquisition",
+      "summary": "Same clean Codex downloaded9022B JPEG from intended Commons page and completed original SDK handle at revision12. Actual download/source bytes and receipt hashes match; item-specific rights retained. Internal browser sandbox=false, OS private-path restrictions retained. Provider href observed; final-response redirect chain not captured. Original transient sidecars lost before preservation instruction; labeled reconstruction retained. Owned browser processes stopped. Claude acquisition/fullA15 remain open.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "action-beat-real-sam21-sparse-native-144",
+      "receiptSha256": "36c52bd29ef027b8c8106844eafba34119f01b5ac103ea5fabd009a1c2b0ab81",
+      "receiptBytes": 22732,
+      "supportsRequirements": [
+        "P3",
+        "P4",
+        "P8",
+        "A03",
+        "A09",
+        "A14",
+        "J2",
+        "J4",
+        "J7"
+      ],
+      "scope": "actual-public-beta1-bounded-action-draft-and-portable-restore",
+      "summary": "Actual6s1920x800/24 action draft preserves144native frames; reviewed realSAM2.1 masks affect only25/61. Editable inverse words, procedural music/fiveSFX; saved word/sting correction121to123 survives reopen. All8source/clocks and53lineage files/18masks retained. Omit-media bundle relinks separately delivered sources; corrected/restored MP4bytes,144decodedYUVframes and full48kHz stereoPCM match. AAC6.016s includes16ms padding; truepeak minus9.3dBFS. Root inspected20contact frames and displayed actualMP4; user feedback/listening pending. Sparse holes/speckles limit use to brief flashes; no dense/clean-matte/SAM3.1/beta2model or fullA14 claim.",
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "public-beta2-registry-install",
+      "receiptSha256": "90c73defc359448937d768b33de80a5147eaf0e9e58c023a7dbcee88fd5ac82b",
+      "receiptBytes": 8055,
+      "scope": "anonymous-exact-registry-bytes-and-clean-CI-install-versions",
+      "supportsRequirements": [
+        "P1",
+        "P9",
+        "P10",
+        "A01",
+        "A17",
+        "A19"
+      ],
+      "summary": "Anonymous npm tarball and PyPI wheel/sdist hashes and lengths match the original beta.2 GitHub archives. npm SLSA provenance cryptographically verifies the original publishing run, bf590 source and SHA512 subject; npm ECDSA distribution signature was not separately verified. Stable latest remains0.0.1; beta points to0.2.0-beta.2. Both protected registry workflows passed clean public installs and CLI-version checks. PyPI publishing-tool source35db differs explicitly from unchanged archive sourcebf590. No complete agent, editorial, model or customer acceptance inferred.",
+      "publicRuns": [
+        "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39523523962",
+        "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39523856326"
+      ],
+      "establishesLaunchAcceptance": false
+    },
+    {
+      "id": "public-codex-final-review-page-7ff",
+      "receiptSha256": "58e59452ef07284e0d6f972961f09b066607d7e7a79e5848c82d8023a58d633b",
+      "receiptBytes": 9310,
+      "scope": "actual-public-beta1-same-Codex-packaged-review-page-opening",
+      "supportsRequirements": [
+        "P1",
+        "P3",
+        "A02",
+        "J1"
+      ],
+      "summary": "Same clean Codex opened the packaged final-video review page at revision14, with the corrected render imported as a distinct source and explicit lineage to its original source/composition/correction. Actual screenshot contains real sunset/mountain/road render pixels; independently viewed by owner and root. No continuous playback, later text, listening or human approval inferred. Native control glyph boxes and generic face/library fields in video mode are usability limits. A local test MCP capability URL appeared in internal tool output; original active endpoints were retired after capture/close, processes gone and ports refused. No customer/provider/SDK bootstrap key exposure reported. Full privacy and both-harness final-release acceptance remain open.",
+      "artifacts": [
+        {
+          "role": "actual-review-page-screenshot",
+          "sha256": "a132867f18a3e85e7645c4e9b229979e53800b68ea68ebdf00af858c6b073d7f",
+          "byteLength": 135038
+        }
+      ],
+      "establishesLaunchAcceptance": false
     }
   ],
   "openGates": [
@@ -1062,17 +1553,17 @@
     "Real BYOK and managed model outcomes, durable multistep goals and crash/disconnect recovery.",
     "Meaningful creative outcomes, principal-workflow user revision acceptance and full template/source-acquisition coverage.",
     "Operational alert delivery, platform/update/privacy/retention and rollback qualification.",
-    "Public release, exact registry installs, stable setup entry and working customer links."
+    "Complete public-endpoint customer journey, stable setup entry and working customer links; qualification beta.2 GitHub/npm/PyPI availability is verified."
   ],
   "privacyPolicy": "Only explicitly curated public summaries, receipt hashes and artifact identities belong here. No operator screenshots, raw filesystem paths, private URLs, account IDs, emails or credential values are included.",
   "currentQualification": {
-    "sourceRevision": "7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1",
-    "canonicalRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39507366659",
+    "sourceRevision": "bf5905c4c4ec0783634d36a0f4c308f2f53e18cf",
+    "canonicalRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39520692681",
     "status": "all13 canonical core jobs passed; full acceptance open",
     "historicalRepairedCanonicalRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39504114006",
     "historicalRepairedCanonicalStatus": "all13jobs passed, older source",
     "customerAuthBilling": "sandbox-only active; actual browser login-code request acknowledged, user verification pending",
-    "paidNativeManagedAuto": "disabled; actual journeys pending",
+    "paidNativeManagedAuto": "This original campaign remains frozen pending reconciled shared release handoff/customer authentication. No native paid handle or managed goal created; separate owner fixture is not this campaign proof.",
     "modelResourceObservations": {
       "standardLinux": "Actual run39510473292 succeeded for TransNet and SAM2.1 CPU inference with final wheel; all18 mask candidates visually reviewed, two accepted only for sparse flashes. Prior terminal prerequisite failures are retained.",
       "standardApple": "disk and native Metal available; memory/load block actual SAM3.1 requirement",
@@ -1080,17 +1571,19 @@
     },
     "acceptancePassed": false,
     "operatorAlert": "Original diagnostic failed before delivery on existing topic encryption key. Exact encrypted-topic dedicated-key change set is prepared but not executed; approval for ongoing cost and actual operator delivery are pending.",
-    "manifestSha256": "16f5ac1aff3b364e4bf479b30c593fc97e8d8ef84add023518a9c10f7800b341",
-    "publicQualificationPrerelease": "https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1",
-    "registryPublished": false,
+    "manifestSha256": "d97e060bf0b8cac57252b71825ac1d0f24e771a5851a9845f8a9cf058848761b",
+    "publicQualificationPrerelease": "https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.2",
+    "registryPublished": true,
     "publicBilling": "https://myrograph.com/billing",
     "modelCpuCurrentRun": "https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39510473292",
     "documentationSupplementSource": "21ef3a377874291f58dec28154871e14a9c58655",
-    "codexPublicBootstrap": "Exact public7ff install plus bounded generated edit, actual image correction and decoded-identical bundle/restore passed. Review-page opening, strict offline-source regeneration, acquisition, clean Claude and future corrected-release archive remain pending.",
+    "codexPublicBootstrap": "Exact public beta.1 install, custom generated mixed edit, image revision, strict hosted offline-source proof and decoded-identical restore passed within scope. Same Codex completed actual browser acquisition and opened/inspected the actual packaged final-review page. Native headless UI limits and retired local-capability exposure retained. Fresh beta.2 and Claude journeys remain open.",
     "byok": "Four bounded tasks validate withinUSD4.499; actual customer-owned credential authority remains pending. Server provider keys are excluded.",
     "sharedCommercialReleaseOwnership": "Handoff saved and source/artifact/deployment/campaign identities pinned. Existing funding remains disabled; no paid native handles have been admitted. Full commercial requirements remain mandatory.",
-    "localResourceHold": "Actual system free space oscillated from about700MB to121MB/ENOSPC. All local media/browser processes stopped; effect, offline-source proof and acquisition bridge remain not executed. Heavy models still require25GiB measured system headroom.",
-    "registryReadiness": "Exact npm0.2.0-beta.1 and PyPI0.2.0b1 still404; protected registry-beta reviewer policy remains configured. No registry dispatch/publication occurred."
+    "localResourceHold": "System volume remains about1.3GiB free, below25GiB model gate. Fresh exact-archive agent environments are prepared on owned external storage with private temp/cache and independent system/target reserves. No heavy model gate waived.",
+    "registryReadiness": "Both registries published exact beta.2 archives, independently anonymously streamed and hash-verified. npm provenance verified; latest remains0.0.1/beta0.2.0-beta.2. npm39523523962 and PyPI39523856326 passed clean public installs/CLI versions; complete clean-agent/editorial journeys remain open.",
+    "editorialAction": "Actual beta1 masked six-second action draft revised/restored;144decoded frames/fullstereoPCM and finalMP4 bytes match. User revision/listening acceptance pending; sparse-mask edge limits explicit.",
+    "codexReviewPageQualifiedWithinScope": true
   },
   "completionDependencies": [
     {
@@ -1154,7 +1647,7 @@
       "needed": "Designated shared Myriograph release owner preserves current project/service/operation/wallet/funding/catalog/recovery contracts, reconciles deployment and campaign authority, and returns actual customer/service/settlement evidence. No commercial requirement is dropped."
     }
   ],
-  "unreleasedSourceChanges": [
+  "publishedQualificationChanges": [
     {
       "kind": "companion-skill-reference-correction",
       "paths": [
@@ -1163,7 +1656,7 @@
       ],
       "summary": "Replace excluded operator-document reference with the already bundled references/contracts.md; refresh owned skill tree digest.",
       "verification": "Existing skill lifecycle, all release-safe harness installations and donor identity checks:3passed.",
-      "publicationState": "Source correction awaits a new immutable archive and exact-release requalification. Published beta1 remains unchanged.",
+      "publicationState": "Included in exact beta2 qualification archives at sourcebf590; complete parent-agent/model/customer requalification remains open.",
       "existingBeta1Workaround": "Read the packaged companion references/contracts.md; it already contains the recovery contract."
     },
     {
@@ -1175,7 +1668,7 @@
         "scripts/index_owned_skills.py"
       ],
       "summary": "Prepare Python0.2.0b2/npm0.2.0-beta.2, require matching Python at Node bridge, select optional Pi1.3.0 runtime by exact lock digest without deleting old runtimes/journals, derive SDK-owned skill versions from package identity.",
-      "publicationState": "Unreleased source; focused local checks do not substitute for new canonical archive/platform/upgrade/customer qualification."
+      "publicationState": "Included in exact beta2 qualification archives at sourcebf590; complete parent-agent/model/customer requalification remains open."
     }
   ]
 }
