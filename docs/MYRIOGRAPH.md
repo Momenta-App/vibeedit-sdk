@@ -1,6 +1,6 @@
 # Myriograph accounts, credit and paid services
 
-Updated 2026-10-20 for the [v0.2.0-beta.1 qualification prerelease](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1). This is not a completed launch: all A01–A20 acceptance criteria remain open. See [launch state](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/STATE.md) for current evidence and [operations](OPERATIONS.md) for recovery and release identities.
+Updated 2026-10-20 for the `0.2.0-beta.2` qualification candidate. Verify package availability through its exact release manifest. This is not a completed launch: all A01–A20 acceptance criteria remain open. See [launch state](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/STATE.md) for current evidence and [operations](OPERATIONS.md) for recovery and release identities.
 
 The public [Myriograph account, API-key and billing page](https://myrograph.com/billing) serves the updated customer interface. The canonical [API origin](https://u83j0k7e5m.execute-api.ca-central-1.amazonaws.com) and [video API specification](https://myrograph.com/openapi.json) are separate entry points. Production billing uses real money. The restricted qualification sandbox has a separate test wallet and test-mode payment flow; it is not a public source of free compute.
 

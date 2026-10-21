@@ -5,16 +5,16 @@ It provides a VibeEdit-owned Python media API, a deterministic JavaScript/HTML
 motion runtime, one shared CompositionSpec, a searchable local catalog, safe
 skill installation, rendering, and output verification.
 
-The published qualification candidate is Python **0.2.0b1** / npm **0.2.0-beta.1**.
+This source targets qualification candidate Python **0.2.0b2** / npm **0.2.0-beta.2**.
 It adds portable projects and corrections, focused local review tools, explicit
 model packs, source-acquisition receipts and an optional Pi companion. It is
-**not yet qualified as the complete launch**. Its exact archives are public in
-[v0.2.0-beta.1](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1).
-Registry publication and complete customer journeys remain pending. Archive
-source is pinned to `7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1`.
-The current source prepares Python **0.2.0b2** / npm **0.2.0-beta.2** with
-update fixes; those new archives are not published or qualified yet. Use the
-pinned beta.1 setup below until a new immutable manifest is available.
+**not yet qualified as the complete launch**. Use its exact release manifest to
+establish archive availability and source identity; this source checkout does
+not establish publication. Registry installation and complete customer journeys
+are separate gates. The previous public
+[v0.2.0-beta.1 qualification prerelease](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1)
+remains pinned to `7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1` with its original
+archives intact; it does not contain the beta.2 update fixes.
 
 VibeEdit-owned code is MIT licensed. Optional models and fonts have their own
 terms in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Myriograph owns the
@@ -23,19 +23,22 @@ editing requires no account or Pi companion.
 
 ## Install
 
-Give your agent the [pinned setup skill](https://raw.githubusercontent.com/Momenta-App/vibeedit-sdk/v0.2.0-beta.1/skills/vibeedit-setup/SKILL.md):
+Give your agent the [version-pinned setup skill](https://raw.githubusercontent.com/Momenta-App/vibeedit-sdk/v0.2.0-beta.2/skills/vibeedit-setup/SKILL.md):
 "Read this VibeEdit setup skill, install it for this project, verify it, and help
 me make a video."
 
 The agent verifies the release manifest, checksums and matching skill before
-installing exact archives into isolated environments. Registry versions are not
-published yet. For manual installation, first download and verify the files from
-that same prerelease; the commands below use those verified local files.
+installing exact archives into isolated environments. If that version's manifest
+is unavailable, stop and report that the candidate has not been published; the
+previous [beta.1 setup](https://raw.githubusercontent.com/Momenta-App/vibeedit-sdk/v0.2.0-beta.1/skills/vibeedit-setup/SKILL.md)
+is a separately pinned fallback. Do not mix their Python and Node versions or
+assume registry availability. For manual installation, download and verify the
+files from the same release; the commands below use those verified local files.
 
 Lightweight Python CLI and media orchestration:
 
 ```bash
-uv tool install ./vibeedit-0.2.0b1-py3-none-any.whl
+uv tool install ./vibeedit-0.2.0b2-py3-none-any.whl
 vibeedit doctor
 ```
 
@@ -44,11 +47,11 @@ needed extras below. These pip commands do not modify an existing `uv tool`
 environment; the setup skill handles isolated optional-runtime installation.
 
 ```bash
-pip install "./vibeedit-0.2.0b1-py3-none-any.whl[effects]"
-pip install "./vibeedit-0.2.0b1-py3-none-any.whl[browser]"
-pip install "./vibeedit-0.2.0b1-py3-none-any.whl[vision]"
-pip install "./vibeedit-0.2.0b1-py3-none-any.whl[sam]"
-pip install "./vibeedit-0.2.0b1-py3-none-any.whl[all]"
+pip install "./vibeedit-0.2.0b2-py3-none-any.whl[effects]"
+pip install "./vibeedit-0.2.0b2-py3-none-any.whl[browser]"
+pip install "./vibeedit-0.2.0b2-py3-none-any.whl[vision]"
+pip install "./vibeedit-0.2.0b2-py3-none-any.whl[sam]"
+pip install "./vibeedit-0.2.0b2-py3-none-any.whl[all]"
 vibeedit setup --effects
 vibeedit setup --browser
 vibeedit setup --sam
@@ -101,7 +104,7 @@ No model weight is part of the base wheel or npm archive.
 Node SDK, HTML motion runtime, and Node-facing CLI:
 
 ```bash
-npm install ./vibeedit-0.2.0-beta.1.tgz
+npm install ./vibeedit-0.2.0-beta.2.tgz
 npx vibeedit doctor --json
 ```
 
@@ -171,13 +174,13 @@ frame count and prior artifact provenance. Mid-scene removal remains planned.
 Install the Python beta directly from its GitHub release asset:
 
 ```bash
-uv tool install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.1/vibeedit-0.2.0b1-py3-none-any.whl
+uv tool install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.2/vibeedit-0.2.0b2-py3-none-any.whl
 ```
 
 Install the Node beta tarball in a project:
 
 ```bash
-npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.1/vibeedit-0.2.0-beta.1.tgz
+npm install https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.2/vibeedit-0.2.0-beta.2.tgz
 ```
 
 When downloading an existing release, use the checksum manifest distributed with that exact release:

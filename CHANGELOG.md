@@ -1,10 +1,12 @@
 # Changelog
 
-## 0.2.0-beta.2 (unreleased candidate)
+## 0.2.0-beta.2 (qualification candidate)
 
 - Require the Node bridge to select the matching Python SDK release; an explicitly configured incompatible interpreter fails without fallback.
+- Store Pi runtimes by their exact companion lock digest, preserving previous runtime and task journals through package updates.
+- Bundle README and nine customer guides in the wheel; verify their exact bytes in all release archives and exclude operator launch records.
 - Correct package-version declarations and bind SDK-owned skill versions to the package identity.
-- Repair the companion skill's bundled contract reference. New archives and clean customer qualification remain pending.
+- Repair the companion skill's bundled contract reference. Complete customer qualification remains a separate launch gate.
 
 ## 0.2.0-beta.1 (GitHub qualification prerelease)
 

@@ -1,6 +1,6 @@
 # Optional Pi workers and durable goals
 
-This guide describes the `0.2.0-beta.2` source candidate, which is not yet published or qualified. The previous `0.2.0-beta.1` archives remain immutable. Full Codex/Claude Code, BYOK/managed and crash/recovery acceptance remains open in the [launch ledger](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/PUBLIC-LEDGER.json). Ordinary editing works without Pi or an account.
+This guide describes the `0.2.0-beta.2` qualification candidate; verify availability and source identity through its exact release manifest. The previous `0.2.0-beta.1` archives remain immutable. Full Codex/Claude Code, BYOK/managed and crash/recovery acceptance remains open in the [launch ledger](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/PUBLIC-LEDGER.json). Ordinary editing works without Pi or an account.
 
 The Python CLI owns supervision and project state. Its optional runtime pins official `@earendil-works/pi-coding-agent` `1.3.0`, requiring Node >=22.19.0. Installation is project/user-local; it creates no always-on system service.
 

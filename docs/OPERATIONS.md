@@ -4,9 +4,15 @@ Updated 2026-10-20. These are customer recovery instructions and an operating co
 
 ## Release identity and qualification
 
-The public [v0.2.0-beta.1 prerelease](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1) contains Python `0.2.0b1` and npm `0.2.0-beta.1` from source commit `7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1`. The pinned optional Pi runtime is `1.3.0`. The [canonical workflow](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39507366659) passed thirteen listed core jobs: six source-platform checks, one build/attestation job and six installations of the same exact archives. This establishes the recorded portable-core checks, not paid services, optional model inference, editorial accuracy or both complete agent journeys.
+This guide targets Python `0.2.0b2` / npm `0.2.0-beta.2`, with optional Pi `1.3.0`.
+Obtain availability, exact hashes and source revision from that version's
+[release manifest](https://github.com/Momenta-App/vibeedit-sdk/releases/download/v0.2.0-beta.2/release-manifest.json).
+An unavailable manifest means the candidate is unavailable; do not substitute
+older archive bytes under its version.
 
-| Release file | SHA256 |
+For previous qualification and rollback, the public [v0.2.0-beta.1 prerelease](https://github.com/Momenta-App/vibeedit-sdk/releases/tag/v0.2.0-beta.1) contains Python `0.2.0b1` and npm `0.2.0-beta.1` from source commit `7ff8ff1a9caf1f53d7f8cba7fbbfec97d0dd61e1`. Its [canonical workflow](https://github.com/Momenta-App/vibeedit-sdk/actions/runs/39507366659) passed thirteen listed core jobs: six source-platform checks, one build/attestation job and six installations of the same exact archives. This establishes those recorded portable-core checks, not qualification of beta.2, paid services, optional model inference, editorial accuracy or both complete agent journeys.
+
+| Previous beta.1 release file | SHA256 |
 |---|---|
 | `release-manifest.json` | `16f5ac1aff3b364e4bf479b30c593fc97e8d8ef84add023518a9c10f7800b341` |
 | `vibeedit-0.2.0b1-py3-none-any.whl` | `6e3fbe0759a7064f6f02943770a1902a202a31c0aa46d27498b13ce7fcb50c86` |

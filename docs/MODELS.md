@@ -1,6 +1,6 @@
 # Optional local model packs
 
-Core editing needs no model weights. Model setup and inference are optional, explicit operations. This guide accompanies the unreleased `0.2.0-beta.2` source candidate; earlier public-wheel evidence does not qualify new archive bytes. Full TransNet/SAM2.1/SAM3.1/Apple Silicon acceptance remains open in the [launch ledger](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/PUBLIC-LEDGER.json).
+Core editing needs no model weights. Model setup and inference are optional, explicit operations. This guide accompanies the `0.2.0-beta.2` qualification candidate; earlier public-wheel evidence does not qualify new archive bytes. Verify availability through the exact release manifest. Full TransNet/SAM2.1/SAM3.1/Apple Silicon acceptance remains open in the [launch ledger](https://github.com/Momenta-App/vibeedit-sdk/blob/v0.2.0-beta.2/docs/launch/PUBLIC-LEDGER.json).
 
 ```sh
 vibeedit models list --json
