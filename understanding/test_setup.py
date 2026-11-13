@@ -24,7 +24,7 @@ class SetupTests(unittest.TestCase):
         self.config = self.root / "vibeedit.json"
         self.calls = []
         self.keys = {}
-        self.accounts = [{"id": ACCOUNT, "name": "Existing account"}]
+        self.accounts = [{"accountId": ACCOUNT, "name": "Existing account"}]
         self.uncertain = False
         self.redirect = False
         self.foreign_auth = False

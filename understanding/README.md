@@ -117,7 +117,8 @@ provider's normal email endpoints. Do not use a Supabase service-role key.
    private transient state. Validate it using GET `/auth/v1/user` with apikey and
    `Authorization: Bearer ACCESS_TOKEN`.
 3. GET `https://vibeedit.com/v1/video/accounts` with that bearer access token.
-   The response is `{ "accounts": [{ "id": "ACCOUNT_ID", "name": "..." }] }`.
+   The current response is `{ "accounts": [{ "accountId": "ACCOUNT_ID", "name": "..." }] }`.
+   Older compatibility replies use `id`. The CLI accepts both and prints `id`.
 4. Before key admission, durably record one random Idempotency-Key and this exact
    body in private state. POST it to `/v1/video/keys` with the login bearer token,
    Content-Type JSON and that Idempotency-Key:

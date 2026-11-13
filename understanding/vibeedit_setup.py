@@ -154,9 +154,11 @@ def session_headers(client, state):
 
 def account_rows(client, state):
     rows = client.request("/v1/video/accounts", headers=session_headers(client, state)).get("accounts")
-    if not isinstance(rows, list) or not rows or any(not isinstance(row, dict) or not isinstance(row.get("id"), str) for row in rows):
+    if not isinstance(rows, list) or any(not isinstance(row, dict) or not isinstance(row.get("accountId", row.get("id")), str) for row in rows):
+        raise SetupError("Account response was incomplete. Keep your verified state and retry accounts; do not create a new account.")
+    if not rows:
         raise SetupError("No owned/administered account is available. Use VibeEdit account support; do not create parallel accounts.")
-    return rows
+    return [{"id": row.get("accountId", row.get("id")), "name": row.get("name", "VibeEdit account")} for row in rows]
 
 
 def config_headers(config):
