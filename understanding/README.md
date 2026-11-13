@@ -100,6 +100,39 @@ Use https://vibeedit.com/docs for dependency, source-clock, uncertainty, artifac
 retention and review contracts. A link between identities is not proof of speech
 or a verified name. Keep unknown/unresolved evidence explicit.
 
+## Check media before paid analysis
+
+Account setup and successful capability requests do not qualify a media file.
+Before uploading a six-service source, inspect the actual video stream and its
+packet timestamps. Face Identity currently requires one H.264/HEVC video stream,
+constant frame rate, unique presentation timestamps starting at zero, and a
+supported pixel format (`yuv420p` or `yuv420p10le`). Its limit is 120 FPS and four
+hours. Use current service limits when they change. Audio and video clocks must
+remain aligned for the linking services.
+
+With a separately installed FFmpeg/ffprobe, this read-only check shows stream
+metadata; inspect packet PTS as well when the clock is uncertain:
+
+```sh
+ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,pix_fmt,r_frame_rate,avg_frame_rate,time_base,start_pts,start_time,duration -of json SOURCE.mp4
+ffprobe -v error -select_streams v:0 -show_packets -show_entries packet=pts -of csv=p=0 SOURCE.mp4
+```
+
+A container `start_time` of zero does not establish a zero-origin **video**
+clock. Likewise, matching average and nominal frame rates do not prove a uniform
+packet clock. Website demonstration videos are presentation assets; they are
+not promised to satisfy every analysis input contract. Validate your selected
+bytes before paid admission. The public capability projection currently omits
+these clock requirements, and a held public status may require support to learn
+the specific qualification failure.
+
+If normalization is needed, keep the original, create a separate file, preserve
+audio/video alignment and verify the new clock. Use its new hash and truthful
+full duration for new quotes and a newly authorized operation. Never replace
+source bytes or parents inside an existing job/state. A qualification failure
+may still incur infrastructure cost; retain its hold until the original usage
+is reconciled. Do not retry held work or buy more credit automatically.
+
 ## Direct HTTP onboarding contract
 
 All service requests use `https://vibeedit.com`. The documented account provider
