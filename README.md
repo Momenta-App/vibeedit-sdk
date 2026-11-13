@@ -12,6 +12,19 @@ runners. These betas are for evaluation, testing, and community review; they are
 not production-stability or commercial-use claims. Source, GitHub release assets,
 and registry publication are separate channels with separate version identities.
 
+## Understanding APIs and agent account setup
+
+For hosted Words & Speakers, Face Identity, Visible Speaker, Voice Identity,
+Words to People & Characters and Visual Understanding, start with
+[the agent setup guide](understanding/README.md). It includes a standalone
+[Python setup CLI](understanding/vibeedit_setup.py), public config schema and
+HTTP onboarding contract. Agents can verify a user-authorized email code, choose
+an existing account/project and write a scoped private config without browser
+exports. No paid analysis starts during setup.
+
+VibeEdit.com is the canonical API/account origin. Hosted analysis is separately
+metered; local Library and the local production SDK below have separate setup.
+
 ## Install
 
 The registry commands below are the intended registry experience. Until a

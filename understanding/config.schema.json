@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibeedit.com/config.schema.json",
+  "title": "VibeEdit private SDK connection",
+  "description": "Public shape only. Actual files contain a private scoped key; never publish them.",
+  "type": "object",
+  "required": ["apiUrl", "apiKey", "organizationId", "projectId"],
+  "properties": {
+    "apiUrl": {"const": "https://vibeedit.com"},
+    "apiKey": {"type": "string", "pattern": "^mv_[A-Za-z0-9_-]{30,150}$", "writeOnly": true},
+    "organizationId": {"type": "string", "format": "uuid"},
+    "projectId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"}
+  },
+  "additionalProperties": false
+}
