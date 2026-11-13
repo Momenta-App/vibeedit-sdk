@@ -159,7 +159,71 @@ maximum, then submit with one durable identity. Preserve original jobs/holds on
 unknown outcomes. A checkout return does not grant credit; only signed payment
 confirmation does. Do not enter real payment details in TEST mode or fabricate
 payment webhooks. Browser payment and security prompts still follow your tool's
-approval rules.
+approval rules. The default setup key has no funding authority; issue a separately
+authorized key with `--billing-access` when the user asked to manage credit.
+
+### Prepare credit through the API
+
+```sh
+python3 vibeedit_setup.py balance --config /private/path/vibeedit.json
+python3 vibeedit_setup.py checkout --config /private/path/vibeedit.json --amount-usd 25 --state /private/path/checkout.json
+```
+
+Amounts are $5, $10 or $25 USD; choose only what the user authorized. This command
+prepares one Stripe Checkout session and **does not pay**. It records the amount,
+account, wallet mode and idempotency identity before the request. It saves the
+private `checkoutUrl` in the mode-600 state, not standard output. Open that URL
+from the private file with the agent's approved browser, verify Stripe's account,
+mode and amount, and follow the user's and tool's payment approval requirements.
+Do not print the private URL into public logs. Payment is a human approval step
+when required by your tools; the CLI does not bypass it or enter saved cards.
+
+After returning to VibeEdit, run `balance` again and check signed confirmation
+and credit history. A return URL alone is not proof of payment or credit. Keep
+the original checkout state on an uncertain acknowledgement; repeat the exact
+command to recover that session. Changing amount, account, project or mode under
+that identity is refused. Do not create another purchase merely to recover.
+
+The direct contract is GET `/v1/video/billing` and POST
+`/v1/video/billing/checkout` with `{ "amountUsd": 25 }`, API-key/project/account
+headers and one durable `Idempotency-Key`. A successful checkout response contains
+`url`, `amountUsd`, `currency` and `mode`; an internal Stripe session ID is not
+required in the public response. Credit history is GET `/v1/video/billing/history`
+with funding-management access. See https://vibeedit.com/setup/openapi.json for
+the account and funding API reference.
+
+### Approved TEST access
+
+TEST access is a separate restricted operator-approved program, not a free
+public analysis grant. The public client cannot approve itself, change its
+ceiling or renew an expired campaign. Use it only when the operator authorized
+that exact verified email. This calls the existing isolated TEST-account service:
+
+```sh
+python3 vibeedit_setup.py request-code --email APPROVED_TEST_EMAIL --state /private/path/test-setup.json
+python3 vibeedit_setup.py verify-code --state /private/path/test-setup.json
+python3 vibeedit_setup.py create-key --sandbox --state /private/path/test-setup.json --project my-test --config /private/path/test-vibeedit.json --access read download upload submit cancel library --billing-access
+python3 vibeedit_setup.py balance --config /private/path/test-vibeedit.json
+python3 vibeedit_setup.py checkout --require-test --config /private/path/test-vibeedit.json --amount-usd 25 --state /private/path/test-checkout.json
+```
+
+These processing/funding grants are broader than the default read-only key;
+select them only for a user-authorized test. `--sandbox` calls POST
+`/v1/video/sandbox/keys` with the ordinary verified login bearer, exact scope
+body and durable idempotency identity, **without** accountId. It verifies the
+returned account/project/mode before saving. The server enforces approved email,
+campaign ceiling and expiry; repeat requests do not multiply the test allowance.
+An approval failure needs an authorized operator, not another account or token.
+Normal setup still uses `/v1/video/keys` and the user's selected existing account.
+
+Check that the wallet reports `test` and Stripe visibly says Sandbox before using
+the documented Stripe test card `4242 4242 4242 4242`, a future expiry and any
+three-digit CVC. Test transactions move no real funds. Never use a real card to
+test, and never put a test card into LIVE Checkout. `--require-test` refuses a
+LIVE wallet before preparing checkout. See https://docs.stripe.com/testing.
+TEST credit cannot become LIVE credit. Processing may still consume the approved
+test campaign budget and real service resources; obtain fresh per-stage quotes
+and a total approved cap before starting the six-service flow.
 
 To revoke only the key in a config:
 

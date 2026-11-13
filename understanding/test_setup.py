@@ -13,6 +13,7 @@ import urllib.parse
 SOURCE = pathlib.Path(__file__).resolve().parent / "vibeedit_setup.py"
 ACCOUNT = "11111111-1111-4111-8111-111111111111"
 SECOND = "22222222-2222-4222-8222-222222222222"
+TEST_ACCOUNT = "33333333-3333-4333-8333-333333333333"
 TOKEN = "mv_" + "fixture_only_" * 5
 
 
@@ -29,6 +30,10 @@ class SetupTests(unittest.TestCase):
         self.redirect = False
         self.foreign_auth = False
         self.revoked = False
+        self.sandbox_approved = False
+        self.wallet_mode = "test"
+        self.checkouts = {}
+        self.checkout_uncertain = False
         outer = self
 
         class Handler(http.server.BaseHTTPRequestHandler):
@@ -51,9 +56,11 @@ class SetupTests(unittest.TestCase):
                     return self.respond({"email": "operator@example.invalid", "email_confirmed_at": "2026-11-12T00:00:00Z"})
                 if self.path == "/v1/video/accounts":
                     return self.respond({"accounts": outer.accounts})
+                if self.path == "/v1/video/billing":
+                    return self.respond({"accountId": self.headers.get("X-Organization-Id"), "mode": outer.wallet_mode, "balanceUsd": 0, "availableUsd": 0, "reservedUsd": 0})
                 if self.path.startswith("/v1/customer/context?"):
                     query = urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query)
-                    return self.respond({"organizationId": self.headers.get("X-Organization-Id"), "projectId": query["projectId"][0], "mode": "test"})
+                    return self.respond({"organizationId": self.headers.get("X-Organization-Id"), "projectId": query["projectId"][0], "mode": outer.wallet_mode})
                 if self.path.endswith("/capabilities"):
                     if outer.redirect:
                         self.send_response(302)
@@ -72,7 +79,17 @@ class SetupTests(unittest.TestCase):
                     if body.get("token") != "123456":
                         return self.respond({"error_code": "otp_expired"}, 403)
                     return self.respond({"access_token": "fixture_session", "expires_in": 3600, "refresh_token": "must_never_be_saved"})
-                if self.path == "/v1/video/keys":
+                if self.path == "/v1/video/billing/checkout":
+                    identity = self.headers["Idempotency-Key"]
+                    outer.checkouts[identity] = body
+                    if outer.checkout_uncertain:
+                        outer.checkout_uncertain = False
+                        return self.respond({"error": {"code": "acknowledgement_lost"}}, 503)
+                    # The public projection intentionally omits Stripe's ID.
+                    return self.respond({"url": "https://checkout.stripe.com/c/pay/cs_test_fixture", "amountUsd": body["amountUsd"], "mode": outer.wallet_mode})
+                if self.path in {"/v1/video/keys", "/v1/video/sandbox/keys"}:
+                    if self.path.endswith("/sandbox/keys") and not outer.sandbox_approved:
+                        return self.respond({"error": {"code": "sandbox_subject_not_authorized"}}, 403)
                     identity = self.headers["Idempotency-Key"]
                     if identity in outer.keys and outer.keys[identity] != body:
                         return self.respond({"error": {"code": "idempotency_conflict"}}, 409)
@@ -80,7 +97,7 @@ class SetupTests(unittest.TestCase):
                     if outer.uncertain:
                         outer.uncertain = False
                         return self.respond({"error": {"code": "acknowledgement_lost"}}, 503)
-                    return self.respond({"apiKey": TOKEN, "organizationId": body["accountId"], "mode": "test"}, 201)
+                    return self.respond({"apiKey": TOKEN, "organizationId": body.get("accountId", TEST_ACCOUNT), "mode": outer.wallet_mode}, 201)
                 return self.respond({}, 404)
 
             def do_DELETE(self):
@@ -187,6 +204,61 @@ class SetupTests(unittest.TestCase):
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             self.cli("request-code", "--email", "operator@example.invalid", "--state", self.state, expected=1)
         self.assertFalse(self.calls)
+
+    def test_sandbox_needs_existing_approval_and_keeps_mode_on_exact_retry(self):
+        self.login()
+        self.create("--sandbox", expected=1)
+        self.assertFalse(self.keys)
+        intent = json.loads(self.state.read_text())["pendingKey"]
+        self.create(expected=1)
+        self.sandbox_approved = True
+        result = self.create("--sandbox")
+        self.assertEqual(result["accountId"], TEST_ACCOUNT)
+        self.assertEqual(result["mode"], "test")
+        self.assertNotIn("accountId", next(iter(self.keys.values())))
+        self.assertTrue(self.create("--sandbox")["reusedAcknowledgement"])
+        self.assertEqual(set(self.keys), {intent["requestId"]})
+        self.create(expected=1)
+
+    def test_checkout_uncertainty_preserves_identity_amount_and_private_url(self):
+        self.login()
+        self.create("--billing-access")
+        state = self.root / "checkout.json"
+        args = ["checkout", "--config", self.config, "--state", state, "--require-test", "--amount-usd", "5"]
+        self.checkout_uncertain = True
+        self.cli(*args, expected=1)
+        request = json.loads(state.read_text())["requestId"]
+        self.cli(*args[:-1], "10", expected=1)
+        result = self.cli(*args)
+        self.assertFalse(result["paymentCompleted"])
+        self.assertNotIn("checkoutUrl", result)
+        self.assertEqual(state.stat().st_mode & 0o777, 0o600)
+        self.cli(*args)
+        self.assertEqual(set(self.checkouts), {request})
+        self.assertEqual(len([c for c in self.calls if c[0:2] == ("POST", "/v1/video/billing/checkout")]), 2)
+        saved = json.loads(state.read_text())
+        saved["checkoutUrl"] = "https://example.invalid/capture"
+        state.write_text(json.dumps(saved))
+        self.cli(*args, expected=1)
+
+    def test_test_only_checkout_refuses_live_wallet_before_admission(self):
+        self.login()
+        self.wallet_mode = "live"
+        self.create("--billing-access")
+        state = self.root / "checkout.json"
+        self.cli("checkout", "--config", self.config, "--state", state, "--require-test", "--amount-usd", "5", expected=1)
+        self.assertFalse(self.checkouts)
+        self.assertFalse(state.exists())
+
+    def test_sandbox_cannot_return_live_config_or_accept_live_account_selection(self):
+        self.login()
+        self.create("--sandbox", "--account", ACCOUNT, expected=1)
+        self.assertFalse(self.keys)
+        self.sandbox_approved = True
+        self.wallet_mode = "live"
+        self.create("--sandbox", expected=1)
+        self.assertFalse(self.config.exists())
+        self.assertIn("pendingKey", json.loads(self.state.read_text()))
 
 
 if __name__ == "__main__":

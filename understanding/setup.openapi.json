@@ -1,0 +1,445 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "VibeEdit account, scoped-key and funding setup",
+    "version": "1.0.0",
+    "description": "Existing public account/key/funding contracts. Email provider endpoints are discovered through /v1/video/auth and documented in /agents.md. TEST eligibility is operator-controlled. Creating a key or Checkout session grants no credit and starts no paid analysis."
+  },
+  "servers": [
+    {
+      "url": "https://vibeedit.com"
+    }
+  ],
+  "paths": {
+    "/v1/video/auth": {
+      "get": {
+        "summary": "Discover the existing public email-account provider",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successful public response"
+          },
+          "403": {
+            "description": "Account, scope or TEST approval denied"
+          }
+        }
+      }
+    },
+    "/v1/video/accounts": {
+      "get": {
+        "summary": "List owned/administered accounts; current rows use accountId",
+        "security": [
+          {
+            "EmailSession": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public response"
+          },
+          "403": {
+            "description": "Account, scope or TEST approval denied"
+          }
+        }
+      }
+    },
+    "/v1/video/keys": {
+      "post": {
+        "summary": "Create a project-scoped key; retain exact body and Idempotency-Key",
+        "security": [
+          {
+            "EmailSession": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Acknowledged public response"
+          },
+          "403": {
+            "description": "Account, scope or TEST approval denied"
+          },
+          "201": {
+            "description": "Successful public response"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "accountId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "projectIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "customerServices": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "video",
+                        "faces",
+                        "speakers"
+                      ]
+                    }
+                  },
+                  "customerAccess": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "read",
+                        "download",
+                        "upload",
+                        "submit",
+                        "cancel",
+                        "library"
+                      ]
+                    }
+                  },
+                  "customerBillingAccess": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "projectIds",
+                  "customerServices",
+                  "customerAccess",
+                  "customerBillingAccess"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/video/sandbox/keys": {
+      "post": {
+        "summary": "Create/reuse approved isolated TEST-account key; no accountId; never grants eligibility",
+        "security": [
+          {
+            "EmailSession": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Acknowledged public response"
+          },
+          "403": {
+            "description": "Account, scope or TEST approval denied"
+          },
+          "201": {
+            "description": "Successful public response"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "customerServices": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "video",
+                        "faces",
+                        "speakers"
+                      ]
+                    }
+                  },
+                  "customerAccess": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "read",
+                        "download",
+                        "upload",
+                        "submit",
+                        "cancel",
+                        "library"
+                      ]
+                    }
+                  },
+                  "customerBillingAccess": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "projectIds",
+                  "customerServices",
+                  "customerAccess",
+                  "customerBillingAccess"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/video/billing": {
+      "get": {
+        "summary": "Read balance, holds and actual wallet mode",
+        "security": [
+          {
+            "BearerKey": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public response"
+          },
+          "403": {
+            "description": "Account, scope or TEST approval denied"
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Project-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/video/billing/history": {
+      "get": {
+        "summary": "Read signed credit activity; funding access required",
+        "security": [
+          {
+            "BearerKey": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public response"
+          },
+          "403": {
+            "description": "Account, scope or TEST approval denied"
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Project-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/video/billing/checkout": {
+      "post": {
+        "summary": "Prepare Stripe Checkout only; no payment or automatic top-up",
+        "security": [
+          {
+            "BearerKey": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "url",
+                    "amountUsd",
+                    "currency",
+                    "mode"
+                  ],
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Private Stripe Checkout URL; preserve privately with original request identity."
+                    },
+                    "amountUsd": {
+                      "enum": [
+                        5,
+                        10,
+                        25
+                      ]
+                    },
+                    "currency": {
+                      "const": "usd"
+                    },
+                    "mode": {
+                      "enum": [
+                        "test",
+                        "live"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Account, scope or TEST approval denied"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amountUsd": {
+                    "enum": [
+                      5,
+                      10,
+                      25
+                    ]
+                  }
+                },
+                "required": [
+                  "amountUsd"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Project-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/video/keys/current": {
+      "delete": {
+        "summary": "Revoke only the presented scoped key",
+        "security": [
+          {
+            "BearerKey": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful public response"
+          },
+          "403": {
+            "description": "Account, scope or TEST approval denied"
+          }
+        },
+        "parameters": [
+          {
+            "name": "X-Project-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Organization-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Issued scoped API key. Funding authority is separate from processing access."
+      },
+      "EmailSession": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Normal user session from real email verification; never a service-role token."
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://vibeedit.com/agents.md"
+  }
+}

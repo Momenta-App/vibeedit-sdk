@@ -167,12 +167,46 @@ def config_headers(config):
     return {"Authorization": "Bearer " + config["apiKey"], "X-Project-Id": config["projectId"], "X-Organization-Id": config["organizationId"]}
 
 
+def prepare_checkout(args, client, config, headers):
+    path = pathlib.Path(args.state).expanduser().absolute()
+    if path == pathlib.Path(args.config).expanduser().absolute():
+        raise SetupError("Checkout state and API config need separate private paths.")
+    wallet = client.request("/v1/video/billing", headers=headers)
+    if wallet.get("accountId") != config["organizationId"] or wallet.get("mode") not in {"test", "live"}:
+        raise SetupError("Billing identity did not match the config. No checkout was prepared.")
+    if args.require_test and wallet["mode"] != "test":
+        raise SetupError("This is a LIVE wallet. --require-test refused checkout; obtain an approved TEST config or use the authorized live payment flow.")
+    binding = {"apiUrl": ORIGIN, "accountId": wallet["accountId"], "projectId": config["projectId"], "mode": wallet["mode"], "amountUsd": args.amount_usd}
+    state = read_private(path) if path.exists() else None
+    if state and (state.get("schemaVersion") != "vibeedit.checkoutSetup.v1" or state.get("binding") != binding):
+        raise SetupError("An earlier checkout uses different inputs. Restore its original config, amount and mode; do not replace an uncertain purchase identity.")
+    if not state:
+        state = {"schemaVersion": "vibeedit.checkoutSetup.v1", "binding": binding, "requestId": str(uuid.uuid4()), "phase": "pending"}
+        save_private(path, state)
+    if state.get("phase") != "prepared":
+        value = client.request("/v1/video/billing/checkout", body={"amountUsd": args.amount_usd}, headers={**headers, "Idempotency-Key": state["requestId"]})
+        url = urllib.parse.urlsplit(value.get("url", ""))
+        if url.scheme != "https" or url.hostname != "checkout.stripe.com" or url.username or url.password or value.get("mode") != wallet["mode"] or value.get("amountUsd") != args.amount_usd:
+            raise SetupError("Checkout acknowledgement did not match this account/mode/amount. Preserve original checkout state for reconciliation.")
+        state.update(phase="prepared", checkoutUrl=value["url"])
+        save_private(path, state, replace=True)
+    saved_url = urllib.parse.urlsplit(state.get("checkoutUrl", ""))
+    if saved_url.scheme != "https" or saved_url.hostname != "checkout.stripe.com" or saved_url.username or saved_url.password:
+        raise SetupError("Saved checkout URL is invalid. Preserve its identity and reconcile through account support.")
+    return {"status": "checkout_prepared", "statePath": str(path), "mode": wallet["mode"], "amountUsd": args.amount_usd,
+            "paymentCompleted": False, "next": "Open checkoutUrl from this private state in your approved browser; verify mode/amount and follow your payment approval rules. Signed payment confirmation, not this preparation or return URL, grants credit."}
+
+
 def run(args, client):
     if args.command == "discover":
         return client.request("/.well-known/vibeedit.json")
-    if args.command in {"check", "revoke"}:
+    if args.command in {"check", "revoke", "balance", "checkout"}:
         config = read_private(args.config)
         headers = config_headers(config)
+        if args.command == "balance":
+            return client.request("/v1/video/billing", headers=headers)
+        if args.command == "checkout":
+            return prepare_checkout(args, client, config, headers)
         if args.command == "revoke":
             value = client.request("/v1/video/keys/current", method="DELETE", headers=headers)
             if value.get("revoked") is not True:
@@ -214,43 +248,52 @@ def run(args, client):
         return {"status": "verified", "accounts": account_rows(client, state), "next": "create-key"}
     if "read" not in args.access:
         raise SetupError("Include read access so the issued key can verify its project/account. No key was created.")
+    if args.sandbox and args.account:
+        raise SetupError("--sandbox uses only the existing approved isolated TEST-account service; do not also select a LIVE account.")
+    endpoint = "/v1/video/sandbox/keys" if args.sandbox else "/v1/video/keys"
     if state.get("phase") == "configured":
         prior = read_private(state["configPath"])
-        expected = {"accountId": args.account or prior["organizationId"], "projectIds": [args.project], "customerServices": sorted(set(args.services)),
+        expected = {**({"accountId": args.account or prior["organizationId"]} if not args.sandbox else {}), "projectIds": [args.project], "customerServices": sorted(set(args.services)),
                     "customerAccess": sorted(set(args.access)), "customerBillingAccess": args.billing_access}
-        if state["configPath"] != str(pathlib.Path(args.config).expanduser().absolute()) or state.get("scopes") != expected:
+        if state["configPath"] != str(pathlib.Path(args.config).expanduser().absolute()) or state.get("scopes") != expected or state.get("keyEndpoint", "/v1/video/keys") != endpoint:
             raise SetupError("This setup already saved its config. Use that config; begin a separately authorized new setup with a new state path for different access.")
-        client.request("/v1/customer/context?" + urllib.parse.urlencode({"service": expected["customerServices"][0], "projectId": args.project, "access": "read"}), headers=config_headers(prior))
+        identity = client.request("/v1/customer/context?" + urllib.parse.urlencode({"service": expected["customerServices"][0], "projectId": args.project, "access": "read"}), headers=config_headers(prior))
+        if identity.get("organizationId") != prior["organizationId"] or identity.get("projectId") != args.project or args.sandbox and identity.get("mode") != "test":
+            raise SetupError("Saved config identity did not verify. Preserve its original setup state.")
         return {"status": "configured", "configPath": state["configPath"], "reusedAcknowledgement": True, "loginSessionCleared": True, "paidWorkStarted": False}
-    accounts = account_rows(client, state)
+    accounts = account_rows(client, state) if not args.sandbox else []
     account = args.account or (accounts[0]["id"] if len(accounts) == 1 else None)
-    if account not in {row["id"] for row in accounts}:
+    if not args.sandbox and account not in {row["id"] for row in accounts}:
         raise SetupError("Select an owned account with --account from the accounts command. No key was created.")
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,127}", args.project):
         raise SetupError("Project ID must use 1–128 letters, numbers, dots, colons, underscores or hyphens, starting with a letter or number.")
     output = pathlib.Path(args.config).expanduser().absolute()
     if output == state_path:
         raise SetupError("Config and temporary login state need separate file paths.")
-    body = {"accountId": account, "projectIds": [args.project], "customerServices": sorted(set(args.services)),
+    body = {**({"accountId": account} if not args.sandbox else {}), "projectIds": [args.project], "customerServices": sorted(set(args.services)),
             "customerAccess": sorted(set(args.access)), "customerBillingAccess": args.billing_access}
     pending = state.get("pendingKey")
-    if pending and (pending["body"] != body or pending["configPath"] != str(output)):
+    if pending and (pending["body"] != body or pending["configPath"] != str(output) or pending.get("endpoint", "/v1/video/keys") != endpoint):
         raise SetupError("An earlier key request is unresolved. Restore its exact account/project/scopes/config path and retry; do not replace its identity.")
     if not pending:
         if output.exists() or output.is_symlink():
             raise SetupError("Config path already exists. Choose a new path before creating a key.")
-        pending = {"requestId": str(uuid.uuid4()), "body": body, "configPath": str(output)}
+        pending = {"requestId": str(uuid.uuid4()), "body": body, "configPath": str(output), "endpoint": endpoint}
         state["pendingKey"] = pending
         save_private(state_path, state, replace=True)
-    value = client.request("/v1/video/keys", body=pending["body"], headers={**session_headers(client, state), "Idempotency-Key": pending["requestId"]})
+    value = client.request(endpoint, body=pending["body"], headers={**session_headers(client, state), "Idempotency-Key": pending["requestId"]})
+    if args.sandbox:
+        account = value.get("organizationId")
+        if value.get("mode") != "test" or not isinstance(account, str) or not re.fullmatch(r"[a-f0-9-]{36}", account):
+            raise SetupError("Approved TEST account was not acknowledged. Preserve the original request; never substitute a LIVE wallet.")
     if value.get("organizationId") != account or not isinstance(value.get("apiKey"), str):
         raise SetupError("Key acknowledgement did not match the selected account. Keep your state and reconcile the original request.")
     config = {"apiUrl": ORIGIN, "apiKey": value["apiKey"], "organizationId": account, "projectId": args.project}
     identity = client.request("/v1/customer/context?" + urllib.parse.urlencode({"service": body["customerServices"][0], "projectId": args.project, "access": "read"}), headers=config_headers(config))
-    if identity.get("organizationId") != account or identity.get("projectId") != args.project:
+    if identity.get("organizationId") != account or identity.get("projectId") != args.project or args.sandbox and identity.get("mode") != "test":
         raise SetupError("The issued key did not verify its account/project. Keep your original state for reconciliation.")
     save_private(output, config)
-    save_private(state_path, {"schemaVersion": VERSION, "apiUrl": ORIGIN, "phase": "configured", "configPath": str(output), "requestId": pending["requestId"], "scopes": body}, replace=True)
+    save_private(state_path, {"schemaVersion": VERSION, "apiUrl": ORIGIN, "phase": "configured", "configPath": str(output), "requestId": pending["requestId"], "scopes": body, "keyEndpoint": endpoint}, replace=True)
     return {"status": "configured", "configPath": str(output), "accountId": account, "projectId": args.project,
             "mode": identity.get("mode"), "scopes": body, "loginSessionCleared": True, "paidWorkStarted": False}
 
@@ -268,6 +311,7 @@ def main(argv=None, client=None):
     create = commands.add_parser("create-key", help="Issue a scoped key and atomically write a private SDK config.")
     create.add_argument("--project", required=True)
     create.add_argument("--account")
+    create.add_argument("--sandbox", action="store_true", help="Use the existing restricted TEST-account service. Requires operator-approved email; does not grant test eligibility or LIVE credit.")
     create.add_argument("--config", required=True)
     create.add_argument("--services", nargs="+", choices=["video", "faces", "speakers"], default=["video", "faces", "speakers"])
     create.add_argument("--access", nargs="+", choices=["read", "download", "upload", "submit", "cancel", "library"], default=["read", "download"])
@@ -279,6 +323,13 @@ def main(argv=None, client=None):
     check.add_argument("--service", choices=SERVICES, action="append")
     revoke = commands.add_parser("revoke", help="Revoke only the key in this config.")
     revoke.add_argument("--config", required=True)
+    balance = commands.add_parser("balance", help="Read wallet mode, balance and holds without funding it.")
+    balance.add_argument("--config", required=True)
+    checkout = commands.add_parser("checkout", help="Prepare one recoverable Stripe checkout; does not pay or enable automatic top-up.")
+    checkout.add_argument("--config", required=True)
+    checkout.add_argument("--state", required=True, help="Separate private checkout state; contains its original identity and private Stripe URL.")
+    checkout.add_argument("--amount-usd", type=int, choices=[5, 10, 25], required=True)
+    checkout.add_argument("--require-test", action="store_true", help="Refuse checkout before admission when config belongs to a LIVE wallet.")
     args = parser.parse_args(argv)
     try:
         selected = client or Client()
